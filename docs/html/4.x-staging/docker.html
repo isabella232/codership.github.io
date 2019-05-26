@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using Docker &#8212; Galera Cluster Documentation</title>
+    
+    <link rel="stylesheet" href="_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/cloud.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using Jails" href="jails.html" />
+    <link rel="prev" title="Container Deployments" href="containers.html" />
+
+	
+
+
+<!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/jquery-1.8.3.min.js"></script>
+-->
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/swipe.js"></script>
+
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript">  google.load("maps", "3",  {other_params:"sensor=false&libraries=geometry,places"});  </script>
+
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/main.js?v3"></script>
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/maps.js?v2"></script>
+
+	<link rel="stylesheet" href="http://galeracluster.com/wp-content/themes/galeracluster/css/style_reset.css">
+	<link rel="stylesheet" href="http://galeracluster.com/wp-content/themes/galeracluster/fonts/fonts.css">
+	<link rel="stylesheet" href="http://galeracluster.com/wp-content/themes/galeracluster/style.css?v3">
+
+		<!--[if lt IE 9]>
+		<script src="http://galeracluster.com/wp-content/themes/galeracluster/js/html5.js"></script>
+		<![endif]-->
+	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="http://galeracluster.com/feed/" />
+	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="http://galeracluster.com/comments/feed/" />
+	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="http://galeracluster.com/support/feed/" />
+
+	<script type='text/javascript' src='http://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://galeracluster.com/xmlrpc.php?rsd" />
+	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://galeracluster.com/wp-includes/wlwmanifest.xml" />
+	<link rel='prev' title='Downloads' href='http://galeracluster.com/downloads/' />
+	<link rel='next' title='Community' href='http://galeracluster.com/community/' />
+	<meta name="generator" content="WordPress 3.8.3" />
+
+	<link rel='shortlink' href='http://galeracluster.com/?p=12' />
+
+
+
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+	<style type="text/css" id="twentythirteen-header-css">
+				.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+	</style>
+
+
+	<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+	</script>
+
+  </head>
+  <body role="document">
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="http://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<a id="mobile-menu-link" href="#">
+	<span class="text">MENU</span>
+
+	<div class="stripes">
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	</div>
+	</a>
+
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+		<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>
+		<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="http://galeracluster.com/products/">Products</a>
+		<ul class="sub-menu">
+		<li id="menu-item-626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="http://galeracluster.com/products/">Galera Cluster</a>
+		<ul class="sub-menu">
+		<li id="menu-item-827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="http://galeracluster.com/products/#use-cases">Use cases</a></li>
+		<li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="http://galeracluster.com/products#success-stories">Success stories</a></li>
+		<li id="menu-item-828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="http://galeracluster.com/products/#case-studies">Case studies</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="http://galeracluster.com/products/technology/">Technology</a>
+		<ul class="sub-menu">
+		<li id="menu-item-829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="http://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
+		<li id="menu-item-830" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="http://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
+		<li id="menu-item-831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="http://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
+		<ul class="sub-menu">
+		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="http://galeracluster.com/support/">Support</a>
+		<ul class="sub-menu">
+		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
+		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
+		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
+		<ul class="sub-menu">
+		<li id="menu-item-634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="http://galeracluster.com/community/">Mailing List</a></li>
+		<li id="menu-item-1101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="http://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="http://galeracluster.com/company/">Company</a>
+		<ul class="sub-menu">
+		<li id="menu-item-637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="http://galeracluster.com/company/">Overview</a></li>
+		<li id="menu-item-835" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="http://galeracluster.com/company/#carousel">What we believe</a></li>
+		<li id="menu-item-836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="http://galeracluster.com/company/#latest-press-releases">News</a></li>
+		<li id="menu-item-838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="http://galeracluster.com/company/#careers">Careers</a></li>
+		<li id="menu-item-837" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="http://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="http://galeracluster.com/category/blog/">Blog</a></li>
+		<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="http://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="using-docker">
+<h1>Using Docker<a class="headerlink" href="#using-docker" title="Permalink to this headline">¶</a></h1>
+<p id="docker">Docker provides an open source platform for automatically deploying applications within software containers.</p>
+<p>Galera Cluster can run from within a Docker container.  You may find it useful in portable deployment across numerous machines, testing applications that depend on Galera Cluster, or scripting the installation and configuration process.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This guide assumes that you are only running one container node per server.  For more information on running multiple nodes per server, see Getting Started Galera with Docker, <a class="reference external" href="http://galeracluster.com/2015/05/getting-started-galera-with-docker-part-1/">Part I</a> and <a class="reference external" href="http://galeracluster.com/2015/05/getting-started-galera-with-docker-part-2-2/">Part II</a>.</p>
+</div>
+<div class="section" id="configuring-the-container">
+<h2>Configuring the Container<a class="headerlink" href="#configuring-the-container" title="Permalink to this headline">¶</a></h2>
+<p id="configure-container">Images are the containers that Docker has available to run.  There are a number of base images available through <a class="reference external" href="https://registry.hub.docker.com">Docker Hub</a>.  You can pull these down to your system through the <code class="docutils literal"><span class="pre">docker</span></code> command-line tool.  You can also build new images.</p>
+<p>When Docker builds a new image, it sources a <code class="docutils literal"><span class="pre">Dockerfile</span></code> to determine the steps that it needs to take in order to generate the image that you want to use. What this means that you can script the installation and configuration process: loading the needed configuration files, running updates and installing packages when the image is built through a single command.</p>
+<div class="highlight-Dockerfile"><div class="highlight"><pre><span></span><span class="c"># Galera Cluster Dockerfile</span>
+<span class="k">FROM</span><span class="s"> ubuntu:14.04</span>
+<span class="k">MAINTAINER</span><span class="s"> your name &lt;your.user@example.org&gt;</span>
+
+<span class="k">ENV</span><span class="s"> DEBIAN_FRONTEND noninteractive</span>
+
+<span class="k">RUN</span> apt-get update
+<span class="k">RUN</span> apt-get install -y  software-properties-common
+<span class="k">RUN</span> apt-key adv --keyserver keyserver.ubuntu.com --recv BC19DDBA
+<span class="k">RUN</span> add-apt-repository <span class="s1">&#39;deb http://releases.galeracluster.com/ubuntu trusty main&#39;</span>
+
+<span class="k">RUN</span> apt-get update
+<span class="k">RUN</span> apt-get install -y galera-3 galera-arbitrator-3 mysql-wsrep-5.6 rsync
+
+COPY my.cnf /etc/mysql/my.cnf
+<span class="k">ENTRYPOINT</span><span class="s"> [&quot;mysqld&quot;]</span>
+</pre></div>
+</div>
+<p>The example follows the installation process for running Galera Cluster from within a Docker container based on Ubuntu.  When you run the build command, Docker pulls down the Ubuntu 14.04 image from Docker Hub, if it&#8217;s needed, then it runs each command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> to initialize the image for your use.</p>
+<div class="section" id="configuration-file">
+<h3>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h3>
+<p id="docker-my-cnf">Before you build the container, you need to write the configuration file for the node.  The <code class="docutils literal"><span class="pre">COPY</span></code> command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> above copies <code class="docutils literal"><span class="pre">my.cnf</span></code> from the build directory into the container.</p>
+<p>For the most part, the configuration file for a node running within Docker is the same as when the node is running on a standard Linux server.  But, there are some parameters that draw their defaults from the base system.  These you need to set manually, as Docker cannot access the host system.</p>
+<ul class="simple">
+<li><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a> The node determines the default address from the IP address on the first network interface.  Containers cannot see the network interfaces on the host system.  You need to set this parameter to ensure that the cluster is given the correct IP address for the node.</li>
+<li><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a>  The node determines the default name from the system hostname.  Containers have their own hostnames distinct from the host system.</li>
+</ul>
+<p>Changing the <code class="docutils literal"><span class="pre">my.cnf</span></code> file does not propagate into the container.  Whenever you need to make changes to the configuration file, run the build again to create a new image with the updated file.  Docker caches each step of the build and on rebuild only runs those steps that have changed since the last run.  For example, using the above <code class="docutils literal"><span class="pre">Dockerfile</span></code>, if you rebuild an image after changing <code class="docutils literal"><span class="pre">my.cnf</span></code>, Docker only runs the last two steps.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you need Docker to rerun the entire build, use the <code class="docutils literal"><span class="pre">--force-rm=true</span></code> option.</p>
+</div>
+</div>
+</div>
+<div class="section" id="building-the-container-image">
+<h2>Building the Container Image<a class="headerlink" href="#building-the-container-image" title="Permalink to this headline">¶</a></h2>
+<p id="building-the-container">Building the image reduces the node installation, configuration and deployment process to a single command.  This creates a server instance where Galera Cluster is already installed, configured and ready to start.</p>
+<p>You can build a container node using the <code class="docutils literal"><span class="pre">docker</span></code> command-line tool.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> docker build -t ubuntu:galera-node1 ./
+</pre></div>
+</div>
+<p>When this command runs, Docker looks in the working directory, (here <code class="docutils literal"><span class="pre">./</span></code>), for the <code class="docutils literal"><span class="pre">Dockerfile</span></code>.  It then follows each command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> to build the image you want.  When the build is complete, you can view the addition among the available images:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> docker images
+
+<span class="go">REPOSITORY  TAG           IMAGE ID      CREATED        SIZE</span>
+<span class="go">ubuntu      galera-node-1 53b97c3d7740  2 minutes ago  362.7 MB</span>
+<span class="go">ubuntu      14.04         ded7cd95e059  5 weeks ago    185.5 MB</span>
+</pre></div>
+</div>
+<p>You now have a working node image available for use as a container.  You can launch it using the <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> command.  Repeat the build process on each server to create a node container image for Galera Cluster.</p>
+<p>Update the container tag to help differentiate between them.  That is,</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">[root@node2]#</span> docker build -t ubuntu:galera-node2 ./
+<span class="gp">[root@node3]#</span> docker build -t ubuntu:galera-node3 ./
+</pre></div>
+</div>
+</div>
+<div class="section" id="deploying-the-container">
+<h2>Deploying the Container<a class="headerlink" href="#deploying-the-container" title="Permalink to this headline">¶</a></h2>
+<p id="deploy-container">When you finish building the image, you&#8217;re ready to launch the node container.  For each node start the container using the Docker command-line tool with the <code class="docutils literal"><span class="pre">run</span></code> argument.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> docker run -i -d --name Node1 --host node1 <span class="se">\</span>
+      -p <span class="m">3306</span>:3306 -p <span class="m">4567</span>:4567 -p <span class="m">4568</span>:4568 -p <span class="m">4444</span>:4444 <span class="se">\</span>
+      -v /var/container_data/mysql:/var/lib/mysql <span class="se">\</span>
+      ubuntu:galera-node1
+</pre></div>
+</div>
+<p>In the example, Docker launches a pre-built Ubuntu container tagged as <code class="docutils literal"><span class="pre">galera-node1</span></code>, which was built using the above <code class="docutils literal"><span class="pre">Dockerfile</span></code>.  The <code class="docutils literal"><span class="pre">ENTRYPOINT</span></code> parameter is set to <code class="docutils literal"><span class="pre">/bin/mysqld</span></code>, so the container launches the database server on start.</p>
+<p>Update the <code class="docutils literal"><span class="pre">--name</span></code> option for each node container you start.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The above command starts a container node meant to be attached to an existing cluster.  If you are starting the first node in a cluster, append the argument <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> to the end of the command.  For more information, see <a class="reference internal" href="startingcluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
+</div>
+<div class="section" id="firewall-settings">
+<h3>Firewall Settings<a class="headerlink" href="#firewall-settings" title="Permalink to this headline">¶</a></h3>
+<p id="docker-firewall">When you launch the Docker container, (with <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> above), the series of <code class="docutils literal"><span class="pre">-p</span></code> options connect the ports on the host system to those in the container.  When the container is launched this way, nodes in the container have the same level of access to the network as the node would when running on the host system.</p>
+<p>Use these settings when you only run one container to the server.  If you are running multiple containers to the server, you will need a load balancer to dole the incoming connections out to the individual nodes.</p>
+<p>For more information on configuring the firewall for Galera Cluster, see <a class="reference internal" href="firewallsettings.html"><span class="doc">Firewall Settings</span></a>.</p>
+</div>
+<div class="section" id="persistent-data">
+<h3>Persistent Data<a class="headerlink" href="#persistent-data" title="Permalink to this headline">¶</a></h3>
+<p id="docker-data">Docker containers are not meant to carry persistent data.  When you close the container, the data it carries is lost.  To avoid this, you can link volumes in the container with directories on the host file system, using the <code class="docutils literal"><span class="pre">-v</span></code> option when you launch the container.</p>
+<p>In the example, (that is, <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> above), the <code class="docutils literal"><span class="pre">-v</span></code> argument connects the <code class="docutils literal"><span class="pre">/var/container_data/mysql/</span></code> directory to <code class="docutils literal"><span class="pre">/var/lib/mysql/</span></code> in the container.  This replaces the local datadir inside the container with a symbolic link to a directory on the host system, ensuring that you don&#8217;t lose data when the container restarts.</p>
+</div>
+<div class="section" id="database-client">
+<h3>Database Client<a class="headerlink" href="#database-client" title="Permalink to this headline">¶</a></h3>
+<p>Once you have the container node running, you can execute additional commands on the container using the <code class="docutils literal"><span class="pre">docker</span> <span class="pre">exec</span></code> command with the container name given above for the <code class="docutils literal"><span class="pre">--name</span></code> parameter.</p>
+<p>For example, if you want access to the database client, run the following command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> docker <span class="nb">exec</span> -ti Node1 /bin/mysql -u root -p
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="index.html" title="index">
+          <img class="logo" src="_static/logo.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Using Docker</a><ul>
+<li><a class="reference internal" href="#configuring-the-container">Configuring the Container</a><ul>
+<li><a class="reference internal" href="#configuration-file">Configuration File</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#building-the-container-image">Building the Container Image</a></li>
+<li><a class="reference internal" href="#deploying-the-container">Deploying the Container</a><ul>
+<li><a class="reference internal" href="#firewall-settings">Firewall Settings</a></li>
+<li><a class="reference internal" href="#persistent-data">Persistent Data</a></li>
+<li><a class="reference internal" href="#database-client">Database Client</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="containers.html"
+                          title="Previous page">&larr; Container Deployments</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="jails.html"
+                          title="Next page">&rarr; Using Jails</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<a id="mobile-menu-link" href="#">
+	<span class="text">MENU</span>
+
+	<div class="stripes">
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	</div>
+	</a>
+
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			 
+
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/docker.rst.rst" title="Edit 'Using Docker' on Github">Edit on Github</a></li>
+
+			 
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="jails.html" title="Using Jails"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="containers.html" title="Container Deployments"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="deployment.html" >Deployment</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="containers.html" accesskey="U">Container Deployments</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+
+			
+				<li><a href="containers.html" title="Container Deployments">&lt; Previous</a></li>
+			
+
+			
+				<li><a href="jails.html" title="Using Jails">Next &gt;</a></li>
+			
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="http://galeracluster.com/products/">Products</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="http://galeracluster.com/products/">Galera Cluster</a>
+		<ul class="sub-menu">
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="http://galeracluster.com/products/#use-cases">Use cases</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="http://galeracluster.com/products#success-stories">Success stories</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="http://galeracluster.com/products/#case-studies">Case studies</a></li>
+		</ul>
+		</li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="http://galeracluster.com/products/technology/">Technology</a>
+		<ul class="sub-menu">
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="http://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="http://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="http://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
+		</ul>
+	</li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="http://galeracluster.com/support/">Support</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="http://galeracluster.com/community/">Mailing List</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="http://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="http://galeracluster.com/company/">Company</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="http://galeracluster.com/company/">Overview</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="http://galeracluster.com/company/#carousel">What we believe</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="http://galeracluster.com/company/#latest-press-releases">News</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="http://galeracluster.com/company/#careers">Careers</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="http://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="http://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="http://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+	<div class="footer-search">
+	<div class="search-form">
+	<form role="search" method="get" action="http://galeracluster.com/">
+	<input type="search" class="search-field" value="" name="s" title="Search for:" />
+	<input type="submit" class="search-submit" value="" />
+	</form>
+	</div>
+	</div>
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	<a href="http://www.nasa.gov/multimedia/imagegallery/" class="imagery" target="_blank">Images: NASA</a>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>
