@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>State Snapshot Transfers &#8212; Galera Cluster Documentation</title>
+    
+    <link rel="stylesheet" href="_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/cloud.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Enabling mysqldump" href="mysqldump.html" />
+    <link rel="prev" title="Node Provisioning" href="nodeprovisioning.html" />
+
+	
+
+
+<!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/jquery-1.8.3.min.js"></script>
+-->
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/swipe.js"></script>
+
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript">  google.load("maps", "3",  {other_params:"sensor=false&libraries=geometry,places"});  </script>
+
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/main.js?v3"></script>
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/maps.js?v2"></script>
+
+	<link rel="stylesheet" href="http://galeracluster.com/wp-content/themes/galeracluster/css/style_reset.css">
+	<link rel="stylesheet" href="http://galeracluster.com/wp-content/themes/galeracluster/fonts/fonts.css">
+	<link rel="stylesheet" href="http://galeracluster.com/wp-content/themes/galeracluster/style.css?v3">
+
+		<!--[if lt IE 9]>
+		<script src="http://galeracluster.com/wp-content/themes/galeracluster/js/html5.js"></script>
+		<![endif]-->
+	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="http://galeracluster.com/feed/" />
+	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="http://galeracluster.com/comments/feed/" />
+	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="http://galeracluster.com/support/feed/" />
+
+	<script type='text/javascript' src='http://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://galeracluster.com/xmlrpc.php?rsd" />
+	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://galeracluster.com/wp-includes/wlwmanifest.xml" />
+	<link rel='prev' title='Downloads' href='http://galeracluster.com/downloads/' />
+	<link rel='next' title='Community' href='http://galeracluster.com/community/' />
+	<meta name="generator" content="WordPress 3.8.3" />
+
+	<link rel='shortlink' href='http://galeracluster.com/?p=12' />
+
+
+
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+	<style type="text/css" id="twentythirteen-header-css">
+				.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+	</style>
+
+
+	<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+	</script>
+
+  </head>
+  <body role="document">
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="http://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<a id="mobile-menu-link" href="#">
+	<span class="text">MENU</span>
+
+	<div class="stripes">
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	</div>
+	</a>
+
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+		<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>
+		<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="http://galeracluster.com/products/">Products</a>
+		<ul class="sub-menu">
+		<li id="menu-item-626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="http://galeracluster.com/products/">Galera Cluster</a>
+		<ul class="sub-menu">
+		<li id="menu-item-827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="http://galeracluster.com/products/#use-cases">Use cases</a></li>
+		<li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="http://galeracluster.com/products#success-stories">Success stories</a></li>
+		<li id="menu-item-828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="http://galeracluster.com/products/#case-studies">Case studies</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="http://galeracluster.com/products/technology/">Technology</a>
+		<ul class="sub-menu">
+		<li id="menu-item-829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="http://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
+		<li id="menu-item-830" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="http://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
+		<li id="menu-item-831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="http://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
+		<ul class="sub-menu">
+		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="http://galeracluster.com/support/">Support</a>
+		<ul class="sub-menu">
+		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
+		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
+		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
+		<ul class="sub-menu">
+		<li id="menu-item-634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="http://galeracluster.com/community/">Mailing List</a></li>
+		<li id="menu-item-1101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="http://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="http://galeracluster.com/company/">Company</a>
+		<ul class="sub-menu">
+		<li id="menu-item-637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="http://galeracluster.com/company/">Overview</a></li>
+		<li id="menu-item-835" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="http://galeracluster.com/company/#carousel">What we believe</a></li>
+		<li id="menu-item-836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="http://galeracluster.com/company/#latest-press-releases">News</a></li>
+		<li id="menu-item-838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="http://galeracluster.com/company/#careers">Careers</a></li>
+		<li id="menu-item-837" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="http://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="http://galeracluster.com/category/blog/">Blog</a></li>
+		<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="http://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <style> .red {color:red} </style><style> .green {color:green} </style><div class="section" id="state-snapshot-transfers">
+<h1>State Snapshot Transfers<a class="headerlink" href="#state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
+<p id="id1">When a node requires a state transfer from the cluster, by default it attempts the <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a> (IST) method.  In the event that there are no nodes available for this or if it finds a manual donor defined through the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a> parameter, uses a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method.</p>
+<p>Galera Cluster supports several back-end methods for use in state snapshot transfers.  There are two types of methods available: Logical State Snapshots, which interface through the database server and client; and Physical State Snapshots, which copy the data files directly from node to node.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="17%" />
+<col width="16%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Method</th>
+<th class="head">Speed</th>
+<th class="head">Blocks Donor</th>
+<th class="head">Available
+on Live Node</th>
+<th class="head">Type</th>
+<th class="head">DB Root Access</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#id2"><span class="std std-ref">mysqldump</span></a></td>
+<td><span class="red">Slow</span></td>
+<td><span class="green">Blocks</span></td>
+<td><span class="green">Available</span></td>
+<td><a class="reference internal" href="#sst-logical"><span class="std std-ref">Logical</span></a></td>
+<td>Donor and Joiner</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#id3"><span class="std std-ref">rsync</span></a></td>
+<td><span class="green">Fastest</span></td>
+<td><span class="green">Blocks</span></td>
+<td><span class="red">Unavailable</span></td>
+<td><a class="reference internal" href="#sst-physical"><span class="std std-ref">Physical</span></a></td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#id4"><span class="std std-ref">xtrabackup</span></a></td>
+<td><span class="green">Fast</span></td>
+<td>Briefly</td>
+<td><span class="red">Unavailable</span></td>
+<td><a class="reference internal" href="#sst-physical"><span class="std std-ref">Physical</span></a></td>
+<td>Donor only</td>
+</tr>
+</tbody>
+</table>
+<p>To set the State Snapshot Transfer method, use the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter.  For example:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_sst_method</span> <span class="o">=</span> <span class="s">rsync</span>
+</pre></div>
+</div>
+<p>There is no single best method for State Snapshot Transfers.  You must decide which best suits your particular needs and cluster deployment.  Fortunately, you need only set the method on the receiving node.  So long as the donor has support, it servers the transfer in whatever method the joiner requests.</p>
+<div class="section" id="logical-state-snapshot">
+<h2>Logical State Snapshot<a class="headerlink" href="#logical-state-snapshot" title="Permalink to this headline">¶</a></h2>
+<p id="sst-logical">There is one back-end method available for a Logical State Snapshots: <code class="docutils literal"><span class="pre">mysqldump</span></code>.</p>
+<p>The <a class="reference internal" href="glossary.html#term-logical-state-transfer-method"><span class="xref std std-term">Logical State Transfer Method</span></a> has the following advantages:</p>
+<ul>
+<li><p class="first">These transfers are available on live servers.  In fact, only a fully initialized server can receive a Logical State Snapshot.</p>
+</li>
+<li><p class="first">These transfers do not require the receptor node to have the same configuration as the donor node.  This allows you to upgrade storage engine options.</p>
+<p>For example, when using this transfer method you can migrate from the Antelope to the Barracuda file format, use compression resize, or move iblog* files from one partition into another.</p>
+</li>
+</ul>
+<p>The Logical State Transfer Method has the following disadvantages:</p>
+<ul class="simple">
+<li>These transfers are as slow as <code class="docutils literal"><span class="pre">mysqldump</span></code>.</li>
+<li>These transfers require that you configure the receiving database server to accept root connections from potential donor nodes.</li>
+<li>The receiving server must have a non-corrupted database.</li>
+</ul>
+<div class="section" id="mysqldump">
+<h3><code class="docutils literal"><span class="pre">mysqldump</span></code><a class="headerlink" href="#mysqldump" title="Permalink to this headline">¶</a></h3>
+<p id="id2">The main advantage of <code class="docutils literal"><span class="pre">mysqldump</span></code> is that you can transfer a state snapshot to a working server.  That is, you start the server standalone and then instruct it to join a cluster from within the database client command line.  You can also use it to migrate from an older database format to a newer one.</p>
+<p><code class="docutils literal"><span class="pre">mysqldump</span></code> requires that the receiving node have a fully functional database, which can be empty.  It also requires the same root credentials as the donor and root access from the other nodes.</p>
+<p>This transfer method is several times slower than the others on sizable databases, but it may prove faster in cases of very small databases.  For instance, on a database that is smaller than the log files.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Warning</strong>: This transfer method is sensitive to the version of <code class="docutils literal"><span class="pre">mysqldump</span></code> each node uses.  It is not uncommon for a given cluster to have installed several versions.  A State Snapshot Transfer can fail if the version one node uses is older and incompatible with the newer server.</p>
+</div>
+<p>On occasion, <code class="docutils literal"><span class="pre">mysqldump</span></code> is the only option available.  For instance, if you upgrade from a cluster using MySQL 5.1 with the built-in InnoDB support to MySQL 5.5, which uses the InnoDB plugin.</p>
+<p>The <code class="docutils literal"><span class="pre">mysqldump</span></code> script only runs on the sending node.  The output from the script gets piped to the MySQL client that connects to the joiner node.</p>
+<p>Because <code class="docutils literal"><span class="pre">mysqldump</span></code> interfaces through the database client, configuring it requires several steps beyond setting the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter.  For more information on its configuration, see:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mysqldump.html">Enabling <code class="docutils literal"><span class="pre">mysqldump</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mysqldump.html#configuring-sst-privileges">Configuring SST Privileges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysqldump.html#granting-sst-privileges">Granting SST Privileges</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>See Also</strong>: For more information on <code class="docutils literal"><span class="pre">mysqldump</span></code>, see <a class="reference external" href="http://dev.mysql.com/doc/refman/5.6/en/mysqldump.html">mysqldump Documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="physical-state-snapshot">
+<h2>Physical State Snapshot<a class="headerlink" href="#physical-state-snapshot" title="Permalink to this headline">¶</a></h2>
+<p id="sst-physical">There are two back-end methods available for Physical State Snapshots: <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code>.</p>
+<p>The <a class="reference internal" href="glossary.html#term-physical-state-transfer-method"><span class="xref std std-term">Physical State Transfer Method</span></a> has the following advantages:</p>
+<ul class="simple">
+<li>These transfers physically copy the data from one node to the disk of the other, and as such do not need to interact with the database server at either end.</li>
+<li>These transfers do not require the database to be in working condition, as the donor node overwrites what was previously on the joining node disk.</li>
+<li>These transfers are faster.</li>
+</ul>
+<p>The Physical State Transfer Method has the following disadvantages:</p>
+<ul>
+<li><p class="first">These transfers require the joining node to have the same data directory layout and the same storage engine configuration as the donor node.  For example, you must use the same file-per-table, compression, log file size and similar settings for InnoDB.</p>
+</li>
+<li><p class="first">These transfers are not accepted by servers with initialized storage engines.</p>
+<p>What this means is that when your node requires a state snapshot transfer, the database server must restart to apply the changes.  The database server remains inaccessible to the client until the state snapshot transfer is complete, since it cannot perform authentication without the storage engines.</p>
+</li>
+</ul>
+<div class="section" id="rsync">
+<h3><code class="docutils literal"><span class="pre">rsync</span></code><a class="headerlink" href="#rsync" title="Permalink to this headline">¶</a></h3>
+<p id="id3">The fastest back-end method for State Snapshot Transfers is <code class="docutils literal"><span class="pre">rsync</span></code>.  It carries all the advantages and disadvantages of of the Physical Snapshot Transfer.  While it does block the donor node during transfer, <code class="docutils literal"><span class="pre">rsync</span></code> does not require database configuration or root access, which makes it easier to configure.</p>
+<p>When using terabyte-scale databases, <code class="docutils literal"><span class="pre">rsync</span></code> is considerably faster, (1.5 to 2 times faster), than <code class="docutils literal"><span class="pre">xtrabackup</span></code>.  This translates to a reduction in transfer times by several hours.</p>
+<p><code class="docutils literal"><span class="pre">rsync</span></code> also features the rsync-wan modification, which engages the <code class="docutils literal"><span class="pre">rsync</span></code> delta transfer algorithm.  However, given that this makes it more I/O intensive, you should only use it when the network throughput is the bottleneck, which is usually the case in <abbr title="Wide Area Network">WAN</abbr> deployments.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The most common issue encountered with this method is due to incompatibilities between the various versions of <code class="docutils literal"><span class="pre">rsync</span></code> on the donor and joining nodes.</p>
+</div>
+<p>The <code class="docutils literal"><span class="pre">rsync</span></code> script runs on both donor and joining nodes.  On the joiner, it starts <code class="docutils literal"><span class="pre">rsync</span></code> in server-mode and waits for a connection from the donor.  On the donor, it starts <code class="docutils literal"><span class="pre">rsync</span></code> in client-mode and sends the contents of the data directory to the joining node.</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_sst_method</span> <span class="o">=</span> <span class="s">rsync</span>
+</pre></div>
+</div>
+<p>For more information about <code class="docutils literal"><span class="pre">rsync</span></code>, see the <a class="reference external" href="http://rsync.samba.org/">rsync Documentation</a>.</p>
+</div>
+<div class="section" id="xtrabackup">
+<h3><code class="docutils literal"><span class="pre">xtrabackup</span></code><a class="headerlink" href="#xtrabackup" title="Permalink to this headline">¶</a></h3>
+<p id="id4">The most popular back-end method for State Snapshot Transfers is <code class="docutils literal"><span class="pre">xtrabackup</span></code>.  It carries all the advantages and disadvantages of a Physical State Snapshot, but is virtually non-blocking on the donor node.</p>
+<p><code class="docutils literal"><span class="pre">xtrabackup</span></code> only blocks the donor for the short period of time it takes to copy the MyISAM tables, (for instance, the system tables).  If these tables are small, the blocking time remains very short.  However, this comes at the cost of speed: a state snapshot transfer that uses <code class="docutils literal"><span class="pre">xtrabackup</span></code> can be considerably slower than one that uses <code class="docutils literal"><span class="pre">rsync</span></code>.</p>
+<p>Given that <code class="docutils literal"><span class="pre">xtrabackup</span></code> copies a large amount of data in the shortest possible time, it may also noticeably degrade donor performance.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The most common issue encountered with this method is due to its configuration.  <code class="docutils literal"><span class="pre">xtrabackup</span></code> requires that you set certain options in the configuration file, which means having local root access to the donor server.</p>
+</div>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
+<span class="na">wsrep_sst_auth</span> <span class="o">=</span> <span class="s">&lt;wsrep_sst_user&gt;:&lt;password&gt;</span>
+<span class="na">wsrep_sst_method</span> <span class="o">=</span> <span class="s">xtrabackup</span>
+<span class="na">datadir</span> <span class="o">=</span> <span class="s">/path/to/datadir</span>
+
+<span class="k">[client]</span>
+<span class="na">socket</span> <span class="o">=</span> <span class="s">/path/to/socket</span>
+</pre></div>
+</div>
+<p>For more information on <code class="docutils literal"><span class="pre">xtrabackup</span></code>, see the <a class="reference external" href="https://www.percona.com/doc/percona-xtrabackup/2.1/manual.html?id=percona-xtrabackup:xtrabackup_manual">Percona XtraBackup User Manual</a> and <a class="reference external" href="http://www.percona.com/doc/percona-xtradb-cluster/5.6/manual/xtrabackup_sst.html">XtraBackup SST Configuration</a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="index.html" title="index">
+          <img class="logo" src="_static/logo.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">State Snapshot Transfers</a><ul>
+<li><a class="reference internal" href="#logical-state-snapshot">Logical State Snapshot</a><ul>
+<li><a class="reference internal" href="#mysqldump"><code class="docutils literal"><span class="pre">mysqldump</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#physical-state-snapshot">Physical State Snapshot</a><ul>
+<li><a class="reference internal" href="#rsync"><code class="docutils literal"><span class="pre">rsync</span></code></a></li>
+<li><a class="reference internal" href="#xtrabackup"><code class="docutils literal"><span class="pre">xtrabackup</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="nodeprovisioning.html"
+                          title="Previous page">&larr; Node Provisioning</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="mysqldump.html"
+                          title="Next page">&rarr; Enabling <code class="docutils literal"><span class="pre">mysqldump</span></code></a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<a id="mobile-menu-link" href="#">
+	<span class="text">MENU</span>
+
+	<div class="stripes">
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	</div>
+	</a>
+
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			 
+
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/sst.rst.rst" title="Edit 'State Snapshot Transfers' on Github">Edit on Github</a></li>
+
+			 
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mysqldump.html" title="Enabling mysqldump"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="nodeprovisioning.html" title="Node Provisioning"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="userguide.html" accesskey="U">Configuration</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+
+			
+				<li><a href="nodeprovisioning.html" title="Node Provisioning">&lt; Previous</a></li>
+			
+
+			
+				<li><a href="mysqldump.html" title="Enabling &lt;code class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;mysqldump&lt;/span&gt;&lt;/code&gt;">Next &gt;</a></li>
+			
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="http://galeracluster.com/products/">Products</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="http://galeracluster.com/products/">Galera Cluster</a>
+		<ul class="sub-menu">
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="http://galeracluster.com/products/#use-cases">Use cases</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="http://galeracluster.com/products#success-stories">Success stories</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="http://galeracluster.com/products/#case-studies">Case studies</a></li>
+		</ul>
+		</li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="http://galeracluster.com/products/technology/">Technology</a>
+		<ul class="sub-menu">
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="http://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="http://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="http://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
+		</ul>
+	</li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="http://galeracluster.com/support/">Support</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="http://galeracluster.com/community/">Mailing List</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="http://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="http://galeracluster.com/company/">Company</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="http://galeracluster.com/company/">Overview</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="http://galeracluster.com/company/#carousel">What we believe</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="http://galeracluster.com/company/#latest-press-releases">News</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="http://galeracluster.com/company/#careers">Careers</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="http://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="http://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="http://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+	<div class="footer-search">
+	<div class="search-form">
+	<form role="search" method="get" action="http://galeracluster.com/">
+	<input type="search" class="search-field" value="" name="s" title="Search for:" />
+	<input type="submit" class="search-submit" value="" />
+	</form>
+	</div>
+	</div>
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	<a href="http://www.nasa.gov/multimedia/imagegallery/" class="imagery" target="_blank">Images: NASA</a>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>
