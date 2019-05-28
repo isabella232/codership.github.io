@@ -235,18 +235,11 @@
 <li><strong>Galera wsrep Provider</strong>  Also, referred to as the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>.  The wsrep Provider uses the following versioning schema: <code class="docutils literal"><span class="pre">&lt;wsrep</span> <span class="pre">API</span> <span class="pre">main</span> <span class="pre">version&gt;.&lt;Galera</span> <span class="pre">version&gt;</span></code>.  For example, release 24.2.4 indicates wsrep API version 24.x.x with Galera wsrep Provider version 2.4.</li>
 <li><strong>MySQL Server with wsrep API patch</strong>  The second versioning schema relates to the database server.  Here, the MySQL server uses the following versioning schema <code class="docutils literal"><span class="pre">&lt;MySQL</span> <span class="pre">server</span> <span class="pre">version&gt;-&lt;wsrep</span> <span class="pre">API</span> <span class="pre">version&gt;</span></code>.  For example, release 5.5.29-23.7.3 indicates a MySQL database server in 5.5.29 with wsrep API version 23.7.3.</li>
 </ul>
-<p>For instances of Galera Cluster that use the MariaDB or Percona XtraDB database servers, consult their respective documentation for version and release information.</p>
+<p>For instances of Galera Cluster that use the MariaDB database server, consult the MariaDB documentation for version and release information.</p>
 </div>
 <div class="section" id="third-party-implementations-of-galera-cluster">
 <h2>Third-party Implementations of Galera Cluster<a class="headerlink" href="#third-party-implementations-of-galera-cluster" title="Permalink to this headline">¶</a></h2>
-<p id="third-party-galera">In addition to the Galera Cluster for MySQL, the reference implementation from Codership Oy, there are two third party implementations of Galera Cluster.  These are,</p>
-<ul>
-<li><p class="first"><a class="reference external" href="http://www.percona.com/software/percona-xtradb-cluster">Percona XtraDB Cluster</a> is a high-availability and high-scalability solution for MySQL users.  Percona XtraDB CLuster integrates Percona XtraDB Server with the Galera library of high-availability solutions in a single product package.</p>
-</li>
-<li><p class="first"><a class="reference external" href="https://mariadb.com">MariaDB Galera Cluster</a> uses the Galera library for the replication implementation.  To interface with the Galera Replication Plugin, MariaDB is enhanced to support the replication API definition in the wsrep API project.  Additionally, releases of MariaDB Server from version 10.1 on are packaged with Galera Cluster.</p>
-<p>For more information, see <a class="reference external" href="https://mariadb.com/kb/en/mariadb/what-is-mariadb-galera-cluster/">What is MariaDB Galera Cluster</a>.</p>
-</li>
-</ul>
+<p id="third-party-galera">In addition to the Galera Cluster for MySQL, the reference implementation from Codership Oy, there is a third-party implementation of Galera Cluster - <a class="reference external" href="https://mariadb.com">MariaDB Galera Cluster</a> which uses the Galera library for the replication implementation.  To interface with the Galera Replication Plugin, MariaDB has been enhanced to support the replication API definition in the wsrep API project.  Additionally, releases of MariaDB Server starting from version 10.1 on are packaged with Galera Cluster already included.  For more information, see <a class="reference external" href="https://mariadb.com/kb/en/mariadb/what-is-mariadb-galera-cluster/">What is MariaDB Galera Cluster</a>.</p>
 </div>
 </div>
 
@@ -368,7 +361,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

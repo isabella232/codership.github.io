@@ -226,6 +226,33 @@ cert_index:
 </div>
 <p>This value is the node state ID.  You can use it to update manually the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file, by entering it in the value of the <code class="docutils literal"><span class="pre">seqno</span></code> field. As an alternative, you can just let <code class="docutils literal"><span class="pre">mysqld_safe</span></code> recover automatically and pass the value to your database server the next time you start it.</p>
 </div>
+<div class="section" id="safe-to-bootstrap-protection">
+<h2>&#8216;Safe to Bootstrap&#8217; Protection<a class="headerlink" href="#safe-to-bootstrap-protection" title="Permalink to this headline">¶</a></h2>
+<p id="id2">Starting with provider version 3.19, Galera has an additional protection against attempting to boostrap the cluster using a node that may not have been the last node remaining in the cluster prior to cluster shutdown.</p>
+<p>If Galera can conclusively determine which node was the last node standing, it will be marked as &#8216;safe to bootstrap&#8217;, as seen in this example <code class="docutils literal"><span class="pre">grastate.dat</span></code>:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span># GALERA saved state
+version: 2.1
+uuid:    5981f182-a4cc-11e6-98cc-77fabedd360d
+seqno:   1234
+safe_to_bootstrap: 1
+</pre></div>
+</div>
+<p>Such a node can be used to bootstrap the cluster. Attempting to boostrap using any other node will cause the following error message:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">2016-11-07 01:49:19 5572 [ERROR] WSREP: It may not be safe to bootstrap the cluster from this node.</span>
+<span class="go">It was not the last one to leave the cluster and may not contain all the updates.</span>
+<span class="go">To force cluster bootstrap with this node, edit the grastate.dat file manually and set safe_to_bootstrap to 1 .</span>
+</pre></div>
+</div>
+<p>To override this protection, edit the <code class="docutils literal"><span class="pre">safe_to_bootstrap</span></code> line in the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file of the node you intend to use as the first node.</p>
+<p>In the case when all nodes crashed simultaneously, no node will be considered safe to bootstrap until the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file is edited manually.</p>
+</div>
+<div class="section" id="gcache-recovery">
+<h2>Gcache Recovery<a class="headerlink" href="#gcache-recovery" title="Permalink to this headline">¶</a></h2>
+<p>Starting with provider version 3.19, Galera provides the <a class="reference internal" href="galeraparameters.html#gcache-recover"><span class="std std-ref">gcache.recover</span></a> parameter. If set to <code class="docutils literal"><span class="pre">yes</span></code>, Galera will attempt to recover the gcache on node startup.</p>
+<p>If gcache recovery is successful, the node will be in position to provide IST to other joining nodes, which can speed up the overall restart time for the entire cluster.</p>
+<p>Gcache recovery requires that the entire gcache file is read twice. For large gcache files located on slow disks, this operation may take some time.</p>
+<p>Gcache recovery is a &#8220;best effort&#8221; operation. If recovery was not successful, the node will continue to operate normally however other nodes will fall back to SST when attempting to join.</p>
+</div>
 <div class="section" id="identifying-crashed-nodes">
 <h2>Identifying Crashed Nodes<a class="headerlink" href="#identifying-crashed-nodes" title="Permalink to this headline">¶</a></h2>
 <p id="identify-crashed-node">You can easily determine if a node has crashed by looking at the contents of the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file. If it looks like the example below, the node has either crashed during execution of a non-transactional operation (e.g., <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code>), or the node aborted due to a database inconsistency.</p>
@@ -254,6 +281,8 @@ cert_index:
     <ul>
 <li><a class="reference internal" href="#">Restarting the Cluster</a><ul>
 <li><a class="reference internal" href="#identifying-the-most-advanced-node">Identifying the Most Advanced Node</a></li>
+<li><a class="reference internal" href="#safe-to-bootstrap-protection">&#8216;Safe to Bootstrap&#8217; Protection</a></li>
+<li><a class="reference internal" href="#gcache-recovery">Gcache Recovery</a></li>
 <li><a class="reference internal" href="#identifying-crashed-nodes">Identifying Crashed Nodes</a></li>
 </ul>
 </li>
@@ -359,7 +388,7 @@ cert_index:
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

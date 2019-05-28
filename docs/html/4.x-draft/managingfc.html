@@ -246,7 +246,7 @@
 </div>
 <div class="section" id="measuring-the-flow-control-pauses">
 <h3>Measuring the Flow Control Pauses<a class="headerlink" href="#measuring-the-flow-control-pauses" title="Permalink to this headline">¶</a></h3>
-<p id="measure-fc-pauses">In addition to tracking Flow Control pauses, Galera Cluster also allows you to track the amount of time since the last <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> query during which replication was paused due to Flow Control.</p>
+<p id="measure-fc-pauses">In addition to tracking Flow Control pauses, Galera Cluster also allows you to track the amount of time since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> query during which replication was paused due to Flow Control.</p>
 <p>You can find this using one of two status variables:</p>
 <ul class="simple">
 <li><a class="reference internal" href="galerastatusvariables.html#wsrep-flow-control-paused"><span class="std std-ref">wsrep_flow_control_paused</span></a> Provides the amount of time replication was paused as a fraction.  Effectively, how much the slave lag is slowing the cluster.  The value <code class="docutils literal"><span class="pre">1.0</span></code> indicates replication is paused now.</li>
@@ -430,7 +430,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

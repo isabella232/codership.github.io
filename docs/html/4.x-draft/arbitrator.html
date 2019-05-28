@@ -244,7 +244,7 @@
 <p id="arbitrator-shell-start">When starting Galera Arbitrator from the shell, you have two options as to how you may configure it.  You can set the parameters through the command line arguments, as in the example here:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> garbd --group<span class="o">=</span>example_cluster <span class="se">\</span>
      --address<span class="o">=</span><span class="s2">&quot;gcomm://192.168.1.1,192.168.1.2,192.168.1.3&quot;</span> <span class="se">\</span>
-     --option<span class="o">=</span><span class="s2">&quot;socket.ssl_key=/etc/ssl/galera/server-key.pem;socket.ssl_cert=/etc/ssl/galera/server-cert.pem;socket.ssl_ca=/etc/ssl/galera/ca-cert.pem;socket.ssl_cipher=AES128-SHA&quot;&quot;</span>
+     --option<span class="o">=</span><span class="s2">&quot;socket.ssl_key=/etc/ssl/galera/server-key.pem;socket.ssl_cert=/etc/ssl/galera/server-cert.pem;socket.ssl_ca=/etc/ssl/galera/ca-cert.pem;socket.ssl_cipher=AES128-SHA256&quot;&quot;</span>
 </pre></div>
 </div>
 <p>If you use SSL, it&#8217;s necessary to specify the cipher. Otherwise, after initializing the ssl context an error will occur with a message saying, &#8220;Terminate called after throwing an instance of &#8216;gu::NotSet&#8217;&#8221;.</p>
@@ -452,7 +452,7 @@ LOG_FILE=&quot;/var/log/garbd.log&quot;
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

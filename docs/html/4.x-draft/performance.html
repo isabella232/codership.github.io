@@ -263,15 +263,14 @@
 </div>
 <div class="section" id="setting-parallel-slave-threads">
 <h2>Setting Parallel Slave Threads<a class="headerlink" href="#setting-parallel-slave-threads" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="parallel-slave-threads"></span><span class="target" id="index-5"></span><span class="target" id="index-6"></span><p id="index-7">There is no rule about how many slave threads you need for replication.  Parallel threads do not guarantee better performance.  But, parallel applying does not impair regular operation performance and may speed up the synchronization of new nodes with the cluster.</p>
+<span class="target" id="parallel-slave-threads"></span><span class="target" id="index-5"></span><p id="index-6">There is no rule about how many slave threads you need for replication.  Parallel threads do not guarantee better performance.  But, parallel applying does not impair regular operation performance and may speed up the synchronization of new nodes with the cluster.</p>
 <p>You should start with four slave threads per CPU core:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_slave_threads</span><span class="o">=</span><span class="s">4</span>
 </pre></div>
 </div>
 <p>The logic here is that, in a balanced system, four slave threads can typically saturate a CPU core.  However, I/O performance can increase this figure several times over.  For example, a single-core ThinkPad R51 with a 4200 RPM drive can use thirty-two slave threads.</p>
 <p>Parallel applying requires the following settings:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">innodb_autoinc_lockmode</span><span class="o">=</span><span class="s">2</span>
-<span class="na">innodb_locks_unsafe_For_binlog</span><span class="o">=</span><span class="s">1</span>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">innodb_autoinc_lock_mode</span><span class="o">=</span><span class="s">2</span>
 </pre></div>
 </div>
 <p>You can use the <a class="reference internal" href="galerastatusvariables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a> status variable to determine the maximum number of slave threads possible.  For example:</p>
@@ -305,6 +304,19 @@
 <p class="last"><strong>See Also</strong>: For more information on <code class="docutils literal"><span class="pre">pt-archiver</span></code>, its syntax and what else it can do, see the <a class="reference external" href="http://www.percona.com/doc/percona-toolkit/2.1/pt-archiver.html">manpage</a>.</p>
 </div>
 </div>
+<div class="section" id="group-commit">
+<h2>Group Commit<a class="headerlink" href="#group-commit" title="Permalink to this headline">¶</a></h2>
+<p id="id2">After each transaction is committed, InnoDB will typically flush changes to its redo log and the binary log to the disk&#8211;it does this typically by calling <cite>fsync()</cite>, <cite>fdatasync()</cite>. This method is used to ensure data changes are stored durably on the disk. Disk flushing, however, can have an effect on performance and the number of transactions-per-second (TPS) that can be committed.</p>
+<p>Starting with version 5.3 of MariaDB, Group Commit was introduced. If there are several transactions trying to commit at the same time, group commit will force them to be flushed to the disk with a single system call, rather than one system call for each commit. This can greatly reduce the need for flush operations, and greatly improve the throughput of TPS.</p>
+<p>In Galera transactions are committed sequentially in total order determined by the group communication between nodes. Sequential commit ordering is implemented with commit monitor, which allows only single transaction to proceed at the time.</p>
+<p>Prior to version 4 of Galera, even with MariaDB 5.3 or later, transactions were committed strictly in sequence: group commit had no effect of Galera. In Galera 3, the commit monitor was held until the transaction was completely finished. This disabled the MariaDB group commit optimization and it was not possible to amortize expensive disk operations (i.e., <cite>fsync()</cite>, <cite>fdatasync()</cite>).</p>
+<p>As of version 4 of Galera, the commit time concurrency control was reworked so that the commit monitor is released as soon as the commit has been queued for group commit. This allows transactions to be committed in groups while still respecting sequential commit order.</p>
+<p>In essence, MariaDB&#8217;s group commit operates now with Galera&#8211;starting with version 4&#8211;by providing better integration with existing functionality. The same will also apply to MySQL-wsrep when it&#8217;s implemented: Galera 4 provides a better way to integrate with native binary log group commit.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>See Also</strong>: For more information, see the <a class="reference external" href="https://mariadb.com/kb/en/mariadb/group-commit-for-the-binary-log/">MariaDB Documentation on Group Commit</a>.</p>
+</div>
+</div>
 </div>
 
 
@@ -325,6 +337,7 @@
 </li>
 <li><a class="reference internal" href="#setting-parallel-slave-threads">Setting Parallel Slave Threads</a></li>
 <li><a class="reference internal" href="#dealing-with-large-transactions">Dealing with Large Transactions</a></li>
+<li><a class="reference internal" href="#group-commit">Group Commit</a></li>
 </ul>
 </li>
 </ul>
@@ -408,7 +421,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Support</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Knowledge Base</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -429,7 +442,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

@@ -274,9 +274,8 @@
 </div>
 <div class="section" id="configuring-the-encryption-cipher">
 <h3>Configuring the Encryption Cipher<a class="headerlink" href="#configuring-the-encryption-cipher" title="Permalink to this headline">¶</a></h3>
-<p id="configuring-cipher">Using the <a class="reference internal" href="galeraparameters.html#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a> parameter, you define which cipher the node uses in encrypting replication traffic.  Galera Cluster uses whatever ciphers are available to the <abbr title="Secure Sockets Layer">SSL</abbr> implementation installed on the nodes. For instance, if you install OpenSSL on your node, Galera Cluster can use any cryptographic algorithms OpenSSL uses in ciphers.</p>
-<p>The <abbr title="Secure Sockets Layer">SSL</abbr> configuration for Galera Cluster defaults to AES128-SHA, as this setting is considerably faster and no less secure than AES256.</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;socket.ssl_cipher=AES128-SHA&quot;</span>
+<p id="configuring-cipher">Using the <a class="reference internal" href="galeraparameters.html#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a> parameter, one can override the default <abbr title="Secure Sockets Layer">SSL</abbr> cipher the node uses to encrypt replication traffic.  Galera Cluster uses whatever ciphers are available to the <abbr title="Secure Sockets Layer">SSL</abbr> implementation installed on the nodes. For instance, if you install OpenSSL on your node, Galera Cluster can use any cipher supported by OpenSSL, as well as use filters to ensure that &#8220;weak&#8221; algorithms are not accepted on connection handshake.</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;socket.ssl_cipher=ALL:!EXP:!NULL:!ADH:!LOW:!SSLv2:!SSLv3:!MD5:!RC4:!RSA&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -410,7 +409,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

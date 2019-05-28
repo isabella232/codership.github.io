@@ -222,16 +222,18 @@
 </pre></div>
 </div>
 <p><a class="reference internal" href="galerastatusvariables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a>: This varaible returns an average of the received queue length since the last status query.</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_recv_queue_avg&#39;</span><span class="p">;</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span> <span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_recv_queue_avg&#39;</span><span class="p">;</span>
 
-<span class="o">+----------------------------+---------+</span>
-<span class="o">|</span> <span class="n">Variable_name</span>              <span class="o">|</span> <span class="n">Value</span>   <span class="o">|</span>
-<span class="o">+----------------------------+---------+</span>
-<span class="o">|</span> <span class="n">wsrep_local_recv_queue_avg</span> <span class="o">|</span> <span class="mi">3</span><span class="p">.</span><span class="mi">34852</span> <span class="o">|</span>
-<span class="o">+----------------------------+---------+</span>
+   <span class="o">+----------------------------+---------+</span>
+   <span class="o">|</span> <span class="n">Variable_name</span>              <span class="o">|</span> <span class="n">Value</span>   <span class="o">|</span>
+   <span class="o">+----------------------------+---------+</span>
+   <span class="o">|</span> <span class="n">wsrep_local_recv_queue_avg</span> <span class="o">|</span> <span class="mi">3</span><span class="p">.</span><span class="mi">34852</span> <span class="o">|</span>
+   <span class="o">+----------------------------+---------+</span>
+
+<span class="n">Nodes</span> <span class="n">that</span> <span class="k">return</span> <span class="k">values</span> <span class="n">much</span> <span class="n">higher</span> <span class="n">than</span> <span class="ss">``</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="ss">``</span> <span class="n">inidcates</span> <span class="n">that</span> <span class="n">it</span> <span class="n">cannot</span> <span class="n">apply</span> <span class="k">write</span><span class="o">-</span><span class="n">sets</span> <span class="k">as</span> <span class="n">fast</span> <span class="k">as</span> <span class="n">they</span> <span class="n">are</span> <span class="n">received</span> <span class="k">and</span> <span class="n">can</span> <span class="n">generate</span> <span class="n">replication</span> <span class="n">throttling</span><span class="p">.</span>
 </pre></div>
 </div>
-<p>A node that return values much higher than <code class="docutils literal"><span class="pre">0.0</span></code> indicates it cannot apply write-sets as fast as they&#8217;re received and can generate replication throttling.</p>
+<p>Check these status variables on each node in your cluster.  The node that returns the highest value is the slowest node.  Lower values are preferable.</p>
 </div>
 </div>
 
@@ -331,7 +333,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Support</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Knowledge Base</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -352,7 +354,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

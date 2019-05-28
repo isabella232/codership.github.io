@@ -235,11 +235,11 @@
 <p class="last"><strong>See Also</strong>: When you start a new cluster, any node can serve as the first node, since all the databases are empty.  When you migrate from MySQL to Galera Cluster, use the original master node as the first node.  When restarting the cluster, use the most advanced node.  For more information, see <a class="reference internal" href="migration.html"><span class="doc">Migrating to Galera Cluster</span></a> and <a class="reference internal" href="quorumreset.html"><span class="doc">Resetting the Quorum</span></a>.</p>
 </div>
 <p>To start the first node&#8211;which should have MySQL, MariaDB or Percona XtraDB, and Galera installed&#8211;you&#8217;ll have to launch the database server on it with the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.  There are a few ways you might do this, depending on the operating system. For systems that use <code class="docutils literal"><span class="pre">init</span></code>, execute the following from the command-line:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql start --wsrep-new-cluster
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> systemctl start mysql --wsrep-new-cluster
 </pre></div>
 </div>
 <p>For operating systems that use <code class="docutils literal"><span class="pre">systemd</span></code>, you would instead enter the following from the command-line:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl start mysql --wsrep-new-cluster
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> /usr/bin/mysqld_bootstrap
 </pre></div>
 </div>
 <p>Both of these start the <code class="docutils literal"><span class="pre">mysqld</span></code> daemon on the node. Starting in MariaDB version 10.4, which includes Galera version 4, you can enter instead the following from the command-line to start MariaDB, Galera, and to establish the Primary Component:</p>
@@ -410,7 +410,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

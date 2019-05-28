@@ -230,7 +230,7 @@
 <p>If <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-osu-method"><span class="std std-ref">wsrep_OSU_method</span></a> is set to <a class="reference internal" href="glossary.html#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a>, or <code class="docutils literal"><span class="pre">ROI</span></code>, then you need to execute the following commands on each node individually.</p>
 </li>
 <li><p class="first">Create a user for <code class="docutils literal"><span class="pre">mysqldump</span></code>.</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span>CREATE USER &#39;sst_user&#39;$&#39;%&#39; IDENTIFIED BY PASSWORD &#39;sst_password&#39;;
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="n">USER</span> <span class="s1">&#39;sst_user&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="n">PASSWORD</span> <span class="s1">&#39;sst_password&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Bear in mind that, due to the manner in which the SST script is called, the user name and password must be the same on all nodes.</p>
@@ -423,7 +423,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

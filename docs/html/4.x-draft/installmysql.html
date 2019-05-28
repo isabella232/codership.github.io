@@ -231,11 +231,14 @@
 </li>
 <li><p class="first">Add the Codership repository to your sources list.  Using your preferred text editor, create a <cite>galera.list</cite> file in the <code class="docutils literal"><span class="pre">/etc/apt/sources.list.d/</span></code> directory.</p>
 <div class="highlight-linux-config"><div class="highlight"><pre><span></span><span class="c1"># Codership Repository (Galera Cluster for MySQL)</span>
-deb http://releases.galeracluster.com/DIST RELEASE main
+deb http://releases.galeracluster.com/mysql-wsrep-VERSION/DIST RELEASE main
+deb http://releases.galeracluster.com/galera-3/DIST RELEASE main
 </pre></div>
 </div>
 <p>For the repository address, make the following changes:</p>
 <ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">VERSION</span></code> Indicates the desired MySQL-wsrep version. For example, <code class="docutils literal"><span class="pre">5.6</span></code></p>
+</li>
 <li><p class="first"><code class="docutils literal"><span class="pre">DIST</span></code> Indicates the name of your Linux distribution.  For example, <code class="docutils literal"><span class="pre">ubuntu</span></code>.</p>
 </li>
 <li><p class="first"><code class="docutils literal"><span class="pre">RELEASE</span></code> Indicates your distribution release.  For example, <code class="docutils literal"><span class="pre">wheezy</span></code>.</p>
@@ -245,6 +248,15 @@ deb http://releases.galeracluster.com/DIST RELEASE main
 </div>
 </li>
 </ul>
+</li>
+<li><p class="first">Prefer the Codership repository over other sources. Using your preferred text editor, create a <cite>galera.pref</cite> file in the <code class="docutils literal"><span class="pre">/etc/apt/preferences.d/</span></code> directory.</p>
+<div class="highlight-linux-config"><div class="highlight"><pre><span></span><span class="c1"># Prefer Codership repository</span>
+Package: *
+Pin: origin releases.galeracluster.com
+Pin-Priority: <span class="mi">1001</span>
+</pre></div>
+</div>
+<p>This is needed to make sure the patched versions are preferred, for example if a 3rd-party program requires <code class="docutils literal"><span class="pre">libmysqlclient20</span></code> and the OS-Version for the library is newer.</p>
 </li>
 <li><p class="first">Update the local cache.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get update
@@ -256,17 +268,24 @@ deb http://releases.galeracluster.com/DIST RELEASE main
 </div>
 <div class="section" id="enabling-the-yum-repository">
 <h3>Enabling the <code class="docutils literal"><span class="pre">yum</span></code> Repository<a class="headerlink" href="#enabling-the-yum-repository" title="Permalink to this headline">¶</a></h3>
-<p id="mysql-yum-repo">For RPM-based distributions, such as CentOS, Red Hat and Fedora, you can enable the Codership repository by adding a <code class="docutils literal"><span class="pre">.repo</span></code> file to the <code class="docutils literal"><span class="pre">/etc/yum.repos.d/</span></code> directory.</p>
-<p>Using your preferred text editor, create the <code class="docutils literal"><span class="pre">.repo</span></code> file.</p>
+<p id="mysql-yum-repo">For RPM-based distributions, such as CentOS, Red Hat and Fedora, you can enable the Codership repository by adding a <code class="docutils literal"><span class="pre">galera.repo</span></code> file to the <code class="docutils literal"><span class="pre">/etc/yum.repos.d/</span></code> directory.</p>
+<p>Using your preferred text editor, create the <code class="docutils literal"><span class="pre">galera.repo</span></code> file.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[galera]</span>
 <span class="na">name</span> <span class="o">=</span> <span class="s">Galera</span>
-<span class="na">baseurl</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/DIST/RELEASE/ARCH</span>
+<span class="na">baseurl</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/galera-3/DIST/RELEASE/ARCH</span>
+<span class="na">gpgkey</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/GPG-KEY-galeracluster.com</span>
+<span class="na">gpgcheck</span> <span class="o">=</span> <span class="s">1</span>
+
+<span class="k">[mysql-wsrep]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">MySQL-wsrep</span>
+<span class="na">baseurl</span> <span class="o">=</span>  <span class="s">http://releases.galeracluster.com/mysql-wsrep-VERSION/DIST/RELEASE/ARCH</span>
 <span class="na">gpgkey</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/GPG-KEY-galeracluster.com</span>
 <span class="na">gpgcheck</span> <span class="o">=</span> <span class="s">1</span>
 </pre></div>
 </div>
 <p>In the <code class="docutils literal"><span class="pre">baseurl</span></code> field, make the following changes to web address:</p>
 <ul class="simple">
+<li><code class="docutils literal"><span class="pre">VERSION</span></code> Indicates the desired MySQL-wsrep version. For example, <code class="docutils literal"><span class="pre">5.6</span></code></li>
 <li><code class="docutils literal"><span class="pre">DIST</span></code> Indicates the distribution name.  For example, <code class="docutils literal"><span class="pre">centos</span></code> or <code class="docutils literal"><span class="pre">fedora</span></code>.</li>
 <li><code class="docutils literal"><span class="pre">RELEASE</span></code> indicates the distribution release number.  For example, <code class="docutils literal"><span class="pre">6</span></code> for CentOS, <code class="docutils literal"><span class="pre">20</span></code> or <code class="docutils literal"><span class="pre">21</span></code> for Fedora.</li>
 <li><code class="docutils literal"><span class="pre">ARCH</span></code> indicates the architecture of your hardware.  For example, <code class="docutils literal"><span class="pre">x86_64</span></code> for 64-bit systems.</li>
@@ -275,7 +294,7 @@ deb http://releases.galeracluster.com/DIST RELEASE main
 </div>
 <div class="section" id="enabling-the-zypper-repository">
 <h3>Enabling the <code class="docutils literal"><span class="pre">zypper</span></code> Repository<a class="headerlink" href="#enabling-the-zypper-repository" title="Permalink to this headline">¶</a></h3>
-<p id="mysql-zypper-repo">For distributions that use <code class="docutils literal"><span class="pre">zypper</span></code> for package management, such as openSUSE and SUSE Linux Enterprise Server, you can enable the Codership repository by importing the GPG key and then creating a <code class="docutils literal"><span class="pre">.repo</span></code> file in the local directory.</p>
+<p id="mysql-zypper-repo">For distributions that use <code class="docutils literal"><span class="pre">zypper</span></code> for package management, such as openSUSE and SUSE Linux Enterprise Server, you can enable the Codership repository by importing the GPG key and then creating a <code class="docutils literal"><span class="pre">galera.repo</span></code> file in the local directory.</p>
 <ol class="arabic">
 <li><p class="first">Import the GPG key.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo rpm --import <span class="s2">&quot;http://releases.galeracluster.com/GPG-KEY-galeracluster.com&quot;</span>
@@ -285,13 +304,19 @@ deb http://releases.galeracluster.com/DIST RELEASE main
 <li><p class="first">Create a <code class="docutils literal"><span class="pre">galera.repo</span></code> file in the local directory.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[galera]</span>
 <span class="na">name</span> <span class="o">=</span> <span class="s">Galera</span>
-<span class="na">baseurl</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/DIST/RELEASE</span>
+<span class="na">baseurl</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/galera-3/DIST/RELEASE/ARCH</span>
+
+<span class="k">[MySQL-wsrep]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">MySQL-wsrep</span>
+<span class="na">baseurl</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/mysql-wsrep-VERSION/DIST/RELEASE/ARCH</span>
 </pre></div>
 </div>
 <p>For the <code class="docutils literal"><span class="pre">baseurl</span></code> repository address, make the following changes:</p>
 <ul class="simple">
+<li><code class="docutils literal"><span class="pre">VERSION</span></code> Indicates the desired MySQL-wsrep version. For example, <code class="docutils literal"><span class="pre">5.6</span></code></li>
 <li><code class="docutils literal"><span class="pre">DIST</span></code> indicates the distribution name.  For example, <code class="docutils literal"><span class="pre">opensuse</span></code> or <code class="docutils literal"><span class="pre">sles</span></code>.</li>
 <li><code class="docutils literal"><span class="pre">RELEASE</span></code> indicates the distribution version number.</li>
+<li><code class="docutils literal"><span class="pre">ARCH</span></code> indicates the architecture of your hardware.  For example, <code class="docutils literal"><span class="pre">x86_64</span></code> for 64-bit systems.</li>
 </ul>
 </li>
 <li><p class="first">Add the Codership repository.</p>
@@ -336,6 +361,10 @@ deb http://releases.galeracluster.com/DIST RELEASE main
 </pre></div>
 </div>
 <p>Galera Cluster for MySQL is now installed on your server.  You need to repeat this process for each node in your cluster.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When deciding which packages to install, the package manager may elect to install a newer major verion of Galera Cluster than the one you intended to install. Before confirming the installation of packages, please make sure that the package manager intends to install the desired Galera Cluster version.</p>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: In the event that you installed Galera Cluster for MySQL over an existing standalone instance of MySQL, there are some additional steps that you need to take in order to update your system to the new database server.  For more information, see <a class="reference internal" href="migration.html"><span class="doc">Migrating to Galera Cluster</span></a>.</p>
@@ -496,7 +525,7 @@ with file from package mysql-libs-5.1.73-.3.e16_5.x86_64
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

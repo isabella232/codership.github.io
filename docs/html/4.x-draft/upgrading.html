@@ -252,6 +252,23 @@
 <p class="first admonition-title">Tip</p>
 <p class="last">If you are upgraded a node that is or will be part of a weighted quorum, set the initial node weight to zero.  This guarantees that if the joining node should fail before it finishes synchronizing, it will not affect any quorum computations that follow.</p>
 </div>
+<div class="section" id="rolling-upgrades-between-major-versions-of-galera-cluster">
+<h3>Rolling Upgrades between Major Versions of Galera Cluster<a class="headerlink" href="#rolling-upgrades-between-major-versions-of-galera-cluster" title="Permalink to this headline">¶</a></h3>
+<p>Performing a rolling upgrade between major versions of Galera Cluster, such as from 5.6 to 5.7 has certain additional limitations:</p>
+<ol class="arabic simple">
+<li>SST is not supported between nodes of different major versions. Therefore, nodes of different major versions should not coexist in the same cluster for longer than necessary to perform the upgrade;</li>
+<li>Prior to performing the upgrade, ensure that the <a class="reference internal" href="galeraparameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> provider option on all nodes is sized so that it can provide IST for the expected duration of the upgrade;</li>
+<li>While the cluster contains nodes of multiple versions, avoid running any statements that are only supported in a particular version or statements that have different effect in different versions. For example, do not run DDL statements that are only available in the newer version.</li>
+</ol>
+<p>The following procedure is recommended for rolling upgrades between major versions:</p>
+<ol class="arabic simple">
+<li>Shut down the node</li>
+<li>Edit the <code class="docutils literal"><span class="pre">my.cnf</span></code> file and temporarily comment out the <code class="docutils literal"><span class="pre">wsrep_provider</span></code> line. This will prevent the node from attempting to rejoin the cluster during the package upgrade process.</li>
+<li>Uninstall all existing mysql-wsrep packages and install the new packages using your package manager</li>
+<li>If the <code class="docutils literal"><span class="pre">mysql_upgrade</span></code> was not run as part of package installation, run it manually. You may need to start the mysqld service first in order to do that</li>
+<li>Shut down the node if it is currently running, restore the <code class="docutils literal"><span class="pre">wsrep_provider</span></code> line in <code class="docutils literal"><span class="pre">my.cnf</span></code> and restart the node.</li>
+</ol>
+</div>
 </div>
 <div class="section" id="bulk-upgrade">
 <h2>Bulk Upgrade<a class="headerlink" href="#bulk-upgrade" title="Permalink to this headline">¶</a></h2>
@@ -348,7 +365,10 @@
     <h3><a href="index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Upgrading Galera Cluster</a><ul>
-<li><a class="reference internal" href="#rolling-upgrade">Rolling Upgrade</a></li>
+<li><a class="reference internal" href="#rolling-upgrade">Rolling Upgrade</a><ul>
+<li><a class="reference internal" href="#rolling-upgrades-between-major-versions-of-galera-cluster">Rolling Upgrades between Major Versions of Galera Cluster</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#bulk-upgrade">Bulk Upgrade</a></li>
 <li><a class="reference internal" href="#provider-only-upgrade">Provider-only Upgrade</a><ul>
 <li><a class="reference internal" href="#upgrading-galera-replication-plugin">Upgrading Galera Replication Plugin</a></li>
@@ -459,7 +479,7 @@
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

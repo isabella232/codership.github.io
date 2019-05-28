@@ -576,8 +576,62 @@
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>Warning</strong>: This feature has been <strong>deprecated</strong>.  It has been replaced by <a class="reference internal" href="#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a>.</p>
 </div>
+<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_certification_rules</span></code></p>
+<span class="target" id="wsrep-certification-rules"></span><p id="index-4">Certification rules to use in the cluster.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="27%" />
+<col width="40%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Command-line Format</strong></td>
+<td colspan="2"><code class="docutils literal"><span class="pre">--wsrep-certification-rules</span></code></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><strong>System Variable</strong></td>
+<td><em>Name:</em></td>
+<td><code class="docutils literal"><span class="pre">wsrep_certification_rules</span></code></td>
+</tr>
+<tr class="row-odd"><td><em>Variable Scope:</em></td>
+<td>Global</td>
+</tr>
+<tr class="row-even"><td><em>Dynamic Variable:</em></td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td rowspan="4"><strong>Permitted Values</strong></td>
+<td><em>Type:</em></td>
+<td>enumeration</td>
+</tr>
+<tr class="row-even"><td><em>Default Value:</em></td>
+<td><code class="docutils literal"><span class="pre">STRICT</span></code></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><em>Valid Values:</em></td>
+<td><code class="docutils literal"><span class="pre">OPTIMIZED</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">STRICT</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Support</strong></td>
+<td><em>Introduced:</em></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>Controls how certification is done in the cluster, in particular this affects how foreign keys are handled: with the <code class="docutils literal"><span class="pre">STRICT</span></code> option two INSERTs that happen at about the same time on two different nodes in a child table, that insert different (non conflicting rows), but both rows point to the same row in the parent table could result in certification failure. With the <code class="docutils literal"><span class="pre">OPTIMIZED</span></code> option such certification failure is avoided.</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_certification_rules&#39;</span><span class="p">;</span>
+
+<span class="o">+---------------------------+--------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>             <span class="o">|</span> <span class="n">Value</span>  <span class="o">|</span>
+<span class="o">+---------------------------+--------+</span>
+<span class="o">|</span> <span class="n">wsrep_certification_rules</span> <span class="o">|</span> <span class="n">STRICT</span> <span class="o">|</span>
+<span class="o">+---------------------------+--------+</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is a MySQL wsrep parameter. It was introduced in 5.5.61-25.24, 5.6.41-25.23, 5.7.23-25.15.</p>
+</div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_certify_nonPK</span></code></p>
-<span class="target" id="wsrep-certify-nonpk"></span><p id="index-4">This parameter is used to define whether the node should generate primary keys on rows without them for the purposes of certification.</p>
+<span class="target" id="wsrep-certify-nonpk"></span><p id="index-5">This parameter is used to define whether the node should generate primary keys on rows without them for the purposes of certification.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -623,7 +677,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_cluster_address</span></code></p>
-<span class="target" id="wsrep-cluster-address"></span><span class="target" id="index-5"></span><p id="index-6">This parameter sets the back-end schema, IP addresses, ports and options the node uses in connecting to the cluster.</p>
+<span class="target" id="wsrep-cluster-address"></span><span class="target" id="index-6"></span><p id="index-7">This parameter sets the back-end schema, IP addresses, ports and options the node uses in connecting to the cluster.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -686,7 +740,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_cluster_name</span></code></p>
-<span class="target" id="wsrep-cluster-name"></span><p id="index-7">This parameter defines the logical cluster name for the node.</p>
+<span class="target" id="wsrep-cluster-name"></span><p id="index-8">This parameter defines the logical cluster name for the node.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -732,7 +786,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_convert_lock_to_trx</span></code></p>
-<span class="target" id="wsrep-convert-lock-to-trx"></span><p id="index-8">This parameter is used to set whether the node converts <code class="docutils literal"><span class="pre">LOCK/UNLOCK</span> <span class="pre">TABLES</span></code> statements into <code class="docutils literal"><span class="pre">BEGIN/COMMIT</span></code> statements.</p>
+<span class="target" id="wsrep-convert-lock-to-trx"></span><p id="index-9">This parameter is used to set whether the node converts <code class="docutils literal"><span class="pre">LOCK/UNLOCK</span> <span class="pre">TABLES</span></code> statements into <code class="docutils literal"><span class="pre">BEGIN/COMMIT</span></code> statements.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -783,7 +837,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_data_home_dir</span></code></p>
-<span class="target" id="wsrep-data-home-dir"></span><p id="index-9">Use this parameter to set the directory the wsrep Provider uses for its files.</p>
+<span class="target" id="wsrep-data-home-dir"></span><p id="index-10">Use this parameter to set the directory the wsrep Provider uses for its files.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -826,7 +880,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_dbug_option</span></code></p>
-<span class="target" id="wsrep-dbug-option"></span><p id="index-10">You can set debug options to pass to the wsrep Provider with this parameter.</p>
+<span class="target" id="wsrep-dbug-option"></span><p id="index-11">You can set debug options to pass to the wsrep Provider with this parameter.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -871,7 +925,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_debug</span></code></p>
-<span class="target" id="wsrep-debug"></span><p id="index-11">This parameter enables additional debugging output for the database server error log.</p>
+<span class="target" id="wsrep-debug"></span><p id="index-12">This parameter enables additional debugging output for the database server error log.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -921,7 +975,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_desync</span></code></p>
-<span class="target" id="wsrep-desync"></span><p id="index-12">This parameter is used to set whether or not the node participates in Flow Control.</p>
+<span class="target" id="wsrep-desync"></span><p id="index-13">This parameter is used to set whether or not the node participates in Flow Control.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -969,7 +1023,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_dirty_reads</span></code></p>
-<span class="target" id="wsrep-dirty-reads"></span><p id="index-13">This parameter defines whether the node accepts read queries when in a non-operational state.</p>
+<span class="target" id="wsrep-dirty-reads"></span><p id="index-14">This parameter defines whether the node accepts read queries when in a non-operational state.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1025,7 +1079,7 @@
 <p class="last">This is a MySQL wsrep parameter.  It was introduced in version 5.6.29.</p>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_drupal_282555_workaround</span></code></p>
-<span class="target" id="wsrep-drupal-282555-workaround"></span><p id="index-14">This parameter enables workaround for a bug in MySQL InnoDB that affects Drupal installations.</p>
+<span class="target" id="wsrep-drupal-282555-workaround"></span><p id="index-15">This parameter enables workaround for a bug in MySQL InnoDB that affects Drupal installations.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1072,7 +1126,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_forced_binlog_format</span></code></p>
-<span class="target" id="wsrep-forced-binlog-format"></span><p id="index-15">This parameter defines the binary log format for all transactions.</p>
+<span class="target" id="wsrep-forced-binlog-format"></span><p id="index-16">This parameter defines the binary log format for all transactions.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1128,7 +1182,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_load_data_splitting</span></code></p>
-<span class="target" id="wsrep-load-data-splitting"></span><p id="index-16">This parameter defines whether the node splits large <code class="docutils literal"><span class="pre">LOAD</span> <span class="pre">DATA</span></code> commands into more manageable units.</p>
+<span class="target" id="wsrep-load-data-splitting"></span><p id="index-17">This parameter defines whether the node splits large <code class="docutils literal"><span class="pre">LOAD</span> <span class="pre">DATA</span></code> commands into more manageable units.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1175,7 +1229,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_log_conflicts</span></code></p>
-<span class="target" id="wsrep-log-conflicts"></span><p id="index-17">This parameter defines whether the node logs additional information about conflicts.</p>
+<span class="target" id="wsrep-log-conflicts"></span><p id="index-18">This parameter defines whether the node logs additional information about conflicts.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1222,7 +1276,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_max_ws_rows</span></code></p>
-<span class="target" id="wsrep-max-ws-rows"></span><p id="index-18">With this parameter you can set the maximum number of rows the node allows in a write-set.</p>
+<span class="target" id="wsrep-max-ws-rows"></span><p id="index-19">With this parameter you can set the maximum number of rows the node allows in a write-set.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1268,7 +1322,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_max_ws_size</span></code></p>
-<span class="target" id="wsrep-max-ws-size"></span><p id="index-19">You can set the maximum size the node allows for write-sets with this parameter.</p>
+<span class="target" id="wsrep-max-ws-size"></span><p id="index-20">You can set the maximum size the node allows for write-sets with this parameter.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1294,7 +1348,7 @@
 <td>string</td>
 </tr>
 <tr class="row-even"><td><em>Default Value:</em></td>
-<td><code class="docutils literal"><span class="pre">1G</span></code></td>
+<td><code class="docutils literal"><span class="pre">2G</span></code></td>
 </tr>
 <tr class="row-odd"><td><strong>Support</strong></td>
 <td><em>Introduced:</em></td>
@@ -1309,12 +1363,12 @@
 <span class="o">+-------------------+-------+</span>
 <span class="o">|</span> <span class="n">Variable_name</span>     <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
 <span class="o">+-------------------+-------+</span>
-<span class="o">|</span> <span class="n">wsrep_max_ws_size</span> <span class="o">|</span> <span class="mi">1</span><span class="n">G</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">wsrep_max_ws_size</span> <span class="o">|</span> <span class="mi">2</span><span class="n">G</span>    <span class="o">|</span>
 <span class="o">+-------------------+-------+</span>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_node_address</span></code></p>
-<span class="target" id="wsrep-node-address"></span><p id="index-20">This parameter is used to note the IP address and port of the node.</p>
+<span class="target" id="wsrep-node-address"></span><p id="index-21">This parameter is used to note the IP address and port of the node.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1375,7 +1429,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_node_incoming_address</span></code></p>
-<span class="target" id="wsrep-node-incoming-address"></span><p id="index-21">This parameter is used to provide the IP address and port from which the node should expect client connections.</p>
+<span class="target" id="wsrep-node-incoming-address"></span><p id="index-22">This parameter is used to provide the IP address and port from which the node should expect client connections.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1421,7 +1475,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_node_name</span></code></p>
-<span class="target" id="wsrep-node-name"></span><p id="index-22">You can set the logical name that the node uses for itself with this parameter.</p>
+<span class="target" id="wsrep-node-name"></span><p id="index-23">You can set the logical name that the node uses for itself with this parameter.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1468,7 +1522,7 @@
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_notify_cmd</span></code></p>
-<span class="target" id="wsrep-notify-cmd"></span><p id="index-23">Defines the command the node runs whenever cluster membership or the state of the node changes.</p>
+<span class="target" id="wsrep-notify-cmd"></span><p id="index-24">Defines the command the node runs whenever cluster membership or the state of the node changes.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1503,6 +1557,10 @@
 </tbody>
 </table>
 <p>Whenever the node registers changes in cluster membership or its own state, this parameter allows you to send information about that change to an external script defined by the value.  You can use this to reconfigure load balancers, raise alerts and so on, in response to node and cluster activity.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><strong>Warning</strong>: The node will block and wait until the script completes and returns before it can proceed. If the script performs any potentially blocking or long-running operations, such as network communication, you may wish initiate such operations in the background and have the script return immediately.</p>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For an example script that updates two tables on the local node, with changes taking place at the cluster level, see the <a class="reference internal" href="notificationcmd.html"><span class="doc">Notification Command</span></a>.</p>
@@ -1559,7 +1617,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_on</span></code></p>
-<span class="target" id="wsrep-on"></span><p id="index-24">Defines whether replication takes place for updates from the current session.</p>
+<span class="target" id="wsrep-on"></span><p id="index-25">Defines whether replication takes place for updates from the current session.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1601,7 +1659,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_OSU_method</span></code></p>
-<span class="target" id="wsrep-osu-method"></span><p id="index-25">Defines the Online Schema Upgrade method the node uses to replicate <abbr title="Data Definition Language">DDL</abbr> statements.</p>
+<span class="target" id="wsrep-osu-method"></span><p id="index-26">Defines the Online Schema Upgrade method the node uses to replicate <abbr title="Data Definition Language">DDL</abbr> statements.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1632,7 +1690,7 @@ The members are presented in the following syntax:</p>
 <tr class="row-odd"><td rowspan="2"><em>Valid Values:</em></td>
 <td><code class="docutils literal"><span class="pre">TOI</span></code></td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">ROI</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">RSU</span></code></td>
 </tr>
 <tr class="row-odd"><td><strong>Support</strong></td>
 <td><em>Introduced:</em></td>
@@ -1659,7 +1717,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_preordered</span></code></p>
-<span class="target" id="wsrep-preordered"></span><p id="index-26">Defines whether the node uses transparent handling of preordered replication events.</p>
+<span class="target" id="wsrep-preordered"></span><p id="index-27">Defines whether the node uses transparent handling of preordered replication events.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1705,7 +1763,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_provider</span></code></p>
-<span class="target" id="wsrep-provider"></span><p id="index-27">Defines the path to the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>.</p>
+<span class="target" id="wsrep-provider"></span><p id="index-28">Defines the path to the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1750,7 +1808,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_provider_options</span></code></p>
-<span class="target" id="wsrep-provider-options"></span><p id="index-28">Defines optional settings the node passes to the wsrep Provider.</p>
+<span class="target" id="wsrep-provider-options"></span><p id="index-29">Defines optional settings the node passes to the wsrep Provider.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1786,6 +1844,10 @@ The members are presented in the following syntax:</p>
 </table>
 <p>When the node loads the wsrep Provider, there are several configuration options available that affect how it handles certain events.  These allow you to fine tune how it handles various situations.</p>
 <p>For example, you can use <a class="reference internal" href="galeraparameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> to define how large a write-set cache the node keeps or manage group communications timeouts.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code> settings need to be specified on a single line. In case of multiple instances of <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code>, only the last one is used.</p>
+</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information on the wsrep Provider options, see <a class="reference internal" href="galeraparameters.html"><span class="doc">Galera Parameters</span></a>.</p>
@@ -1865,7 +1927,7 @@ The members are presented in the following syntax:</p>
 <p class="last">This is a MySQL wsrep parameter.  It was introduced in version 5.6.29.</p>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_restart_slave</span></code></p>
-<span class="target" id="wsrep-restart-slave"></span><p id="index-29">Defines whether the replication slave restarts when the node joins the cluster.</p>
+<span class="target" id="wsrep-restart-slave"></span><p id="index-30">Defines whether the replication slave restarts when the node joins the cluster.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1910,7 +1972,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_retry_autocommit</span></code></p>
-<span class="target" id="wsrep-retry-autocommit"></span><p id="index-30">Defines the number of retries the node attempts when an autocommit query fails.</p>
+<span class="target" id="wsrep-retry-autocommit"></span><p id="index-31">Defines the number of retries the node attempts when an autocommit query fails.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -1955,7 +2017,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_slave_FK_checks</span></code></p>
-<span class="target" id="wsrep-slave-fk-checks"></span><p id="index-31">Defines whether the node performs foreign key checking for applier threads.</p>
+<span class="target" id="wsrep-slave-fk-checks"></span><p id="index-32">Defines whether the node performs foreign key checking for applier threads.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2000,7 +2062,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_slave_threads</span></code></p>
-<span class="target" id="wsrep-slave-threads"></span><p id="index-32">Defines the number of threads to use in applying slave write-sets.</p>
+<span class="target" id="wsrep-slave-threads"></span><p id="index-33">Defines the number of threads to use in applying slave write-sets.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2051,7 +2113,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_slave_UK_checks</span></code></p>
-<span class="target" id="wsrep-slave-uk-checks"></span><p id="index-33">Defines whether the node performs unique key checking on applier threads.</p>
+<span class="target" id="wsrep-slave-uk-checks"></span><p id="index-34">Defines whether the node performs unique key checking on applier threads.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2096,7 +2158,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_sst_auth</span></code></p>
-<span class="target" id="wsrep-sst-auth"></span><p id="index-34">Defines the authentication information to use in <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
+<span class="target" id="wsrep-sst-auth"></span><p id="index-35">Defines the authentication information to use in <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2149,7 +2211,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_sst_donor</span></code></p>
-<span class="target" id="wsrep-sst-donor"></span><p id="index-35">Defines the name of the node that this node uses as a donor in state transfers.</p>
+<span class="target" id="wsrep-sst-donor"></span><p id="index-36">Defines the name of the node that this node uses as a donor in state transfers.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2193,18 +2255,19 @@ The members are presented in the following syntax:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Node 0 (XXX) requested state transfer from &#39;*any*&#39;. Selected 1 (XXX) as donor.
 </pre></div>
 </div>
-<p>Using this parameter, you can tell the node which cluster node it should use instead for state transfers.  The name given to the receiving node with this parameter must match the name given for <a class="reference internal" href="#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> on the donor node.</p>
+<p>Using this parameter, you can tell the node which cluster node or nodes it should use instead for state transfers.  The names used in this parameter must match the names given with <a class="reference internal" href="#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> on the donor nodes.  The setting affects both Incremental State Transfers (IST) and Snapshot State Transfers (SST).</p>
+<p>If the list contains a trailing comma, the remaining nodes in the cluster will also be considered if the nodes from the list are not available.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_sst_donor&#39;</span><span class="p">;</span>
 
-<span class="o">+-----------------+---------------+</span>
-<span class="o">|</span> <span class="n">Variable_name</span>   <span class="o">|</span> <span class="n">Value</span>         <span class="o">|</span>
-<span class="o">+-----------------+---------------+</span>
-<span class="o">|</span> <span class="n">wsrep_sst_donor</span> <span class="o">|</span> <span class="n">my_donor_node</span> <span class="o">|</span>
-<span class="o">+-----------------+---------------+</span>
+<span class="o">+-----------------+--------------------------------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>   <span class="o">|</span> <span class="n">Value</span>                          <span class="o">|</span>
+<span class="o">+-----------------+--------------------------------+</span>
+<span class="o">|</span> <span class="n">wsrep_sst_donor</span> <span class="o">|</span> <span class="n">my_donor_node1</span><span class="p">,</span><span class="n">my_donor_node2</span><span class="p">,</span> <span class="o">|</span>
+<span class="o">+-----------------+--------------------------------+</span>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_sst_donor_rejects_queries</span></code></p>
-<span class="target" id="wsrep-sst-donor-rejects-queries"></span><span class="target" id="index-36"></span><p id="index-37">Defines whether the node rejects blocking client sessions on a node when it is serving as a donor in a blocking state transfer method, such as <code class="docutils literal"><span class="pre">mysqldump</span></code> and <code class="docutils literal"><span class="pre">rsync</span></code>.</p>
+<span class="target" id="wsrep-sst-donor-rejects-queries"></span><span class="target" id="index-37"></span><p id="index-38">Defines whether the node rejects blocking client sessions on a node when it is serving as a donor in a blocking state transfer method, such as <code class="docutils literal"><span class="pre">mysqldump</span></code> and <code class="docutils literal"><span class="pre">rsync</span></code>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="30%" />
@@ -2254,7 +2317,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_sst_method</span></code></p>
-<span class="target" id="wsrep-sst-method"></span><p id="index-38">Defines the method or script the node uses in a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
+<span class="target" id="wsrep-sst-method"></span><p id="index-39">Defines the method or script the node uses in a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2280,7 +2343,7 @@ The members are presented in the following syntax:</p>
 <td>string</td>
 </tr>
 <tr class="row-even"><td><em>Default Value:</em></td>
-<td><code class="docutils literal"><span class="pre">mysqldump</span></code></td>
+<td><code class="docutils literal"><span class="pre">rsync</span></code></td>
 </tr>
 <tr class="row-odd"><td><strong>Support</strong></td>
 <td><em>Introduced:</em></td>
@@ -2305,7 +2368,7 @@ The members are presented in the following syntax:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
 <span class="na">wsrep_sst_auth</span><span class="o">=</span><span class="s">YOUR_SST_USER:YOUR_SST_PASSWORD</span>
 <span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">xtrabackup</span>
-<span class="na">datadri</span><span class="o">=</span><span class="s">/path/to/datadir</span>
+<span class="na">datadir</span><span class="o">=</span><span class="s">/path/to/datadir</span>
 
 <span class="k">[client]</span>
 <span class="na">socket</span><span class="o">=</span><span class="s">/path/to/socket</span>
@@ -2329,7 +2392,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_sst_receive_address</span></code></p>
-<span class="target" id="wsrep-sst-receive-address"></span><p id="index-39">Defines the address from which the node expects to receive state transfers.</p>
+<span class="target" id="wsrep-sst-receive-address"></span><p id="index-40">Defines the address from which the node expects to receive state transfers.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2379,7 +2442,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_start_position</span></code></p>
-<span class="target" id="wsrep-start-position"></span><p id="index-40">Defines the node start position.</p>
+<span class="target" id="wsrep-start-position"></span><p id="index-41">Defines the node start position.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="27%" />
@@ -2428,7 +2491,7 @@ The members are presented in the following syntax:</p>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_sync_wait</span></code></p>
-<span class="target" id="wsrep-sync-wait"></span><span class="target" id="index-41"></span><p id="index-42">Defines whether the node enforces strict cluster-wide causality checks.</p>
+<span class="target" id="wsrep-sync-wait"></span><span class="target" id="index-42"></span><p id="index-43">Defines whether the node enforces strict cluster-wide causality checks.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2484,7 +2547,9 @@ The members are presented in the following syntax:</p>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">1</span></code></td>
 <td>Checks on <code class="docutils literal"><span class="pre">READ</span></code> statements, including <code class="docutils literal"><span class="pre">SELECT</span></code>,
-<code class="docutils literal"><span class="pre">SHOW</span></code>, and <code class="docutils literal"><span class="pre">BEGIN</span></code> / <code class="docutils literal"><span class="pre">START</span> <span class="pre">TRANSACTION</span></code>.</td>
+and <code class="docutils literal"><span class="pre">BEGIN</span></code> / <code class="docutils literal"><span class="pre">START</span> <span class="pre">TRANSACTION</span></code>.
+Checks on <code class="docutils literal"><span class="pre">SHOW</span></code> (up to versions 5.5.54, 5.6.35,
+5.7.17)</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">2</span></code></td>
 <td>Checks made on <code class="docutils literal"><span class="pre">UPDATE</span></code> and <code class="docutils literal"><span class="pre">DELETE</span></code> statements.</td>
@@ -2495,6 +2560,9 @@ statements.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">4</span></code></td>
 <td>Checks made on <code class="docutils literal"><span class="pre">INSERT</span></code> and <code class="docutils literal"><span class="pre">REPLACE</span></code> statements.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">8</span></code></td>
+<td>Checks made on <code class="docutils literal"><span class="pre">SHOW</span></code> statements</td>
 </tr>
 </tbody>
 </table>
@@ -2519,7 +2587,7 @@ statements.</td>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_trx_fragment_size</span></code></p>
-<span class="target" id="wsrep-trx-fragment-size"></span><span class="target" id="index-43"></span><span class="target" id="index-44"></span><p id="index-45">Defines the number of replication units needed to generate a new fragment in Streaming Replication.</p>
+<span class="target" id="wsrep-trx-fragment-size"></span><span class="target" id="index-44"></span><span class="target" id="index-45"></span><p id="index-46">Defines the number of replication units needed to generate a new fragment in Streaming Replication.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2564,7 +2632,7 @@ statements.</td>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_trx_fragment_unit</span></code></p>
-<span class="target" id="wsrep-trx-fragment-unit"></span><span class="target" id="index-46"></span><span class="target" id="index-47"></span><p id="index-48">Defines the replication unit type to use in Streaming Replication.</p>
+<span class="target" id="wsrep-trx-fragment-unit"></span><span class="target" id="index-47"></span><span class="target" id="index-48"></span><p id="index-49">Defines the replication unit type to use in Streaming Replication.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2625,7 +2693,7 @@ statements.</td>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_ws_persistency</span></code></p>
-<span class="target" id="wsrep-ws-persistency"></span><p id="index-49">Defines whether the node stores write-sets locally for debugging.</p>
+<span class="target" id="wsrep-ws-persistency"></span><p id="index-50">Defines whether the node stores write-sets locally for debugging.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="31%" />
@@ -2782,7 +2850,7 @@ statements.</td>
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>

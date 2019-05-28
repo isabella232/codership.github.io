@@ -206,8 +206,8 @@
             
   <div class="section" id="galera-system-tables">
 <h1>Galera System Tables<a class="headerlink" href="#galera-system-tables" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="system-tables"></span><p id="index-0">Starting with version 4 of Galera, three system tables were added to the <code class="docutils literal"><span class="pre">mysql</span></code> database related to Galera replication: <code class="docutils literal"><span class="pre">wsrep_cluster</span></code>, <code class="docutils literal"><span class="pre">wsrep_cluster_members</span></code>, and <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code>.  These system tables may be used by database administrators to get a sense of the current activity of the nodes in a cluster.</p>
-<p>To verify the version of Galera installed on your servers has these tables, execute the following SQL statement one of your servers using the <code class="docutils literal"><span class="pre">mysql</span></code> client or a similar client:</p>
+<span class="target" id="system-tables"></span><p id="index-0">Starting with version 4 of Galera, three system tables related to Galera replication were added to the <code class="docutils literal"><span class="pre">mysql</span></code> database: <code class="docutils literal"><span class="pre">wsrep_cluster</span></code>, <code class="docutils literal"><span class="pre">wsrep_cluster_members</span></code>, and <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code>.  These system tables may be used by database administrators to get a sense of the current layout of the nodes in a cluster.</p>
+<p>To see these tables on your server, execute the following SQL statement one of them using the <code class="docutils literal"><span class="pre">mysql</span></code> client or a similar client:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="kp">TABLES</span> <span class="k">FROM</span> <span class="n">mysql</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep%&#39;</span><span class="p">;</span>
 
 <span class="o">+---------------------------+</span>
@@ -219,7 +219,7 @@
 <span class="o">+---------------------------+</span>
 </pre></div>
 </div>
-<p>Database administrators and clients with the access to the <code class="docutils literal"><span class="pre">mysql</span></code> database may read these tables, but they may not modify them: the database itself will make modifications, as needed.</p>
+<p>Database administrators and clients with the access to the <code class="docutils literal"><span class="pre">mysql</span></code> database may read these tables, but they may not modify them: the database itself will make modifications, as needed. If your server doesn&#8217;t have these tables, it may be that your server is using an older version of Galera.</p>
 <div class="section" id="cluster-view">
 <h2>Cluster View<a class="headerlink" href="#cluster-view" title="Permalink to this headline">¶</a></h2>
 <p>One of the new Galera related system tables is the <code class="docutils literal"><span class="pre">wsrep_cluster</span></code> table. This new table, starting in version 4 of Galera, contains a current view of the cluster. That is to say, it stores the UUID of the cluster and some other identification information, as well as the cluster&#8217;s capabilities.</p>
@@ -461,7 +461,7 @@ node_incoming_address: AUTO
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
 	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
-	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a><a href="http://www.percona.com/software/percona-xtradb-cluster"><img class="alignleft size-full wp-image-238" alt="PERCONA xtraDB Cluster" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-percona.png" width="161" height="49" /></a></p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
 	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>
