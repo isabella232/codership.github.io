@@ -8,15 +8,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using Streaming Replication &#8212; Galera Cluster Documentation</title>
+    <title>Temporary File &#8212; Galera Cluster Documentation</title>
     
-    <link rel="stylesheet" href="_static/codership.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
+        URL_ROOT:    '../',
         VERSION:     '',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -24,15 +24,13 @@
         SOURCELINK_SUFFIX: '.txt'
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="_static/cloud.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Galera Arbitrator" href="arbitrator.html" />
-    <link rel="prev" title="Auto-Eviction" href="autoeviction.html" />
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
 
 	
 
@@ -204,75 +202,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="using-streaming-replication">
-<h1>Using Streaming Replication<a class="headerlink" href="#using-streaming-replication" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="using-sr"></span><p id="index-0">When a node replicates a transaction under <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, it breaks the transaction into fragments, and then certifies and applies the fragments to slave nodes while the transaction is still in progress.</p>
-<p>This allows you to work with larger data-sets, manage hot records, and help avoid conflicts and hangs in the case of long-running transactions.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Streaming Replication is a new feature introduced in version 4.0 of Galera Cluster.  Older versions do not support these operations.</p>
-</div>
-<div class="section" id="enabling-streaming-replication">
-<h2>Enabling Streaming Replication<a class="headerlink" href="#enabling-streaming-replication" title="Permalink to this headline">¶</a></h2>
-<p id="enable-sr">The best practice when working with <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> is to enable it at a session-level for specific transactions, or parts thereof.  The reason is that Streaming Replication increases the load on all nodes when applying and rolling back transactions.  You&#8217;ll get better performance if you only enable Streaming Replication on those transactions that won&#8217;t run correctly without it.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information, see <a class="reference internal" href="streamingreplication.html#when-use-sr"><span class="std std-ref">When to Use Streaming Replication</span></a>.</p>
-</div>
-<p>Enabling Streaming Replication requires you to define the replication unit and number of units to use in forming the transaction fragments.  Two parameters control these variables: <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-trx-fragment-unit"><span class="std std-ref">wsrep_trx_fragment_unit</span></a> and <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-trx-fragment-size"><span class="std std-ref">wsrep_trx_fragment_size</span></a>.</p>
-<p>Below is an example of how to set these two parameters:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">SESSION</span> <span class="n">wsrep_trx_fragment_unit</span><span class="o">=</span><span class="s1">&#39;statements&#39;</span><span class="p">;</span>
-<span class="kt">SET</span> <span class="n">SESSION</span> <span class="n">wsrep_trx_fragment_size</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>In this example, the fragment is set to three statements.  For every three statements from a transaction, the node will generate, replicate and certify a fragment.</p>
-<p>You can choose between a few replication units when forming fragments:</p>
-<ul class="simple">
-<li><strong>bytes</strong> This defines the fragment size in bytes.</li>
-<li><strong>rows</strong> This defines the fragment size as the number of rows the fragment updates.</li>
-<li><strong>statements</strong> This defines the fragment size as the number of statements in a fragment.</li>
-</ul>
-<p>Choose the replication unit and fragment size that best suits the specific operation you want to run.</p>
-</div>
-<div class="section" id="streaming-replication-with-hot-records">
-<h2>Streaming Replication with Hot Records<a class="headerlink" href="#streaming-replication-with-hot-records" title="Permalink to this headline">¶</a></h2>
-<p id="usr-hot-records">When your application needs to update frequently the same records from the same table (e.g., implementing a locking scheme, a counter, or a job queue), Streaming Replication allows you to force critical changes to replicate to the entire cluster.</p>
-<p>For instance, consider the use case of a web application that creates work orders for a company.  When the transaction starts, it updates the table <code class="docutils literal"><span class="pre">work_orders</span></code>, setting the queue position for the order.  Under normal replication, two transactions can come into conflict if they attempt to update the queue position at the same time.</p>
-<p>You can avoid this with Streaming Replication.  As an example of how to do this, you would first execute the following SQL statement to begin the transaction:</p>
-<blockquote>
-<div><div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="n">START</span> <span class="n">TRANSACTION</span><span class="p">;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>After reading the data that you need for the application, you would enable Streaming Replication by executing the following two <code class="docutils literal"><span class="pre">SET</span></code> statements:</p>
-<blockquote>
-<div><div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">SESSION</span> <span class="n">wsrep_trx_fragment_unit</span><span class="o">=</span><span class="s1">&#39;statements&#39;</span><span class="p">;</span>
-<span class="kt">SET</span> <span class="n">SESSION</span> <span class="n">wsrep_trx_fragment_size</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>Next, set the user&#8217;s position in the queue like so:</p>
-<blockquote>
-<div><div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">work_orders</span>
-<span class="kt">SET</span> <span class="n">queue_position</span> <span class="o">=</span> <span class="n">queue_position</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>With that done, you can disable Streaming Replication by executing one of the previous <code class="docutils literal"><span class="pre">SET</span></code> statements, but with a different value like so:</p>
-<blockquote>
-<div><div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">SESSION</span> <span class="n">wsrep_trx_fragment_size</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>You can now perform whatever additional tasks you need to prepare the work order, and then commit the transaction:</p>
-<blockquote>
-<div><div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="n">COMMIT</span><span class="p">;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>During the work order transaction, the client initiates Streaming Replication for a single statement, which it uses to set the queue position.  The queue position update then replicates throughout the cluster, which prevents other nodes from coming into conflict with the new work order.</p>
-</div>
-</div>
+  <div class="section" id="temporary-file">
+<h1>Temporary File<a class="headerlink" href="#temporary-file" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="kb-tmp"></span></div>
 
 
           </div>
@@ -280,32 +212,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-        <p class="logo"><a href="index.html" title="index">
-          <img class="logo" src="_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Using Streaming Replication</a><ul>
-<li><a class="reference internal" href="#enabling-streaming-replication">Enabling Streaming Replication</a></li>
-<li><a class="reference internal" href="#streaming-replication-with-hot-records">Streaming Replication with Hot Records</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
-  <div class="sphinxprev">
-    <h4>Previous page</h4>
-    <p class="topless"><a href="autoeviction.html"
-                          title="Previous page">&larr; Auto-Eviction</a></p>
-  </div>
-  <div class="sphinxnext">
-    <h4>Next page</h4>
-    <p class="topless"><a href="arbitrator.html"
-                          title="Next page">&rarr; Galera Arbitrator</a></p>
-  </div>
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/logo.png" alt="Logo"/>
+        </a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
+    <form class="search" action="../search.html" method="get">
       <div><input type="text" name="q" /></div>
       <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
@@ -352,7 +264,7 @@
 		<ul class="nav-link">
 			 
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/usingsr.rst.rst" title="Edit 'Using Streaming Replication' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/temp.rst.rst" title="Edit 'Temporary File' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -361,28 +273,17 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
+          <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="arbitrator.html" title="Galera Arbitrator"
-             accesskey="N">next</a> &nbsp; &nbsp;</li>
-        <li class="right" >
-          <a href="autoeviction.html" title="Auto-Eviction"
-             accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
-
-          <li class="nav-item nav-item-1"><a href="userguide.html" accesskey="U">Administration</a> &#187;</li> 
+    <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
+ 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="autoeviction.html" title="Auto-Eviction">&lt; Previous</a></li>
-			
 
-			
-				<li><a href="arbitrator.html" title="Galera Arbitrator">Next &gt;</a></li>
 			
 
 		</ul>

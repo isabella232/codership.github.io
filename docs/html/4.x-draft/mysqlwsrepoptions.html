@@ -1698,7 +1698,7 @@ The members are presented in the following syntax:</p>
 </tr>
 </tbody>
 </table>
-<p>DDL statements are non-transactional and as such do not replicate through write-sets.  There are three methods available that determine how the node handles replicating these statements:</p>
+<p>DDL statements are non-transactional and as such don&#8217;t replicate through write-sets.  There are two methods available that determine how the node handles replicating these statements:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">TOI</span></code>  In the <a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> method, the cluster runs the DDL statement on all nodes in the same total order sequence, blocking other transactions from committing while the DDL is in progress.</li>
 <li><code class="docutils literal"><span class="pre">RSU</span></code> In the <a class="reference internal" href="glossary.html#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a> method, the node runs the DDL statements locally, thus blocking only the one node where the statement was made.  While processing the DDL statement, the node is not replicating and may be unable to process replication events due to a table lock.  Once the DDL operation is complete, the node catches up and syncs with the cluster to become fully operational again.  The DDL statement or its effects are not replicated; the user is responsible for manually executing this statement on each node in the cluster.</li>
