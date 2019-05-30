@@ -206,30 +206,25 @@
             
   <div class="section" id="cluster-stalls-on-alter">
 <h1>Cluster Stalls on <code class="docutils literal"><span class="pre">ALTER</span></code><a class="headerlink" href="#cluster-stalls-on-alter" title="Permalink to this headline">¶</a></h1>
-<p id="id1">The cluster stalls when you run an <code class="docutils literal"><span class="pre">ALTER</span></code> query on an unused table.</p>
+<p id="id1">There may be times in which a cluster will stall when an <code class="docutils literal"><span class="pre">ALTER</span></code> statement is executed on an unused table.</p>
 <p class="rubric">Situation</p>
-<p>You attempt to run an <code class="docutils literal"><span class="pre">ALTER</span></code> command on one node.  The command takes a long time to execute.  During that period all other nodes stall leading to performance issues throughout the cluster.</p>
-<p>What&#8217;s happening is a side effect of a multi-master cluster with several appliers.  The cluster needs to control when a <abbr title="Data Definition Language">DDL</abbr> statement ends in relation to other transactions, in order to deterministically detect conflicts and schedule parallel appliers.  Effectively, the DDL statement must execute in isolation.</p>
-<p>Galera Cluster has a 65K window of tolerance for transactions applied in parallel, but the cluster must wait when <code class="docutils literal"><span class="pre">ALTER</span></code> commands take too long.</p>
+<p>There may be a situation in which you attempt to execute an <code class="docutils literal"><span class="pre">ALTER</span></code> statement on one node, but it takes a long time to execute&#8211;longer than expected.  During that period all of the other nodes may stall, leading to performance problems throughout the cluster.</p>
+<p>What&#8217;s happening is a side effect of a multi-master cluster with several appliers.  The cluster needs to control when a <abbr title="Data Definition Language">DDL</abbr> statement ends in relation to other transactions, in order deterministically to detect conflicts and then schedule parallel appliers.  Basically, the DDL statement must execute in isolation.</p>
+<p>Galera Cluster has a 65K window of tolerance for transactions applied in parallel, but the cluster must wait when <code class="docutils literal"><span class="pre">ALTER</span></code> statements take too long.</p>
 <p class="rubric">Solution</p>
-<p>Given that this is a consequence of something intrinsic to how replication works in Galera Cluster, there is no direct solution to the problem.  However, you can implement a workaround.</p>
-<p>In the event that you can guarantee that no other session will try to modify the table <cite>and</cite> that there are no other <abbr title="Data Definition Language">DDL</abbr> statements running, you can shift the schema upgrade method from <a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> to <a class="reference internal" href="glossary.html#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a> for the duration of the <code class="docutils literal"><span class="pre">ALTER</span></code> statement.  This applies the changes to each node individually, without affecting cluster performance.</p>
-<p>To run an <code class="docutils literal"><span class="pre">ALTER</span></code> statement in this manner, on each node run the following queries:</p>
-<ol class="arabic">
-<li><p class="first">Change the Schema Upgrade method to Rolling Schema Upgrade.</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;RSU&#39;</span><span class="p">;</span>
+<p>Given that stalling due to an <code class="docutils literal"><span class="pre">ALTER</span></code> statement is a consequence of something intrinsic to how replication works in Galera Cluster, there is no direct solution to the problem.  However, you can implement a workaround.</p>
+<p>In the event that you can sure that no other session will try to modify the table and that there are no other <abbr title="Data Definition Language">DDL</abbr> statements running, you can shift the schema upgrade method from <a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> to <a class="reference internal" href="glossary.html#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a> for the duration of the <code class="docutils literal"><span class="pre">ALTER</span></code> statement.  This applies the changes to each node individually, without affecting cluster performance.</p>
+<p>To run an <code class="docutils literal"><span class="pre">ALTER</span></code> statement in this manner, you will need to execute the <code class="docutils literal"><span class="pre">ALTER</span></code> statement between a paid of <code class="docutils literal"><span class="pre">SET</span></code> statements on each node like so:</p>
+<blockquote>
+<div><div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;RSU&#39;</span><span class="p">;</span>
+
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">table1</span> <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">col8</span> <span class="kt">INT</span><span class="p">;</span>
+
+<span class="kt">SET</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;TOI&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">Run the <code class="docutils literal"><span class="pre">ALTER</span></code> statement.</p>
-</li>
-<li><p class="first">Reset the Schema Upgrade method back to Total Order Isolation.</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;TOI&#39;</span><span class="p">;</span>
-</pre></div>
-</div>
-</li>
-</ol>
-<p>The cluster now runs with the desired updates.</p>
+</div></blockquote>
+<p>The first SQL statement here will change the Schema Upgrade method to <em>Rolling Schema Upgrade</em> (i.e., <code class="docutils literal"><span class="pre">RSU</span></code>).  The second SQL statement represents an <code class="docutils literal"><span class="pre">ALTER</span></code> statement you want to execute. Once that&#8217;s finished, the last <code class="docutils literal"><span class="pre">SET</span></code> statement will reset the Schema Upgrade method back to <em>Total Order Isolation</em> (i.e., <code class="docutils literal"><span class="pre">TOI</span></code>).  After you&#8217;ve done this on each node, the cluster will now run with the desired updates.</p>
 </div>
 
 
@@ -319,7 +314,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Support</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Knowledge Base</a> &#187;</li> 
       </ul>
     </div>
     </div>

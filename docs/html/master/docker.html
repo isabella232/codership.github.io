@@ -207,15 +207,15 @@
   <div class="section" id="using-docker">
 <h1>Using Docker<a class="headerlink" href="#using-docker" title="Permalink to this headline">¶</a></h1>
 <p id="docker">Docker provides an open source platform for automatically deploying applications within software containers.</p>
-<p>Galera Cluster can run from within a Docker container.  You may find it useful in portable deployment across numerous machines, testing applications that depend on Galera Cluster, or scripting the installation and configuration process.</p>
+<p>Galera Cluster can run from within a such a container, within Docker.  You may find containers useful in portable deployment across numerous machines, testing applications that depend on Galera Cluster, or scripting the installation and configuration process.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This guide assumes that you are only running one container node per server.  For more information on running multiple nodes per server, see Getting Started Galera with Docker, <a class="reference external" href="http://galeracluster.com/2015/05/getting-started-galera-with-docker-part-1/">Part I</a> and <a class="reference external" href="http://galeracluster.com/2015/05/getting-started-galera-with-docker-part-2-2/">Part II</a>.</p>
+<p class="last">This guide assumes that you are only running one container node per server.  For more information on running multiple nodes per server, see <em>Getting Started Galera with Docker, `Part I &lt;http://galeracluster.com/2015/05/getting-started-galera-with-docker-part-1/&gt;`_ and `Part II &lt;http://galeracluster.com/2015/05/getting-started-galera-with-docker-part-2-2/&gt;`_.</em></p>
 </div>
-<div class="section" id="configuring-the-container">
-<h2>Configuring the Container<a class="headerlink" href="#configuring-the-container" title="Permalink to this headline">¶</a></h2>
-<p id="configure-container">Images are the containers that Docker has available to run.  There are a number of base images available through <a class="reference external" href="https://registry.hub.docker.com">Docker Hub</a>.  You can pull these down to your system through the <code class="docutils literal"><span class="pre">docker</span></code> command-line tool.  You can also build new images.</p>
-<p>When Docker builds a new image, it sources a <code class="docutils literal"><span class="pre">Dockerfile</span></code> to determine the steps that it needs to take in order to generate the image that you want to use. What this means that you can script the installation and configuration process: loading the needed configuration files, running updates and installing packages when the image is built through a single command.</p>
+<div class="section" id="configuring-a-container">
+<h2>Configuring a Container<a class="headerlink" href="#configuring-a-container" title="Permalink to this headline">¶</a></h2>
+<p id="configure-container">Images are the containers that Docker has available to run.  There are a number of base images available through <a class="reference external" href="https://registry.hub.docker.com">Docker Hub</a>.  You can pull these to your system through the <code class="docutils literal"><span class="pre">docker</span></code> command-line tool.  You can also build new images.</p>
+<p>When Docker builds a new image, it sources a <code class="docutils literal"><span class="pre">Dockerfile</span></code> to determine the steps that it needs to take in order to generate the image you want to use. This means you can script the installation and configuration process.  Basically, such a script would need to load the needed configuration files, run updates, and install packages when the image is built&#8212;all through a single command.  Below is an example of how you might write such a script:</p>
 <div class="highlight-Dockerfile"><div class="highlight"><pre><span></span><span class="c"># Galera Cluster Dockerfile</span>
 <span class="k">FROM</span><span class="s"> ubuntu:14.04</span>
 <span class="k">MAINTAINER</span><span class="s"> your name &lt;your.user@example.org&gt;</span>
@@ -236,30 +236,30 @@ COPY my.cnf /etc/mysql/my.cnf
 <span class="k">ENTRYPOINT</span><span class="s"> [&quot;mysqld&quot;]</span>
 </pre></div>
 </div>
-<p>The example follows the installation process for running Galera Cluster from within a Docker container based on Ubuntu.  When you run the build command, Docker pulls down the Ubuntu 14.04 image from Docker Hub, if it&#8217;s needed, then it runs each command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> to initialize the image for your use.</p>
+<p>This example follows the installation process for running Galera Cluster from within a Docker container running on Ubuntu.  When you run the build command, Docker pulls down the Ubuntu 14.04 image from Docker Hub, if it&#8217;s needed. It then runs each command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> to initialize the image for your use.</p>
 <div class="section" id="configuration-file">
 <h3>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h3>
-<p id="docker-my-cnf">Before you build the container, you need to write the configuration file for the node.  The <code class="docutils literal"><span class="pre">COPY</span></code> command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> above copies <code class="docutils literal"><span class="pre">my.cnf</span></code> from the build directory into the container.</p>
-<p>For the most part, the configuration file for a node running within Docker is the same as when the node is running on a standard Linux server.  But, there are some parameters that draw their defaults from the base system.  These you need to set manually, as Docker cannot access the host system.</p>
+<p id="docker-my-cnf">Before you build the container, you need to create the configuration file for the node.  The <code class="docutils literal"><span class="pre">COPY</span></code> command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> example above copies <code class="docutils literal"><span class="pre">my.cnf</span></code>, the MySQL configuration file, from the build directory into the container.</p>
+<p>For the most part, the configuration file for a node running within Docker is the same as when the node is running on a standard Linux server.  However, there are some parameters that may not be included in the MySQL configuration file and instead use the default values from the underlying database system&#8212;or they may have been set manually, on-the-fly using the <code class="docutils literal"><span class="pre">SET</span></code> statement.  For these parameters, since Docker can&#8217;t access the host system, you may need to set them, manually.</p>
 <ul class="simple">
-<li><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a> The node determines the default address from the IP address on the first network interface.  Containers cannot see the network interfaces on the host system.  You need to set this parameter to ensure that the cluster is given the correct IP address for the node.</li>
-<li><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a>  The node determines the default name from the system hostname.  Containers have their own hostnames distinct from the host system.</li>
+<li><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a>: A node will determine the default address from the IP address on the first network interface.  Containers cannot see the network interfaces on the host system.  Therefore, you will need to set this parameter to ensure the cluster is given the correct IP address for the node.</li>
+<li><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a>:  A node will determine the default host name from the system hostname.  Containers have their own hostnames distinct from the host system.</li>
 </ul>
-<p>Changing the <code class="docutils literal"><span class="pre">my.cnf</span></code> file does not propagate into the container.  Whenever you need to make changes to the configuration file, run the build again to create a new image with the updated file.  Docker caches each step of the build and on rebuild only runs those steps that have changed since the last run.  For example, using the above <code class="docutils literal"><span class="pre">Dockerfile</span></code>, if you rebuild an image after changing <code class="docutils literal"><span class="pre">my.cnf</span></code>, Docker only runs the last two steps.</p>
+<p>Changes to the <code class="docutils literal"><span class="pre">my.cnf</span></code> file will not propagate into an existing container.  Therefore, whenever you make changes to the configuration file, run the build again to create a new image with the updated configuration file.  Docker caches each step of the build and only runs those steps that have changed when rebuilding.  For example, using the <code class="docutils literal"><span class="pre">Dockerfile</span></code> example above, if you rebuild an image after changing <code class="docutils literal"><span class="pre">my.cnf</span></code>, Docker will run only  the last two steps.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If you need Docker to rerun the entire build, use the <code class="docutils literal"><span class="pre">--force-rm=true</span></code> option.</p>
 </div>
 </div>
 </div>
-<div class="section" id="building-the-container-image">
-<h2>Building the Container Image<a class="headerlink" href="#building-the-container-image" title="Permalink to this headline">¶</a></h2>
-<p id="building-the-container">Building the image reduces the node installation, configuration and deployment process to a single command.  This creates a server instance where Galera Cluster is already installed, configured and ready to start.</p>
-<p>You can build a container node using the <code class="docutils literal"><span class="pre">docker</span></code> command-line tool.</p>
+<div class="section" id="building-a-container-image">
+<h2>Building a Container Image<a class="headerlink" href="#building-a-container-image" title="Permalink to this headline">¶</a></h2>
+<p id="building-the-container">Building an image simplifies everyting&#8212;the node installation, the configuration and the deployment process&#8212;by reducing it to a single command.  It will create a server instance where Galera Cluster is already installed, configured and ready to start.</p>
+<p>You can build a container node using the <code class="docutils literal"><span class="pre">docker</span></code> command-line tool like so:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> docker build -t ubuntu:galera-node1 ./
 </pre></div>
 </div>
-<p>When this command runs, Docker looks in the working directory, (here <code class="docutils literal"><span class="pre">./</span></code>), for the <code class="docutils literal"><span class="pre">Dockerfile</span></code>.  It then follows each command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> to build the image you want.  When the build is complete, you can view the addition among the available images:</p>
+<p>When this command runs, Docker looks in the current working directory, (i.e., <code class="docutils literal"><span class="pre">./</span></code>), for the <code class="docutils literal"><span class="pre">Dockerfile</span></code>.  It then follows each command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> to build the image.  When the build is complete, you can view the addition among the available images by executing the following:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> docker images
 
 <span class="go">REPOSITORY  TAG           IMAGE ID      CREATED        SIZE</span>
@@ -267,46 +267,47 @@ COPY my.cnf /etc/mysql/my.cnf
 <span class="go">ubuntu      14.04         ded7cd95e059  5 weeks ago    185.5 MB</span>
 </pre></div>
 </div>
-<p>You now have a working node image available for use as a container.  You can launch it using the <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> command.  Repeat the build process on each server to create a node container image for Galera Cluster.</p>
-<p>Update the container tag to help differentiate between them.  That is,</p>
+<p>You can see in the results here that there is a working node image available for use as a container.  You would launch it executing <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> at the command-line.  You would repeat the build process on each server to create a node container image for Galera Cluster.</p>
+<p>You would then update the container tag to help differentiate between each node by executing something like this:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">[root@node2]#</span> docker build -t ubuntu:galera-node2 ./
 <span class="gp">[root@node3]#</span> docker build -t ubuntu:galera-node3 ./
 </pre></div>
 </div>
 </div>
-<div class="section" id="deploying-the-container">
-<h2>Deploying the Container<a class="headerlink" href="#deploying-the-container" title="Permalink to this headline">¶</a></h2>
-<p id="deploy-container">When you finish building the image, you&#8217;re ready to launch the node container.  For each node start the container using the Docker command-line tool with the <code class="docutils literal"><span class="pre">run</span></code> argument.</p>
+<div class="section" id="deploying-a-container">
+<h2>Deploying a Container<a class="headerlink" href="#deploying-a-container" title="Permalink to this headline">¶</a></h2>
+<p id="deploy-container">When you finish building an image, you&#8217;re ready to launch the node container.  For each node, start the container using the Docker command-line tool with the <code class="docutils literal"><span class="pre">run</span></code> argument like so:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> docker run -i -d --name Node1 --host node1 <span class="se">\</span>
       -p <span class="m">3306</span>:3306 -p <span class="m">4567</span>:4567 -p <span class="m">4568</span>:4568 -p <span class="m">4444</span>:4444 <span class="se">\</span>
       -v /var/container_data/mysql:/var/lib/mysql <span class="se">\</span>
       ubuntu:galera-node1
 </pre></div>
 </div>
-<p>In the example, Docker launches a pre-built Ubuntu container tagged as <code class="docutils literal"><span class="pre">galera-node1</span></code>, which was built using the above <code class="docutils literal"><span class="pre">Dockerfile</span></code>.  The <code class="docutils literal"><span class="pre">ENTRYPOINT</span></code> parameter is set to <code class="docutils literal"><span class="pre">/bin/mysqld</span></code>, so the container launches the database server on start.</p>
-<p>Update the <code class="docutils literal"><span class="pre">--name</span></code> option for each node container you start.</p>
+<p>In this example, Docker launches a pre-built Ubuntu container tagged as <code class="docutils literal"><span class="pre">galera-node1</span></code>, which was built using the example <code class="docutils literal"><span class="pre">Dockerfile</span></code> from above.  The <code class="docutils literal"><span class="pre">ENTRYPOINT</span></code> parameter is set to <code class="docutils literal"><span class="pre">/bin/mysqld</span></code> so that the container launches the database server when starting.  You would modify the <code class="docutils literal"><span class="pre">--name</span></code> option in the example here for each node container you start.</p>
+<p>You&#8217;ll notice in the example here there are several <code class="docutils literal"><span class="pre">-p</span></code> options included. Those are described in the next section on Firewall Settings.  The <code class="docutils literal"><span class="pre">-v</span></code> option is described in the section after it on Persistent Data.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The above command starts a container node meant to be attached to an existing cluster.  If you are starting the first node in a cluster, append the argument <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> to the end of the command.  For more information, see <a class="reference internal" href="startingcluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
+<p class="last">The above command starts a container node meant to be attached to an existing cluster.  If you&#8217;re starting the first node in a cluster, append the argument <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> to the end of the command.  For more information, see <a class="reference internal" href="startingcluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
 </div>
 <div class="section" id="firewall-settings">
 <h3>Firewall Settings<a class="headerlink" href="#firewall-settings" title="Permalink to this headline">¶</a></h3>
-<p id="docker-firewall">When you launch the Docker container, (with <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> above), the series of <code class="docutils literal"><span class="pre">-p</span></code> options connect the ports on the host system to those in the container.  When the container is launched this way, nodes in the container have the same level of access to the network as the node would when running on the host system.</p>
-<p>Use these settings when you only run one container to the server.  If you are running multiple containers to the server, you will need a load balancer to dole the incoming connections out to the individual nodes.</p>
+<p id="docker-firewall">When you launch the Docker container (i.e., <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> as shown above), the series of <code class="docutils literal"><span class="pre">-p</span></code> options connect the ports on the host system to those in the container.  When the container is launched this way, nodes in the container have the same level of access to the network as the node would if it were running on the host system.</p>
+<p>Use these settings, though, when you run only one container on the server.  If you are running multiple containers on the server, you&#8217;ll need a load balancer to handle and direct incoming connections to individual nodes.</p>
 <p>For more information on configuring the firewall for Galera Cluster, see <a class="reference internal" href="firewallsettings.html"><span class="doc">Firewall Settings</span></a>.</p>
 </div>
 <div class="section" id="persistent-data">
 <h3>Persistent Data<a class="headerlink" href="#persistent-data" title="Permalink to this headline">¶</a></h3>
-<p id="docker-data">Docker containers are not meant to carry persistent data.  When you close the container, the data it carries is lost.  To avoid this, you can link volumes in the container with directories on the host file system, using the <code class="docutils literal"><span class="pre">-v</span></code> option when you launch the container.</p>
-<p>In the example, (that is, <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> above), the <code class="docutils literal"><span class="pre">-v</span></code> argument connects the <code class="docutils literal"><span class="pre">/var/container_data/mysql/</span></code> directory to <code class="docutils literal"><span class="pre">/var/lib/mysql/</span></code> in the container.  This replaces the local datadir inside the container with a symbolic link to a directory on the host system, ensuring that you don&#8217;t lose data when the container restarts.</p>
+<p id="docker-data">Docker containers are not meant to carry persistent data.  When you close a container, the data it carries is lost.  To avoid this problem, you can link volumes in the container to directories on the host file system. This is done with the <code class="docutils literal"><span class="pre">-v</span></code> option when you launch the container.</p>
+<p>In the launch example above (i.e., the <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> lines), the <code class="docutils literal"><span class="pre">-v</span></code> argument connects the <code class="docutils literal"><span class="pre">/var/container_data/mysql/</span></code> directory to <code class="docutils literal"><span class="pre">/var/lib/mysql/</span></code> in the container.  This replaces the local datadir inside the container with a symbolic link to a directory on the host system. This ensures that you won&#8217;t lose data when the container restarts.</p>
 </div>
 <div class="section" id="database-client">
 <h3>Database Client<a class="headerlink" href="#database-client" title="Permalink to this headline">¶</a></h3>
-<p>Once you have the container node running, you can execute additional commands on the container using the <code class="docutils literal"><span class="pre">docker</span> <span class="pre">exec</span></code> command with the container name given above for the <code class="docutils literal"><span class="pre">--name</span></code> parameter.</p>
-<p>For example, if you want access to the database client, run the following command:</p>
+<p>Once you have a container node running, you can execute additional commands on the container using the <code class="docutils literal"><span class="pre">docker</span> <span class="pre">exec</span></code> command with the container name given with the <code class="docutils literal"><span class="pre">--name</span></code> parameter.</p>
+<p>Using the example above, if you want access to the database client, you would run the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> docker <span class="nb">exec</span> -ti Node1 /bin/mysql -u root -p
 </pre></div>
 </div>
+<p>Notice here that <code class="docutils literal"><span class="pre">Node1</span></code> is the name given with the <code class="docutils literal"><span class="pre">--name</span></code> parameter in the example earlier.</p>
 </div>
 </div>
 </div>
@@ -323,12 +324,12 @@ COPY my.cnf /etc/mysql/my.cnf
     <h3><a href="index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Using Docker</a><ul>
-<li><a class="reference internal" href="#configuring-the-container">Configuring the Container</a><ul>
+<li><a class="reference internal" href="#configuring-a-container">Configuring a Container</a><ul>
 <li><a class="reference internal" href="#configuration-file">Configuration File</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#building-the-container-image">Building the Container Image</a></li>
-<li><a class="reference internal" href="#deploying-the-container">Deploying the Container</a><ul>
+<li><a class="reference internal" href="#building-a-container-image">Building a Container Image</a></li>
+<li><a class="reference internal" href="#deploying-a-container">Deploying a Container</a><ul>
 <li><a class="reference internal" href="#firewall-settings">Firewall Settings</a></li>
 <li><a class="reference internal" href="#persistent-data">Persistent Data</a></li>
 <li><a class="reference internal" href="#database-client">Database Client</a></li>

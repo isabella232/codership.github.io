@@ -206,27 +206,16 @@
             
   <div class="section" id="deployment">
 <h1>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound" id="id1">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="deploymentvariants.html">Cluster Deployment Variants</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="deploymentvariants.html#no-clustering">No Clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploymentvariants.html#whole-stack-clustering">Whole Stack Clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploymentvariants.html#data-tier-clustering">Data Tier Clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deploymentvariants.html#aggregated-stack-clustering">Aggregated Stack Clustering</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="loadbalancing.html">Load Balancing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="haproxy.html">HAProxy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pen.html">Pen</a></li>
-<li class="toctree-l2"><a class="reference internal" href="glb.html">Galera Load Balancer</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="containers.html">Container Deployments</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docker.html">Using Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="jails.html">Using Jails</a></li>
-</ul>
-</li>
-</ul>
+<p id="id1">When you start Galera Cluster, you have to do so by initializing a series of nodes that are configured to communicate with each other and to replicate each other.  Each node in the cluster is a particular instance of a MySQL, MariaDB, or Percona XtraDB database server.  How your application servers interact with the cluster and how you manage the load and the individual nodes represents your deployment.</p>
+<p><a class="reference internal" href="deploymentvariants.html"><span class="doc">Cluster Deployment Variants</span></a></p>
+<p>Galera Cluster provides synchronous multi-master replication.  This means that the nodes collectively operate as a single database server that listens across many interfaces.  This section provides various examples of how you might deploy a cluster in relation to your application servers.</p>
+<p><a class="reference internal" href="loadbalancing.html"><span class="doc">Load Balancing</span></a></p>
+<p>In high availability environments, you may sometimes encounter situations in which some nodes have a much greater load of traffic than others.  If you discover such a situation, there may be some benefit in configuring and deploying load balancers between your application servers and Galera Cluster.  Doing so will allow you to distribute client connections more evenly between the nodes, ensuring better performance.</p>
+<p>This section provides guides to installing, configuring and deploying HAProxy, Pen and Galera Load Balancer, helping you to manage traffic between clients and the cluster.</p>
+<p><a class="reference internal" href="containers.html"><span class="doc">Container Deployments</span></a></p>
+<p>When using the standard deployment methods of Galera Cluster, nodes run directly on the  server hardware &#8211; interacting directly with the operating system (i.e., Linux, FreeBSD).  By contrast, with container deployments nodes run in containerized virtual environments on the server.  You may find containers useful in building portable deployments across numerous machines, when testing applications or scripting installations, or when isolating processes for security.</p>
+<p>This section provides guides to installing, configuring and deploying Galera Cluster nodes in container instances using FreeBSD Jails and Docker.</p>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 

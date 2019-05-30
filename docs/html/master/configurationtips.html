@@ -206,15 +206,15 @@
             
   <div class="section" id="configuration-tips">
 <h1>Configuration Tips<a class="headerlink" href="#configuration-tips" title="Permalink to this headline">¶</a></h1>
-<p id="id1">This chapter contains some advanced configuration tips.</p>
+<p id="id1">This page contains some advanced tips on configuring a replication, networking, and servers related to Galera Cluster.</p>
 <div class="section" id="wan-replication">
 <h2>WAN Replication<a class="headerlink" href="#wan-replication" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="id2"></span><span class="target" id="index-0"></span><p id="index-1">When running the cluster over <abbr title="Wide Area Network">WAN</abbr>, you may frequently experience transient network connectivity failures.  To prevent this from partitioning the cluster, you may want to increase the keepalive timeouts.</p>
-<p>The following parameters can tolerate 30 second connectivity outages.</p>
+<span class="target" id="id2"></span><span class="target" id="index-0"></span><p id="index-1">When running the cluster over a <abbr title="Wide Area Network">WAN</abbr>, you may frequently experience transient network connectivity failures.  To prevent this from partitioning the cluster, you may want to increase the <em>keepalive</em> timeouts.</p>
+<p>The following parameters can tolerate 30 second connectivity outages:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;evs.keepalive_period = PT3S;</span>
-<span class="s">      evs.suspect_timeout = PT30S;</span>
-<span class="s">      evs.inactive_timeout = PT1M;</span>
-<span class="s">      evs.install_timeout = PT1M&quot;</span>
+<span class="s">                              evs.suspect_timeout = PT30S;</span>
+<span class="s">                              evs.inactive_timeout = PT1M;</span>
+<span class="s">                              evs.install_timeout = PT1M&quot;</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -223,63 +223,107 @@
 </div>
 <p>In configuring these parameters, consider the following:</p>
 <ul class="simple">
-<li>You want <a class="reference internal" href="galeraparameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter set as high as possible to help avoid partitions.  Given that partitions cause state transfers, which can effect performance.</li>
-<li>You must set the <a class="reference internal" href="galeraparameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> parameter to a value higher than <a class="reference internal" href="galeraparameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a>.</li>
-<li>You must set the <a class="reference internal" href="galeraparameters.html#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a> parameter to a value higher than the <a class="reference internal" href="galeraparameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a>.</li>
+<li>You want the <a class="reference internal" href="galeraparameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter set as high as possible to avoid partitions.  Partitions cause state transfers, which can effect performance.</li>
+<li>You must set the <a class="reference internal" href="galeraparameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> parameter to a value higher than that of the <a class="reference internal" href="galeraparameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter.</li>
+<li>You must set the <a class="reference internal" href="galeraparameters.html#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a> parameter to a value higher than the value of the <a class="reference internal" href="galeraparameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> parameter.</li>
 </ul>
-<div class="section" id="dealing-with-wan-latency">
-<h3>Dealing with WAN Latency<a class="headerlink" href="#dealing-with-wan-latency" title="Permalink to this headline">¶</a></h3>
-<p id="latency">When using Galera Cluster over a <abbr title="Wide Area Network">WAN</abbr>, bear in mind that WAN links can have exceptionally high latency.  You can correct for this by taking Round-Trip Time (RTT) measurements between cluster nodes and adjust all temporal parameters.</p>
-<p>To take RTT measurements, use <code class="docutils literal"><span class="pre">ping</span></code> on each cluster node to ping the others.  For example, if you were to log in to the node at <code class="docutils literal"><span class="pre">192.168.1.1</span></code>:</p>
+<div class="section" id="wan-latency">
+<h3>WAN Latency<a class="headerlink" href="#wan-latency" title="Permalink to this headline">¶</a></h3>
+<p id="latency">When using Galera Cluster over a <abbr title="Wide Area Network">WAN</abbr>, bear in mind that WAN links can have exceptionally high latency.  You can check this by taking Round-Trip Time (RTT) measurements between cluster nodes. If there is a latency, you correct for this by adjusting all of the temporal parameters.</p>
+<p>To take RTT measurements, use <code class="docutils literal"><span class="pre">ping</span></code> on each cluster node to ping the others.  For example, if you were to log into the node at <code class="docutils literal"><span class="pre">192.168.1.1</span></code>, you might execute something like the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> ping -c <span class="m">3</span> <span class="m">192</span>.168.1.2
+
 <span class="go">  PING 192.168.1.2 (192.168.1.2) 58(84) bytes of data.</span>
 <span class="go">  64 bytes from 192.168.1.2: icmp_seq=1 ttl=64 time=0.736 ms</span>
 <span class="go">  64 bytes from 192.168.1.2: icmp_seq=2 ttl=64 time=0.878 ms</span>
 <span class="go">  64 bytes from 192.168.1.2: icmp_seq=3 ttl=64 time=12.7 ms</span>
 
 <span class="go">  --- 192.168.1.2 ---</span>
+
 <span class="go">  3 packets transmitted, 3 received, 0% packet loss, time 2002ms</span>
 <span class="go">  rtt min/avg/max/mdev = 0.736/4.788/12.752/5.631 ms</span>
 </pre></div>
 </div>
-<p>Take RTT measurements on each node in your cluster and note the highest value among them.</p>
-<p>Parameters that relate to periods and timeouts, such as <a class="reference internal" href="galeraparameters.html#evs-join-retrans-period"><span class="std std-ref">evs.join_retrans_period</span></a>.  They must all use values that exceed the highest RTT measurement in your cluster.</p>
+<p>Repeat this on each node in the cluster and note the highest value among them.</p>
+<p>Parameters that relate to periods and timeouts, such as <a class="reference internal" href="galeraparameters.html#evs-join-retrans-period"><span class="std std-ref">evs.join_retrans_period</span></a>, must all use values that exceed the highest RTT measurement in the cluster.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.join_retrans_period=PT0.5S&quot;</span>
 </pre></div>
 </div>
-<p>This allows the cluster to compensate for the latency issues of the <abbr title="Wide Area Network">WAN</abbr> links between your cluster nodes.</p>
+<p>This allows the cluster to compensate for the latency issues of the <abbr title="Wide Area Network">WAN</abbr> links between the cluster nodes.</p>
 </div>
 </div>
 <div class="section" id="multi-master-setup">
 <h2>Multi-Master Setup<a class="headerlink" href="#multi-master-setup" title="Permalink to this headline">¶</a></h2>
-<p id="id3">A master is a node that can simultaneously process writes from clients.</p>
-<p>The more masters you have in the cluster the higher the probability of certification conflicts.  This can lead to undesirable rollbacks and performance degradation.</p>
-<p>If you find you experience frequent certification conflicts, consider reducing the number of nodes your cluster uses as masters.</p>
+<p id="id3">A master is a node that can simultaneously process writes from clients. The more masters in a cluster, the higher the probability of certification conflicts.  This can lead to undesirable rollbacks and performance degradation.</p>
+<p>If you find you experience frequent certification conflicts, consider reducing the number of nodes the cluster uses as masters.</p>
 </div>
 <div class="section" id="single-master-setup">
 <h2>Single Master Setup<a class="headerlink" href="#single-master-setup" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="id4"></span><p id="index-2">In the event that your cluster uses only one node as a master, there are certain requirements, such as the slave queue size, that can be relaxed.</p>
-<p>To relax flow control, use the settings below:</p>
+<span class="target" id="id4"></span><p id="index-2">In the event that a cluster uses only one node as a master, there are certain requirements (e.g., the slave queue size) that can be relaxed.</p>
+<p>To relax flow control, you might use the settings below:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;gcs.fc_limit = 256;</span>
-<span class="s">    gcs.fc_factor = 0.99;</span>
-<span class="s">    gcs.fc_master_slave = YES&quot;</span>
+<span class="s">                          gcs.fc_factor = 0.99;</span>
+<span class="s">                          gcs.fc_master_slave = YES&quot;</span>
 </pre></div>
 </div>
 <p>By reducing the rate of flow control events, these settings may improve replication performance.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You can also use this setting as suboptimal in a multi-master setup.</p>
+<p class="last">You can also use this setting as sub-optimal in a multi-master setup.</p>
 </div>
 </div>
 <div class="section" id="using-galera-cluster-with-selinux">
 <h2>Using Galera Cluster with SELinux<a class="headerlink" href="#using-galera-cluster-with-selinux" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="id5"></span><p id="index-3">When you first enable Galera Cluster on a node that runs SELinux, SELinux prohibits all cluster activities.  In order to enable replication on the node, you need a policy so that SELinux can recognize cluster activities as legitimate.</p>
-<p>To create a policy for Galera Cluster, set SELinux to run in permissive mode.  Permissive mode does not block cluster activity, but it does log the actions as warnings.  By collecting these warnings, you can iteratively create a policy for Galera Cluster.</p>
+<span class="target" id="id5"></span><p id="index-3">When you first enable Galera Cluster on a node that runs SELinux, it will prohibit all cluster activities.  In order to enable replication on the node, you need a policy so that SELinux can recognize cluster activities as legitimate.</p>
+<p>To create a policy for Galera Cluster, set SELinux to run in permissive mode.  Permissive mode does not block cluster activity, but it does log the actions as warnings.  By collecting these warnings, you can iteratively create a policy for Galera Cluster.  You can make this change generally by editing the SELinux configuration file (e.g., <code class="docutils literal"><span class="pre">/etc/selinux/config</span></code>) to include an uncommented line like so:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELINUX=permissive</span>
+</pre></div>
+</div>
 <p>Once SELinux no longer registers warnings from Galera Cluster, you can switch it back into enforcing mode.  SELinux then uses the new policy to allow the cluster access to the various ports and files it needs.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Almost all Linux distributions ship with a MySQL policy for SELinux.  You can use this policy as a starting point for Galera Cluster and extend it, using the above procedure.</p>
 </div>
+</div>
+<div class="section" id="using-synchronization-functions">
+<h2>Using Synchronization Functions<a class="headerlink" href="#using-synchronization-functions" title="Permalink to this headline">¶</a></h2>
+<p id="using-sync-functions">Occasionally, an application may need to perform a critical read. Critical reads are queries that require that the local database reaches the most up-to-date state possible before the query is executed.</p>
+<p>In Galera Cluster prior to 4.x, you could manage critical reads using the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a> session variable.  This would cause the node to enable causality checks, holding new queries until the database server catches up with all updates that were made prior to the start of the current transaction.  While this method does ensure that the node reaches the most up-to-date state before executing the query, it also means that the node may wait to receive updates that might have nothing to do with the query at hand.</p>
+<p>Beginning with Galera Cluster 4.0, though, you can use synchronization functions.  This allows you to tie the synchronization process to specific transactions so that the node waits only until a specific transaction is applied before executing the query.  Here is an example of how this might work:</p>
+<p>Suppose on <code class="docutils literal"><span class="pre">node1</span></code>, you begin a transaction, make changes to a table and then commit the transaction like so:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="n">START</span> <span class="n">TRANSACTION</span><span class="p">;</span>
+
+<span class="k">UPDATE</span> <span class="n">table1</span> <span class="kt">SET</span> <span class="n">col4</span> <span class="o">=</span> <span class="n">col4</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">2</span><span class="p">;</span>
+
+<span class="n">COMMIT</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>After that, using the <a class="reference internal" href="mysqlwsrepfunctions.html#wsrep-last-written-gtid"><span class="std std-ref">WSREP_LAST_WRITTEN_GTID()</span></a> function, say you obtain the <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> of the transaction and save it to the <code class="docutils literal"><span class="pre">$transaction_1_gtid</span></code> variable like this:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span>$transaction_1_gtid = SELECT WSREP_LAST_WRITTEN_GTID();
+</pre></div>
+</div>
+<p>Now, on <code class="docutils literal"><span class="pre">node2</span></code>, suppose you set it to wait until it replicates and applies the transaction from <code class="docutils literal"><span class="pre">node1</span></code> before starting a new transaction:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span>SELECT WSREP_SYNC_WAIT_UPTO_GTID($transaction_1_gtid);
+
+START TRANSACTION;
+</pre></div>
+</div>
+<p>Next, you execute your critical reads.</p>
+<p>Using the <a class="reference internal" href="mysqlwsrepfunctions.html#wsrep-sync-wait-upto-gtid"><span class="std std-ref">WSREP_SYNC_WAIT_UPTO_GTID()</span></a> function, the node waits until it has replicated and applied the given Global Transaction ID before starting a new transaction.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Synchronization Functions were introduced in Galera Cluster 4.  If you have an older version, you won&#8217;t be able to use these features.  To determine which version is installed on a server, use the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement and look for the <a class="reference internal" href="galerastatusvariables.html#wsrep-provider-version"><span class="std std-ref">wsrep_provider_version</span></a> status variable.</p>
+</div>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_provider_version&#39;</span><span class="p">;</span>
+
+    <span class="o">+------------------------+----------------------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>          <span class="o">|</span> <span class="n">Value</span>                <span class="o">|</span>
+<span class="o">+------------------------+----------------------+</span>
+<span class="o">|</span> <span class="n">wsrep_provider_version</span> <span class="o">|</span> <span class="mi">25</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">5</span><span class="o">-</span><span class="nf">wheezy</span><span class="p">(</span><span class="n">rXXXX</span><span class="p">)</span> <span class="o">|</span>
+<span class="o">+------------------------+----------------------+</span>
+</pre></div>
+</div>
+<p>The digits after the second and third decimal places are the version. The results here indicate that Galera Cluster version 3.5 is installed on the server.</p>
 </div>
 </div>
 
@@ -296,12 +340,13 @@
     <ul>
 <li><a class="reference internal" href="#">Configuration Tips</a><ul>
 <li><a class="reference internal" href="#wan-replication">WAN Replication</a><ul>
-<li><a class="reference internal" href="#dealing-with-wan-latency">Dealing with WAN Latency</a></li>
+<li><a class="reference internal" href="#wan-latency">WAN Latency</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#multi-master-setup">Multi-Master Setup</a></li>
 <li><a class="reference internal" href="#single-master-setup">Single Master Setup</a></li>
 <li><a class="reference internal" href="#using-galera-cluster-with-selinux">Using Galera Cluster with SELinux</a></li>
+<li><a class="reference internal" href="#using-synchronization-functions">Using Synchronization Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -385,7 +430,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Support</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Knowledge Base</a> &#187;</li> 
       </ul>
     </div>
     </div>

@@ -206,8 +206,8 @@
             
   <div class="section" id="system-configuration">
 <h1>System Configuration<a class="headerlink" href="#system-configuration" title="Permalink to this headline">¶</a></h1>
-<p id="configuration">When you have finished installing Galera Cluster on your server hardware, you are ready to configure the database itself to serve as a node in your cluster.  To do this, you will need to edit the MySQL configuration file.</p>
-<p>Using your preferred text editor, edit the <code class="docutils literal"><span class="pre">/etc/my.cnf</span></code> file.</p>
+<p id="configuration">After you finish installing Galera Cluster on your server, you&#8217;re ready to configure the database itself to serve as a node in a cluster.  To do this, you&#8217;ll need to edit the MySQL configuration file.</p>
+<p>Using a text editor, edit the <code class="docutils literal"><span class="pre">/etc/my.cnf</span></code> file.  You&#8217;ll need to include entries like the ones shown in this sample excerpt:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
 <span class="na">datadir</span><span class="o">=</span><span class="s">/var/lib/mysql</span>
 <span class="na">socket</span><span class="o">=</span><span class="s">/var/lib/mysql/mysql.sock</span>
@@ -229,57 +229,49 @@
 <span class="na">pid-file</span><span class="o">=</span><span class="s">/var/run/mysqld/mysqld.pid</span>
 </pre></div>
 </div>
-<div class="section" id="configuring-database-server">
-<h2>Configuring Database Server<a class="headerlink" href="#configuring-database-server" title="Permalink to this headline">¶</a></h2>
-<p id="db-config">There are certain basic configurations that you will need to set up in the <code class="docutils literal"><span class="pre">/etc/my.cnf</span></code> file.  Before starting the database server, edit the configuration file for the following:</p>
-<ul>
-<li><p class="first">Ensure that <code class="docutils literal"><span class="pre">mysqld</span></code> is not bound to 127.0.0.1.  This is IP address for localhost.  If the configuration variable appears in the file, comment it out:</p>
+<p>Depending on your system and the location of your installation of MySQL or MariaDB, you will need to adjust the valuables for variables (e.g., the path to the data directory).</p>
+<div class="section" id="configuring-the-database-server">
+<h2>Configuring the Database Server<a class="headerlink" href="#configuring-the-database-server" title="Permalink to this headline">¶</a></h2>
+<p id="db-config">In addition to settings for the system, there are other basic configurations that you will need to set in the <code class="docutils literal"><span class="pre">/etc/my.cnf</span></code> file.  Make these changes before starting the database server.</p>
+<p>First, make sure that <code class="docutils literal"><span class="pre">mysqld</span></code> is not bound to 127.0.0.1.  This is the IP address for localhost.  If the <code class="docutils literal"><span class="pre">bind-address</span></code> variable is in the file, comment it out by adding a hash sign (i.e., <code class="docutils literal"><span class="pre">#</span></code>) at the start of the line:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># bind-address = 127.0.0.1</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">Ensure that the configuration file includes the <code class="docutils literal"><span class="pre">conf.d/</span></code>.</p>
+<p>Next, ensure the configuration file includes the <code class="docutils literal"><span class="pre">conf.d/</span></code> by adding a line with <code class="docutils literal"><span class="pre">!includedir</span></code> at the start, followed by the file path:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">!includedir /etc/mysql/conf.d/</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">Ensure that the binary log format is set to use row-level replication, as opposed to statement-level replication.</p>
+<p>Now, set the binary log format to use row-level replication, as opposed to statement-level replication. You&#8217;d do this by adding the following line:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">binlog_format</span><span class="o">=</span><span class="s">ROW</span>
 </pre></div>
 </div>
-<p>Do not change this value, as it affects performance and consistency.  The binary log can only use row-level replication.</p>
-</li>
-<li><p class="first">Ensure that the default storage engine is InnoDB</p>
+<p>Don&#8217;t change this value later as it affects performance and consistency.  The binary log can only use row-level replication for Galera Cluster.</p>
+<p>Galera Cluster will not work with MyISAM or other non-transactional storage engines. So, make sure the default storage engine is InnoDB using the <code class="docutils literal"><span class="pre">default_storage_engine</span></code> variable like so:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">default_storage_engine</span><span class="o">=</span><span class="s">InnoDB</span>
 </pre></div>
 </div>
-<p>Galera Cluster will not work with MyISAM or similar nontransactional storage engines.</p>
-</li>
-<li><p class="first">Ensure that the InnoDB locking mode for generating auto-increment values is set to interleaved lock mode, which is designated by a <code class="docutils literal"><span class="pre">2</span></code> value.</p>
+<p>Next, ensure the InnoDB locking mode for generating auto-increment values is set to interleaved lock mode. This is designated by a value of <code class="docutils literal"><span class="pre">2</span></code> for the appropriate variable:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">innodb_autoinc_lock_mode</span><span class="o">=</span><span class="s">2</span>
 </pre></div>
 </div>
-<p>Do not change this value.  Other modes may cause <code class="docutils literal"><span class="pre">INSERT</span></code> statements on tables with <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> columns to fail.</p>
+<p>Don&#8217;t change this value afterwards.  Other modes may cause <code class="docutils literal"><span class="pre">INSERT</span></code> statements to fail on tables with <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> columns.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: When <a class="reference external" href="http://dev.mysql.com/doc/refman/5.5/en/innodb-parameters.html#sysvar_innodb_autoinc_lock_mode">innodb_autoinc_lock_mode</a> is set to traditional lock mode, indicated by <code class="docutils literal"><span class="pre">0</span></code>, or to consecutive lock mode, indicated by <code class="docutils literal"><span class="pre">1</span></code>, in Galera Cluster it can cause unresolved deadlocks and make the system unresponsive.</p>
+<p class="last"><strong>Warning</strong>: When <a class="reference external" href="http://dev.mysql.com/doc/refman/5.5/en/innodb-parameters.html#sysvar_innodb_autoinc_lock_mode">innodb_autoinc_lock_mode</a> is set to traditional lock mode (i.e., a value of <code class="docutils literal"><span class="pre">0</span></code>) or to consecutive lock mode (i.e., a value of <code class="docutils literal"><span class="pre">1</span></code>) it can cause unresolved deadlocks and make the system unresponsive in Galera Cluster.</p>
 </div>
-</li>
-<li><p class="first">Ensure that the InnoDB log buffer is written to file once per second, rather than on each commit, to improve performance.</p>
+<p>After all of that, make sure the InnoDB log buffer is written to file once per second, rather than on each commit, to improve performance. To do this, set the <code class="docutils literal"><span class="pre">innodb_flush_log_at_trx_commit</span></code> variable to 0 like so;</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">innodb_flush_log_at_trx_commit</span><span class="o">=</span><span class="s">0</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: While setting <a class="reference external" href="http://dev.mysql.com/doc/refman/5.1/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit">innodb_flush_log_at_trx_commit</a> to a value of <code class="docutils literal"><span class="pre">0</span></code> or <code class="docutils literal"><span class="pre">2</span></code> improves performance, it also introduces certain dangers.  Operating system crashes or power outages can erase the last second of transaction.  Although normally you can recover this data from another node, it can still be lost entirely in the event that the cluster goes down at the same time, (for instance, in the event of a data center power outage).</p>
+<p class="last"><strong>Warning</strong>: Although setting <a class="reference external" href="http://dev.mysql.com/doc/refman/5.1/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit">innodb_flush_log_at_trx_commit</a> to a value of <code class="docutils literal"><span class="pre">0</span></code> or <code class="docutils literal"><span class="pre">2</span></code> improves performance, it also introduces potential problems.  Operating system crashes or power outages can erase the last second of transaction.  Although normally you can recover this data from another node, it can still be lost entirely in the event that the cluster goes down at the same time.</p>
 </div>
-</li>
-</ul>
-<p>After you save the configuration file, you are ready to configure the database privileges.</p>
+<p>After you make all of these changes and additions to the configuration file, you&#8217;re ready to configure the database privileges.</p>
 <div class="section" id="configuring-the-innodb-buffer-pool">
 <h3>Configuring the InnoDB Buffer Pool<a class="headerlink" href="#configuring-the-innodb-buffer-pool" title="Permalink to this headline">¶</a></h3>
-<p id="config-innodb-buffer-pool-size">The InnoDB storage engine uses a memory buffer to cache data and indexes of its tables, which you can configure through the
-<a class="reference external" href="http://dev.mysql.com/doc/refman/5.1/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> parameter.  The default value is 128MB.  To compensate for the increased memory usage of Galera Cluster over the standalone MySQL database server, you should scale your usual value back by 5%.</p>
+<p id="config-innodb-buffer-pool-size">The InnoDB storage engine uses its own memory buffer to cache data and for indexes of tables. You can configure this memory buffer through the
+<a class="reference external" href="http://dev.mysql.com/doc/refman/5.1/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> parameter.  The default value is 128 MB.  To compensate for the increased memory usage of Galera Cluster over a standalone MySQL database server, you should scale your usual value back by five percent.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">innodb_buffer_pool_size</span><span class="o">=</span><span class="s">122M</span>
 </pre></div>
 </div>
@@ -287,53 +279,44 @@
 </div>
 <div class="section" id="configuring-swap-space">
 <h2>Configuring Swap Space<a class="headerlink" href="#configuring-swap-space" title="Permalink to this headline">¶</a></h2>
-<p id="swap-config">Memory requirements for Galera Cluster are difficult to predict with any precision.  The particular amount of memory it uses can vary significantly, depending upon the load the given node receives.  In the event that Galera Cluster attempts to use more memory than the node has available, the <code class="docutils literal"><span class="pre">mysqld</span></code> instance crashes.</p>
-<p>The way to protect your node from such crashing is to ensure that you have sufficient swap space available on the server, either in the form of a swap partition or swap files.  To check the available swap space, run the following command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> swapon --summary
+<p id="swap-config">Memory requirements for Galera Cluster are difficult to predict with any precision.  The particular amount of memory it uses can vary significantly, depending upon the load the given node receives.  In the event that Galera Cluster attempts to use more memory than the node has available, the <code class="docutils literal"><span class="pre">mysqld</span></code> instance will crash.</p>
+<p>The way to protect a node from such crashes is to ensure that there is sufficient swap space available on the server. This can be either in the form of a swap partition or swap files.  To check the available swap space, execute the following from the command-line:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> swapon --summary
+
 <span class="go">Filename        Type        Size     Used    Priority</span>
 <span class="go">/dev/sda2       partition   3369980  0       -1</span>
 <span class="go">/swap/swap1     file        524284   0       -2</span>
 <span class="go">/swap/swap2     file        524284   0       -3</span>
 </pre></div>
 </div>
-<p>If your system does not have swap space available or if the allotted space is insufficient for your needs, you can fix this by creating swap files.</p>
-<ol class="arabic">
-<li><p class="first">Create an empty file on your disk, set the file size to whatever size you require.</p>
+<p>If swap is not configured, nothing will be returned from this command. If your system doesn&#8217;t have swap space available or if the allotted space is insufficient, you can fix this by creating swap files.</p>
+<p>First, create an empty file on your disk, set the file size to whatever size you require.  You can do this with the <code class="docutils literal"><span class="pre">fallocate</span></code> tool like so:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> fallocate -l 512M /swapfile
 </pre></div>
 </div>
-<p>Alternatively, you can manage the same using <code class="docutils literal"><span class="pre">dd</span></code>.</p>
+<p>Alternatively, you can manage the same using <code class="docutils literal"><span class="pre">dd</span></code> utility like this:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/swapfile <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">512</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">Secure the swap file.</p>
+<p>Be sure to secure the swap file by changing the permissions on the filesystem with <code class="docutils literal"><span class="pre">chmod</span></code> like this:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> chmod <span class="m">600</span> /swapfile
-</pre></div>
-</div>
-<p>This sets the file permissions so that only the root user can read and write to the file.  No other user or group member can access it.  You can view the results with <code class="docutils literal"><span class="pre">ls</span></code>:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> ls -a / <span class="p">|</span> grep swapfile
+
+<span class="gp">$</span> ls -a / <span class="p">|</span> grep swapfile
+
 <span class="go">-rw------- 1 root root 536870912 Feb 12 23:55 swapfile</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first">Format the swap file.</p>
+<p>This sets the file permissions so that only the root user can read and write to the file.  No other user or group member can access it.  Using the <code class="docutils literal"><span class="pre">ls</span></code> command command above shows the results.</p>
+<p>Now you&#8217;re read to format the swap file.  You can do this with the <code class="docutils literal"><span class="pre">mkswap</span></code> utility.  You&#8217;ll then need to active the swap file.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> mkswap /swapfile
+<span class="gp">#</span> swapon /swapfile
 </pre></div>
 </div>
-</li>
-<li><p class="first">Activate the swap file.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> swapon /swapfile
-</pre></div>
-</div>
-</li>
-<li><p class="first">Using your preferred text editor, update the <code class="docutils literal"><span class="pre">/etc/fstab</span></code> file to include the swap file by adding the following line to the bottom:</p>
+<p>Using a text editor, update the <code class="docutils literal"><span class="pre">/etc/fstab</span></code> file to include the swap file by adding the following line to the bottom:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">/swapfile none swap defaults 0 0</span>
 </pre></div>
 </div>
-</li>
-</ol>
-<p>After you save the <code class="docutils literal"><span class="pre">/etc/fstab</span></code> file, you can see the results with <code class="docutils literal"><span class="pre">swapon</span></code>.</p>
+<p>After you save the <code class="docutils literal"><span class="pre">/etc/fstab</span></code> file, you run <code class="docutils literal"><span class="pre">swapon</span></code> again to see the results:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> swapon --summary
 <span class="go">Filename        Type        Size     Used    Priority</span>
 <span class="go">/swapfile       file        524284   0       -1</span>
@@ -354,7 +337,7 @@
     <h3><a href="index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">System Configuration</a><ul>
-<li><a class="reference internal" href="#configuring-database-server">Configuring Database Server</a><ul>
+<li><a class="reference internal" href="#configuring-the-database-server">Configuring the Database Server</a><ul>
 <li><a class="reference internal" href="#configuring-the-innodb-buffer-pool">Configuring the InnoDB Buffer Pool</a></li>
 </ul>
 </li>

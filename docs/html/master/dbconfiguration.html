@@ -206,19 +206,19 @@
             
   <div class="section" id="replication-configuration">
 <h1>Replication Configuration<a class="headerlink" href="#replication-configuration" title="Permalink to this headline">¶</a></h1>
-<p id="wsrep-config">In addition to the configuration for the database server, there are some specific options that you need to set to enable write-set replication.  You must apply these changes to the configuration file, that is <code class="docutils literal"><span class="pre">my.cnf</span></code>, for each node in your cluster.</p>
+<p id="wsrep-config">In addition to the configuration for the database server, there are some specific options that you need to set to enable write-set replication.  You must apply these changes to the configuration file (i.e., <code class="docutils literal"><span class="pre">my.cnf</span></code>) for each node in the cluster.</p>
 <ul>
-<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-cluster-name"><span class="std std-ref">wsrep_cluster_name</span></a> Use this parameter to set the logical name for your cluster.  You must use the same name for every node in your cluster.  The connection fails on nodes that have different values for this parameter.</p>
+<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-cluster-name"><span class="std std-ref">wsrep_cluster_name</span></a>: Use this parameter to set the logical name for the cluster.  You must use the same name for each node in the cluster.  The connection will fail on nodes that have different values for this parameter.</p>
 </li>
-<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> Use this parameter to define the IP addresses for the cluster in a comma separated list.</p>
+<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a>: Use this parameter to define the IP addresses for the cluster in a comma-separated list.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: There are additional schemas and options available through this parameter.  For more information on the syntax, see <a class="reference internal" href="#id1"><span class="std std-ref">Understanding Cluster Addresses</span></a> below.</p>
+<p class="last"><strong>See Also</strong>: There are additional schemata and options available through this parameter.  For more information on the syntax, see <span class="xref std std-ref">Understanding Cluster Addresses</span> below.</p>
 </div>
 </li>
-<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> Use this parameter to define the logical name for the individual node—for convenience.</p>
+<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a>: Use this parameter to define the logical name for the individual node—for convenience.</p>
 </li>
-<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a> Use this parameter to explicitly set the IP address for the individual node.  It gets used in the event that the auto-guessing does not produce desirable results.</p>
+<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a>: Use this parameter to set explicitly the IP address for the individual node.  It&#8217;s used when auto-guessing doesn&#8217;t produce desirable results.</p>
 </li>
 </ul>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
@@ -228,50 +228,46 @@
 <span class="na">wsrep_node_address</span><span class="o">=</span><span class="s">&quot;192.168.0.1&quot;</span>
 </pre></div>
 </div>
-<div class="section" id="understanding-cluster-addresses">
-<h2>Understanding Cluster Addresses<a class="headerlink" href="#understanding-cluster-addresses" title="Permalink to this headline">¶</a></h2>
-<p id="id1">For each node in the cluster, you must provide IP addresses for all other nodes in the cluster, using the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter.  Cluster addresses are listed using a particular syntax:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">&lt;backend schema&gt;://&lt;cluster address&gt;[?&lt;option1&gt;</span><span class="o">=</span><span class="s">&lt;value1&gt;[&amp;&lt;option2&gt;=&lt;value2&gt;]]</span>
-</pre></div>
-</div>
 <div class="section" id="backend-schema">
-<h3>Backend Schema<a class="headerlink" href="#backend-schema" title="Permalink to this headline">¶</a></h3>
-<p id="id2">There are two backend schemas available for Galera Cluster.</p>
+<h2>Backend Schema<a class="headerlink" href="#backend-schema" title="Permalink to this headline">¶</a></h2>
+<p id="id1">There are two backend schemata available with Galera Cluster.</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">dummy</span></code> Which provides a pass-through back-end for testing and profiling purposes.  It does not connect to any other nodes.  It ignores any values given to it.</li>
-<li><code class="docutils literal"><span class="pre">gcomm</span></code> Which provides the group communications back-end for use in production.  It takes an address and has several settings that you can enable through the option list, or by using the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> parameter.</li>
+<li><code class="docutils literal"><span class="pre">dummy</span></code>: This provides a pass-through back-end for testing and profiling purposes.  It doesn&#8217;t connect to other nodes and will ignore any values given to it.</li>
+<li><code class="docutils literal"><span class="pre">gcomm</span></code>: This provides the group communications back-end for use in production.  It accepts an address and has several settings that may be enabled through the option list, or by using the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> parameter.</li>
 </ul>
 </div>
 <div class="section" id="cluster-addresses">
-<h3>Cluster Addresses<a class="headerlink" href="#cluster-addresses" title="Permalink to this headline">¶</a></h3>
-<p id="id3">For this section, provide a comma separate list of IP addresses for nodes in the cluster.  The values here can indicate,</p>
-<ul class="simple">
-<li>The IP addresses of any current members, in the event that you want to connect to an existing cluster; or,</li>
-<li>The IP addresses of any possible cluster members, assuming that the list members can belong to no more than one Primary Component;</li>
-</ul>
-<p>If you start the node without an IP address for this parameter, the node assumes that it is the first node of a new cluster.  It initializes a cluster as though you launched <code class="docutils literal"><span class="pre">mysqld</span></code> with the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.</p>
+<h2>Cluster Addresses<a class="headerlink" href="#cluster-addresses" title="Permalink to this headline">¶</a></h2>
+<p id="id2">For the cluster address section, you have to provide a comma-separate list of IP addresses for all of the nodes in the cluster.  You would do this using the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter.  Cluster addresses are listed in the configuration file using a particular syntax, like so:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">&lt;backend schema&gt;://&lt;cluster address&gt;[?&lt;option1&gt;</span><span class="o">=</span><span class="s">&lt;value1&gt;[&amp;&lt;option2&gt;=&lt;value2&gt;]]</span>
+</pre></div>
+</div>
+<p>Below is an example of how this line from the configuration file might look:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_cluster_address</span><span class="o">=</span><span class="s">&quot;gcomm://192.168.0.1,192.168.0.2,192.168.0.3&quot;</span>
+</pre></div>
+</div>
+<p>Here, the backend schema is <code class="docutils literal"><span class="pre">gcomm</span></code>.  The cluster addresses (i.e., <code class="docutils literal"><span class="pre">192.168.0.1</span></code>, etc.) are listed next, separted by commas.  You can add options after that, within the quotes. You would start with a question mark, followed by each option setting. Option key/value pairs are separated by an ampersand. This is covered in the Options section below.</p>
+<p>The IP addresses given in the configuration file should include any current members of the cluster.  The list may also include the IP addresses of any possible cluster members. Members can belong to no more than one Primary Component;</p>
+<p>If you start a node without proving an IP address for this parameter, the node will assume that it&#8217;s the first node of a new cluster.  It will initialize the cluster as though you launched <code class="docutils literal"><span class="pre">mysqld</span></code> with the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.</p>
 </div>
 <div class="section" id="options">
-<h3>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
-<p id="cluster-address-options">You can also use the options list to set backend parameters, such as the listen address and timeout values.</p>
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p id="cluster-address-options">When setting the IP address in the configuration file using the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter, you can also set some options. You can set backend parameters, such as the listen address and timeout values.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: The <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> options list is not durable.  The node must resubmit the options on every connection to the cluster.  To make these options durable, set them in the configuration file using the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> parameter.</p>
+<p class="last"><strong>See Also</strong>: The <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> options list is not durable.  The node must resubmit the options on each connection to a cluster.  To make these options durable, set them in the configuration file using the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> parameter.</p>
 </div>
-<p>The options list set in the URL take precedent over parameters set elsewhere.  Parameters that you can set through the options list are prefixed by <code class="docutils literal"><span class="pre">evs</span></code>, <code class="docutils literal"><span class="pre">pc</span></code> and <code class="docutils literal"><span class="pre">gmcast</span></code>.</p>
+<p>The options set in the URL take precedent over parameters set elsewhere.  Parameters you set through the options list are prefixed by <code class="docutils literal"><span class="pre">evs</span></code> (i.e., Extended Virtual Synchrony), <code class="docutils literal"><span class="pre">pc</span></code> (i.e., Primary Component) and <code class="docutils literal"><span class="pre">gmcast</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information on the available parameters, see <a class="reference internal" href="galeraparameters.html"><span class="doc">Galera Parameters</span></a>.</p>
 </div>
-<p>You can set the options with a list of <code class="docutils literal"><span class="pre">key=value</span></code> pairs according to the URL standard.  For example,</p>
+<p>When listing options, start with a question mark after the IP address list. Then provide the options in a <code class="docutils literal"><span class="pre">key=value</span></code> format. Key/value pairs must be separated by an ampersand. Below is an example of how this might look:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_cluster_address</span><span class="o">=</span><span class="s">&quot;gcomm://192.168.0.1, 192.168.0.2, 192.168.0.3 ? gmcast.segment=0 &amp; evs.max_install_timeouts=1&quot;</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If the listen address and port are not set in the parameter list, <code class="docutils literal"><span class="pre">gcomm</span></code> will listen on all interfaces.  The listen port will be taken from the cluster address.  If it is not specified in the cluster address, the default port is <code class="docutils literal"><span class="pre">4567</span></code>.</p>
-</div>
-</div>
+<p>In this example, the <code class="docutils literal"><span class="pre">segment</span></code> option for <code class="docutils literal"><span class="pre">gcomm</span></code> and the <code class="docutils literal"><span class="pre">max_install_timeouts</span></code> option for <code class="docutils literal"><span class="pre">evs</span></code> are set.</p>
+<p>Incidentally, if the listen address and port are not set in the parameter list, <code class="docutils literal"><span class="pre">gcomm</span></code> will listen on all interfaces.  The listen port will be taken from the cluster address.  If it&#8217;s not specified in the cluster address, the default port is <code class="docutils literal"><span class="pre">4567</span></code>.</p>
 </div>
 </div>
 
@@ -287,12 +283,9 @@
     <h3><a href="index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Replication Configuration</a><ul>
-<li><a class="reference internal" href="#understanding-cluster-addresses">Understanding Cluster Addresses</a><ul>
 <li><a class="reference internal" href="#backend-schema">Backend Schema</a></li>
 <li><a class="reference internal" href="#cluster-addresses">Cluster Addresses</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

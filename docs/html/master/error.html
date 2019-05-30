@@ -208,20 +208,20 @@
 <h1>Server Error Log<a class="headerlink" href="#server-error-log" title="Permalink to this headline">¶</a></h1>
 <p class="rubric" id="id1"><code class="docutils literal"><span class="pre">Node</span> <span class="pre">0</span> <span class="pre">(XXX)</span> <span class="pre">requested</span> <span class="pre">state</span> <span class="pre">transfer</span> <span class="pre">from</span> <span class="pre">'*any*'.</span> <span class="pre">Selected</span> <span class="pre">1</span> <span class="pre">(XXX)</span> <span class="pre">as</span> <span class="pre">donor.</span></code></p>
 <p id="node-requested-sst-from-any">The node is attempting to initiate a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
-<p>In the event that you do not explicitly set the donor node through <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a>, the Group Communication module selects a donor based on the information available about the node states.</p>
-<p>Group Communication monitors node states for the purposes of flow control, state transfers and quorum calculations.  That is, to ensure that a node that shows as <code class="docutils literal"><span class="pre">JOINING</span></code> does not count towards flow control and quorum.</p>
-<p>The node can serve as a donor when it is in the <code class="docutils literal"><span class="pre">SYNCED</span></code> state.  The joiner node selects a donor from the available synced nodes.  It shows preference to synced nodes that have the same <a class="reference internal" href="galeraparameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a> wsrep Provider option or it selects the first in the index.  When the donor node is chosen its state changes immediately to <code class="docutils literal"><span class="pre">DONOR</span></code>, meaning that it is no longer available for requests.</p>
-<p>If the node can find no free nodes that show as <code class="docutils literal"><span class="pre">SYNCED</span></code>, the joining node reports:</p>
+<p>In the event that you do not explicitly set the donor node through <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a>, the <em>Group Communication</em> module will select a donor based on the information available about the node states.</p>
+<p>Group Communication monitors node states for the purposes of flow control, state transfers and quorum calculations.  It ensures that a node that shows as <code class="docutils literal"><span class="pre">JOINING</span></code> doesn&#8217;t count towards flow control and quorum.</p>
+<p>A node can serve as a donor when it is in the <code class="docutils literal"><span class="pre">SYNCED</span></code> state.  The joiner node selects a donor from the available synced nodes.  It shows preference to synced nodes that have the same <a class="reference internal" href="galeraparameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a> wsrep Provider option, or it selects the first in the index.  When a donor node is chosen, its state changes immediately to <code class="docutils literal"><span class="pre">DONOR</span></code>. It&#8217;s no longer available for requests.</p>
+<p>If a node can find no free nodes that show as <code class="docutils literal"><span class="pre">SYNCED</span></code>, the joining node reports the following:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Requesting state transfer failed: -11(Resource temporarily
 unavailable).  Will keep retrying every 1 second(s).
 </pre></div>
 </div>
-<p>The joining node continues to retry the state transfer request.</p>
+<p>The joining node will continue to retry the state transfer request.</p>
 <p class="rubric"><code class="docutils literal"><span class="pre">SQL</span> <span class="pre">SYNTAX</span></code> Errors</p>
-<p id="sql-syntax">When a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> fails using <code class="docutils literal"><span class="pre">mysqldump</span></code> for any reason, the node writes a <code class="docutils literal"><span class="pre">SQL</span> <span class="pre">SYNTAX</span></code> message into the server error logs.</p>
-<p>This is a pseudo-statement.  You can find the actual error message the state transfer returned within the <code class="docutils literal"><span class="pre">SQL</span> <span class="pre">SYNTAX</span></code> entry.  It provides the information you need to correct the problem.</p>
+<p id="sql-syntax">When a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> fails using <code class="docutils literal"><span class="pre">mysqldump</span></code> for any reason, the node will write a <code class="docutils literal"><span class="pre">SQL</span> <span class="pre">SYNTAX</span></code> message into the server error logs.</p>
+<p>This is a pseudo-statement, though.  You can find the actual error message the state transfer returned within the <code class="docutils literal"><span class="pre">SQL</span> <span class="pre">SYNTAX</span></code> entry.  It will provide the information you need to correct the problem.</p>
 <p class="rubric"><code class="docutils literal"><span class="pre">Commit</span> <span class="pre">failed</span> <span class="pre">for</span> <span class="pre">reason:</span> <span class="pre">3</span></code></p>
-<p id="commit-failed-reason-3">When you have <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a> turned <code class="docutils literal"><span class="pre">ON</span></code>, you may occasionally see a message noting that a commit has failed due to reason <code class="docutils literal"><span class="pre">3</span></code>.  For example:</p>
+<p id="commit-failed-reason-3">When you have <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a> turned <code class="docutils literal"><span class="pre">ON</span></code>, you may occasionally see a message noting that a commit has failed due to reason <code class="docutils literal"><span class="pre">3</span></code>.  Below is an example of this:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>110906 17:45:01 [Note] WSREP: BF kill (1, seqno: 16962377), victim:  (140588996478720 4) trx: 35525064
 110906 17:45:01 [Note] WSREP: Aborting query: commit
 110906 17:45:01 [Note] WSREP: kill trx QUERY_COMMITTING for 35525064
@@ -230,10 +230,10 @@ unavailable).  Will keep retrying every 1 second(s).
 </div>
 <p>When attempting to apply a replicated write-set, slave threads occasionally encounter lock conflicts with local transactions, which may already be in the commit phase.  In such cases, the node aborts the local transaction, allowing the slave thread to proceed.</p>
 <p>This is a consequence of optimistic transaction execution.  The database server executes transaction under the expectation that there will be no row conflicts.  It is an expected issue in a multi-master configuration.</p>
-<p>To mitigate such conflicts:</p>
+<p>To mitigate such conflicts, there are a couple of things you can do:</p>
 <ul class="simple">
 <li>Use the cluster in a master-slave configuration.  Direct all writes to a single node.</li>
-<li>Use the same approaches as for master-slave read/write splitting.</li>
+<li>Use the same approach as master-slave read/write splitting.</li>
 </ul>
 </div>
 
@@ -324,7 +324,7 @@ unavailable).  Will keep retrying every 1 second(s).
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Support</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Knowledge Base</a> &#187;</li> 
       </ul>
     </div>
     </div>

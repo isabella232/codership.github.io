@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Server Error Log" href="error.html" />
-    <link rel="prev" title="Support" href="troubleshooting.html" />
+    <link rel="prev" title="Knowledge Base" href="troubleshooting.html" />
 
 	
 
@@ -206,41 +206,35 @@
             
   <div class="section" id="frequently-asked-questions">
 <h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
-<p id="id1">This chapter lists a number of frequently asked questions on Galera Cluster and other related matters.</p>
+<p id="id1">This page lists a number of frequently asked questions on Galera Cluster and other related matters.</p>
 <p class="rubric">What is Galera Cluster?</p>
-<p id="what-is-galera-cluster">Galera Cluster is a write-set replication service provider in the form of the dlopenable library.  It provides synchronous replication and supports multi-master replication.  Galera Cluster is capable of unconstrained parallel applying (that is, &#8220;parallel replication&#8221;), multicast replication and automatic node provisioning.</p>
-<p>The primary focus of Galera Cluster is data consistency.  Transactions are either applied to every node or not at all.  Galera Cluster is not a cluster manager, a load balancer or a cluster monitor.  What it does it keep databases synchronized provided that they were properly configured and synchronized in the beginning.</p>
+<p id="what-is-galera-cluster">Galera Cluster is a write-set replication service provider in the form of the <em>dlopenable</em> library.  It provides synchronous replication and supports multi-master replication.  Galera Cluster is capable of unconstrained parallel applying (i.e., &#8220;parallel replication&#8221;), multicast replication and automatic node provisioning.</p>
+<p>The primary focus of Galera Cluster is data consistency.  Transactions are either applied to every node or not at all.  Galera Cluster is not a cluster manager, a load balancer or a cluster monitor.  What it does is keep databases synchronized, provided they were properly configured and synchronized in the beginning.</p>
 <p class="rubric">What is Galera?</p>
-<p id="what-is-galera">The word <em>galera</em> is the Italian word for <em>galley</em>.  The galley is a class of naval vessel used in the Mediterranean Sea from the 2nd millennium <sub>B.C.E.</sub> until the Renaissance.  Although they used sails when the winds were favorable, their principal method of propulsion came from banks of oars.</p>
-<p>In order to manage the vessel effectively, rowers had to act synchronously, lest the oars become intertwined and get blocked.  Captains could scale the crew up to hundreds of rowers, making the galleys faster and more maneuverable in combat.</p>
+<p id="what-is-galera">The word <em>galera</em> is the Italian word for <em>galley</em>.  The galley is a class of naval vessel used in the Mediterranean Sea from the second millennium <sub>B.C.E.</sub> until the Renaissance.  Although it used sails when the winds were favorable, its principal method of propulsion came from banks of oars.</p>
+<p>In order to manage the vessel effectively, rowers had to act synchronously, lest the oars become intertwined and became blocked.  Captains could scale the crew up to hundreds of rowers, making the galleys faster and more maneuverable in combat.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information on galleys, see <a class="reference external" href="http://en.wikipedia.org/wiki/Galley">Wikipedia</a>.</p>
 </div>
-<p class="rubric">How Do I Manage Failover?</p>
+<p class="rubric">How are Failovers Managed?</p>
 <p id="failover">Galera Cluster is a true synchronous multi-master replication system, which allows the use of any or all of the nodes as master at any time without any extra provisioning.  What this means is that there is no failover in the traditional MySQL master-slave sense.</p>
-<p>The primary focus of Galera Cluster is data consistency across the nodes.  This does not allow for any modifications to the database that may compromise consistency.  For instance, the node blocks or rejects write requests until the joining node syncs with the cluster and is ready to process requests.</p>
+<p>The primary focus of Galera Cluster is data consistency across the nodes.  This doesn&#8217;t allow for any modifications to the database that may compromise consistency.  For instance, the node rejects write requests until the joining node synchronizes with the cluster and is ready to process requests.</p>
 <p>The results of this is that you can safely use your favorite approach to distribute or migrate connections between the nodes without the risk of causing inconsistency.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information on connection distribution, see <a class="reference internal" href="deploymentvariants.html"><span class="doc">Cluster Deployment Variants</span></a>.</p>
 </div>
-<p class="rubric">How Do I Upgrade the Cluster?</p>
-<p id="faq-upgrade">Periodically, updates will become available for Galera Cluster, (for the database server itself or the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>).  To update the software for the node, complete the following steps:</p>
-<ol class="arabic simple">
-<li>Stop the node.</li>
-<li>Upgrade the software.</li>
-<li>Restart the node.</li>
-</ol>
-<p>In addition to this, you also need to transfer client connections from node you want to upgrade to another node for the duration of the migration.</p>
+<p class="rubric">How do I Upgrade the Cluster?</p>
+<p id="faq-upgrade">Periodically, updates will become available for Galera Cluster&#8211;for the database server itself or the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>.  To update the software for a node, you would redirect client connections away from it and then stop the node. Then upgrade the node&#8217;s software.  When finished, just restart the node.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information on upgrade process, see <a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera Cluster</span></a>.</p>
 </div>
 <p class="rubric">What InnoDB Isolation Levels does Galera Cluster Support?</p>
 <p id="faq-isolation-levels">You can use all isolation levels.  Locally, in a given node, transaction isolation works as it does natively with InnoDB.</p>
-<p>That said, globally, with transactions processing in separate nodes, Galera Cluster implements a transaction-level called <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code>.  The <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> level is between the <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> and <code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> levels.</p>
-<p>The <code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> level cannot be guaranteed in the multi-master use case, because Galera Cluster replication does not carry a transaction read set.  Also, <code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> transaction is vulnerable to multi-master conflicts.  It holds read locks and any replicated write to read locked row will cause the transaction to abort.  Hence, it is recommended not to use it in Galera Cluster.</p>
+<p>Globally, with transactions processing in separate nodes, Galera Cluster implements a transaction-level called <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code>.  The <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> level is between the <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> and <code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> levels.</p>
+<p>The <code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> level cannot be guaranteed in the multi-master use case because Galera Cluster replication does not carry a transaction read set.  Also, <code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> transaction is vulnerable to multi-master conflicts.  It holds read locks and any replicated write to read locked row will cause the transaction to abort.  Hence, it is recommended not to use it in Galera Cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="isolationlevels.html"><span class="doc">Isolation Levels</span></a>.</p>
@@ -248,17 +242,17 @@
 <p class="rubric">How are DDL&#8217;s Handled by Galera Cluster?</p>
 <p id="ddl-galera">For <abbr title="Data Definition Language">DDL</abbr> statements and similar queries, Galera Cluster has two modes of execution:</p>
 <ul class="simple">
-<li><a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> Where the query is replicated in a statement before executing on the master.  The node waits for all preceding transactions to commit and then all nodes simultaneously execute the transaction in isolation.</li>
-<li><a class="reference internal" href="glossary.html#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a> Where the schema upgrades run locally, blocking only the node on which they are run.  The changes do not replicate to the rest of the cluster.</li>
+<li><a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a>: A query is replicated in a statement before executing on the master.  The node waits for all preceding transactions to commit and then all nodes simultaneously execute the transaction in isolation.</li>
+<li><a class="reference internal" href="glossary.html#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a>: Schema upgrades run locally, blocking only the node on which they are run.  The changes do not replicate to the rest of the cluster.</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="schemaupgrades.html"><span class="doc">Schema Upgrades</span></a>.</p>
 </div>
-<p class="rubric">What if connections give an <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> error?</p>
-<p id="connection-unknown-command">Your cluster experiences a temporary split, during which a portion of the nodes loses connectivity to the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  When they reconnect, nodes from the former nonoperational component drop their client connections.  New connections to the database client return <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> errors.</p>
-<p>What&#8217;s happening is that the node does not consider yet itself a part of the Primary Component.  While it has restored network connectivity, it still has to resynchronize itself with the cluster.  MySQL does not have an error code for the node lacking Primary status and defaults to an <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> message.</p>
-<p>Nodes in a nonoperational component must regain network connectivity with the Primary Component, process a state transfer and catch up with the cluster before they can resume normal operation.</p>
+<p class="rubric">What if Connections return an <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">Command</span></code> Error?</p>
+<p id="connection-unknown-command">This may happen when a cluster experiences a temporary split, during which a portion of the nodes loses connectivity to the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  When they reconnect, nodes from the former non-operational component drop their client connections.  New connections to the database client will return <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> errors.</p>
+<p>Basically, the node does not yet consider itself a part of the Primary Component.  While it has restored network connectivity, it still has to resynchronize itself with the cluster.  MySQL doesn&#8217;t have an error code for the node lacking Primary status. So it defaults to an <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> message.</p>
+<p>Nodes in a non-operational component must regain network connectivity with the Primary Component, process a state transfer, and catch up with the cluster before they can resume normal operation.</p>
 <p class="rubric">Is GCache a Binlog?</p>
 <p>The <a class="reference internal" href="glossary.html#term-write-set-cache"><span class="xref std std-term">Write-set Cache</span></a>, which is also called GCache, is a memory allocator for write-sets.  Its primary purpose is to minimize the write-set footprint in RAM.  It is not a log of events, but rather a cache.</p>
 <ul class="simple">
@@ -268,14 +262,14 @@
 <li>Write-sets in GCache are not allocated in commit order.</li>
 <li>Write-sets are not an optimal entry for the binlog, since they contain extra information.</li>
 </ul>
-<p>That said, it is possible to construct a binlog out of the write-set cache.</p>
-<p class="rubric">What if the node crashes during <code class="docutils literal"><span class="pre">rsync</span></code> SST</p>
-<p>You can configure <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> to use <code class="docutils literal"><span class="pre">rsync</span></code> for <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.  If the node crashes before the state transfer is complete, it may cause the <code class="docutils literal"><span class="pre">rsync</span></code> process to hang forever, occupying the port and not allowing you to restart the node.  In the event that this occurs, the error logs for the database server show that the port is in use.</p>
-<p>To correct the issue, kill the orphaned <code class="docutils literal"><span class="pre">rsync</span></code> process .  For instance, if you find the process had a pid of <code class="docutils literal"><span class="pre">501</span></code>, you might run the following command:</p>
+<p>Nevertheless, it is possible to construct a binlog out of the write-set cache.</p>
+<p class="rubric">What if a Node Crashes during <code class="docutils literal"><span class="pre">rsync</span></code> SST</p>
+<p>You can configure <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> to use <code class="docutils literal"><span class="pre">rsync</span></code> for <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.  If the node crashes before the state transfer is complete, it may cause the <code class="docutils literal"><span class="pre">rsync</span></code> process to hang forever, occupying the port and not allowing you to restart the node.  If this occurs, the error logs for the database server will show that the port is in use.</p>
+<p>To correct the problem, kill the orphaned <code class="docutils literal"><span class="pre">rsync</span></code> process.  For example, if the process had a pid of <code class="docutils literal"><span class="pre">501</span></code>, you might enter the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> <span class="nb">kill</span> <span class="m">501</span>
 </pre></div>
 </div>
-<p>Once you kill the orphaned process, it frees up the relevant ports and allows you to restart the node.</p>
+<p>Once you kill the orphaned process, it will free the relevant ports and allow you to restart the node.</p>
 </div>
 
 
@@ -290,7 +284,7 @@
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="troubleshooting.html"
-                          title="Previous page">&larr; Support</a></p>
+                          title="Previous page">&larr; Knowledge Base</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -361,18 +355,18 @@
           <a href="error.html" title="Server Error Log"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="troubleshooting.html" title="Support"
+          <a href="troubleshooting.html" title="Knowledge Base"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Support</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Knowledge Base</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="troubleshooting.html" title="Support">&lt; Previous</a></li>
+				<li><a href="troubleshooting.html" title="Knowledge Base">&lt; Previous</a></li>
 			
 
 			

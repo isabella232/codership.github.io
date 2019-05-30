@@ -206,55 +206,43 @@
             
   <div class="section" id="technical-description">
 <h1>Technical Description<a class="headerlink" href="#technical-description" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound" id="tech-description">
+<p id="tech-description">Galera Cluster is a synchronous certification-based replication solution for MySQL, MariaDB and Percona XtraDB.  Cluster nodes are identical and fully representative of the cluster state. They allow for unconstrained transparent client access, acting as a single-distributed database server.  In order to better understand Galera Cluster, this section provides detailed information on how it works and how you can benefit from it.</p>
+<p class="rubric">Understanding Replication</p>
+<p id="understanding-repl">Replication in the context of databases refers to the frequent copying of data from one database server to another.  These sections provide a high-level explanation of replication both in the general sense of how it works, as well as the particulars of how Galera Cluster implements these core concepts.</p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Database Replication</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#masters-and-slaves">Masters and Slaves</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#asynchronous-and-synchronous-replication">Asynchronous and Synchronous Replication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html#solving-the-issues-in-synchronous-replication">Solving the Issues in Synchronous Replication</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="introduction.html"><span class="doc">Database Replication</span></a></p>
+<p>This section explains how database replication works in general.  It provides an overview of the problems inherent in the various replication implementations, including master-slave, asynchronous and synchronous replication.</p>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="certificationbasedreplication.html">Certification-based Replication</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="certificationbasedreplication.html#what-certification-based-replication-requires">What Certification-based Replication Requires</a></li>
-<li class="toctree-l2"><a class="reference internal" href="certificationbasedreplication.html#how-certification-based-replication-works">How Certification-based Replication Works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="certificationbasedreplication.html#certification-based-replication-in-galera-cluster">Certification-based Replication in Galera Cluster</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="architecture.html">Replication API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="architecture.html#wsrep-api">wsrep API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="architecture.html#galera-replication-plugin">Galera Replication Plugin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="architecture.html#group-communication-plugins">Group Communication Plugins</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="isolationlevels.html">Isolation Levels</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="isolationlevels.html#intra-node-vs-inter-node-isolation-in-galera-cluster">Intra-Node vs. Inter-Node Isolation in Galera Cluster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="isolationlevels.html#understanding-isolation-levels">Understanding Isolation Levels</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="statetransfer.html">State Transfers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="statetransfer.html#state-snapshot-transfer-sst">State Snapshot Transfer (SST)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="statetransfer.html#incremental-state-transfer-ist">Incremental State Transfer (IST)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="nodestates.html">Flow Control</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="nodestates.html#how-flow-control-works">How Flow Control Works</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nodestates.html#understanding-node-states">Understanding Node States</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nodestates.html#changes-in-the-node-state">Changes in the Node State</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="recovery.html">Node Failure and Recovery</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="recovery.html#detecting-single-node-failures">Detecting Single Node Failures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recovery.html#cluster-availability-vs-partition-tolerance">Cluster Availability vs. Partition Tolerance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="recovery.html#recovering-from-single-node-failures">Recovering from Single Node Failures</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="weightedquorum.html">Weighted Quorum</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="weightedquorum.html#id1">Weighted Quorum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weightedquorum.html#quorum-calculation">Quorum Calculation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="weightedquorum.html#weighted-quorum-examples">Weighted Quorum Examples</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="certificationbasedreplication.html"><span class="doc">Certification-Based Replication</span></a></p>
+<p>Using group communications and transaction ordering techniques, certification-based replication allows for synchronous replication.</p>
 </li>
 </ul>
+<p class="rubric">Understanding Galera Cluster</p>
+<p id="understanding-galera">With a better grasp on how replication works, these pages provide a more detailed explanation of how Galera Cluster implements certification-based replication, including the specific architecture of the nodes, how they communicate with each other, as well as replicate data and manage the replication process.</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="architecture.html"><span class="doc">Replication API</span></a></p>
+<p>While the above sections explain the abstract concepts surrounding certification-based replication, this section covers the specific architecture used by Galera Cluster in implementing write-set replication, including the wsrep API and the Galera Replication and Group Communication plug-ins.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="isolationlevels.html"><span class="doc">Isolation Levels</span></a></p>
+<p>In a database system, the server will process concurrent transactions in isolation from each other. The level of isolation determines whether and how these transactions affect one another.  This section provides an overview of the isolation levels supported by Galera Cluster.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="statetransfer.html"><span class="doc">State Transfers</span></a></p>
+<p>The actual process that nodes use to replicate data into each other is called provisioning.  Galera Cluster supports two provisioning methods: State Snapshot Transfers and Incremental State Transfers.  This section presents an overview of each.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="nodestates.html"><span class="doc">Flow Control</span></a></p>
+<p>Galera Cluster manages the replication process using a feedback mechanism called Flow Control.  This allows the node to pause and resume replication according to its performance needs and to prevent any node from lagging too far behind the others in applying transaction.  This section provides an overview of Flow Control and the different states nodes can hold.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="recovery.html"><span class="doc">Node Failure and Recovery</span></a></p>
+<p>Nodes fail to operate when they lose their connection with the cluster.  This can occur for various reasons, such as hardware failures, software crashes, or the loss of network connectivity.  This section provides an overview of how nodes and the cluster cope with failure and how they may recover.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="weightedquorum.html"><span class="doc">Weighted Quorum</span></a></p>
+<p>When nodes connect to each other, they form components.  The Primary Component is a component that has quorum: it carries the majority of nodes in the cluster.  By default, each node represents one vote in quorum calculations. However, you can modify this feature in order to ensure certain stable nodes with strong connections carry a greater value.  This section provides an overview of how Galera Cluster handles weighted values in quorum calculations.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="streamingreplication.html"><span class="doc">Streaming Replication</span></a></p>
+<p>Normally, nodes transfer all replication and certification events on the transaction commit.  With Streaming Replication, the nodes break the transaction into fragments.  Then they certify, replicate and apply these replication fragments onto the slave nodes.  This section describes Streaming Replication, how it works and the limitations of its use.</p>
+</li>
+</ul>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 

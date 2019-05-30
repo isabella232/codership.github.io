@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Support &#8212; Galera Cluster Documentation</title>
+    <title>Knowledge Base &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -204,42 +204,50 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="support">
-<h1>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="troubleshooting">
-<span id="id1"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound" id="id2">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="error.html">Server Error Log</a></li>
-<li class="toctree-l1"><a class="reference internal" href="unknowncommand.html">Unknown Command Errors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="userchanges.html">User Changes not Replicating</a></li>
-<li class="toctree-l1"><a class="reference internal" href="clusterstallonalter.html">Cluster Stalls on <code class="docutils literal"><span class="pre">ALTER</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="detectingaslownode.html">Detecting a Slow Node</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dealingwithmultimasterconflicts.html">Dealing with Multi-Master Conflicts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="twonode.html">Two-Node Clusters</a></li>
+  <div class="section" id="knowledge-base">
+<h1>Knowledge Base<a class="headerlink" href="#knowledge-base" title="Permalink to this headline">¶</a></h1>
+<p id="kb">The Galera Knowledge Base (KB) contains information on resolving problems and improving use of Galera Cluster.  Here you&#8217;ll find answers to frequently asked questions, troubleshooting articles, and best practices articles.</p>
+<p class="rubric">Frequently Asked Questions</p>
+<ul class="simple">
+<li><a class="reference internal" href="faq.html"><span class="doc">Frequently Asked Questions</span></a></li>
 </ul>
-</div>
-</div>
-<div class="section" id="tutorials">
-<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound" id="id3">
+<p>This section provides an FAQ for Galera Cluster. The questions range from the meaning behind the name Galera, to common issues like failover and how to handle crashes during rsync.</p>
+<p class="rubric">Troubleshooting</p>
+<p id="troubleshooting">When you experience difficulties with a Galera Cluster deployment, these sections of the KB may provide some assistance. They include articles to diagnose and address various performance and replication issues.</p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#write-set-caching-during-state-transfers">Write-set Caching during State Transfers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#setting-parallel-slave-threads">Setting Parallel Slave Threads</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance.html#dealing-with-large-transactions">Dealing with Large Transactions</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="error.html"><span class="doc">Server Error Log</span></a></p>
+<p>Given that Galera Cluster enables a number of new features not present in the standard MySQL implementation, it may on occasion log server errors that are unfamiliar to you.  This section lists common error messages and explains them, as well as what to do about them.</p>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="configurationtips.html">Configuration Tips</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="configurationtips.html#wan-replication">WAN Replication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configurationtips.html#multi-master-setup">Multi-Master Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configurationtips.html#single-master-setup">Single Master Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configurationtips.html#using-galera-cluster-with-selinux">Using Galera Cluster with SELinux</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="unknowncommand.html"><span class="doc">Unknown Command Errors</span></a></p>
+<p>When a node encounters issues in loading the wsrep Provider, statements run in a console will generate an unknown command error.  This section covers identifying the source of the problem and how to solve it.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="userchanges.html"><span class="doc">User Changes not Replicating</span></a></p>
+<p>Galera Cluster doesn&#8217;t support direct modification of MySQL system tables since they use the MyISAM engine and are thus non-transactional.  For instance, if you add or modify rows in <code class="docutils literal"><span class="pre">mysql.user</span></code>, these changes will not replicate to the cluster.  This section explains the correct methods to use in making changes to systems tables in a cluster.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="clusterstallonalter.html"><span class="doc">Cluster Stalls on ALTER</span></a></p>
+<p>Sometimes, when executing <code class="docutils literal"><span class="pre">ALTER</span></code> statements that take a long time, you may encounter issues in which other nodes in the cluster stall.  This section provides information on how to identify this problem and what to do about it.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="detectingaslownode.html"><span class="doc">Detecting a Slow Node</span></a></p>
+<p>By design, a cluster&#8217;s performance is limited by its slowest node.  This section shows you how to identify which node is the slowest and to help determine the cause. It also explains how thereby to improve performance.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="dealingwithmultimasterconflicts.html"><span class="doc">Dealing with Multi-Master Conflicts</span></a></p>
+<p>Multi-master conflicts occur in as a result of application servers writing to different nodes.  This can lead to two nodes attempting to update the same row with different data. This section provides information on diagnosing and correcting these conflicts.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="twonode.html"><span class="doc">Two-Node Clusters</span></a></p>
+<p>Optimally, Galera Cluster requires a minimum of three nodes.  If you have a cluster that uses only two nodes, you may sometimes encounter issues in which single-node failures cause the cluster to stop working.  This section gives some pointers in how to manage these cases.</p>
 </li>
 </ul>
-</div>
+<p class="rubric">Best Practices</p>
+<p id="best-practices">Whereas the above sections relate to handling problems with a cluster, these sections of the KB provide additional information and guidance on improving performance and optimizing configuration.</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="performance.html"><span class="doc">Performance</span></a></p>
+<p>This section provides a series of guides to improving performance, such as optimizing write-set caching for state transfers, configuring parallel slave threads and handling large transactions.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="configurationtips.html"><span class="doc">Configuration Tips</span></a></p>
+<p>This section provides a series of guides for optimizing your configuration, including WAN replication, single-master and multi-master deployments and working with SELinux.</p>
+</li>
+</ul>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -251,17 +259,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="index.html" title="index">
           <img class="logo" src="_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Support</a><ul>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
-<li><a class="reference internal" href="#tutorials">Tutorials</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="migration.html"
@@ -321,7 +319,7 @@
 		<ul class="nav-link">
 			 
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/troubleshooting.rst.rst" title="Edit 'Support' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/troubleshooting.rst.rst" title="Edit 'Knowledge Base' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">

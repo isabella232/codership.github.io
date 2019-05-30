@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Galera Cluster for MySQL - Binary Installation" href="installmysql.html" />
-    <link rel="prev" title="Getting Started" href="gettingstarted.html" />
+    <link rel="prev" title="What’s New in Galera Cluster 4.x" href="whatsnew.html" />
 
 	
 
@@ -208,38 +208,40 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <p id="galera-install-configure">Galera Cluster requires server hardware for a minimum of three nodes.</p>
 <p>If your cluster runs on a single switch, use three nodes.  If your cluster spans switches, use three switches.  If your cluster spans networks, use three networks.  If your cluster spans data centers, use three data centers.  This ensures that the cluster can maintain a Primary Component in the event of network outages.</p>
-<p>For server hardware, each node requires at a minimum:</p>
+<p><strong>Hardware Requirements</strong></p>
+<p>For server hardware, each node requires at a minimum the following components:</p>
 <ul class="simple">
-<li>1GHz single core CPU</li>
-<li>512MB RAM</li>
+<li>1 GHz single core CPU;</li>
+<li>512 MB RAM; and</li>
 <li>100 Mbps network connectivity</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: Galera Cluster may occasionally crash when run on limited hardware due to insufficient memory.  To prevent this, ensure that you have sufficient swap space available.  For more information on how to create swap space, see <a class="reference internal" href="configuration.html#swap-config"><span class="std std-ref">Configuring Swap Space</span></a>.</p>
+<p class="last"><strong>See Also</strong>: Galera Cluster may occasionally crash when run on limited hardware due to insufficient memory.  To prevent this, make sure that you have allocated a sufficient amount of swap space.  For more information on how to create swap space, see <a class="reference internal" href="configuration.html#swap-config"><span class="std std-ref">Configuring Swap Space</span></a>.</p>
 </div>
-<p>For software, each node in the cluster requires:</p>
+<p><strong>Software Requirements</strong></p>
+<p>For software, each node in the cluster requires at a minimum the following:</p>
 <ul class="simple">
-<li>Linux or FreeBSD;</li>
-<li>MySQL or MariaDB server with wsrep API patch;</li>
-<li>Galera Replication Plugin.</li>
+<li>Linux or FreeBSD operating system installed;</li>
+<li>MySQL or MariaDB server with the wsrep API patch; and</li>
+<li>Galera Replication Plugin installed.</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Binary installation packages for Galera Cluster include the database server with the wsrep API patch.  When building from source, you must apply this patch yourself.</p>
+<p class="last">Binary installation packages for Galera Cluster include the database server with the wsrep API patch.  When building from source, though, you must apply this patch manually.</p>
 </div>
 <div class="section" id="preparing-the-server">
 <h2>Preparing the Server<a class="headerlink" href="#preparing-the-server" title="Permalink to this headline">¶</a></h2>
-<p id="system-requirements">Before you begin the installation process, there are a few tasks that you need to undertake to prepare the servers for Galera Cluster.  You must perform the following steps for each node in your cluster.</p>
+<p id="system-requirements">Before you begin the installation process, there are a few tasks that you need to do to prepare the servers for Galera Cluster.  You must perform the following steps on each node in your cluster.</p>
 <div class="section" id="disabling-selinux-for-mysqld">
 <h3>Disabling SELinux for mysqld<a class="headerlink" href="#disabling-selinux-for-mysqld" title="Permalink to this headline">¶</a></h3>
-<p id="disable-selinux">If you have SELinux enabled, it may block <code class="docutils literal"><span class="pre">mysqld</span></code> from carrying out required operations.  You must either disable SELinux for mysqld or configure it to allow <code class="docutils literal"><span class="pre">mysqld</span></code> to run external programs and open listen sockets on unprivileged ports—that is, things that an unprivileged user can do.</p>
-<p>To disable SELinux for mysql run the following command:</p>
+<p id="disable-selinux">If SELinux (Security-Enhanced Linux) is enabled on the servers, it may block <code class="docutils literal"><span class="pre">mysqld</span></code> from performing required operations.  You must either disable SELinux for <code class="docutils literal"><span class="pre">mysqld</span></code> or configure it to allow <code class="docutils literal"><span class="pre">mysqld</span></code> to run external programs and open listen sockets on unprivileged ports—that is, operations that an unprivileged user may do.</p>
+<p>To disable SELinux for <code class="docutils literal"><span class="pre">mysqld</span></code>, execute the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> semanage permissive -a mysqld_t
 </pre></div>
 </div>
-<p>This command switches SELinux into permissive mode when it registers activity from the database server.  While this is fine during the installation and configuration process, it is not in general a good policy to disable applications that improve security.</p>
-<p>In order to use SELinux with Galera Cluster, you need to create an access policy, so that SELinux can understand and allow normal operations from the database server.  For information on how to create an access policy, see <a class="reference internal" href="selinux.html"><span class="doc">SELinux Configuration</span></a>.</p>
+<p>This command switches SELinux into permissive mode when it registers activity from the database server.  While this is fine during the installation and configuration process, it is not in general a good policy to disable security applications.</p>
+<p>Rather than disable SELinux, so that your may use it along with Galera Cluster, you will need to create an access policy. This will allow SELinux to understand and allow normal operations from the database server.  For information on how to create such an access policy, see <a class="reference internal" href="selinux.html"><span class="doc">SELinux Configuration</span></a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information on writing SELinux policies, see <a class="reference external" href="https://blogs.oracle.com/jsmyth/entry/selinux_and_mysql">SELinux and MySQL</a>.</p>
@@ -247,12 +249,12 @@
 </div>
 <div class="section" id="firewall-configuration">
 <h3>Firewall Configuration<a class="headerlink" href="#firewall-configuration" title="Permalink to this headline">¶</a></h3>
-<p id="firewall-config">Next, you need to update the firewall settings on each node so that they can communicate with the cluster.  How you do this varies depending upon your distribution and the particular firewall software that you use.</p>
+<p id="firewall-config">Next, you will need to update the firewall settings on each node so that they may communicate with the cluster.  How you do this varies depending upon your distribution and the particular firewall software that you use.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If there is a <abbr title="Network Address Translation">NAT</abbr> firewall between the nodes, you must configure it to allow for direct connections between the nodes, such as through port forwarding.</p>
 </div>
-<p>As an example, to open ports between trusted hosts using <code class="docutils literal"><span class="pre">iptables</span></code> the commands you run on each  would look something like this:</p>
+<p>As an example, to open ports between trusted hosts using <code class="docutils literal"><span class="pre">iptables</span></code>, you would execute something like the following on each node:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> iptables --append INPUT --protocol tcp <span class="se">\</span>
       --source <span class="m">64</span>.57.102.34 --jump ACCEPT
 <span class="gp">#</span> iptables --apend INPUT --protocol tcp <span class="se">\</span>
@@ -361,8 +363,8 @@
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="gettingstarted.html"
-                          title="Previous page">&larr; Getting Started</a></p>
+    <p class="topless"><a href="whatsnew.html"
+                          title="Previous page">&larr; What&#8217;s New in Galera Cluster 4.x</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -433,7 +435,7 @@
           <a href="installmysql.html" title="Galera Cluster for MySQL - Binary Installation"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="gettingstarted.html" title="Getting Started"
+          <a href="whatsnew.html" title="What’s New in Galera Cluster 4.x"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
@@ -444,7 +446,7 @@
 
 
 			
-				<li><a href="gettingstarted.html" title="Getting Started">&lt; Previous</a></li>
+				<li><a href="whatsnew.html" title="What&amp;#8217;s New in Galera Cluster 4.x">&lt; Previous</a></li>
 			
 
 			

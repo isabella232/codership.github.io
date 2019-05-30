@@ -206,31 +206,26 @@
             
   <div class="section" id="two-node-clusters">
 <h1>Two-Node Clusters<a class="headerlink" href="#two-node-clusters" title="Permalink to this headline">¶</a></h1>
-<p id="id1">In a two-node cluster, a single-node failure causes the other to stop working.</p>
+<p id="id1">Although it may seem simple to maintain a cluster of only two nodes, there is an inherent potential problem. In a two-node cluster, when one node fails, it will cause the other to stop.</p>
 <p class="rubric">Situation</p>
-<p>You have a cluster composed of only two nodes.  One of the nodes leaves the cluster <em>ungracefully</em>.  That is, instead of being shut down through <code class="docutils literal"><span class="pre">init</span></code> or <code class="docutils literal"><span class="pre">systemd</span></code>, it crashes or suffers a loss of network connectivity.  The node that remains becomes nonoperational.  It remains so until some additional information is provided by a third party, such as a human operator or another node.</p>
-<p>If the node remained operational after the other left the cluster ungracefully, there would be the risk that each of the two nodes will think itself as being the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  To prevent this, the node becomes nonoperational.</p>
+<p>Suppose you have a cluster composed of only two nodes.  Suppose further that one of the nodes leaves the cluster, ungracefully.  For instance, instead of being shut down through <code class="docutils literal"><span class="pre">init</span></code> or <code class="docutils literal"><span class="pre">systemd</span></code>, it crashes or loses network connectivity.  The node that remains becomes non-operational.  It will remain so until some additional information is provided by a third entity, such as another node or a person.</p>
+<p>In a two-node cluster, if one node loses its network connection and other node is still on the network, both will think itself as being the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Each will be unaware that the other is still running. This could cause problems once network connectivity is restored. To prevent this, the nodes become non-operational.</p>
 <p class="rubric">Solutions</p>
-<p>There are two solutions available to you:</p>
-<ul>
-<li><p class="first">You can bootstrap the surviving node to form a new <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, using the <a class="reference internal" href="galeraparameters.html#pc-bootstrap"><span class="std std-ref">pc.boostrap</span></a> wsrep Provider option.  To do so, log into the database client and run the following command:</p>
+<p>There are two solutions available.  You can bootstrap the surviving node (i.e., the one with network connectivity) to form a new <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>. You would do this by using the <a class="reference internal" href="galeraparameters.html#pc-bootstrap"><span class="std std-ref">pc.boostrap</span></a> wsrep Provider option.  To do so, log into the database client and run the following SQL statement:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.bootstrap=YES&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>This bootstraps the surviving node as a new Primary Component.  When the other node comes back online or regains network connectivity with this node, it will initiate a state transfer and catch up with this node.</p>
-</li>
-<li><p class="first">In the event that you want the node to continue to operate, you can use the <a class="reference internal" href="galeraparameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> wsrep Provider option.  To do so, log into the database client and run the following command:</p>
+<p>This will bootstrap the surviving node as a new Primary Component.  When the other node comes back online or regains network connectivity with this node, it will recognize that it&#8217;s behind and initiate a state transfer to catch up.</p>
+<p>If you want the node to continue to operate, you can use the <a class="reference internal" href="galeraparameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> wsrep Provider option.  To do so, log into the database client and run the following SQL statement:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.ignore_sb=TRUE&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>The node resumes processing updates and it will continue to do so, even in the event that it suspects a split-brain situation.</p>
+<p>The node will resume processing updates, even if it suspects a split-brain situation.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: Enabling <a class="reference internal" href="galeraparameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> is dangerous in a multi-master setup, due to the aforementioned risk for split-brain situations.  However, it does simplify things in master-slave clusters, (especially in cases where you only use two nodes).</p>
+<p class="last"><strong>Warning</strong>: Enabling <a class="reference internal" href="galeraparameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> is dangerous in a multi-master setup due to the aforementioned risk for split-brain situations.  However, it does simplify things in master-slave clusters&#8211;especially in situations with only two nodes.</p>
 </div>
-</li>
-</ul>
-<p>In addition to the solutions provided above, you can avoid the situation entirely using Galera Arbitrator.  Galera Arbitrator functions as an odd node in quorum calculations.  Meaning that, if you enable Galera Arbitrator on one node in a two-node cluster, that node remains the Primary Component, even if the other node fails or loses network connectivity.</p>
+<p>In addition to the solutions provided here, you can avoid this situation entirely by using Galera Arbitrator.  Galera Arbitrator functions as an odd node in quorum calculations.  If you enable Galera Arbitrator on one node in a two-node cluster, that node will remain the Primary Component, even if the other node fails or loses network connectivity.</p>
 </div>
 
 
@@ -320,7 +315,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Support</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Knowledge Base</a> &#187;</li> 
       </ul>
     </div>
     </div>

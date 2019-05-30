@@ -206,13 +206,12 @@
             
   <div class="section" id="detecting-a-slow-node">
 <h1>Detecting a Slow Node<a class="headerlink" href="#detecting-a-slow-node" title="Permalink to this headline">¶</a></h1>
-<p id="id1">By design, the performance of the cluster cannot be higher than the performance of the slowest node on the cluster. Even if you have one node only, its performance can be considerably lower when compared with running the same server in a standalone mode (without a wsrep Provider).</p>
-<p>This is particularly true for big transactions even if they were within the transaction size limits. This is why it is important to be able to detect a slow node on the cluster.</p>
+<p id="id1">By design, the performance of a cluster cannot be higher than the performance of the slowest node in the cluster. Even if you have only one node, its performance can be considerably slower when compared with running the same server in a standalone mode (i.e., without a wsrep Provider).</p>
+<p>This is particularly true for large transactions&#8212;even if they are within transaction size limits. This is why it&#8217;s important to be able to detect a slow node on a cluster.</p>
 <div class="section" id="finding-slow-nodes">
 <h2>Finding Slow Nodes<a class="headerlink" href="#finding-slow-nodes" title="Permalink to this headline">¶</a></h2>
-<p id="id2">There are two status variables used in finding slow nodes:</p>
-<ul>
-<li><p class="first"><a class="reference internal" href="galerastatusvariables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a> Provides the number of times the node sent a pause event due to flow control since the last status query.</p>
+<p id="id2">There are two status variables used in finding slow nodes in a cluster: <code class="docutils literal"><span class="pre">wsrep_flow_control_sent</span></code> and <code class="docutils literal"><span class="pre">wsrep_local_recv_queue_avg</span></code>. Check these status variables on each node in a cluster.  The node that returns the highest value is the slowest one.  Lower values are preferable.</p>
+<p><a class="reference internal" href="galerastatusvariables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a>: This variable provides the number of times a node sent a pause event due to flow control since the last status query.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_flow_control_sent&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------------+-------+</span>
@@ -222,20 +221,18 @@
 <span class="o">+-------------------------+-------+</span>
 </pre></div>
 </div>
-</li>
-<li><p class="first"><a class="reference internal" href="galerastatusvariables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a> Provides an average of the received queue length since the last status query.</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_recv_queue_avg&#39;</span><span class="p">;</span>
+<p><a class="reference internal" href="galerastatusvariables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a>: This varaible returns an average of the received queue length since the last status query.</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span> <span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_recv_queue_avg&#39;</span><span class="p">;</span>
 
-<span class="o">+----------------------------+---------+</span>
-<span class="o">|</span> <span class="n">Variable_name</span>              <span class="o">|</span> <span class="n">Value</span>   <span class="o">|</span>
-<span class="o">+----------------------------+---------+</span>
-<span class="o">|</span> <span class="n">wsrep_local_recv_queue_avg</span> <span class="o">|</span> <span class="mi">3</span><span class="p">.</span><span class="mi">34852</span> <span class="o">|</span>
-<span class="o">+----------------------------+---------+</span>
+   <span class="o">+----------------------------+---------+</span>
+   <span class="o">|</span> <span class="n">Variable_name</span>              <span class="o">|</span> <span class="n">Value</span>   <span class="o">|</span>
+   <span class="o">+----------------------------+---------+</span>
+   <span class="o">|</span> <span class="n">wsrep_local_recv_queue_avg</span> <span class="o">|</span> <span class="mi">3</span><span class="p">.</span><span class="mi">34852</span> <span class="o">|</span>
+   <span class="o">+----------------------------+---------+</span>
+
+<span class="n">Nodes</span> <span class="n">that</span> <span class="k">return</span> <span class="k">values</span> <span class="n">much</span> <span class="n">higher</span> <span class="n">than</span> <span class="ss">``</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="ss">``</span> <span class="n">inidcates</span> <span class="n">that</span> <span class="n">it</span> <span class="n">cannot</span> <span class="n">apply</span> <span class="k">write</span><span class="o">-</span><span class="n">sets</span> <span class="k">as</span> <span class="n">fast</span> <span class="k">as</span> <span class="n">they</span> <span class="n">are</span> <span class="n">received</span> <span class="k">and</span> <span class="n">can</span> <span class="n">generate</span> <span class="n">replication</span> <span class="n">throttling</span><span class="p">.</span>
 </pre></div>
 </div>
-<p>Nodes that return values much higher than <code class="docutils literal"><span class="pre">0.0</span></code> inidcates that it cannot apply write-sets as fast as they are received and can generate replication throttling.</p>
-</li>
-</ul>
 <p>Check these status variables on each node in your cluster.  The node that returns the highest value is the slowest node.  Lower values are preferable.</p>
 </div>
 </div>
@@ -336,7 +333,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Support</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="troubleshooting.html" accesskey="U">Knowledge Base</a> &#187;</li> 
       </ul>
     </div>
     </div>

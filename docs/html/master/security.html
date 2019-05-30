@@ -206,25 +206,20 @@
             
   <div class="section" id="security">
 <h1>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound" id="id1">
+<p id="id1">On occasion, you may want or need to enable degrees of security that go beyond the basics of Unix file permissions and secure database management.  For situations such as these,  you can secure both node communications and client connections between the application servers and the cluster.</p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="firewallsettings.html">Firewall Settings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="iptables.html">Firewall Configuration with <code class="docutils literal"><span class="pre">iptables</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="firewalld.html">Firewall Configuration with FirewallD</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pf.html">Firewall Configuration with PF</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="firewallsettings.html"><span class="doc">Firewall Settings</span></a></p>
+<p>In order to use Galera Cluster, nodes must have access to a number of ports to maintain network connectivity with the cluster.  While it was touched upon briefly in the <a class="reference internal" href="galerainstallation.html#firewall-config"><span class="std std-ref">Installation</span></a> chapter, this chapter provides more detailed guides on configuring a system firewall using <code class="docutils literal"><span class="pre">iptables</span></code>, FirewallD and PF.</p>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="ssl.html">SSL Settings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sslcert.html">SSL Certificates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sslconfig.html">SSL Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sslsst.html">SSL for State Snapshot Transfers</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="ssl.html"><span class="doc">SSL Settings</span></a></p>
+<p>To secure communications between nodes and from the application severs, you can enable encryption through the SSL protocol for client connections, replication traffic and State Snapshot Transfers.  This chapter provides guidance to configuring SSL on Galera Cluster.</p>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="selinux.html">SELinux Configuration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="selinux.html#generating-an-selinux-policy">Generating an SELinux Policy</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="selinux.html"><span class="doc">SELinux Configuration</span></a></p>
+<p>Without proper configuration, SELinux can either block nodes from communicating or it can block the database server from starting at all.  When it does so, it causes the given process to fail silently, without any notification sent to standard output or error as to why.  While you can configure SELinux to permit all activity from the database server, (as was explained in the <a class="reference internal" href="galerainstallation.html#disable-selinux"><span class="std std-ref">Installation</span></a> chapter, this is not a good long-term solution.</p>
+<p>This chapter provides a guide to creating an SELinux security policy for Galera Cluster.</p>
 </li>
 </ul>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 

@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Notification Command" href="notificationcmd.html" />
-    <link rel="prev" title="Monitoring Cluster Status" href="monitoringthecluster.html" />
+    <link rel="prev" title="Using Status Variables" href="monitoringthecluster.html" />
 
 	
 
@@ -206,23 +206,23 @@
             
   <div class="section" id="database-server-logs">
 <h1>Database Server Logs<a class="headerlink" href="#database-server-logs" title="Permalink to this headline">¶</a></h1>
-<p id="server-log">Galera Cluster provides the same database server logging features available to MySQL and MariaDB, depending on which you use.  By default, it writes errors to a <code class="docutils literal"><span class="pre">&lt;hostname&gt;.err</span></code> in the data directory.  You can change this in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file using the <a class="reference external" href="https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_log-error">log_error</a> parameter, or by using the <code class="docutils literal"><span class="pre">--log-error</span></code> parameter.</p>
+<p id="server-log">Galera Cluster provides the same database server logging features available to MySQL, MariaDB and Percona XtraDB, depending on which you use.  By default, it writes errors to a <code class="docutils literal"><span class="pre">&lt;hostname&gt;.err</span></code> file in the data directory.  You can change this in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file using the <a class="reference external" href="https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_log-error">log_error</a> option, or by using the <code class="docutils literal"><span class="pre">--log-error</span></code> parameter.</p>
 <div class="section" id="log-parameters">
 <h2>Log Parameters<a class="headerlink" href="#log-parameters" title="Permalink to this headline">¶</a></h2>
-<p id="server-log-parameters">Galera Cluster provides parameters and wsrep Options that allow you to enable error logging on events that are specific to the replication process.  If you have a script monitoring the logs, these entires can provide you with information on conflicts occurring in the replication process.</p>
+<p id="server-log-parameters">Galera Cluster provides parameters and wsrep options that allow you to enable error logging on events that are specific to the replication process.  If you have a script monitoring the logs, these entires can give you information on conflicts occurring in the replication process.</p>
 <ul>
-<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-log-conflicts"><span class="std std-ref">wsrep_log_conflicts</span></a> This parameter enables conflict logging for your error logs, such as when two nodes attempt to write to the same row of the same table at the same time.</p>
+<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-log-conflicts"><span class="std std-ref">wsrep_log_conflicts</span></a>: This parameter enables conflict logging for error logs. An example would be when two nodes attempt to write to the same row of the same table at the same time.</p>
 </li>
-<li><p class="first"><a class="reference internal" href="galeraparameters.html#cert-log-conflicts"><span class="std std-ref">cert.log_conflicts</span></a> This wsrep Provider option enables logging of information on certification failures during replication.</p>
+<li><p class="first"><a class="reference internal" href="galeraparameters.html#cert-log-conflicts"><span class="std std-ref">cert.log_conflicts</span></a>: This wsrep Provider option enables logging of information on certification failures during replication.</p>
 </li>
-<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a> This parameter enables debugging information for the database server logs.</p>
+<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a>: This parameter enables debugging information for the database server logs.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: In addition to useful debugging information, this parameter also causes the database server to print authentication information, (that is, passwords), to the error logs.  Do not enable it in production environments.</p>
+<p class="last"><strong>Warning</strong>: In addition to useful debugging information, this parameter also causes the database server to print authentication information, (i.e., passwords) to the error logs.  Don&#8217;t enable it in production environments as it&#8217;s a security vulnerability.</p>
 </div>
 </li>
 </ul>
-<p>You can enable these through the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.</p>
+<p>You can enable these through the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.  The excerpt below is an example of these options and how they are enabled:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># wsrep Log Options</span>
 <span class="na">wsrep_log_conflicts</span><span class="o">=</span><span class="s">ON</span>
 <span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;cert.log_conflicts=ON&quot;</span>
@@ -232,7 +232,7 @@
 </div>
 <div class="section" id="additional-log-files">
 <h2>Additional Log Files<a class="headerlink" href="#additional-log-files" title="Permalink to this headline">¶</a></h2>
-<p id="gra-log">Whenever the node fails to apply an event on a slave node, the database server creates a special binary log file of the event in the data directory.  The naming convention the node uses for the filename is <code class="docutils literal"><span class="pre">GRA_*.log</span></code>.</p>
+<p id="gra-log">Whenever a node fails to apply an event on a slave node, the database server creates a special binary log file of the event in the data directory.  The naming convention the node uses for the filename is <code class="docutils literal"><span class="pre">GRA_*.log</span></code>.</p>
 </div>
 </div>
 
@@ -258,7 +258,7 @@
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="monitoringthecluster.html"
-                          title="Previous page">&larr; Monitoring Cluster Status</a></p>
+                          title="Previous page">&larr; Using Status Variables</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -329,18 +329,18 @@
           <a href="notificationcmd.html" title="Notification Command"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="monitoringthecluster.html" title="Monitoring Cluster Status"
+          <a href="monitoringthecluster.html" title="Using Status Variables"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="monitor.html" accesskey="U">Monitor</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="monitor.html" accesskey="U">Cluster Monitoring</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="monitoringthecluster.html" title="Monitoring Cluster Status">&lt; Previous</a></li>
+				<li><a href="monitoringthecluster.html" title="Using Status Variables">&lt; Previous</a></li>
 			
 
 			

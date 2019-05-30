@@ -206,7 +206,7 @@
             
   <div class="section" id="galera-load-balancer">
 <h1>Galera Load Balancer<a class="headerlink" href="#galera-load-balancer" title="Permalink to this headline">¶</a></h1>
-<p id="glb-doc">Galera Load Balancer provides simple TCP connection balancing developed with scalability and performance in mind.  It draws on Pen for inspiration, but its functionality is limited to only balancing TCP connections.</p>
+<p id="glb-doc">Galera Load Balancer provides simple TCP connection balancing. It was developed with scalability and performance in mind.  It draws on Pen for inspiration, but its functionality is limited to only balancing TCP connections.  It provides several features:</p>
 <ul class="simple">
 <li>Support for configuring back-end servers at runtime.</li>
 <li>Support for draning servers.</li>
@@ -216,95 +216,83 @@
 </ul>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p id="glb-install">Unlike Galera Cluster, there is no binary installation available for Galera Load Balancer.  Installing it on your system requires that you build it from source.  It is available on GitHub at <a class="reference external" href="https://github.com/codership/glb">glb</a>.</p>
-<p>To build Galera Load Balancer, complete the following steps:</p>
-<ol class="arabic">
-<li><p class="first">From a directory convenient to you for source builds, such as <code class="docutils literal"><span class="pre">/opt</span></code>, use Git to clone the GitHub repo for Galera Load Balancer.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/codership/glb
+<p id="glb-install">Unlike Galera Cluster, there is no binary installation available for Galera Load Balancer.  Installing it on your system will requires you to build it from the source files.  They&#8217;re available on GitHub at <a class="reference external" href="https://github.com/codership/glb">glb</a>.</p>
+<p>To build Galera Load Balancer, you will need to complete a few steps.  First, from a directory convenient for source builds (e.g., <code class="docutils literal"><span class="pre">/opt</span></code>), use the <code class="docutils literal"><span class="pre">git</span></code> utility to clone the GitHub repository for Galera Load Balancer. You would do this like so:</p>
+<blockquote>
+<div><div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/codership/glb
 </pre></div>
 </div>
-</li>
-<li><p class="first">Change into the new <code class="docutils literal"><span class="pre">glb/</span></code> directory created by Git, then run the bootstrap script.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> glb/
+</div></blockquote>
+<p>Next, from within <code class="docutils literal"><span class="pre">glb</span></code> directory created by <code class="docutils literal"><span class="pre">git</span></code>, run the bootstrap script&#8211;which will be found in that directory.</p>
+<blockquote>
+<div><div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> glb/
 <span class="gp">$</span> ./bootstrap.sh
 </pre></div>
 </div>
-</li>
-<li><p class="first">Configure Make to build on your system.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> ./configure
+</div></blockquote>
+<p>Now you will need to configure <code class="docutils literal"><span class="pre">make</span></code> to build on your system, then run <code class="docutils literal"><span class="pre">make</span></code> to build the application. After that, you&#8217;ll use <code class="docutils literal"><span class="pre">make</span></code> to install it. This may seem like a lot, but it&#8217;s simple. Just execute the following lines, one at a time, from the command-line:</p>
+<blockquote>
+<div><div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> ./configure
+
+<span class="gp">$</span> make
+
+<span class="gp">#</span> make install
 </pre></div>
 </div>
-</li>
-<li><p class="first">Build the application with Make.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> make
-</pre></div>
-</div>
-</li>
-<li><p class="first">Install the application on your system.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> make install
-</pre></div>
-</div>
+</div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Galera Load Balancer installs in <code class="docutils literal"><span class="pre">/usr/sbin</span></code>.  You need to run the above command as root.</p>
+<p class="last">Galera Load Balancer installs in the <code class="docutils literal"><span class="pre">/usr/sbin</span></code> directory.  So you will need to run the last line above as root.</p>
 </div>
-</li>
-</ol>
-<p>Galera Load Balancer is now installed on your system.  You can launch it from the command-line, using the <code class="docutils literal"><span class="pre">glbd</span></code> command.</p>
-<p>In addition to the system daemon, you have also installed <code class="docutils literal"><span class="pre">libglb</span></code>, a shared library for connection balancing with any Linux applications that use the <code class="docutils literal"><span class="pre">connect()</span></code> call from the C Standard Library.</p>
+<p>Once you&#8217;ve successfully execute everything above, Galera Load Balancer will be installed on your system.  You can launch it from the command-line, using the <code class="docutils literal"><span class="pre">glbd</span></code> command.</p>
+<p>In addition to the system daemon, you will also have installed <code class="docutils literal"><span class="pre">libglb</span></code>, a shared library for connection balancing with any Linux applications that use the <code class="docutils literal"><span class="pre">connect()</span></code> call from the C Standard Library.</p>
 <div class="section" id="service-installation">
 <h3>Service Installation<a class="headerlink" href="#service-installation" title="Permalink to this headline">¶</a></h3>
-<p id="glb-service">The above installation procedure only installs Galera Load Balancer to be run manually from the command-line.  However, you may find it more useful to run this application as a system service.</p>
-<p>In the source directory you cloned from GitHub, navigate into the <code class="docutils literal"><span class="pre">files/</span></code> directory.  Within this directory there is a configuration file and a service script that you need to copy to their relevant locations.</p>
-<ul>
-<li><p class="first">Place <code class="docutils literal"><span class="pre">glbd.sh</span></code> into <code class="docutils literal"><span class="pre">/etc/init.d</span></code> directory under a service name.</p>
+<p id="glb-service">The above installation procedure only installs Galera Load Balancer to be run manually from the command-line.  However, you may find it more useful to run this application as a system service. To do this, you&#8217;ll need to copy a couple of files to the appropriate directories.</p>
+<p>In the source directory you cloned from GitHub, navigate into the <code class="docutils literal"><span class="pre">files</span></code> directory.  Within that directory there is a configuration file and a service script that you need to copy to their relevant locations.</p>
+<p>First, copy <code class="docutils literal"><span class="pre">glbd.sh</span></code> into <code class="docutils literal"><span class="pre">/etc/init.d</span></code> directory under a service name. You would execute the following from the command-line to do this:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> cp glbd.sh /etc/init.d/glb
 </pre></div>
 </div>
-</li>
-<li><p class="first">Place <code class="docutils literal"><span class="pre">glbd.cfg</span></code> into either configuration directory.  For Red Hat and its derivatives, this is <code class="docutils literal"><span class="pre">/etc/sysconfig/glbd.cfg</span></code>.  For Debian and its derivatives, use <code class="docutils literal"><span class="pre">/etc/default/glbd.cfg</span></code>.</p>
+<p>Now, copy the default <code class="docutils literal"><span class="pre">glbd.cfg</span></code> file into the appropriate configuration directory.  For Red Hat and its derivatives, this is <code class="docutils literal"><span class="pre">/etc/sysconfig/glbd.cfg</span></code>.  For Debian and its derivatives, use <code class="docutils literal"><span class="pre">/etc/default/glbd.cfg</span></code>. For the former possibility, you would execute this from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> cp glbd.cfg /etc/sysconfig/glbd.cfg
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file used below refer to the one you have copied into <code class="docutils literal"><span class="pre">/etc</span></code>.</p>
-</div>
-</li>
-</ul>
-<p>When you finish this, you can manage Galera Load Balancer through the <code class="docutils literal"><span class="pre">service</span></code> command.  For more information on available commands, see <a class="reference internal" href="#glb-use"><span class="std std-ref">Using Galera Load Balancer</span></a>.</p>
+<p>When you finish this, you will be able to manage Galera Load Balancer through the <code class="docutils literal"><span class="pre">service</span></code> command.  For more information on available commands, see <a class="reference internal" href="#glb-use"><span class="std std-ref">Using Galera Load Balancer</span></a>.</p>
 </div>
 </div>
 <div class="section" id="configuration">
 <h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p id="glb-config">When you run Galera Load Balancer, you can configure its use through the command-line options, which you can reference through the <code class="docutils literal"><span class="pre">--help</span></code> command.  For users that run Galera Load Balancer as a service, you can manage it through the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file.</p>
+<p id="glb-config">When you run Galera Load Balancer, you can configure its use through the command-line options. You can get a list of by exeduting <code class="docutils literal"><span class="pre">glb</span></code> with the <code class="docutils literal"><span class="pre">--help</span></code> option.  For servers running Galera Load Balancer as a service, you can manage it through the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file.</p>
 <ul class="simple">
-<li><a class="reference internal" href="glbparameters.html#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a> Defines the address that Galera Load Balancer monitors for incoming client connections.</li>
-<li><a class="reference internal" href="glbparameters.html#glb-default-targets"><span class="std std-ref">DEFAULT_TARGETS</span></a> Defines the default servers that Galera Load Balancer routes incoming client connections to.  For this parameter, use the IP addresses for the nodes in your cluster.</li>
-<li><a class="reference internal" href="glbparameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> Defines additional Galera Load Balancer options, such as the balancing policy you want to use.  Use the same format as they would appear on the command-line.</li>
+<li><a class="reference internal" href="glbparameters.html#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a>: This is the address that Galera Load Balancer monitors for incoming client connections.</li>
+<li><a class="reference internal" href="glbparameters.html#glb-default-targets"><span class="std std-ref">DEFAULT_TARGETS</span></a>: This specifies the default servers where Galera Load Balancer is to route incoming client connections. For this parameter, use the IP addresses for the nodes in your cluster.</li>
+<li><a class="reference internal" href="glbparameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a>: This is used to define additional Galera Load Balancer options. For example, you might want to set the balancing policy.  Use the same format as you would from the command-line.</li>
 </ul>
-<p>For instance,</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># Galera Load Balancer COnfigurations</span>
+<p>Below is an example of a <cite>glbd.cfg`</cite> configuration file:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># Galera Load Balancer Configuration</span>
 <span class="na">LISTEN_ADDR</span><span class="o">=</span><span class="s">&quot;8010&quot;</span>
 <span class="na">DEFAULT_TARGETS</span><span class="o">=</span><span class="s">&quot;192.168.1.1 192.168.1.2 192.168.1.3&quot;</span>
 <span class="na">OTHER_OPTIONS</span><span class="o">=</span><span class="s">&quot;--random --top 3&quot;</span>
 </pre></div>
 </div>
+<p>The <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file would be the one you copied into <code class="docutils literal"><span class="pre">/etc</span></code> as mentioned in the previous section.</p>
 <div class="section" id="destination-selection-policies">
 <h3>Destination Selection Policies<a class="headerlink" href="#destination-selection-policies" title="Permalink to this headline">¶</a></h3>
-<p id="glb-dest-select">Galera Load Balancer, both the system daemon and the shared library, support five destination selection policies.  When you run it from the command-line, you can define these using the command-line arguments, otherwise add the arguments to the <a class="reference internal" href="glbparameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> parameter in the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file.</p>
+<p id="glb-dest-select">Galera Load Balancer&#8211;both the system daemon and the shared library&#8211;supports five destination selection policies. When you run it from the command-line, you can define these using the command-line arguments. Otherwise, you&#8217;ll have to add the arguments to the <a class="reference internal" href="glbparameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> parameter in the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file.</p>
 <ul class="simple">
-<li><strong>Least Connected</strong> Directs new connections to the server using the smallest number of connections possible, which is adjusted for the server weight.  This is the default policy.</li>
-<li><strong>Round Robin</strong> Directs new connections to the next destination in the circular order list.  You can enable it through the <a class="reference internal" href="glbparameters.html#glb-round"><span class="std std-ref">&#8211;round</span></a> option.</li>
-<li><strong>Single</strong> Directs all connections to the single server with the highest weight of those available.  Routing continues to that server until it fails or a server with a higher weight becomes available.  You can enable it through the <a class="reference internal" href="glbparameters.html#glb-single"><span class="std std-ref">&#8211;single</span></a> option.</li>
-<li><strong>Random</strong> Directs connections randomly to available servers.  You can enable it through the <a class="reference internal" href="glbparameters.html#glb-random"><span class="std std-ref">&#8211;random</span></a> option</li>
-<li><strong>Source Tracking</strong> Directs connections originating from the same address to the same server.  You can enable it through the <a class="reference internal" href="glbparameters.html#glb-source"><span class="std std-ref">&#8211;source</span></a> option.</li>
+<li><strong>Least Connected</strong>: This directs new connections to the server using the smallest number of connections possible. It will be adjusted for the server weight.  This is the default policy.</li>
+<li><strong>Round Robin</strong>: This sets new connections to the next destination in the circular order list. You can enable it with the <a class="reference internal" href="glbparameters.html#glb-round"><span class="std std-ref">&#8211;round</span></a> option.</li>
+<li><strong>Single</strong>: This directs all connections to the single server with the highest weight of those available.  Routing continues to that server until it fails, or until a server with a higher weight becomes available.  You can enable it with the <a class="reference internal" href="glbparameters.html#glb-single"><span class="std std-ref">&#8211;single</span></a> option.</li>
+<li><strong>Random</strong>: This will direct connections randomly to available servers.  You can enable it using the <a class="reference internal" href="glbparameters.html#glb-random"><span class="std std-ref">&#8211;random</span></a> option.</li>
+<li><strong>Source Tracking</strong>: This will direct connections originating from the same address to the same server.  You can enable it with the <a class="reference internal" href="glbparameters.html#glb-source"><span class="std std-ref">&#8211;source</span></a> option.</li>
 </ul>
 </div>
 </div>
 <div class="section" id="using-galera-load-balancer">
 <h2>Using Galera Load Balancer<a class="headerlink" href="#using-galera-load-balancer" title="Permalink to this headline">¶</a></h2>
-<p id="glb-use">In the above section <a class="reference internal" href="#glb-service"><span class="std std-ref">Service Installation</span></a>, you configured your system to run Galera Load Balancer as a service.  This allows you to manage common operations through the <code class="docutils literal"><span class="pre">service</span></code> command, for instance:</p>
+<p id="glb-use">The section on <a class="reference internal" href="#glb-service"><span class="std std-ref">Service Installation</span></a> explained how to configure a system to run Galera Load Balancer as a service.  If you do that, you can then manage common operations with the <code class="docutils literal"><span class="pre">service</span></code> command. The format for doing this is to enter <code class="docutils literal"><span class="pre">service</span></code>, followed by <code class="docutils literal"><span class="pre">glb</span></code>, and then an option.</p>
+<p>Below is an example of how you might use <code class="docutils literal"><span class="pre">service</span></code> to get information on the Galera Load Balancer:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service glb getinfo
 
 <span class="go">Router:</span>
@@ -317,15 +305,19 @@
 <span class="go">Destinations: 3, total connections: 0</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">service</span></code> script supports the following operations:</p>
+<p>In the results shown here, you can see a list of servers available, their weight and usage, as well as the number of connections made to them.</p>
+<p>The <code class="docutils literal"><span class="pre">service</span></code> script supports several operations.  Below is a list of them and their uses:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">start</span></code>/<code class="docutils literal"><span class="pre">stop</span></code>/<code class="docutils literal"><span class="pre">restart</span></code> Commands to start, stop and restart Galera Load Balancer.</li>
-<li><code class="docutils literal"><span class="pre">getinfo</span></code> Command provides the current routing information: the servers available, their weight and usage, the number of connections made to them.</li>
-<li><code class="docutils literal"><span class="pre">add</span></code>/<code class="docutils literal"><span class="pre">remove</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;</span></code> Add or remove the designated IP address from the routing table.</li>
-<li><code class="docutils literal"><span class="pre">getstats</span></code> Command provides performance statistics.</li>
-<li><code class="docutils literal"><span class="pre">drain</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;</span></code> Sets the designated server to drain.  That is, Galera Load Balancer does not allocate new connections to the server, but also does not kill existing connections.  Instead, it waits for the connections to this server to end gracefully.</li>
+<li><code class="docutils literal"><span class="pre">start</span></code> is used to start <code class="docutils literal"><span class="pre">glb</span></code>, the Galera Load Balancer.</li>
+<li><code class="docutils literal"><span class="pre">stop</span></code> will stop Galera Load Balancer.</li>
+<li><code class="docutils literal"><span class="pre">restart</span></code> tells <code class="docutils literal"><span class="pre">glb</span></code> to stop and restart the Galera Load Balancer.</li>
+<li><code class="docutils literal"><span class="pre">getinfo</span></code> is used as shown in the example above to retrieve the current routing information.</li>
+<li><code class="docutils literal"><span class="pre">getstats</span></code> will provide performance statistics related to the cluster.</li>
+<li><code class="docutils literal"><span class="pre">add</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;</span></code> can be used to add an IP address from the routing table.</li>
+<li><code class="docutils literal"><span class="pre">remove</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;</span></code> will remove the designated IP address from the routing table.</li>
+<li><code class="docutils literal"><span class="pre">drain</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;</span></code> will sets the designated server to drain. When doing this, Galera Load Balancer won&#8217;t send new connections to the given server, but it also won&#8217;t kill existing connections. Instead, it waits for the connections to the specified server to end gracefully.</li>
 </ul>
-<p>When adding an IP address to Galera Load Balancer at runtime, bear in mind that it must follow the convention: <code class="docutils literal"><span class="pre">IP</span> <span class="pre">Address:port:weight</span></code>.  When adding through a hostname, the convention is <code class="docutils literal"><span class="pre">Hostname:port:weight</span></code>.</p>
+<p>When adding an IP address to Galera Load Balancer at runtime, keep in mind that it must follow the convention, <code class="docutils literal"><span class="pre">IP</span> <span class="pre">Address:port:weight</span></code>.  A hostname may be used instead of an IP address.</p>
 </div>
 </div>
 

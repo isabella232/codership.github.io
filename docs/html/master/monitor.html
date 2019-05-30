@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Monitor &#8212; Galera Cluster Documentation</title>
+    <title>Cluster Monitoring &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="_static/cloud.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Monitoring Cluster Status" href="monitoringthecluster.html" />
+    <link rel="next" title="Using Status Variables" href="monitoringthecluster.html" />
     <link rel="prev" title="Using Jails" href="jails.html" />
 
 	
@@ -204,34 +204,26 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="monitor">
-<h1>Monitor<a class="headerlink" href="#monitor" title="Permalink to this headline">¶</a></h1>
-<p id="id1">There are three approaches to monitoring cluster activity and replication health: directly off the database client, using the notification script for Galera Cluster, or through a third-party monitoring application, such as Nagios.</p>
-<div class="toctree-wrapper compound">
+  <div class="section" id="cluster-monitoring">
+<h1>Cluster Monitoring<a class="headerlink" href="#cluster-monitoring" title="Permalink to this headline">¶</a></h1>
+<p id="monitor">Occasionally, you may want or need to check on the status of the cluster. For instance, you may want to check the state of nodes. You may want to check for network connectivity problems amongst nodes.</p>
+<p>There are three methods available in monitoring cluster activity and replication health: query status variables through the database client; use a notification script; or through a third-party monitoring application (e.g., Nagios).</p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="monitoringthecluster.html">Monitoring Cluster Status</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="monitoringthecluster.html#checking-cluster-integrity">Checking Cluster Integrity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="monitoringthecluster.html#checking-the-node-status">Checking the Node Status</a></li>
-<li class="toctree-l2"><a class="reference internal" href="monitoringthecluster.html#checking-the-replication-health">Checking the Replication Health</a></li>
-<li class="toctree-l2"><a class="reference internal" href="monitoringthecluster.html#detecting-slow-network-issues">Detecting Slow Network Issues</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="monitoringthecluster.html"><span class="doc">Using Status Variables</span></a></p>
+<p>In addition to the standard status variables in MySQL, Galera Cluster provides a series of its own status variables. These will allow you to check node and cluster states, as well as replication health through the database client.</p>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="log.html">Database Server Logs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="log.html#log-parameters">Log Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="log.html#additional-log-files">Additional Log Files</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="log.html"><span class="doc">Database Server Logs</span></a></p>
+<p>Queries entered through the database client will provide information on the current state of the cluster. However, to check its history for more systemic issues, you need to check the logs.  This section provides a guide to the Galera Cluster parameter used to configure database logging to ensure it records the information you need.</p>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="notificationcmd.html">Notification Command</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notificationcmd.html#notification-command-parameters">Notification Command Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notificationcmd.html#example-notification-script">Example Notification Script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notificationcmd.html#enabling-the-notification-command">Enabling the Notification Command</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="notificationcmd.html"><span class="doc">Notification Command</span></a></p>
+<p>Although checking logs and status variables may give you the information you need while logged into a node, getting information from them is a manual process.  Using the notification command, you can set the node to call a script in response to changes in cluster membership or node status.  You can use this to raise alerts and adjust load balances. You can use it in a script for any situation in which you need the infrastructure to respond to changes in the cluster.</p>
 </li>
 </ul>
-</div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">You can also use Nagios for monitoring Galera Cluster.  For more information, see <a class="reference external" href="http://www.fromdual.com/galera-cluster-nagios-plugin-en">Galera Cluster Nagios Plugin</a>.</p>
+<p class="last">You can also use Nagios for monitoring Galera Cluster.  For more information, see <a class="reference external" href="http://www.fromdual.com/galera-cluster-nagios-plugin-en">Galera Cluster Nagios Plugin</a></p>
+</div>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -252,7 +244,7 @@
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="monitoringthecluster.html"
-                          title="Next page">&rarr; Monitoring Cluster Status</a></p>
+                          title="Next page">&rarr; Using Status Variables</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -303,7 +295,7 @@
 		<ul class="nav-link">
 			 
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/monitor.rst.rst" title="Edit 'Monitor' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/monitor.rst.rst" title="Edit 'Cluster Monitoring' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -315,7 +307,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="monitoringthecluster.html" title="Monitoring Cluster Status"
+          <a href="monitoringthecluster.html" title="Using Status Variables"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
           <a href="jails.html" title="Using Jails"
@@ -332,7 +324,7 @@
 			
 
 			
-				<li><a href="monitoringthecluster.html" title="Monitoring Cluster Status">Next &gt;</a></li>
+				<li><a href="monitoringthecluster.html" title="Using Status Variables">Next &gt;</a></li>
 			
 
 		</ul>

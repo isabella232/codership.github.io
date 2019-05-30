@@ -207,9 +207,9 @@
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
 <dl class="glossary docutils">
 <dt id="term-galera-arbitrator">Galera Arbitrator</dt>
-<dd><p class="first">External process that functions as an additional node in certain cluster operations, such as quorum calculations and generating consistent application state snapshots.</p>
-<p>Consider a situation where you cluster becomes partitioned due to a loss of network connectivity that results in two components of equal size.  Each component initiates quorum calculations to determine which should remain the <a class="reference internal" href="#term-primary-component"><span class="xref std std-term">Primary Component</span></a> and which should become a nonoperational component.  If the components are of equal size, it risks a split-brain condition.  Galera Arbitrator provides an addition vote in the quorum calculation, so that one component registers as larger than the other.  The larger component then remains the Primary Component.</p>
-<p>Unlike the main <code class="docutils literal"><span class="pre">mysqld</span></code> process, <code class="docutils literal"><span class="pre">garbd</span></code> does not generate replication events of its own and does not store replication data, but it does acknowledge all replication events.  Furthermore, you can route replication through Galera Arbitrator, such as when generating a consistent application state snapshot for backups.</p>
+<dd><p class="first">An external process that functions as an additional node in certain cluster operations, such as quorum calculations and generating consistent application state snapshots.</p>
+<p>For example, consider a situation where your cluster becomes partitioned due to a loss of network connectivity that results in two components of equal size.  Each component initiates quorum calculations to determine which should remain the <a class="reference internal" href="#term-primary-component"><span class="xref std std-term">Primary Component</span></a> and which should become a non-operational component.  If the components are of equal size, it risks a split-brain condition.  Galera Arbitrator provides an addition vote in the quorum calculation, so that one component registers as larger than the other.  The larger component then remains the Primary Component.</p>
+<p>Unlike the main <code class="docutils literal"><span class="pre">mysqld</span></code> process, <code class="docutils literal"><span class="pre">garbd</span></code> doesn&#8217;t generate replication events of its own and doesn&#8217;t store replication data. It does, however, acknowledge all replication events.  Furthermore, you can route replication through Galera Arbitrator, such as when generating a consistent application state snapshot for backups.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="arbitrator.html"><span class="doc">Galera Arbitrator</span></a> and <a class="reference internal" href="backingupthecluster.html"><span class="doc">Backing Up Cluster Data</span></a>.</p>
@@ -219,33 +219,21 @@
 <dd><p class="first">Galera Replication Plugin is a general purpose replication plugin for any transactional system. It can be used to create a synchronous multi-master replication solution to achieve high availability and scale-out.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="architecture.html#id3"><span class="std std-ref">Galera Replication Plugin</span></a> for more details.</p>
+<p class="last"><strong>See Also</strong>: See <a class="reference internal" href="architecture.html#id3"><span class="std std-ref">Galera Replication Plugin</span></a> for more details.</p>
 </div>
 </dd>
 <dt id="term-gcache">GCache</dt>
 <dd>See <a class="reference internal" href="#term-write-set-cache"><span class="xref std std-term">Write-set Cache</span></a>.</dd>
 <dt id="term-global-transaction-id">Global Transaction ID</dt>
-<dd><p class="first">To keep the state identical on all nodes, the <a class="reference internal" href="#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> uses global transaction IDs (GTID), which are used to both:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Identify the state change</li>
-<li>Identify the state itself by the ID of the last state change</li>
-</ul>
-</div></blockquote>
-<p>The GTID consists of:</p>
-<blockquote>
-<div><ul class="simple">
-<li>A state UUID, which uniquely identifies the state and the sequence of changes it undergoes</li>
-<li>An ordinal sequence number (seqno, a 64-bit signed integer) to denote the position of the change in the sequence</li>
-</ul>
-</div></blockquote>
+<dd><p class="first">To keep the state identical on all nodes, the <a class="reference internal" href="#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> uses global transaction IDs (GTID), which are used to identify the state change and to identify the state itself by the ID of the last state change</p>
+<p>The GTID consists of a state UUID, which uniquely identifies the state and the sequence of changes it undergoes, and an ordinal sequence number (seqno, a 64-bit signed integer) to denote the position of the change in the sequence.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information on Global Transaction ID&#8217;s, see <a class="reference internal" href="architecture.html#id2"><span class="std std-ref">wsrep API</span></a>.</p>
 </div>
 </dd>
 <dt id="term-incremental-state-transfer">Incremental State Transfer</dt>
-<dd><p class="first">In an Incremental State Transfer (IST) a node only receives the missing write-sets and catch up with the group by replaying them. See also the definition for State Snapshot Transfer (SST).</p>
+<dd><p class="first">In an Incremental State Transfer (IST) a node only receives the missing write-sets and catches up with the group by replaying them. See also the definition for State Snapshot Transfer (SST).</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information on IST&#8217;s, see <a class="reference internal" href="statetransfer.html#ist"><span class="std std-ref">Incremental State Transfer (IST)</span></a>.</p>
@@ -254,28 +242,28 @@
 <dt id="term-ist">IST</dt>
 <dd>See <a class="reference internal" href="#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</dd>
 <dt id="term-logical-state-transfer-method">Logical State Transfer Method</dt>
-<dd><p class="first">Type of back-end state transfer method that operates through the database server.  For example: <code class="docutils literal"><span class="pre">mysqldump</span></code>.</p>
+<dd><p class="first">This is a type of back-end state transfer method that operates through the database server (e.g., <code class="docutils literal"><span class="pre">mysqldump</span></code>).</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: For more information see, <a class="reference internal" href="sst.html#sst-logical"><span class="std std-ref">Logical State Snapshot</span></a>.</p>
+<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="sst.html#sst-logical"><span class="std std-ref">Logical State Snapshot</span></a>.</p>
 </div>
 </dd>
 <dt id="term-physical-state-transfer-method">Physical State Transfer Method</dt>
-<dd><p class="first">Type of back-end state transfer method that operates on the physical media in the datadir.  For example: <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code>.</p>
+<dd><p class="first">This is another type of back-end state transfer method, but it operates on the physical media in the datadir (e.g., <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code>).</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: For more information see, <a class="reference internal" href="sst.html#sst-physical"><span class="std std-ref">Physical State Snapshot</span></a>.</p>
+<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="sst.html#sst-physical"><span class="std std-ref">Physical State Snapshot</span></a>.</p>
 </div>
 </dd>
 <dt id="term-primary-component">Primary Component</dt>
-<dd><p class="first">In addition to single node failures, the cluster may be split into several components due to network failure. In such a situation, only one of the components can continue to modify the database state to avoid history divergence. This component is called the Primary Component (PC).</p>
+<dd><p class="first">In addition to single-node failures, the cluster may be split into several components due to network failure. In such a situation, only one of the components can continue to modify the database state to avoid history divergence. This component is called the Primary Component (PC).</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: For more information on the Primary Component, see <a class="reference internal" href="weightedquorum.html"><span class="doc">Weighted Quorum</span></a> for more details.</p>
+<p class="last"><strong>See Also</strong>: For more information on the Primary Component, see <a class="reference internal" href="weightedquorum.html"><span class="doc">Weighted Quorum</span></a>.</p>
 </div>
 </dd>
 <dt id="term-rolling-schema-upgrade">Rolling Schema Upgrade</dt>
-<dd><p class="first">The rolling schema upgrade is a <abbr title="Data Definition Language">DDL</abbr> processing method, where the <abbr title="Data Definition Language">DDL</abbr> will only be processed locally at the node. The node is desynchronized from the cluster for the duration of the <abbr title="Data Definition Language">DDL</abbr> processing in a way that it does not block the rest of the nodes.  When the <abbr title="Data Definition Language">DDL</abbr> processing is complete, the node applies the delayed replication events and synchronizes back with the cluster.</p>
+<dd><p class="first">The rolling schema upgrade is a <abbr title="Data Definition Language">DDL</abbr> processing method in which the <abbr title="Data Definition Language">DDL</abbr> will only be processed locally on the node. The node is desynchronized from the cluster for the duration of the <abbr title="Data Definition Language">DDL</abbr> processing in a way that it doesn&#8217;t block the other nodes.  When the <abbr title="Data Definition Language">DDL</abbr> processing is complete, the node applies the delayed replication events and synchronizes with the cluster.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="schemaupgrades.html#rsu"><span class="std std-ref">Rolling Schema Upgrade</span></a>.</p>
@@ -285,23 +273,31 @@
 <dd>See <a class="reference internal" href="#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a>.</dd>
 <dt id="term-seqno">seqno</dt>
 <dd>See <a class="reference internal" href="#term-sequence-number"><span class="xref std std-term">Sequence Number</span></a>.</dd>
-<dt id="term-sequence-number">sequence number</dt>
-<dd>64-bit signed integer that the node uses to denote the position of a given transaction in the sequence.  The seqno is second component to the <a class="reference internal" href="#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>.</dd>
+<dt id="term-sequence-number">Sequence Number</dt>
+<dd>This is a 64-bit signed integer that the node uses to denote the position of a given transaction in the sequence.  The seqno is second component to the <a class="reference internal" href="#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>.</dd>
 <dt id="term-sst">SST</dt>
 <dd>See <a class="reference internal" href="#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</dd>
 <dt id="term-state-snapshot-transfer">State Snapshot Transfer</dt>
-<dd><p class="first">State Snapshot Transfer refers to a full data copy from one cluster node (donor) to the joining node (joiner). See also the definition for Incremental State Transfer (IST).</p>
+<dd><p class="first">State Snapshot Transfer refers to a full data copy from one cluster node (i.e., a donor) to the joining node (i.e., a joiner). See also the definition for Incremental State Transfer (IST).</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="statetransfer.html#sst"><span class="std std-ref">State Snapshot Transfer (SST)</span></a>.</p>
 </div>
 </dd>
 <dt id="term-state-uuid">State UUID</dt>
-<dd>Unique identifier for the state of a node and the sequence of changes it undergoes.  It is the first component of the <a class="reference internal" href="#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>.</dd>
+<dd>Unique identifier for the state of a node and the sequence of changes it undergoes.  It&#8217;s the first component of the <a class="reference internal" href="#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>.</dd>
+<dt id="term-streaming-replication">Streaming Replication</dt>
+<dd><p class="first">This provides an alternative replication method for handling large or long-running write transactions.  It&#8217;s a new feature in version 4.0 of Galera Cluster.  In older versions, the feature is unsupported.</p>
+<p>Under normal operation, the node performs all replication and certification operations when the transaction commits. With large transactions this can result in conflicts if smaller transactions are committed first.  With Streaming Replication, the node breaks the transaction into fragments, then certifies and replicates them to all nodes while the transaction is still in progress.  Once certified, a fragment can no longer be aborted by a conflicting transaction.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more information see <a class="reference internal" href="streamingreplication.html"><span class="doc">Streaming Replication</span></a> and <a class="reference internal" href="usingsr.html"><span class="doc">Using Streaming Replication</span></a>.</p>
+</div>
+</dd>
 <dt id="term-toi">TOI</dt>
 <dd>See <a class="reference internal" href="#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a>.</dd>
 <dt id="term-total-order-isolation">Total Order Isolation</dt>
-<dd><p class="first">By default, <abbr title="Data Definition Language">DDL</abbr> statements are processed by using the Total Order Isolation (TOI) method. In TOI, the query is replicated to the nodes in a statement form before executing on master. The query waits for all preceding transactions to commit and then gets executed in isolation on all nodes simultaneously.</p>
+<dd><p class="first">By default, <abbr title="Data Definition Language">DDL</abbr> statements are processed by using the Total Order Isolation (TOI) method. In TOI, the query is replicated to the nodes in a statement form before executing on the master. The query waits for all preceding transactions to commit and then gets executed in isolation on all nodes, simultaneously.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="schemaupgrades.html#toi"><span class="std std-ref">Total Order Isolation</span></a>.</p>
@@ -310,7 +306,7 @@
 <dt id="term-write-set">write-set</dt>
 <dd>Transaction commits the node sends to and receives from the cluster.</dd>
 <dt id="term-write-set-cache">Write-set Cache</dt>
-<dd><p class="first">Galera stores write-sets in a special cache called Write-set Cache (GCache).  In short, GCache is a memory allocator for write-sets and its primary purpose is to minimize the write set footprint on the RAM.</p>
+<dd><p class="first">Galera stores write-sets in a special cache called, Write-set Cache (GCache). GCache is a memory allocator for write-sets. Its primary purpose is to minimize the write set footprint on the RAM.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="statetransfer.html#gcache"><span class="std std-ref">Write-set Cache (GCache)</span></a>.</p>

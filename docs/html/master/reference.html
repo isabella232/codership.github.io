@@ -206,28 +206,52 @@
             
   <div class="section" id="reference">
 <h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
+<p id="id1">In the event that you need more information about particular variables or parameters or status variable or would like a clearer explanation about various terms used in the documentation, these chapters provide general reference material to Galera Cluster configuration and use.</p>
+<p class="rubric">Variable Reference</p>
+<p id="ref-vars">Defining persistent configurations in Galera Cluster is done through the underlying database server, using the <code class="docutils literal"><span class="pre">[mysqld]</span></code> unit in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.  These chapters provide reference guides to the base replication status and configuration variables as well as the specific wsrep Provider options implemented through the Galera Replication Plugin.</p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="mysqlwsrepoptions.html">MySQL wsrep Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="galeraparameters.html">Galera Parameters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="galeraparameters.html#setting-galera-parameters-in-mysql">Setting Galera Parameters in MySQL</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="mysqlwsrepoptions.html"><span class="doc">MySQL wsrep Options</span></a></p>
+<p>In addition to the standard configuration variables available through the database server, Galera Cluster implements several that are unique and specific to fine-tuning database replication.  This chapter provides a reference guide to these new configuration variables in Galera Cluster</p>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="galerastatusvariables.html">Galera Status Variables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="xtrabackupoptions.html">XtraBackup Parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glbparameters.html">Galera Load Balancer Parameters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="glbparameters.html#configuration-parameters">Configuration Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="glbparameters.html#configuration-options">Configuration Options</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="mysqlwsrepfunctions.html"><span class="doc">MySQL wsrep Functions</span></a></p>
+<p>There are a few Galera specific functions. This page lists and explains them, as well as gives examples of their use.</p>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="versioninginformation.html">Versioning Information</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="versioninginformation.html#release-numbering-schemes">Release Numbering Schemes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="versioninginformation.html#third-party-implementations-of-galera-cluster">Third-party Implementations of Galera Cluster</a></li>
-</ul>
+<li><p class="first"><a class="reference internal" href="galeraparameters.html"><span class="doc">Galera Parameters</span></a></p>
+<p>The Galera Replication Plugin, which acts as the wsrep Provider, includes a number of parameters specific to its operation.  This chapter provides a reference guide to the various wsrep Provider options available.</p>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="legalnotice.html">Legal Notice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li><p class="first"><a class="reference internal" href="galerastatusvariables.html"><span class="doc">Galera Status Variables</span></a></p>
+<p>In addition to the standard status variables available through the database server, Galera Cluster also implements several that you can use in determining the status and health of the node and the cluster.  This chapter provides a reference guide to these new status variables in Galera Cluster.</p>
+</li>
 </ul>
+<p class="rubric">Utility Reference</p>
+<p id="ref-utils">In some cases your configuration or implementation may require that you work with external utilities in your deployment of Galera Cluster.  These chapters provide reference guides for two such utilities: XtraBackup and Galera Load Balancer.</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="xtrabackupoptions.html"><span class="doc">XtraBackup Parameters</span></a></p>
+<p>When you manage State Snapshot Transfers using Percona XtraBackup, it allows you to set various parameters on the state transfer script the node uses from the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.  This chapter provides a reference guide to options available to XtraBackup.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="glbparameters.html"><span class="doc">Galera Load Balancer Parameters</span></a></p>
+<p>In high availability situations or similar cases where nodes are subject to high traffic situations, you may find it beneficial to set up a load balancer between your application servers and the cluster.  This chapter provides a reference guide to the Codership implementation: the Galera Load Balancer.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="system-tables.html"><span class="doc">Galera System Tables</span></a></p>
+<p>This page provides information on the Galera specific system tables.  These were added as of version 4 of Galera.</p>
+</li>
+</ul>
+<p class="rubric">Miscellaneous References</p>
+<ul id="ref-misc">
+<li><p class="first"><a class="reference internal" href="versioninginformation.html"><span class="doc">Versioning Information</span></a></p>
+<p>While the documentation follows a convention of 3.x in speaking of release versions for Galera Cluster, in practice the numbering system is somewhat more complicated: covering releases of the underlying database server, the wsrep Provider and the wsrep API.  This chapter provides a more thorough explanation of versioning with Galera Cluster.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="legalnotice.html"><span class="doc">Legal Notice</span></a></p>
+<p>This page provides information on the documentation copyright.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="glossary.html"><span class="doc">Glossary</span></a></p>
+<p>In the event that you would like clarification on particular topics, this chapter provides reference information on core concepts in Galera Cluster.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p>
+<p>In the event that you would like to check these concepts against related terms to find more information in the docs, this chapter provides a general index of the site.</p>
+</li>
+</ul>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 

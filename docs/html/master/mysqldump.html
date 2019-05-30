@@ -31,7 +31,7 @@
     <script type="text/javascript" src="_static/cloud.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Recovering the Primary Component" href="pcrecovery.html" />
+    <link rel="next" title="Scriptable State Snapshot Transfers" href="scriptablesst.html" />
     <link rel="prev" title="State Snapshot Transfers" href="sst.html" />
 
 	
@@ -206,33 +206,29 @@
             
   <div class="section" id="enabling-mysqldump">
 <h1>Enabling <code class="docutils literal"><span class="pre">mysqldump</span></code><a class="headerlink" href="#enabling-mysqldump" title="Permalink to this headline">¶</a></h1>
-<p id="id1">The <a class="reference internal" href="glossary.html#term-logical-state-transfer-method"><span class="xref std std-term">Logical State Transfer Method</span></a> <code class="docutils literal"><span class="pre">mysqldump</span></code> works by interfacing through the database server rather than the physical data.  As such, they require some additional configurations beyond setting the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter.</p>
+<p id="id1">The <a class="reference internal" href="glossary.html#term-logical-state-transfer-method"><span class="xref std std-term">Logical State Transfer Method</span></a> <code class="docutils literal"><span class="pre">mysqldump</span></code> works by interfacing through the database server rather than the physical data.  As such, it requires some additional configuration, besides setting the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter.</p>
 <div class="section" id="configuring-sst-privileges">
 <h2>Configuring SST Privileges<a class="headerlink" href="#configuring-sst-privileges" title="Permalink to this headline">¶</a></h2>
 <p id="sst-privileges">In order for <code class="docutils literal"><span class="pre">mysqldump</span></code> to interface with the database server, it requires root connections for both the donor and joiner nodes.  You can enable this through the <a class="reference internal" href="mysqlwsrepoptions.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a> parameter.</p>
-<p>Using your preferred text editor, open <code class="docutils literal"><span class="pre">wsrep.cnf</span></code> file.  You can find it in <code class="docutils literal"><span class="pre">/etc/mysql/conf.d/</span></code>), and enter the relevant authentication information.</p>
+<p>Using a text editor, open the <code class="docutils literal"><span class="pre">wsrep.cnf</span></code> file&#8211;it should be in the <code class="docutils literal"><span class="pre">/etc/mysql/conf.d/</span></code> directory.  Add a line like the following to that file:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># wsrep SST Authentication</span>
 <span class="na">wsrep_sst_auth</span> <span class="o">=</span> <span class="s">wsrep_sst_username:password</span>
 </pre></div>
 </div>
-<p>This provides authentication information that the node requires to establish connections. Use the same values for every node in your cluster.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: Use your own authentication parameters in place of <code class="docutils literal"><span class="pre">wsrep_sst_user</span></code> and <code class="docutils literal"><span class="pre">password</span></code>.</p>
-</div>
+<p>You would use your own authentication parameters in place of <code class="docutils literal"><span class="pre">wsrep_sst_user</span></code> and <code class="docutils literal"><span class="pre">password</span></code>. This line will provide authentication information that the node will need to establish connections. Use the same values for every node in the cluster.</p>
 </div>
 <div class="section" id="granting-sst-privileges">
 <h2>Granting SST Privileges<a class="headerlink" href="#granting-sst-privileges" title="Permalink to this headline">¶</a></h2>
-<p id="sst-authorization">When the database server start, it reads from the above file the authentication information it needs to access another database server.  In order for the node to accept connections from the cluster, you must also create and configure the State Snapshot Transfer user through the database client.</p>
-<p>In order to do this, you need to start the database server.  If you have not used this node on the cluster before, start it with replication disabled.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
+<p id="sst-authorization">When the database server starts, it will read from the <code class="docutils literal"><span class="pre">wsrep.cnf</span></code> file to get the authentication information it needs to access another database server.  In order for the node to accept connections from the cluster, you must also create and configure the State Snapshot Transfer user through the database client.</p>
+<p>In order to do this, you need to start the database server.  If you haven&#8217;t used this node on the cluster before, start it with replication disabled.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, execute the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql start --wsrep-on<span class="o">=</span>off
 </pre></div>
 </div>
-<p>For servers that use <code class="docutils literal"><span class="pre">systemd</span></code>, instead run this command:</p>
+<p>For servers that use <code class="docutils literal"><span class="pre">systemd</span></code>, instead execute this from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl start mysql --wsrep-on<span class="o">=</span>OFF
 </pre></div>
 </div>
-<p>When the database server is running, log into the database client and run the <code class="docutils literal"><span class="pre">GRANT</span> <span class="pre">ALL</span></code> command for the IP address of each node in your cluster.</p>
+<p>When the database server is running, log into the database using a client and execute the <code class="docutils literal"><span class="pre">GRANT</span> <span class="pre">ALL</span></code> statement for the IP address of each node in the cluster.  You would do this like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;wsrep_sst_user&#39;</span><span class="o">@</span><span class="s1">&#39;node1_IP_address&#39;</span>
      <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;password&#39;</span><span class="p">;</span>
 <span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;wsrep_sst_user&#39;</span><span class="o">@</span><span class="s1">&#39;node2_IP_address&#39;</span>
@@ -241,12 +237,12 @@
      <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;password&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>These commands grant each node in your cluster access to the database server on this node.  You need to run these commands on every other cluster node to allow <code class="docutils literal"><span class="pre">mysqldump</span></code> in state transfers between them.</p>
-<p>In the event that you have not yet created your cluster, you can stop the database server while you configure the other nodes.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
+<p>You would, of course, modify the text above to use your user names, IP addresses, and passwords. These SQL statements will grant each node in the cluster access to the database server on this node.  You need to run these SQL statements on each node to allow <code class="docutils literal"><span class="pre">mysqldump</span></code> in state transfers among them.</p>
+<p>If you have not yet created the cluster, you can stop the database server while you configure the other nodes.  To stop MySQL on servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the execute the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql stop
 </pre></div>
 </div>
-<p>For servers that use <code class="docutils literal"><span class="pre">systemd</span></code>, instead run this command:</p>
+<p>For servers that use <code class="docutils literal"><span class="pre">systemd</span></code>, you would execute the following from the command-line to shutdown MySQL:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl stop mysql
 </pre></div>
 </div>
@@ -279,8 +275,8 @@
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="pcrecovery.html"
-                          title="Next page">&rarr; Recovering the Primary Component</a></p>
+    <p class="topless"><a href="scriptablesst.html"
+                          title="Next page">&rarr; Scriptable State Snapshot Transfers</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -343,14 +339,14 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="pcrecovery.html" title="Recovering the Primary Component"
+          <a href="scriptablesst.html" title="Scriptable State Snapshot Transfers"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
           <a href="sst.html" title="State Snapshot Transfers"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="userguide.html" >Configuration</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="userguide.html" >Administration</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="sst.html" accesskey="U">State Snapshot Transfers</a> &#187;</li> 
       </ul>
     </div>
@@ -362,7 +358,7 @@
 			
 
 			
-				<li><a href="pcrecovery.html" title="Recovering the Primary Component">Next &gt;</a></li>
+				<li><a href="scriptablesst.html" title="Scriptable State Snapshot Transfers">Next &gt;</a></li>
 			
 
 		</ul>

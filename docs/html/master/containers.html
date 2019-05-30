@@ -206,22 +206,23 @@
             
   <div class="section" id="container-deployments">
 <h1>Container Deployments<a class="headerlink" href="#container-deployments" title="Permalink to this headline">¶</a></h1>
-<p id="id1">In the standard deployment methods of Galera Cluster, the node runs on a server in the same manner as would an individual standalone instance of MySQL.  In container deployments, the node runs in a containerized virtual environment on the server.  You may find these methods useful in portable deployments across numerous machines, testing applications that depend on Galera Cluster, process isolation for security, or scripting the installation and configuration process.</p>
-<p>For the most part, the configuration for a node running in a containerized environment remains the same as well the node runs in the standard manner.  But, there are some parameters that draw their defaults from the base system configurations.  These you need to set manually, as the jail is unable to access the host file system.</p>
+<p id="id1">In the standard deployment methods for Galera Cluster, a node runs on a server in the same manner as would an individual stand-alone instance of MySQL or MariaDB.  In container deployments, a node runs in a containerized virtual environment on the server.</p>
+<p>You may find these methods useful in portable deployments across numerous machines, testing applications that depend on Galera Cluster, process isolation for security, or scripting the installation and configuration process.</p>
+<p>The configuration for a node running in a containerized environment remains primarily the same as a node running in the standard manner.  However, there are some parameters that draw their defaults from the base system configurations.  You will need to set these, manually. Otherwise, the jail will be unable to access the host file system.</p>
 <ul class="simple">
-<li><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a> The node determines the default address from the IP address on the first network interface. Jails cannot see the network interfaces on the host system. You need to set this parameter to ensure that the cluster is given the correct IP address for the node.</li>
-<li><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> The node determines the default name from the system hostname. Jails have their own hostnames, distinct from that of the host system.</li>
+<li><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a>: A node determines the default address from the IP address on the first network interface. Jails cannot see the network interfaces on the host system. You need to set this parameter to ensure that the cluster is given the correct IP address for the node.</li>
+<li><a class="reference internal" href="mysqlwsrepoptions.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a>: The node determines the default name from the system hostname. Jails have their own hostnames, distinct from that of the host system.</li>
 </ul>
 <p>Bear in mind that the configuration file must be placed within the container <code class="docutils literal"><span class="pre">/etc</span></code> directory, not that of the host system.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Using Docker</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#configuring-the-container">Configuring the Container</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#configuring-a-container">Configuring a Container</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="docker.html#configuration-file">Configuration File</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#building-the-container-image">Building the Container Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="docker.html#deploying-the-container">Deploying the Container</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#building-a-container-image">Building a Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html#deploying-a-container">Deploying a Container</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="docker.html#firewall-settings">Firewall Settings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="docker.html#persistent-data">Persistent Data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="docker.html#database-client">Database Client</a></li>
