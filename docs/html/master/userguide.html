@@ -223,7 +223,7 @@
 <li><p class="first"><a class="reference internal" href="system-tables.html"><span class="doc">Galera System Tables</span></a></p>
 <p>When you install Galera Cluster, it creates a set of system tables in the <code class="docutils literal"><span class="pre">mysql</span></code> database, which it uses to store configuration information.  Similar to how the underlying database server uses the <code class="docutils literal"><span class="pre">performance_schema</span></code> and <code class="docutils literal"><span class="pre">information_schema</span></code>, Galera Cluster uses these tables to record information relevant to replication.  This section provides a guide to what you&#8217;ll find in these tables and how you might query them for useful information about the status of the node and the cluster.</p>
 </li>
-<li><p class="first"><a class="reference internal" href="schemaupgrades.html"><span class="doc">Schema Upgrades</span></a></p>
+<li><p class="first"><span class="xref doc">schemaupgrades</span></p>
 <p>Statements that update the database schema, (that is, DDL statements), are non-transactional and as such won&#8217;t replicate to the cluster through write-sets.  This chapter covers different methods for online schema upgrades and how to implement them in your deployment.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera Cluster</span></a></p>

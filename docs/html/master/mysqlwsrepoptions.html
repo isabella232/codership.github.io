@@ -572,9 +572,9 @@
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_causal_reads&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: This feature has been <strong>deprecated</strong>.  It has been replaced by <a class="reference internal" href="#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This feature has been <strong>deprecated</strong>.  It has been replaced by <a class="reference internal" href="#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a>.</p>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">wsrep_certification_rules</span></code></p>
 <span class="target" id="wsrep-certification-rules"></span><p id="index-4">Certification rules to use in the cluster.</p>
@@ -725,9 +725,9 @@
 </pre></div>
 </div>
 <p>Using the string <code class="docutils literal"><span class="pre">gcomm://</span></code> without any address will cause the node to startup alone, thus initializing a new cluster&#8211;that the other nodes can join to.  Using <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> is the newer, preferred way.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: Never use an empty <code class="docutils literal"><span class="pre">gcomm://</span></code> string in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file. If a node restarts, that will cause the node not to rejoin the cluster of which it was a member. Instead, it will initialize a new one-node cluster and cause a split brain. To bootstrap a cluster, you should only pass the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> string at the command-line&#8211;instead of using <code class="docutils literal"><span class="pre">--wsrep-cluster-address=&quot;gcomm://&quot;</span></code>. For more information, see <a class="reference internal" href="startingcluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Never use an empty <code class="docutils literal"><span class="pre">gcomm://</span></code> string in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file. If a node restarts, that will cause the node not to rejoin the cluster of which it was a member. Instead, it will initialize a new one-node cluster and cause a split brain. To bootstrap a cluster, you should only pass the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> string at the command-line&#8211;instead of using <code class="docutils literal"><span class="pre">--wsrep-cluster-address=&quot;gcomm://&quot;</span></code>. For more information, see <a class="reference internal" href="startingcluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
 </div>
 <p>You can execute the following SQL statement to see how this variable is set:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_address&#39;</span><span class="p">;</span>
@@ -960,9 +960,9 @@
 </tbody>
 </table>
 <p>Under normal operation, error events are logged to an error log file for the database server.  By default, the name of this file is the server hostname with the <code class="docutils literal"><span class="pre">.err</span></code> extension.  You can define a custom path using the <a class="reference external" href="https://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html#sysvar_log_error">log_error</a> parameter. When you enable <a class="reference internal" href="#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a>, the database server logs additional events surrounding these errors to help in identifying and correcting problems.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: In addition to useful debugging information, this parameter also causes the database server to print authentication information (i.e., passwords) to the error logs.  Don&#8217;t enable it in production environments.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">In addition to useful debugging information, this parameter also causes the database server to print authentication information (i.e., passwords) to the error logs.  Don&#8217;t enable it in production environments.</p>
 </div>
 <p>You can execute the following <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">VARIABLES</span></code> statement with a <code class="docutils literal"><span class="pre">LIKE</span></code> operator to see if this variable is enabled:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_debug&#39;</span><span class="p">;</span>
@@ -1557,9 +1557,9 @@
 </tbody>
 </table>
 <p>Whenever the node registers changes in cluster membership or its own state, this parameter allows you to send information about that change to an external script defined by the value.  You can use this to reconfigure load balancers, raise alerts and so on, in response to node and cluster activity.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: The node will block and wait until the script completes and returns before it can proceed. If the script performs any potentially blocking or long-running operations, such as network communication, you may wish initiate such operations in the background and have the script return immediately.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The node will block and wait until the script completes and returns before it can proceed. If the script performs any potentially blocking or long-running operations, such as network communication, you may wish initiate such operations in the background and have the script return immediately.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1705,7 +1705,7 @@ The members are presented in the following syntax:</p>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: For more information on DDL statements and OSU methods, see <a class="reference internal" href="schemaupgrades.html"><span class="doc">Schema Upgrades</span></a>.</p>
+<p class="last"><strong>See Also</strong>: For more information on DDL statements and OSU methods, see <span class="xref doc">schemaupgrades</span>.</p>
 </div>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_OSU_method&#39;</span><span class="p">;</span>
 
@@ -2303,9 +2303,9 @@ The members are presented in the following syntax:</p>
 </table>
 <p>This parameter determines whether the node rejects blocking client sessions while it is sending state transfers using methods that block it as the donor.  In these situations, all queries return the error <code class="docutils literal"><span class="pre">ER_UNKNOWN_COM_ERROR</span></code>, that is they respond with <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code>, just like the joining node does.</p>
 <p>Given that a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> is scriptable, there is no way to tell whether the requested method is blocking or not.  You may also want to avoid querying the donor even with non-blocking state transfers.  As a result, when this parameter is enabled the donor node rejects queries regardless the state transfer and even if the initial request concerned a blocking-only transfer, (meaning, it also rejects during <code class="docutils literal"><span class="pre">xtrabackup</span></code>).</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: The <code class="docutils literal"><span class="pre">mysqldump</span></code> state transfer method does not work with this setting, given that <code class="docutils literal"><span class="pre">mysqldump</span></code> runs queries on the donor and there is no way to differentiate its session from the regular client session.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The <code class="docutils literal"><span class="pre">mysqldump</span></code> state transfer method does not work with this setting, given that <code class="docutils literal"><span class="pre">mysqldump</span></code> runs queries on the donor and there is no way to differentiate its session from the regular client session.</p>
 </div>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_sst_donor_rejects_queries&#39;</span><span class="p">;</span>
 

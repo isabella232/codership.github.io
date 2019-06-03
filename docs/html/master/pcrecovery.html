@@ -243,9 +243,9 @@ member: d3124bc8-1605-11e4-aa3d-ab44303c044a 1
 <div class="section" id="modifying-the-saved-primary-component-state">
 <h2>Modifying the Saved Primary Component State<a class="headerlink" href="#modifying-the-saved-primary-component-state" title="Permalink to this headline">¶</a></h2>
 <p id="modifying-pc-state">In the event that you find yourself in the unusual situation where you need to force certain nodes to join each other specifically, you can do so by manually changing the saved <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: Under normal circumstances, for safety reasons, you should entirely avoid editing or otherwise modifying the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file.  Doing so may lead to unexpected results.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Under normal circumstances, for safety reasons, you should entirely avoid editing or otherwise modifying the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file.  Doing so may lead to unexpected results.</p>
 </div>
 <p>When a node starts for the first time or after a graceful shutdown, it randomly generates and assigns to itself a UUID, which serves as its identifier to the rest of the cluster.  If the node finds a <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file in the data directory, it reads the <code class="docutils literal"><span class="pre">my_uuid</span></code> field to find the value it should use.</p>
 <p>By manually assigning arbitrary UUID values to the respective fields on each node, you force them to join each other, forming a new Primary Component, as they start.</p>
