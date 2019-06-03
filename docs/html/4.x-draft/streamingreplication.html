@@ -225,6 +225,7 @@
 <p id="longrun-write-trx">When using normal replication, you may occasionally encounter issues with long-running write transactions.</p>
 <p>The longer it takes for a node to commit a transaction, the greater the likelihood that the cluster will apply a smaller, conflicting transaction before the longer one can replicate to the cluster.  When this happens, the cluster aborts the long-running transaction.</p>
 <p>Using <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> on long-running transactions mitigates this situation.  Once the node replicates and certifies a fragment, it is no longer possible for other transactions to abort it.</p>
+<p>Certification keys are generated from record locks, therefore they don&#8217;t cover gap locks or next key locks. If the transaction takes a gap lock, it is possible that a transaction, which is executed on another node, will apply a write set which encounters the gap log and will abort the streaming transaction.</p>
 </div>
 <div class="section" id="large-data-write-transactions">
 <h3>Large Data Write Transactions<a class="headerlink" href="#large-data-write-transactions" title="Permalink to this headline">¶</a></h3>

@@ -207,9 +207,9 @@
   <div class="section" id="firewall-configuration-with-pf">
 <h1>Firewall Configuration with PF<a class="headerlink" href="#firewall-configuration-with-pf" title="Permalink to this headline">¶</a></h1>
 <p id="firewall-pf">FreeBSD provides packet filtering support at the kernel level.  Using PF you can set up, maintain and inspect the packet filtering rule sets.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: Different versions of FreeBSD use different versions of PF.  Examples here are from FreeBSD 10.1, which uses the same version of PF as OpenBSD 4.5.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Different versions of FreeBSD use different versions of PF.  Examples here are from FreeBSD 10.1, which uses the same version of PF as OpenBSD 4.5.</p>
 </div>
 <div class="section" id="enabling-pf">
 <h2>Enabling PF<a class="headerlink" href="#enabling-pf" title="Permalink to this headline">¶</a></h2>
@@ -258,9 +258,9 @@
 </pre></div>
 </div>
 <p>If there are no syntax errors, <code class="docutils literal"><span class="pre">pfctl</span></code> prints each of the rules it adds to the firewall, (expanded, as in the example above).  If there are syntax errors, it notes the line near where the errors occur.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: The IP addresses in the example are for demonstration purposes only.  Use the real values from your nodes and netmask in your PF configuration.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The IP addresses in the example are for demonstration purposes only.  Use the real values from your nodes and netmask in your PF configuration.</p>
 </div>
 </div>
 <div class="section" id="starting-pf">

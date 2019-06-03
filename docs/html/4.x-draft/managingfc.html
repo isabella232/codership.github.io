@@ -291,9 +291,9 @@
 </li>
 </ul>
 <p>Bear in mind that, while it is critical for multi-master operations that you use as small a slave queue as possible, the slave queue length is not so critical in master-slave setups.  Depending on your application and hardware, the node can apply even 1K of write-sets in a fraction of a second.  The slave queue length has no effect on master-slave failover.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p><strong>Warning</strong>: Cluster nodes process transactions asynchronously with regards to each other.  Nodes cannot anticipate in any way the amount of replication data.  Because of this, Flow Control is always reactive.  That is, it only comes into affect after the node exceeds certain limits.  It cannot prevent exceeding these limits or, when they are exceeded, it cannot make any guarantee as to the degree they are exceeded.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Cluster nodes process transactions asynchronously with regards to each other.  Nodes cannot anticipate in any way the amount of replication data.  Because of this, Flow Control is always reactive.  That is, it only comes into affect after the node exceeds certain limits.  It cannot prevent exceeding these limits or, when they are exceeded, it cannot make any guarantee as to the degree they are exceeded.</p>
 <p>Meaning, if you were to configure a node with:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">gcs.recv_q_hard_limit</span><span class="o">=</span><span class="s">100Mb</span>
 </pre></div>

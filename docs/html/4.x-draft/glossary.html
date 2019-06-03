@@ -245,14 +245,14 @@
 <dd><p class="first">This is a type of back-end state transfer method that operates through the database server (e.g., <code class="docutils literal"><span class="pre">mysqldump</span></code>).</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="sst.html#sst-logical"><span class="std std-ref">Logical State Snapshot</span></a>.</p>
+<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical State Snapshot</span></a>.</p>
 </div>
 </dd>
 <dt id="term-physical-state-transfer-method">Physical State Transfer Method</dt>
 <dd><p class="first">This is another type of back-end state transfer method, but it operates on the physical media in the datadir (e.g., <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code>).</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="sst.html#sst-physical"><span class="std std-ref">Physical State Snapshot</span></a>.</p>
+<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical State Snapshot</span></a>.</p>
 </div>
 </dd>
 <dt id="term-primary-component">Primary Component</dt>
@@ -266,7 +266,7 @@
 <dd><p class="first">The rolling schema upgrade is a <abbr title="Data Definition Language">DDL</abbr> processing method in which the <abbr title="Data Definition Language">DDL</abbr> will only be processed locally on the node. The node is desynchronized from the cluster for the duration of the <abbr title="Data Definition Language">DDL</abbr> processing in a way that it doesn&#8217;t block the other nodes.  When the <abbr title="Data Definition Language">DDL</abbr> processing is complete, the node applies the delayed replication events and synchronizes with the cluster.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="schemaupgrades.html#rsu"><span class="std std-ref">Rolling Schema Upgrade</span></a>.</p>
+<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="schema-upgrades.html#rsu"><span class="std std-ref">Rolling Schema Upgrade</span></a>.</p>
 </div>
 </dd>
 <dt id="term-rsu">RSU</dt>
@@ -300,7 +300,7 @@
 <dd><p class="first">By default, <abbr title="Data Definition Language">DDL</abbr> statements are processed by using the Total Order Isolation (TOI) method. In TOI, the query is replicated to the nodes in a statement form before executing on the master. The query waits for all preceding transactions to commit and then gets executed in isolation on all nodes, simultaneously.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="schemaupgrades.html#toi"><span class="std std-ref">Total Order Isolation</span></a>.</p>
+<p class="last"><strong>See Also</strong>: For more information, see <a class="reference internal" href="schema-upgrades.html#toi"><span class="std std-ref">Total Order Isolation</span></a>.</p>
 </div>
 </dd>
 <dt id="term-write-set">write-set</dt>

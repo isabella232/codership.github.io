@@ -209,59 +209,31 @@
 <p>At a high level, Galera Cluster consists of a database server—that is, MySQL, MariaDB or Percona XtraDB—that uses the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> to manage replication.  To be more specific, the MySQL replication plugin API has been extended to provide all the information and hooks required for true multi-master, synchronous replication.  This extended API is called the Write-Set Replication API, or wsrep API.</p>
 <p>Through the wsrep API, Galera Cluster provides certification-based replication.  A transaction for replication, the write-set not only contains the database rows to replicate, but also includes information on all of the locks that were held by the database during the transaction.  Each node then certifies the replicated write-set against other write-sets in the applier queue.  The write-set is then applied—if there are no conflicting locks.  At this point, the transaction is considered committed, after which each node continues to apply it to the tablespace.</p>
 <p>This approach is also called virtually synchronous replication, given that while it is logically synchronous, the actual writing and committing to the tablespace happens independently, and thus asynchronously on each node.</p>
-<p class="rubric">Benefits of Galera Cluster</p>
+<p class="test rubric">Benefits of Galera Cluster</p>
 <p id="galera-cluster-benefits">Galera Cluster provides a significant improvement in high-availability for the MySQL system.  The various ways to achieve high-availability have typically provided only some of the features available through Galera Cluster, making the choice of a high-availability solution an exercise in trade-offs.</p>
 <p>The following features are available through Galera Cluster:</p>
 <ul class="simple">
-<li><strong>True Multi-Master</strong></li>
+<li><strong>True Multi-Master</strong>
+You can read and write to any node at any time. Changes to data on one node will be replicated on all.</li>
+<li><strong>Synchronous Replication</strong>
+There is no slave lag, so no data is lost if a node crashes.</li>
+<li><strong>Tightly Coupled</strong>
+All nodes hold the same state. There is no diverged data between nodes.</li>
+<li><strong>Multi-Threaded Slave</strong>
+This allows for better performance and for any workload.</li>
+<li><strong>No Master-Slave Failover</strong>
+There is no need for master-slave operations or to use VIP.</li>
+<li><strong>Hot Standby</strong>
+There is no downtime related to failures or intentionally taking down a node for maintenance since there is no failover.</li>
+<li><strong>Automatic Node Provisioning</strong>
+There&#8217;s no need to backup manually the database and copy it to the new node.</li>
+<li><strong>Supports InnoDB.</strong>
+The InnoDB storage engine provides for transactional tables.</li>
+<li><strong>Transparent to Applications</strong>
+Generally, you won&#8217;t have to change an application that will interface with the database as a result of Galera. If you do, it will be minimal changes.</li>
+<li><strong>No Read and Write Splitting Needed</strong>
+There is no need to split read and write queries.</li>
 </ul>
-<blockquote>
-<div>You can read and write to any node at any time. Changes to data on one node will be replicated on all.</div></blockquote>
-<ul class="simple">
-<li><strong>Synchronous Replication</strong></li>
-</ul>
-<blockquote>
-<div>There is no slave lag, so no data is lost if a node crashes.</div></blockquote>
-<ul class="simple">
-<li><strong>Tightly Coupled</strong></li>
-</ul>
-<blockquote>
-<div>All nodes hold the same state. There is no diverged data between nodes.</div></blockquote>
-<ul class="simple">
-<li><strong>Multi-Threaded Slave</strong></li>
-</ul>
-<blockquote>
-<div>This allows for better performance and for any workload.</div></blockquote>
-<ul class="simple">
-<li><strong>No Master-Slave Failover</strong></li>
-</ul>
-<blockquote>
-<div>There is no need for master-slave operations or to use VIP.</div></blockquote>
-<ul class="simple">
-<li><strong>Hot Standby</strong></li>
-</ul>
-<blockquote>
-<div>There is no downtime related to failures or intentionally taking down a node for maintenance since there is no failover.</div></blockquote>
-<ul class="simple">
-<li><strong>Automatic Node Provisioning</strong></li>
-</ul>
-<blockquote>
-<div>There&#8217;s no need to backup manually the database and copy it to the new node.</div></blockquote>
-<ul class="simple">
-<li><strong>Supports InnoDB.</strong></li>
-</ul>
-<blockquote>
-<div>The InnoDB storage engine provides for transactional tables.</div></blockquote>
-<ul class="simple">
-<li><strong>Transparent to Applications</strong></li>
-</ul>
-<blockquote>
-<div>Generally, you won&#8217;t have to change an application that will interface with the database as a result of Galera. If you do, it will be minimal changes.</div></blockquote>
-<ul class="simple">
-<li><strong>No Read and Write Splitting Needed</strong></li>
-</ul>
-<blockquote>
-<div>There is no need to split read and write queries.</div></blockquote>
 <p>In summary, Galera Cluster is a high-availability solution that is both robust in terms of data integrity and provides high-performance with instant failovers.</p>
 <p class="rubric">Cloud Implementations with Galera Cluster</p>
 <p id="galera-cluster-cloud-implementations">An additional benefit of Galera Cluster is good cloud support.  Automatic node provisioning makes elastic scale-out and scale-in operations painless.  Galera Cluster has been proven to perform extremely well in the cloud, such as when using multiple small node instances, across multiple data centers—AWS zones, for example—or even over Wider Area Networks.</p>
@@ -366,8 +338,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="sst.html">State Snapshot Transfers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="sst.html#logical-state-snapshot">Logical State Snapshot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sst.html#physical-state-snapshot">Physical State Snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst.html#sst-methods">SST Methods</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="scriptablesst.html">Scriptable State Snapshot Transfers</a><ul>
@@ -381,11 +352,6 @@
 <li class="toctree-l3"><a class="reference internal" href="system-tables.html#cluster-view">Cluster View</a></li>
 <li class="toctree-l3"><a class="reference internal" href="system-tables.html#cluster-members">Cluster Members</a></li>
 <li class="toctree-l3"><a class="reference internal" href="system-tables.html#cluster-streaming-log">Cluster Streaming Log</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="schemaupgrades.html">Schema Upgrades</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="schemaupgrades.html#total-order-isolation">Total Order Isolation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="schemaupgrades.html#rolling-schema-upgrade">Rolling Schema Upgrade</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="upgrading.html">Upgrading Galera Cluster</a><ul>
@@ -501,40 +467,6 @@
 <li class="toctree-l2"><a class="reference internal" href="migration.html">Migrating to Galera Cluster</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="migration.html#upgrading-system-tables">Upgrading System Tables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="migration.html#migrating-from-mysql-to-galera-cluster">Migrating from MySQL to Galera Cluster</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Knowledge Base</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="error.html">Server Error Log</a></li>
-<li class="toctree-l2"><a class="reference internal" href="unknowncommand.html">Unknown Command Errors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="userchanges.html">User Changes not Replicating</a></li>
-<li class="toctree-l2"><a class="reference internal" href="clusterstallonalter.html">Cluster Stalls on <code class="docutils literal"><span class="pre">ALTER</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="detectingaslownode.html">Detecting a Slow Node</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="detectingaslownode.html#finding-slow-nodes">Finding Slow Nodes</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="dealingwithmultimasterconflicts.html">Dealing with Multi-Master Conflicts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="dealingwithmultimasterconflicts.html#diagnosing-multi-master-conflicts">Diagnosing Multi-Master Conflicts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dealingwithmultimasterconflicts.html#auto-committing-transactions">Auto-Committing Transactions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dealingwithmultimasterconflicts.html#multi-master-conflict-work-around">Multi-Master Conflict Work-Around</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="twonode.html">Two-Node Clusters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="performance.html#write-set-caching-during-state-transfers">Write-set Caching during State Transfers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="performance.html#setting-parallel-slave-threads">Setting Parallel Slave Threads</a></li>
-<li class="toctree-l3"><a class="reference internal" href="performance.html#dealing-with-large-transactions">Dealing with Large Transactions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="performance.html#group-commit">Group Commit</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="configurationtips.html">Configuration Tips</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="configurationtips.html#wan-replication">WAN Replication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configurationtips.html#multi-master-setup">Multi-Master Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configurationtips.html#single-master-setup">Single Master Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configurationtips.html#using-galera-cluster-with-selinux">Using Galera Cluster with SELinux</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configurationtips.html#using-synchronization-functions">Using Synchronization Functions</a></li>
 </ul>
 </li>
 </ul>

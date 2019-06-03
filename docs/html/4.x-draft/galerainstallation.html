@@ -264,9 +264,9 @@
 </pre></div>
 </div>
 <p>This causes packet filtering on the kernel to accept <abbr title="Transmission Control Protocol">TCP</abbr> connections between the given IP addresses.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: The IP addresses in the example are for demonstration purposes only.  Use the real values from your nodes and netmask in the <code class="docutils literal"><span class="pre">iptables</span></code> configuration for your cluster.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The IP addresses in the example are for demonstration purposes only.  Use the real values from your nodes and netmask in the <code class="docutils literal"><span class="pre">iptables</span></code> configuration for your cluster.</p>
 </div>
 <p>The updated packet filtering rules take effect immediately, but are not persistent.  When the server reboots, it reverts to default packet filtering rules, which do not include your updates.  To use these rules after rebooting, you need to save them as defaults.</p>
 <p>For systems that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>

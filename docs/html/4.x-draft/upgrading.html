@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Recovering the Primary Component" href="pcrecovery.html" />
-    <link rel="prev" title="Schema Upgrades" href="schemaupgrades.html" />
+    <link rel="prev" title="Galera System Tables" href="system-tables.html" />
 
 	
 
@@ -274,9 +274,9 @@
 <h2>Bulk Upgrade<a class="headerlink" href="#bulk-upgrade" title="Permalink to this headline">¶</a></h2>
 <p id="id2">When you want to avoid time-consuming state transfers and the slow process of upgrading each node, one at a time, use a bulk upgrade.</p>
 <p>In bulk upgrades, you take all of the nodes down in an idle cluster, perform the upgrades, then bring the cluster back online.  This allows you to upgrade your cluster quickly, but does mean a complete service outage for your cluster.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: Always use bulk upgrades when using a two-node cluster, as the rolling upgrade would result in a much longer service outage.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Always use bulk upgrades when using a two-node cluster, as the rolling upgrade would result in a much longer service outage.</p>
 </div>
 <p>The main advantage of bulk upgrade is that when you are working with huge databases, it is much faster and results in better availability than rolling upgrades.</p>
 <p>The main disadvantage is that it relies on the upgrade and restart being quick.  Shutting down InnoDB may take a few minutes as it flushes dirty pages.  If something goes wrong during the upgrade, there is little time to troubleshoot and fix the problem.</p>
@@ -382,8 +382,8 @@
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="schemaupgrades.html"
-                          title="Previous page">&larr; Schema Upgrades</a></p>
+    <p class="topless"><a href="system-tables.html"
+                          title="Previous page">&larr; Galera System Tables</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -454,7 +454,7 @@
           <a href="pcrecovery.html" title="Recovering the Primary Component"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="schemaupgrades.html" title="Schema Upgrades"
+          <a href="system-tables.html" title="Galera System Tables"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
 
@@ -465,7 +465,7 @@
 
 
 			
-				<li><a href="schemaupgrades.html" title="Schema Upgrades">&lt; Previous</a></li>
+				<li><a href="system-tables.html" title="Galera System Tables">&lt; Previous</a></li>
 			
 
 			

@@ -223,9 +223,9 @@ isolation level is honored only between transactions issued on the same node and
 </div>
 <div class="section" id="understanding-isolation-levels">
 <h2>Understanding Isolation Levels<a class="headerlink" href="#understanding-isolation-levels" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last"><strong>Warning</strong>: When using Galera Cluster in master-slave mode, all four levels are available to you, to the extend that MySQL supports it.  In multi-master mode, however, you can only use the <code class="docutils literal"><span class="pre">REPEATABLE-READ</span></code> level.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When using Galera Cluster in master-slave mode, all four levels are available to you, to the extend that MySQL supports it.  In multi-master mode, however, you can only use the <code class="docutils literal"><span class="pre">REPEATABLE-READ</span></code> level.</p>
 </div>
 <div class="section" id="read-uncommitted">
 <h3>READ-UNCOMMITTED<a class="headerlink" href="#read-uncommitted" title="Permalink to this headline">¶</a></h3>
