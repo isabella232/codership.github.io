@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 
-	
+
 
 
 <!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
@@ -158,7 +158,7 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -207,27 +207,27 @@
 <p id="kb-best-two-node-clusters">Although it may seem simple to maintain a cluster of only two nodes, there is an inherent potential problem. In a two-node cluster, when one node fails, it will cause the other to stop.</p>
 <p class="kb rubric">Scenario</p>
 <p>Suppose you have a cluster composed of only two nodes.  Suppose further that one of the nodes leaves the cluster, ungracefully.  For instance, instead of being shut down through <code class="docutils literal"><span class="pre">init</span></code> or <code class="docutils literal"><span class="pre">systemd</span></code>, it crashes or loses network connectivity.  The node that remains becomes non-operational.  It will remain so until some additional information is provided by a third entity, such as another node or a person.</p>
-<p>In a two-node cluster, if one node loses its network connection and other node is still on the network, both will think itself as being the <a class="reference internal" href="../../glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Each will be unaware that the other is still running. This could cause problems once network connectivity is restored. To prevent this, the nodes become non-operational.</p>
+<p>In a two-node cluster, if one node loses its network connection and other node is still on the network, both will think itself as being the <a class="reference internal" href="../../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Each will be unaware that the other is still running. This could cause problems once network connectivity is restored. To prevent this, the nodes become non-operational.</p>
 <p class="kb rubric">Recommendations</p>
-<p>There are two solutions available.  You can bootstrap the surviving node (i.e., the one with network connectivity) to form a new <a class="reference internal" href="../../glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>. You would do this by using the <a class="reference internal" href="../../galeraparameters.html#pc-bootstrap"><span class="std std-ref">pc.boostrap</span></a> wsrep Provider option.  To do so, log into the database client and run the following SQL statement:</p>
+<p>There are two solutions available.  You can bootstrap the surviving node (i.e., the one with network connectivity) to form a new <a class="reference internal" href="../../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>. You would do this by using the <a class="reference internal" href="../../documentation/galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.boostrap</span></a> wsrep Provider option.  To do so, log into the database client and run the following SQL statement:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.bootstrap=YES&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>This will bootstrap the surviving node as a new Primary Component.  When the other node comes back online or regains network connectivity with this node, it will recognize that it&#8217;s behind and initiate a state transfer to catch up.</p>
-<p>If you want the node to continue to operate, you can use the <a class="reference internal" href="../../galeraparameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> wsrep Provider option.  To do so, log into the database client and run the following SQL statement:</p>
+<p>If you want the node to continue to operate, you can use the <a class="reference internal" href="../../documentation/galera-parameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> wsrep Provider option.  To do so, log into the database client and run the following SQL statement:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.ignore_sb=TRUE&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>The node will resume processing updates, even if it suspects a split-brain situation.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Enabling <a class="reference internal" href="../../galeraparameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> is dangerous in a multi-master setup due to the aforementioned risk for split-brain situations.  However, it does simplify things in master-slave clusters&#8211;especially in situations with only two nodes.</p>
+<p class="last">Enabling <a class="reference internal" href="../../documentation/galera-parameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> is dangerous in a multi-master setup due to the aforementioned risk for split-brain situations.  However, it does simplify things in master-slave clusters&#8211;especially in situations with only two nodes.</p>
 </div>
 <p>In addition to the solutions provided here, you can avoid this situation entirely by using Galera Arbitrator.  Galera Arbitrator functions as an odd node in quorum calculations.  If you enable Galera Arbitrator on one node in a two-node cluster, that node will remain the Primary Component, even if the other node fails or loses network connectivity.</p>
 <p class="kb rubric">Additional Information</p>
 <p>For more information related to this KB article, see the following documents:</p>
 <ul class="simple">
-<li><span class="xref doc">arbitrator</span></li>
+<li><a class="reference internal" href="../../documentation/arbitrator.html#arbitrator"><span class="std std-ref">Arbitrator</span></a></li>
 </ul>
 </div>
 
@@ -287,7 +287,7 @@
 
 	<div id="menu-nav-bar" class="nav-menu">
 		<ul class="nav-link">
-			 
+			
 
 				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/best/two-node-clusters.rst.rst" title="Edit 'Two-Node Clusters' on Github">Edit on Github</a></li>
 
@@ -343,7 +343,7 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>

@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 
-	
+
 
 
 <!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
@@ -158,7 +158,7 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -206,14 +206,14 @@
 <h1>Requested State Transfer Failed<a class="headerlink" href="#requested-state-transfer-failed" title="Permalink to this headline">¶</a></h1>
 <p id="kb-trouble-requested-state-transfer-failed">When a new node joins a cluster, it will try to synchronize with the cluster by getting a full copy of the databases from one of the other nodes.  Sometimes this will fail.</p>
 <p class="kb rubric">Scenario</p>
-<p>Suppose a joiner node seeks a donor node to give it a copy of the databases by the <a class="reference internal" href="../../glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method.  Suppose further that an excessive amount of time passes and it&#8217;s unsuccessful.</p>
+<p>Suppose a joiner node seeks a donor node to give it a copy of the databases by the <a class="reference internal" href="../../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method.  Suppose further that an excessive amount of time passes and it&#8217;s unsuccessful.</p>
 <p>You decide to look at the database server&#8217;s error log on a joiner node, and it contains the following message:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Node 0 (XXX) requested state transfer from &#39;*any*&#39;.
 Selected 1 (XXX) as donor.
 </pre></div>
 </div>
 <p>This indicates that you didn&#8217;t explicitly set the donor node in the configuration file. As a result, the <em>Group Communication</em> module will select a donor based on what it knows about the status of each node.</p>
-<p>The joiner node selects a donor from the available synced nodes, nodes in <code class="docutils literal"><span class="pre">SYNCED</span></code> state&#8211;preferrably ones that have the same <a class="reference internal" href="../../galeraparameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a> wsrep Provider option, but otherwise it will select the first in the index.</p>
+<p>The joiner node selects a donor from the available synced nodes, nodes in <code class="docutils literal"><span class="pre">SYNCED</span></code> state&#8211;preferrably ones that have the same <a class="reference internal" href="../../documentation/galera-parameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a> wsrep Provider option, but otherwise it will select the first in the index.</p>
 <p>If the joiner node can&#8217;t find a free node that shows as <code class="docutils literal"><span class="pre">SYNCED</span></code>, it will report the following:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>Requesting state transfer failed: -11(Resource temporarily
 unavailable).  Will keep retrying every 1 second(s).
@@ -221,18 +221,18 @@ unavailable).  Will keep retrying every 1 second(s).
 </div>
 <p>The joiner node will continue to retry the state transfer request.</p>
 <p class="kb rubric">Solution</p>
-<p>To make the process of finding a donor node faster, you could set one or more donor nodes with the <a class="reference internal" href="../../mysqlwsrepoptions.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a> parameter.  You could do this in the configuration file, or on the fly like so:</p>
+<p>To make the process of finding a donor node faster, you could set one or more donor nodes with the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a> parameter.  You could do this in the configuration file, or on the fly like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">wsrep_sst_donor</span> <span class="o">=</span> <span class="s1">&#39;node1,node2&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>This tells the cluster that one of the nodes named <code class="docutils literal"><span class="pre">node1</span></code> and <code class="docutils literal"><span class="pre">node2</span></code> should be used as the donor. This value is set with the <a class="reference internal" href="../../mysqlwsrepoptions.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> parameter in each node&#8217;s configuration file.</p>
+<p>This tells the cluster that one of the nodes named <code class="docutils literal"><span class="pre">node1</span></code> and <code class="docutils literal"><span class="pre">node2</span></code> should be used as the donor. This value is set with the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> parameter in each node&#8217;s configuration file.</p>
 <p class="kb rubric">Additional Information</p>
 <p>For more information related to this KB article, see the following documents:</p>
 <blockquote>
 <div><ul class="simple">
-<li><a class="reference internal" href="../../mysqlwsrepoptions.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
-<li><a class="reference internal" href="../../mysqlwsrepoptions.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
-<li><a class="reference internal" href="../../galeraparameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -293,7 +293,7 @@ unavailable).  Will keep retrying every 1 second(s).
 
 	<div id="menu-nav-bar" class="nav-menu">
 		<ul class="nav-link">
-			 
+			
 
 				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/trouble/requested-state-transfer-failed.rst.rst" title="Edit 'Requested State Transfer Failed' on Github">Edit on Github</a></li>
 
@@ -349,7 +349,7 @@ unavailable).  Will keep retrying every 1 second(s).
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>

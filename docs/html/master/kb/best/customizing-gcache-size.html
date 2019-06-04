@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 
-	
+
 
 
 <!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
@@ -158,7 +158,7 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -204,7 +204,7 @@
             
   <div class="section" id="customizing-the-write-set-cache-size">
 <h1>Customizing the Write-Set Cache Size<a class="headerlink" href="#customizing-the-write-set-cache-size" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="kb-best-customizing-gcache-size"></span><span class="target" id="index-0"></span><p id="index-1">You can define the size of the write-set cache using the <a class="reference internal" href="../../galeraparameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter.  The set the size to one less than that of the data directory.</p>
+<span class="target" id="kb-best-customizing-gcache-size"></span><span class="target" id="index-0"></span><p id="index-1">You can define the size of the write-set cache using the <a class="reference internal" href="../../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter.  The set the size to one less than that of the data directory.</p>
 <p class="kb rubric">Scenario</p>
 <p>If you have storage issues, there are some guidelines to consider in adjusting this issue.  For example, your preferred state snapshot method.  <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code> copy the InnoDB log files, while <code class="docutils literal"><span class="pre">mysqldump</span></code> does not.  So, if you use <code class="docutils literal"><span class="pre">mysqldump</span></code> for state snapshot transfers, you can subtract the size of the log files from your calculation of the data directory size.</p>
 <div class="admonition note">
@@ -214,7 +214,7 @@
 <p class="kb rubric">Recommendations</p>
 <p>As a general rule, start with the data directory size, including any possible links, then subtract the size of the ring buffer storage file, which is called <code class="docutils literal"><span class="pre">galera.cache</span></code> by default.</p>
 <p>If storage remains an issue, you can further refine these calculations with the database write rate.  The write rate indicates the tail length that the cluster stores in the write-set cache.</p>
-<p>You can calculate this using the <a class="reference internal" href="../../galerastatusvariables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a> status variable.</p>
+<p>You can calculate this using the <a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a> status variable.</p>
 <ol class="arabic">
 <li><p class="first">Determine the size of the write-sets the node has received from the cluster:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_received_bytes&#39;</span><span class="p">;</span>
@@ -242,7 +242,7 @@
 </div><p>Conversely, if you already know the period in which you want the write-set cache to remain valid, you can use instead this equation:</p>
 <div class="math">
 <p><img src="../../_images/math/b9bcad9c8cc6166028cd60121fdaba45b157e8bf.png" alt="cachesize = writerate \times time"/></p>
-</div><p>This equation can show how the size of the write-set cache can improve performance.  For instance, say you find that cluster nodes frequently request state snapshot transfers.  Increasing the <a class="reference internal" href="../../galeraparameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter extends the period in which the write-set remains valid, allowing the nodes to update instead through incremental state transfers.</p>
+</div><p>This equation can show how the size of the write-set cache can improve performance.  For instance, say you find that cluster nodes frequently request state snapshot transfers.  Increasing the <a class="reference internal" href="../../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter extends the period in which the write-set remains valid, allowing the nodes to update instead through incremental state transfers.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Consider these configuration tips as guidelines only. For example, in cases where you must avoid state snapshot transfers as much as possible, you may end up using a much larger write-set cache than suggested above.</p>
@@ -250,8 +250,8 @@
 <p class="kb rubric">Additional Information</p>
 <p>For more information related to this KB article, see the following documents:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../../galeraparameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter</li>
-<li><a class="reference internal" href="../../galerastatusvariables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a> status variable</li>
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter</li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a> status variable</li>
 </ul>
 </div>
 
@@ -311,7 +311,7 @@
 
 	<div id="menu-nav-bar" class="nav-menu">
 		<ul class="nav-link">
-			 
+			
 
 				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/best/customizing-gcache-size.rst.rst" title="Edit 'Customizing the Write-Set Cache Size' on Github">Edit on Github</a></li>
 
@@ -367,7 +367,7 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>

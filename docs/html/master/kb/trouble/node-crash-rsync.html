@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 
-	
+
 
 
 <!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
@@ -158,7 +158,7 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -204,9 +204,9 @@
             
   <div class="section" id="node-crashes-during-rsync-sst">
 <h1>Node Crashes during <code class="docutils literal"><span class="pre">rsync</span></code> SST<a class="headerlink" href="#node-crashes-during-rsync-sst" title="Permalink to this headline">¶</a></h1>
-<p id="kb-trouble-node-crash-rsync">When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a <a class="reference internal" href="../../glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full data copy to the new node, known as the joiner.  This should work well, but it doesn&#8217;t always.</p>
+<p id="kb-trouble-node-crash-rsync">When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a <a class="reference internal" href="../../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full data copy to the new node, known as the joiner.  This should work well, but it doesn&#8217;t always.</p>
 <p class="kb rubric">Scenario</p>
-<p>You can configure <a class="reference internal" href="../../mysqlwsrepoptions.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> to use <code class="docutils literal"><span class="pre">rsync</span></code> for <a class="reference internal" href="../../glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.  If the node crashes before the state transfer is complete, it may cause the <code class="docutils literal"><span class="pre">rsync</span></code> process to hang forever, occupying the port and not allowing you to restart the node.</p>
+<p>You can configure <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> to use <code class="docutils literal"><span class="pre">rsync</span></code> for <a class="reference internal" href="../../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.  If the node crashes before the state transfer is complete, it may cause the <code class="docutils literal"><span class="pre">rsync</span></code> process to hang forever, occupying the port and not allowing you to restart the node.</p>
 <p>If this occurs, the error logs for the database server will show that the port is in use.</p>
 <p class="kb rubric">Solution</p>
 <p>There are a few ways you can resolve this situation.  The simplest way is to kill the orphaned <code class="docutils literal"><span class="pre">rsync</span></code> process.  To do this, you&#8217;ll first need to know the process identification number.  You could enter something like the following on the stalled node, from the command-line:</p>
@@ -223,9 +223,9 @@
 <p class="kb rubric">Additional Information</p>
 <p>For more information related to this KB article, see the following documents:</p>
 <ul class="simple">
-<li><span class="xref doc">sst</span></li>
-<li><a class="reference internal" href="../../mysqlwsrepoptions.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a> parameter</li>
-<li><a class="reference internal" href="../../mysqlwsrepoptions.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter</li>
+<li><span class="xref std std-ref">SST</span></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a> parameter</li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter</li>
 </ul>
 </div>
 
@@ -285,7 +285,7 @@
 
 	<div id="menu-nav-bar" class="nav-menu">
 		<ul class="nav-link">
-			 
+			
 
 				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/trouble/node-crash-rsync.rst.rst" title="Edit 'Node Crashes during <code class="docutils literal"><span class="pre">rsync</span></code> SST' on Github">Edit on Github</a></li>
 
@@ -341,7 +341,7 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
