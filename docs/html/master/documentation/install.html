@@ -8,15 +8,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Getting Started &#8212; Galera Cluster Documentation</title>
+    <title>Installing Galera Cluster &#8212; Galera Cluster Documentation</title>
     
-    <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
+        URL_ROOT:    '../',
         VERSION:     '',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -24,15 +24,15 @@
         SOURCELINK_SUFFIX: '.txt'
       };
     </script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../../_static/cloud.js"></script>
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Installation" href="galera-installation.html" />
-    <link rel="prev" title="Training" href="../index.html" />
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../_static/cloud.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Galera Cluster for MySQL - Binary Installation" href="install-mysql.html" />
+    <link rel="prev" title="Migrating to Galera Cluster" href="migration.html" />
 
 
 
@@ -204,63 +204,31 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p id="id1">Galera Cluster is a synchronous replication solution to improve availability and performance of the MySQL database service.  All nodes in Galera Cluster are identical and fully representative of the cluster.  They allow for unconstrained transparent client access, operating as a single, distributed MySQL server.  It provides,</p>
+  <div class="section" id="installing-galera-cluster">
+<h1>Installing Galera Cluster<a class="headerlink" href="#installing-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p id="install-galera">Galera Cluster may be installed by several methods, using binary or source files.  It may be installed along with MySQL, MariaDB, or XtraDB.</p>
+<div class="section" id="install-mysql-galera-cluster">
+<h2>Install MySQL Galera Cluster<a class="headerlink" href="#install-mysql-galera-cluster" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Transparent client connections, so it&#8217;s highly compatible with existing applications;</li>
-<li>Synchronous data safety semantics—if a client received confirmation, transactions will be committed on every node; and</li>
-<li>Automatic write conflict detection and resolution, so that nodes are always consistent.</li>
+<li><a class="reference internal" href="install-mysql.html"><span class="doc">MySQL Binary Installation</span></a></li>
+<li><a class="reference internal" href="install-mysql-src.html"><span class="doc">MySQL Source Installation</span></a></li>
 </ul>
-<p>Galera Cluster is well suited for LAN, WAN, container and cloud environments.  The following chapters provide you with the basics to setting up and deploying Galera Cluster.  Bear in mind before you get started that you need root access to at least three Linux or FreeBSD hosts and their IP addresses.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">With the latest release Galerea Cluster begins the 4.x branch, introducing a number of new features.  For more information on these features, see <a class="reference internal" href="../../whats-new.html"><span class="doc">What&#8217;s New</span></a>.</p>
 </div>
-<p class="rubric">Node Initialization</p>
-<p id="node-init">Individual nodes in Galera Cluster are MySQL, MariaDB or Percona XtraDB.  But, deploying a node is not exactly the same as the standard standalone instance of the database server.  You need to take a few additional steps in order to properly install and configure the software.  The software runs on any unix-like operating system.  These chapters provides guides to installing and configuring nodes for Galera Cluster.</p>
-<ul>
-<li><p class="first"><a class="reference internal" href="galera-installation.html"><span class="doc">Installation</span></a></p>
-<p>Once you have your server hardware ready, including at least three hosts running either Linux or FreeBSD and their respective IP addresses.  This chapter provides guides to preparing the server and installing Galera Cluster.  When you install Galera Cluster, you must choose between three implementations available.  For each implementations, you can install the software using Debian- and RPM-based binary packages or by building the node from source.</p>
+<div class="section" id="install-mariadb-galera-cluster">
+<h2>Install MariaDB Galera Cluster<a class="headerlink" href="#install-mariadb-galera-cluster" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>Galera Cluster for MySQL</strong>: The reference implementation from Codership, Oy. You can use either the <a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Binary Installation</span></a> or the <a class="reference internal" href="../../documentation/install-mysql-src.html"><span class="doc">Source Build</span></a> methods.</li>
-<li><strong>Percona XtraDB Cluster</strong>: The Percona alternative implementation of Galera Cluster, which uses XtraDB in place of MySQL.  You can use either the <a class="reference internal" href="../../documentation/install-xtradb.html"><span class="doc">Install XtraDB Binary Installation</span></a> or the <a class="reference internal" href="../../documentation/install-xtradb-src.html"><span class="doc">Source Build</span></a> methods.</li>
-<li><strong>MariaDB Galera Cluster</strong>: The MariaDB Ab alternative implementation of Galera Cluster, which uses MariaDB in place of MySQL.  You can use either the <a class="reference internal" href="../../documentation/install-mariadb.html"><span class="doc">Install MariaDB Binary Installation</span></a> or the <a class="reference internal" href="../../documentation/install-mariadb-src.html"><span class="doc">Source Build</span></a>.</li>
+<li><a class="reference internal" href="install-mariadb.html"><span class="doc">MariaDB Binary Installation</span></a></li>
+<li><a class="reference internal" href="install-mariadb-src.html"><span class="doc">MariaDB Source Installation</span></a></li>
 </ul>
-</li>
-<li><p class="first"><a class="reference internal" href="configuration.html"><span class="doc">System Configuration</span></a></p>
-<p>Before you can start the cluster, you need to configure the individual nodes.  This chapter covers general parameters that you must set in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file in order to use Galera Cluster.  It also provides a guide to configuring swap space in order to protect the node from crashing due to large write-sets requiring more memory than the server has available.</p>
-</li>
-<li><p class="first"><a class="reference internal" href="wsrep-configuration.html"><span class="doc">Replication Configuration</span></a></p>
-<p>With the system-level configurations complete, this chapter provides a guide to configuring the database server to connect and communicate with the cluster and explains the syntax format used in cluster addresses.</p>
-</li>
-</ul>
-<p class="rubric">Cluster Initialization</p>
-<p id="cluster-init">With the software installed on the relevant servers in your your infrastructure, you can now initialize Galera Cluster, by bootstrapping the Primary Component then starting all the other nodes as you would any other database server instance.  These chapters provide guides to starting the cluster, ways of testing that it&#8217;s operational and, when you need to, how to restart the entire cluster.</p>
-<ul>
-<li><p class="first"><a class="reference internal" href="starting-cluster.html"><span class="doc">Starting the Cluster</span></a></p>
-<p>In order to start Galera Cluster, you need to bootstrap the Primary Component.  Afterwards, you can start nodes using the same command as you would the standard standalone MySQL, MariaDB or Percona XtraDB database server.  This chapter provides a guide to initializing the cluster.</p>
-</li>
-<li><p class="first"><a class="reference internal" href="testing-cluster.html"><span class="doc">Testing a Cluster</span></a></p>
-<p>With your cluster online, you may want to test out some of the features in order to ensure it&#8217;s working properly and to better see how it works in planning out your own deployment.  This chapter provides a rough guide to testing replication and similar cluster operations.</p>
-</li>
-<li><p class="first"><a class="reference internal" href="restarting-cluster.html"><span class="doc">Restarting the Cluster</span></a></p>
-<p>On occasion, you may need to restart the entire cluster, such as in the case of a power failure where every node is shut down and there is no database server process left running.  This chapter provides guides to finding your most advanced node and restarting the Primary Component on that node.</p>
-</li>
-</ul>
-<p class="rubric">How Galera Cluster Works</p>
-<p id="how-galera-works">The primary focus is data consistency.  The transactions are either applied on every node or not all.  So, the databases stay synchronized, provided that they were properly configured and synchronized at the beginning.</p>
-<p>The <a class="reference internal" href="../../documentation/glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> differs from the standard MySQL Replication by addressing several issues, including multi-master write conflicts, replication lag and slaves being out of sync with the master.</p>
-<div class="figure">
-<img alt="../../_images/galerausecases11.png" src="../../_images/galerausecases11.png" />
 </div>
-<p>In a typical instance of a Galera Cluster, applications can write to any node in the cluster and transaction commits, (RBR events), are then applied to all the servers, through certification-based replication.</p>
-<p>Certification-based replication is an alternative approach to synchronous database replication, using group communication and transaction ordering techniques.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For security and performance reasons, it&#8217;s recommended that you run Galera Cluster on its own subnet.</p>
-</div>
+<div class="section" id="install-xtradb-galera-cluster">
+<h2>Install XtraDB Galera Cluster<a class="headerlink" href="#install-xtradb-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="install-xtradb.html"><span class="doc">XtraDB Binary Installation</span></a></li>
+<li><a class="reference internal" href="install-xtradb-src.html"><span class="doc">XtraDB Source Installation</span></a></li>
+</ul>
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 
@@ -270,22 +238,33 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-        <p class="logo"><a href="../../index.html" title="index">
-          <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p>
+        <p class="logo"><a href="../index.html" title="index">
+          <img class="logo" src="../_static/logo.png" alt="Logo"/>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="../index.html">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Installing Galera Cluster</a><ul>
+<li><a class="reference internal" href="#install-mysql-galera-cluster">Install MySQL Galera Cluster</a></li>
+<li><a class="reference internal" href="#install-mariadb-galera-cluster">Install MariaDB Galera Cluster</a></li>
+<li><a class="reference internal" href="#install-xtradb-galera-cluster">Install XtraDB Galera Cluster</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="../index.html"
-                          title="Previous page">&larr; Training</a></p>
+    <p class="topless"><a href="migration.html"
+                          title="Previous page">&larr; Migrating to Galera Cluster</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="galera-installation.html"
-                          title="Next page">&rarr; Installation</a></p>
+    <p class="topless"><a href="install-mysql.html"
+                          title="Next page">&rarr; Galera Cluster for MySQL - Binary Installation</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
-    <form class="search" action="../../search.html" method="get">
+    <form class="search" action="../search.html" method="get">
       <div><input type="text" name="q" /></div>
       <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
@@ -332,7 +311,7 @@
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/getting-started.rst.rst" title="Edit 'Getting Started' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/documentation/install.rst.rst" title="Edit 'Installing Galera Cluster' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -341,28 +320,30 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
+          <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="galera-installation.html" title="Installation"
+          <a href="install-mysql.html" title="Galera Cluster for MySQL - Binary Installation"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="../index.html" title="Training"
+          <a href="migration.html" title="Migrating to Galera Cluster"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
+    <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Training</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="migrate.html" >Migration</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="migration.html" accesskey="U">Migrating to Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="../index.html" title="Training">&lt; Previous</a></li>
+				<li><a href="migration.html" title="Migrating to Galera Cluster">&lt; Previous</a></li>
 			
 
 			
-				<li><a href="galera-installation.html" title="Installation">Next &gt;</a></li>
+				<li><a href="install-mysql.html" title="Galera Cluster for MySQL - Binary Installation">Next &gt;</a></li>
 			
 
 		</ul>

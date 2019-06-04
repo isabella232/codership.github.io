@@ -31,6 +31,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installing Galera Cluster" href="install.html" />
+    <link rel="prev" title="Differences from a Standalone MySQL Server" href="differences.html" />
 
 
 
@@ -210,7 +212,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">For more information on installing Galera Cluster, see</p>
 </div>
-<p><span class="xref std std-ref">Galera Installation</span>.</p>
+<p><a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>.</p>
 <div class="section" id="upgrading-system-tables">
 <h2>Upgrading System Tables<a class="headerlink" href="#upgrading-system-tables" title="Permalink to this headline">¶</a></h2>
 <p id="upgrade-system-tables">When you finish upgrading a standalone database server to Galera Cluster, but before you initialize your own cluster, you need to update the system tables to take advantage of the new privileges and capabilities.  You can do this with <code class="docutils literal"><span class="pre">mysql_upgrade</span></code>.</p>
@@ -238,7 +240,7 @@
 <p>Running this command stops database server.  When you are ready to initialize your cluster, choose this server as your starting node.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For more information on initializing and adding nodes to a cluster, see <span class="xref std std-ref">Starting the Cluster</span>.</p>
+<p class="last">For more information on initializing and adding nodes to a cluster, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
 </div>
 </div>
 <div class="section" id="migrating-from-mysql-to-galera-cluster">
@@ -257,12 +259,12 @@
 <ol class="arabic">
 <li><p class="first">Launch at least three new servers, outside of and unconnected to your existing database infrastructure.</p>
 </li>
-<li><p class="first">On each new server, install Galera Cluster.  For information on how to do this, see <span class="xref std std-ref">Galera Installation</span>.</p>
+<li><p class="first">On each new server, install Galera Cluster.  For information on how to do this, see <a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>.</p>
 </li>
 <li><p class="first">Configure the database server.  In addition to the IP addresses of each node, on the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter, include the IP addresses of the MySQL master server and each instance of the slave servers.</p>
-<p>For more information on configuring Galera Cluster, see <span class="xref std std-ref">System Configuration</span> and <span class="xref std std-ref">Replication Configuration</span>.</p>
+<p>For more information on configuring Galera Cluster, see <a class="reference internal" href="../training/tutorials/configuration.html"><span class="doc">System Configuration</span></a> and <a class="reference internal" href="../training/tutorials/wsrep-configuration.html"><span class="doc">Replication Configuration</span></a>.</p>
 </li>
-<li><p class="first">When you finish the installation and configuration, start the cluster.  For more information on how to start the cluster, see <span class="xref std std-ref">Starting the Cluster</span>.</p>
+<li><p class="first">When you finish the installation and configuration, start the cluster.  For more information on how to start the cluster, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
 </li>
 </ol>
 <p>To check that it is running properly, log into one of the database clients and run the <a class="reference internal" href="galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a> status variable:</p>
@@ -312,7 +314,7 @@
 <h3>Database Migration<a class="headerlink" href="#database-migration" title="Permalink to this headline">¶</a></h3>
 <p id="migrate-db">With your application server now using the new cluster nodes, you now need to migrate your master and slave servers from stock MySQL to Galera Cluster.</p>
 <ol class="arabic">
-<li><p class="first">Using the same process described in <span class="xref std std-ref">Galera Installation</span>, install and configure Galera Cluster on the server.</p>
+<li><p class="first">Using the same process described in <a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>, install and configure Galera Cluster on the server.</p>
 </li>
 <li><p class="first">Start the node with replication disabled.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql start --wsrep-on<span class="o">=</span>OFF
@@ -357,6 +359,8 @@
 </li>
 </ol>
 <p>When the former MySQL master and slave servers come back after restarting, they establish network connectivity with the cluster and begin catching up with recent changes.  All of the servers now function as nodes in Galera Cluster.</p>
+<div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 </div>
@@ -384,6 +388,16 @@
 </li>
 </ul>
 
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="differences.html"
+                          title="Previous page">&larr; Differences from a Standalone MySQL Server</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="install.html"
+                          title="Next page">&rarr; Installing Galera Cluster</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -445,15 +459,27 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="install.html" title="Installing Galera Cluster"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="differences.html" title="Differences from a Standalone MySQL Server"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
- 
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="migrate.html" accesskey="U">Migration</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
+				<li><a href="differences.html" title="Differences from a Standalone MySQL Server">&lt; Previous</a></li>
+			
 
+			
+				<li><a href="install.html" title="Installing Galera Cluster">Next &gt;</a></li>
 			
 
 		</ul>

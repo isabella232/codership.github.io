@@ -31,6 +31,7 @@
     <script type="text/javascript" src="_static/cloud.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Restarting the Cluster" href="training/tutorials/restarting-cluster.html" />
 
 
 
@@ -208,13 +209,13 @@
 <ul>
 <li><p class="first"><strong>Streaming Replication</strong> Under normal operation, the node initiates all replication and certification operations when the transaction commits.  For large transactions, this can result in conflicts: smaller transactions can get in first and cause the large transactions to abort.  With Streaming Replication, the node breaks the transaction into fragments, then certifies and replicates them on all slave nodes while the transaction is still in progress.  Once certified, conflicting transactions can no longer abort the fragment.</p>
 <p>This provides an alternative replication method for handling large or long-running write transactions, or when working with hot records.</p>
-<p>For more information, see <span class="xref doc">streamingreplication</span> and <span class="xref doc">usingsr</span>.</p>
+<p>For more information, see <a class="reference internal" href="documentation/streaming-replication.html"><span class="doc">Streaming Replication</span></a> and <a class="reference internal" href="documentation/using-sr.html"><span class="doc">Using Streaming Replication</span></a>.</p>
 </li>
 <li><p class="first"><strong>Synchronization Functions</strong>  This version introduces a series of SQL functions for use in wsrep synchronization operations.  You can use them to obtain the <a class="reference internal" href="documentation/glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>, based on either the last write or last seen transaction, as well as setting the node to wait for a specific GTID to replicate and apply, before initiating the next transaction.</p>
-<p>For more information, see <span class="xref std std-ref">Using Synchronization Functions</span> and <span class="xref doc">mysqlwsrepfunctions</span>.</p>
+<p>For more information, see <span class="xref std std-ref">Using Synchronization Functions</span> and <a class="reference internal" href="documentation/mysql-wsrep-functions.html"><span class="doc">MySQL wsrep Functions</span></a>.</p>
 </li>
 <li><p class="first"><strong>Galera System Tables</strong>  In version 4 of Galera, three system tables were added to the <code class="docutils literal"><span class="pre">mysql</span></code> database: <code class="docutils literal"><span class="pre">wsrep_cluster</span></code>, <code class="docutils literal"><span class="pre">wsrep_cluster_members</span></code>, and <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code>.  These tables may be used by database administrators to get a sense the current activity of the nodes in a cluster.</p>
-<p>For more information, see <a class="reference internal" href="documentation/system-tables.html#system-tables"><span class="std std-ref">System Tables</span></a> and <span class="xref doc">system-tables</span>.</p>
+<p>For more information, see <a class="reference internal" href="documentation/system-tables.html#system-tables"><span class="std std-ref">System Tables</span></a> and <a class="reference internal" href="documentation/system-tables.html"><span class="doc">Galera System Tables</span></a>.</p>
 </li>
 </ul>
 </div>
@@ -228,6 +229,11 @@
         <p class="logo"><a href="index.html" title="index">
           <img class="logo" src="_static/logo.png" alt="Logo"/>
         </a></p>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="training/tutorials/restarting-cluster.html"
+                          title="Previous page">&larr; Restarting the Cluster</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -288,6 +294,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="training/tutorials/restarting-cluster.html" title="Restarting the Cluster"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">Galera Cluster Documentation</a> &#187;</li>
  
       </ul>
@@ -295,6 +304,8 @@
     </div>
 
 
+			
+				<li><a href="training/tutorials/restarting-cluster.html" title="Restarting the Cluster">&lt; Previous</a></li>
 			
 
 			
