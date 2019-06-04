@@ -31,6 +31,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Flow Control" href="node-states.html" />
+    <link rel="prev" title="Isolation Levels" href="isolation-levels.html" />
 
 
 
@@ -274,7 +276,7 @@
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For more information on parameters that control write-set caching, see the <code class="docutils literal"><span class="pre">gcache.*</span></code> parameters on <span class="xref std std-ref">Galera Parameters</span>.</p>
+<p class="last">For more information on parameters that control write-set caching, see the <code class="docutils literal"><span class="pre">gcache.*</span></code> parameters on <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
 </div>
 <p>Galera Cluster uses an allocation algorithm that attempts to store write-sets in the above order.  That is, first it attempts to use permanent in-memory store.  If there is not enough space for the write-set, it attempts to store to the permanent ring-buffer file.  The page store always succeeds, unless the write-set is larger than the available disk space.</p>
 <p>By default, the write-set cache allocates files in the working directory of the process.  You can specify a dedicated location for write-set caching, using the <a class="reference internal" href="galera-parameters.html#gcache-dir"><span class="std std-ref">gcache.dir</span></a> parameter.</p>
@@ -311,6 +313,16 @@
 </li>
 </ul>
 
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="isolation-levels.html"
+                          title="Previous page">&larr; Isolation Levels</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="node-states.html"
+                          title="Next page">&rarr; Flow Control</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -372,15 +384,27 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="node-states.html" title="Flow Control"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="isolation-levels.html" title="Isolation Levels"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
- 
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="technical-description.html" accesskey="U">Technical Description</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
+				<li><a href="isolation-levels.html" title="Isolation Levels">&lt; Previous</a></li>
+			
 
+			
+				<li><a href="node-states.html" title="Flow Control">Next &gt;</a></li>
 			
 
 		</ul>

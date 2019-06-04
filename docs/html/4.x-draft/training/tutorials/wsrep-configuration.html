@@ -31,6 +31,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Starting the Cluster" href="starting-cluster.html" />
+    <link rel="prev" title="System Configuration" href="configuration.html" />
 
 
 
@@ -211,7 +213,7 @@
 <li><p class="first"><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a>: Use this parameter to define the IP addresses for the cluster in a comma-separated list.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">There are additional schemata and options available through this parameter.  For more information on the syntax, see <span class="xref std std-ref">Understanding Cluster Addresses</span> below.</p>
+<p class="last">There are additional schemata and options available through this parameter.  For more information on the syntax, see Cluster Addresses below.</p>
 </div>
 </li>
 <li><p class="first"><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a>: Use this parameter to define the logical name for the individual node—for convenience.</p>
@@ -219,11 +221,11 @@
 <li><p class="first"><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a>: Use this parameter to set explicitly the IP address for the individual node.  It&#8217;s used when auto-guessing doesn&#8217;t produce desirable results.</p>
 </li>
 </ul>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
-<span class="na">wsrep_cluster_name</span><span class="o">=</span><span class="s">MyCluster</span>
-<span class="na">wsrep_cluster_address</span><span class="o">=</span><span class="s">&quot;gcomm://192.168.0.1,192.168.0.2,192.168.0.3&quot;</span>
-<span class="na">wsrep_node_name</span><span class="o">=</span><span class="s">MyNode1</span>
-<span class="na">wsrep_node_address</span><span class="o">=</span><span class="s">&quot;192.168.0.1&quot;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">[mysqld]</span>
+<span class="go">wsrep_cluster_name=MyCluster</span>
+<span class="go">wsrep_cluster_address=&quot;gcomm://192.168.0.1,192.168.0.2,192.168.0.3&quot;</span>
+<span class="go">wsrep_node_name=MyNode1</span>
+<span class="go">wsrep_node_address=&quot;192.168.0.1&quot;</span>
 </pre></div>
 </div>
 <div class="section" id="backend-schema">
@@ -258,7 +260,7 @@
 <p>The options set in the URL take precedent over parameters set elsewhere.  Parameters you set through the options list are prefixed by <code class="docutils literal"><span class="pre">evs</span></code> (i.e., Extended Virtual Synchrony), <code class="docutils literal"><span class="pre">pc</span></code> (i.e., Primary Component) and <code class="docutils literal"><span class="pre">gmcast</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For more information on the available parameters, see <span class="xref std std-ref">Galera Parameters</span>.</p>
+<p class="last">For more information on the available parameters, see <a class="reference internal" href="../../documentation/galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
 </div>
 <p>When listing options, start with a question mark after the IP address list. Then provide the options in a <code class="docutils literal"><span class="pre">key=value</span></code> format. Key/value pairs must be separated by an ampersand. Below is an example of how this might look:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_cluster_address</span><span class="o">=</span><span class="s">&quot;gcomm://192.168.0.1, 192.168.0.2, 192.168.0.3 ? gmcast.segment=0 &amp; evs.max_install_timeouts=1&quot;</span>
@@ -288,6 +290,16 @@
 </li>
 </ul>
 
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="configuration.html"
+                          title="Previous page">&larr; System Configuration</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="starting-cluster.html"
+                          title="Next page">&rarr; Starting the Cluster</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -349,15 +361,28 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="starting-cluster.html" title="Starting the Cluster"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="configuration.html" title="System Configuration"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
- 
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Tutorials</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
+				<li><a href="configuration.html" title="System Configuration">&lt; Previous</a></li>
+			
 
+			
+				<li><a href="starting-cluster.html" title="Starting the Cluster">Next &gt;</a></li>
 			
 
 		</ul>

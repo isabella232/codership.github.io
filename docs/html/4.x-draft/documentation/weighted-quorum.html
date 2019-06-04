@@ -31,6 +31,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Streaming Replication" href="streaming-replication.html" />
+    <link rel="prev" title="Node Failure and Recovery" href="recovery.html" />
 
 
 
@@ -253,14 +255,14 @@
 <span class="target" id="id4"></span><p id="index-3">Galera Cluster supports a weighted quorum, where each node can be assigned a weight in the 0 to 255 range, with which it will participate in quorum calculations.</p>
 <p>The quorum calculation formula is</p>
 <div class="math">
-<p><img src="../_images/math/577f12ac1f0f075536bcca073e7c680913e66ad2.png" alt="\frac{ \sum_{p_i \times w_i} - \sum_{l_i \times w_i}}
+<p><img src="../_images/math/f6ce048e561037cdcc973c9b57a7f3eeae109505.png" alt="\frac{ \sum_{p_i \times w_i} - \sum_{l_i \times w_i}}
 { 2} &lt; \sum_{m_i \times w_i}"/></p>
 </div><p>Where:</p>
 <ul class="simple">
-<li><img class="math" src="../_images/math/be005a6163eb06f81800d3f41ee8408927fec9d7.png" alt="p_i"/> Members of the last seen primary component;</li>
-<li><img class="math" src="../_images/math/88bc030a182566fd736c26624875aa9d76f683d3.png" alt="l_i"/> Members that are known to have left gracefully;</li>
-<li><img class="math" src="../_images/math/21728519fb5117232be3dab5913f25e4508c8c29.png" alt="m_i"/> Current component members; and,</li>
-<li><img class="math" src="../_images/math/b4e1bc8e2dfd2c26158273aef285b08a816f960a.png" alt="w_i"/> Member weights.</li>
+<li><img class="math" src="../_images/math/24b68632b58b3294cc8f170cef67b2dd9510e981.png" alt="p_i"/> Members of the last seen primary component;</li>
+<li><img class="math" src="../_images/math/482e54b9315122e2bb78625a1c384da62e910c27.png" alt="l_i"/> Members that are known to have left gracefully;</li>
+<li><img class="math" src="../_images/math/a9850fd3cf70d5ac90a474d257041fe9dcf965e7.png" alt="m_i"/> Current component members; and,</li>
+<li><img class="math" src="../_images/math/1caac5f874f508b298a9b1dcf65af7fe3823f9cc.png" alt="w_i"/> Member weights.</li>
 </ul>
 <p>What this means is that the quorum is preserved if (and only if) the sum weight of the nodes in a new component strictly exceeds half that of the preceding <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, minus the nodes which left gracefully.</p>
 <p>You can customize node weight using the <a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a> parameter.  By default, node weight is <code class="docutils literal"><span class="pre">1</span></code>, which translates to the traditional node count behavior.</p>
@@ -358,6 +360,16 @@ Secondary Site:
 </ul>
 
   </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="recovery.html"
+                          title="Previous page">&larr; Node Failure and Recovery</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="streaming-replication.html"
+                          title="Next page">&rarr; Streaming Replication</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -418,15 +430,27 @@ Secondary Site:
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="streaming-replication.html" title="Streaming Replication"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="recovery.html" title="Node Failure and Recovery"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
- 
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="technical-description.html" accesskey="U">Technical Description</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
+				<li><a href="recovery.html" title="Node Failure and Recovery">&lt; Previous</a></li>
+			
 
+			
+				<li><a href="streaming-replication.html" title="Streaming Replication">Next &gt;</a></li>
 			
 
 		</ul>

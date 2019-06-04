@@ -31,6 +31,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Multi-Master Setup" href="multi-master-setup.html" />
+    <link rel="prev" title="Group Commit" href="group-commit.html" />
 
 
 
@@ -209,7 +211,7 @@
 <p>Suppose you have a node called <code class="docutils literal"><span class="pre">dbhost</span></code> with a database called <code class="docutils literal"><span class="pre">keystone</span></code>.  Suppose further that you execute a large transaction, which includes a <code class="docutils literal"><span class="pre">DELETE</span></code> statement that deletes expired tokens from their table in that database and on that host. If this transaction involves millions of rows, it could affect the overall performance of the cluster.</p>
 <p class="kb rubric">Recommendations</p>
 <p>This problem might be easily resolved by changing the size of the InnoDB buffer pool. The pool is bytes of the memory area where InnoDB caches table and index data. The larger the pool (i.e., the more RAM is used), the less the disk is  accessed, which is especially important when dealing with the same data in tables multiple times as you might in a large transaction on the same table.</p>
-<p>To change the buffer pool size, check the value of the <span class="xref std std-ref">innodb_buffer_pool_size</span> variable. If your servers are dedicated only to database service, try setting it to 80% of the server&#8217;s physical memory size. You can use the <code class="docutils literal"><span class="pre">free</span></code> command to see how much memory you have.  Once you determine how much memory you can spare for the InnoDB pool, add or change a line in the server&#8217;s configuration file like the following:</p>
+<p>To change the buffer pool size, check the value of the <a class="reference external" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> variable. If your servers are dedicated only to database service, try setting it to 80% of the server&#8217;s physical memory size. You can use the <code class="docutils literal"><span class="pre">free</span></code> command to see how much memory you have.  Once you determine how much memory you can spare for the InnoDB pool, add or change a line in the server&#8217;s configuration file like the following:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">innodb_buffer_pool_size</span><span class="o">=</span><span class="s">128M</span>
 </pre></div>
 </div>
@@ -226,8 +228,8 @@
 <p class="kb rubric">Additional Information</p>
 <p>For more information related to this KB article, see the following documents:</p>
 <ul class="simple">
-<li><span class="xref std std-ref">innodb_buffer_pool_size</span> variable</li>
-<li><cite>pt-archiver &lt;http://www.percona.com/doc/percona-toolkit/2.1/pt-archiver.html&gt;</cite></li>
+<li><a class="reference external" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> variable</li>
+<li><a class="reference external" href="http://www.percona.com/doc/percona-toolkit/2.1/pt-archiver.html">pt-archiver</a></li>
 </ul>
 </div>
 
@@ -240,6 +242,16 @@
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
         </a></p>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="group-commit.html"
+                          title="Previous page">&larr; Group Commit</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="multi-master-setup.html"
+                          title="Next page">&rarr; Multi-Master Setup</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
@@ -300,15 +312,27 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="multi-master-setup.html" title="Multi-Master Setup"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="group-commit.html" title="Group Commit"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
- 
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Knowledge Base</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Best Practices</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
+				<li><a href="group-commit.html" title="Group Commit">&lt; Previous</a></li>
+			
 
+			
+				<li><a href="multi-master-setup.html" title="Multi-Master Setup">Next &gt;</a></li>
 			
 
 		</ul>

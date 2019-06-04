@@ -31,6 +31,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cluster Monitoring" href="monitor.html" />
+    <link rel="prev" title="Using Docker" href="docker.html" />
 
 
 
@@ -219,8 +221,8 @@
 <p>To create a loopback interface, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Using your preferred text editor, add the loopback interface to <code class="docutils literal"><span class="pre">/etc/rc.conf</span></code>:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># Network Interface</span>
-<span class="na">cloned_interfaces</span><span class="o">=</span><span class="s">&quot;${cloned_interfaces} lo1&quot;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> Network Interface
+<span class="go">cloned_interfaces=&quot;${cloned_interfaces} lo1&quot;</span>
 </pre></div>
 </div>
 </li>
@@ -241,39 +243,39 @@
 <p>To enable PF and create rules for the node, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Using your preferred text editor, make the following additions to <code class="docutils literal"><span class="pre">/etc/rc.conf</span></code>:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># Firewall Configuration</span>
-<span class="na">pf_enable</span><span class="o">=</span><span class="s">&quot;YES&quot;</span>
-<span class="na">pf_rules</span><span class="o">=</span><span class="s">&quot;/etc/pf.conf&quot;</span>
-<span class="na">pflog_enable</span><span class="o">=</span><span class="s">&quot;YES&quot;</span>
-<span class="na">pflog_logfile</span><span class="o">=</span><span class="s">&quot;/var/log/pf.log&quot;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> Firewall Configuration
+<span class="go">pf_enable=&quot;YES&quot;</span>
+<span class="go">pf_rules=&quot;/etc/pf.conf&quot;</span>
+<span class="go">pflog_enable=&quot;YES&quot;</span>
+<span class="go">pflog_logfile=&quot;/var/log/pf.log&quot;</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Create the rules files for PF at <code class="docutils literal"><span class="pre">/etc/pf.conf</span></code></p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># External Network Interface</span>
-<span class="na">ext_if</span><span class="o">=</span><span class="s">&quot;vtnet0&quot;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> External Network Interface
+<span class="go">ext_if=&quot;vtnet0&quot;</span>
 
-<span class="c1"># Internal Network Interface</span>
-<span class="na">int_if</span><span class="o">=</span><span class="s">&quot;lo1&quot;</span>
+<span class="gp">#</span> Internal Network Interface
+<span class="go">int_if=&quot;lo1&quot;</span>
 
-<span class="c1"># IP Addresses</span>
-<span class="na">external_addr</span><span class="o">=</span><span class="s">&quot;host_IP_address&quot;</span>
-<span class="na">internal_addr</span><span class="o">=</span><span class="s">&quot;jail_IP_address_range&quot;</span>
+<span class="gp">#</span> IP Addresses
+<span class="go">external_addr=&quot;host_IP_address&quot;</span>
+<span class="go">internal_addr=&quot;jail_IP_address_range&quot;</span>
 
-<span class="c1"># Variables for Galera Cluster</span>
-<span class="na">wsrep_ports</span><span class="o">=</span><span class="s">&quot;{3306,4567,4568,4444}&quot;</span>
-<span class="na">table &lt;wsrep_cluster_address&gt; persist {192.168.1.1,192.168.1.2,192.168.1.3}</span>
+<span class="gp">#</span> Variables <span class="k">for</span> Galera Cluster
+<span class="go">wsrep_ports=&quot;{3306,4567,4568,4444}&quot;</span>
+<span class="go">table &lt;wsrep_cluster_address&gt; persist {192.168.1.1,192.168.1.2,192.168.1.3}</span>
 
-<span class="c1"># Translation</span>
-<span class="na">nat on $ext_if from $internal_addr to any -&gt; ($ext_if)</span>
+<span class="gp">#</span> Translation
+<span class="go">nat on $ext_if from $internal_addr to any -&gt; ($ext_if)</span>
 
-<span class="c1"># Redirects</span>
-<span class="na">rdr on $ext_if proto tcp from any to $external_addr/32 port 3306 -&gt; jail_IP_address port 3306</span>
-<span class="na">rdr on $ext_if proto tcp from any to $external_addr/32 port 4567 -&gt; jail_IP_address port 4567</span>
-<span class="na">rdr on $ext_if proto tcp from any to $external_addr/32 port 4568 -&gt; jail_IP_address port 4568</span>
-<span class="na">rdr on $ext_if proto tcp from any to $external_addr/32 port 4444 -&gt; jail_IP_address port 4444</span>
+<span class="gp">#</span> Redirects
+<span class="go">rdr on $ext_if proto tcp from any to $external_addr/32 port 3306 -&gt; jail_IP_address port 3306</span>
+<span class="go">rdr on $ext_if proto tcp from any to $external_addr/32 port 4567 -&gt; jail_IP_address port 4567</span>
+<span class="go">rdr on $ext_if proto tcp from any to $external_addr/32 port 4568 -&gt; jail_IP_address port 4568</span>
+<span class="go">rdr on $ext_if proto tcp from any to $external_addr/32 port 4444 -&gt; jail_IP_address port 4444</span>
 
-<span class="na">pass in proto tcp from &lt;wsrep_cluster_address&gt; to any port $wsrep_ports keep state</span>
+<span class="go">pass in proto tcp from &lt;wsrep_cluster_address&gt; to any port $wsrep_ports keep state</span>
 </pre></div>
 </div>
 <p>Replace <code class="docutils literal"><span class="pre">host_IP_address</span></code> with the IP address of the host server and <code class="docutils literal"><span class="pre">jail_IP_address</span></code> with the IP address you want to use for the jail.</p>
@@ -304,7 +306,7 @@
 <p>To create a node jail with <code class="docutils literal"><span class="pre">ezjail</span></code>, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Using your preferred text editor, add the following line to <code class="docutils literal"><span class="pre">/etc/rc.conf</span></code>:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">ezjail_enable</span><span class="o">=</span><span class="s">&quot;YES&quot;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">ezjail_enable=&quot;YES&quot;</span>
 </pre></div>
 </div>
 <p>This allows you to start and stop jails through the <code class="docutils literal"><span class="pre">service</span></code> command.</p>
@@ -375,24 +377,24 @@
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a> The node determines the default address from the IP address on the first network interface.  Jails cannot see the network interfaces on the host system.  You need to set this parameter to ensure that the cluster is given the correct IP address for the node.</li>
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> The node determines the default name from the system hostname.  Jails have their own hostnames, distinct from that of the host system.</li>
 </ul>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
-<span class="na">user</span><span class="o">=</span><span class="s">mysql</span>
-<span class="c1">#bind-address=0.0.0.0</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">[mysqld]</span>
+<span class="go">user=mysql</span>
+<span class="gp">#</span>bind-address<span class="o">=</span><span class="m">0</span>.0.0.0
 
-<span class="c1"># Cluster Options</span>
-<span class="na">wsrep_provider</span><span class="o">=</span><span class="s">/usr/lib/libgalera_smm.so</span>
-<span class="na">wsrep_cluster_address</span><span class="o">=</span><span class="s">&quot;gcomm://192.168.1.1, 192.168.1.2, 192.16.1.3&quot;</span>
-<span class="na">wsrep_node_address</span><span class="o">=</span><span class="s">&quot;192.168.1.1&quot;</span>
-<span class="na">wsrep_node_name</span><span class="o">=</span><span class="s">&quot;node1&quot;</span>
-<span class="na">wsrep_cluster_name</span><span class="o">=</span><span class="s">&quot;example_cluster&quot;</span>
+<span class="gp">#</span> Cluster Options
+<span class="go">wsrep_provider=/usr/lib/libgalera_smm.so</span>
+<span class="go">wsrep_cluster_address=&quot;gcomm://192.168.1.1, 192.168.1.2, 192.16.1.3&quot;</span>
+<span class="go">wsrep_node_address=&quot;192.168.1.1&quot;</span>
+<span class="go">wsrep_node_name=&quot;node1&quot;</span>
+<span class="go">wsrep_cluster_name=&quot;example_cluster&quot;</span>
 
-<span class="c1"># InnoDB Options</span>
-<span class="na">default_storage_engine</span><span class="o">=</span><span class="s">innodb</span>
-<span class="na">innodb_autoinc_lock_mode</span><span class="o">=</span><span class="s">2</span>
-<span class="na">innodb_flush_log_at_trx_commit</span><span class="o">=</span><span class="s">0</span>
+<span class="gp">#</span> InnoDB Options
+<span class="go">default_storage_engine=innodb</span>
+<span class="go">innodb_autoinc_lock_mode=2</span>
+<span class="go">innodb_flush_log_at_trx_commit=0</span>
 
-<span class="c1"># SST</span>
-<span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">rsync</span>
+<span class="gp">#</span> SST
+<span class="go">wsrep_sst_method=rsync</span>
 </pre></div>
 </div>
 <p>If you are logged into the jail console, place the configuration file at <code class="docutils literal"><span class="pre">/etc/my.cnf</span></code>.  If you are on the host system console, place it at <code class="docutils literal"><span class="pre">/usr/jails/galera-node/etc/my.cnf</span></code>.  Replace <code class="docutils literal"><span class="pre">galera-node</span></code> in the latter with the name of the node jail.</p>
@@ -442,6 +444,16 @@
 </li>
 </ul>
 
+  </div>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="docker.html"
+                          title="Previous page">&larr; Using Docker</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="monitor.html"
+                          title="Next page">&rarr; Cluster Monitoring</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -503,15 +515,28 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="monitor.html" title="Cluster Monitoring"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="docker.html" title="Using Docker"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
- 
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="deployment.html" >Deployment</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="containers.html" accesskey="U">Container Deployments</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
+				<li><a href="docker.html" title="Using Docker">&lt; Previous</a></li>
+			
 
+			
+				<li><a href="monitor.html" title="Cluster Monitoring">Next &gt;</a></li>
 			
 
 		</ul>

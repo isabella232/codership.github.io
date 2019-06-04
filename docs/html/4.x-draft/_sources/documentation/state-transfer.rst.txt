@@ -127,7 +127,7 @@ GCache employs three types of storage:
   When all other stores are disabled, at least one page file remains present on disk.
 
 
-.. note:: For more information on parameters that control write-set caching, see the ``gcache.*`` parameters on :ref:`Galera Parameters <Galera Parameters>`.
+.. note:: For more information on parameters that control write-set caching, see the ``gcache.*`` parameters on :doc:`Galera Parameters <galera-parameters>`.
 
 Galera Cluster uses an allocation algorithm that attempts to store write-sets in the above order.  That is, first it attempts to use permanent in-memory store.  If there is not enough space for the write-set, it attempts to store to the permanent ring-buffer file.  The page store always succeeds, unless the write-set is larger than the available disk space.
 

@@ -31,6 +31,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Galera Parameters" href="galera-parameters.html" />
+    <link rel="prev" title="MySQL wsrep Options" href="mysql-wsrep-options.html" />
 
 
 
@@ -252,7 +254,7 @@
 </table>
 <p>This function returns the <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> of the last write transaction observed by the client. It can be useful in combination with <a class="reference internal" href="#wsrep-sync-wait-upto-gtid"><span class="std std-ref">WSREP_SYNC_WAIT_UPTO_GTID()</span></a>. You can use this parameter to identify the transaction upon which it should wait before unblocking the client.</p>
 <p>Below is an example of how you might use the <code class="docutils literal"><span class="pre">WSREP_LAST_SEEN_GTID()</span></code> function to get the Global Transaction ID of the last write transaction observed:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="nf">WSREP_LAST_SEEN_GTID</span><span class="p">();</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT WSREP_LAST_SEEN_GTID();</span>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">WSREP_LAST_WRITTEN_GTID()</span></code></p>
@@ -276,14 +278,14 @@
 </table>
 <p>This function returns the Global Transaction ID of the last write transaction made by the client.  This can be useful in combination with <a class="reference internal" href="#wsrep-sync-wait-upto-gtid"><span class="std std-ref">WSREP_SYNC_WAIT_UPTO_GTID()</span></a>. You can use this parameter to identify the transaction upon which it should wait before unblocking the client.</p>
 <p>Below is an example of how you might use the <code class="docutils literal"><span class="pre">WSREP_LAST_SEEN_GTID()</span></code> function to get the Global Transaction ID of the last write transaction observed:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="n">BEGIN</span><span class="p">;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">BEGIN;</span>
 
-<span class="k">UPDATE</span> <span class="n">table_name</span> <span class="kt">SET</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">WHERE</span> <span class="n">field</span> <span class="o">=</span> <span class="s1">&#39;example&#39;</span><span class="p">;</span>
+<span class="go">UPDATE table_name SET id = 0</span>
+<span class="go">WHERE field = &#39;example&#39;;</span>
 
-<span class="n">COMMIT</span><span class="p">;</span>
+<span class="go">COMMIT;</span>
 
-<span class="k">SELECT</span> <span class="nf">WSREP_LAST_WRITTEN_GTID</span><span class="p">();</span>
+<span class="go">SELECT WSREP_LAST_WRITTEN_GTID();</span>
 </pre></div>
 </div>
 <p class="rubric"><code class="docutils literal"><span class="pre">WSREP_SYNC_WAIT_UPTO_GTID()</span></code></p>
@@ -317,9 +319,9 @@
 <li><code class="docutils literal"><span class="pre">ER_WRONG_ARGUMENTS</span></code> Error: The function is given an incorrect Global Transaction ID.</li>
 </ul>
 <p>Below is an example of how you might use the <code class="docutils literal"><span class="pre">WSREP_SYNC_WAIT_UPTO_GTID()</span></code> function:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span>$transaction_gtid = SELECT WSREP_LAST_SEEN_GTID();
-...
-SELECT WSREP_SYNC_WAIT_UPTO_GTID($transaction_gtid);
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span><span class="nv">transaction_gtid</span> <span class="o">=</span> SELECT WSREP_LAST_SEEN_GTID<span class="o">()</span><span class="p">;</span>
+<span class="go">...</span>
+<span class="go">SELECT WSREP_SYNC_WAIT_UPTO_GTID($transaction_gtid);</span>
 </pre></div>
 </div>
 </div>
@@ -333,6 +335,16 @@ SELECT WSREP_SYNC_WAIT_UPTO_GTID($transaction_gtid);
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
         </a></p>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="mysql-wsrep-options.html"
+                          title="Previous page">&larr; MySQL wsrep Options</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="galera-parameters.html"
+                          title="Next page">&rarr; Galera Parameters</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -393,15 +405,27 @@ SELECT WSREP_SYNC_WAIT_UPTO_GTID($transaction_gtid);
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="galera-parameters.html" title="Galera Parameters"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="mysql-wsrep-options.html" title="MySQL wsrep Options"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
- 
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="reference.html" accesskey="U">Reference</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
+				<li><a href="mysql-wsrep-options.html" title="MySQL wsrep Options">&lt; Previous</a></li>
+			
 
+			
+				<li><a href="galera-parameters.html" title="Galera Parameters">Next &gt;</a></li>
 			
 
 		</ul>
