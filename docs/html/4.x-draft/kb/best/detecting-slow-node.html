@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 
-	
+
 
 
 <!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
@@ -158,7 +158,7 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -208,7 +208,7 @@
 <p>This is particularly true for large transactions&#8212;even if they are within transaction size limits. This is why it&#8217;s important to be able to detect a slow node on a cluster.</p>
 <p class="kb rubric">Scenario</p>
 <p id="finding-slow-nodes">Suppose you suspect that your cluster is running slowly, that transactions are slow to commit to all nodes. However, you&#8217;re not sure which node is the slowest.</p>
-<p>There are two status variables you can use to find slow nodes in a cluster: <a class="reference internal" href="../../galerastatusvariables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a> and <a class="reference internal" href="../../galerastatusvariables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a>. Check these status variables on each node in a cluster.  The node that returns the highest value is the slowest one.  Lower values are preferable.</p>
+<p>There are two status variables you can use to find slow nodes in a cluster: <a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a> and <a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a>. Check these status variables on each node in a cluster.  The node that returns the highest value is the slowest one.  Lower values are preferable.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">GLOBAL_STATUS</span>
 <span class="k">WHERE</span> <span class="n">VARIABLE_NAME</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_flow_control_sent&#39;</span>
 <span class="k">OR</span> <span class="n">VARIABLE_NAME</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_recv_queue_avg&#39;</span><span class="p">;</span>
@@ -226,8 +226,8 @@
 <p class="kb rubric">Additional Information</p>
 <p>For more information related to this KB article, see the following documents:</p>
 <ul class="simple">
-<li><a class="reference internal" href="../../galerastatusvariables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a></li>
-<li><a class="reference internal" href="../../galerastatusvariables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a></li>
 </ul>
 </div>
 
@@ -287,7 +287,7 @@
 
 	<div id="menu-nav-bar" class="nav-menu">
 		<ul class="nav-link">
-			 
+			
 
 				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/best/detecting-slow-node.rst.rst" title="Edit 'Detecting a Slow Node' on Github">Edit on Github</a></li>
 
@@ -343,7 +343,7 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>

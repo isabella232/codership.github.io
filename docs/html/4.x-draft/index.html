@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Galera Cluster Documentation &#8212; Galera Cluster Documentation</title>
+    <title>The Codership Library &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -31,9 +31,8 @@
     <script type="text/javascript" src="_static/cloud.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Getting Started" href="gettingstarted.html" />
 
-	
+
 
 
 <!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
@@ -159,7 +158,7 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -203,309 +202,29 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="galera-cluster-documentation">
-<h1>Galera Cluster Documentation<a class="headerlink" href="#galera-cluster-documentation" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="index-0"></span><p id="index-1">Galera Cluster is a synchronous multi-master database cluster, based on synchronous replication and MySQL and InnoDB.  When Galera Cluster is in use, database reads and writes can be directed to any node. Any individual node can be lost without interruption in operations and without using complex failover procedures.</p>
-<p>At a high level, Galera Cluster consists of a database server—that is, MySQL, MariaDB or Percona XtraDB—that uses the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> to manage replication.  To be more specific, the MySQL replication plugin API has been extended to provide all the information and hooks required for true multi-master, synchronous replication.  This extended API is called the Write-Set Replication API, or wsrep API.</p>
-<p>Through the wsrep API, Galera Cluster provides certification-based replication.  A transaction for replication, the write-set not only contains the database rows to replicate, but also includes information on all of the locks that were held by the database during the transaction.  Each node then certifies the replicated write-set against other write-sets in the applier queue.  The write-set is then applied—if there are no conflicting locks.  At this point, the transaction is considered committed, after which each node continues to apply it to the tablespace.</p>
-<p>This approach is also called virtually synchronous replication, given that while it is logically synchronous, the actual writing and committing to the tablespace happens independently, and thus asynchronously on each node.</p>
-<p class="test rubric">Benefits of Galera Cluster</p>
-<p id="galera-cluster-benefits">Galera Cluster provides a significant improvement in high-availability for the MySQL system.  The various ways to achieve high-availability have typically provided only some of the features available through Galera Cluster, making the choice of a high-availability solution an exercise in trade-offs.</p>
-<p>The following features are available through Galera Cluster:</p>
-<ul class="simple">
-<li><strong>True Multi-Master</strong>
-You can read and write to any node at any time. Changes to data on one node will be replicated on all.</li>
-<li><strong>Synchronous Replication</strong>
-There is no slave lag, so no data is lost if a node crashes.</li>
-<li><strong>Tightly Coupled</strong>
-All nodes hold the same state. There is no diverged data between nodes.</li>
-<li><strong>Multi-Threaded Slave</strong>
-This allows for better performance and for any workload.</li>
-<li><strong>No Master-Slave Failover</strong>
-There is no need for master-slave operations or to use VIP.</li>
-<li><strong>Hot Standby</strong>
-There is no downtime related to failures or intentionally taking down a node for maintenance since there is no failover.</li>
-<li><strong>Automatic Node Provisioning</strong>
-There&#8217;s no need to backup manually the database and copy it to the new node.</li>
-<li><strong>Supports InnoDB.</strong>
-The InnoDB storage engine provides for transactional tables.</li>
-<li><strong>Transparent to Applications</strong>
-Generally, you won&#8217;t have to change an application that will interface with the database as a result of Galera. If you do, it will be minimal changes.</li>
-<li><strong>No Read and Write Splitting Needed</strong>
-There is no need to split read and write queries.</li>
-</ul>
-<p>In summary, Galera Cluster is a high-availability solution that is both robust in terms of data integrity and provides high-performance with instant failovers.</p>
-<p class="rubric">Cloud Implementations with Galera Cluster</p>
-<p id="galera-cluster-cloud-implementations">An additional benefit of Galera Cluster is good cloud support.  Automatic node provisioning makes elastic scale-out and scale-in operations painless.  Galera Cluster has been proven to perform extremely well in the cloud, such as when using multiple small node instances, across multiple data centers—AWS zones, for example—or even over Wider Area Networks.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="whatsnew.html">What&#8217;s New in Galera Cluster 4.x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="galerainstallation.html">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="galerainstallation.html#preparing-the-server">Preparing the Server</a></li>
-<li class="toctree-l3"><a class="reference internal" href="galerainstallation.html#installing-galera-cluster">Installing Galera Cluster</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="configuration.html">System Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="configuration.html#configuring-the-database-server">Configuring the Database Server</a></li>
-<li class="toctree-l3"><a class="reference internal" href="configuration.html#configuring-swap-space">Configuring Swap Space</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="dbconfiguration.html">Replication Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="dbconfiguration.html#backend-schema">Backend Schema</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dbconfiguration.html#cluster-addresses">Cluster Addresses</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dbconfiguration.html#options">Options</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="startingcluster.html">Starting the Cluster</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="startingcluster.html#starting-the-first-node">Starting the First Node</a></li>
-<li class="toctree-l3"><a class="reference internal" href="startingcluster.html#adding-nodes-to-the-cluster">Adding Nodes to the Cluster</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="testingcluster.html">Testing a Cluster</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="testingcluster.html#replication-testing">Replication Testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="testingcluster.html#split-brain-testing">Split-Brain Testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="testingcluster.html#failure-simulation">Failure Simulation</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="restartingcluster.html">Restarting the Cluster</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="restartingcluster.html#identifying-the-most-advanced-node">Identifying the Most Advanced Node</a></li>
-<li class="toctree-l3"><a class="reference internal" href="restartingcluster.html#safe-to-bootstrap-protection">&#8216;Safe to Bootstrap&#8217; Protection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="restartingcluster.html#gcache-recovery">Gcache Recovery</a></li>
-<li class="toctree-l3"><a class="reference internal" href="restartingcluster.html#identifying-crashed-nodes">Identifying Crashed Nodes</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="technicaldescription.html">Technical Description</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="introduction.html">Database Replication</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="introduction.html#masters-and-slaves">Masters and Slaves</a></li>
-<li class="toctree-l3"><a class="reference internal" href="introduction.html#asynchronous-and-synchronous-replication">Asynchronous and Synchronous Replication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="introduction.html#solving-the-issues-in-synchronous-replication">Solving the Issues in Synchronous Replication</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="certificationbasedreplication.html">Certification-Based Replication</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="certificationbasedreplication.html#certification-based-replication-requirements">Certification-Based Replication Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="certificationbasedreplication.html#how-certification-based-replication-works">How Certification-Based Replication Works</a></li>
-<li class="toctree-l3"><a class="reference internal" href="certificationbasedreplication.html#certification-based-replication-in-galera-cluster">Certification-Based Replication in Galera Cluster</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="architecture.html">Replication API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#wsrep-api">wsrep API</a></li>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#galera-replication-plugin">Galera Replication Plugin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="architecture.html#group-communication-plugins">Group Communication Plugins</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="isolationlevels.html">Isolation Levels</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="isolationlevels.html#intra-node-vs-inter-node-isolation-in-galera-cluster">Intra-Node vs. Inter-Node Isolation in Galera Cluster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="isolationlevels.html#understanding-isolation-levels">Understanding Isolation Levels</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="statetransfer.html">State Transfers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="statetransfer.html#state-snapshot-transfer-sst">State Snapshot Transfer (SST)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="statetransfer.html#incremental-state-transfer-ist">Incremental State Transfer (IST)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="nodestates.html">Flow Control</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="nodestates.html#how-flow-control-works">How Flow Control Works</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nodestates.html#understanding-node-states">Understanding Node States</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nodestates.html#changes-in-the-node-state">Changes in the Node State</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="recovery.html">Node Failure and Recovery</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="recovery.html#detecting-single-node-failures">Detecting Single Node Failures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="recovery.html#cluster-availability-vs-partition-tolerance">Cluster Availability vs. Partition Tolerance</a></li>
-<li class="toctree-l3"><a class="reference internal" href="recovery.html#recovering-from-single-node-failures">Recovering from Single Node Failures</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="weightedquorum.html">Weighted Quorum</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="weightedquorum.html#id1">Weighted Quorum</a></li>
-<li class="toctree-l3"><a class="reference internal" href="weightedquorum.html#quorum-calculation">Quorum Calculation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="weightedquorum.html#weighted-quorum-examples">Weighted Quorum Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="streamingreplication.html">Streaming Replication</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="streamingreplication.html#when-to-use-streaming-replication">When to Use Streaming Replication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="streamingreplication.html#limitations">Limitations</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="userguide.html">Administration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="nodeprovisioning.html">Node Provisioning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="nodeprovisioning.html#how-nodes-join-the-cluster">How Nodes Join the Cluster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="nodeprovisioning.html#state-transfers">State Transfers</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="sst.html">State Snapshot Transfers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="sst.html#sst-methods">SST Methods</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="scriptablesst.html">Scriptable State Snapshot Transfers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="scriptablesst.html#using-the-common-sst-script">Using the Common SST Script</a></li>
-<li class="toctree-l3"><a class="reference internal" href="scriptablesst.html#state-transfer-script-parameters">State Transfer Script Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="scriptablesst.html#calling-conventions">Calling Conventions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="scriptablesst.html#enabling-scriptable-sst-s">Enabling Scriptable SST&#8217;s</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="system-tables.html">Galera System Tables</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="system-tables.html#cluster-view">Cluster View</a></li>
-<li class="toctree-l3"><a class="reference internal" href="system-tables.html#cluster-members">Cluster Members</a></li>
-<li class="toctree-l3"><a class="reference internal" href="system-tables.html#cluster-streaming-log">Cluster Streaming Log</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="upgrading.html">Upgrading Galera Cluster</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="upgrading.html#rolling-upgrade">Rolling Upgrade</a></li>
-<li class="toctree-l3"><a class="reference internal" href="upgrading.html#bulk-upgrade">Bulk Upgrade</a></li>
-<li class="toctree-l3"><a class="reference internal" href="upgrading.html#provider-only-upgrade">Provider-only Upgrade</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="pcrecovery.html">Recovering the Primary Component</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="pcrecovery.html#understanding-the-primary-component-state">Understanding the Primary Component State</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pcrecovery.html#modifying-the-saved-primary-component-state">Modifying the Saved Primary Component State</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="quorumreset.html">Resetting the Quorum</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="quorumreset.html#finding-the-most-advanced-node">Finding the Most Advanced Node</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quorumreset.html#id2">Resetting the Quorum</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="managingfc.html">Managing Flow Control</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="managingfc.html#monitoring-flow-control">Monitoring Flow Control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="managingfc.html#configuring-flow-control">Configuring Flow Control</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="autoeviction.html">Auto-Eviction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="autoeviction.html#configuring-auto-eviction">Configuring Auto-Eviction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoeviction.html#checking-eviction-status">Checking Eviction Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoeviction.html#upgrading-from-previous-versions">Upgrading from Previous Versions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="usingsr.html">Using Streaming Replication</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usingsr.html#enabling-streaming-replication">Enabling Streaming Replication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usingsr.html#streaming-replication-with-hot-records">Streaming Replication with Hot Records</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="arbitrator.html">Galera Arbitrator</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="arbitrator.html#starting-galera-arbitrator">Starting Galera Arbitrator</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="backingupthecluster.html">Backing Up Cluster Data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="backingupthecluster.html#state-snapshot-transfer-as-backup">State Snapshot Transfer as Backup</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="deployment.html">Deployment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="deploymentvariants.html">Cluster Deployment Variants</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="deploymentvariants.html#no-clustering">No Clustering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deploymentvariants.html#whole-stack-clustering">Whole Stack Clustering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deploymentvariants.html#data-tier-clustering">Data Tier Clustering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="deploymentvariants.html#aggregated-stack-clustering">Aggregated Stack Clustering</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="loadbalancing.html">Load Balancing</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="haproxy.html">HAProxy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pen.html">Pen</a></li>
-<li class="toctree-l3"><a class="reference internal" href="glb.html">Galera Load Balancer</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="containers.html">Container Deployments</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="docker.html">Using Docker</a></li>
-<li class="toctree-l3"><a class="reference internal" href="jails.html">Using Jails</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="monitor.html">Cluster Monitoring</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="monitoringthecluster.html">Using Status Variables</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="monitoringthecluster.html#checking-cluster-integrity">Checking Cluster Integrity</a></li>
-<li class="toctree-l3"><a class="reference internal" href="monitoringthecluster.html#checking-the-node-status">Checking the Node Status</a></li>
-<li class="toctree-l3"><a class="reference internal" href="monitoringthecluster.html#checking-the-replication-health">Checking the Replication Health</a></li>
-<li class="toctree-l3"><a class="reference internal" href="monitoringthecluster.html#detecting-slow-network-issues">Detecting Slow Network Issues</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="log.html">Database Server Logs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="log.html#log-parameters">Log Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="log.html#additional-log-files">Additional Log Files</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notificationcmd.html">Notification Command</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notificationcmd.html#notification-command-parameters">Notification Command Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notificationcmd.html#example-notification-script">Example Notification Script</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notificationcmd.html#enabling-the-notification-command">Enabling the Notification Command</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="firewallsettings.html">Firewall Settings</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="iptables.html">Firewall Configuration with <code class="docutils literal"><span class="pre">iptables</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="firewalld.html">Firewall Configuration with FirewallD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pf.html">Firewall Configuration with PF</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="ssl.html">SSL Settings</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="sslcert.html">SSL Certificates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sslconfig.html">SSL Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sslsst.html">SSL for State Snapshot Transfers</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="selinux.html">SELinux Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="selinux.html#generating-an-selinux-policy">Generating an SELinux Policy</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="migrate.html">Migration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="limitations.html">Differences from a Standalone MySQL Server</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="limitations.html#server-differences">Server Differences</a></li>
-<li class="toctree-l3"><a class="reference internal" href="limitations.html#differences-in-table-configurations">Differences in Table Configurations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="limitations.html#differences-in-transactions">Differences in Transactions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="migration.html">Migrating to Galera Cluster</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="migration.html#upgrading-system-tables">Upgrading System Tables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="migration.html#migrating-from-mysql-to-galera-cluster">Migrating from MySQL to Galera Cluster</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mysqlwsrepoptions.html">MySQL wsrep Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysqlwsrepfunctions.html">MySQL wsrep Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="galeraparameters.html">Galera Parameters</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="galeraparameters.html#setting-galera-parameters-in-mysql">Setting Galera Parameters in MySQL</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="galerastatusvariables.html">Galera Status Variables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="system-tables.html">Galera System Tables</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="system-tables.html#cluster-view">Cluster View</a></li>
-<li class="toctree-l3"><a class="reference internal" href="system-tables.html#cluster-members">Cluster Members</a></li>
-<li class="toctree-l3"><a class="reference internal" href="system-tables.html#cluster-streaming-log">Cluster Streaming Log</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="xtrabackupoptions.html">XtraBackup Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="glbparameters.html">Galera Load Balancer Parameters</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="glbparameters.html#configuration-parameters">Configuration Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="glbparameters.html#configuration-options">Configuration Options</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="versioninginformation.html">Versioning Information</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="versioninginformation.html#release-numbering-schemes">Release Numbering Schemes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="versioninginformation.html#third-party-implementations-of-galera-cluster">Third-party Implementations of Galera Cluster</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="legalnotice.html">Legal Notice</a></li>
-<li class="toctree-l2"><a class="reference internal" href="glossary.html">Glossary</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="the-codership-library">
+<h1>The Codership Library<a class="headerlink" href="#the-codership-library" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><p id="index-1">This library contains a variety of information about Codership&#8217;s Galera Cluster—a synchronous multi-master database cluster, based on synchronous replication and MySQL and InnoDB.  Here you will find many resources to help you with installing and configuring Galera, as well as learning about it.</p>
+<div class="section" id="documentation">
+<h2><span class="xref std std-ref">Documentation</span><a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>This section is the documentation for Galera Cluster. This is straightforward documentation, not tutorials or advice articles. See below for those. The documentation includes hundreds of pages of information on configuring every aspect of Galera (i.e., <span class="xref std std-ref">Reference Manual</span>), as well as information on administering a cluster (i.e., <span class="xref std std-ref">Administration Manual</span>).</p>
 </div>
+<div class="section" id="knowledge-base">
+<h2><span class="xref std std-ref">Knowledge Base</span><a class="headerlink" href="#knowledge-base" title="Permalink to this headline">¶</a></h2>
+<p>Occasionally, you may have problems getting a cluster to work the way you want. Maybe you&#8217;ll may have a node that just won&#8217;t join the cluster. Or a node or the cluster crashes. The Knowledge Base provides Troubleshooting articles explaining how to resolve common problems. It also contains Best Practices articles for improving performance, ensuring against crashes, and other methods for getting the most out of Galera.</p>
+</div>
+<div class="section" id="frequently-asked-questions">
+<h2><span class="xref std std-ref">Frequently Asked Questions</span><a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<p>This section is the FAQ for Galera Cluster. It lists a number of frequently asked questions on Galera and other related matters. They&#8217;re not for solving problems.  Instead, they&#8217;re mostly questions that you might have before deciding to use Galera software, as well as how to get assistance and learn about Galera.</p>
+</div>
+<div class="section" id="training">
+<h2><span class="xref std std-ref">Training</span><a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h2>
+<p>This is our training section. It contains a <span class="xref std std-ref">Getting Started Guide</span> , as well as articles using Galera for specific uses.  Soon there will also be videos of training seminars and other presentations.</p>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
 <li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
+</div>
 </div>
 
 
@@ -516,11 +235,18 @@ There is no need to split read and write queries.</li>
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="#" title="index">
           <img class="logo" src="_static/logo.png" alt="Logo"/>
-        </a></p>
-  <div class="sphinxnext">
-    <h4>Next page</h4>
-    <p class="topless"><a href="gettingstarted.html"
-                          title="Next page">&rarr; Getting Started</a></p>
+        </a></p><div class="sphinx-toc sphinxlocaltoc">
+    <h3><a href="#">Page contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">The Codership Library</a><ul>
+<li><a class="reference internal" href="#documentation"><code class="docutils literal"><span class="pre">Documentation</span></code></a></li>
+<li><a class="reference internal" href="#knowledge-base"><code class="docutils literal"><span class="pre">Knowledge</span> <span class="pre">Base</span></code></a></li>
+<li><a class="reference internal" href="#frequently-asked-questions"><code class="docutils literal"><span class="pre">Frequently</span> <span class="pre">Asked</span> <span class="pre">Questions</span></code></a></li>
+<li><a class="reference internal" href="#training"><code class="docutils literal"><span class="pre">Training</span></code></a></li>
+</ul>
+</li>
+</ul>
+
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -569,9 +295,9 @@ There is no need to split read and write queries.</li>
 
 	<div id="menu-nav-bar" class="nav-menu">
 		<ul class="nav-link">
-			 
+			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/index.rst.rst" title="Edit 'Galera Cluster Documentation' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/index.rst.rst" title="Edit 'The Codership Library' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -582,9 +308,6 @@ There is no need to split read and write queries.</li>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="gettingstarted.html" title="Getting Started"
-             accesskey="N">next</a> &nbsp; &nbsp;</li>
     <li><a href="#">Galera Cluster Documentation</a> &#187;</li>
  
       </ul>
@@ -594,8 +317,6 @@ There is no need to split read and write queries.</li>
 
 			
 
-			
-				<li><a href="gettingstarted.html" title="Getting Started">Next &gt;</a></li>
 			
 
 		</ul>
@@ -630,7 +351,7 @@ There is no need to split read and write queries.</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/documentation-webpages/">Documentation</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
