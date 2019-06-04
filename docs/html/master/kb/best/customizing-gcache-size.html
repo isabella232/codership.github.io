@@ -228,22 +228,22 @@
 <span class="o">+------------------------+-----------+</span>
 </pre></div>
 </div>
-<p>Note the value and time, respective as <img class="math" src="../../_images/math/f8947410122674340e214a24e1b1eba229ad5ab9.png" alt="recv_1"/> and <img class="math" src="../../_images/math/72e3f7de9bb11d3b9446b2bf18dfa9248fe4ce1f.png" alt="time_1"/>.</p>
+<p>Note the value and time, respective as <img class="math" src="../../_images/math/dcf6a6108aba42b53093ac02236d96bab58b98c1.png" alt="recv_1"/> and <img class="math" src="../../_images/math/3367f7bccbd59a41d52f479baa7f04c6c15b3dc3.png" alt="time_1"/>.</p>
 </li>
-<li><p class="first">Run the same query again, noting the value and time, respectively, as <img class="math" src="../../_images/math/e83246fffebba80a274243babcb22407fae77c3c.png" alt="recv_2"/> and <img class="math" src="../../_images/math/5e8a6084885d1d19281546cdea9199d53410bcb5.png" alt="time_2"/>.</p>
+<li><p class="first">Run the same query again, noting the value and time, respectively, as <img class="math" src="../../_images/math/1344c690f232194652a338a905ae6209666b85a8.png" alt="recv_2"/> and <img class="math" src="../../_images/math/29ef4a16f979550323a84babab5537fe178d28df.png" alt="time_2"/>.</p>
 </li>
 <li><p class="first">Apply these values to the following equation:</p>
 <div class="math">
-<p><img src="../../_images/math/f8bd8a7a3055b03d5ec5170bbac8bc549ff74377.png" alt="writerate = \frac{ recv_2 - recv_1 }{ time_2 - time_1}"/></p>
+<p><img src="../../_images/math/93c323bc821635cc3f53a9632ae524008541bc91.png" alt="writerate = \frac{ recv_2 - recv_1 }{ time_2 - time_1}"/></p>
 </div></li>
 </ol>
 <p>From the write rate you can determine the amount of time the cache remains valid.  When the cluster shows a node as absent for a period of time less than this interval, the node can rejoin the cluster through an incremental state transfer. Node that remains absent for longer than this interval will likely require a full state snapshot transfer to rejoin the cluster.</p>
 <p>You can determine the period of time the cache remains valid using this equation:</p>
 <div class="math">
-<p><img src="../../_images/math/6f2f1a49639f9ff42b30cdedf5fa2f3c3567565f.png" alt="period = \frac{ cachesize } { writerate }"/></p>
+<p><img src="../../_images/math/21c92820a890ac262b1992cef30ad93dce025c29.png" alt="period = \frac{ cachesize } { writerate }"/></p>
 </div><p>Conversely, if you already know the period in which you want the write-set cache to remain valid, you can use instead this equation:</p>
 <div class="math">
-<p><img src="../../_images/math/b9bcad9c8cc6166028cd60121fdaba45b157e8bf.png" alt="cachesize = writerate \times time"/></p>
+<p><img src="../../_images/math/e795ebc93ee422dced53f50f901bfeb38dc95fb2.png" alt="cachesize = writerate \times time"/></p>
 </div><p>This equation can show how the size of the write-set cache can improve performance.  For instance, say you find that cluster nodes frequently request state snapshot transfers.  Increasing the <a class="reference internal" href="../../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter extends the period in which the write-set remains valid, allowing the nodes to update instead through incremental state transfers.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>

@@ -208,15 +208,15 @@
 <h1>Galera System Tables<a class="headerlink" href="#galera-system-tables" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="system-tables"></span><p id="index-0">Starting with version 4 of Galera, three system tables related to Galera replication were added to the <code class="docutils literal"><span class="pre">mysql</span></code> database: <code class="docutils literal"><span class="pre">wsrep_cluster</span></code>, <code class="docutils literal"><span class="pre">wsrep_cluster_members</span></code>, and <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code>.  These system tables may be used by database administrators to get a sense of the current layout of the nodes in a cluster.</p>
 <p>To see these tables on your server, execute the following SQL statement one of them using the <code class="docutils literal"><span class="pre">mysql</span></code> client or a similar client:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="kp">TABLES</span> <span class="k">FROM</span> <span class="n">mysql</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep%&#39;</span><span class="p">;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SHOW TABLES FROM mysql LIKE &#39;wsrep%&#39;;</span>
 
-<span class="o">+---------------------------+</span>
-<span class="o">|</span> <span class="nf">Tables_in_mysql</span> <span class="p">(</span><span class="n">wsrep</span><span class="o">%</span><span class="p">)</span>  <span class="o">|</span>
-<span class="o">+---------------------------+</span>
-<span class="o">|</span> <span class="n">wsrep_cluster</span>             <span class="o">|</span>
-<span class="o">|</span> <span class="n">wsrep_cluster_members</span>     <span class="o">|</span>
-<span class="o">|</span> <span class="n">wsrep_streaming_log</span>       <span class="o">|</span>
-<span class="o">+---------------------------+</span>
+<span class="go">+---------------------------+</span>
+<span class="go">| Tables_in_mysql (wsrep%)  |</span>
+<span class="go">+---------------------------+</span>
+<span class="go">| wsrep_cluster             |</span>
+<span class="go">| wsrep_cluster_members     |</span>
+<span class="go">| wsrep_streaming_log       |</span>
+<span class="go">+---------------------------+</span>
 </pre></div>
 </div>
 <p>Database administrators and clients with the access to the <code class="docutils literal"><span class="pre">mysql</span></code> database may read these tables, but they may not modify them: the database itself will make modifications, as needed. If your server doesn&#8217;t have these tables, it may be that your server is using an older version of Galera.</p>
@@ -224,32 +224,32 @@
 <h2>Cluster View<a class="headerlink" href="#cluster-view" title="Permalink to this headline">¶</a></h2>
 <p>One of the new Galera related system tables is the <code class="docutils literal"><span class="pre">wsrep_cluster</span></code> table. This new table, starting in version 4 of Galera, contains a current view of the cluster. That is to say, it stores the UUID of the cluster and some other identification information, as well as the cluster&#8217;s capabilities.</p>
 <p>To see the names of the columns in this table, either use the <code class="docutils literal"><span class="pre">DESCRIBE</span></code> statement or execute the following SQL statement from the <code class="docutils literal"><span class="pre">mysql</span></code> client on one of the nodes in the cluster:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">COLUMN_NAME</span> <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">columns</span>
-<span class="k">WHERE</span> <span class="n">table_schema</span><span class="o">=</span><span class="s1">&#39;mysql&#39;</span>
-<span class="k">AND</span> <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;wsrep_cluster&#39;</span><span class="p">;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT COLUMN_NAME FROM information_schema.columns</span>
+<span class="go">WHERE table_schema=&#39;mysql&#39;</span>
+<span class="go">AND table_name=&#39;wsrep_cluster&#39;;</span>
 
-<span class="o">+------------------+</span>
-<span class="o">|</span> <span class="n">COLUMN_NAME</span>      <span class="o">|</span>
-<span class="o">+------------------+</span>
-<span class="o">|</span> <span class="n">cluster_uuid</span>     <span class="o">|</span>
-<span class="o">|</span> <span class="n">view_id</span>          <span class="o">|</span>
-<span class="o">|</span> <span class="n">view_seqno</span>       <span class="o">|</span>
-<span class="o">|</span> <span class="n">protocol_version</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">capabilities</span>     <span class="o">|</span>
-<span class="o">+------------------+</span>
+<span class="go">+------------------+</span>
+<span class="go">| COLUMN_NAME      |</span>
+<span class="go">+------------------+</span>
+<span class="go">| cluster_uuid     |</span>
+<span class="go">| view_id          |</span>
+<span class="go">| view_seqno       |</span>
+<span class="go">| protocol_version |</span>
+<span class="go">| capabilities     |</span>
+<span class="go">+------------------+</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">cluster_uuid</span></code> contains the UUID of the cluster.</p>
 <p>The <code class="docutils literal"><span class="pre">view_id</span></code> corresponds to the status value of the <code class="docutils literal"><span class="pre">wsrep_cluster_conf_id</span></code>, the number of cluster configuration changes which have occurred in the cluster.  The <code class="docutils literal"><span class="pre">view_seqno</span></code> on the other hand, corresponds to Galera sequence number associated with the cluster view.  The protocol version is the same value as contained in the <code class="docutils literal"><span class="pre">wsrep_protocol_version</span></code> variable.  It&#8217;s the protocol version of the MySQL-wsrep or the MariaDB wsrep patch. Last, the  <code class="docutils literal"><span class="pre">capabilities</span></code> column contains the capabilities bitmask provided by the Galera library. It&#8217;s metadata that will be needed to recover node state during crash recovery.</p>
 <p>If you execute the following SQL statement from any node in a cluster, you can see the contents of this table:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span>SELECT * FROM mysql.wsrep_cluster \G
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT * FROM mysql.wsrep_cluster \G</span>
 
-*************************** 1. row ***************************
-    cluster_uuid: bd5fe1c3-7d80-11e9-8913-4f209d688a15
-         view_id: 3
-      view_seqno: 2956
-protocol_version: 4
-    capabilities: 184703
+<span class="go">*************************** 1. row ***************************</span>
+<span class="go">    cluster_uuid: bd5fe1c3-7d80-11e9-8913-4f209d688a15</span>
+<span class="go">         view_id: 3</span>
+<span class="go">      view_seqno: 2956</span>
+<span class="go">protocol_version: 4</span>
+<span class="go">    capabilities: 184703</span>
 </pre></div>
 </div>
 <p>In the results here, you can see the cluster UUID. This can also be found by using the SQL statement, <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> for the variable, <code class="docutils literal"><span class="pre">wsrep_local_state_uuid</span></code>.</p>
@@ -258,39 +258,39 @@ protocol_version: 4
 <h2>Cluster Members<a class="headerlink" href="#cluster-members" title="Permalink to this headline">¶</a></h2>
 <p>Another Galera related system tables is the <code class="docutils literal"><span class="pre">wsrep_cluster_members</span></code> table. This system table will provide the current membership of the cluster; it will contain a row for each node in the cluster.  That is to say, each node in the cluster known to the node upon which the table is queried.</p>
 <p>To see the names of columns in this table, either use the <code class="docutils literal"><span class="pre">DESCRIBE</span></code> statement or execute the following SQL statement from the <code class="docutils literal"><span class="pre">mysql</span></code> client on one of the nodes in the cluster:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">COLUMN_NAME</span> <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">columns</span>
-<span class="k">WHERE</span> <span class="n">table_schema</span><span class="o">=</span><span class="s1">&#39;mysql&#39;</span>
-<span class="k">AND</span> <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;wsrep_cluster_members&#39;</span><span class="p">;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT COLUMN_NAME FROM information_schema.columns</span>
+<span class="go">WHERE table_schema=&#39;mysql&#39;</span>
+<span class="go">AND table_name=&#39;wsrep_cluster_members&#39;;</span>
 
-<span class="o">+-----------------------+</span>
-<span class="o">|</span> <span class="n">COLUMN_NAME</span>           <span class="o">|</span>
-<span class="o">+-----------------------+</span>
-<span class="o">|</span> <span class="n">node_uuid</span>             <span class="o">|</span>
-<span class="o">|</span> <span class="n">cluster_uuid</span>          <span class="o">|</span>
-<span class="o">|</span> <span class="n">node_name</span>             <span class="o">|</span>
-<span class="o">|</span> <span class="n">node_incoming_address</span> <span class="o">|</span>
-<span class="o">+-----------------------+</span>
+<span class="go">+-----------------------+</span>
+<span class="go">| COLUMN_NAME           |</span>
+<span class="go">+-----------------------+</span>
+<span class="go">| node_uuid             |</span>
+<span class="go">| cluster_uuid          |</span>
+<span class="go">| node_name             |</span>
+<span class="go">| node_incoming_address |</span>
+<span class="go">+-----------------------+</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">node_uuid</span></code> records the UUID of each node in the cluster. The <code class="docutils literal"><span class="pre">cluster_uuid</span></code> is the UUID of the cluster for which the node belongs&#8211;the one on which the table has been queried. This is currently the same as what&#8217;s contained in the <code class="docutils literal"><span class="pre">wsrep_cluster</span> <span class="pre">table</span></code>. The <code class="docutils literal"><span class="pre">node_name</span></code> contains the human readable name of each node, Last, the <code class="docutils literal"><span class="pre">node_incoming_address</span></code> stores the IP address and port on which each node is listening for client connections.</p>
 <p>If you execute the following SQL statement from any node in a cluster, you can see the contents of this table:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span>SELECT * FROM mysql.wsrep_cluster_members ORDER BY node_name \G
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT * FROM mysql.wsrep_cluster_members ORDER BY node_name \G</span>
 
-*************************** 1. row ***************************
-            node_uuid: e39d1774-7e2b-11e9-b5b2-7696f81d30fb
-         cluster_uuid: bd5fe1c3-7d80-11e9-8913-4f209d688a15
-            node_name: galera1
-node_incoming_address: AUTO
-*************************** 2. row ***************************
-            node_uuid: eb8fc512-7e2b-11e9-bb74-3281cf207f60
-         cluster_uuid: bd5fe1c3-7d80-11e9-8913-4f209d688a15
-            node_name: galera2
-node_incoming_address: AUTO
-*************************** 3. row ***************************
-            node_uuid: 2347a8ac-7e2c-11e9-b6f0-da90a2d0a563
-         cluster_uuid: bd5fe1c3-7d80-11e9-8913-4f209d688a15
-            node_name: galera3
-node_incoming_address: AUTO
+<span class="go">*************************** 1. row ***************************</span>
+<span class="go">            node_uuid: e39d1774-7e2b-11e9-b5b2-7696f81d30fb</span>
+<span class="go">         cluster_uuid: bd5fe1c3-7d80-11e9-8913-4f209d688a15</span>
+<span class="go">            node_name: galera1</span>
+<span class="go">node_incoming_address: AUTO</span>
+<span class="go">*************************** 2. row ***************************</span>
+<span class="go">            node_uuid: eb8fc512-7e2b-11e9-bb74-3281cf207f60</span>
+<span class="go">         cluster_uuid: bd5fe1c3-7d80-11e9-8913-4f209d688a15</span>
+<span class="go">            node_name: galera2</span>
+<span class="go">node_incoming_address: AUTO</span>
+<span class="go">*************************** 3. row ***************************</span>
+<span class="go">            node_uuid: 2347a8ac-7e2c-11e9-b6f0-da90a2d0a563</span>
+<span class="go">         cluster_uuid: bd5fe1c3-7d80-11e9-8913-4f209d688a15</span>
+<span class="go">            node_name: galera3</span>
+<span class="go">node_incoming_address: AUTO</span>
 </pre></div>
 </div>
 <p>In the results of this example you can see that this cluster is composed of three nodes.  The node UUIDs are unique for each node. Notice that the cluster UUID is the same for all three and corresponds to the related value found in the <code class="docutils literal"><span class="pre">wsrep_cluster</span></code> table shown in the example earlier. Each node has a unique name (e.g., galera1). They were named in the configuration file using the <code class="docutils literal"><span class="pre">wsrep_node_name</span></code> parameter.  The incoming node address is set to <code class="docutils literal"><span class="pre">AUTO</span></code> for all of these nodes, but they can be set individual to specific nodes with the <code class="docutils literal"><span class="pre">wsrep-node-address</span></code> or the <code class="docutils literal"><span class="pre">bind-address</span></code> parameter in each node&#8217;s configuration file.</p>
@@ -300,42 +300,42 @@ node_incoming_address: AUTO
 <p>The last Galera related system tables is the <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code> table. This system table contains meta data and row events for ongoing streaming transactions, write set fragment per row.</p>
 <p>The <code class="docutils literal"><span class="pre">node_uuid</span></code> column contains the node UUID of the hosting node for the transaction (i.e. node where the client is executing the transaction). The <code class="docutils literal"><span class="pre">trx_id</span></code> column stores the transaction identifier, whereas the <code class="docutils literal"><span class="pre">seqno</span></code> stores the sequence number of the write set fragment. Last, the <code class="docutils literal"><span class="pre">flags</span></code> columns records flags associated with the write set fragment, and <code class="docutils literal"><span class="pre">frag</span></code> contains the binary log replication events contained in the write set fragment.</p>
 <p>To see the names of columns in this table, either use the <code class="docutils literal"><span class="pre">DESCRIBE</span></code> statement or execute the following SQL statement from the <code class="docutils literal"><span class="pre">mysql</span></code> client on one of the nodes in the cluster:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">COLUMN_NAME</span> <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">columns</span>
-<span class="k">WHERE</span> <span class="n">table_schema</span><span class="o">=</span><span class="s1">&#39;mysql&#39;</span>
-<span class="k">AND</span> <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;wsrep_streaming_log&#39;</span><span class="p">;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT COLUMN_NAME FROM information_schema.columns</span>
+<span class="go">WHERE table_schema=&#39;mysql&#39;</span>
+<span class="go">AND table_name=&#39;wsrep_streaming_log&#39;;</span>
 
-<span class="o">+-------------+</span>
-<span class="o">|</span> <span class="n">COLUMN_NAME</span> <span class="o">|</span>
-<span class="o">+-------------+</span>
-<span class="o">|</span> <span class="n">node_uuid</span>   <span class="o">|</span>
-<span class="o">|</span> <span class="n">trx_id</span>      <span class="o">|</span>
-<span class="o">|</span> <span class="n">seqno</span>       <span class="o">|</span>
-<span class="o">|</span> <span class="n">flags</span>       <span class="o">|</span>
-<span class="o">|</span> <span class="n">frag</span>        <span class="o">|</span>
-<span class="o">+-------------+</span>
+<span class="go">+-------------+</span>
+<span class="go">| COLUMN_NAME |</span>
+<span class="go">+-------------+</span>
+<span class="go">| node_uuid   |</span>
+<span class="go">| trx_id      |</span>
+<span class="go">| seqno       |</span>
+<span class="go">| flags       |</span>
+<span class="go">| frag        |</span>
+<span class="go">+-------------+</span>
 </pre></div>
 </div>
 <p>If you execute the following SQL statement from any node in a cluster, you can see the contents of this table:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span>SELECT * FROM mysql.wsrep_streaming_log \G
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT * FROM mysql.wsrep_streaming_log \G</span>
 </pre></div>
 </div>
 <p>Typically, you won&#8217;t see any results since it will contain entries only for transactions which have streaming replication enabled. For example:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nf">table1</span> <span class="p">(</span><span class="n">col1</span> <span class="kt">INT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">);</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">CREATE TABLE table1 (col1 INT PRIMARY KEY);</span>
 
-<span class="kt">SET</span> <span class="n">SESSION</span> <span class="n">wsrep_trx_fragment_size</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="go">SET SESSION wsrep_trx_fragment_size=1;</span>
 
-<span class="n">START</span> <span class="n">TRANSACTION</span><span class="p">;</span>
+<span class="go">START TRANSACTION;</span>
 
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">table1</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="go">INSERT INTO table1 VALUES (100);</span>
 
-<span class="k">SELECT</span> <span class="n">node_uuid</span><span class="p">,</span> <span class="n">trx_id</span><span class="p">,</span> <span class="n">seqno</span><span class="p">,</span> <span class="n">flags</span>
-<span class="k">FROM</span> <span class="n">mysql</span><span class="p">.</span><span class="n">wsrep_streaming_log</span><span class="p">;</span>
+<span class="go">SELECT node_uuid, trx_id, seqno, flags</span>
+<span class="go">FROM mysql.wsrep_streaming_log;</span>
 
-<span class="o">+--------------------------------------+--------+-------+-------+</span>
-<span class="o">|</span> <span class="n">node_uuid</span>                            <span class="o">|</span> <span class="n">trx_id</span> <span class="o">|</span> <span class="n">seqno</span> <span class="o">|</span> <span class="n">flags</span> <span class="o">|</span>
-<span class="o">+--------------------------------------+--------+-------+-------+</span>
-<span class="o">|</span> <span class="n">a006244a</span><span class="o">-</span><span class="mi">7</span><span class="n">ed8</span><span class="o">-</span><span class="mi">11</span><span class="n">e9</span><span class="o">-</span><span class="n">bf00</span><span class="o">-</span><span class="mi">867215999</span><span class="n">c7c</span> <span class="o">|</span>     <span class="mi">26</span> <span class="o">|</span>     <span class="mi">4</span> <span class="o">|</span>     <span class="mi">1</span> <span class="o">|</span>
-<span class="o">+--------------------------------------+--------+-------+-------+</span>
+<span class="go">+--------------------------------------+--------+-------+-------+</span>
+<span class="go">| node_uuid                            | trx_id | seqno | flags |</span>
+<span class="go">+--------------------------------------+--------+-------+-------+</span>
+<span class="go">| a006244a-7ed8-11e9-bf00-867215999c7c |     26 |     4 |     1 |</span>
+<span class="go">+--------------------------------------+--------+-------+-------+</span>
 </pre></div>
 </div>
 <p>You can see in the results from the example here that the node UUID matches that of the third node (i.e., <code class="docutils literal"><span class="pre">galera3</span></code>) in the results for the example above related to the <code class="docutils literal"><span class="pre">wsrep_cluster_members</span></code> table. In this example, the <code class="docutils literal"><span class="pre">frag</span></code> column was omitted from the <code class="docutils literal"><span class="pre">SELECT</span></code> statement since it contains binary characters that don&#8217;t format well.</p>

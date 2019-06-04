@@ -210,9 +210,8 @@
 <p>When upgrading from a standalone database server, you must take some additional steps in order to subsequently preserve and use your data with Galera Cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For more information on installing Galera Cluster, see</p>
+<p class="last">For more information on installing Galera Cluster, see <a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>.</p>
 </div>
-<p><a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>.</p>
 <div class="section" id="upgrading-system-tables">
 <h2>Upgrading System Tables<a class="headerlink" href="#upgrading-system-tables" title="Permalink to this headline">¶</a></h2>
 <p id="upgrade-system-tables">When you finish upgrading a standalone database server to Galera Cluster, but before you initialize your own cluster, you need to update the system tables to take advantage of the new privileges and capabilities.  You can do this with <code class="docutils literal"><span class="pre">mysql_upgrade</span></code>.</p>
@@ -256,16 +255,14 @@
 <div class="section" id="infrastructure-preparation">
 <h3>Infrastructure Preparation<a class="headerlink" href="#infrastructure-preparation" title="Permalink to this headline">¶</a></h3>
 <p id="migrate-infrastructure">For your existing infrastructure, you have a MySQL master server as well as several slave servers that form a master-slave cluster.  Before you can begin migration, you first need to prepare your infrastructure for the change.</p>
-<ol class="arabic">
-<li><p class="first">Launch at least three new servers, outside of and unconnected to your existing database infrastructure.</p>
-</li>
-<li><p class="first">On each new server, install Galera Cluster.  For information on how to do this, see <a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>.</p>
-</li>
-<li><p class="first">Configure the database server.  In addition to the IP addresses of each node, on the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter, include the IP addresses of the MySQL master server and each instance of the slave servers.</p>
+<ol class="arabic simple">
+<li>Launch at least three new servers, outside of and unconnected to your existing database infrastructure.</li>
+<li>On each new server, install Galera Cluster.  For information on how to do this, see <a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>.</li>
+<li>Configure the database server.  In addition to the IP addresses of each node, on the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter, include the IP addresses of the MySQL master server and each instance of the slave servers.</li>
+</ol>
 <p>For more information on configuring Galera Cluster, see <a class="reference internal" href="../training/tutorials/configuration.html"><span class="doc">System Configuration</span></a> and <a class="reference internal" href="../training/tutorials/wsrep-configuration.html"><span class="doc">Replication Configuration</span></a>.</p>
-</li>
-<li><p class="first">When you finish the installation and configuration, start the cluster.  For more information on how to start the cluster, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
-</li>
+<ol class="arabic simple">
+<li>When you finish the installation and configuration, start the cluster.  For more information on how to start the cluster, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting the Cluster</span></a>.</li>
 </ol>
 <p>To check that it is running properly, log into one of the database clients and run the <a class="reference internal" href="galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a> status variable:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_size&#39;</span><span class="p">;</span>

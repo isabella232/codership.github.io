@@ -247,9 +247,9 @@
 </div>
 <div class="section" id="disadvantages-of-synchronous-replication">
 <h3>Disadvantages of Synchronous Replication<a class="headerlink" href="#disadvantages-of-synchronous-replication" title="Permalink to this headline">¶</a></h3>
-<p>Traditionally, eager replication protocols coordinate nodes one operation at a time.  They use a two phase commit, or distributed locking.  A system with <img class="math" src="../_images/math/413f8a8e40062a9090d9d50b88bc7b551b314c26.png" alt="n"/> number of nodes due to process <img class="math" src="../_images/math/12ea3a10030ba2d90f89dab440196780a4b19e93.png" alt="o"/> operations with a throughput of <img class="math" src="../_images/math/ef9270877405055756d345facd044e4ab297f858.png" alt="t"/> transactions per second gives you <img class="math" src="../_images/math/c4bb40dd65eae6c11b325989b14e0b8d35e4e3ef.png" alt="m"/> messages per second with:</p>
+<p>Traditionally, eager replication protocols coordinate nodes one operation at a time.  They use a two phase commit, or distributed locking.  A system with <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> number of nodes due to process <img class="math" src="../_images/math/21736df275793e73d4849d98709ef561b459defd.png" alt="o"/> operations with a throughput of <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/> transactions per second gives you <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> messages per second with:</p>
 <div class="math">
-<p><img src="../_images/math/24b078d5c18a3642e6d9e976673bd6019180550e.png" alt="m = n \times o \times t"/></p>
+<p><img src="../_images/math/4341bfcf2c93cce181abfbb4afc1a1b2b8e7697b.png" alt="m = n \times o \times t"/></p>
 </div><p>What this means that any increase in the number of nodes leads to an exponential growth in the transaction response times and in the probability of conflicts and deadlock rates.</p>
 <p>For this reason, asynchronous replication remains the dominant replication protocol for database performance, scalability and availability.  Widely adopted open source databases, such as MySQL and PostgreSQL only provide asynchronous replication solutions.</p>
 </div>

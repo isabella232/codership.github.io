@@ -211,34 +211,34 @@
 <p>Beginning with Galera Cluster 4.0, though, you can use synchronization functions.  This allows you to tie the synchronization process to specific transactions so that the node waits only until a specific transaction is applied before executing the query.  Here is an example of how this might work:</p>
 <p class="kb rubric">Scenario</p>
 <p>Suppose on <code class="docutils literal"><span class="pre">node1</span></code>, you begin a transaction, make changes to a table and then commit the transaction like so:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="n">START</span> <span class="n">TRANSACTION</span><span class="p">;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">START TRANSACTION;</span>
 
-<span class="k">UPDATE</span> <span class="n">table1</span> <span class="kt">SET</span> <span class="n">col4</span> <span class="o">=</span> <span class="n">col4</span> <span class="o">*</span> <span class="mi">1</span><span class="p">.</span><span class="mi">2</span><span class="p">;</span>
+<span class="go">UPDATE table1 SET col4 = col4 * 1.2;</span>
 
-<span class="n">COMMIT</span><span class="p">;</span>
+<span class="go">COMMIT;</span>
 </pre></div>
 </div>
 <p>After that, using the <a class="reference internal" href="../../documentation/mysql-wsrep-functions.html#wsrep-last-written-gtid"><span class="std std-ref">WSREP_LAST_WRITTEN_GTID()</span></a> function, say you obtain the <a class="reference internal" href="../../documentation/glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> of the transaction and save it to the <code class="docutils literal"><span class="pre">$transaction_1_gtid</span></code> variable like this:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span>$transaction_1_gtid = SELECT WSREP_LAST_WRITTEN_GTID();
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span><span class="nv">transaction_1_gtid</span> <span class="o">=</span> SELECT WSREP_LAST_WRITTEN_GTID<span class="o">()</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Now, on <code class="docutils literal"><span class="pre">node2</span></code>, suppose you set it to wait until it replicates and applies the transaction from <code class="docutils literal"><span class="pre">node1</span></code> before starting a new transaction:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span>SELECT WSREP_SYNC_WAIT_UPTO_GTID($transaction_1_gtid);
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT WSREP_SYNC_WAIT_UPTO_GTID($transaction_1_gtid);</span>
 
-START TRANSACTION;
+<span class="go">START TRANSACTION;</span>
 </pre></div>
 </div>
 <p>Next, you execute your critical reads.</p>
 <p class="kb rubric">Recommendations</p>
 <p>Using the <a class="reference internal" href="../../documentation/mysql-wsrep-functions.html#wsrep-sync-wait-upto-gtid"><span class="std std-ref">WSREP_SYNC_WAIT_UPTO_GTID()</span></a> function, the node waits until it has replicated and applied the given Global Transaction ID before starting a new transaction.</p>
 <p>Synchronization Functions were introduced in Galera Cluster 4.  If you have an older version, you won&#8217;t be able to use these features.  To determine which version is installed on a server, use the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement and look for the <a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-provider-version"><span class="std std-ref">wsrep_provider_version</span></a> status variable.</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_provider_version&#39;</span><span class="p">;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SHOW STATUS LIKE &#39;wsrep_provider_version&#39;;</span>
 
-    <span class="o">+------------------------+----------------------+</span>
-<span class="o">|</span> <span class="n">Variable_name</span>          <span class="o">|</span> <span class="n">Value</span>                <span class="o">|</span>
-<span class="o">+------------------------+----------------------+</span>
-<span class="o">|</span> <span class="n">wsrep_provider_version</span> <span class="o">|</span> <span class="mi">25</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">5</span><span class="o">-</span><span class="nf">wheezy</span><span class="p">(</span><span class="n">rXXXX</span><span class="p">)</span> <span class="o">|</span>
-<span class="o">+------------------------+----------------------+</span>
+<span class="go">    +------------------------+----------------------+</span>
+<span class="go">| Variable_name          | Value                |</span>
+<span class="go">+------------------------+----------------------+</span>
+<span class="go">| wsrep_provider_version | 25.3.5-wheezy(rXXXX) |</span>
+<span class="go">+------------------------+----------------------+</span>
 </pre></div>
 </div>
 <p>The digits after the second and third decimal places are the version. The results here indicate that Galera Cluster version 3.5 is installed on the server.</p>

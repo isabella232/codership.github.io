@@ -276,7 +276,7 @@
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For more information on parameters that control write-set caching, see the <code class="docutils literal"><span class="pre">gcache.*</span></code> parameters on <span class="xref std std-ref">Galera Parameters</span>.</p>
+<p class="last">For more information on parameters that control write-set caching, see the <code class="docutils literal"><span class="pre">gcache.*</span></code> parameters on <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
 </div>
 <p>Galera Cluster uses an allocation algorithm that attempts to store write-sets in the above order.  That is, first it attempts to use permanent in-memory store.  If there is not enough space for the write-set, it attempts to store to the permanent ring-buffer file.  The page store always succeeds, unless the write-set is larger than the available disk space.</p>
 <p>By default, the write-set cache allocates files in the working directory of the process.  You can specify a dedicated location for write-set caching, using the <a class="reference internal" href="galera-parameters.html#gcache-dir"><span class="std std-ref">gcache.dir</span></a> parameter.</p>

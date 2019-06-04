@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Dealing with Large Transactions &#8212; Galera Cluster Documentation</title>
+    <title>Tutorials &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -31,8 +31,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Multi-Master Setup" href="multi-master-setup.html" />
-    <link rel="prev" title="Group Commit" href="group-commit.html" />
+    <link rel="next" title="Getting Started" href="getting-started.html" />
+    <link rel="prev" title="Training" href="../index.html" />
 
 
 
@@ -204,33 +204,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="dealing-with-large-transactions">
-<h1>Dealing with Large Transactions<a class="headerlink" href="#dealing-with-large-transactions" title="Permalink to this headline">¶</a></h1>
-<p id="kb-best-large-transactions">Large transactions, especially ones deleting removes millions of rows from a table at once, can lead to diminished performance. One reason is that the table may reindexed and rescanned after each row is deleted.</p>
-<p class="kb rubric">Scenario</p>
-<p>Suppose you have a node called <code class="docutils literal"><span class="pre">dbhost</span></code> with a database called <code class="docutils literal"><span class="pre">keystone</span></code>.  Suppose further that you execute a large transaction, which includes a <code class="docutils literal"><span class="pre">DELETE</span></code> statement that deletes expired tokens from their table in that database and on that host. If this transaction involves millions of rows, it could affect the overall performance of the cluster.</p>
-<p class="kb rubric">Recommendations</p>
-<p>This problem might be easily resolved by changing the size of the InnoDB buffer pool. The pool is bytes of the memory area where InnoDB caches table and index data. The larger the pool (i.e., the more RAM is used), the less the disk is  accessed, which is especially important when dealing with the same data in tables multiple times as you might in a large transaction on the same table.</p>
-<p>To change the buffer pool size, check the value of the <a class="reference external" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> variable. If your servers are dedicated only to database service, try setting it to 80% of the server&#8217;s physical memory size. You can use the <code class="docutils literal"><span class="pre">free</span></code> command to see how much memory you have.  Once you determine how much memory you can spare for the InnoDB pool, add or change a line in the server&#8217;s configuration file like the following:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">innodb_buffer_pool_size</span><span class="o">=</span><span class="s">128M</span>
-</pre></div>
+  <div class="section" id="tutorials">
+<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
+<p id="training">These are tutorial articles of the training section of the Codership Library. Here you&#8217;ll finding tutorial articles on how to get started with Galera.</p>
+<div class="toctree-wrapper compound">
 </div>
-<p>If you must frequently perform extremely large transactions including <code class="docutils literal"><span class="pre">DELETE</span></code> statements, you might consider using <code class="docutils literal"><span class="pre">pt-archiver</span></code> from the Percona Toolkit.  It&#8217;s very efficient at deleting millions of rows without reading them or reindexing after each row is deleted.</p>
-<p>To use <code class="docutils literal"><span class="pre">pt-archiver</span></code>, you&#8217;ll have to install the Percona Toolkit. Once that&#8217;s done, you would enter something like the following from the command-line to delete rows from tables (i.e., <code class="docutils literal"><span class="pre">keystone.token</span></code>) based on a <code class="docutils literal"><span class="pre">WHERE</span></code> clause (i.e., datetime column <code class="docutils literal"><span class="pre">expires</span></code> with values before now):</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> pt-archiver --source <span class="nv">h</span><span class="o">=</span>dbhost,D<span class="o">=</span>keystone,t<span class="o">=</span>token <span class="se">\</span>
-   --purge --where <span class="s2">&quot;expires &lt; NOW()&quot;</span> --primary-key-only <span class="se">\</span>
-   --sleep-coef <span class="m">1</span>.0 --txn-size <span class="m">500</span>
-</pre></div>
-</div>
-<p>This allows you to delete rows efficiently from the cluster.</p>
-<p>The <code class="docutils literal"><span class="pre">--source</span></code> parameter provides the host, database, and table. Since there is no  <code class="docutils literal"><span class="pre">--destination</span></code> parameter given, it won&#8217;t move the data to another table for archiving, per the primary function of <code class="docutils literal"><span class="pre">pt-archiver</span></code>. The <code class="docutils literal"><span class="pre">--purge</span></code> parameter instructs <code class="docutils literal"><span class="pre">pt-archiver</span></code> to remove the rows from the database. The <code class="docutils literal"><span class="pre">--where</span></code> parameter provides the <code class="docutils literal"><span class="pre">WHERE</span></code> clause of the <code class="docutils literal"><span class="pre">DELETE</span></code> statement.</p>
-<p>The <code class="docutils literal"><span class="pre">--primary-key-only</span></code> parameter is efficient when purging rows. It prevents fetching each row in its entirety, when only the primary key column is used in the <code class="docutils literal"><span class="pre">WHERE</span></code> clause for <code class="docutils literal"><span class="pre">DELETE</span></code> statements.</p>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference external" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> variable</li>
-<li><a class="reference external" href="http://www.percona.com/doc/percona-toolkit/2.1/pt-archiver.html">pt-archiver</a></li>
-</ul>
 </div>
 
 
@@ -244,13 +222,13 @@
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="group-commit.html"
-                          title="Previous page">&larr; Group Commit</a></p>
+    <p class="topless"><a href="../index.html"
+                          title="Previous page">&larr; Training</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="multi-master-setup.html"
-                          title="Next page">&rarr; Multi-Master Setup</a></p>
+    <p class="topless"><a href="getting-started.html"
+                          title="Next page">&rarr; Getting Started</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -301,7 +279,7 @@
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/best/large-transactions.rst.rst" title="Edit 'Dealing with Large Transactions' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/index.rst.rst" title="Edit 'Tutorials' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -313,26 +291,25 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="multi-master-setup.html" title="Multi-Master Setup"
+          <a href="getting-started.html" title="Getting Started"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="group-commit.html" title="Group Commit"
+          <a href="../index.html" title="Training"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Knowledge Base</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Best Practices</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Training</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="group-commit.html" title="Group Commit">&lt; Previous</a></li>
+				<li><a href="../index.html" title="Training">&lt; Previous</a></li>
 			
 
 			
-				<li><a href="multi-master-setup.html" title="Multi-Master Setup">Next &gt;</a></li>
+				<li><a href="getting-started.html" title="Getting Started">Next &gt;</a></li>
 			
 
 		</ul>
