@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,17 +204,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="migrating-to-galera-cluster">
+  <div class="library-document section" id="migrating-to-galera-cluster">
 <h1>Migrating to Galera Cluster<a class="headerlink" href="#migrating-to-galera-cluster" title="Permalink to this headline">¶</a></h1>
 <p id="migration">For systems that already have instances of the standalone versions of MySQL or MariaDB, the Galera Cluster installation replaces the existing database server with a new one that includes the <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> patch.  This only affects the database server, not the data.</p>
 <p>When upgrading from a standalone database server, you must take some additional steps in order to subsequently preserve and use your data with Galera Cluster.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on installing Galera Cluster, see <a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>.</p>
-</div>
+<p>For more information on installing Galera Cluster, see <a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>.</p>
 <div class="section" id="upgrading-system-tables">
-<h2>Upgrading System Tables<a class="headerlink" href="#upgrading-system-tables" title="Permalink to this headline">¶</a></h2>
-<p id="upgrade-system-tables">When you finish upgrading a standalone database server to Galera Cluster, but before you initialize your own cluster, you need to update the system tables to take advantage of the new privileges and capabilities.  You can do this with <code class="docutils literal"><span class="pre">mysql_upgrade</span></code>.</p>
+<span id="upgrade-system-tables"></span><h2>Upgrading System Tables<a class="headerlink" href="#upgrading-system-tables" title="Permalink to this headline">¶</a></h2>
+<p>When you finish upgrading a standalone database server to Galera Cluster, but before you initialize your own cluster, you need to update the system tables to take advantage of the new privileges and capabilities.  You can do this with <code class="docutils literal"><span class="pre">mysql_upgrade</span></code>.</p>
 <p>In order to use <code class="docutils literal"><span class="pre">mysql_upgrade</span></code>, you need to first start the database server, but start it without initializing replication.  For systems that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql start --wsrep_on<span class="o">=</span>OFF
 </pre></div>
@@ -237,14 +234,11 @@
 </pre></div>
 </div>
 <p>Running this command stops database server.  When you are ready to initialize your cluster, choose this server as your starting node.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on initializing and adding nodes to a cluster, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
-</div>
+<p>For more information on initializing and adding nodes to a cluster, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
 </div>
 <div class="section" id="migrating-from-mysql-to-galera-cluster">
-<h2>Migrating from MySQL to Galera Cluster<a class="headerlink" href="#migrating-from-mysql-to-galera-cluster" title="Permalink to this headline">¶</a></h2>
-<p id="migrating-mysql-galera">In the event that you have an existing database server that uses the MyISAM storage engine or the stock MySQL master-slave replication, there are some additional steps that you need to take.  The <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> requires a transactional storage engine in order to function.  As MyISAM is non-transactional, you need to migrate your data to InnoDB, in addition to installing the new software packages.</p>
+<span id="migrating-mysql-galera"></span><h2>Migrating from MySQL to Galera Cluster<a class="headerlink" href="#migrating-from-mysql-to-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<p>In the event that you have an existing database server that uses the MyISAM storage engine or the stock MySQL master-slave replication, there are some additional steps that you need to take.  The <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> requires a transactional storage engine in order to function.  As MyISAM is non-transactional, you need to migrate your data to InnoDB, in addition to installing the new software packages.</p>
 <p>There are three types of database servers referred to in this guide:</p>
 <ul class="simple">
 <li><strong>Master Server</strong> Refers to the MySQL master server.</li>
@@ -253,8 +247,8 @@
 </ul>
 <p>For the sake of simplicity, slave servers and cluster nodes are referenced collectively, rather than individually.  In production, you may have several slave servers and must have at least three cluster nodes.</p>
 <div class="section" id="infrastructure-preparation">
-<h3>Infrastructure Preparation<a class="headerlink" href="#infrastructure-preparation" title="Permalink to this headline">¶</a></h3>
-<p id="migrate-infrastructure">For your existing infrastructure, you have a MySQL master server as well as several slave servers that form a master-slave cluster.  Before you can begin migration, you first need to prepare your infrastructure for the change.</p>
+<span id="migrate-infrastructure"></span><h3>Infrastructure Preparation<a class="headerlink" href="#infrastructure-preparation" title="Permalink to this headline">¶</a></h3>
+<p>For your existing infrastructure, you have a MySQL master server as well as several slave servers that form a master-slave cluster.  Before you can begin migration, you first need to prepare your infrastructure for the change.</p>
 <ol class="arabic simple">
 <li>Launch at least three new servers, outside of and unconnected to your existing database infrastructure.</li>
 <li>On each new server, install Galera Cluster.  For information on how to do this, see <a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>.</li>
@@ -277,8 +271,8 @@
 <p>Galera Cluster is now running in parallel to your MySQL master-slave cluster.  It contains no data and remains unused by your application servers.  You can now begin migrating your data.</p>
 </div>
 <div class="section" id="data-migration">
-<h3>Data Migration<a class="headerlink" href="#data-migration" title="Permalink to this headline">¶</a></h3>
-<p id="migrate-data">In order to migrate data from a MySQL master-slave cluster to Galera Cluster, you need to manually transfer it from your existing infrastructure to the new one.</p>
+<span id="migrate-data"></span><h3>Data Migration<a class="headerlink" href="#data-migration" title="Permalink to this headline">¶</a></h3>
+<p>In order to migrate data from a MySQL master-slave cluster to Galera Cluster, you need to manually transfer it from your existing infrastructure to the new one.</p>
 <ol class="arabic">
 <li><p class="first">Stop the load of the master server.</p>
 </li>
@@ -308,8 +302,8 @@
 </div>
 </div>
 <div class="section" id="database-migration">
-<h3>Database Migration<a class="headerlink" href="#database-migration" title="Permalink to this headline">¶</a></h3>
-<p id="migrate-db">With your application server now using the new cluster nodes, you now need to migrate your master and slave servers from stock MySQL to Galera Cluster.</p>
+<span id="migrate-db"></span><h3>Database Migration<a class="headerlink" href="#database-migration" title="Permalink to this headline">¶</a></h3>
+<p>With your application server now using the new cluster nodes, you now need to migrate your master and slave servers from stock MySQL to Galera Cluster.</p>
 <ol class="arabic">
 <li><p class="first">Using the same process described in <a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>, install and configure Galera Cluster on the server.</p>
 </li>
@@ -328,12 +322,10 @@
 </div>
 </li>
 <li><p class="first">Update the system tables:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> mysql_upgrade
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">  #</span> mysql_upgrade
+
+<span class="go">For more information, see :ref:`Upgrading System Tables &lt;upgrade-system-tables&gt;`.</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information, see <a class="reference internal" href="#upgrade-system-tables"><span class="std std-ref">Upgrading System Tables</span></a>.</p>
 </div>
 </li>
 <li><p class="first">From one of the running Galera Cluster nodes, copy the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file into the data directory of the former MySQL master server.</p>
@@ -464,7 +456,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="migrate.html" accesskey="U">Migration</a> &#187;</li> 
       </ul>
     </div>
@@ -511,7 +503,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -520,6 +511,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

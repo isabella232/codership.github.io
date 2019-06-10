@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,18 +204,15 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="node-failure-and-recovery">
+  <div class="library-document section" id="node-failure-and-recovery">
 <h1>Node Failure and Recovery<a class="headerlink" href="#node-failure-and-recovery" title="Permalink to this headline">¶</a></h1>
 <p id="recovery">Individual nodes fail to operate when they lose touch with the cluster.  This can occur due to various reasons.  For instance, in the event of hardware failure or software crash, the loss of network connectivity or the failure of a state transfer.  Anything that prevents the node from communicating with the cluster is generalized behind the concept of node failure.  Understanding how nodes fail will help in planning for their recovery.</p>
 <div class="section" id="detecting-single-node-failures">
-<h2>Detecting Single Node Failures<a class="headerlink" href="#detecting-single-node-failures" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="single-node-failure-detection"></span><span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">When a node fails the only sign is the loss of connection to the node processes as seen by other nodes.  Thus nodes are considered failed when they lose membership with the cluster&#8217;s <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  That is, from the perspective of the cluster when the nodes that form the Primary Component can no longer see the node, that node is failed.  From the perspective of the failed node itself, assuming that it has not crashed, it has lost its connection with the Primary Component.</p>
+<span id="single-node-failure-detection"></span><h2>Detecting Single Node Failures<a class="headerlink" href="#detecting-single-node-failures" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">When a node fails the only sign is the loss of connection to the node processes as seen by other nodes.  Thus nodes are considered failed when they lose membership with the cluster&#8217;s <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  That is, from the perspective of the cluster when the nodes that form the Primary Component can no longer see the node, that node is failed.  From the perspective of the failed node itself, assuming that it has not crashed, it has lost its connection with the Primary Component.</p>
 <p>Although there are third-party tools for monitoring nodes—such as ping, Heartbeat, and Pacemaker—they can be grossly off in their estimates on node failures.  These utilities do not participate in the Galera Cluster group communications and remain unaware of the Primary Component.</p>
 <p>If you want to monitor the Galera Cluster node status poll the <a class="reference internal" href="galera-status-variables.html#wsrep-local-state"><span class="std std-ref">wsrep_local_state</span></a> status variable or through the <a class="reference internal" href="notification-cmd.html"><span class="doc">Notification Command</span></a>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on monitoring the state of cluster nodes, see the chapter on <a class="reference internal" href="monitoring-cluster.html"><span class="doc">Monitoring the Cluster</span></a>.</p>
-</div>
+<p>For more information on monitoring the state of cluster nodes, see the chapter on <a class="reference internal" href="monitoring-cluster.html"><span class="doc">Monitoring the Cluster</span></a>.</p>
 <p>The cluster determines node connectivity from the last time it received a network packet from the node.  You can configure how often the cluster checks this using the <a class="reference internal" href="galera-parameters.html#evs-inactive-check-period"><span class="std std-ref">evs.inactive_check_period</span></a> parameter.  During the check, if the cluster finds that the time since the last time it received a network packet from the node is greater than the value of the <a class="reference internal" href="galera-parameters.html#evs-keepalive-period"><span class="std std-ref">evs.keepalive_period</span></a> parameter, it begins to emit heartbeat beacons.  If the cluster continues to receive no network packets from the node for the period of the <a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter, the node is declared suspect.  Once all members of the Primary Component see the node as suspect, it is declared inactive—that is, failed.</p>
 <p>If no messages were received from the node for a period greater than the <a class="reference internal" href="galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> period, the node is declared failed regardless of the consensus.  The failed node remains non-operational until all members agree on its membership.  If the members cannot reach consensus on the liveness of a node, the network is too unstable for cluster operations.</p>
 <p>The relationship between these option values is:</p>
@@ -250,17 +247,17 @@
 </div>
 </div>
 <div class="section" id="cluster-availability-vs-partition-tolerance">
-<h2>Cluster Availability vs. Partition Tolerance<a class="headerlink" href="#cluster-availability-vs-partition-tolerance" title="Permalink to this headline">¶</a></h2>
-<p id="availability-partition-tolerance">Within the <a class="reference external" href="http://en.wikipedia.org/wiki/CAP_theorem">CAP theorem</a>, Galera Cluster emphasizes data safety and consistency.  This leads to a trade-off between cluster availability and partition tolerance.  That is, when using unstable networks, such as <abbr title="Wide Area Network">WAN</abbr>, low <a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> and <a class="reference internal" href="galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> values may result in false node failure detections, while higher values on these parameters may result in longer availability outages in the event of actual node failures.</p>
+<span id="availability-partition-tolerance"></span><h2>Cluster Availability vs. Partition Tolerance<a class="headerlink" href="#cluster-availability-vs-partition-tolerance" title="Permalink to this headline">¶</a></h2>
+<p>Within the <a class="reference external" href="http://en.wikipedia.org/wiki/CAP_theorem">CAP theorem</a>, Galera Cluster emphasizes data safety and consistency.  This leads to a trade-off between cluster availability and partition tolerance.  That is, when using unstable networks, such as <abbr title="Wide Area Network">WAN</abbr>, low <a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> and <a class="reference internal" href="galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> values may result in false node failure detections, while higher values on these parameters may result in longer availability outages in the event of actual node failures.</p>
 <p>Essentially what this means is that the <a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter defines the minimum time needed to detect a failed node.  During this period, the cluster is unavailable due to the consistency constraint.</p>
 </div>
 <div class="section" id="recovering-from-single-node-failures">
-<h2>Recovering from Single Node Failures<a class="headerlink" href="#recovering-from-single-node-failures" title="Permalink to this headline">¶</a></h2>
-<p id="recovery-single-node-failure">If one node in the cluster fails, the other nodes continue to operate as usual.  When the failed node comes back online, it automatically synchronizes with the other nodes before it is allowed back into the cluster.</p>
+<span id="recovery-single-node-failure"></span><h2>Recovering from Single Node Failures<a class="headerlink" href="#recovering-from-single-node-failures" title="Permalink to this headline">¶</a></h2>
+<p>If one node in the cluster fails, the other nodes continue to operate as usual.  When the failed node comes back online, it automatically synchronizes with the other nodes before it is allowed back into the cluster.</p>
 <p>No data is lost in single node failures.</p>
 <div class="section" id="state-transfer-failure">
-<h3>State Transfer Failure<a class="headerlink" href="#state-transfer-failure" title="Permalink to this headline">¶</a></h3>
-<p id="id1">Single node failures can also occur when a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">state snapshot transfer</span></a> fails.  This failure renders the receiving node unusable, as the receiving node aborts when it detects a state transfer failure.</p>
+<span id="id1"></span><h3>State Transfer Failure<a class="headerlink" href="#state-transfer-failure" title="Permalink to this headline">¶</a></h3>
+<p>Single node failures can also occur when a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">state snapshot transfer</span></a> fails.  This failure renders the receiving node unusable, as the receiving node aborts when it detects a state transfer failure.</p>
 <p>When the node fails while using <code class="docutils literal"><span class="pre">mysqldump</span></code>, restarting may require you to manually restore the administrative tables.  For the <code class="docutils literal"><span class="pre">rsync</span></code> method in state transfers this is not an issue, given that it does not require the database server to be in an operational state to work.</p>
 </div>
 </div>
@@ -367,7 +364,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="technical-description.html" accesskey="U">Technical Description</a> &#187;</li> 
       </ul>
     </div>
@@ -414,7 +411,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -423,6 +419,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

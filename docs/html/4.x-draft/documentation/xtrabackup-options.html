@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="xtrabackup-parameters">
+  <div class="library-document section" id="xtrabackup-parameters">
 <h1>XtraBackup Parameters<a class="headerlink" href="#xtrabackup-parameters" title="Permalink to this headline">¶</a></h1>
 <p id="id1">When using <code class="docutils literal"><span class="pre">xtrabackup-v2</span></code> as your <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> method, you can fine tune how the script operates using the <code class="docutils literal"><span class="pre">[sst]</span></code> unit in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
@@ -301,8 +301,8 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">compressor</span></code></p>
-<p id="xtra-compressor">Defines the compression utility the donor node uses to compress the state transfer.</p>
+<p class="rubric" id="xtra-compressor"><code class="docutils literal"><span class="pre">compressor</span></code></p>
+<p>Defines the compression utility the donor node uses to compress the state transfer.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="42%" />
@@ -330,8 +330,8 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">compression</span><span class="o">=</span><span class="s">&quot;gzip&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">compact</span></code></p>
-<p id="xtra-compact">Defines whether the joiner node performs compaction when rebuilding indexes after applying a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
+<p class="rubric" id="xtra-compact"><code class="docutils literal"><span class="pre">compact</span></code></p>
+<p>Defines whether the joiner node performs compaction when rebuilding indexes after applying a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -360,8 +360,8 @@
 <span class="na">compact</span><span class="o">=</span><span class="s">ON</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">cpat</span></code></p>
-<p id="xtra-cpat">Defines what files to clean up from the datadir during state transfers.</p>
+<p class="rubric" id="xtra-cpat"><code class="docutils literal"><span class="pre">cpat</span></code></p>
+<p>Defines what files to clean up from the datadir during state transfers.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="42%" />
@@ -389,8 +389,8 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">cpat</span><span class="o">=</span><span class="s">&quot;.*glaera\.cache$\|.*sst_in_progress$\|.*grastate\.dat$\|.*\.err&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">decompressor</span></code></p>
-<p id="xtra-decompressor">Defines the decompression utility the joiner node uses to decompress the state transfer.</p>
+<p class="rubric" id="xtra-decompressor"><code class="docutils literal"><span class="pre">decompressor</span></code></p>
+<p>Defines the decompression utility the joiner node uses to decompress the state transfer.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -418,8 +418,8 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">decompressor</span><span class="o">=</span><span class="s">&quot;gzip -dc&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">encrypt</span></code></p>
-<p id="xtra-encrypt">Defines whether the node uses SSL encryption for XtraBackup and what kind of encryption it uses.</p>
+<p class="rubric" id="xtra-encrypt"><code class="docutils literal"><span class="pre">encrypt</span></code></p>
+<p>Defines whether the node uses SSL encryption for XtraBackup and what kind of encryption it uses.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -477,8 +477,8 @@ key and certificate files implemented for Galera Cluster.</td>
 <span class="na">tca</span><span class="o">=</span><span class="s">&quot;/path/to/ca.pem&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">encrypt-algo</span></code></p>
-<p id="xtra-encrypt-algo">Defines the SSL encryption type the node uses for XtraBackup state transfers.</p>
+<p class="rubric" id="xtra-encrypt-algo"><code class="docutils literal"><span class="pre">encrypt-algo</span></code></p>
+<p>Defines the SSL encryption type the node uses for XtraBackup state transfers.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -508,8 +508,8 @@ key and certificate files implemented for Galera Cluster.</td>
 <span class="na">encrypt-algo</span><span class="o">=</span><span class="s">3</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">progress</span></code></p>
-<p id="xtra-progress">Defines whether where the node reports <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> progress.</p>
+<p class="rubric" id="xtra-progress"><code class="docutils literal"><span class="pre">progress</span></code></p>
+<p>Defines whether where the node reports <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> progress.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -541,13 +541,13 @@ key and certificate files implemented for Galera Cluster.</td>
 <p>When you set this parameter, the node reports progress on XtraBackup progress in state transfers.  If you set the value to <code class="docutils literal"><span class="pre">1</span></code>, the node makes these reports to the database server stderr.  If you set the value to a file path, it writes the progress to that file.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Bear in mind, that a <code class="docutils literal"><span class="pre">0</span></code> value is invalid.  If you want to disable this parameter, delete or comment it out.</p>
+<p class="last">Keep in mind, that a <code class="docutils literal"><span class="pre">0</span></code> value is invalid.  If you want to disable this parameter, delete or comment it out.</p>
 </div>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">progress</span><span class="o">=</span><span class="s">&quot;/var/log/mysql/xtrabackup-progress.log&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">rebuild</span></code></p>
-<p id="xtra-rebuild">Defines whether the joiner node rebuilds indexes during a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
+<p class="rubric" id="xtra-rebuild"><code class="docutils literal"><span class="pre">rebuild</span></code></p>
+<p>Defines whether the joiner node rebuilds indexes during a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -576,8 +576,8 @@ key and certificate files implemented for Galera Cluster.</td>
 <span class="na">compact</span><span class="o">=</span><span class="s">ON</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">rlimit</span></code></p>
-<p id="xtra-rlimit">Defines the rate limit for the donor node.</p>
+<p class="rubric" id="xtra-rlimit"><code class="docutils literal"><span class="pre">rlimit</span></code></p>
+<p>Defines the rate limit for the donor node.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -605,8 +605,8 @@ key and certificate files implemented for Galera Cluster.</td>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">rlimit</span><span class="o">=</span><span class="s">300M</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">sst_initial_timeout</span></code></p>
-<p id="xtra-sst-initial-timeout">Defines the initial timeout to receive the first state transfer packet.</p>
+<p class="rubric" id="xtra-sst-initial-timeout"><code class="docutils literal"><span class="pre">sst_initial_timeout</span></code></p>
+<p>Defines the initial timeout to receive the first state transfer packet.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="37%" />
@@ -634,8 +634,8 @@ key and certificate files implemented for Galera Cluster.</td>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">sst_initial_timeout</span><span class="o">=</span><span class="s">130</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">sst_special_dirs</span></code></p>
-<p id="xtra-sst-special-dirs">Defines whether the node uses special InnoDB home and log directories.</p>
+<p class="rubric" id="xtra-sst-special-dirs"><code class="docutils literal"><span class="pre">sst_special_dirs</span></code></p>
+<p>Defines whether the node uses special InnoDB home and log directories.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="38%" />
@@ -669,8 +669,8 @@ key and certificate files implemented for Galera Cluster.</td>
 <span class="na">sst_special_dirs</span><span class="o">=</span><span class="s">TRUE</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">sockopt</span></code></p>
-<p id="xtra-sockopt">Defines socket options.</p>
+<p class="rubric" id="xtra-sockopt"><code class="docutils literal"><span class="pre">sockopt</span></code></p>
+<p>Defines socket options.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="38%" />
@@ -695,8 +695,8 @@ key and certificate files implemented for Galera Cluster.</td>
 </tbody>
 </table>
 <p>This parameter allows you to define one or more socket options for XtraBackup using the Socat transfer format.</p>
-<p class="rubric"><code class="docutils literal"><span class="pre">streamfmt</span></code></p>
-<p id="xtra-streamfmt">Defines the stream formatting utility.</p>
+<p class="rubric" id="xtra-streamfmt"><code class="docutils literal"><span class="pre">streamfmt</span></code></p>
+<p>Defines the stream formatting utility.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -730,8 +730,8 @@ key and certificate files implemented for Galera Cluster.</td>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">streamfmt</span><span class="o">=</span><span class="s">&#39;xbstream&#39;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">tca</span></code></p>
-<p id="xtra-tca">Defines the Certificate Authority (CA) to use in SSL encryption.</p>
+<p class="rubric" id="xtra-tca"><code class="docutils literal"><span class="pre">tca</span></code></p>
+<p>Defines the Certificate Authority (CA) to use in SSL encryption.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -756,16 +756,13 @@ key and certificate files implemented for Galera Cluster.</td>
 </tbody>
 </table>
 <p>This parameter defines the Certificate Authority (CA) file that the node uses with XtraBackup state transfers.  In order to use SSL encryption with XtraBackup, you must configure  the <a class="reference internal" href="#xtra-transferfmt"><span class="std std-ref">transferfmt</span></a> parameter to use <code class="docutils literal"><span class="pre">socat</span></code>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on using Socat with encryption, see <a class="reference external" href="http://www.dest-unreach.org/socat/doc/socat-openssltunnel.html">Securing Traffic between Two Socat Instances using SSL</a>.</p>
-</div>
+<p>For more information on using Socat with encryption, see <a class="reference external" href="http://www.dest-unreach.org/socat/doc/socat-openssltunnel.html">Securing Traffic between Two Socat Instances using SSL</a>.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">transferfmt</span><span class="o">=</span><span class="s">&quot;socat&quot;</span>
 <span class="na">tca</span><span class="o">=</span><span class="s">&quot;/path/to/ca.pem&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">tcert</span></code></p>
-<p id="xtra-tcert">Defines the certificate to use in SSL encryption.</p>
+<p class="rubric" id="xtra-tcert"><code class="docutils literal"><span class="pre">tcert</span></code></p>
+<p>Defines the certificate to use in SSL encryption.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -790,16 +787,13 @@ key and certificate files implemented for Galera Cluster.</td>
 </tbody>
 </table>
 <p>This parameter defines the SSL certificate file that the node uses with SSL encryption on XtraBackup state transfers.  In order to use SSL encryption with XtraBackup, you must configure the <a class="reference internal" href="#xtra-transferfmt"><span class="std std-ref">transferfmt</span></a> parameter to use Socat.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on using Socat with encryption, see <a class="reference external" href="http://www.dest-unreach.org/socat/doc/socat-openssltunnel.html">Securing Traffic between Two Socat Instances using SSL</a>.</p>
-</div>
+<p>For more information on using Socat with encryption, see <a class="reference external" href="http://www.dest-unreach.org/socat/doc/socat-openssltunnel.html">Securing Traffic between Two Socat Instances using SSL</a>.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">transferfmt</span><span class="o">=</span><span class="s">&quot;socat&quot;</span>
 <span class="na">tcert</span><span class="o">=</span><span class="s">&quot;/path/to/cert.pem&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">time</span></code></p>
-<p id="xtra-time">Defines whether XtraBackup instruments key stages in the backup and restore process for state transfers.</p>
+<p class="rubric" id="xtra-time"><code class="docutils literal"><span class="pre">time</span></code></p>
+<p>Defines whether XtraBackup instruments key stages in the backup and restore process for state transfers.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -827,8 +821,8 @@ key and certificate files implemented for Galera Cluster.</td>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">time</span><span class="o">=</span><span class="s">ON</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">transferfmt</span></code></p>
-<p id="xtra-transferfmt">Defines the transfer stream utility.</p>
+<p class="rubric" id="xtra-transferfmt"><code class="docutils literal"><span class="pre">transferfmt</span></code></p>
+<p>Defines the transfer stream utility.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="41%" />
@@ -951,7 +945,7 @@ key and certificate files implemented for Galera Cluster.</td>
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="reference.html" accesskey="U">Reference</a> &#187;</li> 
       </ul>
     </div>
@@ -998,7 +992,6 @@ key and certificate files implemented for Galera Cluster.</td>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -1007,6 +1000,7 @@ key and certificate files implemented for Galera Cluster.</td>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

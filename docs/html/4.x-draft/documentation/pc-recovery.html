@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,17 +204,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="recovering-the-primary-component">
+  <div class="library-document section" id="recovering-the-primary-component">
 <h1>Recovering the Primary Component<a class="headerlink" href="#recovering-the-primary-component" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="pc-recovery"></span><p id="index-0">Cluster nodes can store the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state to disk.  The node records the state of the Primary Component and the UUID&#8217;s of the nodes connected to it.  In the event of an outage, once all nodes that were part of the last saved state achieve connectivity, the cluster recovers the Primary Component.</p>
 <p>In the event that the write-set position differs between the nodes, the recovery process also requires a full state snapshot transfer.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on this feature, see the <a class="reference internal" href="galera-parameters.html#pc-recovery"><span class="std std-ref">pc.recovery</span></a> parameter.  By default, it is enabled starting in version 3.6.</p>
-</div>
+<p>For more information on this feature, see the <a class="reference internal" href="galera-parameters.html#pc-recovery"><span class="std std-ref">pc.recovery</span></a> parameter.  By default, it is enabled starting in version 3.6.</p>
 <div class="section" id="understanding-the-primary-component-state">
-<h2>Understanding the Primary Component State<a class="headerlink" href="#understanding-the-primary-component-state" title="Permalink to this headline">¶</a></h2>
-<p id="understand-pc-state">When a node stores the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state to disk, it saves it as the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file.  The node creates and updates this file when the cluster forms or changes the Primary Component.  This ensures that the node retains the latest Primary Component state that it was in.  If the node loses connectivity, it has the file to reference.  If the node shuts down gracefully, it deletes the file.</p>
+<span id="understand-pc-state"></span><h2>Understanding the Primary Component State<a class="headerlink" href="#understanding-the-primary-component-state" title="Permalink to this headline">¶</a></h2>
+<p>When a node stores the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state to disk, it saves it as the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file.  The node creates and updates this file when the cluster forms or changes the Primary Component.  This ensures that the node retains the latest Primary Component state that it was in.  If the node loses connectivity, it has the file to reference.  If the node shuts down gracefully, it deletes the file.</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>my_uuid: d3124bc8-1605-11e4-aa3d-ab44303c044a
 #vwbeg
 view_id: 3 0dae1307-1606-11e4-aa94-5255b1455aa0 12
@@ -241,8 +238,8 @@ member: d3124bc8-1605-11e4-aa3d-ab44303c044a 1
 </ul>
 </div>
 <div class="section" id="modifying-the-saved-primary-component-state">
-<h2>Modifying the Saved Primary Component State<a class="headerlink" href="#modifying-the-saved-primary-component-state" title="Permalink to this headline">¶</a></h2>
-<p id="modifying-pc-state">In the event that you find yourself in the unusual situation where you need to force certain nodes to join each other specifically, you can do so by manually changing the saved <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state.</p>
+<span id="modifying-pc-state"></span><h2>Modifying the Saved Primary Component State<a class="headerlink" href="#modifying-the-saved-primary-component-state" title="Permalink to this headline">¶</a></h2>
+<p>In the event that you find yourself in the unusual situation where you need to force certain nodes to join each other specifically, you can do so by manually changing the saved <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Under normal circumstances, for safety reasons, you should entirely avoid editing or otherwise modifying the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file.  Doing so may lead to unexpected results.</p>
@@ -393,8 +390,8 @@ member: d3124bc8-1605-11e4-aa3d-ab44303c044a 1
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Administration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Galera Cluster Administration</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -440,7 +437,6 @@ member: d3124bc8-1605-11e4-aa3d-ab44303c044a 1
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -449,6 +445,7 @@ member: d3124bc8-1605-11e4-aa3d-ab44303c044a 1
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,10 +204,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="replication-api">
+  <div class="library-document section" id="replication-api">
 <h1>Replication API<a class="headerlink" href="#replication-api" title="Permalink to this headline">¶</a></h1>
 <p id="id1">Synchronous replication systems generally use eager replication.  Nodes in a cluster will synchronize with all of the other nodes by updating the replicas through a single transaction.  This means that when a transaction commits, all of the nodes will have the same value.  This process takes place using <em>write-set</em> replication through group communication.</p>
-<div class="figure" id="id5">
+<div class="figure" id="id6">
 <img alt="../_images/replicationapi.png" src="../_images/replicationapi.png" />
 <p class="caption"><span class="caption-text"><em>Replication API</em></span></p>
 </div>
@@ -227,8 +227,8 @@
 <li><strong>Group Communication Plugins:</strong> There several group communication systems available to Galera Cluster (e.g., <em>gcomm</em> and <a class="reference external" href="http://www.spread.org/">Spread</a>).</li>
 </ul>
 <div class="section" id="wsrep-api">
-<h2>wsrep API<a class="headerlink" href="#wsrep-api" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="id2"></span><span class="target" id="index-0"></span><p id="index-1">The <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> is a generic replication plugin interface for databases.  It defines a set of application callbacks and replication plugin calls.</p>
+<span id="id2"></span><h2>wsrep API<a class="headerlink" href="#wsrep-api" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-0"></span><p id="index-1">The <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> is a generic replication plugin interface for databases.  It defines a set of application callbacks and replication plugin calls.</p>
 <p>The wsrep API uses a replication model that considers the database server to have a state.  That state refers to the contents of the database.  When a database is in use and clients modify the database content, its state is changed.  The wsrep API represents changes in the database state as a series of atomic changes, or transactions.</p>
 <p>In a database cluster, all of the nodes always have the same state.  They synchronize with each other by replicating and applying state changes in the same serial order.</p>
 <p>From a more technical perspective, Galera Cluster handles state changes in the following way:</p>
@@ -240,7 +240,7 @@
 </ol>
 <p>For each node in the cluster, the application process occurs by high-priority transactions.</p>
 <div class="section" id="global-transaction-id">
-<h3>Global Transaction ID<a class="headerlink" href="#global-transaction-id" title="Permalink to this headline">¶</a></h3>
+<span id="id3"></span><h3>Global Transaction ID<a class="headerlink" href="#global-transaction-id" title="Permalink to this headline">¶</a></h3>
 <p>In order to keep the state identical across the cluster, the wsrep API uses a <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>, or GTID.  This allows it to identify state changes and to identify the current state in relation to the last state change. Below is an example of a GTID:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>45eec521-2f34-11e0-0800-2a36050b826b:94530586304
 </pre></div>
@@ -254,8 +254,8 @@
 </div>
 </div>
 <div class="section" id="galera-replication-plugin">
-<h2>Galera Replication Plugin<a class="headerlink" href="#galera-replication-plugin" title="Permalink to this headline">¶</a></h2>
-<p id="id3">The <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> implements the <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a>.  It operates as the wsrep Provider. From a more technical perspective, the Galera Replication Plugin consists of the following components:</p>
+<span id="id4"></span><h2>Galera Replication Plugin<a class="headerlink" href="#galera-replication-plugin" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> implements the <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a>.  It operates as the wsrep Provider. From a more technical perspective, the Galera Replication Plugin consists of the following components:</p>
 <ul class="simple">
 <li><strong>Certification Layer:</strong> This layer prepares the write-sets and performs the certification checks on them, ensuring that they can be applied.</li>
 <li><strong>Replication Layer:</strong> This layer manages the replication protocol and provides the total ordering capability.</li>
@@ -263,8 +263,8 @@
 </ul>
 </div>
 <div class="section" id="group-communication-plugins">
-<h2>Group Communication Plugins<a class="headerlink" href="#group-communication-plugins" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="id4"></span><p id="index-2">The Group Communication Framework provides a plugin architecture for the various gcomm systems.</p>
+<span id="id5"></span><h2>Group Communication Plugins<a class="headerlink" href="#group-communication-plugins" title="Permalink to this headline">¶</a></h2>
+<p id="index-2">The Group Communication Framework provides a plugin architecture for the various gcomm systems.</p>
 <p>Galera Cluster is built on top of a proprietary group communication system layer, which implements a virtual synchrony <abbr title="Quality of Service">QoS</abbr>.  Virtual synchrony unifies the data delivery and cluster membership services, providing clear formalism for message delivery semantics.</p>
 <p>While virtual synchrony guarantees consistency, it does not guarantee temporal synchrony, which is necessary for smooth multi-master operations.  To address this, Galera Cluster implements its own runtime-configurable temporal flow control.  Flow control keeps nodes synchronized to a fraction of a second.</p>
 <p>Group Communication Framework also provides a total ordering of messages from multiple sources.  It uses this to generate <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>&#8216;s in a multi-master cluster.</p>
@@ -373,7 +373,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="technical-description.html" accesskey="U">Technical Description</a> &#187;</li> 
       </ul>
     </div>
@@ -420,7 +420,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -429,6 +428,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

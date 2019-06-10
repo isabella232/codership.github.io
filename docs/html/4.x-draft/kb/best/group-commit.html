@@ -31,8 +31,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Dealing with Large Transactions" href="large-transactions.html" />
-    <link rel="prev" title="Write-Set Caching during State Transfers" href="gcache-during-state-transfers.html" />
+    <link rel="next" title="Handling Large Transactions" href="large-transactions.html" />
+    <link rel="prev" title="Codership Best Practices Articles" href="index.html" />
 
 
 
@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="group-commit">
+  <div class="kb-article section" id="group-commit">
 <h1>Group Commit<a class="headerlink" href="#group-commit" title="Permalink to this headline">¶</a></h1>
 <p id="kb-best-group-commit">After each transaction is committed, InnoDB will typically flush changes to its redo log and the binary log to the disk&#8211;it does this typically by calling <cite>fsync()</cite>, <cite>fdatasync()</cite>. This method is used to ensure data changes are stored durably on the disk. Disk flushing, however, can have an effect on performance and the number of transactions-per-second (TPS) that can be committed.</p>
 <p>Starting with version 5.3 of MariaDB, Group Commit was introduced. If there are several transactions trying to commit at the same time, group commit will force them to be flushed to the disk with a single system call, rather than one system call for each commit. This can greatly reduce the need for flush operations, and greatly improve the throughput of TPS.</p>
@@ -229,13 +229,13 @@
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="gcache-during-state-transfers.html"
-                          title="Previous page">&larr; Write-Set Caching during State Transfers</a></p>
+    <p class="topless"><a href="index.html"
+                          title="Previous page">&larr; Codership Best Practices Articles</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="large-transactions.html"
-                          title="Next page">&rarr; Dealing with Large Transactions</a></p>
+                          title="Next page">&rarr; Handling Large Transactions</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -298,26 +298,26 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="large-transactions.html" title="Dealing with Large Transactions"
+          <a href="large-transactions.html" title="Handling Large Transactions"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="gcache-during-state-transfers.html" title="Write-Set Caching during State Transfers"
+          <a href="index.html" title="Codership Best Practices Articles"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Knowledge Base</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Best Practices</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >The Codership Knowledge Base</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Best Practices Articles</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="gcache-during-state-transfers.html" title="Write-Set Caching during State Transfers">&lt; Previous</a></li>
+				<li><a href="index.html" title="Codership Best Practices Articles">&lt; Previous</a></li>
 			
 
 			
-				<li><a href="large-transactions.html" title="Dealing with Large Transactions">Next &gt;</a></li>
+				<li><a href="large-transactions.html" title="Handling Large Transactions">Next &gt;</a></li>
 			
 
 		</ul>
@@ -352,7 +352,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -361,6 +360,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

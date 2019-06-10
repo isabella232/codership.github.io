@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,11 +204,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="reference">
+  <div class="library-document section" id="reference">
 <h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
 <p id="id1">In the event that you need more information about particular variables or parameters or status variable or would like a clearer explanation about various terms used in the documentation, these chapters provide general reference material to Galera Cluster configuration and use.</p>
-<p class="rubric">Variable Reference</p>
-<p id="ref-vars">Defining persistent configurations in Galera Cluster is done through the underlying database server, using the <code class="docutils literal"><span class="pre">[mysqld]</span></code> unit in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.  These chapters provide reference guides to the base replication status and configuration variables as well as the specific wsrep Provider options implemented through the Galera Replication Plugin.</p>
+<p class="rubric" id="ref-vars">Variable Reference</p>
+<p>Defining persistent configurations in Galera Cluster is done through the underlying database server, using the <code class="docutils literal"><span class="pre">[mysqld]</span></code> unit in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.  These chapters provide reference guides to the base replication status and configuration variables as well as the specific wsrep Provider options implemented through the Galera Replication Plugin.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="mysql-wsrep-options.html"><span class="doc">MySQL wsrep Options</span></a></p>
 <p>In addition to the standard configuration variables available through the database server, Galera Cluster implements several that are unique and specific to fine-tuning database replication.  This chapter provides a reference guide to these new configuration variables in Galera Cluster</p>
@@ -223,21 +223,21 @@
 <p>In addition to the standard status variables available through the database server, Galera Cluster also implements several that you can use in determining the status and health of the node and the cluster.  This chapter provides a reference guide to these new status variables in Galera Cluster.</p>
 </li>
 </ul>
-<p class="rubric">Utility Reference</p>
-<p id="ref-utils">In some cases your configuration or implementation may require that you work with external utilities in your deployment of Galera Cluster.  These chapters provide reference guides for two such utilities: XtraBackup and Galera Load Balancer.</p>
+<p class="rubric" id="ref-utils">Utility Reference</p>
+<p>In some cases your configuration or implementation may require that you work with external utilities in your deployment of Galera Cluster.  These chapters provide reference guides for two such utilities: XtraBackup and Galera Load Balancer.</p>
 <ul>
-<li><p class="first"><a class="reference internal" href="xtrabackup-options.html"><span class="doc">XtraBackup Parameters</span></a></p>
-<p>When you manage State Snapshot Transfers using Percona XtraBackup, it allows you to set various parameters on the state transfer script the node uses from the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.  This chapter provides a reference guide to options available to XtraBackup.</p>
-</li>
 <li><p class="first"><a class="reference internal" href="glb-parameters.html"><span class="doc">Galera Load Balancer Parameters</span></a></p>
 <p>In high availability situations or similar cases where nodes are subject to high traffic situations, you may find it beneficial to set up a load balancer between your application servers and the cluster.  This chapter provides a reference guide to the Codership implementation: the Galera Load Balancer.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="xtrabackup-options.html"><span class="doc">XtraBackup Parameters</span></a></p>
+<p>When you manage State Snapshot Transfers using Percona XtraBackup, it allows you to set various parameters on the state transfer script the node uses from the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.  This chapter provides a reference guide to options available to XtraBackup.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="system-tables.html"><span class="doc">Galera System Tables</span></a></p>
 <p>This page provides information on the Galera specific system tables.  These were added as of version 4 of Galera.</p>
 </li>
 </ul>
-<p class="rubric">Miscellaneous References</p>
-<ul id="ref-misc">
+<p class="rubric" id="ref-misc">Miscellaneous References</p>
+<ul>
 <li><p class="first"><a class="reference internal" href="versioning-information.html"><span class="doc">Versioning Information</span></a></p>
 <p>While the documentation follows a convention of 3.x in speaking of release versions for Galera Cluster, in practice the numbering system is somewhat more complicated: covering releases of the underlying database server, the wsrep Provider and the wsrep API.  This chapter provides a more thorough explanation of versioning with Galera Cluster.</p>
 </li>
@@ -342,7 +342,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Galera Cluster Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">The Codership Documentation</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -388,7 +388,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -397,6 +396,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,14 +204,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="galera-load-balancer-parameters">
+  <div class="library-document section" id="galera-load-balancer-parameters">
 <h1>Galera Load Balancer Parameters<a class="headerlink" href="#galera-load-balancer-parameters" title="Permalink to this headline">¶</a></h1>
 <p id="glb-parameters">Galera Load Balancer provides simple TCP connection balancing developed with scalability and performance in mind.  It draws on Pen for inspiration, but its functionality is limited to only balancing TCP connections.</p>
 <p>It can be run either through the <code class="docutils literal"><span class="pre">service</span></code> command or the command-line interface of <code class="docutils literal"><span class="pre">glbd</span></code>.  Configuration for Galera Load Balancer depends on which you use to run it.</p>
 <div class="section" id="configuration-parameters">
-<h2>Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permalink to this headline">¶</a></h2>
-<p id="glb-config-parameters">When Galera Load Balancer starts as a system service, it reads the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file for default parameters you want to use.  Only the <a class="reference internal" href="#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a> parameter is mandatory.</p>
-<table border="1" class="docutils">
+<span id="glb-config-parameters"></span><h2>Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permalink to this headline">¶</a></h2>
+<p>When Galera Load Balancer starts as a system service, it reads the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file for default parameters you want to use.  Only the <a class="reference internal" href="#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a> parameter is mandatory.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
 <col width="50%" />
 <col width="50%" />
@@ -225,15 +225,13 @@
 <tr class="row-even"><td><a class="reference internal" href="#glb-control-addr"><span class="std std-ref">CONTROL_ADDR</span></a></td>
 <td><code class="docutils literal"><span class="pre">127.0.0.1:8011</span></code></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#glb-control-fifo"><span class="std std-ref">CONTROL_FIFO</span></a></td>
+<tr class="row-odd"><td>:ref:<a href="#id1"><span class="problematic" id="id2">`</span></a>CONTROL_FIFO &lt;glb-control_fifo&gt;</td>
 <td><code class="docutils literal"><span class="pre">/var/run/glbd.fifo</span></code></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#glb-default-targets"><span class="std std-ref">DEFAULT_TARGETS</span></a></td>
-<td><code class="docutils literal"><span class="pre">127.0.0.1:80</span>
-<span class="pre">10.0.1:80</span>
-<span class="pre">10.0.0.2:80</span></code></td>
+<td><code class="docutils literal"><span class="pre">127.0.0.1:80</span> <span class="pre">10.0.1:80</span> <span class="pre">10.0.0.2:80</span></code></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a></td>
+<tr class="row-odd"><td>:ref:<a href="#id3"><span class="problematic" id="id4">`</span></a>LISTEN_ADDR &lt;glb-listen_addr&gt;</td>
 <td><code class="docutils literal"><span class="pre">8010</span></code></td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#glb-max-conn-par"><span class="std std-ref">MAX_CONN</span></a></td>
@@ -247,12 +245,12 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">CONTROL_ADDR</span></code></p>
-<p id="glb-control-addr">Defines the IP address and port for controlling connections.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-control-addr"><code class="docutils literal"><span class="pre">CONTROL_ADDR</span></code></p>
+<p>Defines the IP address and port for controlling connections.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="47%" />
-<col width="53%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Command-line Argument</strong></td>
@@ -270,12 +268,12 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">CONTROL_ADDR</span><span class="o">=</span><span class="s">&quot;127.0.0.1:8011&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">CONTROL_FIFO</span></code></p>
-<p id="glb-control-fifo">Defines the path to the FIFO control file.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-control-fifo"><code class="docutils literal"><span class="pre">CONTROL_FIFO</span></code></p>
+<p>Defines the path to the FIFO control file.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="47%" />
-<col width="53%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Command-line Argument</strong></td>
@@ -293,17 +291,16 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">CONTROL_FIFO</span><span class="o">=</span><span class="s">&quot;/var/run/glbd.fifo&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">DEFAULT_TARGETS</span></code></p>
-<p id="glb-default-targets">Defines the IP addresses and ports of the destination servers.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-default-targets"><code class="docutils literal"><span class="pre">DEFAULT_TARGETS</span></code></p>
+<p>Defines the IP addresses and ports of the destination servers.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="47%" />
-<col width="53%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Default Configuration</strong></td>
-<td><code class="docutils literal"><span class="pre">127.0.0.1:80</span> <span class="pre">10.0.0.1:80</span>
-<span class="pre">10.0.0.2:80:2</span></code></td>
+<td><code class="docutils literal"><span class="pre">127.0.0.1:80</span> <span class="pre">10.0.0.1:80</span> <span class="pre">10.0.0.2:80:2</span></code></td>
 </tr>
 <tr class="row-even"><td><strong>Mandatory Parameter</strong></td>
 <td>No</td>
@@ -314,12 +311,12 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">DEFAULT_TARGETS</span><span class="o">=</span><span class="s">&quot;192.168.1.1 192.168.1.2 192.168.1.3&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">LISTEN_ADDR</span></code></p>
-<p id="glb-listen-addr">Defines the IP address and port used for client connections.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-listen-addr"><code class="docutils literal"><span class="pre">LISTEN_ADDR</span></code></p>
+<p>Defines the IP address and port used for client connections.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="47%" />
-<col width="53%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Default Configuration</strong></td>
@@ -334,15 +331,15 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">LISTEN_ADDR</span><span class="o">=</span><span class="s">&quot;8010&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">MAX_CONN</span></code></p>
-<p id="glb-max-conn-par">Defines the maximum allowed client connections.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-max-conn-par"><code class="docutils literal"><span class="pre">MAX_CONN</span></code></p>
+<p>Defines the maximum allowed client connections.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="47%" />
-<col width="53%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><strong>Command-line Argument</strong></td>
+<tr class="row-odd"><td><strong>Default Configuration</strong></td>
 <td><a class="reference internal" href="#glb-max-conn-arg"><span class="std std-ref">&#8211;max_conn</span></a></td>
 </tr>
 <tr class="row-even"><td><strong>Mandatory Parameter</strong></td>
@@ -355,32 +352,21 @@
 </pre></div>
 </div>
 <p>This option defines the maximum number of client connections that you want allow to Galera Load Balancer. Bear in mind, that it can be operating system dependent.</p>
-<p class="rubric"><code class="docutils literal"><span class="pre">OTHER_OPTIONS</span></code></p>
-<p id="glb-other-options">Defines additional options that you want to pass to Galera Load Balancer.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="47%" />
-<col width="53%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>Mandatory Parameter</strong></td>
-<td>No</td>
-</tr>
-</tbody>
-</table>
+<p class="rubric" id="glb-other-options"><code class="docutils literal"><span class="pre">OTHER_OPTIONS</span></code></p>
+<p>Defines additional options that you want to pass to Galera Load Balancer.  There is no default configuration and this is not a mandatory parameter.</p>
 <p>This parameter defines various additional options that you would like to pass to Galera Load Balancer, such as a destination selection policy or Watchdog configurations.  Use the same syntax as you would for the command-line arguments.  For more information on the available options, see <a class="reference internal" href="#glb-config-options"><span class="std std-ref">Configuration Options</span></a>.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">OTHER_OPTIONS</span><span class="o">=</span><span class="s">&quot;--random --watchdog exec:&#39;mysql -utest -ptestpass&#39; --discover&quot;</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">THREADS</span></code></p>
-<p id="glb-threads-par">Defines the number of threads you want to use.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-threads-par"><code class="docutils literal"><span class="pre">THREADS</span></code></p>
+<p>Defines the number of threads you want to use.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="47%" />
-<col width="53%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><strong>Command-line Argument</strong></td>
+<tr class="row-odd"><td><strong>Default Configuration</strong></td>
 <td><a class="reference internal" href="#glb-threads-arg"><span class="std std-ref">&#8211;threads</span></a></td>
 </tr>
 <tr class="row-even"><td><strong>Mandatory Parameter</strong></td>
@@ -394,8 +380,8 @@
 </div>
 </div>
 <div class="section" id="configuration-options">
-<h2>Configuration Options<a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
-<p id="glb-config-options">When Galera Load Balancer starts as a daemon process, through the <code class="docutils literal"><span class="pre">/sbin/glbd</span></code> command, it allows you to pass a number of command-line arguments to configure how it operates.  It uses the following syntax:</p>
+<span id="glb-config-options"></span><h2>Configuration Options<a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h2>
+<p>When Galera Load Balancer starts as a daemon process, through the <code class="docutils literal"><span class="pre">/sbin/glbd</span></code> command, it allows you to pass a number of command-line arguments to configure how it operates.  It uses the following syntax:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>/usr/local/sbin/glbd [OPTIONS] LISTEN_ADDRESS [DESTINATION_LIST]
 </pre></div>
 </div>
@@ -517,12 +503,12 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">--control</span></code></p>
-<p id="glb-control">Defines the IP address and port for control connections.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-control"><code class="docutils literal"><span class="pre">--control</span></code></p>
+<p>Defines the IP address and port for control connections.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -544,12 +530,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--daemon</span></code></p>
-<p id="glb-daemon">Defines whether you want Galera Load Balancer to run as a daemon process.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-daemon"><code class="docutils literal"><span class="pre">--daemon</span></code></p>
+<p>Defines whether you want Galera Load Balancer to run as a daemon process.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -568,12 +554,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--defer-accept</span></code></p>
-<p id="glb-defer-accept">Enables TCP deferred acceptance on the listening socket.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-defer-accept"><code class="docutils literal"><span class="pre">--defer-accept</span></code></p>
+<p>Enables TCP deferred acceptance on the listening socket.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -592,12 +578,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--discover</span></code></p>
-<p id="glb-discover">Defines whether you want to use watchdog results to discover and set new destinations.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-discover"><code class="docutils literal"><span class="pre">--discover</span></code></p>
+<p>Defines whether you want to use watchdog results to discover and set new destinations.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -616,12 +602,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--extra</span></code></p>
-<p id="glb-extra">Defines whether you want to perform an extra destination poll on connection attempts.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-extra"><code class="docutils literal"><span class="pre">--extra</span></code></p>
+<p>Defines whether you want to perform an extra destination poll on connection attempts.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -640,12 +626,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--fifo</span></code></p>
-<p id="glb-fifo">Defines the path to the FIFO control file.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-fifo"><code class="docutils literal"><span class="pre">--fifo</span></code></p>
+<p>Defines the path to the FIFO control file.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -667,12 +653,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--interval</span></code></p>
-<p id="glb-interval">Defines how often to probe destinations for liveliness.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-interval"><code class="docutils literal"><span class="pre">--interval</span></code></p>
+<p>Defines how often to probe destinations for liveliness.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -691,12 +677,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--keepalive</span></code></p>
-<p id="glb-keepalive">Defines whether you want to disable the <code class="docutils literal"><span class="pre">SO_KEEPALIVE</span></code> socket option on server-side sockets.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-keepalive"><code class="docutils literal"><span class="pre">--keepalive</span></code></p>
+<p>Defines whether you want to disable the <code class="docutils literal"><span class="pre">SO_KEEPALIVE</span></code> socket option on server-side sockets.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -715,12 +701,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--latency</span></code></p>
-<p id="glb-latency">Defines the number of samples to take in calculating latency for watchdog.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-latency"><code class="docutils literal"><span class="pre">--latency</span></code></p>
+<p>Defines the number of samples to take in calculating latency for watchdog.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -739,12 +725,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--linger</span></code></p>
-<p id="glb-linger">Defines whether Galera Load Balancer disables sockets lingering after they are closed.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-linger"><code class="docutils literal"><span class="pre">--linger</span></code></p>
+<p>Defines whether Galera Load Balancer disables sockets lingering after they are closed.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -763,12 +749,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--max_conn</span></code></p>
-<p id="glb-max-conn-arg">Defines the maximum allowed client connections.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-max-conn-arg"><code class="docutils literal"><span class="pre">--max_conn</span></code></p>
+<p>Defines the maximum allowed client connections.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -787,12 +773,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--nodelay</span></code></p>
-<p id="glb-nodelay">Defines whether it disables the TCP no-delay socket option.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-nodelay"><code class="docutils literal"><span class="pre">--nodelay</span></code></p>
+<p>Defines whether it disables the TCP no-delay socket option.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -811,12 +797,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--random</span></code></p>
-<p id="glb-random">Defines the destination selection policy as Random.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-random"><code class="docutils literal"><span class="pre">--random</span></code></p>
+<p>Defines the destination selection policy as Random.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -836,12 +822,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--round</span></code></p>
-<p id="glb-round">Defines the destination selection policy as Round Robin.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-round"><code class="docutils literal"><span class="pre">--round</span></code></p>
+<p>Defines the destination selection policy as Round Robin.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -861,12 +847,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--single</span></code></p>
-<p id="glb-single">Defines the destination selection policy as Single.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-single"><code class="docutils literal"><span class="pre">--single</span></code></p>
+<p>Defines the destination selection policy as Single.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -886,12 +872,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--source</span></code></p>
-<p id="glb-source">Defines the destination selection policy as Source Tracking.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-source"><code class="docutils literal"><span class="pre">--source</span></code></p>
+<p>Defines the destination selection policy as Source Tracking.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -912,12 +898,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--threads</span></code></p>
-<p id="glb-threads-arg">Defines the number of threads that you want to use.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-threads-arg"><code class="docutils literal"><span class="pre">--threads</span></code></p>
+<p>Defines the number of threads that you want to use.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -936,12 +922,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--top</span></code></p>
-<p id="glb-top">Enables balancing to top weights only.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-top"><code class="docutils literal"><span class="pre">--top</span></code></p>
+<p>Enables balancing to top weights only.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -960,12 +946,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--verbose</span></code></p>
-<p id="glb-verbose">Defines whether you want Galera Load Balancer to run as verbose.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-verbose"><code class="docutils literal"><span class="pre">--verbose</span></code></p>
+<p>Defines whether you want Galera Load Balancer to run as verbose.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -984,12 +970,12 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">--watchdog</span></code></p>
-<p id="glb-watchdog">Defines specifications for watchdog operations.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="glb-watchdog"><code class="docutils literal"><span class="pre">--watchdog</span></code></p>
+<p>Defines specifications for watchdog operations.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="54%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>Short Argument</strong></td>
@@ -1114,7 +1100,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="reference.html" accesskey="U">Reference</a> &#187;</li> 
       </ul>
     </div>
@@ -1161,7 +1147,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -1170,6 +1155,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

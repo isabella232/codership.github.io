@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,12 +204,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="pen">
+  <div class="library-document section" id="pen">
 <h1>Pen<a class="headerlink" href="#pen" title="Permalink to this headline">¶</a></h1>
 <p id="id1">Pen is a high-scalability, high-availability, robust load balancer for TCP- and UDP-based protocols.  You can use it to balance connections between application servers and Galera Cluster.</p>
 <div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p id="pen-install">Pen is available in the software repositories of most Linux distributions.  You can install it using a package manager.</p>
+<span id="pen-install"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Pen is available in the software repositories of most Linux distributions.  You can install it using a package manager.</p>
 <ul>
 <li><p class="first">For DEB-based Linux distributions (i.e., Debian and Ubuntu), run the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install pen
@@ -225,8 +225,8 @@
 <p>Whichever you use, they will install Pen on your system.  In the event that the command for your distribution or operating system does not work as expected, check your system&#8217;s documentation or software repository for information on the correct procedure to install Pen. For instance, on a RPM-based system, you may have to install the <code class="docutils literal"><span class="pre">yum</span></code> utility.</p>
 </div>
 <div class="section" id="using-pen">
-<h2>Using Pen<a class="headerlink" href="#using-pen" title="Permalink to this headline">¶</a></h2>
-<p id="id2">Once you&#8217;ve installed Pen on the load balancing server, you can launch it from the command-line by entering something like the following:</p>
+<span id="id2"></span><h2>Using Pen<a class="headerlink" href="#using-pen" title="Permalink to this headline">¶</a></h2>
+<p>Once you&#8217;ve installed Pen on the load balancing server, you can launch it from the command-line by entering something like the following:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> pen -l pen.log -p pen.pid localhost:3306 <span class="se">\</span>
       <span class="m">191</span>.168.1.1:3306 <span class="se">\</span>
       <span class="m">191</span>.168.1.2:3306 <span class="se">\</span>
@@ -234,13 +234,10 @@
 </pre></div>
 </div>
 <p>When one of the application servers attempts to connect to the Pen server on port <code class="docutils literal"><span class="pre">3306</span></code>, Pen routes that connection to one of the Galera Cluster nodes.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on Pen configuration and use, see its manpage.</p>
-</div>
+<p>For more information on Pen configuration and use, see its manpage.</p>
 <div class="section" id="server-selection">
-<h3>Server Selection<a class="headerlink" href="#server-selection" title="Permalink to this headline">¶</a></h3>
-<p id="pen-server-selection">When Pen receives a new connection from the application servers, it first checks to see where the application was routed on the last connection and attempts to send traffic there.  In the event that it cannot establish a connection, it falls back on a round-robin selection policy.</p>
+<span id="pen-server-selection"></span><h3>Server Selection<a class="headerlink" href="#server-selection" title="Permalink to this headline">¶</a></h3>
+<p>When Pen receives a new connection from the application servers, it first checks to see where the application was routed on the last connection and attempts to send traffic there.  In the event that it cannot establish a connection, it falls back on a round-robin selection policy.</p>
 <p>There are a number of options you can use to modify this behavior when you launch Pen.</p>
 <ul class="simple">
 <li><strong>Default Round Robin:</strong> This directs all new connections to the next destination in a cirular order, without determining which server a client used the last time.  You can enable this with the <code class="docutils literal"><span class="pre">-r</span></code> option.</li>
@@ -351,7 +348,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="deployment.html" >Deployment</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="load-balancing.html" accesskey="U">Load Balancing</a> &#187;</li> 
       </ul>
@@ -399,7 +396,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -408,6 +404,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

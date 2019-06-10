@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="State Snapshot Transfers" href="sst.html" />
-    <link rel="prev" title="Administration" href="administration.html" />
+    <link rel="prev" title="Galera Cluster Administration" href="administration.html" />
 
 
 
@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <style> .red {color:red} </style><style> .green {color:green} </style><div class="section" id="node-provisioning">
+  <style> .red {color:red} </style><style> .green {color:green} </style><div class="library-document section" id="node-provisioning">
 <h1>Node Provisioning<a class="headerlink" href="#node-provisioning" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="id1"></span><span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><p id="index-3">When the state of a new or failed node differs from that of the cluster&#8217;s <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, the new or failed node must be synchronized with the cluster.  Because of this, the provisioning of new nodes and the recover of failed nodes are essentially the same process as that of joining a node to the cluster Primary Component.</p>
 <p>Galera reads the initial node state ID from the <strong>grastate.txt</strong> file, found in the directory assigned by the <code class="docutils literal"><span class="pre">wsrep_data_dir</span></code> parameter.  Each time the node gracefully shuts down, Galera saves to this file.</p>
@@ -234,8 +234,8 @@
 <p>While there is no guarantee on how soon a node will catch up, when it does the node status updates to <code class="docutils literal"><span class="pre">SYNCED</span></code> and it begins to accept client connections.</p>
 </div>
 <div class="section" id="state-transfers">
-<h2>State Transfers<a class="headerlink" href="#state-transfers" title="Permalink to this headline">¶</a></h2>
-<p id="state-transfer">There are two types of state transfers available to bring the node up to date with the cluster:</p>
+<span id="node-provisioning-state-transfer"></span><h2>State Transfers<a class="headerlink" href="#state-transfers" title="Permalink to this headline">¶</a></h2>
+<p>There are two types of state transfers available to bring the node up to date with the cluster:</p>
 <ul class="simple">
 <li><a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) Where donor transfers to the joining node a snapshot of the entire node state as it stands.</li>
 <li><a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a> (IST) Where the donor only transfers the results of transactions missing from the joining node.</li>
@@ -272,7 +272,7 @@
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="administration.html"
-                          title="Previous page">&larr; Administration</a></p>
+                          title="Previous page">&larr; Galera Cluster Administration</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -343,19 +343,19 @@
           <a href="sst.html" title="State Snapshot Transfers"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="administration.html" title="Administration"
+          <a href="administration.html" title="Galera Cluster Administration"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Administration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Galera Cluster Administration</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="administration.html" title="Administration">&lt; Previous</a></li>
+				<li><a href="administration.html" title="Galera Cluster Administration">&lt; Previous</a></li>
 			
 
 			
@@ -394,7 +394,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -403,6 +402,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

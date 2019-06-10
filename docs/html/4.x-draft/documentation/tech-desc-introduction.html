@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,13 +204,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="database-replication">
+  <div class="library-document section" id="database-replication">
 <h1>Database Replication<a class="headerlink" href="#database-replication" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="id1"></span><p id="index-0">Database replication refers to the frequent copying of data from one node—a database on a server—into another.  Think of a database replication system as a distributed database, where all nodes share the same level of information.  This system is also known as a <em>database cluster</em>.</p>
 <p>The database clients, such as web browsers or computer applications, do not see the database replication system, but they benefit from close to native <abbr title="Database Management System">DBMS</abbr> behavior.</p>
 <div class="section" id="masters-and-slaves">
-<h2>Masters and Slaves<a class="headerlink" href="#masters-and-slaves" title="Permalink to this headline">¶</a></h2>
-<p id="masters-slaves">Many <abbr title="DBMS">Database Management Systems</abbr> replicate the database.</p>
+<span id="masters-slaves"></span><h2>Masters and Slaves<a class="headerlink" href="#masters-and-slaves" title="Permalink to this headline">¶</a></h2>
+<p>Many <abbr title="DBMS">Database Management Systems</abbr> replicate the database.</p>
 <p>The most common replication setup uses a master/slave relationship between the original data set and the copies.</p>
 <div class="figure" id="id2">
 <img alt="../_images/asynchronousreplication.png" src="../_images/asynchronousreplication.png" />
@@ -225,14 +225,14 @@
 <p>In a multi-master replication system, you can submit updates to any database node.  These updates then propagate through the network to other database nodes.  All database nodes function as masters.  There are no logs available and the system provides no indicators sent to tell you if the updates were successful.</p>
 </div>
 <div class="section" id="asynchronous-and-synchronous-replication">
-<h2>Asynchronous and Synchronous Replication<a class="headerlink" href="#asynchronous-and-synchronous-replication" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="asynchronous-synchronous-replication"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">In addition to the setup of how different nodes relate to one another, there is also the protocol for how they propagate database transactions through the cluster.</p>
+<span id="asynchronous-synchronous-replication"></span><h2>Asynchronous and Synchronous Replication<a class="headerlink" href="#asynchronous-and-synchronous-replication" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">In addition to the setup of how different nodes relate to one another, there is also the protocol for how they propagate database transactions through the cluster.</p>
 <ul class="simple">
 <li><strong>Synchronous Replication</strong> Uses the approach of eager replication.  Nodes keep all replicas synchronized by updating all replicas in a single transaction.  In other words, when a transaction commits, all nodes have the same value.</li>
 <li><strong>Asynchronous Replication</strong> Uses the approach of lazy replication.  The master database asynchronously propagates replica updates to other nodes.  After the master node propagates the replica, the transaction commits.  In other words, when a transaction commits, for at least a short time, some nodes hold different values.</li>
 </ul>
 <div class="section" id="advantages-of-synchronous-replication">
-<h3>Advantages of Synchronous Replication<a class="headerlink" href="#advantages-of-synchronous-replication" title="Permalink to this headline">¶</a></h3>
+<span id="advantages-synchronous-replication"></span><h3>Advantages of Synchronous Replication<a class="headerlink" href="#advantages-of-synchronous-replication" title="Permalink to this headline">¶</a></h3>
 <p>In theory, there are several advantages that synchronous replication has over asynchronous replication.  For instance:</p>
 <ul class="simple">
 <li><strong>High Availability</strong> Synchronous replication provides highly available clusters and guarantees 24/7 service availability, given that:<ul>
@@ -246,7 +246,7 @@
 </ul>
 </div>
 <div class="section" id="disadvantages-of-synchronous-replication">
-<h3>Disadvantages of Synchronous Replication<a class="headerlink" href="#disadvantages-of-synchronous-replication" title="Permalink to this headline">¶</a></h3>
+<span id="disadvantages-synchronous-replication"></span><h3>Disadvantages of Synchronous Replication<a class="headerlink" href="#disadvantages-of-synchronous-replication" title="Permalink to this headline">¶</a></h3>
 <p>Traditionally, eager replication protocols coordinate nodes one operation at a time.  They use a two phase commit, or distributed locking.  A system with <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> number of nodes due to process <img class="math" src="../_images/math/21736df275793e73d4849d98709ef561b459defd.png" alt="o"/> operations with a throughput of <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/> transactions per second gives you <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> messages per second with:</p>
 <div class="math">
 <p><img src="../_images/math/4341bfcf2c93cce181abfbb4afc1a1b2b8e7697b.png" alt="m = n \times o \times t"/></p>
@@ -255,8 +255,8 @@
 </div>
 </div>
 <div class="section" id="solving-the-issues-in-synchronous-replication">
-<h2>Solving the Issues in Synchronous Replication<a class="headerlink" href="#solving-the-issues-in-synchronous-replication" title="Permalink to this headline">¶</a></h2>
-<p id="solving-issues-synchronous-replication">There are several issues with the traditional approach to synchronous replication systems.  Over the past few years, researchers from around the world have begun to suggest alternative approaches to synchronous database replication.</p>
+<span id="solving-issues-synchronous-replication"></span><h2>Solving the Issues in Synchronous Replication<a class="headerlink" href="#solving-the-issues-in-synchronous-replication" title="Permalink to this headline">¶</a></h2>
+<p>There are several issues with the traditional approach to synchronous replication systems.  Over the past few years, researchers from around the world have begun to suggest alternative approaches to synchronous database replication.</p>
 <p>In addition to theory, several prototype implementations have shown much promise.  These are some of the most important improvements that these studies have brought about:</p>
 <ul class="simple">
 <li><strong>Group Communication</strong>  This is a high-level abstraction that defines patterns for the communication of database nodes.  The implementation guarantees the consistency of replication data.</li>
@@ -370,7 +370,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="technical-description.html" accesskey="U">Technical Description</a> &#187;</li> 
       </ul>
     </div>
@@ -417,7 +417,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -426,6 +425,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

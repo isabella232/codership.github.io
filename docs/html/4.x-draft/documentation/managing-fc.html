@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,13 +204,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="managing-flow-control">
+  <div class="library-document section" id="managing-flow-control">
 <h1>Managing Flow Control<a class="headerlink" href="#managing-flow-control" title="Permalink to this headline">¶</a></h1>
 <p id="managing-fc">The cluster replicates changes synchronously through global ordering, but applies these changes asynchronously from the originating node out.  To prevent any one node from falling too far behind the cluster, Galera Cluster implements a feedback mechanism called Flow Control.</p>
 <p>Nodes queue the write-sets they receive in the global order and begin to apply and commit them on the database.  In the event that the received queue grows too large, the node initiates Flow Control.  The node pauses replication while it works the received queue.  Once it reduces the received queue to a more manageable size, the node resumes replication.</p>
 <div class="section" id="monitoring-flow-control">
-<h2>Monitoring Flow Control<a class="headerlink" href="#monitoring-flow-control" title="Permalink to this headline">¶</a></h2>
-<p id="monitoring-fc">Galera Cluster provides global status variables for use in monitoring Flow Control.  These break down into those status variables that count Flow Control pause events and those that measure the effects of pauses.</p>
+<span id="monitoring-fc"></span><h2>Monitoring Flow Control<a class="headerlink" href="#monitoring-flow-control" title="Permalink to this headline">¶</a></h2>
+<p>Galera Cluster provides global status variables for use in monitoring Flow Control.  These break down into those status variables that count Flow Control pause events and those that measure the effects of pauses.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_flow_control_%&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -232,21 +232,18 @@
 </pre></div>
 </div>
 <p>You can find the slave queue under the <code class="docutils literal"><span class="pre">Queue</span> <span class="pre">Dn</span></code> column and <code class="docutils literal"><span class="pre">FC</span> <span class="pre">pau</span></code> refers to Flow Control pauses.  When the slave queue rises to a certain point, Flow Control changes the pause value to <code class="docutils literal"><span class="pre">1.0</span></code>.  The node will hold to this value until the slave queue is worked down to a more manageable size.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on status variables that relate to flow control, see <a class="reference internal" href="galera-status-variables.html"><span class="doc">Galera Status Variables</span></a>.</p>
-</div>
+<p>For more information on status variables that relate to flow control, see <a class="reference internal" href="galera-status-variables.html"><span class="doc">Galera Status Variables</span></a>.</p>
 <div class="section" id="monitoring-for-flow-control-pauses">
-<h3>Monitoring for Flow Control Pauses<a class="headerlink" href="#monitoring-for-flow-control-pauses" title="Permalink to this headline">¶</a></h3>
-<p id="monitor-pauses">When Flow Control engages, it notifies the cluster that it is pausing replication using an <code class="docutils literal"><span class="pre">FC_Pause</span></code> event.  Galera Cluster provides two status variables that monitor for these events.</p>
+<span id="monitor-pauses"></span><h3>Monitoring for Flow Control Pauses<a class="headerlink" href="#monitoring-for-flow-control-pauses" title="Permalink to this headline">¶</a></h3>
+<p>When Flow Control engages, it notifies the cluster that it is pausing replication using an <code class="docutils literal"><span class="pre">FC_Pause</span></code> event.  Galera Cluster provides two status variables that monitor for these events.</p>
 <ul class="simple">
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a> This status variable shows the number of Flow Control pause events sent by the local node since the last status query.</li>
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-recv"><span class="std std-ref">wsrep_flow_control_recv</span></a> This status variable shows the number of Flow Control pause events on the cluster, both those from other nodes and those sent by the local node, since the last status query.</li>
 </ul>
 </div>
 <div class="section" id="measuring-the-flow-control-pauses">
-<h3>Measuring the Flow Control Pauses<a class="headerlink" href="#measuring-the-flow-control-pauses" title="Permalink to this headline">¶</a></h3>
-<p id="measure-fc-pauses">In addition to tracking Flow Control pauses, Galera Cluster also allows you to track the amount of time since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> query during which replication was paused due to Flow Control.</p>
+<span id="measure-fc-pauses"></span><h3>Measuring the Flow Control Pauses<a class="headerlink" href="#measuring-the-flow-control-pauses" title="Permalink to this headline">¶</a></h3>
+<p>In addition to tracking Flow Control pauses, Galera Cluster also allows you to track the amount of time since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> query during which replication was paused due to Flow Control.</p>
 <p>You can find this using one of two status variables:</p>
 <ul class="simple">
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused"><span class="std std-ref">wsrep_flow_control_paused</span></a> Provides the amount of time replication was paused as a fraction.  Effectively, how much the slave lag is slowing the cluster.  The value <code class="docutils literal"><span class="pre">1.0</span></code> indicates replication is paused now.</li>
@@ -255,11 +252,11 @@
 </div>
 </div>
 <div class="section" id="configuring-flow-control">
-<h2>Configuring Flow Control<a class="headerlink" href="#configuring-flow-control" title="Permalink to this headline">¶</a></h2>
-<p id="configuring-fc">Galera Cluster provides two sets of parameters that allow you to manage how nodes handle the replication rate and Flow Control.  The first set controls the write-set cache, the second relates to the points at which the node engages and disengages Flow Control.</p>
+<span id="configuring-fc"></span><h2>Configuring Flow Control<a class="headerlink" href="#configuring-flow-control" title="Permalink to this headline">¶</a></h2>
+<p>Galera Cluster provides two sets of parameters that allow you to manage how nodes handle the replication rate and Flow Control.  The first set controls the write-set cache, the second relates to the points at which the node engages and disengages Flow Control.</p>
 <div class="section" id="managing-the-replication-rate">
-<h3>Managing the Replication Rate<a class="headerlink" href="#managing-the-replication-rate" title="Permalink to this headline">¶</a></h3>
-<p id="managing-gcache-fc">These three parameters control how nodes respond to changes in the replication rate.  They allow you to manage the write-set cache on an individual node.</p>
+<span id="managing-gcache-fc"></span><h3>Managing the Replication Rate<a class="headerlink" href="#managing-the-replication-rate" title="Permalink to this headline">¶</a></h3>
+<p>These three parameters control how nodes respond to changes in the replication rate.  They allow you to manage the write-set cache on an individual node.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="galera-parameters.html#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a> This sets the maximum write-set cache size (in bytes).  The parameter value depends on the amount of RAM, swap size and performance considerations.</p>
 <p>The default value is <code class="docutils literal"><span class="pre">SSIZE_MAX</span></code> minus 2 gigabytes on 32-bit systems.  There is no practical limit on 64-bit systems.</p>
@@ -279,8 +276,8 @@
 <p>The write-set cache grows semi-logarithmically with time after the <a class="reference internal" href="galera-parameters.html#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a> and the time needed for a state transfer to complete.</p>
 </div>
 <div class="section" id="id1">
-<h3>Managing Flow Control<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p id="id2">These parameters control the point at which the node triggers Flow Control and the factor used in determining when it should disengage Flow Control and resume replication.</p>
+<span id="id2"></span><h3>Managing Flow Control<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>These parameters control the point at which the node triggers Flow Control and the factor used in determining when it should disengage Flow Control and resume replication.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="galera-parameters.html#gcs-fc-limit"><span class="std std-ref">gcs.fc_limit</span></a> This parameter determines the point at which Flow Control engages.  When the slave queue exceeds this limit, the node pauses replication.</p>
 <p>It is essential for multi-master configurations that you keep this limit low.  The certification conflict rate is proportional to the slave queue length.  In master-save setups, you can use a considerably higher value to reduce Flow Control intervention.</p>
@@ -409,8 +406,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Administration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Galera Cluster Administration</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -456,7 +453,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -465,6 +461,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="using-docker">
+  <div class="library-document section" id="using-docker">
 <h1>Using Docker<a class="headerlink" href="#using-docker" title="Permalink to this headline">¶</a></h1>
 <p id="docker">Docker provides an open source platform for automatically deploying applications within software containers.</p>
 <p>Galera Cluster can run from within a such a container, within Docker.  You may find containers useful in portable deployment across numerous machines, testing applications that depend on Galera Cluster, or scripting the installation and configuration process.</p>
@@ -213,8 +213,8 @@
 <p class="last">This guide assumes that you are only running one container node per server.  For more information on running multiple nodes per server, see <em>Getting Started Galera with Docker, `Part I &lt;http://galeracluster.com/2015/05/getting-started-galera-with-docker-part-1/&gt;`_ and `Part II &lt;http://galeracluster.com/2015/05/getting-started-galera-with-docker-part-2-2/&gt;`_.</em></p>
 </div>
 <div class="section" id="configuring-a-container">
-<h2>Configuring a Container<a class="headerlink" href="#configuring-a-container" title="Permalink to this headline">¶</a></h2>
-<p id="configure-container">Images are the containers that Docker has available to run.  There are a number of base images available through <a class="reference external" href="https://registry.hub.docker.com">Docker Hub</a>.  You can pull these to your system through the <code class="docutils literal"><span class="pre">docker</span></code> command-line tool.  You can also build new images.</p>
+<span id="configure-container"></span><h2>Configuring a Container<a class="headerlink" href="#configuring-a-container" title="Permalink to this headline">¶</a></h2>
+<p>Images are the containers that Docker has available to run.  There are a number of base images available through <a class="reference external" href="https://registry.hub.docker.com">Docker Hub</a>.  You can pull these to your system through the <code class="docutils literal"><span class="pre">docker</span></code> command-line tool.  You can also build new images.</p>
 <p>When Docker builds a new image, it sources a <code class="docutils literal"><span class="pre">Dockerfile</span></code> to determine the steps that it needs to take in order to generate the image you want to use. This means you can script the installation and configuration process.  Basically, such a script would need to load the needed configuration files, run updates, and install packages when the image is built&#8212;all through a single command.  Below is an example of how you might write such a script:</p>
 <div class="highlight-Dockerfile"><div class="highlight"><pre><span></span><span class="c"># Galera Cluster Dockerfile</span>
 <span class="k">FROM</span><span class="s"> ubuntu:14.04</span>
@@ -238,8 +238,8 @@ COPY my.cnf /etc/mysql/my.cnf
 </div>
 <p>This example follows the installation process for running Galera Cluster from within a Docker container running on Ubuntu.  When you run the build command, Docker pulls down the Ubuntu 14.04 image from Docker Hub, if it&#8217;s needed. It then runs each command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> to initialize the image for your use.</p>
 <div class="section" id="configuration-file">
-<h3>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h3>
-<p id="docker-my-cnf">Before you build the container, you need to create the configuration file for the node.  The <code class="docutils literal"><span class="pre">COPY</span></code> command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> example above copies <code class="docutils literal"><span class="pre">my.cnf</span></code>, the MySQL configuration file, from the build directory into the container.</p>
+<span id="docker-my-cnf"></span><h3>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h3>
+<p>Before you build the container, you need to create the configuration file for the node.  The <code class="docutils literal"><span class="pre">COPY</span></code> command in the <code class="docutils literal"><span class="pre">Dockerfile</span></code> example above copies <code class="docutils literal"><span class="pre">my.cnf</span></code>, the MySQL configuration file, from the build directory into the container.</p>
 <p>For the most part, the configuration file for a node running within Docker is the same as when the node is running on a standard Linux server.  However, there are some parameters that may not be included in the MySQL configuration file and instead use the default values from the underlying database system&#8212;or they may have been set manually, on-the-fly using the <code class="docutils literal"><span class="pre">SET</span></code> statement.  For these parameters, since Docker can&#8217;t access the host system, you may need to set them, manually.</p>
 <ul class="simple">
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a>: A node will determine the default address from the IP address on the first network interface.  Containers cannot see the network interfaces on the host system.  Therefore, you will need to set this parameter to ensure the cluster is given the correct IP address for the node.</li>
@@ -253,8 +253,8 @@ COPY my.cnf /etc/mysql/my.cnf
 </div>
 </div>
 <div class="section" id="building-a-container-image">
-<h2>Building a Container Image<a class="headerlink" href="#building-a-container-image" title="Permalink to this headline">¶</a></h2>
-<p id="building-the-container">Building an image simplifies everyting&#8212;the node installation, the configuration and the deployment process&#8212;by reducing it to a single command.  It will create a server instance where Galera Cluster is already installed, configured and ready to start.</p>
+<span id="building-the-container"></span><h2>Building a Container Image<a class="headerlink" href="#building-a-container-image" title="Permalink to this headline">¶</a></h2>
+<p>Building an image simplifies everyting&#8212;the node installation, the configuration and the deployment process&#8212;by reducing it to a single command.  It will create a server instance where Galera Cluster is already installed, configured and ready to start.</p>
 <p>You can build a container node using the <code class="docutils literal"><span class="pre">docker</span></code> command-line tool like so:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> docker build -t ubuntu:galera-node1 ./
 </pre></div>
@@ -275,8 +275,8 @@ COPY my.cnf /etc/mysql/my.cnf
 </div>
 </div>
 <div class="section" id="deploying-a-container">
-<h2>Deploying a Container<a class="headerlink" href="#deploying-a-container" title="Permalink to this headline">¶</a></h2>
-<p id="deploy-container">When you finish building an image, you&#8217;re ready to launch the node container.  For each node, start the container using the Docker command-line tool with the <code class="docutils literal"><span class="pre">run</span></code> argument like so:</p>
+<span id="deploy-container"></span><h2>Deploying a Container<a class="headerlink" href="#deploying-a-container" title="Permalink to this headline">¶</a></h2>
+<p>When you finish building an image, you&#8217;re ready to launch the node container.  For each node, start the container using the Docker command-line tool with the <code class="docutils literal"><span class="pre">run</span></code> argument like so:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> docker run -i -d --name Node1 --host node1 <span class="se">\</span>
       -p <span class="m">3306</span>:3306 -p <span class="m">4567</span>:4567 -p <span class="m">4568</span>:4568 -p <span class="m">4444</span>:4444 <span class="se">\</span>
       -v /var/container_data/mysql:/var/lib/mysql <span class="se">\</span>
@@ -290,14 +290,14 @@ COPY my.cnf /etc/mysql/my.cnf
 <p class="last">The above command starts a container node meant to be attached to an existing cluster.  If you&#8217;re starting the first node in a cluster, append the argument <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> to the end of the command.  For more information, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting a Cluster</span></a>.</p>
 </div>
 <div class="section" id="firewall-settings">
-<h3>Firewall Settings<a class="headerlink" href="#firewall-settings" title="Permalink to this headline">¶</a></h3>
-<p id="docker-firewall">When you launch the Docker container (i.e., <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> as shown above), the series of <code class="docutils literal"><span class="pre">-p</span></code> options connect the ports on the host system to those in the container.  When the container is launched this way, nodes in the container have the same level of access to the network as the node would if it were running on the host system.</p>
+<span id="docker-firewall"></span><h3>Firewall Settings<a class="headerlink" href="#firewall-settings" title="Permalink to this headline">¶</a></h3>
+<p>When you launch the Docker container (i.e., <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> as shown above), the series of <code class="docutils literal"><span class="pre">-p</span></code> options connect the ports on the host system to those in the container.  When the container is launched this way, nodes in the container have the same level of access to the network as the node would if it were running on the host system.</p>
 <p>Use these settings, though, when you run only one container on the server.  If you are running multiple containers on the server, you&#8217;ll need a load balancer to handle and direct incoming connections to individual nodes.</p>
 <p>For more information on configuring the firewall for Galera Cluster, see <a class="reference internal" href="firewall-settings.html"><span class="doc">Firewall Settings</span></a>.</p>
 </div>
 <div class="section" id="persistent-data">
-<h3>Persistent Data<a class="headerlink" href="#persistent-data" title="Permalink to this headline">¶</a></h3>
-<p id="docker-data">Docker containers are not meant to carry persistent data.  When you close a container, the data it carries is lost.  To avoid this problem, you can link volumes in the container to directories on the host file system. This is done with the <code class="docutils literal"><span class="pre">-v</span></code> option when you launch the container.</p>
+<span id="docker-data"></span><h3>Persistent Data<a class="headerlink" href="#persistent-data" title="Permalink to this headline">¶</a></h3>
+<p>Docker containers are not meant to carry persistent data.  When you close a container, the data it carries is lost.  To avoid this problem, you can link volumes in the container to directories on the host file system. This is done with the <code class="docutils literal"><span class="pre">-v</span></code> option when you launch the container.</p>
 <p>In the launch example above (i.e., the <code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> lines), the <code class="docutils literal"><span class="pre">-v</span></code> argument connects the <code class="docutils literal"><span class="pre">/var/container_data/mysql/</span></code> directory to <code class="docutils literal"><span class="pre">/var/lib/mysql/</span></code> in the container.  This replaces the local datadir inside the container with a symbolic link to a directory on the host system. This ensures that you won&#8217;t lose data when the container restarts.</p>
 </div>
 <div class="section" id="database-client">
@@ -418,7 +418,7 @@ COPY my.cnf /etc/mysql/my.cnf
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="deployment.html" >Deployment</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="containers.html" accesskey="U">Container Deployments</a> &#187;</li> 
       </ul>
@@ -466,7 +466,6 @@ COPY my.cnf /etc/mysql/my.cnf
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -475,6 +474,7 @@ COPY my.cnf /etc/mysql/my.cnf
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

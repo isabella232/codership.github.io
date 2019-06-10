@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,9 +204,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="replication-configuration">
+  <div class="tutorial-article section" id="replication-configuration">
 <h1>Replication Configuration<a class="headerlink" href="#replication-configuration" title="Permalink to this headline">¶</a></h1>
-<p id="wsrep-configuration">In addition to the configuration for the database server, there are some specific options that you need to set to enable write-set replication.  You must apply these changes to the configuration file (i.e., <code class="docutils literal"><span class="pre">my.cnf</span></code>) for each node in the cluster.</p>
+<p class="list-stats" id="wsrep-configuration">Length:  964 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+<p>In addition to the configuration for the database server, there are some specific options that you need to set to enable write-set replication.  You must apply these changes to the configuration file (i.e., <code class="docutils literal"><span class="pre">my.cnf</span></code>) for each node in the cluster.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-name"><span class="std std-ref">wsrep_cluster_name</span></a>: Use this parameter to set the logical name for the cluster.  You must use the same name for each node in the cluster.  The connection will fail on nodes that have different values for this parameter.</p>
 </li>
@@ -258,10 +259,7 @@
 <p class="last">The <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> options list is not durable.  The node must resubmit the options on each connection to a cluster.  To make these options durable, set them in the configuration file using the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> parameter.</p>
 </div>
 <p>The options set in the URL take precedent over parameters set elsewhere.  Parameters you set through the options list are prefixed by <code class="docutils literal"><span class="pre">evs</span></code> (i.e., Extended Virtual Synchrony), <code class="docutils literal"><span class="pre">pc</span></code> (i.e., Primary Component) and <code class="docutils literal"><span class="pre">gmcast</span></code>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on the available parameters, see <a class="reference internal" href="../../documentation/galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
-</div>
+<p>For more information on the available parameters, see <a class="reference internal" href="../../documentation/galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
 <p>When listing options, start with a question mark after the IP address list. Then provide the options in a <code class="docutils literal"><span class="pre">key=value</span></code> format. Key/value pairs must be separated by an ampersand. Below is an example of how this might look:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_cluster_address</span><span class="o">=</span><span class="s">&quot;gcomm://192.168.0.1, 192.168.0.2, 192.168.0.3 ? gmcast.segment=0 &amp; evs.max_install_timeouts=1&quot;</span>
 </pre></div>
@@ -417,7 +415,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -426,6 +423,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

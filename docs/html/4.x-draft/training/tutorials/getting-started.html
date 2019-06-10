@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,50 +204,20 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="getting-started">
+  <div class="tutorial-article section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p id="id1">Galera Cluster is a synchronous replication solution to improve availability and performance of the MySQL database service.  All nodes in Galera Cluster are identical and fully representative of the cluster.  They allow for unconstrained transparent client access, operating as a single, distributed MySQL server.  It provides,</p>
+<p class="list-stats" id="id1">Length: 840 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+<p>Galera Cluster is a synchronous replication solution to improve availability and performance of the MySQL database service.  All nodes in Galera Cluster are identical and fully representative of the cluster.  They allow for unconstrained transparent client access, operating as a single, distributed MySQL server.  It provides,</p>
 <ul class="simple">
 <li>Transparent client connections, so it&#8217;s highly compatible with existing applications;</li>
 <li>Synchronous data safety semantics—if a client received confirmation, transactions will be committed on every node; and</li>
 <li>Automatic write conflict detection and resolution, so that nodes are always consistent.</li>
 </ul>
-<p>Galera Cluster is well suited for LAN, WAN, container and cloud environments.  The following chapters provide you with the basics to setting up and deploying Galera Cluster.  Bear in mind before you get started that you need root access to at least three Linux or FreeBSD hosts and their IP addresses.</p>
+<p>Galera Cluster is well suited for LAN, WAN, container and cloud environments.  The following tutorial articles provide you with the basics to setting up and deploying Galera Cluster.  Bear in mind before you get started that you need root access to at least three Linux or FreeBSD hosts and their IP addresses.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">With the latest release Galerea Cluster begins the 4.x branch, introducing a number of new features.  For more information on these features, see <a class="reference internal" href="../../whats-new.html"><span class="doc">What&#8217;s New</span></a>.</p>
 </div>
-<p class="rubric">Node Initialization</p>
-<p id="node-init">Individual nodes in Galera Cluster are MySQL, MariaDB or Percona XtraDB.  But, deploying a node is not exactly the same as the standard standalone instance of the database server.  You need to take a few additional steps in order to properly install and configure the software.  The software runs on any unix-like operating system.  These chapters provides guides to installing and configuring nodes for Galera Cluster.</p>
-<ul>
-<li><p class="first"><a class="reference internal" href="galera-installation.html"><span class="doc">Installation</span></a></p>
-<p>Once you have your server hardware ready, including at least three hosts running either Linux or FreeBSD and their respective IP addresses.  This chapter provides guides to preparing the server and installing Galera Cluster.  When you install Galera Cluster, you must choose between three implementations available.  For each implementations, you can install the software using Debian- and RPM-based binary packages or by building the node from source.</p>
-<ul class="simple">
-<li><strong>Galera Cluster for MySQL</strong>: The reference implementation from Codership, Oy. You can use either the <a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Binary Installation</span></a> or the <a class="reference internal" href="../../documentation/install-mysql-src.html"><span class="doc">Source Build</span></a> methods.</li>
-<li><strong>Percona XtraDB Cluster</strong>: The Percona alternative implementation of Galera Cluster, which uses XtraDB in place of MySQL.  You can use either the <a class="reference internal" href="../../documentation/install-xtradb.html"><span class="doc">Install XtraDB Binary Installation</span></a> or the <a class="reference internal" href="../../documentation/install-xtradb-src.html"><span class="doc">Source Build</span></a> methods.</li>
-<li><strong>MariaDB Galera Cluster</strong>: The MariaDB Ab alternative implementation of Galera Cluster, which uses MariaDB in place of MySQL.  You can use either the <a class="reference internal" href="../../documentation/install-mariadb.html"><span class="doc">Install MariaDB Binary Installation</span></a> or the <a class="reference internal" href="../../documentation/install-mariadb-src.html"><span class="doc">Source Build</span></a>.</li>
-</ul>
-</li>
-<li><p class="first"><a class="reference internal" href="configuration.html"><span class="doc">System Configuration</span></a></p>
-<p>Before you can start the cluster, you need to configure the individual nodes.  This chapter covers general parameters that you must set in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file in order to use Galera Cluster.  It also provides a guide to configuring swap space in order to protect the node from crashing due to large write-sets requiring more memory than the server has available.</p>
-</li>
-<li><p class="first"><a class="reference internal" href="wsrep-configuration.html"><span class="doc">Replication Configuration</span></a></p>
-<p>With the system-level configurations complete, this chapter provides a guide to configuring the database server to connect and communicate with the cluster and explains the syntax format used in cluster addresses.</p>
-</li>
-</ul>
-<p class="rubric">Cluster Initialization</p>
-<p id="cluster-init">With the software installed on the relevant servers in your your infrastructure, you can now initialize Galera Cluster, by bootstrapping the Primary Component then starting all the other nodes as you would any other database server instance.  These chapters provide guides to starting the cluster, ways of testing that it&#8217;s operational and, when you need to, how to restart the entire cluster.</p>
-<ul>
-<li><p class="first"><a class="reference internal" href="starting-cluster.html"><span class="doc">Starting the Cluster</span></a></p>
-<p>In order to start Galera Cluster, you need to bootstrap the Primary Component.  Afterwards, you can start nodes using the same command as you would the standard standalone MySQL, MariaDB or Percona XtraDB database server.  This chapter provides a guide to initializing the cluster.</p>
-</li>
-<li><p class="first"><a class="reference internal" href="testing-cluster.html"><span class="doc">Testing a Cluster</span></a></p>
-<p>With your cluster online, you may want to test out some of the features in order to ensure it&#8217;s working properly and to better see how it works in planning out your own deployment.  This chapter provides a rough guide to testing replication and similar cluster operations.</p>
-</li>
-<li><p class="first"><a class="reference internal" href="restarting-cluster.html"><span class="doc">Restarting the Cluster</span></a></p>
-<p>On occasion, you may need to restart the entire cluster, such as in the case of a power failure where every node is shut down and there is no database server process left running.  This chapter provides guides to finding your most advanced node and restarting the Primary Component on that node.</p>
-</li>
-</ul>
 <p class="rubric">How Galera Cluster Works</p>
 <p id="how-galera-works">The primary focus is data consistency.  The transactions are either applied on every node or not all.  So, the databases stay synchronized, provided that they were properly configured and synchronized at the beginning.</p>
 <p>The <a class="reference internal" href="../../documentation/glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> differs from the standard MySQL Replication by addressing several issues, including multi-master write conflicts, replication lag and slaves being out of sync with the master.</p>
@@ -260,6 +230,37 @@
 <p class="first admonition-title">Note</p>
 <p class="last">For security and performance reasons, it&#8217;s recommended that you run Galera Cluster on its own subnet.</p>
 </div>
+<p class="rubric">Node Initialization</p>
+<p id="node-init">Individual nodes in Galera Cluster are MySQL, MariaDB or Percona XtraDB.  But, deploying a node is not exactly the same as the standard standalone instance of the database server.  You need to take a few additional steps in order to properly install and configure the software.  The software runs on any unix-like operating system.  These articles provide guides to installing and configuring nodes for Galera Cluster.</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="galera-installation.html"><span class="doc">Installation</span></a></p>
+<p>Once you have your server hardware ready, including at least three hosts running either Linux or FreeBSD and their respective IP addresses.  This article provides guides to preparing the server and installing Galera Cluster.  When you install Galera Cluster, you must choose between three implementations available.  For each implementations, you can install the software using Debian- and RPM-based binary packages or by building the node from source.</p>
+<ul class="simple">
+<li><strong>Galera Cluster for MySQL</strong>: The reference implementation from Codership, Oy. You can use either the <a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Binary Installation</span></a> or the <a class="reference internal" href="../../documentation/install-mysql-src.html"><span class="doc">Source Build</span></a> methods.</li>
+<li><strong>Percona XtraDB Cluster</strong>: The Percona alternative implementation of Galera Cluster, which uses XtraDB in place of MySQL.  You can use either the <a class="reference internal" href="../../documentation/install-xtradb.html"><span class="doc">Install XtraDB Binary Installation</span></a> or the <a class="reference internal" href="../../documentation/install-xtradb-src.html"><span class="doc">Source Build</span></a> methods.</li>
+<li><strong>MariaDB Galera Cluster</strong>: The MariaDB Ab alternative implementation of Galera Cluster, which uses MariaDB in place of MySQL.  You can use either the <a class="reference internal" href="../../documentation/install-mariadb.html"><span class="doc">Install MariaDB Binary Installation</span></a> or the <a class="reference internal" href="../../documentation/install-mariadb-src.html"><span class="doc">Source Build</span></a>.</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference internal" href="configuration.html"><span class="doc">System Configuration</span></a></p>
+<p>Before you can start the cluster, you need to configure the individual nodes.  This article covers general parameters that you must set in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file in order to use Galera Cluster.  It also provides a guide to configuring swap space in order to protect the node from crashing due to large write-sets requiring more memory than the server has available.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="wsrep-configuration.html"><span class="doc">Replication Configuration</span></a></p>
+<p>With the system-level configurations complete, this article provides a guide to configuring the database server to connect and communicate with the cluster and explains the syntax format used in cluster addresses.</p>
+</li>
+</ul>
+<p class="rubric">Cluster Initialization</p>
+<p id="cluster-init">With the software installed on the relevant servers in your your infrastructure, you can now initialize Galera Cluster, by bootstrapping the Primary Component then starting all the other nodes as you would any other database server instance.  These tutorial articles provide guides to starting the cluster, ways of testing that it&#8217;s operational and, when you need to, how to restart the entire cluster.</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="starting-cluster.html"><span class="doc">Starting the Cluster</span></a></p>
+<p>In order to start Galera Cluster, you need to bootstrap the Primary Component.  Afterwards, you can start nodes using the same command as you would the standard standalone MySQL, MariaDB or Percona XtraDB database server.  This article provides a guide to initializing the cluster.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="testing-cluster.html"><span class="doc">Testing a Cluster</span></a></p>
+<p>With your cluster online, you may want to test out some of the features in order to ensure it&#8217;s working properly and to better see how it works in planning out your own deployment.  This tutorial provides a rough guide to testing replication and similar cluster operations.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="restarting-cluster.html"><span class="doc">Restarting the Cluster</span></a></p>
+<p>On occasion, you may need to restart the entire cluster, such as in the case of a power failure where every node is shut down and there is no database server process left running.  This article provides guides to finding your most advanced node and restarting the Primary Component on that node.</p>
+</li>
+</ul>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -398,7 +399,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -407,6 +407,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

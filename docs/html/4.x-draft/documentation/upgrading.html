@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,18 +204,18 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="upgrading-galera-cluster">
+  <div class="library-document section" id="upgrading-galera-cluster">
 <h1>Upgrading Galera Cluster<a class="headerlink" href="#upgrading-galera-cluster" title="Permalink to this headline">¶</a></h1>
 <p id="upgrading">You have three methods available in upgrading Galera Cluster:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#id1"><span class="std std-ref">Rolling Upgrade</span></a> Where you upgrade each node one at a time.</li>
-<li><a class="reference internal" href="#id2"><span class="std std-ref">Bulk Upgrade</span></a> Where you upgrade all nodes together.</li>
+<li><a class="reference internal" href="#rolling-upgrade"><span class="std std-ref">Rolling Upgrade</span></a> Where you upgrade each node one at a time.</li>
+<li><a class="reference internal" href="#bulk-upgrade"><span class="std std-ref">Bulk Upgrade</span></a> Where you upgrade all nodes together.</li>
 <li><a class="reference internal" href="#provider-upgrade"><span class="std std-ref">Provider Upgrade</span></a> Where you only upgrade the Galera Replication Plugin.</li>
 </ul>
 <p>There are advantages and disadvantages to each method.  For instance, while a rolling upgrade may prove time consuming, the cluster remains up.  Similarly, while a bulk upgrade is faster, problems can result in longer outages.  You must choose the best method to implement in upgrading your cluster.</p>
 <div class="section" id="rolling-upgrade">
-<h2>Rolling Upgrade<a class="headerlink" href="#rolling-upgrade" title="Permalink to this headline">¶</a></h2>
-<p id="id1">When you need the cluster to remain live and do not mind the time it takes to upgrade each node, use rolling upgrades.</p>
+<span id="id1"></span><h2>Rolling Upgrade<a class="headerlink" href="#rolling-upgrade" title="Permalink to this headline">¶</a></h2>
+<p>When you need the cluster to remain live and do not mind the time it takes to upgrade each node, use rolling upgrades.</p>
 <p>In rolling upgrades, you take each node down individually, upgrade its software and then restart the node.  When the node reconnects, it brings itself back into sync with the cluster, as it would in the event of any other outage.  Once the individual finishes syncing with the cluster, you can move to the next in the cluster.</p>
 <p>The main advantage of a rolling upgrade is that in the even that something goes wrong with the upgrade, the other nodes remain operational, giving you time to troubleshoot the problem.</p>
 <p>Some of the disadvantages to consider in rolling upgrades are:</p>
@@ -253,7 +253,7 @@
 <p class="last">If you are upgraded a node that is or will be part of a weighted quorum, set the initial node weight to zero.  This guarantees that if the joining node should fail before it finishes synchronizing, it will not affect any quorum computations that follow.</p>
 </div>
 <div class="section" id="rolling-upgrades-between-major-versions-of-galera-cluster">
-<h3>Rolling Upgrades between Major Versions of Galera Cluster<a class="headerlink" href="#rolling-upgrades-between-major-versions-of-galera-cluster" title="Permalink to this headline">¶</a></h3>
+<span id="rolling-upgrade-major-versions"></span><h3>Rolling Upgrades between Major Versions of Galera Cluster<a class="headerlink" href="#rolling-upgrades-between-major-versions-of-galera-cluster" title="Permalink to this headline">¶</a></h3>
 <p>Performing a rolling upgrade between major versions of Galera Cluster, such as from 5.6 to 5.7 has certain additional limitations:</p>
 <ol class="arabic simple">
 <li>SST is not supported between nodes of different major versions. Therefore, nodes of different major versions should not coexist in the same cluster for longer than necessary to perform the upgrade;</li>
@@ -271,8 +271,8 @@
 </div>
 </div>
 <div class="section" id="bulk-upgrade">
-<h2>Bulk Upgrade<a class="headerlink" href="#bulk-upgrade" title="Permalink to this headline">¶</a></h2>
-<p id="id2">When you want to avoid time-consuming state transfers and the slow process of upgrading each node, one at a time, use a bulk upgrade.</p>
+<span id="id2"></span><h2>Bulk Upgrade<a class="headerlink" href="#bulk-upgrade" title="Permalink to this headline">¶</a></h2>
+<p>When you want to avoid time-consuming state transfers and the slow process of upgrading each node, one at a time, use a bulk upgrade.</p>
 <p>In bulk upgrades, you take all of the nodes down in an idle cluster, perform the upgrades, then bring the cluster back online.  This allows you to upgrade your cluster quickly, but does mean a complete service outage for your cluster.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -298,15 +298,15 @@
 </div>
 </div>
 <div class="section" id="provider-only-upgrade">
-<h2>Provider-only Upgrade<a class="headerlink" href="#provider-only-upgrade" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="provider-upgrade"></span><p id="index-0">When you only need to upgrade the Galera provider, you can further optimize the bulk upgrade to only take a few seconds.</p>
+<span id="provider-upgrade"></span><h2>Provider-only Upgrade<a class="headerlink" href="#provider-only-upgrade" title="Permalink to this headline">¶</a></h2>
+<p id="index-0">When you only need to upgrade the Galera provider, you can further optimize the bulk upgrade to only take a few seconds.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">In provider-only upgrade, the warmed up InnoDB buffer pool is fully preserved and the cluster continues to operate at full speed as soon as you resume the load.</p>
 </div>
 <div class="section" id="upgrading-galera-replication-plugin">
-<h3>Upgrading Galera Replication Plugin<a class="headerlink" href="#upgrading-galera-replication-plugin" title="Permalink to this headline">¶</a></h3>
-<p id="upgrade-plugin">If you installed Galera Cluster for MySQL using the binary package from the Codership repository, you can upgrade the Galera Replication Plugin through your package manager..</p>
+<span id="upgrade-plugin"></span><h3>Upgrading Galera Replication Plugin<a class="headerlink" href="#upgrading-galera-replication-plugin" title="Permalink to this headline">¶</a></h3>
+<p>If you installed Galera Cluster for MySQL using the binary package from the Codership repository, you can upgrade the Galera Replication Plugin through your package manager..</p>
 <p>To upgrade the Galera Replicator Plugin on an RPM-based Linux distribution, run the following command for each node in the cluster:</p>
 <blockquote>
 <div><div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> yum update galera
@@ -323,7 +323,7 @@
 <p>When <code class="docutils literal"><span class="pre">apt-get</span></code> or <code class="docutils literal"><span class="pre">yum</span></code> finish, you will have the latest version of the Galera Replicator Plugin available on the node.  Once this process is complete, you can move on to updating the cluster to use the newer version of the plugin.</p>
 </div>
 <div class="section" id="updating-galera-cluster">
-<h3>Updating Galera Cluster<a class="headerlink" href="#updating-galera-cluster" title="Permalink to this headline">¶</a></h3>
+<span id="id3"></span><h3>Updating Galera Cluster<a class="headerlink" href="#updating-galera-cluster" title="Permalink to this headline">¶</a></h3>
 <p>After you upgrade the Galera Replicator Plugin package on each node in the cluster, you need to run a bulk upgrade to switch the cluster over to the newer version of the plugin.</p>
 <ol class="arabic">
 <li><p class="first">Stop all load on the cluster.</p>
@@ -458,8 +458,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Administration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Galera Cluster Administration</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -505,7 +505,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -514,6 +513,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
