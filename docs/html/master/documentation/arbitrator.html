@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="galera-arbitrator">
+  <div class="library-document section" id="galera-arbitrator">
 <h1>Galera Arbitrator<a class="headerlink" href="#galera-arbitrator" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="arbitrator"></span><span class="target" id="index-0"></span><span class="target" id="index-1"></span><p id="index-2">It&#8217;s recommended when deploying a Galera Cluster that you use a minimum of three instances: Three nodes, three datacenters and so on.</p>
 <p>If the cost of adding resources (e.g., a third datacenter) is too much, you can use <a class="reference internal" href="glossary.html#term-galera-arbitrator"><span class="xref std std-term">Galera Arbitrator</span></a>.  Galera Arbitrator is a member of a cluster that participates in voting, but not in the actual replication.</p>
@@ -223,13 +223,10 @@
 <p class="last">Even though Galera Arbitrator doesn&#8217;t store data, it must see all replication traffic.  Placing Galera Arbitrator in a location with poor network connectivity to the rest of the cluster may lead to poor cluster performance.</p>
 </div>
 <p>In the event that Galera Arbitrator fails, it won&#8217;t affect cluster operation.  You can attach a new instance to the cluster at any time and there can be several instances running in the cluster.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on using Galera Arbitrator for making backups, see <a class="reference internal" href="backup-cluster.html"><span class="doc">Backing Up Cluster Data</span></a>.</p>
-</div>
+<p>For more information on using Galera Arbitrator for making backups, see <a class="reference internal" href="backup-cluster.html"><span class="doc">Backing Up Cluster Data</span></a>.</p>
 <div class="section" id="starting-galera-arbitrator">
-<h2>Starting Galera Arbitrator<a class="headerlink" href="#starting-galera-arbitrator" title="Permalink to this headline">¶</a></h2>
-<p id="starting-arbitrator">Galera Arbitrator is a separate daemon from Galera Cluster, called <code class="docutils literal"><span class="pre">garbd</span></code>.  This means that you must start it separately from the cluster.  It also means that you cannot configure Galera Arbitrator through the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.</p>
+<span id="starting-arbitrator"></span><h2>Starting Galera Arbitrator<a class="headerlink" href="#starting-galera-arbitrator" title="Permalink to this headline">¶</a></h2>
+<p>Galera Arbitrator is a separate daemon from Galera Cluster, called <code class="docutils literal"><span class="pre">garbd</span></code>.  This means that you must start it separately from the cluster.  It also means that you cannot configure Galera Arbitrator through the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.</p>
 <p>How you configure Galera Arbitrator depends on how you start it.  That is to say, whether it runs from the shell or as a service. These two methods are described in the next two sections.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -240,8 +237,8 @@
 <p class="last">This will prevent the operating system from blocking Galera Arbitrator.</p>
 </div>
 <div class="section" id="starting-galera-arbitrator-from-the-shell">
-<h3>Starting Galera Arbitrator from the Shell<a class="headerlink" href="#starting-galera-arbitrator-from-the-shell" title="Permalink to this headline">¶</a></h3>
-<p id="arbitrator-shell-start">When starting Galera Arbitrator from the shell, you have two options as to how you may configure it.  You can set the parameters through the command line arguments, as in the example here:</p>
+<span id="arbitrator-shell-start"></span><h3>Starting Galera Arbitrator from the Shell<a class="headerlink" href="#starting-galera-arbitrator-from-the-shell" title="Permalink to this headline">¶</a></h3>
+<p>When starting Galera Arbitrator from the shell, you have two options as to how you may configure it.  You can set the parameters through the command line arguments, as in the example here:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> garbd --group<span class="o">=</span>example_cluster <span class="se">\</span>
      --address<span class="o">=</span><span class="s2">&quot;gcomm://192.168.1.1,192.168.1.2,192.168.1.3&quot;</span> <span class="se">\</span>
      --option<span class="o">=</span><span class="s2">&quot;socket.ssl_key=/etc/ssl/galera/server-key.pem;socket.ssl_cert=/etc/ssl/galera/server-cert.pem;socket.ssl_ca=/etc/ssl/galera/ca-cert.pem;socket.ssl_cipher=AES128-SHA256&quot;&quot;</span>
@@ -280,14 +277,11 @@ address <span class="o">=</span> gcomm://192.168.1.1,192.168.1.2,192.168.1.3
 </pre></div>
 </div>
 <p>In addition to the standard configuration, any parameter available to Galera Cluster also works with Galera Arbitrator, except for those prefixed by <code class="docutils literal"><span class="pre">repl</span></code>.  When you start it from the shell, you can set those using the <code class="docutils literal"><span class="pre">--option</span></code> argument.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on the options available to Galera Arbitrator, see <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
-</div>
+<p>For more information on the options available to Galera Arbitrator, see <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
 </div>
 <div class="section" id="starting-galera-arbitrator-as-a-service">
-<h3>Starting Galera Arbitrator as a Service<a class="headerlink" href="#starting-galera-arbitrator-as-a-service" title="Permalink to this headline">¶</a></h3>
-<p id="arbitrator-service-start">When starting Galera Aribtrator as a service, whether using <code class="docutils literal"><span class="pre">init</span></code> or <code class="docutils literal"><span class="pre">systemd</span></code>, you would use a different format for the configuration file than you would use when starting it from the shell. Below is an example of the configuration file:</p>
+<span id="arbitrator-service-start"></span><h3>Starting Galera Arbitrator as a Service<a class="headerlink" href="#starting-galera-arbitrator-as-a-service" title="Permalink to this headline">¶</a></h3>
+<p>When starting Galera Aribtrator as a service, whether using <code class="docutils literal"><span class="pre">init</span></code> or <code class="docutils literal"><span class="pre">systemd</span></code>, you would use a different format for the configuration file than you would use when starting it from the shell. Below is an example of the configuration file:</p>
 <div class="highlight-linux-config"><div class="highlight"><pre><span></span><span class="c1"># Copyright (C) 2013-2015 Codership Oy</span>
 <span class="c1"># This config file is to be sourced by garbd service script.</span>
 
@@ -323,10 +317,7 @@ LOG_FILE=&quot;/var/log/garbd.log&quot;
 </div>
 <p>This starts Galera Arbitrator as a service.  It uses the parameters set in the configuration file.</p>
 <p>In addition to the standard configuration, any parameter available to Galera Cluster also works with Galera Arbitrator, excepting those prefixed by <code class="docutils literal"><span class="pre">repl</span></code>.  When you start it as a service, you can set those using the <code class="docutils literal"><span class="pre">GALERA_OPTIONS</span></code> parameter.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on the options available to Galera Arbitrator, see <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
-</div>
+<p>For more information on the options available to Galera Arbitrator, see <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
 </div>
 </div>
 </div>
@@ -431,8 +422,8 @@ LOG_FILE=&quot;/var/log/garbd.log&quot;
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Administration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Galera Cluster Administration</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -478,7 +469,6 @@ LOG_FILE=&quot;/var/log/garbd.log&quot;
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -487,6 +477,7 @@ LOG_FILE=&quot;/var/log/garbd.log&quot;
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

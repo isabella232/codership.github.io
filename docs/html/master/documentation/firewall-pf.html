@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="firewall-configuration-with-pf">
+  <div class="library-document section" id="firewall-configuration-with-pf">
 <h1>Firewall Configuration with PF<a class="headerlink" href="#firewall-configuration-with-pf" title="Permalink to this headline">¶</a></h1>
 <p id="firewall-pf">FreeBSD provides packet filtering support at the kernel level.  Using PF you can set up, maintain and inspect the packet filtering rule sets.</p>
 <div class="admonition warning">
@@ -212,8 +212,8 @@
 <p class="last">Different versions of FreeBSD use different versions of PF.  Examples here are from FreeBSD 10.1, which uses the same version of PF as OpenBSD 4.5.</p>
 </div>
 <div class="section" id="enabling-pf">
-<h2>Enabling PF<a class="headerlink" href="#enabling-pf" title="Permalink to this headline">¶</a></h2>
-<p id="using-pf">In order to use PF on FreeBSD, you must first set the system up to load its kernel module.  Additionally, you need to set the path to the configuration file for PF.</p>
+<span id="using-pf"></span><h2>Enabling PF<a class="headerlink" href="#enabling-pf" title="Permalink to this headline">¶</a></h2>
+<p>In order to use PF on FreeBSD, you must first set the system up to load its kernel module.  Additionally, you need to set the path to the configuration file for PF.</p>
 <p>Using your preferred text editor, add the following lines to <code class="docutils literal"><span class="pre">/etc/rc.conf</span></code>:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">pf_enable=&quot;YES&quot;</span>
 <span class="go">pf_rules=&quot;/etc/pf.conf&quot;</span>
@@ -227,8 +227,8 @@
 <p>FreeBSD now loads the PF kernel module with logging features at boot.</p>
 </div>
 <div class="section" id="configuring-pf-rules">
-<h2>Configuring PF Rules<a class="headerlink" href="#configuring-pf-rules" title="Permalink to this headline">¶</a></h2>
-<p id="pf-config">In the above section, the configuration file for PF was set to <code class="docutils literal"><span class="pre">/etc/pf.conf</span></code>.  This file allows you to set up the default firewall configuration that you want to use on your server.  The settings you add to this file are the same for each cluster node.</p>
+<span id="pf-config"></span><h2>Configuring PF Rules<a class="headerlink" href="#configuring-pf-rules" title="Permalink to this headline">¶</a></h2>
+<p>In the above section, the configuration file for PF was set to <code class="docutils literal"><span class="pre">/etc/pf.conf</span></code>.  This file allows you to set up the default firewall configuration that you want to use on your server.  The settings you add to this file are the same for each cluster node.</p>
 <p>There are two variables that you need to define for Galera Cluster in the PF configuration file:  a list for the ports it needs open for <abbr title="Transmission Control Protocol">TCP</abbr> and a table for the IP addresses of nodes in the cluster.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> Galera Cluster Macros
 <span class="go">wsrep_ports=&quot;{ 3306, 4567, 4568,4444}&quot;</span>
@@ -264,8 +264,8 @@
 </div>
 </div>
 <div class="section" id="starting-pf">
-<h2>Starting PF<a class="headerlink" href="#starting-pf" title="Permalink to this headline">¶</a></h2>
-<p id="pf-start">When you finish configuring packet filtering for Galera Cluster and for any other service you may require on your FreeBSD server, you can start the service.  This is done with two commands: one to start the service itself and one to start the logging service.</p>
+<span id="pf-start"></span><h2>Starting PF<a class="headerlink" href="#starting-pf" title="Permalink to this headline">¶</a></h2>
+<p>When you finish configuring packet filtering for Galera Cluster and for any other service you may require on your FreeBSD server, you can start the service.  This is done with two commands: one to start the service itself and one to start the logging service.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service pf start
 <span class="gp">#</span> service pflog start
 </pre></div>
@@ -375,7 +375,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="security.html" >Security</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="firewall-settings.html" accesskey="U">Firewall Settings</a> &#187;</li> 
       </ul>
@@ -423,7 +423,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -432,6 +431,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

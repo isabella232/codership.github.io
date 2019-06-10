@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="using-streaming-replication">
+  <div class="library-document section" id="using-streaming-replication">
 <h1>Using Streaming Replication<a class="headerlink" href="#using-streaming-replication" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="using-sr"></span><p id="index-0">When a node replicates a transaction under <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, it breaks the transaction into fragments, and then certifies and applies the fragments to slave nodes while the transaction is still in progress.</p>
 <p>This allows you to work with larger data-sets, manage hot records, and help avoid conflicts and hangs in the case of long-running transactions.</p>
@@ -213,12 +213,9 @@
 <p class="last">Streaming Replication is a new feature introduced in version 4.0 of Galera Cluster.  Older versions do not support these operations.</p>
 </div>
 <div class="section" id="enabling-streaming-replication">
-<h2>Enabling Streaming Replication<a class="headerlink" href="#enabling-streaming-replication" title="Permalink to this headline">¶</a></h2>
-<p id="enable-sr">The best practice when working with <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> is to enable it at a session-level for specific transactions, or parts thereof.  The reason is that Streaming Replication increases the load on all nodes when applying and rolling back transactions.  You&#8217;ll get better performance if you only enable Streaming Replication on those transactions that won&#8217;t run correctly without it.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information, see <a class="reference internal" href="streaming-replication.html#when-use-sr"><span class="std std-ref">When to Use Streaming Replication</span></a>.</p>
-</div>
+<span id="enable-sr"></span><h2>Enabling Streaming Replication<a class="headerlink" href="#enabling-streaming-replication" title="Permalink to this headline">¶</a></h2>
+<p>The best practice when working with <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> is to enable it at a session-level for specific transactions, or parts thereof.  The reason is that Streaming Replication increases the load on all nodes when applying and rolling back transactions.  You&#8217;ll get better performance if you only enable Streaming Replication on those transactions that won&#8217;t run correctly without it.</p>
+<p>For more information, see <a class="reference internal" href="streaming-replication.html#when-use-sr"><span class="std std-ref">When to Use Streaming Replication</span></a>.</p>
 <p>Enabling Streaming Replication requires you to define the replication unit and number of units to use in forming the transaction fragments.  Two parameters control these variables: <a class="reference internal" href="mysql-wsrep-options.html#wsrep-trx-fragment-unit"><span class="std std-ref">wsrep_trx_fragment_unit</span></a> and <a class="reference internal" href="mysql-wsrep-options.html#wsrep-trx-fragment-size"><span class="std std-ref">wsrep_trx_fragment_size</span></a>.</p>
 <p>Below is an example of how to set these two parameters:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">SESSION</span> <span class="n">wsrep_trx_fragment_unit</span><span class="o">=</span><span class="s1">&#39;statements&#39;</span><span class="p">;</span>
@@ -235,8 +232,8 @@
 <p>Choose the replication unit and fragment size that best suits the specific operation you want to run.</p>
 </div>
 <div class="section" id="streaming-replication-with-hot-records">
-<h2>Streaming Replication with Hot Records<a class="headerlink" href="#streaming-replication-with-hot-records" title="Permalink to this headline">¶</a></h2>
-<p id="usr-hot-records">When your application needs to update frequently the same records from the same table (e.g., implementing a locking scheme, a counter, or a job queue), Streaming Replication allows you to force critical changes to replicate to the entire cluster.</p>
+<span id="usr-hot-records"></span><h2>Streaming Replication with Hot Records<a class="headerlink" href="#streaming-replication-with-hot-records" title="Permalink to this headline">¶</a></h2>
+<p>When your application needs to update frequently the same records from the same table (e.g., implementing a locking scheme, a counter, or a job queue), Streaming Replication allows you to force critical changes to replicate to the entire cluster.</p>
 <p>For instance, consider the use case of a web application that creates work orders for a company.  When the transaction starts, it updates the table <code class="docutils literal"><span class="pre">work_orders</span></code>, setting the queue position for the order.  Under normal replication, two transactions can come into conflict if they attempt to update the queue position at the same time.</p>
 <p>You can avoid this with Streaming Replication.  As an example of how to do this, you would first execute the following SQL statement to begin the transaction:</p>
 <blockquote>
@@ -371,8 +368,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Administration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Galera Cluster Administration</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -418,7 +415,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -427,6 +423,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

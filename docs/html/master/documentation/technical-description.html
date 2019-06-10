@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Database Replication" href="tech-desc-introduction.html" />
-    <link rel="prev" title="Galera Cluster Documentation" href="index.html" />
+    <link rel="prev" title="Overview of Galera Cluster" href="overview.html" />
 
 
 
@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,11 +204,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="technical-description">
+  <div class="library-document section" id="technical-description">
 <h1>Technical Description<a class="headerlink" href="#technical-description" title="Permalink to this headline">¶</a></h1>
 <p id="tech-description">Galera Cluster is a synchronous certification-based replication solution for MySQL, MariaDB and Percona XtraDB.  Cluster nodes are identical and fully representative of the cluster state. They allow for unconstrained transparent client access, acting as a single-distributed database server.  In order to better understand Galera Cluster, this section provides detailed information on how it works and how you can benefit from it.</p>
-<p class="rubric">Understanding Replication</p>
-<p id="understanding-repl">Replication in the context of databases refers to the frequent copying of data from one database server to another.  These sections provide a high-level explanation of replication both in the general sense of how it works, as well as the particulars of how Galera Cluster implements these core concepts.</p>
+<p class="rubric" id="understanding-repl">Understanding Replication</p>
+<p>Replication in the context of databases refers to the frequent copying of data from one database server to another.  These sections provide a high-level explanation of replication both in the general sense of how it works, as well as the particulars of how Galera Cluster implements these core concepts.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="tech-desc-introduction.html"><span class="doc">Database Replication</span></a></p>
 <p>This section explains how database replication works in general.  It provides an overview of the problems inherent in the various replication implementations, including master-slave, asynchronous and synchronous replication.</p>
@@ -217,8 +217,8 @@
 <p>Using group communications and transaction ordering techniques, certification-based replication allows for synchronous replication.</p>
 </li>
 </ul>
-<p class="rubric">Understanding Galera Cluster</p>
-<p id="understanding-galera">With a better grasp on how replication works, these pages provide a more detailed explanation of how Galera Cluster implements certification-based replication, including the specific architecture of the nodes, how they communicate with each other, as well as replicate data and manage the replication process.</p>
+<p class="rubric" id="understanding-galera">Understanding Galera Cluster</p>
+<p>With a better grasp on how replication works, these pages provide a more detailed explanation of how Galera Cluster implements certification-based replication, including the specific architecture of the nodes, how they communicate with each other, as well as replicate data and manage the replication process.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="architecture.html"><span class="doc">Replication API</span></a></p>
 <p>While the above sections explain the abstract concepts surrounding certification-based replication, this section covers the specific architecture used by Galera Cluster in implementing write-set replication, including the wsrep API and the Galera Replication and Group Communication plug-ins.</p>
@@ -257,8 +257,8 @@
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="index.html"
-                          title="Previous page">&larr; Galera Cluster Documentation</a></p>
+    <p class="topless"><a href="overview.html"
+                          title="Previous page">&larr; Overview of Galera Cluster</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -329,18 +329,18 @@
           <a href="tech-desc-introduction.html" title="Database Replication"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="index.html" title="Galera Cluster Documentation"
+          <a href="overview.html" title="Overview of Galera Cluster"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Galera Cluster Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">The Codership Documentation</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="index.html" title="Galera Cluster Documentation">&lt; Previous</a></li>
+				<li><a href="overview.html" title="Overview of Galera Cluster">&lt; Previous</a></li>
 			
 
 			
@@ -379,7 +379,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -388,6 +387,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

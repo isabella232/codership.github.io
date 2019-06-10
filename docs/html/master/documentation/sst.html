@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,50 +204,49 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <style> .red {color:red} </style><style> .green {color:green} </style><div class="section" id="state-snapshot-transfers">
+  <style> .red {color:red} </style><style> .green {color:green} </style><div class="library-document section" id="state-snapshot-transfers">
 <h1>State Snapshot Transfers<a class="headerlink" href="#state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
 <p id="sst">When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full data copy to the new node, known as the joiner.</p>
 <p>You can designate in advance which node should be the donor with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a> parameter. If you don&#8217;t set the donor node, the <em>Group Communication</em> module will select a donor based on the information available about the node states.</p>
 <p>Group Communication monitors node states for the purposes of flow control, state transfers and quorum calculations.  It ensures that a node that shows as <code class="docutils literal"><span class="pre">JOINING</span></code> doesn&#8217;t count towards flow control and quorum.</p>
 <p>A node can serve as a donor when it is in the <code class="docutils literal"><span class="pre">SYNCED</span></code> state.  The joiner node selects a donor from the available synced nodes.  It shows preference to synced nodes that have the same <a class="reference internal" href="galera-parameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a> wsrep Provider option, or it selects the first in the index.  When a donor node is chosen, its state changes immediately to <code class="docutils literal"><span class="pre">DONOR</span></code>. It&#8217;s no longer available for requests.</p>
 <div class="section" id="sst-methods">
-<h2>SST Methods<a class="headerlink" href="#sst-methods" title="Permalink to this headline">¶</a></h2>
-<p id="rsync">Galera supports several back-end methods for use in state snapshot transfers.  There are two types: Logical State Snapshots, which interface through the database server and client; and Physical State Snapshots, which directly copy the data files from node to node.</p>
-<table border="1" class="docutils">
+<span id="id1"></span><h2>SST Methods<a class="headerlink" href="#sst-methods" title="Permalink to this headline">¶</a></h2>
+<p>Galera supports several back-end methods for use in state snapshot transfers.  There are two types: Logical State Snapshots, which interface through the database server and client; and Physical State Snapshots, which directly copy the data files from node to node.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
 <col width="17%" />
-<col width="16%" />
-<col width="20%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Method</th>
 <th class="head">Speed</th>
 <th class="head">Blocks Donor</th>
-<th class="head">Available
-on Live Node</th>
+<th class="head">Available on Live Node</th>
 <th class="head">Type</th>
 <th class="head">DB Root Access</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference internal" href="sst-logical.html#id1"><span class="std std-ref">mysqldump</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="sst-logical.html#mysqldump"><span class="std std-ref">mysqldump</span></a></td>
 <td><span class="red">Slow</span></td>
 <td><span class="green">Blocks</span></td>
 <td><span class="green">Available</span></td>
 <td><a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical</span></a></td>
 <td>Donor and Joiner</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="sst-physical.html#id1"><span class="std std-ref">rsync</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="sst-physical.html#sst-physical-rsync"><span class="std std-ref">rsync</span></a></td>
 <td><span class="green">Fastest</span></td>
 <td><span class="green">Blocks</span></td>
 <td><span class="red">Unavailable</span></td>
 <td><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></td>
 <td>None</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="sst-physical.html#id2"><span class="std std-ref">xtrabackup</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="sst-physical.html#sst-physical-xtrabackup"><span class="std std-ref">xtrabackup</span></a></td>
 <td><span class="green">Fast</span></td>
 <td>Briefly</td>
 <td><span class="red">Unavailable</span></td>
@@ -367,8 +366,8 @@ on Live Node</th>
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Administration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Galera Cluster Administration</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -414,7 +413,6 @@ on Live Node</th>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -423,6 +421,7 @@ on Live Node</th>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

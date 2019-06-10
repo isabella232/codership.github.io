@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="ssl-certificates">
+  <div class="library-document section" id="ssl-certificates">
 <h1>SSL Certificates<a class="headerlink" href="#ssl-certificates" title="Permalink to this headline">¶</a></h1>
 <p id="ssl-cert">Before you can enable encryption for your cluster, you first need to generate the relevant certificates for the nodes to use.  This procedure assumes that you are using OpenSSL.</p>
 <div class="admonition note">
@@ -212,15 +212,15 @@
 <p class="last">This chapter only covers certificate generation.  For information on its use in Galera Cluster, see <a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a>.</p>
 </div>
 <div class="section" id="generating-certificates">
-<h2>Generating Certificates<a class="headerlink" href="#generating-certificates" title="Permalink to this headline">¶</a></h2>
-<p id="gen-certs">There are three certificates that you need to create in order to secure Galera Cluster: the Certificate Authority (CA) key and cert; the server certificate, to secure <code class="docutils literal"><span class="pre">mysqld</span></code> activity and replication traffic; and the client certificate to secure the database client and <code class="docutils literal"><span class="pre">stunnel</span></code> for state snapshot transfers.</p>
+<span id="gen-certs"></span><h2>Generating Certificates<a class="headerlink" href="#generating-certificates" title="Permalink to this headline">¶</a></h2>
+<p>There are three certificates that you need to create in order to secure Galera Cluster: the Certificate Authority (CA) key and cert; the server certificate, to secure <code class="docutils literal"><span class="pre">mysqld</span></code> activity and replication traffic; and the client certificate to secure the database client and <code class="docutils literal"><span class="pre">stunnel</span></code> for state snapshot transfers.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">When certificates expire there is no way to update the cluster without a complete shutdown.  You can minimize the frequency of this downtime by using large values for the <code class="docutils literal"><span class="pre">-days</span></code> parameter when generating your certificates.</p>
 </div>
 <div class="section" id="ca-certificate">
-<h3>CA Certificate<a class="headerlink" href="#ca-certificate" title="Permalink to this headline">¶</a></h3>
-<p id="gen-ca">The node uses the Certificate Authority to verify the signature on the certificates.  As such, you need this key and cert file to generate the server and client certificates.</p>
+<span id="gen-ca"></span><h3>CA Certificate<a class="headerlink" href="#ca-certificate" title="Permalink to this headline">¶</a></h3>
+<p>The node uses the Certificate Authority to verify the signature on the certificates.  As such, you need this key and cert file to generate the server and client certificates.</p>
 <p>To create the CA key and cert, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Generate the CA key.</p>
@@ -238,8 +238,8 @@
 <p>This creates a key and certificate file for the Certificate Authority.  They are in the current working directory as <code class="docutils literal"><span class="pre">ca-key.pem</span></code> and <code class="docutils literal"><span class="pre">ca-cert.pem</span></code>.  You need both to generate the server and client certificates.  Additionally, each node requires <code class="docutils literal"><span class="pre">ca-cert.pem</span></code> to verify certificate signatures.</p>
 </div>
 <div class="section" id="server-certificate">
-<h3>Server Certificate<a class="headerlink" href="#server-certificate" title="Permalink to this headline">¶</a></h3>
-<p id="gen-server-cert">The node uses the server certificate to secure both the database server activity and replication traffic from Galera Cluster.</p>
+<span id="gen-server-cert"></span><h3>Server Certificate<a class="headerlink" href="#server-certificate" title="Permalink to this headline">¶</a></h3>
+<p>The node uses the server certificate to secure both the database server activity and replication traffic from Galera Cluster.</p>
 <ol class="arabic">
 <li><p class="first">Create the server key.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl req -newkey rsa:2048 -days <span class="m">365000</span> <span class="se">\</span>
@@ -263,8 +263,8 @@
 <p>This creates a key and certificate file for the server.  They are in the current working directory as <code class="docutils literal"><span class="pre">server-key.pem</span></code> and <code class="docutils literal"><span class="pre">server-cert.pem</span></code>.  Each node requires both to secure database server activity and replication traffic.</p>
 </div>
 <div class="section" id="client-certificate">
-<h3>Client Certificate<a class="headerlink" href="#client-certificate" title="Permalink to this headline">¶</a></h3>
-<p id="gen-client-cert">The node uses the client certificate to secure client-side activity.  In the event that you prefer physical transfer methods for state snapshot transfers, <code class="docutils literal"><span class="pre">rsync</span></code> for instance, the node also uses this key and certificate to secure <code class="docutils literal"><span class="pre">stunnel</span></code>.</p>
+<span id="gen-client-cert"></span><h3>Client Certificate<a class="headerlink" href="#client-certificate" title="Permalink to this headline">¶</a></h3>
+<p>The node uses the client certificate to secure client-side activity.  In the event that you prefer physical transfer methods for state snapshot transfers, <code class="docutils literal"><span class="pre">rsync</span></code> for instance, the node also uses this key and certificate to secure <code class="docutils literal"><span class="pre">stunnel</span></code>.</p>
 <ol class="arabic">
 <li><p class="first">Create the client key.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl req -newkey rsa:2048 -days <span class="m">365000</span> <span class="se">\</span>
@@ -289,8 +289,8 @@
 </div>
 </div>
 <div class="section" id="verifying-the-certificates">
-<h2>Verifying the Certificates<a class="headerlink" href="#verifying-the-certificates" title="Permalink to this headline">¶</a></h2>
-<p id="verify-cert">When you finish creating the key and certificate files, use <code class="docutils literal"><span class="pre">openssl</span></code> to verify that they were generated correctly:</p>
+<span id="verify-cert"></span><h2>Verifying the Certificates<a class="headerlink" href="#verifying-the-certificates" title="Permalink to this headline">¶</a></h2>
+<p>When you finish creating the key and certificate files, use <code class="docutils literal"><span class="pre">openssl</span></code> to verify that they were generated correctly:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl verify -CAfile ca-cert.pem <span class="se">\</span>
       server-cert.pem client-cert.pem
 
@@ -411,7 +411,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="security.html" >Security</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="ssl.html" accesskey="U">SSL Settings</a> &#187;</li> 
       </ul>
@@ -459,7 +459,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -468,6 +467,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,17 +204,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="firewall-configuration-with-firewalld">
+  <div class="library-document section" id="firewall-configuration-with-firewalld">
 <h1>Firewall Configuration with FirewallD<a class="headerlink" href="#firewall-configuration-with-firewalld" title="Permalink to this headline">¶</a></h1>
 <p id="firewalld">The firewall daemon, or FirewallD, is an interface for dynamically managing firewalls on Linux operating systems. It allows you to set up, maintain and inspect IPv4 and IPv6 firewall rules.</p>
 <p>FirewallD includes support for defining zones. This allows you to set the trust level of a given network connection or interface.  For example, when deploying nodes that connect to each other over the internet&#8211;rather than a private network&#8211;you might configure your firewall around the <code class="docutils literal"><span class="pre">public</span></code> zone.  This assumes that other computers on the network are untrusted and only accept designated connections.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on FirewallD, see the <a class="reference external" href="https://fedoraproject.org/wiki/FirewallD">Documentation</a>.</p>
-</div>
+<p>For more information on FirewallD, see the <a class="reference external" href="https://fedoraproject.org/wiki/FirewallD">Documentation</a>.</p>
 <div class="section" id="opening-ports-for-galera-cluster">
-<h2>Opening Ports for Galera Cluster<a class="headerlink" href="#opening-ports-for-galera-cluster" title="Permalink to this headline">¶</a></h2>
-<p id="firewalld-ports">Galera Cluster requires four open ports for replication over TCP. To use multicast replication, it also requires one for UDP transport.  In order for this to work over FirewallD, you also need to add the database service to the firewall rules.</p>
+<span id="firewalld-ports"></span><h2>Opening Ports for Galera Cluster<a class="headerlink" href="#opening-ports-for-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<p>Galera Cluster requires four open ports for replication over TCP. To use multicast replication, it also requires one for UDP transport.  In order for this to work over FirewallD, you also need to add the database service to the firewall rules.</p>
 <p>To enable the database service for FirewallD, you would enter something like the following at the command-line:</p>
 <blockquote>
 <div><div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> firewall-cmd --zone<span class="o">=</span>public --add-service<span class="o">=</span>mysql
@@ -239,8 +236,8 @@
 <p>These commands dynamically configure FirewallD. Your firewall will then permit the rest of the cluster to connect to the node hosted on the server.  Repeat the above commands on each server.  Keep in mind, changes to the firewall made by this method are not persistent.  When the server reboots, FirewallD will return to its default state.</p>
 </div>
 <div class="section" id="making-firewall-changes-persistent">
-<h2>Making Firewall Changes Persistent<a class="headerlink" href="#making-firewall-changes-persistent" title="Permalink to this headline">¶</a></h2>
-<p id="firewalld-persistent">The commands given in the above section allow you to configure FirewallD on a running server and update the firewall rules without restarting.  However, these changes are not persistent.  When the server restarts, FirewallD reverts to its default configuration.  To change the default configuration, a somewhat different approach is required:</p>
+<span id="firewalld-persistent"></span><h2>Making Firewall Changes Persistent<a class="headerlink" href="#making-firewall-changes-persistent" title="Permalink to this headline">¶</a></h2>
+<p>The commands given in the above section allow you to configure FirewallD on a running server and update the firewall rules without restarting.  However, these changes are not persistent.  When the server restarts, FirewallD reverts to its default configuration.  To change the default configuration, a somewhat different approach is required:</p>
 <p>First, enable the database service for FirewallD by entering the following from the command-line:</p>
 <blockquote>
 <div><div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> firewall-cmd --zone<span class="o">=</span>public --add-service<span class="o">=</span>mysql <span class="se">\</span>
@@ -375,7 +372,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="security.html" >Security</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="firewall-settings.html" accesskey="U">Firewall Settings</a> &#187;</li> 
       </ul>
@@ -423,7 +420,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -432,6 +428,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

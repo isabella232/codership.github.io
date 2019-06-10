@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Best Practices &#8212; Galera Cluster Documentation</title>
+    <title>Codership Best Practices Articles &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -31,8 +31,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Customizing the Write-Set Cache Size" href="customizing-gcache-size.html" />
-    <link rel="prev" title="Multi-Master Conflicts" href="../trouble/multi-master-conflicts.html" />
+    <link rel="next" title="Group Commit" href="group-commit.html" />
+    <link rel="prev" title="User Changes not Replicating" href="../trouble/user-changes.html" />
 
 
 
@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,25 +204,36 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="best-practices">
-<h1>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">¶</a></h1>
+  <div class="kb-list section" id="codership-best-practices-articles">
+<h1>Codership Best Practices Articles<a class="headerlink" href="#codership-best-practices-articles" title="Permalink to this headline">¶</a></h1>
 <p id="kb-best">Whereas the <a class="reference internal" href="../trouble/index.html"><span class="doc">Troubleshooting</span></a> section relates to handling problems with a cluster, this section of the KB provide information and guidance on improving the performance of a cluster and optimizing configuration of the nodes.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="group-commit.html"><span class="doc">Group Commit</span></a></p>
+<p class="list-abstract">If there are several transactions trying to commit at the same time, group commit will force them to be flushed to the disk with a single system call, rather than one system call for each commit. This can greatly reduce the need for flush operations, and greatly improve the throughput of TPS.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="large-transactions.html"><span class="doc">Large Transactions</span></a></p>
+<p class="list-abstract">Large transactions, especially ones deleting removes millions of rows from a table at once, can lead to diminished performance. One reason is that the table may reindexed and rescanned after each row is deleted.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="multi-master-setup.html"><span class="doc">Multi-Master Setup</span></a></p>
+<p class="list-abstract">A master is a node that can simultaneously process writes from clients. The more masters in a cluster, the higher the probability of certification conflicts.  This can lead to undesirable rollbacks and performance degradation.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="parallel-slave-threads.html"><span class="doc">Parallel Slave Threads</span></a></p>
+<p class="list-abstract">There is no rule about how many slave threads you need for replication.  Parallel threads do not guarantee better performance, but they don&#8217;t impair regular operation performance and they may in fact speed up the synchronization of new nodes joining a cluster.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="single-master-setup.html"><span class="doc">Single Master Setup</span></a></p>
+<p class="list-abstract">If a cluster uses only one node as a master, there are certain requirements (e.g., the slave queue size) that can be relaxed.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="galera-with-selinux.html"><span class="doc">SELinux with Galera Cluster</span></a></p>
+<p class="list-abstract">When you first enable Galera Cluster on a node that runs SELinux, it will prohibit all cluster activities.  In order to enable replication on the node, you need a policy so that SELinux can recognize cluster activities as legitimate.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="detecting-slow-node.html"><span class="doc">Slow Nodes</span></a></p>
+<p class="list-abstract">By design, the performance of a cluster cannot be higher than the performance of the slowest node in the cluster. Even if you have only one node, its performance can be considerably slower when compared with running the same server in a standalone mode (i.e., without a wsrep Provider).</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="using-sync-functions.html"><span class="doc">Synchronization Functions</span></a></p>
+<p class="list-abstract">Occasionally, an application may need to perform a critical read&#8211;queries that require that the local database reaches the most up-to-date state possible before they&#8217;re executed. You can use synchronization functions to tie the synchronization process to specific transactions so that the node waits only until a specific transaction is applied before executing the query.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="two-node-clusters.html"><span class="doc">Two-Node Clusters</span></a></p>
+<p class="list-abstract">Although it may seem simple to maintain a cluster of only two nodes, there is an inherent potential problem. In a two-node cluster, when one node fails, it will cause the other to stop.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="wan-latency.html"><span class="doc">WAN Latency</span></a></p>
+<p class="list-abstract">When using Galera Cluster over a WAN (Wide Area Network), remember that WAN links can have exceptionally high latency. You can check this by taking Round-Trip Time (RTT) measurements between cluster nodes. If there is a latency, you can correct for this by adjusting all of the temporal parameters.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="wan-replication.html"><span class="doc">WAN Replication</span></a></p>
+<p class="list-abstract">When running the cluster over a WAN (Wide Area Network), you may frequently experience transient network connectivity failures. To prevent this from partitioning the cluster, you may want to increase the <em>keepalive</em> timeouts.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="customizing-gcache-size.html"><span class="doc">Write-Set Cache Size</span></a></p>
+<p class="list-abstract">You can define the size of the write-set cache using the <code class="docutils literal"><span class="pre">gcache.size</span></code> parameter. The set the size to one less than that of the data directory.</p>
+<p class="list-sub-header rubric"><a class="reference internal" href="gcache-during-state-transfers.html"><span class="doc">Write-Set Caching during State Transfers</span></a></p>
+<p class="list-abstract">Under normal operations, nodes do not consume much more memory than the regular standalone MySQL database server.  The certification index and uncommitted write-sets do cause some additional usage, but in typical applications this is not usually noticeable. Write-set caching during state transfers is the exception.</p>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="customizing-gcache-size.html">Customizing the Write-Set Cache Size</a></li>
-<li class="toctree-l1"><a class="reference internal" href="detecting-slow-node.html">Detecting a Slow Node</a></li>
-<li class="toctree-l1"><a class="reference internal" href="galera-with-selinux.html">Using Galera Cluster with SELinux</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gcache-during-state-transfers.html">Write-Set Caching during State Transfers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="group-commit.html">Group Commit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="large-transactions.html">Dealing with Large Transactions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="multi-master-setup.html">Multi-Master Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parallel-slave-threads.html">Setting Parallel Slave Threads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="single-master-setup.html">Single Master Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="two-node-clusters.html">Two-Node Clusters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="using-sync-functions.html">Using Synchronization Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="wan-latency.html">WAN Latency</a></li>
-<li class="toctree-l1"><a class="reference internal" href="wan-replication.html">WAN Replication</a></li>
-</ul>
 </div>
 </div>
 
@@ -237,13 +248,13 @@
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="../trouble/multi-master-conflicts.html"
-                          title="Previous page">&larr; Multi-Master Conflicts</a></p>
+    <p class="topless"><a href="../trouble/user-changes.html"
+                          title="Previous page">&larr; User Changes not Replicating</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="customizing-gcache-size.html"
-                          title="Next page">&rarr; Customizing the Write-Set Cache Size</a></p>
+    <p class="topless"><a href="group-commit.html"
+                          title="Next page">&rarr; Group Commit</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -294,7 +305,7 @@
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/best/index.rst.rst" title="Edit 'Best Practices' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/best/index.rst.rst" title="Edit 'Codership Best Practices Articles' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -306,25 +317,25 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="customizing-gcache-size.html" title="Customizing the Write-Set Cache Size"
+          <a href="group-commit.html" title="Group Commit"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="../trouble/multi-master-conflicts.html" title="Multi-Master Conflicts"
+          <a href="../trouble/user-changes.html" title="User Changes not Replicating"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Knowledge Base</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">The Codership Knowledge Base</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="../trouble/multi-master-conflicts.html" title="Multi-Master Conflicts">&lt; Previous</a></li>
+				<li><a href="../trouble/user-changes.html" title="User Changes not Replicating">&lt; Previous</a></li>
 			
 
 			
-				<li><a href="customizing-gcache-size.html" title="Customizing the Write-Set Cache Size">Next &gt;</a></li>
+				<li><a href="group-commit.html" title="Group Commit">Next &gt;</a></li>
 			
 
 		</ul>
@@ -359,7 +370,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -368,6 +378,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

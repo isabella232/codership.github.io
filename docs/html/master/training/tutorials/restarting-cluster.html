@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="What’s New in Galera Cluster 4.x" href="../../whats-new.html" />
+    <link rel="next" title="Getting Started Galera with Docker, Part 1" href="getting-started-docker-pt1.html" />
     <link rel="prev" title="Testing a Cluster" href="testing-cluster.html" />
 
 
@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,9 +204,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="restarting-the-cluster">
+  <div class="tutorial-article section" id="restarting-the-cluster">
 <h1>Restarting the Cluster<a class="headerlink" href="#restarting-the-cluster" title="Permalink to this headline">¶</a></h1>
-<p id="restarting-cluster">Occasionally, you may have to restart an entire Galera Cluster.  This may happen, for example, when there is a power failure in which every node is shut down and you have no <code class="docutils literal"><span class="pre">mysqld</span></code> process.  Restarting a cluster, starting nodes in the wrong order, starting the wrong nodes first, can be devastating and lead to loss of data.</p>
+<p class="list-stats" id="restarting-cluster">Length:  791 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+<p>Occasionally, you may have to restart an entire Galera Cluster.  This may happen, for example, when there is a power failure in which every node is shut down and you have no <code class="docutils literal"><span class="pre">mysqld</span></code> process.  Restarting a cluster, starting nodes in the wrong order, starting the wrong nodes first, can be devastating and lead to loss of data.</p>
 <p>When restarting an entire Galera Cluster, you&#8217;ll need to determine which node has the most advanced node state ID. This is covered in the next section.  Once you&#8217;ve identified the most advanced node, you&#8217;ll need to start that node first.  Then you can start the rest of the nodes in any order.  They will each look to the first node as the most up-to-date node.</p>
 <div class="section" id="identifying-the-most-advanced-node">
 <h2>Identifying the Most Advanced Node<a class="headerlink" href="#identifying-the-most-advanced-node" title="Permalink to this headline">¶</a></h2>
@@ -296,8 +297,8 @@ cert_index:
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="../../whats-new.html"
-                          title="Next page">&rarr; What&#8217;s New in Galera Cluster 4.x</a></p>
+    <p class="topless"><a href="getting-started-docker-pt1.html"
+                          title="Next page">&rarr; Getting Started Galera with Docker, Part 1</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -360,7 +361,7 @@ cert_index:
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../../whats-new.html" title="What’s New in Galera Cluster 4.x"
+          <a href="getting-started-docker-pt1.html" title="Getting Started Galera with Docker, Part 1"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
           <a href="testing-cluster.html" title="Testing a Cluster"
@@ -380,7 +381,7 @@ cert_index:
 			
 
 			
-				<li><a href="../../whats-new.html" title="What&amp;#8217;s New in Galera Cluster 4.x">Next &gt;</a></li>
+				<li><a href="getting-started-docker-pt1.html" title="Getting Started Galera with Docker, Part 1">Next &gt;</a></li>
 			
 
 		</ul>
@@ -415,7 +416,6 @@ cert_index:
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -424,6 +424,7 @@ cert_index:
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

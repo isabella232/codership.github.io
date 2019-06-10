@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="mysql-wsrep-functions">
+  <div class="library-document section" id="mysql-wsrep-functions">
 <h1>MySQL wsrep Functions<a class="headerlink" href="#mysql-wsrep-functions" title="Permalink to this headline">¶</a></h1>
 <table border="1" class="docutils" id="id1">
 <colgroup>
@@ -233,8 +233,8 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">WSREP_LAST_SEEN_GTID()</span></code></p>
-<span class="target" id="wsrep-last-seen-gtid"></span><span class="target" id="index-0"></span><p id="index-1">Much like <code class="docutils literal"><span class="pre">LAST_INSERT_ID()</span></code> for getting the identification number of the last row inserted in MySQL, this function returns the <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> of the last write transaction observed by the client.</p>
+<p class="rubric" id="wsrep-last-seen-gtid"><code class="docutils literal"><span class="pre">WSREP_LAST_SEEN_GTID()</span></code></p>
+<span class="target" id="index-0"></span><p id="index-1">Much like <code class="docutils literal"><span class="pre">LAST_INSERT_ID()</span></code> for getting the identification number of the last row inserted in MySQL, this function returns the <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> of the last write transaction observed by the client.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="35%" />
@@ -257,8 +257,8 @@
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT WSREP_LAST_SEEN_GTID();</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">WSREP_LAST_WRITTEN_GTID()</span></code></p>
-<span class="target" id="wsrep-last-written-gtid"></span><span class="target" id="index-2"></span><p id="index-3">This function returns the <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> of the last write transaction made by the client.</p>
+<p class="rubric" id="wsrep-last-written-gtid"><code class="docutils literal"><span class="pre">WSREP_LAST_WRITTEN_GTID()</span></code></p>
+<span class="target" id="index-2"></span><p id="index-3">This function returns the <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> of the last write transaction made by the client.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -288,8 +288,8 @@
 <span class="go">SELECT WSREP_LAST_WRITTEN_GTID();</span>
 </pre></div>
 </div>
-<p class="rubric"><code class="docutils literal"><span class="pre">WSREP_SYNC_WAIT_UPTO_GTID()</span></code></p>
-<span class="target" id="wsrep-sync-wait-upto-gtid"></span><span class="target" id="index-4"></span><p id="index-5">This function blocks the client until the node applies and commits the given transaction.</p>
+<p class="rubric" id="wsrep-sync-wait-upto-gtid"><code class="docutils literal"><span class="pre">WSREP_SYNC_WAIT_UPTO_GTID()</span></code></p>
+<span class="target" id="index-4"></span><p id="index-5">This function blocks the client until the node applies and commits the given transaction.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="25%" />
@@ -413,7 +413,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="reference.html" accesskey="U">Reference</a> &#187;</li> 
       </ul>
     </div>
@@ -460,7 +460,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -469,6 +468,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

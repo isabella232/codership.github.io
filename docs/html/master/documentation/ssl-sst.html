@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="ssl-for-state-snapshot-transfers">
+  <div class="library-document section" id="ssl-for-state-snapshot-transfers">
 <h1>SSL for State Snapshot Transfers<a class="headerlink" href="#ssl-for-state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
 <p id="ssl-sst">When you finish generating the SSL certificates for your cluster, you can begin configuring the node for their use.  Where <a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a> covers how to enable SSL for replication traffic and the database client, this page covers enabling it for <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> scripts.</p>
 <p>The particular method you use to secure the State Snapshot Transfer through SSL depends upon the method you use in state snapshot transfers: <code class="docutils literal"><span class="pre">mysqldump</span></code> or <code class="docutils literal"><span class="pre">xtrabackup</span></code>.</p>
@@ -213,8 +213,8 @@
 <p class="last">For Gelera Cluster, SSL configurations are not dynamic.  Since they must be set on every node in the cluster, if you want to enable this feature with an existing cluster you need to restart the entire cluster.</p>
 </div>
 <div class="section" id="enabling-ssl-for-mysqldump">
-<h2>Enabling SSL for <code class="docutils literal"><span class="pre">mysqldump</span></code><a class="headerlink" href="#enabling-ssl-for-mysqldump" title="Permalink to this headline">¶</a></h2>
-<p id="ssl-mysqldump">The procedure for securing <code class="docutils literal"><span class="pre">mysqldump</span></code> is fairly similar to that of securing the database server and client through SSL.  Given that <code class="docutils literal"><span class="pre">mysqldump</span></code> connects through the database client, you can use the same SSL certificates you created for replication traffic.</p>
+<span id="ssl-mysqldump"></span><h2>Enabling SSL for <code class="docutils literal"><span class="pre">mysqldump</span></code><a class="headerlink" href="#enabling-ssl-for-mysqldump" title="Permalink to this headline">¶</a></h2>
+<p>The procedure for securing <code class="docutils literal"><span class="pre">mysqldump</span></code> is fairly similar to that of securing the database server and client through SSL.  Given that <code class="docutils literal"><span class="pre">mysqldump</span></code> connects through the database client, you can use the same SSL certificates you created for replication traffic.</p>
 <p>Before you shut down the cluster, you need to create a user for <code class="docutils literal"><span class="pre">mysqldump</span></code> on the database server and grant it privileges through the cluster.  This ensures that when the cluster comes back up, the nodes have the correct privileges to execute the incoming state snapshot transfers.  In the event that you use the <a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> online schema upgrade method, you only need to execute the following commands on a single node.</p>
 <ol class="arabic">
 <li><p class="first">From the database client, check that you use Total Order Isolation for online schema upgrades.</p>
@@ -285,8 +285,8 @@
 <p>This configures the node to use <code class="docutils literal"><span class="pre">mysqldump</span></code> for state snapshot transfers over SSL.  When all nodes are updated to SSL, you can begin restarting the cluster.  For more information on how to do this, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting a Cluster</span></a>.</p>
 </div>
 <div class="section" id="enabling-ssl-for-xtrabackup">
-<h2>Enabling SSL for <code class="docutils literal"><span class="pre">xtrabackup</span></code><a class="headerlink" href="#enabling-ssl-for-xtrabackup" title="Permalink to this headline">¶</a></h2>
-<p id="ssl-xtrabackup">The <a class="reference internal" href="glossary.html#term-physical-state-transfer-method"><span class="xref std std-term">Physical State Transfer Method</span></a> for state snapshot transfers, uses an external script to copy the physical data directly from the file system on one cluster node into another.  Unlike <code class="docutils literal"><span class="pre">rsync</span></code>, <code class="docutils literal"><span class="pre">xtrabackup</span></code> includes support for SSL encryption built in.</p>
+<span id="ssl-xtrabackup"></span><h2>Enabling SSL for <code class="docutils literal"><span class="pre">xtrabackup</span></code><a class="headerlink" href="#enabling-ssl-for-xtrabackup" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="glossary.html#term-physical-state-transfer-method"><span class="xref std std-term">Physical State Transfer Method</span></a> for state snapshot transfers, uses an external script to copy the physical data directly from the file system on one cluster node into another.  Unlike <code class="docutils literal"><span class="pre">rsync</span></code>, <code class="docutils literal"><span class="pre">xtrabackup</span></code> includes support for SSL encryption built in.</p>
 <p>Configurations for <code class="docutils literal"><span class="pre">xtrabackup</span></code> are handled through the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file, in the same as the database server and client.  Use the <code class="docutils literal"><span class="pre">[sst]</span></code> unit to configure SSL for the script.  You can use the same SSL certificate files as the node uses on the database server, client and with replication traffic.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># xtrabackup Configuration</span>
 <span class="k">[sst]</span>
@@ -401,7 +401,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="security.html" >Security</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="ssl.html" accesskey="U">SSL Settings</a> &#187;</li> 
       </ul>
@@ -449,7 +449,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -458,6 +457,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

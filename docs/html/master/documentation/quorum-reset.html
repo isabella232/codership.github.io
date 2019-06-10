@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="resetting-the-quorum">
+  <div class="library-document section" id="resetting-the-quorum">
 <h1>Resetting the Quorum<a class="headerlink" href="#resetting-the-quorum" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="quorum-reset"></span><span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">Occasionally, you may find your nodes no longer consider themselves part of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  For instance, in the event of a network failure, the failure of more than half of the cluster, or a split-brain situation.  In these cases, the node come to suspect that there is another Primary Component, to which they are no longer connected.</p>
 <p>When this occurs, all nodes return an <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> error to all queries.  You can check if this is happening using the <a class="reference internal" href="galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a> status variable.  Run the following query on each node:</p>
@@ -223,8 +223,8 @@
 <p class="last">Bear in mind that situations where none of the nodes show as part of the Primary Component are very rare.  In the event that you do find one or more nodes that return the value <code class="docutils literal"><span class="pre">Primary</span></code>, this indicates an issue with network connectivity rather than a need to reset the quorum.  Troubleshoot the connection issue.  Once the nodes regain network connectivity they automatically resynchronize with the Primary Component.</p>
 </div>
 <div class="section" id="finding-the-most-advanced-node">
-<h2>Finding the Most Advanced Node<a class="headerlink" href="#finding-the-most-advanced-node" title="Permalink to this headline">¶</a></h2>
-<p id="finding-most-advanced-node">Before you can reset the quorum, you need to identify the most advanced node in the cluster.  That is, you must find the node whose local database committed the last transaction.  Regardless of the method you use in resetting the quorum, this node serves as the starting point for the new <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</p>
+<span id="finding-most-advanced-node"></span><h2>Finding the Most Advanced Node<a class="headerlink" href="#finding-the-most-advanced-node" title="Permalink to this headline">¶</a></h2>
+<p>Before you can reset the quorum, you need to identify the most advanced node in the cluster.  That is, you must find the node whose local database committed the last transaction.  Regardless of the method you use in resetting the quorum, this node serves as the starting point for the new <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</p>
 <p>Identifying the most advanced node in the cluster requires that you find the node with the most advanced sequence number, or seqno.  You can determine this using the <a class="reference internal" href="galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a> status variable.</p>
 <p>From the database client on each node, run the following query:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_last_committed&#39;</span><span class="p">;</span>
@@ -238,17 +238,17 @@
 </div>
 <p>The return value is the seqno for the last transaction the node committed.  The node that provides the highest seqno is the most advanced node in your cluster.  Use it as the starting point in the next section when bootstrapping the new Primary Component.</p>
 </div>
-<div class="section" id="id1">
-<h2>Resetting the Quorum<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p id="resetting-quorum">When you reset the quorum what you are doing is bootstrapping the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> on the most advanced node you have available.  This node then functions as the new Primary Component, bringing the rest of the cluster into line with its state.</p>
+<div class="section" id="resetting-quorum">
+<span id="id1"></span><h2>Resetting the Quorum<a class="headerlink" href="#resetting-quorum" title="Permalink to this headline">¶</a></h2>
+<p>When you reset the quorum what you are doing is bootstrapping the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> on the most advanced node you have available.  This node then functions as the new Primary Component, bringing the rest of the cluster into line with its state.</p>
 <p>There are two methods available to you in this process: automatic and manual.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The preferred method for a quorum reset is the automatic method.  Unlike the manual method, automatic bootstraps preserve the write-set cache, or GCache, on each node.  What this means is that when the new Primary Component starts, some or all of the joining nodes can provision themselves using the <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a> (IST) method, rather than the much slower <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method.</p>
 </div>
 <div class="section" id="automatic-bootstrap">
-<h3>Automatic Bootstrap<a class="headerlink" href="#automatic-bootstrap" title="Permalink to this headline">¶</a></h3>
-<p id="id2">Resetting the quorum bootstraps the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> onto the most advanced node.  In the automatic method this is done by enabling <a class="reference internal" href="galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a> under <a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> dynamically through the database client.  This makes the node a new Primary Component.</p>
+<span id="id2"></span><h3>Automatic Bootstrap<a class="headerlink" href="#automatic-bootstrap" title="Permalink to this headline">¶</a></h3>
+<p>Resetting the quorum bootstraps the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> onto the most advanced node.  In the automatic method this is done by enabling <a class="reference internal" href="galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a> under <a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> dynamically through the database client.  This makes the node a new Primary Component.</p>
 <p>To perform an automatic bootstrap, on the database client of the most advanced node, run the following command:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.bootstrap=YES&#39;</span><span class="p">;</span>
 </pre></div>
@@ -256,8 +256,8 @@
 <p>The node now operates as the starting node in a new Primary Component.  Nodes in nonoperational components that have network connectivity attempt to initiate incremental state transfers if possible, state snapshot transfers if not, with this node, bringing their own databases up-to-date.</p>
 </div>
 <div class="section" id="manual-bootstrap">
-<h3>Manual Bootstrap<a class="headerlink" href="#manual-bootstrap" title="Permalink to this headline">¶</a></h3>
-<p id="id3">Resetting the quorum bootstraps the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> onto the most advanced node.  In the manual method this is done by shutting down the cluster, then starting it up again beginning with the most advanced node.</p>
+<span id="id3"></span><h3>Manual Bootstrap<a class="headerlink" href="#manual-bootstrap" title="Permalink to this headline">¶</a></h3>
+<p>Resetting the quorum bootstraps the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> onto the most advanced node.  In the manual method this is done by shutting down the cluster, then starting it up again beginning with the most advanced node.</p>
 <p>To manually bootstrap your cluster, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Shut down all cluster nodes.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command from the console:</p>
@@ -310,7 +310,7 @@
     <ul>
 <li><a class="reference internal" href="#">Resetting the Quorum</a><ul>
 <li><a class="reference internal" href="#finding-the-most-advanced-node">Finding the Most Advanced Node</a></li>
-<li><a class="reference internal" href="#id1">Resetting the Quorum</a><ul>
+<li><a class="reference internal" href="#resetting-quorum">Resetting the Quorum</a><ul>
 <li><a class="reference internal" href="#automatic-bootstrap">Automatic Bootstrap</a></li>
 <li><a class="reference internal" href="#manual-bootstrap">Manual Bootstrap</a></li>
 </ul>
@@ -398,8 +398,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Administration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Galera Cluster Administration</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -445,7 +445,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -454,6 +453,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

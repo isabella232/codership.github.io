@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,12 +204,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="haproxy">
+  <div class="library-document section" id="haproxy">
 <h1>HAProxy<a class="headerlink" href="#haproxy" title="Permalink to this headline">¶</a></h1>
 <p id="ha-proxy">High Availability Proxy, or HAProxy is a single-threaded event-driven non-blocking engine that combines a fast I/O layer with a priority-based scheduler.  You can use it to balance  TCP connections between application servers and Galera Cluster.</p>
 <div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p id="install-haproxy">HAProxy is available in the software repositories of most Linux distributions and it&#8217;s the ports tree of FreeBSD.  You can install it using the appropriate package manager.</p>
+<span id="install-haproxy"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>HAProxy is available in the software repositories of most Linux distributions and it&#8217;s the ports tree of FreeBSD.  You can install it using the appropriate package manager.</p>
 <ul>
 <li><p class="first">For DEB-based Linux distributions (e.g., Debian and Ubuntu), run the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install haproxy
@@ -235,8 +235,8 @@
 <p>Whichever method you use, it installs HAProxy on your server.  In the event that the command for your Linux distribution or operating system doesn&#8217;t work as expected, check  your system&#8217;s documentation or software repository for the correct procedure to install HAProxy.</p>
 </div>
 <div class="section" id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p id="haproxy-config">Configuration options for HAProxy are managed through an <code class="docutils literal"><span class="pre">haproxy.cfg</span></code> configuration file.  The above package installations generally put this file in the <code class="docutils literal"><span class="pre">/etc/haproxy/</span></code> directory. However, it may have a different path depending on your operating system distribution.</p>
+<span id="haproxy-config"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>Configuration options for HAProxy are managed through an <code class="docutils literal"><span class="pre">haproxy.cfg</span></code> configuration file.  The above package installations generally put this file in the <code class="docutils literal"><span class="pre">/etc/haproxy/</span></code> directory. However, it may have a different path depending on your operating system distribution.</p>
 <p>To configure HAProxy to work with Galera Cluster, add the lines to the <code class="docutils literal"><span class="pre">haproxy.cfg</span></code> configuration file similar to the following:</p>
 <div class="highlight-squid"><div class="highlight"><pre><span></span><span class="c"># Load Balancing for Galera Cluster</span><span class="w"></span>
 listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192.168.1.10</span>:3306<span class="w"></span>
@@ -258,8 +258,8 @@ listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192
 <li><code class="docutils literal"><span class="pre">server</span> <span class="pre">&lt;server-name&gt;</span> <span class="pre">&lt;IP_address&gt;</span> <span class="pre">check</span> <span class="pre">weight</span> <span class="pre">1</span></code> defines the nodes HAProxy should use in routing connections.</li>
 </ul>
 <div class="section" id="destination-selection-policies">
-<h3>Destination Selection Policies<a class="headerlink" href="#destination-selection-policies" title="Permalink to this headline">¶</a></h3>
-<p id="haproxy-destination-selection">When HAProxy receives a new connection, there are a number of options available to define which algorithm it uses to choose where to route the connection.  This algorithm is its destination selection policy.  It&#8217;s defined by the <code class="docutils literal"><span class="pre">balance</span></code> parameter.</p>
+<span id="haproxy-destination-selection"></span><h3>Destination Selection Policies<a class="headerlink" href="#destination-selection-policies" title="Permalink to this headline">¶</a></h3>
+<p>When HAProxy receives a new connection, there are a number of options available to define which algorithm it uses to choose where to route the connection.  This algorithm is its destination selection policy.  It&#8217;s defined by the <code class="docutils literal"><span class="pre">balance</span></code> parameter.</p>
 <ul class="simple">
 <li><strong>Round Robin</strong> directs new connections to the next destination in a circular order list, modified by the server&#8217;s weight.  Enable it with <code class="docutils literal"><span class="pre">balance</span> <span class="pre">roundrobin</span></code>.</li>
 <li><strong>Static Round Robin</strong> directs new connections to the next destination in a circular order list, modified by the server&#8217;s weight.  Unlike the standard implementation of round robin, in static round robin you can&#8217;t modify the server weight on the fly.  Changing the server weight requires you to restart HAProxy. Enable it with <code class="docutils literal"><span class="pre">balance</span> <span class="pre">static-rr</span></code>.</li>
@@ -270,8 +270,8 @@ listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192
 <p>In the above configuration example, HAProxy is configured to use the source selection policy.  For your implementation, choose the policy that works best with your infrastructure and load.</p>
 </div>
 <div class="section" id="enabling-database-server-checks">
-<h3>Enabling Database Server Checks<a class="headerlink" href="#enabling-database-server-checks" title="Permalink to this headline">¶</a></h3>
-<p id="haproxy-mysql-check">In addition to routing TCP connections to Galera Cluster, HAProxy can also perform basic health checks on the database server.  When enabled, HAProxy attempts to establish a connection with the node and parses its response, or any errors, to determine if the node is operational.</p>
+<span id="haproxy-mysql-check"></span><h3>Enabling Database Server Checks<a class="headerlink" href="#enabling-database-server-checks" title="Permalink to this headline">¶</a></h3>
+<p>In addition to routing TCP connections to Galera Cluster, HAProxy can also perform basic health checks on the database server.  When enabled, HAProxy attempts to establish a connection with the node and parses its response, or any errors, to determine if the node is operational.</p>
 <p>For HAProxy, you can enable this through the <code class="docutils literal"><span class="pre">mysql-check</span></code> option.  However, it requires that you also create a user in the cluster for HAProxy to use when connecting.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="n">USER</span> <span class="s1">&#39;haproxy&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.1.10&#39;</span><span class="p">;</span>
 </pre></div>
@@ -280,8 +280,8 @@ listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192
 </div>
 </div>
 <div class="section" id="using-haproxy">
-<h2>Using HAProxy<a class="headerlink" href="#using-haproxy" title="Permalink to this headline">¶</a></h2>
-<p id="haproxy-use">When you finish configuring HAProxy and the nodes to work with HAProxy, you can start it on the server.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
+<span id="haproxy-use"></span><h2>Using HAProxy<a class="headerlink" href="#using-haproxy" title="Permalink to this headline">¶</a></h2>
+<p>When you finish configuring HAProxy and the nodes to work with HAProxy, you can start it on the server.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service haproxy start
 </pre></div>
 </div>
@@ -395,7 +395,7 @@ listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="deployment.html" >Deployment</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="load-balancing.html" accesskey="U">Load Balancing</a> &#187;</li> 
       </ul>
@@ -443,7 +443,6 @@ listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -452,6 +451,7 @@ listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

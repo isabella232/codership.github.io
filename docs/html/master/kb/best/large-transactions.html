@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Dealing with Large Transactions &#8212; Galera Cluster Documentation</title>
+    <title>Handling Large Transactions &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,8 +204,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="dealing-with-large-transactions">
-<h1>Dealing with Large Transactions<a class="headerlink" href="#dealing-with-large-transactions" title="Permalink to this headline">¶</a></h1>
+  <div class="kb-article section" id="handling-large-transactions">
+<h1>Handling Large Transactions<a class="headerlink" href="#handling-large-transactions" title="Permalink to this headline">¶</a></h1>
 <p id="kb-best-large-transactions">Large transactions, especially ones deleting removes millions of rows from a table at once, can lead to diminished performance. One reason is that the table may reindexed and rescanned after each row is deleted.</p>
 <p class="kb rubric">Scenario</p>
 <p>Suppose you have a node called <code class="docutils literal"><span class="pre">dbhost</span></code> with a database called <code class="docutils literal"><span class="pre">keystone</span></code>.  Suppose further that you execute a large transaction, which includes a <code class="docutils literal"><span class="pre">DELETE</span></code> statement that deletes expired tokens from their table in that database and on that host. If this transaction involves millions of rows, it could affect the overall performance of the cluster.</p>
@@ -301,7 +301,7 @@
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/best/large-transactions.rst.rst" title="Edit 'Dealing with Large Transactions' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/kb/best/large-transactions.rst.rst" title="Edit 'Handling Large Transactions' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -320,8 +320,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Knowledge Base</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Best Practices</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >The Codership Knowledge Base</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Best Practices Articles</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -367,7 +367,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -376,6 +375,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

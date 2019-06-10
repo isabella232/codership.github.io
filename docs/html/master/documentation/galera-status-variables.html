@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="galera-status-variables">
+  <div class="library-document section" id="galera-status-variables">
 <h1>Galera Status Variables<a class="headerlink" href="#galera-status-variables" title="Permalink to this headline">¶</a></h1>
 <p id="id1">These variables are <em>Galera Cluster</em> 0.8.x status variables. There are two types of wsrep-related status variables:</p>
 <ul class="simple">
@@ -463,8 +463,26 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_apply_oooe</span></code></p>
-<span class="target" id="wsrep-apply-oooe"></span><p id="index-0">How often applier started write-set applying out-of-order (parallelization efficiency).</p>
+<p class="rubric" id="wsrep-apply-oooe"><code class="docutils literal"><span class="pre">wsrep_apply_oooe</span></code></p>
+<p id="index-0">How often applier started write-set applying out-of-order (parallelization efficiency).</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0.671120</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
+<td>Galera</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
+</tr>
+</tbody>
+</table>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_apply_oooe&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------+----------+</span>
@@ -474,30 +492,26 @@
 <span class="o">+------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-apply-oool"><code class="docutils literal"><span class="pre">wsrep_apply_oool</span></code></p>
+<p id="index-1">How often write-set was so slow to apply that write-set with higher seqno&#8217;s were applied earlier. Values closer to 0 refer to a greater gap between slow and fast write-sets.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0.671120</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0.195248</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_apply_oool</span></code></p>
-<span class="target" id="wsrep-apply-oool"></span><p id="index-1">How often write-set was so slow to apply that write-set with higher seqno&#8217;s were applied earlier. Values closer to 0 refer to a greater gap between slow and fast write-sets.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_apply_oool&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------+----------+</span>
@@ -507,30 +521,26 @@
 <span class="o">+------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-apply-window"><code class="docutils literal"><span class="pre">wsrep_apply_window</span></code></p>
+<p id="index-2">Average distance between highest and lowest concurrently applied seqno.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="35%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0.195248</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">5.163966</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_apply_window</span></code></p>
-<span class="target" id="wsrep-apply-window"></span><p id="index-2">Average distance between highest and lowest concurrently applied seqno.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_apply_window&#39;</span><span class="p">;</span>
 
 <span class="o">+--------------------+----------+</span>
@@ -540,30 +550,26 @@
 <span class="o">+--------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-cert-deps-distance"><code class="docutils literal"><span class="pre">wsrep_cert_deps_distance</span></code></p>
+<p id="index-3">Average distance between highest and lowest seqno value that can be possibly applied in parallel (potential degree of parallelization).</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="35%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">5.163966</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">23.888889</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_cert_deps_distance</span></code></p>
-<span class="target" id="wsrep-cert-deps-distance"></span><p id="index-3">Average distance between highest and lowest seqno value that can be possibly applied in parallel (potential degree of parallelization).</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cert_deps_distance&#39;</span><span class="p">;</span>
 
 <span class="o">+--------------------------+----------+</span>
@@ -573,30 +579,26 @@
 <span class="o">+--------------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-cert-index-size"><code class="docutils literal"><span class="pre">wsrep_cert_index_size</span></code></p>
+<p id="index-4">The number of entries in the certification index.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">23.888889</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">30936</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_cert_index_size</span></code></p>
-<span class="target" id="wsrep-cert-index-size"></span><p id="index-4">The number of entries in the certification index.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_certs_index_size&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+-------+</span>
@@ -606,30 +608,28 @@
 <span class="o">+------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-cert-interval"><code class="docutils literal"><span class="pre">wsrep_cert_interval</span></code></p>
+<p id="index-5">Average number of transactions received while a transaction replicates.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">30936</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">1.0</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_cert_interval</span></code></p>
-<span class="target" id="wsrep-cert-interval"></span><p id="index-5">Average number of transactions received while a transaction replicates.</p>
+<p>When a node replicates a write-set to the cluster, it can take some time before all the nodes in the cluster receive it.  By the time a given node receives, orders and commits a write-set, it may receive and potentially commit others, changing the state of the database from when the write-set was sent and rendering the transaction inapplicable.</p>
+<p>To prevent this, Galera Cluster checks write-sets against all write-sets within its certification interval for potential conflicts.  Using the <a class="reference internal" href="#wsrep-cert-interval"><span class="std std-ref">wsrep_cert_interval</span></a> status variable, you can see the average number of transactions with the certification interval.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cert_interval&#39;</span><span class="p">;</span>
 
 <span class="o">+---------------------+-------+</span>
@@ -639,33 +639,27 @@
 <span class="o">+---------------------+-------+</span>
 </pre></div>
 </div>
-<p>When a node replicates a write-set to the cluster, it can take some time before all the nodes in the cluster receive it.  By the time a given node receives, orders and commits a write-set, it may receive and potentially commit others, changing the state of the database from when the write-set was sent and rendering the transaction inapplicable.</p>
-<p>To prevent this, Galera Cluster checks write-sets against all write-sets within its certification interval for potential conflicts.  Using the <a class="reference internal" href="#wsrep-cert-interval"><span class="std std-ref">wsrep_cert_interval</span></a> status variable, you can see the average number of transactions with the certification interval.</p>
 <p>This shows you the number of write-sets concurrently replicating to the cluster. In a fully synchronous cluster, with one write-set replicating at a time, <a class="reference internal" href="#wsrep-cert-interval"><span class="std std-ref">wsrep_cert_interval</span></a> returns a value of <code class="docutils literal"><span class="pre">1.0</span></code>.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-cluster-conf-id"><code class="docutils literal"><span class="pre">wsrep_cluster_conf_id</span></code></p>
+<p id="index-6">Total number of cluster membership changes happened.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="30%" />
-<col width="22%" />
-<col width="24%" />
-<col width="24%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">1.0</span></code></td>
-<td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">34</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
+<td>MySQL</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_cluster_conf_id</span></code></p>
-<span class="target" id="wsrep-cluster-conf-id"></span><p id="index-6">Total number of cluster membership changes happened.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_conf_id&#39;</span><span class="p">;</span>
 
 <span class="o">+-----------------------+-------+</span>
@@ -675,30 +669,26 @@
 <span class="o">+-----------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-cluster-size"><code class="docutils literal"><span class="pre">wsrep_cluster_size</span></code></p>
+<p id="index-7">Current number of members in the cluster.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">34</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">3</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>MySQL</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_cluster_size</span></code></p>
-<span class="target" id="wsrep-cluster-size"></span><p id="index-7">Current number of members in the cluster.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_size&#39;</span><span class="p">;</span>
 
 <span class="o">+--------------------+-------+</span>
@@ -708,30 +698,26 @@
 <span class="o">+--------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-cluster-state-uuid"><code class="docutils literal"><span class="pre">wsrep_cluster_state_uuid</span></code></p>
+<p id="index-8">Provides the current State UUID.  This is a unique identifier for the current state of the cluster and the sequence of changes it undergoes.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">3</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">e2c9a15e-5485-11e00900-6bbb637e7211</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>MySQL</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_cluster_state_uuid</span></code></p>
-<span class="target" id="wsrep-cluster-state-uuid"></span><p id="index-8">Provides the current State UUID.  This is a unique identifier for the current state of the cluster and the sequence of changes it undergoes.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_state_uuid&#39;</span><span class="p">;</span>
 
 <span class="o">+--------------------------+--------------------------------------+</span>
@@ -741,35 +727,27 @@
 <span class="o">+--------------------------+--------------------------------------+</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on the state UUID, see <a class="reference internal" href="architecture.html#id2"><span class="std std-ref">wsrep API</span></a>.</p>
-</div>
-<table border="1" class="docutils">
+<p>For more information on the state UUID, see <a class="reference internal" href="architecture.html#wsrep-api"><span class="std std-ref">wsrep API</span></a>.</p>
+<p class="rubric" id="wsrep-cluster-status"><code class="docutils literal"><span class="pre">wsrep_cluster_status</span></code></p>
+<p id="index-9">Status of this cluster component.  That is, whether the node is part of a <code class="docutils literal"><span class="pre">PRIMARY</span></code> or <code class="docutils literal"><span class="pre">NON_PRIMARY</span></code> component.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="19%" />
-<col width="20%" />
-<col width="20%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">e2c9a15e-5485-11e0</span>
-<span class="pre">0900-6bbb637e7211</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">Primary</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>MySQL</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_cluster_status</span></code></p>
-<span class="target" id="wsrep-cluster-status"></span><p id="index-9">Status of this cluster component.  That is, whether the node is part of a <code class="docutils literal"><span class="pre">PRIMARY</span></code> or <code class="docutils literal"><span class="pre">NON_PRIMARY</span></code> component.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_status&#39;</span><span class="p">;</span>
 
 <span class="o">+----------------------+---------+</span>
@@ -779,31 +757,27 @@
 <span class="o">+----------------------+---------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-cluster-weight"><code class="docutils literal"><span class="pre">wsrep_cluster_weight</span></code></p>
+<p id="index-10">The total weight of the current members in the cluster. The value is counted as a sum of
+of <a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a> of the nodes in the current <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">Primary</span></code></td>
-<td>MySQL</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">3</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
+<td>Galera</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>3.24</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_cluster_weight</span></code></p>
-<span class="target" id="wsrep-cluster-weight"></span><p id="index-10">The total weight of the current members in the cluster. The value is counted as a sum of
-of <a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a> of the nodes in the current <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_weight&#39;</span><span class="p">;</span>
 
 <span class="o">+----------------------+-------+</span>
@@ -813,30 +787,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+----------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-commit-oooe"><code class="docutils literal"><span class="pre">wsrep_commit_oooe</span></code></p>
+<p id="index-11">How often a transaction was committed out of order.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">3</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0.000000</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>3.24</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_commit_oooe</span></code></p>
-<span class="target" id="wsrep-commit-oooe"></span><p id="index-11">How often a transaction was committed out of order.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_commit_oooe&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------+----------+</span>
@@ -846,30 +816,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+-------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-commit-oool"><code class="docutils literal"><span class="pre">wsrep_commit_oool</span></code></p>
+<p id="index-12">No meaning.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0.000000</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0.000000</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_commit_oool</span></code></p>
-<span class="target" id="wsrep-commit-oool"></span><p id="index-12">No meaning.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_commit_oool&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------+----------+</span>
@@ -879,30 +845,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+-------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-commit-window"><code class="docutils literal"><span class="pre">wsrep_commit_window</span></code></p>
+<p id="index-13">Average distance between highest and lowest concurrently committed seqno.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0.000000</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0.000000</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_commit_window</span></code></p>
-<span class="target" id="wsrep-commit-window"></span><p id="index-13">Average distance between highest and lowest concurrently committed seqno.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_commit_window&#39;</span><span class="p">;</span>
 
 <span class="o">+---------------------+----------+</span>
@@ -912,30 +874,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+---------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-connected"><code class="docutils literal"><span class="pre">wsrep_connected</span></code></p>
+<p id="index-14">If the value is <code class="docutils literal"><span class="pre">OFF</span></code>, the node has not yet connected to any of the cluster components. This may be due to misconfiguration. Check the error log for proper diagnostics.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0.000000</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">ON</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_connected</span></code></p>
-<span class="target" id="wsrep-connected"></span><p id="index-14">If the value is <code class="docutils literal"><span class="pre">OFF</span></code>, the node has not yet connected to any of the cluster components. This may be due to misconfiguration. Check the error log for proper diagnostics.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_connected&#39;</span><span class="p">;</span>
 
 <span class="o">+-----------------+-------+</span>
@@ -945,30 +903,27 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+-----------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-desync-count"><code class="docutils literal"><span class="pre">wsrep_desync_count</span></code></p>
+<p id="index-15">Returns the number of operations in progress that require the node to temporarily desync from the cluster.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">ON</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>3.8</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_desync_count</span></code></p>
-<span class="target" id="wsrep-desync-count"></span><p id="index-15">Returns the number of operations in progress that require the node to temporarily desync from the cluster.</p>
+<p>Certain operations, such as DDL statements issued when <a class="reference internal" href="mysql-wsrep-options.html#wsrep-osu-method"><span class="std std-ref">wsrep_OSU_method</span></a> is set to Rolling Schema Upgrade or when you enable <a class="reference internal" href="mysql-wsrep-options.html#wsrep-desync"><span class="std std-ref">wsrep_desync</span></a>, cause the node to desync from the cluster.  This status variable shows how many of these operations are currently running on the node.  When all of these operations complete, the counter returns to its default value <code class="docutils literal"><span class="pre">0</span></code> and the node can sync back to the cluster.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_desync_count&#39;</span><span class="p">;</span>
 
 <span class="o">+--------------------+-------+</span>
@@ -978,85 +933,79 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+--------------------+-------+</span>
 </pre></div>
 </div>
-<p>Certain operations, such as DDL statements issued when <a class="reference internal" href="mysql-wsrep-options.html#wsrep-osu-method"><span class="std std-ref">wsrep_OSU_method</span></a> is set to Rolling Schema Upgrade or when you enable <a class="reference internal" href="mysql-wsrep-options.html#wsrep-desync"><span class="std std-ref">wsrep_desync</span></a>, cause the node to desync from the cluster.  This status variable shows how many of these operations are currently running on the node.  When all of these operations complete, the counter returns to its default value <code class="docutils literal"><span class="pre">0</span></code> and the node can sync back to the cluster.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-evs-delayed"><code class="docutils literal"><span class="pre">wsrep_evs_delayed</span></code></p>
+<p id="index-16">Provides a comma separated list of all the nodes this node has registered on its delayed list.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>Galera</td>
-<td>3.8</td>
+<tr class="row-odd"><td>Example Value</td>
 <td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Location</td>
+<td>Galera</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>3.8</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_evs_delayed</span></code></p>
-<span class="target" id="wsrep-evs-delayed"></span><p id="index-16">Provides a comma separated list of all the nodes this node has registered on its delayed list.</p>
-<p>The node listing format is</p>
+<p>The node listing format is as follows:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>uuid:address:count
 </pre></div>
 </div>
 <p>This refers to the UUID and IP address of the delayed node, with a count of the number of entries it has on the delayed list.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-evs-evict-list"><code class="docutils literal"><span class="pre">wsrep_evs_evict_list</span></code></p>
+<p id="index-17">Lists the UUID&#8217;s of all nodes evicted from the cluster.  Evicted nodes cannot rejoin the cluster until you restart their <code class="docutils literal"><span class="pre">mysqld</span></code> processes.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td>&nbsp;</td>
-<td>Galera</td>
-<td>3.8</td>
+<tr class="row-odd"><td>Example Value</td>
 <td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Location</td>
+<td>Galera</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>3.8</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_evs_evict_list</span></code></p>
-<span class="target" id="wsrep-evs-evict-list"></span><p id="index-17">Lists the UUID&#8217;s of all nodes evicted from the cluster.  Evicted nodes cannot rejoin the cluster until you restart their <code class="docutils literal"><span class="pre">mysqld</span></code> processes.</p>
-<table border="1" class="docutils">
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_evs_evict_list&#39;</span><span class="p">;</span>
+
+<span class="o">+----------------------+-------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>        <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+----------------------+-------+</span>
+<span class="o">|</span> <span class="n">wsrep_evs_evict_list</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="o">+----------------------+-------+</span>
+</pre></div>
+</div>
+<p class="rubric" id="wsrep-evs-repl-latency"><code class="docutils literal"><span class="pre">wsrep_evs_repl_latency</span></code></p>
+<p id="index-18">This status variable provides figures for the replication latency on group communication.  It measures latency from the time point when a message is sent out to the time point when a message is received.  As replication is a group operation, this essentially gives you the slowest ACK and longest RTT in the cluster.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td>&nbsp;</td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0.00243433/0.144033/0.581963/0.215724/13</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>3.8</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>3.0</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_evs_repl_latency</span></code></p>
-<span class="target" id="wsrep-evs-repl-latency"></span><p id="index-18">This status variable provides figures for the replication latency on group communication.  It measures latency from the time point when a message is sent out to the time point when a message is received.  As replication is a group operation, this essentially gives you the slowest ACK and longest RTT in the cluster.</p>
-<p>For example,</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_evs_repl_latency&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+------------------------------------------+</span>
@@ -1071,56 +1020,56 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 </pre></div>
 </div>
 <p>This variable periodically resets.  You can control the reset interval using the <a class="reference internal" href="galera-parameters.html#evs-stats-report-period"><span class="std std-ref">evs.stats_report_period</span></a> parameter.  The default value is 1 minute.</p>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-evs-state"><code class="docutils literal"><span class="pre">wsrep_evs_state</span></code></p>
+<p id="index-19">Shows the internal state of the EVS Protocol.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="42%" />
-<col width="18%" />
-<col width="20%" />
-<col width="20%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0.00243433/0.144033/</span>
-<span class="pre">0.581963/0.215724/13</span></code></td>
-<td>Galera</td>
-<td>3.0</td>
+<tr class="row-odd"><td>Example Value</td>
 <td>&nbsp;</td>
 </tr>
-</tbody>
-</table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_evs_state</span></code></p>
-<span class="target" id="wsrep-evs-state"></span><p id="index-19">Shows the internal state of the EVS Protocol.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>&nbsp;</td>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
 <td>3.8</td>
+</tr>
+</tbody>
+</table>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_evs_state&#39;</span><span class="p">;</span>
+
+<span class="o">+-----------------+-------------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>   <span class="o">|</span> <span class="n">Value</span>       <span class="o">|</span>
+<span class="o">+-----------------+-------------+</span>
+<span class="o">|</span> <span class="n">wsrep_evs_state</span> <span class="o">|</span> <span class="n">OPERATIONAL</span> <span class="o">|</span>
+<span class="o">+-----------------+-------------+</span>
+</pre></div>
+</div>
+<p class="rubric" id="wsrep-flow-control-paused"><code class="docutils literal"><span class="pre">wsrep_flow_control_paused</span></code></p>
+<p id="index-20">The fraction of time since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command that replication was paused due to flow control.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0.174353</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
+<td>Galera</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_flow_control_paused</span></code></p>
-<span class="target" id="wsrep-flow-control-paused"></span><p id="index-20">The fraction of time since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command that replication was paused due to flow control.</p>
-<p>In other words, how much the slave lag is slowing down the cluster.</p>
+<p>Basically, this is how much the slave lag is slowing down the cluster.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_flow_control_paused&#39;</span><span class="p">;</span>
 
 <span class="o">+---------------------------+----------+</span>
@@ -1130,30 +1079,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+---------------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-flow-control-paused-ns"><code class="docutils literal"><span class="pre">wsrep_flow_control_paused_ns</span></code></p>
+<p id="index-21">The total time spent in a paused state measured in nanoseconds.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0.174353</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">20222491180</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_flow_control_paused_ns</span></code></p>
-<span class="target" id="wsrep-flow-control-paused-ns"></span><p id="index-21">The total time spent in a paused state measured in nanoseconds.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_flow_control_paused_ns&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------------+-------------+</span>
@@ -1163,30 +1108,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+------------------------------+-------------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-flow-control-recv"><code class="docutils literal"><span class="pre">wsrep_flow_control_recv</span></code></p>
+<p id="index-22">Returns the number of <code class="docutils literal"><span class="pre">FC_PAUSE</span></code> events the node has received, including those the node has sent.  Unlike most status variables, the counter for this one does not reset every time you run the query.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">20222491180</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">11</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_flow_control_recv</span></code></p>
-<span class="target" id="wsrep-flow-control-recv"></span><p id="index-22">Returns the number of <code class="docutils literal"><span class="pre">FC_PAUSE</span></code> events the node has received, including those the node has sent.  Unlike most status variables, the counter for this one does not reset every time you run the query.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_flow_control_recv&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------------+-------+</span>
@@ -1196,30 +1137,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+-------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-flow-control-sent"><code class="docutils literal"><span class="pre">wsrep_flow_control_sent</span></code></p>
+<p id="index-23">Returns the number of <code class="docutils literal"><span class="pre">FC_PAUSE</span></code> events the node has sent.  Unlike most status variables, the counter for this one does not reset every time you run the query.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">11</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">7</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_flow_control_sent</span></code></p>
-<span class="target" id="wsrep-flow-control-sent"></span><p id="index-23">Returns the number of <code class="docutils literal"><span class="pre">FC_PAUSE</span></code> events the node has sent.  Unlike most status variables, the counter for this one does not reset every time you run the query.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_flow_control_sent&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------------+-------+</span>
@@ -1229,30 +1166,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+-------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-gcomm-uuid"><code class="docutils literal"><span class="pre">wsrep_gcomm_uuid</span></code></p>
+<p id="index-24">Displays the group communications UUID.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">7</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">7e729708-605f-11e5-8ddd-8319a704b8c4</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>1.0</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_gcomm_uuid</span></code></p>
-<span class="target" id="wsrep-gcomm-uuid"></span><p id="index-24">Displays the group communications UUID.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_gcomm_uuid&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------+--------------------------------------+</span>
@@ -1262,30 +1195,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+------------------+--------------------------------------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-incoming-addresses"><code class="docutils literal"><span class="pre">wsrep_incoming_addresses</span></code></p>
+<p id="index-25">Comma-separated list of incoming server addresses in the cluster component.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="56%" />
-<col width="14%" />
-<col width="15%" />
-<col width="15%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">7e729708-605f-11e5-8ddd-8319a704b8c4</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">10.0.0.1:3306,10.0.0.2:3306,undefined</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>1</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_incoming_addresses</span></code></p>
-<span class="target" id="wsrep-incoming-addresses"></span><p id="index-25">Comma-separated list of incoming server addresses in the cluster component.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_incoming_addresses&#39;</span><span class="p">;</span>
 
 <span class="o">+--------------------------+--------------------------------------+</span>
@@ -1295,32 +1224,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+--------------------------+--------------------------------------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-last-committed"><code class="docutils literal"><span class="pre">wsrep_last_committed</span></code></p>
+<p id="index-26">The sequence number, or seqno, of the last committed transaction. See <a class="reference internal" href="architecture.html#wsrep-api"><span class="std std-ref">wsrep API</span></a>.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">10.0.0.1:3306,</span>
-<span class="pre">10.0.0.2:3306,</span>
-<span class="pre">undefined</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">409745</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_last_committed</span></code></p>
-<span class="target" id="wsrep-last-committed"></span><p id="index-26">The sequence number, or seqno, of the last committed transaction. See <a class="reference internal" href="architecture.html#id2"><span class="std std-ref">wsrep API</span></a>.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_last_committed&#39;</span><span class="p">;</span>
 
 <span class="o">+----------------------+--------+</span>
@@ -1330,34 +1253,27 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+----------------------+--------+</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information, see <a class="reference internal" href="architecture.html#id2"><span class="std std-ref">wsrep API</span></a>.</p>
-</div>
-<table border="1" class="docutils">
+<p>For more information, see <a class="reference internal" href="architecture.html#wsrep-api"><span class="std std-ref">wsrep API</span></a>.</p>
+<p class="rubric" id="wsrep-local-bf-aborts"><code class="docutils literal"><span class="pre">wsrep_local_bf_aborts</span></code></p>
+<p id="index-27">Total number of local transactions that were aborted by slave transactions while in execution.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">409745</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">960</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_bf_aborts</span></code></p>
-<span class="target" id="wsrep-local-bf-aborts"></span><p id="index-27">Total number of local transactions that were aborted by slave transactions while in execution.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_bf_aborts&#39;</span><span class="p">;</span>
 
 <span class="o">+-----------------------+-------+</span>
@@ -1367,30 +1283,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+-----------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-cached-downto"><code class="docutils literal"><span class="pre">wsrep_local_cached_downto</span></code></p>
+<p id="index-28">The lowest sequence number, or seqno, in the write-set cache (GCache).</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">960</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">18446744073709551615</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_cached_downto</span></code></p>
-<span class="target" id="wsrep-local-cached-downto"></span><p id="index-28">The lowest sequence number, or seqno, in the write-set cache (GCache).</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_cached_downto&#39;</span><span class="p">;</span>
 
 <span class="o">+---------------------------+----------------------+</span>
@@ -1400,30 +1312,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+---------------------------+----------------------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-cert-failures"><code class="docutils literal"><span class="pre">wsrep_local_cert_failures</span></code></p>
+<p id="index-29">Total number of local transactions that failed certification test.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="43%" />
-<col width="18%" />
-<col width="20%" />
-<col width="20%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">18446744073709551615</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">333</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_cert_failures</span></code></p>
-<span class="target" id="wsrep-local-cert-failures"></span><p id="index-29">Total number of local transactions that failed certification test.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_cert_failures&#39;</span><span class="p">;</span>
 
 <span class="o">+---------------------------+-------+</span>
@@ -1433,30 +1341,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+---------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-commits"><code class="docutils literal"><span class="pre">wsrep_local_commits</span></code></p>
+<p id="index-30">Total number of local transactions committed.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">333</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">14981</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_commits</span></code></p>
-<span class="target" id="wsrep-local-commits"></span><p id="index-30">Total number of local transactions committed.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_commits&#39;</span><span class="p">;</span>
 
 <span class="o">+---------------------+-------+</span>
@@ -1466,30 +1370,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+---------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-index"><code class="docutils literal"><span class="pre">wsrep_local_index</span></code></p>
+<p id="index-31">This node index in the cluster (base 0).</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">14981</span></code></td>
-<td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">1</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
+<td>MySQL</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_index</span></code></p>
-<span class="target" id="wsrep-local-index"></span><p id="index-31">This node index in the cluster (base 0).</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_index&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------+-------+</span>
@@ -1499,30 +1399,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+-------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-recv-queue"><code class="docutils literal"><span class="pre">wsrep_local_recv_queue</span></code></p>
+<p id="index-32">Current (instantaneous) length of the recv queue.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>MySQL</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
+<td>Galera</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_recv_queue</span></code></p>
-<span class="target" id="wsrep-local-recv-queue"></span><p id="index-32">Current (instantaneous) length of the recv queue.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_recv_queue&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+-------+</span>
@@ -1532,30 +1428,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-recv-queue-avg"><code class="docutils literal"><span class="pre">wsrep_local_recv_queue_avg</span></code></p>
+<p id="index-33">Recv queue length averaged over interval since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command. Values considerably larger than <code class="docutils literal"><span class="pre">0.0</span></code> mean that the node cannot apply write-sets as fast as they are received and will generate a lot of replication throttling.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">3.348452</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_recv_queue_avg</span></code></p>
-<span class="target" id="wsrep-local-recv-queue-avg"></span><p id="index-33">Recv queue length averaged over interval since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command. Values considerably larger than <code class="docutils literal"><span class="pre">0.0</span></code> mean that the node cannot apply write-sets as fast as they are received and will generate a lot of replication throttling.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_recv_queue_avg&#39;</span><span class="p">;</span>
 
 <span class="o">+----------------------------+----------+</span>
@@ -1565,30 +1457,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+----------------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-recv-queue-max"><code class="docutils literal"><span class="pre">wsrep_local_recv_queue_max</span></code></p>
+<p id="index-34">The maximum length of the recv queue since the last FLUSH STATUS command.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">3.348452</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">10</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_recv_queue_max</span></code></p>
-<span class="target" id="wsrep-local-recv-queue-max"></span><p id="index-34">The maximum length of the recv queue since the last FLUSH STATUS command.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_recv_queue_max&#39;</span><span class="p">;</span>
 
 <span class="o">+----------------------------+-------+</span>
@@ -1598,30 +1486,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+----------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-recv-queue-min"><code class="docutils literal"><span class="pre">wsrep_local_recv_queue_min</span></code></p>
+<p id="index-35">The minimum length of the recv queue since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">10</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_recv_queue_min</span></code></p>
-<span class="target" id="wsrep-local-recv-queue-min"></span><p id="index-35">The minimum length of the recv queue since the last FLUSH STATUS command.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_recv_queue_min&#39;</span><span class="p">;</span>
 
 <span class="o">+-----------------------------+-------+</span>
@@ -1631,30 +1515,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+-----------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-replays"><code class="docutils literal"><span class="pre">wsrep_local_replays</span></code></p>
+<p id="index-36">Total number of transaction replays due to <em>asymmetric lock granularity</em>.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_replays</span></code></p>
-<span class="target" id="wsrep-local-replays"></span><p id="index-36">Total number of transaction replays due to <em>asymmetric lock granularity</em>.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_replays&#39;</span><span class="p">;</span>
 
 <span class="o">+---------------------+-------+</span>
@@ -1664,30 +1544,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+---------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-send-queue"><code class="docutils literal"><span class="pre">wsrep_local_send_queue</span></code></p>
+<p id="index-37">Current (instantaneous) length of the send queue.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">1</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_send_queue</span></code></p>
-<span class="target" id="wsrep-local-send-queue"></span><p id="index-37">Current (instantaneous) length of the send queue.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_send_queue&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+-------+</span>
@@ -1697,30 +1573,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-send-queue-avg"><code class="docutils literal"><span class="pre">wsrep_local_send_queue_avg</span></code></p>
+<p id="index-38">Send queue length averaged over time since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command. Values considerably larger than 0.0 indicate replication throttling or network throughput issue.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">1</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0.145000</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_send_queue_avg</span></code></p>
-<span class="target" id="wsrep-local-send-queue-avg"></span><p id="index-38">Send queue length averaged over time since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command. Values considerably larger than 0.0 indicate replication throttling or network throughput issue.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_send_queue_avg&#39;</span><span class="p">;</span>
 
 <span class="o">+----------------------------+----------+</span>
@@ -1730,30 +1602,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+----------------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-send-queue-max"><code class="docutils literal"><span class="pre">wsrep_local_send_queue_max</span></code></p>
+<p id="index-39">The maximum length of the send queue since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0.145000</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">10</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_send_queue_max</span></code></p>
-<span class="target" id="wsrep-local-send-queue-max"></span><p id="index-39">The maximum length of the send queue since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_send_queue_max&#39;</span><span class="p">;</span>
 
 <span class="o">+----------------------------+-------+</span>
@@ -1763,30 +1631,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+----------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-send-queue-min"><code class="docutils literal"><span class="pre">wsrep_local_send_queue_min</span></code></p>
+<p id="index-40">The minimum length of the send queue since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">10</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_send_queue_min</span></code></p>
-<span class="target" id="wsrep-local-send-queue-min"></span><p id="index-40">The minimum length of the send queue since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> command.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_send_queue_min&#39;</span><span class="p">;</span>
 
 <span class="o">+----------------------------+-------+</span>
@@ -1796,30 +1660,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+----------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-state"><code class="docutils literal"><span class="pre">wsrep_local_state</span></code></p>
+<p id="index-41">Internal Galera Cluster FSM state number.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">4</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_state</span></code></p>
-<span class="target" id="wsrep-local-state"></span><p id="index-41">Internal Galera Cluster FSM state number.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_state&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------+-------+</span>
@@ -1829,34 +1689,27 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+-------------------+-------+</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on the possible node states, see <a class="reference internal" href="node-states.html#node-state-changes"><span class="std std-ref">Node State Changes</span></a>.</p>
-</div>
-<table border="1" class="docutils">
+<p>For more information on the possible node states, see <a class="reference internal" href="node-states.html#node-state-changes"><span class="std std-ref">Node State Changes</span></a>.</p>
+<p class="rubric" id="wsrep-local-state-comment"><code class="docutils literal"><span class="pre">wsrep_local_state_comment</span></code></p>
+<p id="index-42">Human-readable explanation of the state.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">4</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">Synced</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_state_comment</span></code></p>
-<span class="target" id="wsrep-local-state-comment"></span><p id="index-42">Human-readable explanation of the state.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_state_comment&#39;</span><span class="p">;</span>
 
 <span class="o">+---------------------------+--------+</span>
@@ -1866,30 +1719,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+---------------------------+--------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-local-state-uuid"><code class="docutils literal"><span class="pre">wsrep_local_state_uuid</span></code></p>
+<p id="index-43">The UUID of the state stored on this node.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">Synced</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">e2c9a15e-5385-11e0-0800-6bbb637e7211</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_local_state_uuid</span></code></p>
-<span class="target" id="wsrep-local-state-uuid"></span><p id="index-43">The UUID of the state stored on this node.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_state_uuid&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+--------------------------------------+</span>
@@ -1899,35 +1748,27 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+------------------------+--------------------------------------+</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on the state UUID, see <a class="reference internal" href="architecture.html#id2"><span class="std std-ref">wsrep API</span></a>.</p>
-</div>
-<table border="1" class="docutils">
+<p>For more information on the state UUID, see <a class="reference internal" href="architecture.html#wsrep-api"><span class="std std-ref">wsrep API</span></a>.</p>
+<p class="rubric" id="wsrep-open-connections"><code class="docutils literal"><span class="pre">wsrep_open_connections</span></code></p>
+<p id="index-44">The number of open connection objects inside the wsrep provider.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="40%" />
-<col width="19%" />
-<col width="21%" />
-<col width="21%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">e2c9a15e-5385-11e0-</span>
-<span class="pre">0800-6bbb637e7211</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">1</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>3.24</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_open_connections</span></code></p>
-<span class="target" id="wsrep-open-connections"></span><p id="index-44">The number of open connection objects inside the wsrep provider.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_open_connections&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+-------+</span>
@@ -1937,33 +1778,26 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <span class="o">+------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-open-transactions"><code class="docutils literal"><span class="pre">wsrep_open_transactions</span></code></p>
+<p id="index-45">The number of locally running transactions which have been registered inside the wsrep provider. This means transactions which have made operations which have caused write set population to happen. Transactions which are read only are not counted.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">1</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">6</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
 <td>3.24</td>
-<td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_open_transactions</span></code></p>
-<span class="target" id="wsrep-open-transactions"></span><p id="index-45">The number of locally running transactions which have been registered inside
-the wsrep provider. This means transactions which have made operations
-which have caused write set population to happen. Transactions which are
-read only are not counted.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_open_transactions&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------------+-------+</span>
@@ -1973,30 +1807,26 @@ read only are not counted.</p>
 <span class="o">+-------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-protocol-version"><code class="docutils literal"><span class="pre">wsrep_protocol_version</span></code></p>
+<p id="index-46">The version of the wsrep Protocol used.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">6</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">4</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>3.24</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_protocol_version</span></code></p>
-<span class="target" id="wsrep-protocol-version"></span><p id="index-46">The version of the wsrep Protocol used.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_protocol_version&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+-------+</span>
@@ -2006,30 +1836,26 @@ read only are not counted.</p>
 <span class="o">+------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-provider-name"><code class="docutils literal"><span class="pre">wsrep_provider_name</span></code></p>
+<p id="index-47">The name of the wsrep Provider.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">4</span></code></td>
-<td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">Galera</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
+<td>MySQL</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_provider_name</span></code></p>
-<span class="target" id="wsrep-provider-name"></span><p id="index-47">The name of the wsrep Provider.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_provider_name&#39;</span><span class="p">;</span>
 
 <span class="o">+---------------------+--------+</span>
@@ -2039,30 +1865,26 @@ read only are not counted.</p>
 <span class="o">+---------------------+--------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-provider-vendor"><code class="docutils literal"><span class="pre">wsrep_provider_vendor</span></code></p>
+<p id="index-48">The name of the wsrep Provider vendor.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">Galera</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">Codership</span> <span class="pre">Oy</span> <span class="pre">&lt;info&#64;codership.com&gt;</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>MySQL</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_provider_vendor</span></code></p>
-<span class="target" id="wsrep-provider-vendor"></span><p id="index-48">The name of the wsrep Provider vendor.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_provider_vendor&#39;</span><span class="p">;</span>
 
 <span class="o">+-----------------------+-----------------------------------+</span>
@@ -2072,31 +1894,26 @@ read only are not counted.</p>
 <span class="o">+-----------------------+-----------------------------------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-provider-version"><code class="docutils literal"><span class="pre">wsrep_provider_version</span></code></p>
+<p id="index-49">The name of the wsrep Provider version string.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="19%" />
-<col width="20%" />
-<col width="20%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">Codership</span> <span class="pre">Oy</span>
-<span class="pre">&lt;info&#64;codership.com&gt;</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">25.3.5-wheezy(rXXXX)</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>MySQL</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_provider_version</span></code></p>
-<span class="target" id="wsrep-provider-version"></span><p id="index-49">The name of the wsrep Provider version string.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_provider_version&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+----------------------+</span>
@@ -2106,30 +1923,26 @@ read only are not counted.</p>
 <span class="o">+------------------------+----------------------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-ready"><code class="docutils literal"><span class="pre">wsrep_ready</span></code></p>
+<p id="index-50">Whether the server is ready to accept queries. If this status is <code class="docutils literal"><span class="pre">OFF</span></code>, almost all of the queries will fail with:</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="43%" />
-<col width="18%" />
-<col width="20%" />
-<col width="20%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">25.3.5-wheezy(rXXXX)</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">ON</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>MySQL</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_ready</span></code></p>
-<span class="target" id="wsrep-ready"></span><p id="index-50">Whether the server is ready to accept queries. If this status is <code class="docutils literal"><span class="pre">OFF</span></code>, almost all of the queries will fail with:</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>ERROR 1047 (08S01) Unknown Command
 </pre></div>
 </div>
@@ -2143,30 +1956,26 @@ read only are not counted.</p>
 <span class="o">+---------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-received"><code class="docutils literal"><span class="pre">wsrep_received</span></code></p>
+<p id="index-51">Total number of write-sets received from other nodes.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">ON</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">17831</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>MySQL</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_received</span></code></p>
-<span class="target" id="wsrep-received"></span><p id="index-51">Total number of write-sets received from other nodes.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_received&#39;</span><span class="p">;</span>
 
 <span class="o">+----------------+-------+</span>
@@ -2176,30 +1985,26 @@ read only are not counted.</p>
 <span class="o">+----------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-received-bytes"><code class="docutils literal"><span class="pre">wsrep_received_bytes</span></code></p>
+<p id="index-52">Total size of write-sets received from other nodes.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">17831</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">6637093</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_received_bytes</span></code></p>
-<span class="target" id="wsrep-received-bytes"></span><p id="index-52">Total size of write-sets received from other nodes.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_received_bytes&#39;</span><span class="p">;</span>
 
 <span class="o">+----------------------+---------+</span>
@@ -2209,30 +2014,26 @@ read only are not counted.</p>
 <span class="o">+----------------------+---------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-repl-data-bytes"><code class="docutils literal"><span class="pre">wsrep_repl_data_bytes</span></code></p>
+<p id="index-53">Total size of data replicated.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">6637093</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">6526788</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_repl_data_bytes</span></code></p>
-<span class="target" id="wsrep-repl-data-bytes"></span><p id="index-53">Total size of data replicated.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_repl_data_bytes&#39;</span><span class="p">;</span>
 
 <span class="o">+-----------------------+---------+</span>
@@ -2242,30 +2043,26 @@ read only are not counted.</p>
 <span class="o">+-----------------------+---------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-repl-keys"><code class="docutils literal"><span class="pre">wsrep_repl_keys</span></code></p>
+<p id="index-54">Total number of keys replicated.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">6526788</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">797399</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_repl_keys</span></code></p>
-<span class="target" id="wsrep-repl-keys"></span><p id="index-54">Total number of keys replicated.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_repl_keys&#39;</span><span class="p">;</span>
 
 <span class="o">+-----------------+--------+</span>
@@ -2275,30 +2072,26 @@ read only are not counted.</p>
 <span class="o">+-----------------+--------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-repl-keys-bytes"><code class="docutils literal"><span class="pre">wsrep_repl_keys_bytes</span></code></p>
+<p id="index-55">Total size of keys replicated.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">797399</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">11203721</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_repl_keys_bytes</span></code></p>
-<span class="target" id="wsrep-repl-keys-bytes"></span><p id="index-55">Total size of keys replicated.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_repl_keys_bytes&#39;</span><span class="p">;</span>
 
 <span class="o">+-----------------------+----------+</span>
@@ -2308,30 +2101,26 @@ read only are not counted.</p>
 <span class="o">+-----------------------+----------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-repl-other-bytes"><code class="docutils literal"><span class="pre">wsrep_repl_other_bytes</span></code></p>
+<p id="index-56">Total size of other bits replicated.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">11203721</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_repl_other_bytes</span></code></p>
-<span class="target" id="wsrep-repl-other-bytes"></span><p id="index-56">Total size of other bits replicated.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_repl_other_bytes&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+-------+</span>
@@ -2341,30 +2130,26 @@ read only are not counted.</p>
 <span class="o">+------------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-replicated"><code class="docutils literal"><span class="pre">wsrep_replicated</span></code></p>
+<p id="index-57">Total number of write-sets replicated (sent to other nodes).</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">0</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">16109</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_replicated</span></code></p>
-<span class="target" id="wsrep-replicated"></span><p id="index-57">Total number of write-sets replicated (sent to other nodes).</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_replicated&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------+-------+</span>
@@ -2374,30 +2159,26 @@ read only are not counted.</p>
 <span class="o">+------------------+-------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
+<p class="rubric" id="wsrep-replicated-bytes"><code class="docutils literal"><span class="pre">wsrep_replicated_bytes</span></code></p>
+<p id="index-58">Total size of write-sets replicated.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">16109</span></code></td>
+<tr class="row-odd"><td>Example Value</td>
+<td><code class="docutils literal"><span class="pre">6526788</span></code></td>
+</tr>
+<tr class="row-even"><td>Location</td>
 <td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Introduced</td>
+<td>???</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric"><code class="docutils literal"><span class="pre">wsrep_replicated_bytes</span></code></p>
-<span class="target" id="wsrep-replicated-bytes"></span><p id="index-58">Total size of write-sets replicated.</p>
+<p>To see retrieve the value of this status variable, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_replicated_bytes&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+---------+</span>
@@ -2407,28 +2188,6 @@ read only are not counted.</p>
 <span class="o">+------------------------+---------+</span>
 </pre></div>
 </div>
-<table border="1" class="docutils">
-<colgroup>
-<col width="36%" />
-<col width="20%" />
-<col width="22%" />
-<col width="22%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Example Value</th>
-<th class="head">Location</th>
-<th class="head">Introduced</th>
-<th class="head">Deprecated</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">6526788</span></code></td>
-<td>Galera</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
 </div>
 
 
@@ -2518,7 +2277,7 @@ read only are not counted.</p>
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="reference.html" accesskey="U">Reference</a> &#187;</li> 
       </ul>
     </div>
@@ -2565,7 +2324,6 @@ read only are not counted.</p>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -2574,6 +2332,7 @@ read only are not counted.</p>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

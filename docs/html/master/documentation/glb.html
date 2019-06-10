@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="galera-load-balancer">
+  <div class="library-document section" id="galera-load-balancer">
 <h1>Galera Load Balancer<a class="headerlink" href="#galera-load-balancer" title="Permalink to this headline">¶</a></h1>
 <p id="glb-doc">Galera Load Balancer provides simple TCP connection balancing. It was developed with scalability and performance in mind.  It draws on Pen for inspiration, but its functionality is limited to only balancing TCP connections.  It provides several features:</p>
 <ul class="simple">
@@ -215,8 +215,8 @@
 <li>Optional watchdog module to monitor destinations and adjust the routing table.</li>
 </ul>
 <div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p id="glb-install">Unlike Galera Cluster, there is no binary installation available for Galera Load Balancer.  Installing it on your system will requires you to build it from the source files.  They&#8217;re available on GitHub at <a class="reference external" href="https://github.com/codership/glb">glb</a>.</p>
+<span id="glb-install"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Unlike Galera Cluster, there is no binary installation available for Galera Load Balancer.  Installing it on your system will requires you to build it from the source files.  They&#8217;re available on GitHub at <a class="reference external" href="https://github.com/codership/glb">glb</a>.</p>
 <p>To build Galera Load Balancer, you will need to complete a few steps.  First, from a directory convenient for source builds (e.g., <code class="docutils literal"><span class="pre">/opt</span></code>), use the <code class="docutils literal"><span class="pre">git</span></code> utility to clone the GitHub repository for Galera Load Balancer. You would do this like so:</p>
 <blockquote>
 <div><div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/codership/glb
@@ -247,8 +247,8 @@
 <p>Once you&#8217;ve successfully execute everything above, Galera Load Balancer will be installed on your system.  You can launch it from the command-line, using the <code class="docutils literal"><span class="pre">glbd</span></code> command.</p>
 <p>In addition to the system daemon, you will also have installed <code class="docutils literal"><span class="pre">libglb</span></code>, a shared library for connection balancing with any Linux applications that use the <code class="docutils literal"><span class="pre">connect()</span></code> call from the C Standard Library.</p>
 <div class="section" id="service-installation">
-<h3>Service Installation<a class="headerlink" href="#service-installation" title="Permalink to this headline">¶</a></h3>
-<p id="glb-service">The above installation procedure only installs Galera Load Balancer to be run manually from the command-line.  However, you may find it more useful to run this application as a system service. To do this, you&#8217;ll need to copy a couple of files to the appropriate directories.</p>
+<span id="glb-service"></span><h3>Service Installation<a class="headerlink" href="#service-installation" title="Permalink to this headline">¶</a></h3>
+<p>The above installation procedure only installs Galera Load Balancer to be run manually from the command-line.  However, you may find it more useful to run this application as a system service. To do this, you&#8217;ll need to copy a couple of files to the appropriate directories.</p>
 <p>In the source directory you cloned from GitHub, navigate into the <code class="docutils literal"><span class="pre">files</span></code> directory.  Within that directory there is a configuration file and a service script that you need to copy to their relevant locations.</p>
 <p>First, copy <code class="docutils literal"><span class="pre">glbd.sh</span></code> into <code class="docutils literal"><span class="pre">/etc/init.d</span></code> directory under a service name. You would execute the following from the command-line to do this:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> cp glbd.sh /etc/init.d/glb
@@ -262,8 +262,8 @@
 </div>
 </div>
 <div class="section" id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
-<p id="glb-config">When you run Galera Load Balancer, you can configure its use through the command-line options. You can get a list of by exeduting <code class="docutils literal"><span class="pre">glb</span></code> with the <code class="docutils literal"><span class="pre">--help</span></code> option.  For servers running Galera Load Balancer as a service, you can manage it through the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file.</p>
+<span id="glb-config"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>When you run Galera Load Balancer, you can configure its use through the command-line options. You can get a list of by exeduting <code class="docutils literal"><span class="pre">glb</span></code> with the <code class="docutils literal"><span class="pre">--help</span></code> option.  For servers running Galera Load Balancer as a service, you can manage it through the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file.</p>
 <ul class="simple">
 <li><a class="reference internal" href="glb-parameters.html#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a>: This is the address that Galera Load Balancer monitors for incoming client connections.</li>
 <li><a class="reference internal" href="glb-parameters.html#glb-default-targets"><span class="std std-ref">DEFAULT_TARGETS</span></a>: This specifies the default servers where Galera Load Balancer is to route incoming client connections. For this parameter, use the IP addresses for the nodes in your cluster.</li>
@@ -278,8 +278,8 @@
 </div>
 <p>The <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file would be the one you copied into <code class="docutils literal"><span class="pre">/etc</span></code> as mentioned in the previous section.</p>
 <div class="section" id="destination-selection-policies">
-<h3>Destination Selection Policies<a class="headerlink" href="#destination-selection-policies" title="Permalink to this headline">¶</a></h3>
-<p id="glb-dest-select">Galera Load Balancer&#8211;both the system daemon and the shared library&#8211;supports five destination selection policies. When you run it from the command-line, you can define these using the command-line arguments. Otherwise, you&#8217;ll have to add the arguments to the <a class="reference internal" href="glb-parameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> parameter in the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file.</p>
+<span id="glb-dest-select"></span><h3>Destination Selection Policies<a class="headerlink" href="#destination-selection-policies" title="Permalink to this headline">¶</a></h3>
+<p>Galera Load Balancer&#8211;both the system daemon and the shared library&#8211;supports five destination selection policies. When you run it from the command-line, you can define these using the command-line arguments. Otherwise, you&#8217;ll have to add the arguments to the <a class="reference internal" href="glb-parameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> parameter in the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file.</p>
 <ul class="simple">
 <li><strong>Least Connected</strong>: This directs new connections to the server using the smallest number of connections possible. It will be adjusted for the server weight.  This is the default policy.</li>
 <li><strong>Round Robin</strong>: This sets new connections to the next destination in the circular order list. You can enable it with the <a class="reference internal" href="glb-parameters.html#glb-round"><span class="std std-ref">&#8211;round</span></a> option.</li>
@@ -290,8 +290,8 @@
 </div>
 </div>
 <div class="section" id="using-galera-load-balancer">
-<h2>Using Galera Load Balancer<a class="headerlink" href="#using-galera-load-balancer" title="Permalink to this headline">¶</a></h2>
-<p id="glb-use">The section on <a class="reference internal" href="#glb-service"><span class="std std-ref">Service Installation</span></a> explained how to configure a system to run Galera Load Balancer as a service.  If you do that, you can then manage common operations with the <code class="docutils literal"><span class="pre">service</span></code> command. The format for doing this is to enter <code class="docutils literal"><span class="pre">service</span></code>, followed by <code class="docutils literal"><span class="pre">glb</span></code>, and then an option.</p>
+<span id="glb-use"></span><h2>Using Galera Load Balancer<a class="headerlink" href="#using-galera-load-balancer" title="Permalink to this headline">¶</a></h2>
+<p>The section on <a class="reference internal" href="#glb-service"><span class="std std-ref">Service Installation</span></a> explained how to configure a system to run Galera Load Balancer as a service.  If you do that, you can then manage common operations with the <code class="docutils literal"><span class="pre">service</span></code> command. The format for doing this is to enter <code class="docutils literal"><span class="pre">service</span></code>, followed by <code class="docutils literal"><span class="pre">glb</span></code>, and then an option.</p>
 <p>Below is an example of how you might use <code class="docutils literal"><span class="pre">service</span></code> to get information on the Galera Load Balancer:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service glb getinfo
 
@@ -425,7 +425,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="deployment.html" >Deployment</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="load-balancing.html" accesskey="U">Load Balancing</a> &#187;</li> 
       </ul>
@@ -473,7 +473,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -482,6 +481,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

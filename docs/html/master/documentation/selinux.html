@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,16 +204,16 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="selinux-configuration">
+  <div class="library-document section" id="selinux-configuration">
 <h1>SELinux Configuration<a class="headerlink" href="#selinux-configuration" title="Permalink to this headline">¶</a></h1>
 <p id="selinux">Security-Enhanced Linux, or SELinux, is a kernel module for improving security of Linux operating systems.  It integrates support for access control security policies, including mandatory access control (MAC), that limit user applications and system daemons access to files and network resources.  Some Linux distributions, such as Fedora, ship with SELinux enabled by default.</p>
 <p>In the context of Galera Cluster, systems with SELinux may block the database server, keeping it from starting or preventing the node from establishing connections with other nodes in the cluster.  To prevent this, you need to configure SELinux policies to allow the node to operate.</p>
 <div class="section" id="generating-an-selinux-policy">
-<h2>Generating an SELinux Policy<a class="headerlink" href="#generating-an-selinux-policy" title="Permalink to this headline">¶</a></h2>
-<p id="gen-selinux-policy">In order to create an SELinux policy for Galera Cluster, you need to first open ports and set SELinux to permissive mode.  Then, after generating various replication events, state transfers and notifications, create a policy from the logs of this activity and reset SELinux from to enforcing mode.</p>
+<span id="gen-selinux-policy"></span><h2>Generating an SELinux Policy<a class="headerlink" href="#generating-an-selinux-policy" title="Permalink to this headline">¶</a></h2>
+<p>In order to create an SELinux policy for Galera Cluster, you need to first open ports and set SELinux to permissive mode.  Then, after generating various replication events, state transfers and notifications, create a policy from the logs of this activity and reset SELinux from to enforcing mode.</p>
 <div class="section" id="setting-selinux-to-permissive-mode">
-<h3>Setting SELinux to Permissive Mode<a class="headerlink" href="#setting-selinux-to-permissive-mode" title="Permalink to this headline">¶</a></h3>
-<p id="permissive-selinux">When SELinux registers a system event, there are three modes that define its response: enforcing, permissive and disabled.  While you can set it to permit all activity on the system, this is not a good security practice.  Instead, set SELinux to permit activity on the relevant ports and to ignore the database server.</p>
+<span id="permissive-selinux"></span><h3>Setting SELinux to Permissive Mode<a class="headerlink" href="#setting-selinux-to-permissive-mode" title="Permalink to this headline">¶</a></h3>
+<p>When SELinux registers a system event, there are three modes that define its response: enforcing, permissive and disabled.  While you can set it to permit all activity on the system, this is not a good security practice.  Instead, set SELinux to permit activity on the relevant ports and to ignore the database server.</p>
 <p>To set SELinux to permissive mode, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Using <code class="docutils literal"><span class="pre">semanage</span></code>, open the relevant ports:</p>
@@ -236,8 +236,8 @@
 <p>SELinux now permits the database server to function on the server and no longer blocks the node from network connectivity with the cluster.</p>
 </div>
 <div class="section" id="defining-the-selinux-policy">
-<h3>Defining the SELinux Policy<a class="headerlink" href="#defining-the-selinux-policy" title="Permalink to this headline">¶</a></h3>
-<p id="define-selinux-policy">While SELinux remains in permissive mode, it continues to log activity from the database server.  In order for it to understand normal operation for the database, you need to start the database and generate routine events for SELinux to see.</p>
+<span id="define-selinux-policy"></span><h3>Defining the SELinux Policy<a class="headerlink" href="#defining-the-selinux-policy" title="Permalink to this headline">¶</a></h3>
+<p>While SELinux remains in permissive mode, it continues to log activity from the database server.  In order for it to understand normal operation for the database, you need to start the database and generate routine events for SELinux to see.</p>
 <p>For servers that use <code class="docutils literal"><span class="pre">init</span></code>, start the database with the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql start
 </pre></div>
@@ -259,8 +259,8 @@
 </div>
 </div>
 <div class="section" id="enabling-an-selinux-policy">
-<h3>Enabling an SELinux Policy<a class="headerlink" href="#enabling-an-selinux-policy" title="Permalink to this headline">¶</a></h3>
-<p id="enable-selinux">Generating an SELinux policy requires that you search log events for the relevant information and pipe it to the <code class="docutils literal"><span class="pre">audit2allow</span></code> utility, creating a <code class="docutils literal"><span class="pre">galera.te</span></code> file to load into SELinux.</p>
+<span id="enable-selinux"></span><h3>Enabling an SELinux Policy<a class="headerlink" href="#enabling-an-selinux-policy" title="Permalink to this headline">¶</a></h3>
+<p>Generating an SELinux policy requires that you search log events for the relevant information and pipe it to the <code class="docutils literal"><span class="pre">audit2allow</span></code> utility, creating a <code class="docutils literal"><span class="pre">galera.te</span></code> file to load into SELinux.</p>
 <p>To generate and load an SELinux policy for Galera Cluster, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Using <code class="docutils literal"><span class="pre">fgrep</span></code> and <code class="docutils literal"><span class="pre">audit2allow</span></code>, create a textease file with the policy information.</p>
@@ -398,7 +398,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="security.html" accesskey="U">Security</a> &#187;</li> 
       </ul>
     </div>
@@ -445,7 +445,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -454,6 +453,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

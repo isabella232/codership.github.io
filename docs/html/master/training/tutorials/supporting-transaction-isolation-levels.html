@@ -1,0 +1,592 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Support for Transaction Isolation Levels &#8212; Galera Cluster Documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../_static/cloud.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The Safe-To-Bootstrap Feature" href="safe-to-bootstrap-feature.html" />
+    <link rel="prev" title="The Primary Component in Galera Cluster" href="primary-component.html" />
+
+
+
+
+<!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/jquery-1.8.3.min.js"></script>
+-->
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/swipe.js"></script>
+
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript">  google.load("maps", "3",  {other_params:"sensor=false&libraries=geometry,places"});  </script>
+
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/main.js?v3"></script>
+	<script type="text/javascript" src="http://galeracluster.com/wp-content/themes/galeracluster/js/maps.js?v2"></script>
+
+	<link rel="stylesheet" href="http://galeracluster.com/wp-content/themes/galeracluster/css/style_reset.css">
+	<link rel="stylesheet" href="http://galeracluster.com/wp-content/themes/galeracluster/fonts/fonts.css">
+	<link rel="stylesheet" href="http://galeracluster.com/wp-content/themes/galeracluster/style.css?v3">
+
+		<!--[if lt IE 9]>
+		<script src="http://galeracluster.com/wp-content/themes/galeracluster/js/html5.js"></script>
+		<![endif]-->
+	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="http://galeracluster.com/feed/" />
+	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="http://galeracluster.com/comments/feed/" />
+	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="http://galeracluster.com/support/feed/" />
+
+	<script type='text/javascript' src='http://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://galeracluster.com/xmlrpc.php?rsd" />
+	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://galeracluster.com/wp-includes/wlwmanifest.xml" />
+	<link rel='prev' title='Downloads' href='http://galeracluster.com/downloads/' />
+	<link rel='next' title='Community' href='http://galeracluster.com/community/' />
+	<meta name="generator" content="WordPress 3.8.3" />
+
+	<link rel='shortlink' href='http://galeracluster.com/?p=12' />
+
+
+
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+	<style type="text/css" id="twentythirteen-header-css">
+				.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+	</style>
+
+
+	<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+	</script>
+
+  </head>
+  <body role="document">
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="http://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<a id="mobile-menu-link" href="#">
+	<span class="text">MENU</span>
+
+	<div class="stripes">
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	</div>
+	</a>
+
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+		<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>
+		<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="http://galeracluster.com/products/">Products</a>
+		<ul class="sub-menu">
+		<li id="menu-item-626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="http://galeracluster.com/products/">Galera Cluster</a>
+		<ul class="sub-menu">
+		<li id="menu-item-827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="http://galeracluster.com/products/#use-cases">Use cases</a></li>
+		<li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="http://galeracluster.com/products#success-stories">Success stories</a></li>
+		<li id="menu-item-828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="http://galeracluster.com/products/#case-studies">Case studies</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="http://galeracluster.com/products/technology/">Technology</a>
+		<ul class="sub-menu">
+		<li id="menu-item-829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="http://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
+		<li id="menu-item-830" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="http://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
+		<li id="menu-item-831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="http://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
+		<ul class="sub-menu">
+		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
+		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="http://galeracluster.com/support/">Support</a>
+		<ul class="sub-menu">
+		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
+		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
+		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
+		<ul class="sub-menu">
+		<li id="menu-item-634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="http://galeracluster.com/community/">Mailing List</a></li>
+		<li id="menu-item-1101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="http://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="http://galeracluster.com/company/">Company</a>
+		<ul class="sub-menu">
+		<li id="menu-item-637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="http://galeracluster.com/company/">Overview</a></li>
+		<li id="menu-item-835" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="http://galeracluster.com/company/#carousel">What we believe</a></li>
+		<li id="menu-item-836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="http://galeracluster.com/company/#latest-press-releases">News</a></li>
+		<li id="menu-item-838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="http://galeracluster.com/company/#careers">Careers</a></li>
+		<li id="menu-item-837" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="http://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
+		</ul>
+		</li>
+		<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="http://galeracluster.com/category/blog/">Blog</a></li>
+		<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="http://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="tutorial-article section" id="support-for-transaction-isolation-levels">
+<h1>Support for Transaction Isolation Levels<a class="headerlink" href="#support-for-transaction-isolation-levels" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats" id="supporting-transaction-isolation-levels">Length:  1009 words; Writer: Seppo Jaakola; Published: September 21, 2015; Topic: General; Level: Intermediate</p>
+<p>There appears to be great misunderstanding as to what MySQL transaction isolation levels Galera CLuster actually supports and how. This blog post tries to give answer to those uncertainties.</p>
+<p>Galera Cluster provides <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> between transactions running on separate cluster nodes. Transactions running on the same node are isolated by whatever was configured as the transaction isolation level in the MySQL configuration. So, if you have configured the default <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> isolation, transactions issued on the same node will behave under <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> semantics. However, for transactions issued on separate cluster nodes, the ‘first committer wins’ rule of <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> is provided, and this will fix the lost update problem that generally hurts REPEATABLE READ isolation.</p>
+<p>Therefore, it is not safe for the application to rely on <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> semantics. But in general, transaction isolation in Galera CLuster is no less than what was configured for transaction isolation level in MySQL.</p>
+<p>Note that this transaction isolation behavior has changed somewhat over time. Earlier Galera releases have also supported <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> among transactions on the same node.</p>
+<p>Here is an example showing how the lost update anomaly hurts transactions using plain <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> isolation. Two transactions read a value from a row in table t and then update the value and commit. The transactions are issued on the same node, and will behave under MySQL’s <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> isolation.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Transaction #1                  Transaction #2</span>
+
+<span class="go">node1&gt; begin;</span>
+<span class="go">Query OK, 0 rows affected</span>
+
+<span class="go">                             node1&gt; begin;</span>
+<span class="go">                             Query OK, 0 rows affected</span>
+
+<span class="go">node1&gt; select * from t;</span>
+<span class="go">+---+------+</span>
+<span class="go">| i | j    |</span>
+<span class="go">+---+------+</span>
+<span class="go">| 1 |    0 |</span>
+<span class="go">+---+------+</span>
+<span class="go">1 row in set</span>
+
+<span class="go">                             node1&gt; select * from t;</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             | i | j    |</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             | 1 |    0 |</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             1 row in set</span>
+
+<span class="go">node1&gt; update t set j=1 where i=1;</span>
+<span class="go">Query OK, 1 row affected</span>
+
+<span class="go">                             node1&gt; update t set j=2</span>
+<span class="go">                             node1&gt; where i=1;</span>
+<span class="gp">                             #</span> Waits <span class="k">for</span> InnoDB lock ...
+
+<span class="go">node1&gt; commit;</span>
+<span class="go">Query OK, 0 rows affected</span>
+
+<span class="go">                             Query OK, 1 row affected</span>
+<span class="gp">                             #</span> Lock waiting ends
+
+<span class="go">node1&gt; select * from t;</span>
+<span class="go">+---+------+</span>
+<span class="go">| i | j    |</span>
+<span class="go">+---+------+</span>
+<span class="go">| 1 |    1 |</span>
+<span class="go">+---+------+</span>
+<span class="go">1 row in set</span>
+<span class="gp">#</span> Transaction <span class="c1">#1&#39;s update is now visible</span>
+
+<span class="go">                             node1&gt; commit;</span>
+
+<span class="go">node1&gt; select * from t;</span>
+<span class="go">+---+------+</span>
+<span class="go">| i | j    |</span>
+<span class="go">+---+------+</span>
+<span class="go">| 1 |    2 |</span>
+<span class="go">+---+------+</span>
+<span class="go">1 row in set</span>
+
+<span class="go">                             node1&gt; select * from t;</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             | i | j    |</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             | 1 |    2 |</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             1 row in set</span>
+
+<span class="gp">#</span> Transaction <span class="c1">#2 has written over transaction #1&#39;s result</span>
+</pre></div>
+</div>
+<p>Both transactions have read the same value in the row (0), and made their decision on how to change the value based on the application logic.
+But, as the outcome of running these transactions in parallel, transaction #1’s write was visible in the database for a short while, but it went unnoticed by transaction #2 who blindly wrote over its value (2) in the table. Had it noticed that the value had changed to 1, the application logic may have dictated another value to be written in the table.</p>
+<p>Here is the same exercise, but now transactions #1 and #2 connect to separate cluster nodes (node1 and node2).</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Transaction #1                  Transaction #2</span>
+
+<span class="go">node1&gt; begin;</span>
+<span class="go">Query OK, 0 rows affected</span>
+
+<span class="go">                             node2&gt; begin;</span>
+<span class="go">                             Query OK, 0 rows affected</span>
+
+<span class="go">node1&gt; select * from t;</span>
+<span class="go">+---+------+</span>
+<span class="go">| i | j    |</span>
+<span class="go">+---+------+</span>
+<span class="go">| 1 |    0 |</span>
+<span class="go">+---+------+</span>
+<span class="go">1 row in set</span>
+<span class="go">                             node2&gt; select * from t;</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             | i | j    |</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             | 1 |    0 |</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             1 row in set</span>
+
+<span class="go">node1&gt; update t set j=1 where i=1;</span>
+<span class="go">Query OK, 1 row affected</span>
+
+<span class="go">                             node2&gt; update t set j=2</span>
+<span class="go">                             node2&gt; where i=1;</span>
+<span class="go">                             Query OK, 1 row affected</span>
+<span class="gp">                             #</span> There is no lock <span class="nb">wait</span> here,
+<span class="gp">                             #</span> as we are operating
+<span class="gp">                             #</span> on another node
+
+<span class="go">node1&gt; commit;</span>
+<span class="go">Query OK, 0 rows affected</span>
+<span class="go">                             node2&gt; commit;</span>
+<span class="go">                             ERROR 1213 (40001): Deadlock</span>
+<span class="go">                             found when trying to get lock;</span>
+<span class="go">                             try restarting transaction</span>
+
+<span class="go">node1&gt; select * from t;</span>
+<span class="go">+---+------+</span>
+<span class="go">| i | j    |</span>
+<span class="go">+---+------+</span>
+<span class="go">| 1 |    1 |</span>
+<span class="go">+---+------+</span>
+<span class="go">1 row in set</span>
+<span class="go">                             node2&gt; select * from t;</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             | i | j    |</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             | 1 |    1 |</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             1 row in set</span>
+
+<span class="gp">#</span> Transaction <span class="c1">#1, the first committer, has won</span>
+</pre></div>
+</div>
+<p>Here the ‘first committer wins’ rule is applied, and only transaction #1 is let to commit. Transaction #2 will notice that it is working on the same database snapshot as transaction #1 and has a conflicting write, therefore it aborts and returns a deadlock error back to the client.</p>
+<p>Therefore, transactions on multiple nodes are protected from the ‘lost update’ problem. The lost update phenomenon can hurt only transactions that are using <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> isolation and are running on the same node. However, MySQL/InnoDB has a workaround even for this situation by using <code class="docutils literal"><span class="pre">SELECT</span> <span class="pre">FOR</span> <span class="pre">UPDATE</span></code>, which will lock the rows read, and prevent other transactions from operating on this ‘read view’ until the transaction finally commits. Here is an example showing how transactions #1 and #2 can tackle the lost update problem by using the read locks granted by <code class="docutils literal"><span class="pre">SELECT</span> <span class="pre">FOR</span> <span class="pre">UPDATE</span></code>:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">Transaction #1                  transaction #2</span>
+
+<span class="go">node1&gt; begin;</span>
+<span class="go">Query OK, 0 rows affected</span>
+<span class="go">                             node1&gt; begin;</span>
+<span class="go">                             Query OK, 0 rows affected</span>
+
+<span class="go">node1&gt; select * from t for update;</span>
+<span class="go">+---+------+</span>
+<span class="go">| i | j    |</span>
+<span class="go">+---+------+</span>
+<span class="go">| 1 |    0 |</span>
+<span class="go">+---+------+</span>
+<span class="go">1 row in set</span>
+<span class="go">                             node1&gt; select * from t</span>
+<span class="go">                             node1&gt; for update;</span>
+<span class="gp">                             #</span> Blocks waiting
+<span class="gp">                             #</span> <span class="k">for</span> InnoDB lock
+
+<span class="go">node1&gt; update t set j=1 where i=1;</span>
+<span class="go">Query OK, 1 row affected</span>
+
+<span class="go">node1&gt; commit;</span>
+<span class="go">Query OK, 0 rows affected</span>
+
+<span class="go">                             +---+------+</span>
+<span class="go">                             | i | j    |</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             | 1 |    1 |</span>
+<span class="go">                             +---+------+</span>
+<span class="go">                             1 row in set</span>
+<span class="gp">                             #</span> Lock <span class="nb">wait</span> ends
+<span class="gp">                             #</span> We see transaction <span class="c1">#1&#39;s</span>
+<span class="gp">                             #</span> result and work on
+<span class="gp">                             #</span> a different snapshot now
+
+<span class="go">                             node1&gt; update t set j=3</span>
+<span class="go">                             node1&gt; where i=1;</span>
+<span class="go">                             Query OK, 1 row affected</span>
+
+<span class="go">                             node1&gt;  commit;</span>
+<span class="go">                             Query OK, 0 rows affected</span>
+<span class="go">node1&gt; select * from t;</span>
+<span class="go">+---+------+</span>
+<span class="go">| i | j    |</span>
+<span class="go">+---+------+</span>
+<span class="go">| 1 |    3 |</span>
+<span class="go">+---+------+</span>
+<span class="go">1 row in set</span>
+<span class="go">                              node1&gt; select * from t;</span>
+<span class="go">                              +---+------+</span>
+<span class="go">                              | i | j    |</span>
+<span class="go">                              +---+------+</span>
+<span class="go">                              | 1 |    3 |</span>
+<span class="go">                              +---+------+</span>
+<span class="go">                              1 row in set</span>
+</pre></div>
+</div>
+<p>Galera Cluster can support transaction isolation levels up to <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> and also protect against lost update problem if the application can be tuned to use proper locking strategy like the one shown above.</p>
+<p>However, Galera does not support <code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> isolation in multi-master topology, because there is currently no means to protect read locks from being overwritten by the replication. <code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> isolation should work in controlled master-slave topologies, but in practice its use is not recommended at all. And, <code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> isolation may be disabled in future releases, unless we can figure out a way to support it in a safe way.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="../../index.html" title="index">
+          <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+        </a></p>
+  <div class="sphinxprev">
+    <h4>Previous page</h4>
+    <p class="topless"><a href="primary-component.html"
+                          title="Previous page">&larr; The Primary Component in Galera Cluster</a></p>
+  </div>
+  <div class="sphinxnext">
+    <h4>Next page</h4>
+    <p class="topless"><a href="safe-to-bootstrap-feature.html"
+                          title="Next page">&rarr; The Safe-To-Bootstrap Feature</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<a id="mobile-menu-link" href="#">
+	<span class="text">MENU</span>
+
+	<div class="stripes">
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	<div class="stripe"></div>
+	</div>
+	</a>
+
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			
+
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/supporting-transaction-isolation-levels.rst.rst" title="Edit 'Support for Transaction Isolation Levels' on Github">Edit on Github</a></li>
+
+			 
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="safe-to-bootstrap-feature.html" title="The Safe-To-Bootstrap Feature"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="primary-component.html" title="The Primary Component in Galera Cluster"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+      </ul>
+    </div>
+    </div>
+
+
+			
+				<li><a href="primary-component.html" title="The Primary Component in Galera Cluster">&lt; Previous</a></li>
+			
+
+			
+				<li><a href="safe-to-bootstrap-feature.html" title="The Safe-To-Bootstrap Feature">Next &gt;</a></li>
+			
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="http://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="http://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="http://galeracluster.com/products/">Products</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="http://galeracluster.com/products/">Galera Cluster</a>
+		<ul class="sub-menu">
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="http://galeracluster.com/products/#use-cases">Use cases</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="http://galeracluster.com/products#success-stories">Success stories</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="http://galeracluster.com/products/#case-studies">Case studies</a></li>
+		</ul>
+		</li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="http://galeracluster.com/products/technology/">Technology</a>
+		<ul class="sub-menu">
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="http://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="http://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
+			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="http://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
+		</ul>
+	</li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="http://galeracluster.com/support/">Support</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="http://galeracluster.com/community/">Mailing List</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="http://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="http://galeracluster.com/company/">Company</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="http://galeracluster.com/company/">Overview</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="http://galeracluster.com/company/#carousel">What we believe</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="http://galeracluster.com/company/#latest-press-releases">News</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="http://galeracluster.com/company/#careers">Careers</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="http://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
+	</ul>
+	</li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="http://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="http://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+	<div class="footer-search">
+	<div class="search-form">
+	<form role="search" method="get" action="http://galeracluster.com/">
+	<input type="search" class="search-field" value="" name="s" title="Search for:" />
+	<input type="submit" class="search-submit" value="" />
+	</form>
+	</div>
+	</div>
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	<a href="http://www.nasa.gov/multimedia/imagegallery/" class="imagery" target="_blank">Images: NASA</a>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

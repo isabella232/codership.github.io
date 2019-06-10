@@ -31,8 +31,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Cluster Stalls on ALTER" href="stall-on-alter.html" />
-    <link rel="prev" title="Requested State Transfer Failed" href="requested-state-transfer-failed.html" />
+    <link rel="next" title="Codership Best Practices Articles" href="../best/index.html" />
+    <link rel="prev" title="Unknown Command Errors" href="error-unknown-command.html" />
 
 
 
@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="user-changes-not-replicating">
+  <div class="kb-article section" id="user-changes-not-replicating">
 <h1>User Changes not Replicating<a class="headerlink" href="#user-changes-not-replicating" title="Permalink to this headline">¶</a></h1>
 <p id="kb-trouble-user-changes">Galera replicates only InnoDB tables.  Therefore, databases should not use other storage engines.  However, the system tables contained in the <code class="docutils literal"><span class="pre">mysql</span></code> database use the MyISAM storage engine. This includes the <code class="docutils literal"><span class="pre">user</span></code> table and other tables containing user permissions.  Since these tables are not replicated, you must make changes to them manually on each node.</p>
 <p class="kb rubric">Scenario</p>
@@ -249,13 +249,13 @@
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="requested-state-transfer-failed.html"
-                          title="Previous page">&larr; Requested State Transfer Failed</a></p>
+    <p class="topless"><a href="error-unknown-command.html"
+                          title="Previous page">&larr; Unknown Command Errors</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="stall-on-alter.html"
-                          title="Next page">&rarr; Cluster Stalls on <code class="docutils literal"><span class="pre">ALTER</span></code></a></p>
+    <p class="topless"><a href="../best/index.html"
+                          title="Next page">&rarr; Codership Best Practices Articles</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -318,26 +318,26 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="stall-on-alter.html" title="Cluster Stalls on ALTER"
+          <a href="../best/index.html" title="Codership Best Practices Articles"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="requested-state-transfer-failed.html" title="Requested State Transfer Failed"
+          <a href="error-unknown-command.html" title="Unknown Command Errors"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Knowledge Base</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Troubleshooting</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >The Codership Knowledge Base</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Troubleshooting Articles</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="requested-state-transfer-failed.html" title="Requested State Transfer Failed">&lt; Previous</a></li>
+				<li><a href="error-unknown-command.html" title="Unknown Command Errors">&lt; Previous</a></li>
 			
 
 			
-				<li><a href="stall-on-alter.html" title="Cluster Stalls on &lt;code class=&#34;docutils literal&#34;&gt;&lt;span class=&#34;pre&#34;&gt;ALTER&lt;/span&gt;&lt;/code&gt;">Next &gt;</a></li>
+				<li><a href="../best/index.html" title="Codership Best Practices Articles">Next &gt;</a></li>
 			
 
 		</ul>
@@ -372,7 +372,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -381,6 +380,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

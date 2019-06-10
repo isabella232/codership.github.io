@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,12 +204,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="notification-command">
+  <div class="library-document section" id="notification-command">
 <h1>Notification Command<a class="headerlink" href="#notification-command" title="Permalink to this headline">¶</a></h1>
 <p id="notification-cmd">While you can use the database client to check the status of your cluster, the individual nodes and the health of replication, you may find it counterproductive to log into the client on each node to run these checks.  Galera Cluster provides a notification script and interface for customization, allowing you to automate the monitoring process for your cluster.</p>
 <div class="section" id="notification-command-parameters">
-<h2>Notification Command Parameters<a class="headerlink" href="#notification-command-parameters" title="Permalink to this headline">¶</a></h2>
-<p id="notification-cmd-parameters">When the node registers a change in the cluster or itself that triggers the notification command, it passes a number of parameters in calling the script.</p>
+<span id="notification-cmd-parameters"></span><h2>Notification Command Parameters<a class="headerlink" href="#notification-command-parameters" title="Permalink to this headline">¶</a></h2>
+<p>When the node registers a change in the cluster or itself that triggers the notification command, it passes a number of parameters in calling the script.</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">--status</span></code> The node passes a string indicating it&#8217;s current state.  For a list of the strings it uses, see <a class="reference internal" href="#node-status"><span class="std std-ref">Node Status Strings</span></a> below.</li>
 <li><code class="docutils literal"><span class="pre">--uuid</span></code> The node passes a string of either <cite>yes</cite> or <cite>no</cite>, indicating whether it considers itself part of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</li>
@@ -221,8 +221,8 @@
 <p class="last">Only those nodes that in the <code class="docutils literal"><span class="pre">Synced</span></code> state accept connections from the cluster.  For more information on node states, see <a class="reference internal" href="node-states.html#node-state-changes"><span class="std std-ref">Node State Changes</span></a>.</p>
 </div>
 <div class="section" id="node-status-strings">
-<h3>Node Status Strings<a class="headerlink" href="#node-status-strings" title="Permalink to this headline">¶</a></h3>
-<p id="node-status">The notification command passes one of six values with the <code class="docutils literal"><span class="pre">--status</span></code> parameter to indicate the current status of the node:</p>
+<span id="node-status"></span><h3>Node Status Strings<a class="headerlink" href="#node-status-strings" title="Permalink to this headline">¶</a></h3>
+<p>The notification command passes one of six values with the <code class="docutils literal"><span class="pre">--status</span></code> parameter to indicate the current status of the node:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">Undefined</span></code> Indicates a starting node that is not part of the Primary Component.</li>
 <li><code class="docutils literal"><span class="pre">Joiner</span></code> Indicates a node that is part of the Primary Component that is receiving a state  snapshot transfer.</li>
@@ -233,8 +233,8 @@
 </ul>
 </div>
 <div class="section" id="members-list-format">
-<h3>Members List Format<a class="headerlink" href="#members-list-format" title="Permalink to this headline">¶</a></h3>
-<p id="member-list-format">The notification command passes with the <code class="docutils literal"><span class="pre">--member</span></code> parameter a list containing entries for each node that is connected to the cluster component to which the node belongs.  For each entry in the list the node uses this format:</p>
+<span id="member-list-format"></span><h3>Members List Format<a class="headerlink" href="#members-list-format" title="Permalink to this headline">¶</a></h3>
+<p>The notification command passes with the <code class="docutils literal"><span class="pre">--member</span></code> parameter a list containing entries for each node that is connected to the cluster component to which the node belongs.  For each entry in the list the node uses this format:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>&lt;node UUID&gt; / &lt;node name&gt; / &lt;incoming address&gt;
 </pre></div>
 </div>
@@ -246,8 +246,8 @@
 </div>
 </div>
 <div class="section" id="example-notification-script">
-<h2>Example Notification Script<a class="headerlink" href="#example-notification-script" title="Permalink to this headline">¶</a></h2>
-<p id="id1">Nodes can call a notification script when changes happen in the membership of the cluster, that is when nodes join or leave the cluster.  You can specify the name of the script the node calls using the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a>.  While you can use whatever script meets the particular needs of your deployment, you may find it helpful to consider the example below as a starting point.</p>
+<span id="id1"></span><h2>Example Notification Script<a class="headerlink" href="#example-notification-script" title="Permalink to this headline">¶</a></h2>
+<p>Nodes can call a notification script when changes happen in the membership of the cluster, that is when nodes join or leave the cluster.  You can specify the name of the script the node calls using the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a>.  While you can use whatever script meets the particular needs of your deployment, you may find it helpful to consider the example below as a starting point.</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -eu</span>
 
 <span class="c1"># This is a simple example of wsrep notification script (wsrep_notify_cmd).</span>
@@ -371,8 +371,8 @@ status_update<span class="o">()</span>
 <p>This ensures that only the <code class="docutils literal"><span class="pre">mysql</span></code> user executes and can read the notification script, preventing all other users from seeing your root password.</p>
 </div>
 <div class="section" id="enabling-the-notification-command">
-<h2>Enabling the Notification Command<a class="headerlink" href="#enabling-the-notification-command" title="Permalink to this headline">¶</a></h2>
-<p id="enable-notification-command">You can enable the  notification command through the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a> parameter in the configuration file.</p>
+<span id="enable-notification-command"></span><h2>Enabling the Notification Command<a class="headerlink" href="#enabling-the-notification-command" title="Permalink to this headline">¶</a></h2>
+<p>You can enable the  notification command through the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a> parameter in the configuration file.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_notify_cmd</span><span class="o">=</span><span class="s">/path/to/wsrep_notify.sh</span>
 </pre></div>
 </div>
@@ -483,7 +483,7 @@ status_update<span class="o">()</span>
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="monitor.html" accesskey="U">Cluster Monitoring</a> &#187;</li> 
       </ul>
     </div>
@@ -530,7 +530,6 @@ status_update<span class="o">()</span>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -539,6 +538,7 @@ status_update<span class="o">()</span>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

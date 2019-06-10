@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,13 +204,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="cluster-deployment-variants">
+  <div class="library-document section" id="cluster-deployment-variants">
 <h1>Cluster Deployment Variants<a class="headerlink" href="#cluster-deployment-variants" title="Permalink to this headline">¶</a></h1>
 <p id="deployment-variants">A Galera Cluster will consist of multiple nodes, preferably three or more.  Each node is an instance of MySQL, MariaDB or Percona XtraDB that you convert to Galera Cluster, allowing you to use that node as a cluster base.</p>
 <p>Galera Cluster provides synchronous multi-master replication. You can treat the cluster as a single database server that listens through many interfaces.  To appreciate this, consider a typical <em>n</em>-tier application and the various benefits that would come from deploying it with Galera Cluster.</p>
 <div class="section" id="no-clustering">
-<h2>No Clustering<a class="headerlink" href="#no-clustering" title="Permalink to this headline">¶</a></h2>
-<p id="id1">In the typical <em>n</em>-tier application cluster without database clustering, there&#8217;s no concern for database replication or synchronization.</p>
+<span id="id1"></span><h2>No Clustering<a class="headerlink" href="#no-clustering" title="Permalink to this headline">¶</a></h2>
+<p>In the typical <em>n</em>-tier application cluster without database clustering, there&#8217;s no concern for database replication or synchronization.</p>
 <p>Internet traffic will be filtered down to your application servers, all of which read and write from the same <abbr title="Database Management System">DBMS</abbr> server.  Given that the upper tiers usually remain stateless, you can start as many instances as you need to meet the demand from the internet. Each instance stores its data in the data tier.</p>
 <div class="figure" id="id2">
 <img alt="../_images/galerausecases0.png" src="../_images/galerausecases0.png" />
@@ -221,8 +221,8 @@
 <p>Similarly, this deployment also introduces performance concerns.  While you can start as many instances as you need to meet the demands on your web and application servers, they can only so much load on the <abbr title="Database Management System">DBMS</abbr> server can be handled before the load begins to slow end-user activities.</p>
 </div>
 <div class="section" id="whole-stack-clustering">
-<h2>Whole Stack Clustering<a class="headerlink" href="#whole-stack-clustering" title="Permalink to this headline">¶</a></h2>
-<p id="whole-stack-cluster">In the typical <em>n</em>-tier application cluster you can avoid the performance bottleneck by building a whole stack cluster.</p>
+<span id="whole-stack-cluster"></span><h2>Whole Stack Clustering<a class="headerlink" href="#whole-stack-clustering" title="Permalink to this headline">¶</a></h2>
+<p>In the typical <em>n</em>-tier application cluster you can avoid the performance bottleneck by building a whole stack cluster.</p>
 <p>Internet traffic filters down to the application server, which stores data on its own dedicated <abbr title="Database Management System">DBMS</abbr> server.  Galera Cluster then replicates the data through to the cluster, ensuring it remains synchronous.</p>
 <div class="figure" id="id3">
 <img alt="../_images/galerausecases1.png" src="../_images/galerausecases1.png" />
@@ -240,8 +240,8 @@
 <p>Despite the disadvantages, however, this setup can prove very usable for several applications, depending on your needs.</p>
 </div>
 <div class="section" id="data-tier-clustering">
-<h2>Data Tier Clustering<a class="headerlink" href="#data-tier-clustering" title="Permalink to this headline">¶</a></h2>
-<p id="data-tier-cluster">To compensate for the shortcomings in whole stack clusters, you can cluster the data tier separately from your web and application servers.</p>
+<span id="data-tier-cluster"></span><h2>Data Tier Clustering<a class="headerlink" href="#data-tier-clustering" title="Permalink to this headline">¶</a></h2>
+<p>To compensate for the shortcomings in whole stack clusters, you can cluster the data tier separately from your web and application servers.</p>
 <p>With data tier clustering, the <abbr title="Database Management System">DBMS</abbr> servers form a cluster distinct from your <em>n</em>-tier application cluster.  The application servers treat the database cluster as a single virtual server, making calls through load balancers to the data tier.</p>
 <div class="figure" id="id4">
 <img alt="../_images/galerausecases2.png" src="../_images/galerausecases2.png" />
@@ -256,8 +256,8 @@
 <li><strong>Scalability</strong>: This setup doesn&#8217;t scale well over several datacenters.  Attempts to do so may reduce any benefits you gain from resource consolidation, given that each datacenter must include at least two <abbr title="Database Management System">DBMS</abbr> servers.</li>
 </ul>
 <div class="section" id="data-tier-clustering-with-distributed-load-balancing">
-<h3>Data Tier Clustering with Distributed Load Balancing<a class="headerlink" href="#data-tier-clustering-with-distributed-load-balancing" title="Permalink to this headline">¶</a></h3>
-<p id="data-tier-load-balancers">One solution to the limitations of data tier clustering is to deploy them with distributed load balancing.  This method roughly follows the standard data tier cluster method, but includes a dedicated load balancer installed on each application server.</p>
+<span id="data-tier-load-balancers"></span><h3>Data Tier Clustering with Distributed Load Balancing<a class="headerlink" href="#data-tier-clustering-with-distributed-load-balancing" title="Permalink to this headline">¶</a></h3>
+<p>One solution to the limitations of data tier clustering is to deploy them with distributed load balancing.  This method roughly follows the standard data tier cluster method, but includes a dedicated load balancer installed on each application server.</p>
 <div class="figure" id="id5">
 <img alt="../_images/galerausecases3.png" src="../_images/galerausecases3.png" />
 <p class="caption"><span class="caption-text"><em>Data Tier Cluster with Distributed Load Balancing</em></span></p>
@@ -270,8 +270,8 @@
 </div>
 </div>
 <div class="section" id="aggregated-stack-clustering">
-<h2>Aggregated Stack Clustering<a class="headerlink" href="#aggregated-stack-clustering" title="Permalink to this headline">¶</a></h2>
-<p id="aggregated-stack-cluster">Besides the deployment methods already mentioned, you could set up a hybrid method that integrates whole stack and data tier clustering by aggregating several application stacks around single <abbr title="Database Management System">DBMS</abbr> servers.</p>
+<span id="aggregated-stack-cluster"></span><h2>Aggregated Stack Clustering<a class="headerlink" href="#aggregated-stack-clustering" title="Permalink to this headline">¶</a></h2>
+<p>Besides the deployment methods already mentioned, you could set up a hybrid method that integrates whole stack and data tier clustering by aggregating several application stacks around single <abbr title="Database Management System">DBMS</abbr> servers.</p>
 <div class="figure" id="id6">
 <img alt="../_images/galerausecases4.png" src="../_images/galerausecases4.png" />
 <p class="caption"><span class="caption-text"><em>Aggregated Stack Clustering</em></span></p>
@@ -383,7 +383,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="deployment.html" accesskey="U">Deployment</a> &#187;</li> 
       </ul>
     </div>
@@ -430,7 +430,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -439,6 +438,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

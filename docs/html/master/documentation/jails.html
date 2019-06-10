@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,16 +204,16 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="using-jails">
+  <div class="library-document section" id="using-jails">
 <h1>Using Jails<a class="headerlink" href="#using-jails" title="Permalink to this headline">¶</a></h1>
 <p id="jails">In FreeBSD, jails provides a platform for securely deploying applications within virtual instances.  You may find it useful in portable deployments across numerous machines for testing and security.</p>
 <p>Galera Cluster can run from within a jail instance.</p>
 <div class="section" id="preparing-the-server">
-<h2>Preparing the Server<a class="headerlink" href="#preparing-the-server" title="Permalink to this headline">¶</a></h2>
-<p id="jails-prep-serve">Jails exist as isolated file systems within, but unaware of, the host server.  In order to grant the node running within the jail network connectivity with the cluster, you need to configure the network interfaces and firewall to redirect from the host into the jail.</p>
+<span id="jails-prep-serve"></span><h2>Preparing the Server<a class="headerlink" href="#preparing-the-server" title="Permalink to this headline">¶</a></h2>
+<p>Jails exist as isolated file systems within, but unaware of, the host server.  In order to grant the node running within the jail network connectivity with the cluster, you need to configure the network interfaces and firewall to redirect from the host into the jail.</p>
 <div class="section" id="network-configuration">
-<h3>Network Configuration<a class="headerlink" href="#network-configuration" title="Permalink to this headline">¶</a></h3>
-<p id="jail-net-config">To begin, create a second loopback interface for the jail.  this allows you to isolate jail traffic from <code class="docutils literal"><span class="pre">lo0</span></code>, the host loopback interface.</p>
+<span id="jail-net-config"></span><h3>Network Configuration<a class="headerlink" href="#network-configuration" title="Permalink to this headline">¶</a></h3>
+<p>To begin, create a second loopback interface for the jail.  this allows you to isolate jail traffic from <code class="docutils literal"><span class="pre">lo0</span></code>, the host loopback interface.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For the purposes of this guide, the jail loopback is called <code class="docutils literal"><span class="pre">lo1</span></code>, if <code class="docutils literal"><span class="pre">lo1</span></code> already exists on your system, increment the digit to create one that does not already exist, (for instance, <code class="docutils literal"><span class="pre">lo2</span></code>).</p>
@@ -238,8 +238,8 @@
 </div>
 </div>
 <div class="section" id="firewall-configuration">
-<h3>Firewall Configuration<a class="headerlink" href="#firewall-configuration" title="Permalink to this headline">¶</a></h3>
-<p id="jails-pf">FreeBSD provides packet filtering support at the kernel level.  Using PF you can set up, maintain and inspect the packet filtering rule sets.  For jails, you can route traffic from external ports on the host system to internal ports within the jail&#8217;s file system.  This allows the node running within the jail to have network access as though it were running on the host system.</p>
+<span id="jails-pf"></span><h3>Firewall Configuration<a class="headerlink" href="#firewall-configuration" title="Permalink to this headline">¶</a></h3>
+<p>FreeBSD provides packet filtering support at the kernel level.  Using PF you can set up, maintain and inspect the packet filtering rule sets.  For jails, you can route traffic from external ports on the host system to internal ports within the jail&#8217;s file system.  This allows the node running within the jail to have network access as though it were running on the host system.</p>
 <p>To enable PF and create rules for the node, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Using your preferred text editor, make the following additions to <code class="docutils literal"><span class="pre">/etc/rc.conf</span></code>:</p>
@@ -293,15 +293,12 @@
 </li>
 </ol>
 <p>The server now uses PF to manage its firewall.  Network traffic directed at the four ports Galera Cluster uses is routed to the comparable ports within the jail.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on firewall configurations for FreeBSD, see <a class="reference internal" href="firewall-pf.html"><span class="doc">Firewall Configuration with PF</span></a>.</p>
-</div>
+<p>For more information on firewall configurations for FreeBSD, see <a class="reference internal" href="firewall-pf.html"><span class="doc">Firewall Configuration with PF</span></a>.</p>
 </div>
 </div>
 <div class="section" id="creating-the-node-jail">
-<h2>Creating the Node Jail<a class="headerlink" href="#creating-the-node-jail" title="Permalink to this headline">¶</a></h2>
-<p id="jail-creation">While FreeBSD does provide a manual interface for creating and managing jails on your server, (<code class="docutils literal"><span class="pre">jail(8)</span></code>), it can prove cumbersome in the event that you have multiple jails running on a server.</p>
+<span id="jail-creation"></span><h2>Creating the Node Jail<a class="headerlink" href="#creating-the-node-jail" title="Permalink to this headline">¶</a></h2>
+<p>While FreeBSD does provide a manual interface for creating and managing jails on your server, (<code class="docutils literal"><span class="pre">jail(8)</span></code>), it can prove cumbersome in the event that you have multiple jails running on a server.</p>
 <p>The application <code class="docutils literal"><span class="pre">ezjail</span></code> facilitates this process by automating common tasks and using templates and symbolic links to reduce the disk space usage per jail.  It is available for installation through <code class="docutils literal"><span class="pre">pkg</span></code>.  Alternative, you can build it through ports at <code class="docutils literal"><span class="pre">sysutils/ezjail</span></code>.</p>
 <p>To create a node jail with <code class="docutils literal"><span class="pre">ezjail</span></code>, complete the following steps:</p>
 <ol class="arabic">
@@ -358,8 +355,8 @@
 <p>When you enter the jail file system, note that the hostname changes to indicate the transition.</p>
 </div>
 <div class="section" id="installing-galera-cluster">
-<h2>Installing Galera Cluster<a class="headerlink" href="#installing-galera-cluster" title="Permalink to this headline">¶</a></h2>
-<p id="jails-galera-install">Regardless of whether you are on the host system or working from within a jail, currently, there is no binary package or port available to fully install Galera Cluster on FreeBSD.  You must build the database server from source code.</p>
+<span id="jails-galera-install"></span><h2>Installing Galera Cluster<a class="headerlink" href="#installing-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<p>Regardless of whether you are on the host system or working from within a jail, currently, there is no binary package or port available to fully install Galera Cluster on FreeBSD.  You must build the database server from source code.</p>
 <p>The specific build process that you need to follow depends on the database server that you want to use:</p>
 <ul class="simple">
 <li><a class="reference internal" href="install-mysql-src.html"><span class="doc">Galera Cluster for MySQL</span></a></li>
@@ -371,8 +368,8 @@
 </div>
 <p>This install the wsrep Provider file in <code class="docutils literal"><span class="pre">/usr/local/lib</span></code>.  Use this path in the configuration file for the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a> parameter.</p>
 <div class="section" id="configuration-file">
-<h3>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h3>
-<p id="jails-node-config">For the most part, the configuration file for a node running in a jail is the same as when the node runs on a standard FreeBSD server.  But, there are some parameters that draw their defaults from the base system.  These you need to set manually, as the jail is unable to access the host file system.</p>
+<span id="jails-node-config"></span><h3>Configuration File<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h3>
+<p>For the most part, the configuration file for a node running in a jail is the same as when the node runs on a standard FreeBSD server.  But, there are some parameters that draw their defaults from the base system.  These you need to set manually, as the jail is unable to access the host file system.</p>
 <ul class="simple">
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a> The node determines the default address from the IP address on the first network interface.  Jails cannot see the network interfaces on the host system.  You need to set this parameter to ensure that the cluster is given the correct IP address for the node.</li>
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> The node determines the default name from the system hostname.  Jails have their own hostnames, distinct from that of the host system.</li>
@@ -401,8 +398,8 @@
 </div>
 </div>
 <div class="section" id="starting-the-cluster">
-<h2>Starting the Cluster<a class="headerlink" href="#starting-the-cluster" title="Permalink to this headline">¶</a></h2>
-<p id="jails-galera-start">When running the cluster from within jails, you create and manage the cluster in the same manner as you would in the standard deployment of Galera Cluster on FreeBSD.  The exception being that you must obtain console access to the node jail first.</p>
+<span id="jails-galera-start"></span><h2>Starting the Cluster<a class="headerlink" href="#starting-the-cluster" title="Permalink to this headline">¶</a></h2>
+<p>When running the cluster from within jails, you create and manage the cluster in the same manner as you would in the standard deployment of Galera Cluster on FreeBSD.  The exception being that you must obtain console access to the node jail first.</p>
 <p>To start the initial cluster node, run the following commands:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin console galera-node
 <span class="gp">#</span> service mysql start --wsrep-new-cluster
@@ -523,7 +520,7 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="deployment.html" >Deployment</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="containers.html" accesskey="U">Container Deployments</a> &#187;</li> 
       </ul>
@@ -571,7 +568,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -580,6 +576,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,7 +204,7 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="galera-system-tables">
+  <div class="library-document section" id="galera-system-tables">
 <h1>Galera System Tables<a class="headerlink" href="#galera-system-tables" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="system-tables"></span><p id="index-0">Starting with version 4 of Galera, three system tables related to Galera replication were added to the <code class="docutils literal"><span class="pre">mysql</span></code> database: <code class="docutils literal"><span class="pre">wsrep_cluster</span></code>, <code class="docutils literal"><span class="pre">wsrep_cluster_members</span></code>, and <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code>.  These system tables may be used by database administrators to get a sense of the current layout of the nodes in a cluster.</p>
 <p>To see these tables on your server, execute the following SQL statement one of them using the <code class="docutils literal"><span class="pre">mysql</span></code> client or a similar client:</p>
@@ -221,7 +221,7 @@
 </div>
 <p>Database administrators and clients with the access to the <code class="docutils literal"><span class="pre">mysql</span></code> database may read these tables, but they may not modify them: the database itself will make modifications, as needed. If your server doesn&#8217;t have these tables, it may be that your server is using an older version of Galera.</p>
 <div class="section" id="cluster-view">
-<h2>Cluster View<a class="headerlink" href="#cluster-view" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Cluster View<a class="headerlink" href="#cluster-view" title="Permalink to this headline">¶</a></h2>
 <p>One of the new Galera related system tables is the <code class="docutils literal"><span class="pre">wsrep_cluster</span></code> table. This new table, starting in version 4 of Galera, contains a current view of the cluster. That is to say, it stores the UUID of the cluster and some other identification information, as well as the cluster&#8217;s capabilities.</p>
 <p>To see the names of the columns in this table, either use the <code class="docutils literal"><span class="pre">DESCRIBE</span></code> statement or execute the following SQL statement from the <code class="docutils literal"><span class="pre">mysql</span></code> client on one of the nodes in the cluster:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT COLUMN_NAME FROM information_schema.columns</span>
@@ -255,7 +255,7 @@
 <p>In the results here, you can see the cluster UUID. This can also be found by using the SQL statement, <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> for the variable, <code class="docutils literal"><span class="pre">wsrep_local_state_uuid</span></code>.</p>
 </div>
 <div class="section" id="cluster-members">
-<h2>Cluster Members<a class="headerlink" href="#cluster-members" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Cluster Members<a class="headerlink" href="#cluster-members" title="Permalink to this headline">¶</a></h2>
 <p>Another Galera related system tables is the <code class="docutils literal"><span class="pre">wsrep_cluster_members</span></code> table. This system table will provide the current membership of the cluster; it will contain a row for each node in the cluster.  That is to say, each node in the cluster known to the node upon which the table is queried.</p>
 <p>To see the names of columns in this table, either use the <code class="docutils literal"><span class="pre">DESCRIBE</span></code> statement or execute the following SQL statement from the <code class="docutils literal"><span class="pre">mysql</span></code> client on one of the nodes in the cluster:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT COLUMN_NAME FROM information_schema.columns</span>
@@ -296,7 +296,7 @@
 <p>In the results of this example you can see that this cluster is composed of three nodes.  The node UUIDs are unique for each node. Notice that the cluster UUID is the same for all three and corresponds to the related value found in the <code class="docutils literal"><span class="pre">wsrep_cluster</span></code> table shown in the example earlier. Each node has a unique name (e.g., galera1). They were named in the configuration file using the <code class="docutils literal"><span class="pre">wsrep_node_name</span></code> parameter.  The incoming node address is set to <code class="docutils literal"><span class="pre">AUTO</span></code> for all of these nodes, but they can be set individual to specific nodes with the <code class="docutils literal"><span class="pre">wsrep-node-address</span></code> or the <code class="docutils literal"><span class="pre">bind-address</span></code> parameter in each node&#8217;s configuration file.</p>
 </div>
 <div class="section" id="cluster-streaming-log">
-<h2>Cluster Streaming Log<a class="headerlink" href="#cluster-streaming-log" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h2>Cluster Streaming Log<a class="headerlink" href="#cluster-streaming-log" title="Permalink to this headline">¶</a></h2>
 <p>The last Galera related system tables is the <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code> table. This system table contains meta data and row events for ongoing streaming transactions, write set fragment per row.</p>
 <p>The <code class="docutils literal"><span class="pre">node_uuid</span></code> column contains the node UUID of the hosting node for the transaction (i.e. node where the client is executing the transaction). The <code class="docutils literal"><span class="pre">trx_id</span></code> column stores the transaction identifier, whereas the <code class="docutils literal"><span class="pre">seqno</span></code> stores the sequence number of the write set fragment. Last, the <code class="docutils literal"><span class="pre">flags</span></code> columns records flags associated with the write set fragment, and <code class="docutils literal"><span class="pre">frag</span></code> contains the binary log replication events contained in the write set fragment.</p>
 <p>To see the names of columns in this table, either use the <code class="docutils literal"><span class="pre">DESCRIBE</span></code> statement or execute the following SQL statement from the <code class="docutils literal"><span class="pre">mysql</span></code> client on one of the nodes in the cluster:</p>
@@ -440,8 +440,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Administration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="administration.html" accesskey="U">Galera Cluster Administration</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -487,7 +487,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -496,6 +495,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>

@@ -31,7 +31,7 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Knowledge Base" href="../kb/index.html" />
+    <link rel="next" title="The Codership Knowledge Base" href="../kb/index.html" />
     <link rel="prev" title="Legal Notice" href="legal-notice.html" />
 
 
@@ -160,7 +160,6 @@
 		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 		<ul class="sub-menu">
 		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 		</ul>
 		</li>
@@ -169,6 +168,7 @@
 		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 		</ul>
 		</li>
 		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
@@ -204,23 +204,20 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="glossary">
+  <div class="library-document section" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
 <dl class="glossary docutils">
 <dt id="term-galera-arbitrator">Galera Arbitrator</dt>
 <dd><p class="first">An external process that functions as an additional node in certain cluster operations, such as quorum calculations and generating consistent application state snapshots.</p>
 <p>For example, consider a situation where your cluster becomes partitioned due to a loss of network connectivity that results in two components of equal size.  Each component initiates quorum calculations to determine which should remain the <a class="reference internal" href="#term-primary-component"><span class="xref std std-term">Primary Component</span></a> and which should become a non-operational component.  If the components are of equal size, it risks a split-brain condition.  Galera Arbitrator provides an addition vote in the quorum calculation, so that one component registers as larger than the other.  The larger component then remains the Primary Component.</p>
 <p>Unlike the main <code class="docutils literal"><span class="pre">mysqld</span></code> process, <code class="docutils literal"><span class="pre">garbd</span></code> doesn&#8217;t generate replication events of its own and doesn&#8217;t store replication data. It does, however, acknowledge all replication events.  Furthermore, you can route replication through Galera Arbitrator, such as when generating a consistent application state snapshot for backups.</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last">For more information, see <a class="reference internal" href="arbitrator.html"><span class="doc">Galera Arbitrator</span></a> and <a class="reference internal" href="backup-cluster.html"><span class="doc">Backing Up Cluster Data</span></a>.</p>
-</div>
 </dd>
 <dt id="term-galera-replication-plugin">Galera Replication Plugin</dt>
 <dd><p class="first">Galera Replication Plugin is a general purpose replication plugin for any transactional system. It can be used to create a synchronous multi-master replication solution to achieve high availability and scale-out.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">See <a class="reference internal" href="architecture.html#id3"><span class="std std-ref">Galera Replication Plugin</span></a> for more details.</p>
+<p class="last">See <a class="reference internal" href="architecture.html#galera-replication-plugin"><span class="std std-ref">Galera Replication Plugin</span></a> for more details.</p>
 </div>
 </dd>
 <dt id="term-gcache">GCache</dt>
@@ -228,47 +225,29 @@
 <dt id="term-global-transaction-id">Global Transaction ID</dt>
 <dd><p class="first">To keep the state identical on all nodes, the <a class="reference internal" href="#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> uses global transaction IDs (GTID), which are used to identify the state change and to identify the state itself by the ID of the last state change</p>
 <p>The GTID consists of a state UUID, which uniquely identifies the state and the sequence of changes it undergoes, and an ordinal sequence number (seqno, a 64-bit signed integer) to denote the position of the change in the sequence.</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on Global Transaction ID&#8217;s, see <a class="reference internal" href="architecture.html#id2"><span class="std std-ref">wsrep API</span></a>.</p>
-</div>
+<p class="last">For more information on Global Transaction ID&#8217;s, see <a class="reference internal" href="architecture.html#wsrep-api"><span class="std std-ref">wsrep API</span></a>.</p>
 </dd>
 <dt id="term-incremental-state-transfer">Incremental State Transfer</dt>
 <dd><p class="first">In an Incremental State Transfer (IST) a node only receives the missing write-sets and catches up with the group by replaying them. See also the definition for State Snapshot Transfer (SST).</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information on IST&#8217;s, see <a class="reference internal" href="state-transfer.html#ist"><span class="std std-ref">Incremental State Transfer (IST)</span></a>.</p>
-</div>
+<p class="last">For more information on IST&#8217;s, see <span class="xref std std-ref">Incremental State Transfer (IST)</span>.</p>
 </dd>
 <dt id="term-ist">IST</dt>
 <dd>See <a class="reference internal" href="#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</dd>
 <dt id="term-logical-state-transfer-method">Logical State Transfer Method</dt>
 <dd><p class="first">This is a type of back-end state transfer method that operates through the database server (e.g., <code class="docutils literal"><span class="pre">mysqldump</span></code>).</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last">For more information, see <a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical State Snapshot</span></a>.</p>
-</div>
 </dd>
 <dt id="term-physical-state-transfer-method">Physical State Transfer Method</dt>
 <dd><p class="first">This is another type of back-end state transfer method, but it operates on the physical media in the datadir (e.g., <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code>).</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last">For more information, see <a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical State Snapshot</span></a>.</p>
-</div>
 </dd>
 <dt id="term-primary-component">Primary Component</dt>
 <dd><p class="first">In addition to single-node failures, the cluster may be split into several components due to network failure. In such a situation, only one of the components can continue to modify the database state to avoid history divergence. This component is called the Primary Component (PC).</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last">For more information on the Primary Component, see <a class="reference internal" href="weighted-quorum.html"><span class="doc">Weighted Quorum</span></a>.</p>
-</div>
 </dd>
 <dt id="term-rolling-schema-upgrade">Rolling Schema Upgrade</dt>
 <dd><p class="first">The rolling schema upgrade is a <abbr title="Data Definition Language">DDL</abbr> processing method in which the <abbr title="Data Definition Language">DDL</abbr> will only be processed locally on the node. The node is desynchronized from the cluster for the duration of the <abbr title="Data Definition Language">DDL</abbr> processing in a way that it doesn&#8217;t block the other nodes.  When the <abbr title="Data Definition Language">DDL</abbr> processing is complete, the node applies the delayed replication events and synchronizes with the cluster.</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last">For more information, see <a class="reference internal" href="schema-upgrades.html#rsu"><span class="std std-ref">Rolling Schema Upgrade</span></a>.</p>
-</div>
 </dd>
 <dt id="term-rsu">RSU</dt>
 <dd>See <a class="reference internal" href="#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a>.</dd>
@@ -280,45 +259,30 @@
 <dd>See <a class="reference internal" href="#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</dd>
 <dt id="term-state-snapshot-transfer">State Snapshot Transfer</dt>
 <dd><p class="first">State Snapshot Transfer refers to a full data copy from one cluster node (i.e., a donor) to the joining node (i.e., a joiner). See also the definition for Incremental State Transfer (IST).</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information, see <a class="reference internal" href="state-transfer.html#sst"><span class="std std-ref">State Snapshot Transfer (SST)</span></a>.</p>
-</div>
+<p class="last">For more information, see <a class="reference internal" href="sst.html#sst"><span class="std std-ref">State Snapshot Transfer (SST)</span></a>.</p>
 </dd>
 <dt id="term-state-uuid">State UUID</dt>
 <dd>Unique identifier for the state of a node and the sequence of changes it undergoes.  It&#8217;s the first component of the <a class="reference internal" href="#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>.</dd>
 <dt id="term-streaming-replication">Streaming Replication</dt>
 <dd><p class="first">This provides an alternative replication method for handling large or long-running write transactions.  It&#8217;s a new feature in version 4.0 of Galera Cluster.  In older versions, the feature is unsupported.</p>
 <p>Under normal operation, the node performs all replication and certification operations when the transaction commits. With large transactions this can result in conflicts if smaller transactions are committed first.  With Streaming Replication, the node breaks the transaction into fragments, then certifies and replicates them to all nodes while the transaction is still in progress.  Once certified, a fragment can no longer be aborted by a conflicting transaction.</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last">For more information see <a class="reference internal" href="streaming-replication.html"><span class="doc">Streaming Replication</span></a> and <a class="reference internal" href="using-sr.html"><span class="doc">Using Streaming Replication</span></a>.</p>
-</div>
 </dd>
 <dt id="term-toi">TOI</dt>
 <dd>See <a class="reference internal" href="#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a>.</dd>
 <dt id="term-total-order-isolation">Total Order Isolation</dt>
 <dd><p class="first">By default, <abbr title="Data Definition Language">DDL</abbr> statements are processed by using the Total Order Isolation (TOI) method. In TOI, the query is replicated to the nodes in a statement form before executing on the master. The query waits for all preceding transactions to commit and then gets executed in isolation on all nodes, simultaneously.</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last">For more information, see <a class="reference internal" href="schema-upgrades.html#toi"><span class="std std-ref">Total Order Isolation</span></a>.</p>
-</div>
 </dd>
 <dt id="term-write-set">write-set</dt>
 <dd>Transaction commits the node sends to and receives from the cluster.</dd>
 <dt id="term-write-set-cache">Write-set Cache</dt>
 <dd><p class="first">Galera stores write-sets in a special cache called, Write-set Cache (GCache). GCache is a memory allocator for write-sets. Its primary purpose is to minimize the write set footprint on the RAM.</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information, see <a class="reference internal" href="state-transfer.html#gcache"><span class="std std-ref">Write-set Cache (GCache)</span></a>.</p>
-</div>
+<p class="last">For more information, see <span class="xref std std-ref">Write-set Cache (GCache)</span>.</p>
 </dd>
 <dt id="term-wsrep-api">wsrep API</dt>
 <dd><p class="first">The wsrep API is a generic replication plugin interface for databases.  The API defines a set of application callbacks and replication plugin calls.</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For more information, see <a class="reference internal" href="architecture.html#id2"><span class="std std-ref">wsrep API</span></a>.</p>
-</div>
+<p class="last">For more information, see <a class="reference internal" href="architecture.html#wsrep-api"><span class="std std-ref">wsrep API</span></a>.</p>
 </dd>
 </dl>
 </div>
@@ -340,7 +304,7 @@
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="../kb/index.html"
-                          title="Next page">&rarr; Knowledge Base</a></p>
+                          title="Next page">&rarr; The Codership Knowledge Base</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -403,14 +367,14 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../kb/index.html" title="Knowledge Base"
+          <a href="../kb/index.html" title="The Codership Knowledge Base"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
           <a href="legal-notice.html" title="Legal Notice"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >Galera Cluster Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="reference.html" accesskey="U">Reference</a> &#187;</li> 
       </ul>
     </div>
@@ -422,7 +386,7 @@
 			
 
 			
-				<li><a href="../kb/index.html" title="Knowledge Base">Next &gt;</a></li>
+				<li><a href="../kb/index.html" title="The Codership Knowledge Base">Next &gt;</a></li>
 			
 
 		</ul>
@@ -457,7 +421,6 @@
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="http://galeracluster.com/downloads/">Downloads</a>
 	<ul class="sub-menu">
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="http://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="http://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
 	</ul>
 	</li>
@@ -466,6 +429,7 @@
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="http://galeracluster.com/support/#support-partners">Support Partners</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="http://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
 		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="http://galeracluster.com/support/#consulting">Consulting</a></li>
+		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="http://galeracluster.com/library/">Library (Documentation)</a></li>
 	</ul>
 	</li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="http://galeracluster.com/community/">Community</a>
