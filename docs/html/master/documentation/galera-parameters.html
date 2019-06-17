@@ -206,432 +206,649 @@
             
   <div class="library-document section" id="galera-parameters">
 <h1>Galera Parameters<a class="headerlink" href="#galera-parameters" title="Permalink to this headline">¶</a></h1>
-<p id="id1">As of version 0.8, Galera Cluster accepts parameters as semicolon-separated key value pair lists, such as <code class="docutils literal"><span class="pre">key1</span> <span class="pre">=</span> <span class="pre">value1;</span> <span class="pre">key2</span> <span class="pre">=</span> <span class="pre">value2</span></code>.  In this way, you can configure an arbitrary number of Galera Cluster parameters in one call. A key consists of parameter group and parameter name:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">group</span><span class="o">&gt;.&lt;</span><span class="n">name</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<p>Where <code class="docutils literal"><span class="pre">&lt;group&gt;</span></code> roughly corresponds to some Galera module.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">All <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code> settings need to be specified on a single line. In case of multiple instances of <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code>, only the last one is used.</p>
-</div>
-<p>Table legend:</p>
+<p id="id1">As of version 0.8, Galera Cluster accepts parameters as semicolon-separated key value pair lists, such as <code class="docutils literal"><span class="pre">key1</span> <span class="pre">=</span> <span class="pre">value1;</span> <span class="pre">key2</span> <span class="pre">=</span> <span class="pre">value2</span></code>.  In this way, you can configure an arbitrary number of Galera Cluster parameters in one call. A key consists of parameter group and parameter name: <code class="docutils literal"><span class="pre">&lt;group&gt;.&lt;name&gt;</span></code>, where <code class="docutils literal"><span class="pre">&lt;group&gt;</span></code> corresponds roughly to some Galera module.</p>
+<p>All <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code> settings need to be specified on a single line. In case of multiple instances of <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code>, only the last one is used.</p>
+<p>Below is a list of all of the Galera parameters.  Each is also a link to further down the page where you may find more information.  There are a few things to know about this table:</p>
 <ul class="simple">
-<li><strong>Numeric values</strong> Galera Cluster understands the following numeric modifiers:
-<code class="docutils literal"><span class="pre">K</span></code>, <code class="docutils literal"><span class="pre">M</span></code>, <code class="docutils literal"><span class="pre">G</span></code>, <code class="docutils literal"><span class="pre">T</span></code> standing for 2<sup>10</sup>, 2<sup>20</sup>, 2<sup>30</sup> and 2<sup>40</sup> respectively.</li>
-<li><strong>Boolean values</strong> Galera Cluster accepts the following boolean values: <code class="docutils literal"><span class="pre">0</span></code>, <code class="docutils literal"><span class="pre">1</span></code>, <code class="docutils literal"><span class="pre">YES</span></code>, <code class="docutils literal"><span class="pre">NO</span></code>, <code class="docutils literal"><span class="pre">TRUE</span></code>, <code class="docutils literal"><span class="pre">FALSE</span></code>, <code class="docutils literal"><span class="pre">ON</span></code>, <code class="docutils literal"><span class="pre">OFF</span></code>.</li>
-<li>Time periods must be expressed in the ISO8601 format. See also the examples below.</li>
-<li><strong>T</strong> indicates parameters that are strictly for use in troubleshooting problems.  You should not implement these in production environments.</li>
+<li>For numeric values related to memory size, Galera Cluster accepts the numeric modifiers, <code class="docutils literal"><span class="pre">K</span></code>, <code class="docutils literal"><span class="pre">M</span></code>, <code class="docutils literal"><span class="pre">G</span></code>, and <code class="docutils literal"><span class="pre">T</span></code> to represent 2<sup>10</sup>, 2<sup>20</sup>, 2<sup>30</sup> and 2<sup>40</sup>, respectively.</li>
+<li>Galera Cluster accepts the following boolean values: <code class="docutils literal"><span class="pre">0</span></code>, <code class="docutils literal"><span class="pre">1</span></code>, <code class="docutils literal"><span class="pre">YES</span></code>, <code class="docutils literal"><span class="pre">NO</span></code>, <code class="docutils literal"><span class="pre">TRUE</span></code>, <code class="docutils literal"><span class="pre">FALSE</span></code>, <code class="docutils literal"><span class="pre">ON</span></code>, <code class="docutils literal"><span class="pre">OFF</span></code>.</li>
+<li>Time periods must be expressed in the ISO8601 format. See some of the examples below.</li>
+<li>The parameters that are noted as for debugging only are strictly for use in troubleshooting problems. You should not implement these in production environments.</li>
 </ul>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="27%" />
-<col width="14%" />
-<col width="12%" />
+<col width="30%" />
+<col width="40%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameter</th>
-<th class="head">Default</th>
-<th class="head">Support</th>
-<th class="head">Dynamic</th>
+<tr class="row-odd"><th class="head"><br /> Parameter</th>
+<th class="head"><br /> Default</th>
+<th class="head"><br /> Dynamic</th>
+<th class="head">Debug <br /> Only</th>
+<th class="head">Initial <br /> Version</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><a class="reference internal" href="#base-host"><span class="std std-ref">base_host</span></a></td>
-<td>detected network
-address</td>
-<td>1+</td>
+<td>detected network address</td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#base-port"><span class="std std-ref">base_port</span></a></td>
 <td><code class="docutils literal"><span class="pre">4567</span></code></td>
-<td>1+</td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#cert-log-conflicts"><span class="std std-ref">cert.log_conflicts</span></a></td>
 <td><code class="docutils literal"><span class="pre">NO</span></code></td>
-<td>2+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#cert-optimistic-pa"><span class="std std-ref">cert.optimistic_pa</span></a></td>
 <td><code class="docutils literal"><span class="pre">YES</span></code></td>
-<td>3.25+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.25</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#debug"><span class="std std-ref">debug</span></a></td>
 <td><code class="docutils literal"><span class="pre">NO</span></code></td>
-<td>2+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-auto-evict"><span class="std std-ref">evs.auto_evict</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>3.8+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.8</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-causal-keepalive-period"><span class="std std-ref">evs.causal_keepalive_period</span></a></td>
+<td><code class="docutils literal"><span class="pre">0</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td>1.0</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#evs-consensus-timeout"><span class="std std-ref">evs.consensus_timeout</span></a> <sup>T</sup></td>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-consensus-timeout"><span class="std std-ref">evs.consensus_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT30S</span></code></td>
-<td>1 - 2</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0, 2.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-debug-log-mask"><span class="std std-ref">evs.debug_log_mask</span></a></td>
 <td><code class="docutils literal"><span class="pre">0x1</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-delayed-keep-period"><span class="std std-ref">evs.delayed_keep_period</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT30S</span></code></td>
-<td>3.8+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.8</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-delayed-margin"><span class="std std-ref">evs.delayed_margin</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT1S</span></code></td>
-<td>3.8+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.8</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-evict"><span class="std std-ref">evs.evict</span></a></td>
 <td>&nbsp;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
 <td>3.8</td>
-<td>No</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-inactive-check-period"><span class="std std-ref">evs.inactive_check_period</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT1S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT15S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-info-log-mask"><span class="std std-ref">evs.info_log_mask</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT15S</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-join-retrans-period"><span class="std std-ref">evs.join_retrans_period</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT1S</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-keepalive-period"><span class="std std-ref">evs.keepalive_period</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT1S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-max-install-timeouts"><span class="std std-ref">evs.max_install_timeouts</span></a></td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-send-window"><span class="std std-ref">evs.send_window</span></a></td>
 <td><code class="docutils literal"><span class="pre">4</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-stats-report-period"><span class="std std-ref">evs.stats_report_period</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT1M</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT5S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-use-aggregate"><span class="std std-ref">evs.use_aggregate</span></a></td>
 <td><code class="docutils literal"><span class="pre">TRUE</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-user-send-window"><span class="std std-ref">evs.user_send_window</span></a></td>
 <td><code class="docutils literal"><span class="pre">2</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-view-forget-timeout"><span class="std std-ref">evs.view_forget_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT5M</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#evs-version"><span class="std std-ref">evs.version</span></a> <sup>T</sup></td>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-version"><span class="std std-ref">evs.version</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcache-dir"><span class="std std-ref">gcache.dir</span></a></td>
 <td>working directory</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
 <td>1.0</td>
-<td>No</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcache-name"><span class="std std-ref">gcache.name</span></a></td>
 <td><code class="docutils literal"><span class="pre">galera.cache</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcache-keep-pages-size"><span class="std std-ref">gcache.keep_pages_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcache-page-size"><span class="std std-ref">gcache.page_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">128Mb</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcache-recover"><span class="std std-ref">gcache.recover</span></a></td>
 <td><code class="docutils literal"><span class="pre">no</span></code></td>
-<td>3.19+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.19</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcache-size"><span class="std std-ref">gcache.size</span></a></td>
 <td><code class="docutils literal"><span class="pre">128Mb</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcomm-thread-prio"><span class="std std-ref">gcomm.thread_prio</span></a></td>
 <td>&nbsp;</td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcs-fc-debug"><span class="std std-ref">gcs.fc_debug</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcs-fc-factor"><span class="std std-ref">gcs.fc_factor</span></a></td>
 <td><code class="docutils literal"><span class="pre">1.0</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcs-fc-limit"><span class="std std-ref">gcs.fc_limit</span></a></td>
 <td><code class="docutils literal"><span class="pre">16</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcs-fc-master-slave"><span class="std std-ref">gcs.fc_master_slave</span></a></td>
 <td><code class="docutils literal"><span class="pre">NO</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcs-max-packet-size"><span class="std std-ref">gcs.max_packet_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">32616</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcs-max-throttle"><span class="std std-ref">gcs.max_throttle</span></a></td>
 <td><code class="docutils literal"><span class="pre">0.25</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a></td>
 <td><code class="docutils literal"><span class="pre">LLONG_MAX</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a></td>
 <td><code class="docutils literal"><span class="pre">0.25</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcs-sync-donor"><span class="std std-ref">gcs.sync_donor</span></a></td>
 <td><code class="docutils literal"><span class="pre">NO</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gmcast-listen-addr"><span class="std std-ref">gmcast.listen_addr</span></a></td>
 <td><code class="docutils literal"><span class="pre">tcp://0.0.0.0:4567</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gmcast-mcast-addr"><span class="std std-ref">gmcast.mcast_addr</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gmcast-mcast-ttl"><span class="std std-ref">gmcast.mcast_ttl</span></a></td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gmcast-peer-timeout"><span class="std std-ref">gmcast.peer_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT3S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gmcast-time-wait"><span class="std std-ref">gmcast.time_wait</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT5S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#gmcast-version"><span class="std std-ref">gmcast.version</span></a> <sup>T</sup></td>
+<tr class="row-even"><td><a class="reference internal" href="#gmcast-version"><span class="std std-ref">gmcast.version</span></a></td>
 <td>n/a</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ist-recv-addr"><span class="std std-ref">ist.recv_addr</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#ist-recv-bind"><span class="std std-ref">ist.recv_bind</span></a></td>
 <td>&nbsp;</td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-recovery"><span class="std std-ref">pc.recovery</span></a></td>
 <td><code class="docutils literal"><span class="pre">TRUE</span></code></td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a></td>
 <td>n/a</td>
-<td>2+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-announce-timeout"><span class="std std-ref">pc.announce_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT3S</span></code></td>
-<td>2+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pc-checksum"><span class="std std-ref">pc.checksum</span></a></td>
 <td><code class="docutils literal"><span class="pre">FALSE</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a></td>
 <td><code class="docutils literal"><span class="pre">FALSE</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pc-ignore-quorum"><span class="std std-ref">pc.ignore_quorum</span></a></td>
 <td><code class="docutils literal"><span class="pre">FALSE</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-linger"><span class="std std-ref">pc.linger</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT2S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pc-npvo"><span class="std std-ref">pc.npvo</span></a></td>
 <td><code class="docutils literal"><span class="pre">FALSE</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-wait-prim"><span class="std std-ref">pc.wait_prim</span></a></td>
 <td><code class="docutils literal"><span class="pre">TRUE</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pc-wait-prim-timeout"><span class="std std-ref">pc.wait_prim_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT30S</span></code></td>
-<td>2+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-weight"><span class="std std-ref">pc.weight</span></a></td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>2.4+</td>
-<td>Yes</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#pc-version"><span class="std std-ref">pc.version</span></a> <sup>T</sup></td>
-<td>n/a</td>
-<td>1+</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
 <td>&nbsp;</td>
+<td>2.4</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pc-version"><span class="std std-ref">pc.version</span></a></td>
+<td>n/a</td>
+<td>No</td>
+<td>Yes</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#protonet-backend"><span class="std std-ref">protonet.backend</span></a></td>
 <td><code class="docutils literal"><span class="pre">asio</span></code></td>
-<td>1+</td>
-<td>No</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#protonet-version"><span class="std std-ref">protonet.version</span></a> <sup>T</sup></td>
-<td>n/a</td>
-<td>1+</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
 <td>&nbsp;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#protonet-version"><span class="std std-ref">protonet.version</span></a></td>
+<td>n/a</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#repl-commit-order"><span class="std std-ref">repl.commit_order</span></a></td>
 <td><code class="docutils literal"><span class="pre">3</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#repl-causal-read-timeout"><span class="std std-ref">repl.causal_read_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT30S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#repl-key-format"><span class="std std-ref">repl.key_format</span></a></td>
 <td><code class="docutils literal"><span class="pre">FLAT8</span></code></td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#repl-max-ws-size"><span class="std std-ref">repl.max_ws_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">2147483647</span></code></td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#repl-proto-max"><span class="std std-ref">repl.proto_max</span></a></td>
 <td><code class="docutils literal"><span class="pre">5</span></code></td>
-<td>2+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#socket-recv-buf-size"><span class="std std-ref">socket.recv_buf_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">212992</span></code></td>
-<td>3.17+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.17</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-ca"><span class="std std-ref">socket.ssl_ca</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#socket-ssl-cert"><span class="std std-ref">socket.ssl_cert</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#socket-checksum"><span class="std std-ref">socket.checksum</span></a></td>
-<td><p class="first"><code class="docutils literal"><span class="pre">1</span></code> (for version 2)</p>
-<p class="last"><code class="docutils literal"><span class="pre">2</span></code> (for version 3+)</p>
+<td><code class="docutils literal"><span class="pre">1</span></code> (vs. 2); <code class="docutils literal"><span class="pre">2</span></code> (vs. 3)</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
 </td>
-<td>2+</td>
-<td>No</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a></td>
-<td><code class="docutils literal"><span class="pre">AES128-SHA</span></code> before
-version 3.24, system
-default after</td>
-<td>1+</td>
-<td>No</td>
+<td><code class="docutils literal"><span class="pre">AES128-SHA</span></code> (vs. 1); <br /> system default (vs. 3.24)</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-compression"><span class="std std-ref">socket.ssl_compression</span></a></td>
 <td><code class="docutils literal"><span class="pre">YES</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-password-file"><span class="std std-ref">socket.ssl_password_file</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 </tbody>
 </table>
@@ -649,14 +866,14 @@ default after</td>
 <tr class="row-even"><td>Dynamic</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Do not manually set this variable.</p>
+<p class="last">Since this is for internal use only, don&#8217;t manually set the <code class="docutils literal"><span class="pre">base_host</span></code> variable.</p>
 </div>
 <p class="rubric" id="base-port"><code class="docutils literal"><span class="pre">base_port</span></code></p>
 <p id="index-1">Global variable for internal use.</p>
@@ -672,14 +889,14 @@ default after</td>
 <tr class="row-even"><td>Dynamic</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Do not manually set this variable.</p>
+<p class="last">Since this is for internal use only, don&#8217;t manually set the <code class="docutils literal"><span class="pre">base_port</span></code> variable.</p>
 </div>
 <p class="rubric" id="cert-log-conflicts"><code class="docutils literal"><span class="pre">cert.log_conflicts</span></code></p>
 <p id="index-2">Log details of certification failures.</p>
@@ -695,7 +912,7 @@ default after</td>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -722,7 +939,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.25</td>
 </tr>
 </tbody>
@@ -744,7 +961,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -766,7 +983,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -793,7 +1010,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -812,7 +1029,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 <tr class="row-even"><td>Deprecated</td>
@@ -843,7 +1060,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -866,7 +1083,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -892,7 +1109,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -918,7 +1135,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -938,7 +1155,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -963,7 +1180,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -989,7 +1206,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1019,7 +1236,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1047,7 +1264,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1070,7 +1287,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1094,7 +1311,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1118,7 +1335,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1143,7 +1360,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1166,7 +1383,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1190,7 +1407,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1213,7 +1430,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1239,7 +1456,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1263,7 +1480,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1288,7 +1505,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1313,7 +1530,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1336,7 +1553,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1361,7 +1578,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1384,7 +1601,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.19</td>
 </tr>
 </tbody>
@@ -1407,7 +1624,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1433,7 +1650,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -1463,7 +1680,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1486,7 +1703,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1509,7 +1726,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1532,7 +1749,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1555,7 +1772,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1578,7 +1795,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1601,7 +1818,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1624,7 +1841,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1649,7 +1866,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1673,7 +1890,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1696,7 +1913,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1721,7 +1938,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1744,7 +1961,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1767,7 +1984,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -1790,7 +2007,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1813,7 +2030,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1833,7 +2050,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -1856,7 +2073,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.16</td>
 </tr>
 </tbody>
@@ -1880,7 +2097,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -1912,7 +2129,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -1935,7 +2152,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -1958,7 +2175,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1981,7 +2198,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2004,7 +2221,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2027,7 +2244,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2050,7 +2267,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2073,7 +2290,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2096,7 +2313,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -2119,7 +2336,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.4</td>
 </tr>
 </tbody>
@@ -2142,7 +2359,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2162,7 +2379,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2185,7 +2402,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2205,7 +2422,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2235,7 +2452,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2258,7 +2475,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -2288,7 +2505,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -2311,7 +2528,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -2334,7 +2551,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.17</td>
 </tr>
 </tbody>
@@ -2357,7 +2574,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2382,7 +2599,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2407,7 +2624,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -2436,7 +2653,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2459,7 +2676,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2482,7 +2699,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2507,7 +2724,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>

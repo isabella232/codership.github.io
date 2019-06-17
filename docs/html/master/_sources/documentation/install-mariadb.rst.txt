@@ -7,6 +7,11 @@ MariaDB Galera Cluster - Binary Installation
 
 MariaDB Galera Cluster is the MariaDB implementation of Galera Cluster.  Binary installation packages are available for Debian-based and RPM-based distributions of Linux through the MariaDB repository (`MariaDB Repository Generator <https://downloads.mariadb.org/mariadb/repositories/>`_).
 
+.. image:: ../images/mariadb-repository-tool.png
+   :width: 600px
+   :alt: MariaDB Repository Tool
+   :class: tutorial-screenshot
+
 .. _`mariadb-repo`:
 
 ---------------------------------
@@ -131,4 +136,4 @@ For RPM-based distributions, execute instead from the command line the following
 
 Once you've done this, MariaDB Galera Cluster will be installed on your server.  You'll need to repeat this process for each node in your cluster.
 
-.. note:: If you installed MariaDB Galera Cluster over an existing stand-alone instance of MariaDB, there are some additional steps that you'll need to take to update your system to the new database server.  For more information on this, see :doc:`migration`.
+.. note:: If you installed MariaDB Galera Cluster over an existing stand-alone instance of MariaDB, there are some additional steps that you'll need to take to update your system to the new database server.  For more information on this, see :doc:`../training/tutorials/migration`.

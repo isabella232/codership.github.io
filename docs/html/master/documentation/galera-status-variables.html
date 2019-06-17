@@ -211,255 +211,316 @@
 <li>Galera Cluster-specific variables exported by Galera Cluster</li>
 <li>Variables exported by MySQL. These variables are for the general wsrep provider.</li>
 </ul>
-<p>This distinction is of importance for developers only.  For convenience, all status variables are presented as a single list below.  Variables exported by MySQL are indicated by an <em>M</em> in superscript.</p>
-<table border="1" class="docutils">
+<p>This distinction is of importance for developers only.  For convenience, all status variables are presented as a single list below. They&#8217;re noted as to whether they are exported by Galera or by MySQL.</p>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="42%" />
-<col width="45%" />
-<col width="13%" />
+<col width="40%" />
+<col width="15%" />
+<col width="30%" />
+<col width="15%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Status Variable</th>
-<th class="head">Example</th>
-<th class="head">Support</th>
+<tr class="row-odd"><th class="head"><br /> Status Variable</th>
+<th class="head"><br /> Exporter</th>
+<th class="head">Example <br /> Value</th>
+<th class="head">Initial <br /> Version</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-apply-oooe"><span class="std std-ref">wsrep_apply_oooe</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0.671120</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-apply-oool"><span class="std std-ref">wsrep_apply_oool</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0.195248</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-apply-window"><span class="std std-ref">wsrep_apply_window</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">5.163966</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">23.88889</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-cert-index-size"><span class="std std-ref">wsrep_cert_index_size</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">30936</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-cert-interval"><span class="std std-ref">wsrep_cert_interval</span></a></td>
+<td>Galera</td>
 <td>&nbsp;</td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-cluster-conf-id"><span class="std std-ref">wsrep_cluster_conf_id</span></a> <sup>M</sup></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-cluster-conf-id"><span class="std std-ref">wsrep_cluster_conf_id</span></a></td>
+<td>MySQL</td>
 <td><code class="docutils literal"><span class="pre">34</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a> <sup>M</sup></td>
-<td><code class="docutils literal"><span class="pre">3</span></code></td>
-<td>1+</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-cluster-state-uuid"><span class="std std-ref">wsrep_cluster_state_uuid</span></a> <sup>M</sup></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a></td>
+<td>MySQL</td>
 <td>&nbsp;</td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a> <sup>M</sup></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-cluster-state-uuid"><span class="std std-ref">wsrep_cluster_state_uuid</span></a></td>
+<td>MySQL</td>
+<td>&nbsp;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></td>
+<td>MySQL</td>
 <td><code class="docutils literal"><span class="pre">Primary</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-cluster-weight"><span class="std std-ref">wsrep_cluster_weight</span></a> <sup>M</sup></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-cluster-weight"><span class="std std-ref">wsrep_cluster_weight</span></a></td>
+<td>MySQL</td>
 <td><code class="docutils literal"><span class="pre">3</span></code></td>
-<td>3.24+</td>
+<td>3.24</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-commit-oooe"><span class="std std-ref">wsrep_commit_oooe</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0.000000</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-commit-oool"><span class="std std-ref">wsrep_commit_oool</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0.000000</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-commit-window"><span class="std std-ref">wsrep_commit_window</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0.000000</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-connected"><span class="std std-ref">wsrep_connected</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-desync-count"><span class="std std-ref">wsrep_desync_count</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>3+</td>
+<td>3.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-evs-delayed"><span class="std std-ref">wsrep_evs_delayed</span></a></td>
+<td>Galera</td>
 <td>&nbsp;</td>
-<td>3.8+</td>
+<td>3.8</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-evs-evict-list"><span class="std std-ref">wsrep_evs_evict_list</span></a></td>
+<td>Galera</td>
 <td>&nbsp;</td>
-<td>3.8+</td>
+<td>3.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-evs-repl-latency"><span class="std std-ref">wsrep_evs_repl_latency</span></a></td>
+<td>Galera</td>
 <td>&nbsp;</td>
-<td>3.0+</td>
+<td>3.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-evs-state"><span class="std std-ref">wsrep_evs_state</span></a></td>
+<td>Galera</td>
 <td>&nbsp;</td>
-<td>3.8+</td>
+<td>3.8</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-flow-control-paused"><span class="std std-ref">wsrep_flow_control_paused</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0.184353</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-flow-control-paused-ns"><span class="std std-ref">wsrep_flow_control_paused_ns</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">20222491180</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-flow-control-recv"><span class="std std-ref">wsrep_flow_control_recv</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">11</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">7</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-gcomm-uuid"><span class="std std-ref">wsrep_gcomm_uuid</span></a></td>
+<td>Galera</td>
 <td>&nbsp;</td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-incoming-addresses"><span class="std std-ref">wsrep_incoming_addresses</span></a></td>
+<td>Galera</td>
 <td>&nbsp;</td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">409745</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-local-bf-aborts"><span class="std std-ref">wsrep_local_bf_aborts</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">960</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-local-cached-downto"><span class="std std-ref">wsrep_local_cached_downto</span></a></td>
+<td>Galera</td>
 <td>&nbsp;</td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-local-cert-failures"><span class="std std-ref">wsrep_local_cert_failures</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">333</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-local-commits"><span class="std std-ref">wsrep_local_commits</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">14981</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-local-index"><span class="std std-ref">wsrep_local_index</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-local-recv-queue"><span class="std std-ref">wsrep_local_recv_queue</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">3.348452</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-local-recv-queue-max"><span class="std std-ref">wsrep_local_recv_queue_max</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">10</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-local-recv-queue-min"><span class="std std-ref">wsrep_local_recv_queue_min</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-local-replays"><span class="std std-ref">wsrep_local_replays</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-local-send-queue"><span class="std std-ref">wsrep_local_send_queue</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-local-send-queue-avg"><span class="std std-ref">wsrep_local_send_queue_avg</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0.145000</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-local-send-queue-max"><span class="std std-ref">wsrep_local_send_queue_max</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">10</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-local-send-queue-min"><span class="std std-ref">wsrep_local_send_queue_min</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-local-state"><span class="std std-ref">wsrep_local_state</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">4</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-local-state-comment"><span class="std std-ref">wsrep_local_state_comment</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">Synced</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-local-state-uuid"><span class="std std-ref">wsrep_local_state_uuid</span></a></td>
+<td>Galera</td>
 <td>&nbsp;</td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-open-connections"><span class="std std-ref">wsrep_open_connections</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">3</span></code></td>
-<td>3.24+</td>
+<td>3.24</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-open-transactions"><span class="std std-ref">wsrep_open_transactions</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">25</span></code></td>
-<td>3.24+</td>
+<td>3.24</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-protocol-version"><span class="std std-ref">wsrep_protocol_version</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">4</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-provider-name"><span class="std std-ref">wsrep_provider_name</span></a> <sup>M</sup></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-provider-name"><span class="std std-ref">wsrep_provider_name</span></a></td>
+<td>MySQL</td>
 <td><code class="docutils literal"><span class="pre">Galera</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-provider-vendor"><span class="std std-ref">wsrep_provider_vendor</span></a> <sup>M</sup></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-provider-vendor"><span class="std std-ref">wsrep_provider_vendor</span></a></td>
+<td>MySQL</td>
 <td>&nbsp;</td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-provider-version"><span class="std std-ref">wsrep_provider_version</span></a> <sup>M</sup></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-provider-version"><span class="std std-ref">wsrep_provider_version</span></a></td>
+<td>MySQL</td>
 <td>&nbsp;</td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-ready"><span class="std std-ref">wsrep_ready</span></a> <sup>M</sup></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-ready"><span class="std std-ref">wsrep_ready</span></a></td>
+<td>MySQL</td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-received"><span class="std std-ref">wsrep_received</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">17831</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">6637093</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-repl-data-bytes"><span class="std std-ref">wsrep_repl_data_bytes</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">265035226</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-repl-keys"><span class="std std-ref">wsrep_repl_keys</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">797399</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-repl-keys-bytes"><span class="std std-ref">wsrep_repl_keys_bytes</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">11203721</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-repl-other-bytes"><span class="std std-ref">wsrep_repl_other_bytes</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-replicated"><span class="std std-ref">wsrep_replicated</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">16109</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-replicated-bytes"><span class="std std-ref">wsrep_replicated_bytes</span></a></td>
+<td>Galera</td>
 <td><code class="docutils literal"><span class="pre">6526788</span></code></td>
-<td>1+</td>
+<td>1.0</td>
 </tr>
 </tbody>
 </table>
@@ -477,8 +538,8 @@
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
-<td>???</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
 </tr>
 </tbody>
 </table>
@@ -506,8 +567,8 @@
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
-<td>???</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
 </tr>
 </tbody>
 </table>
@@ -535,7 +596,7 @@
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -564,7 +625,7 @@
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -593,7 +654,7 @@
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -622,7 +683,7 @@
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -654,7 +715,7 @@
 <tr class="row-even"><td>Location</td>
 <td>MySQL</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -683,7 +744,7 @@
 <tr class="row-even"><td>Location</td>
 <td>MySQL</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -712,7 +773,7 @@
 <tr class="row-even"><td>Location</td>
 <td>MySQL</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -742,7 +803,7 @@
 <tr class="row-even"><td>Location</td>
 <td>MySQL</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -772,7 +833,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.24</td>
 </tr>
 </tbody>
@@ -801,7 +862,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -830,7 +891,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -859,7 +920,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -888,7 +949,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -917,7 +978,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -947,7 +1008,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -971,7 +1032,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -1000,7 +1061,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -1034,7 +1095,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -1063,7 +1124,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -1093,7 +1154,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -1122,7 +1183,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -1151,7 +1212,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -1180,7 +1241,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1209,7 +1270,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1238,7 +1299,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1268,7 +1329,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1297,7 +1358,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1326,7 +1387,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1355,7 +1416,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1384,7 +1445,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>MySQL</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1413,7 +1474,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1442,7 +1503,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1471,7 +1532,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1500,7 +1561,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1529,7 +1590,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1558,7 +1619,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1587,7 +1648,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1616,7 +1677,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1645,7 +1706,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1674,7 +1735,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1704,7 +1765,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1733,7 +1794,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1763,7 +1824,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.24</td>
 </tr>
 </tbody>
@@ -1792,7 +1853,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.24</td>
 </tr>
 </tbody>
@@ -1821,7 +1882,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1850,7 +1911,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>MySQL</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1879,7 +1940,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>MySQL</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1908,7 +1969,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>MySQL</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1937,7 +1998,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>MySQL</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1970,7 +2031,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>MySQL</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1999,7 +2060,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -2028,7 +2089,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -2057,7 +2118,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -2086,7 +2147,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -2115,7 +2176,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -2144,7 +2205,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -2173,7 +2234,7 @@ of <a class="reference internal" href="galera-parameters.html#pc-weight"><span c
 <tr class="row-even"><td>Location</td>
 <td>Galera</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>

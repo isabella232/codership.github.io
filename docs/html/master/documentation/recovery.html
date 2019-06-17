@@ -216,11 +216,11 @@
 <p>The cluster determines node connectivity from the last time it received a network packet from the node.  You can configure how often the cluster checks this using the <a class="reference internal" href="galera-parameters.html#evs-inactive-check-period"><span class="std std-ref">evs.inactive_check_period</span></a> parameter.  During the check, if the cluster finds that the time since the last time it received a network packet from the node is greater than the value of the <a class="reference internal" href="galera-parameters.html#evs-keepalive-period"><span class="std std-ref">evs.keepalive_period</span></a> parameter, it begins to emit heartbeat beacons.  If the cluster continues to receive no network packets from the node for the period of the <a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter, the node is declared suspect.  Once all members of the Primary Component see the node as suspect, it is declared inactive—that is, failed.</p>
 <p>If no messages were received from the node for a period greater than the <a class="reference internal" href="galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> period, the node is declared failed regardless of the consensus.  The failed node remains non-operational until all members agree on its membership.  If the members cannot reach consensus on the liveness of a node, the network is too unstable for cluster operations.</p>
 <p>The relationship between these option values is:</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options tight-header docutils">
 <colgroup>
-<col width="46%" />
-<col width="8%" />
-<col width="46%" />
+<col width="45%" />
+<col width="10%" />
+<col width="45%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="galera-parameters.html#evs-keepalive-period"><span class="std std-ref">evs.keepalive_period</span></a></td>

@@ -8,15 +8,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Differences from a Standalone MySQL Server &#8212; Galera Cluster Documentation</title>
+    <title>Migrating to Galera Cluster &#8212; Galera Cluster Documentation</title>
     
-    <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
+        URL_ROOT:    '../../',
         VERSION:     '',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -24,15 +24,15 @@
         SOURCELINK_SUFFIX: '.txt'
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../_static/cloud.js"></script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Migrating to Galera Cluster" href="migration.html" />
-    <link rel="prev" title="Migration" href="migrate.html" />
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../_static/cloud.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Getting Started Galera with Docker, Part 1" href="getting-started-docker-pt1.html" />
+    <link rel="prev" title="Differences from a Standalone MySQL Server" href="differences.html" />
 
 
 
@@ -204,102 +204,151 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="differences-from-a-standalone-mysql-server">
-<h1>Differences from a Standalone MySQL Server<a class="headerlink" href="#differences-from-a-standalone-mysql-server" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="differences"></span><p id="index-0">Although Galera Cluster is built on providing write-set replication to MySQL and related database systems, there are certain key differences between how it handles and the standard standalone MySQL server.</p>
-<div class="section" id="server-differences">
-<span id="server-difference"></span><h2>Server Differences<a class="headerlink" href="#server-differences" title="Permalink to this headline">¶</a></h2>
-<p>Using a server with Galera Cluster is not the same as one with MySQL.  Galera Cluster does not support the same range of operating systems as MySQL, and there are differences in how it handles binary logs and character sets.</p>
-<div class="section" id="operating-system-support">
-<span id="os-support"></span><h3>Operating System Support<a class="headerlink" href="#operating-system-support" title="Permalink to this headline">¶</a></h3>
-<p>Galera Cluster requires that you use Linux or a similar UNIX-like operating system.  Binary packages are not supplied for FreeBSD, Solaris and Mac OS X.  There is no support available for Microsoft Windows.</p>
+  <div class="tutorial-article section" id="migrating-to-galera-cluster">
+<h1>Migrating to Galera Cluster<a class="headerlink" href="#migrating-to-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats" id="migration">Length: xxx words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+<p>For systems that already have instances of the standalone versions of MySQL or MariaDB, the Galera Cluster installation replaces the existing database server with a new one that includes the <a class="reference internal" href="../../documentation/glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> patch.  This only affects the database server, not the data.</p>
+<p>When upgrading from a standalone database server, you must take some additional steps in order to subsequently preserve and use your data with Galera Cluster.</p>
+<p>For more information on installing Galera Cluster, see <a class="reference internal" href="galera-installation.html"><span class="doc">Galera Installation</span></a>.</p>
+<div class="section" id="upgrading-system-tables">
+<span id="upgrade-system-tables"></span><h2>Upgrading System Tables<a class="headerlink" href="#upgrading-system-tables" title="Permalink to this headline">¶</a></h2>
+<p>When you finish upgrading a standalone database server to Galera Cluster, but before you initialize your own cluster, you need to update the system tables to take advantage of the new privileges and capabilities.  You can do this with <code class="docutils literal"><span class="pre">mysql_upgrade</span></code>.</p>
+<p>In order to use <code class="docutils literal"><span class="pre">mysql_upgrade</span></code>, you need to first start the database server, but start it without initializing replication.  For systems that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql start --wsrep_on<span class="o">=</span>OFF
+</pre></div>
 </div>
-<div class="section" id="binary-log-support">
-<span id="binlog-support"></span><h3>Binary Log Support<a class="headerlink" href="#binary-log-support" title="Permalink to this headline">¶</a></h3>
-<p>Do not use the <code class="docutils literal"><span class="pre">binlog-do-db</span></code> and <code class="docutils literal"><span class="pre">binlog-ignore-db</span></code> options.</p>
-<p>These binary log options are only supported for <abbr title="Data Manipulation Language">DML</abbr> statements.  They provide no support for <abbr title="Data Definition Language">DDL</abbr> statements.  This creates a discrepancy in the binary logs and will cause replication to abort.</p>
+<p>For servers that use <code class="docutils literal"><span class="pre">systemd</span></code>, instead use this command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl start mysql --wsrep_on<span class="o">=</span>OFF
+</pre></div>
 </div>
-<div class="section" id="unsupported-character-sets">
-<span id="unicode-support"></span><h3>Unsupported Character Sets<a class="headerlink" href="#unsupported-character-sets" title="Permalink to this headline">¶</a></h3>
-<p>Do not use the <code class="docutils literal"><span class="pre">character_set_server</span></code> with UTF-16, UTF-32 or UCS-2.</p>
-<p>When you use <code class="docutils literal"><span class="pre">rsync</span></code> for <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>, the use of these unsupported character sets can cause the server to crash.</p>
+<p>The command starts <code class="docutils literal"><span class="pre">mysqld</span></code> with the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-on"><span class="std std-ref">wsrep_on</span></a> parameter set to <code class="docutils literal"><span class="pre">OFF</span></code>, which disables replication.  With the database server running, you can update the system tables:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> mysql_upgrade
+</pre></div>
+</div>
+<p>If this command generates any errors, check the MySQL Reference Manual for more information related to the particular error message.  Typically, these errors are not critical and you can usually ignore them, unless they relate to specific functionality that your system requires.</p>
+<p>When you finish upgrading the system tables, you need to stop the <code class="docutils literal"><span class="pre">mysqld</span></code> process until you are ready to initialize the cluster.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql stop
+</pre></div>
+</div>
+<p>For servers that use <code class="docutils literal"><span class="pre">systemd</span></code>, instead use this command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl stop mysql
+</pre></div>
+</div>
+<p>Running this command stops database server.  When you are ready to initialize your cluster, choose this server as your starting node.</p>
+<p>For more information on initializing and adding nodes to a cluster, see <a class="reference internal" href="starting-cluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
+</div>
+<div class="section" id="migrating-from-mysql-to-galera-cluster">
+<span id="migrating-mysql-galera"></span><h2>Migrating from MySQL to Galera Cluster<a class="headerlink" href="#migrating-from-mysql-to-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<p>In the event that you have an existing database server that uses the MyISAM storage engine or the stock MySQL master-slave replication, there are some additional steps that you need to take.  The <a class="reference internal" href="../../documentation/glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> requires a transactional storage engine in order to function.  As MyISAM is non-transactional, you need to migrate your data to InnoDB, in addition to installing the new software packages.</p>
+<p>There are three types of database servers referred to in this guide:</p>
+<ul class="simple">
+<li><strong>Master Server</strong> Refers to the MySQL master server.</li>
+<li><strong>Slave Server</strong>  Refers to a MySQL slave server.</li>
+<li><strong>Cluster Node</strong> Refers to a node in Galera Cluster.</li>
+</ul>
+<p>For the sake of simplicity, slave servers and cluster nodes are referenced collectively, rather than individually.  In production, you may have several slave servers and must have at least three cluster nodes.</p>
+<div class="section" id="infrastructure-preparation">
+<span id="migrate-infrastructure"></span><h3>Infrastructure Preparation<a class="headerlink" href="#infrastructure-preparation" title="Permalink to this headline">¶</a></h3>
+<p>For your existing infrastructure, you have a MySQL master server as well as several slave servers that form a master-slave cluster.  Before you can begin migration, you first need to prepare your infrastructure for the change.</p>
+<ol class="arabic simple">
+<li>Launch at least three new servers, outside of and unconnected to your existing database infrastructure.</li>
+<li>On each new server, install Galera Cluster.  For information on how to do this, see <a class="reference internal" href="galera-installation.html"><span class="doc">Galera Installation</span></a>.</li>
+<li>Configure the database server.  In addition to the IP addresses of each node, on the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter, include the IP addresses of the MySQL master server and each instance of the slave servers.</li>
+</ol>
+<p>For more information on configuring Galera Cluster, see <a class="reference internal" href="configuration.html"><span class="doc">System Configuration</span></a> and <a class="reference internal" href="wsrep-configuration.html"><span class="doc">Replication Configuration</span></a>.</p>
+<ol class="arabic simple">
+<li>When you finish the installation and configuration, start the cluster.  For more information on how to start the cluster, see <a class="reference internal" href="starting-cluster.html"><span class="doc">Starting the Cluster</span></a>.</li>
+</ol>
+<p>To check that it is running properly, log into one of the database clients and run the <a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a> status variable:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_size&#39;</span><span class="p">;</span>
+
+<span class="o">+--------------------+-------+</span>
+<span class="o">|</span> <span class="n">Varialbe_name</span>      <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+--------------------+-------+</span>
+<span class="o">|</span> <span class="n">wsrep_cluster_size</span> <span class="o">|</span> <span class="mi">3</span>     <span class="o">|</span>
+<span class="o">+--------------------+-------+</span>
+</pre></div>
+</div>
+<p>Galera Cluster is now running in parallel to your MySQL master-slave cluster.  It contains no data and remains unused by your application servers.  You can now begin migrating your data.</p>
+</div>
+<div class="section" id="data-migration">
+<span id="migrate-data"></span><h3>Data Migration<a class="headerlink" href="#data-migration" title="Permalink to this headline">¶</a></h3>
+<p>In order to migrate data from a MySQL master-slave cluster to Galera Cluster, you need to manually transfer it from your existing infrastructure to the new one.</p>
+<ol class="arabic">
+<li><p class="first">Stop the load of the master server.</p>
+</li>
+<li><p class="first">On the master server, run <code class="docutils literal"><span class="pre">mysqldump</span></code>:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mysqldump -u root -p --skip-create-options --all-databases &gt; migration.sql
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">--skip-create-options</span></code> ensures that the database server uses the default storage engine when loading the data, instead of MyISAM.</p>
+</li>
+<li><p class="first">Transfer the <code class="docutils literal"><span class="pre">migration.sql</span></code> output file to one of your new cluster nodes.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> scp migration.sql user@galera-node-IP
+</pre></div>
+</div>
+</li>
+<li><p class="first">On the cluster node, load the data from the master server.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">mysql -u root -p &lt; migration.sql</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Restart the load from the application servers, this time directing it towards your cluster nodes instead of the master server.</p>
+</li>
+</ol>
+<p>Your application now uses Galera Cluster, instead of your previous MySQL master-slave cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This is also a problem when you use automatic donor selection in your cluster, as the cluster may choose to use <code class="docutils literal"><span class="pre">rsync</span></code> on its own.</p>
+<p class="last">Bear in mind that your application will experience downtime at this stage of the process.  The length of the downtime varies depending on the amount of data you have to migrate, specifically how long it takes <code class="docutils literal"><span class="pre">mysqldump</span></code> to create a snapshot of the master server, then transfer and upload it onto a cluster node.</p>
 </div>
 </div>
-</div>
-<div class="section" id="differences-in-table-configurations">
-<span id="db-config-limitations"></span><h2>Differences in Table Configurations<a class="headerlink" href="#differences-in-table-configurations" title="Permalink to this headline">¶</a></h2>
-<p>There are certain features and configurations available in MySQL that do not work as expected in Galera Cluster, such as storage engine support, certain queries and the query cache.</p>
-<div class="section" id="storage-engine-support">
-<span id="id1"></span><h3>Storage Engine Support<a class="headerlink" href="#storage-engine-support" title="Permalink to this headline">¶</a></h3>
-<p>Galera Cluster requires the InnoDB storage engine.  Writes made to tables of other types, including the system <code class="docutils literal"><span class="pre">mysql-*</span></code> tables, do not replicate to the cluster.</p>
-<p>That said, <abbr title="Data Definition Language">DDL</abbr> statements do replicate at the statement level, meaning that changes made to the <code class="docutils literal"><span class="pre">mysql-*</span></code> tables do replicate that way.</p>
-<p>What this means is that if you were to issue a statement like</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="n">USER</span> <span class="s1">&#39;stranger&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span>
-  <span class="n">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;password&#39;</span><span class="p">;</span>
+<div class="section" id="database-migration">
+<span id="migrate-db"></span><h3>Database Migration<a class="headerlink" href="#database-migration" title="Permalink to this headline">¶</a></h3>
+<p>With your application server now using the new cluster nodes, you now need to migrate your master and slave servers from stock MySQL to Galera Cluster.</p>
+<ol class="arabic">
+<li><p class="first">Using the same process described in <a class="reference internal" href="galera-installation.html"><span class="doc">Galera Installation</span></a>, install and configure Galera Cluster on the server.</p>
+</li>
+<li><p class="first">Start the node with replication disabled.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql start --wsrep-on<span class="o">=</span>OFF
 </pre></div>
 </div>
-<p>or, like</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">ON</span> <span class="n">strangedb</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;stranger&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+<p>For servers that use <code class="docutils literal"><span class="pre">systemd</span></code>, instead run this command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl start mysql --wsrep-on<span class="o">=</span>OFF
 </pre></div>
 </div>
-<p>the changes made to the <code class="docutils literal"><span class="pre">mysql-*</span></code> tables would replicate to the cluster.  However, if you were to issue a statement like</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">mysql</span><span class="p">.</span><span class="nf">user</span> <span class="p">(</span><span class="n">Host</span><span class="p">,</span> <span class="n">User</span><span class="p">,</span> <span class="n">Password</span><span class="p">)</span>
-   <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="s1">&#39;stranger&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">);</span>
+</li>
+<li><p class="first">From the database client, manually switch the storage engine on each table from MyISAM to InnoDB:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">table_name</span> <span class="kp">ENGINE</span> <span class="o">=</span> <span class="n">InnoDB</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>the changes would not replicate.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">In general, non-transactional storage engines cannot be supported in multi-master replication.</p>
-</div>
-</div>
-<div class="section" id="tables-without-primary-keys">
-<span id="table-without-pk"></span><h3>Tables without Primary Keys<a class="headerlink" href="#tables-without-primary-keys" title="Permalink to this headline">¶</a></h3>
-<p>Do not use tables without a primary key.</p>
-<p>When tables lack a primary key, rows can appear in different order on different nodes in your cluster.  As such, queries like <code class="docutils literal"><span class="pre">SELECT...LIMIT...</span></code> can return different results.  Additionally, on such tables the <code class="docutils literal"><span class="pre">DELETE</span></code> statement is unsupported.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If you have a table without a primary key, it is always possible to add an <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> column to the table without breaking your application.</p>
-</div>
-</div>
-<div class="section" id="table-locking">
-<span id="unsupported-queries"></span><h3>Table Locking<a class="headerlink" href="#table-locking" title="Permalink to this headline">¶</a></h3>
-<p>Galera Cluster does not support table locking, as they conflict with multi-master replication.  As such, the <code class="docutils literal"><span class="pre">LOCK</span> <span class="pre">TABLES</span></code> and <code class="docutils literal"><span class="pre">UNLOCK</span> <span class="pre">TABLES</span></code> queries are not supported.  This also applies to lock functions, such as <code class="docutils literal"><span class="pre">GET_LOCK()</span></code> and <code class="docutils literal"><span class="pre">RELEASE_LOCK()...</span></code> for the same reason.</p>
-</div>
-<div class="section" id="query-logs">
-<span id="query-log-support"></span><h3>Query Logs<a class="headerlink" href="#query-logs" title="Permalink to this headline">¶</a></h3>
-<p>You cannot direct query logs to a table.  If you would like to enable query logging in Galera Cluster, you must forward the logs to a file.</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">log_output</span> <span class="o">=</span> <span class="s">FILE</span>
+</li>
+<li><p class="first">Update the system tables:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">  #</span> mysql_upgrade
+
+<span class="go">For more information, see :ref:`Upgrading System Tables &lt;upgrade-system-tables&gt;`.</span>
 </pre></div>
 </div>
-<p>Use <code class="docutils literal"><span class="pre">general_log</span></code> and <code class="docutils literal"><span class="pre">general_log_file</span></code> to choose query logging and to set the filename for your log file.</p>
-</div>
-</div>
-<div class="section" id="differences-in-transactions">
-<span id="diff-transactions"></span><h2>Differences in Transactions<a class="headerlink" href="#differences-in-transactions" title="Permalink to this headline">¶</a></h2>
-<p>There are some differences in how Galera Cluster handles transactions from MySQL, such as <abbr title="eXtended Architecture">XA</abbr> transactions and limitations on transaction size.</p>
-<div class="section" id="distributed-transaction-processing">
-<span id="xa-transactions"></span><h3>Distributed Transaction Processing<a class="headerlink" href="#distributed-transaction-processing" title="Permalink to this headline">¶</a></h3>
-<p>The standard MySQL server provides support for distributed transaction processing using the Open Group <abbr title="eXtended Architecture">XA</abbr> standard.  This feature is <em>not</em> available for Galera Cluster, given that it can lead to possible rollbacks on commit.</p>
-</div>
-<div class="section" id="transaction-size">
-<span id="id2"></span><h3>Transaction Size<a class="headerlink" href="#transaction-size" title="Permalink to this headline">¶</a></h3>
-<p>Although Galera Cluster does not explicitly limit the transaction size, the hardware you run it on does impose a size limitation on your transactions.  Nodes process write-sets in a single memory-resident buffer.  As such, extremely large transactions, such as <code class="docutils literal"><span class="pre">LOAD</span> <span class="pre">DATA</span></code> can adversely effect node performance.</p>
-<p>You can avoid situations of this kind using the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-max-ws-rows"><span class="std std-ref">wsrep_max_ws_rows</span></a> and the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-max-ws-size"><span class="std std-ref">wsrep_max_ws_size</span></a> parameters.  Limit the transaction rows to 128 KB and the transaction size to 1 GB.</p>
-<p>If necessary, you can increase these limits.</p>
-</div>
-<div class="section" id="transaction-commits">
-<span id="id3"></span><h3>Transaction Commits<a class="headerlink" href="#transaction-commits" title="Permalink to this headline">¶</a></h3>
-<p>Galera Cluster uses at the cluster-level optimistic concurrency control, which can result in transactions that issue a <code class="docutils literal"><span class="pre">COMMIT</span></code> aborting at that stage.</p>
-<p>For example, say that you have two transactions that will write to the same rows, but commit on separate nodes in the cluster and that only one of them can successfully commit.  The commit that fails is aborted, while the successful one replicates.</p>
-<p>When aborts occur at the cluster level, Galera Cluster gives a deadlock error.</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="nf">code</span> <span class="p">(</span><span class="n">Error</span><span class="p">:</span> <span class="mi">1213</span> <span class="k">SQLSTATE</span><span class="p">:</span> <span class="mi">40001</span> <span class="p">(</span><span class="n">ER_LOCK_DEADLOCK</span><span class="p">)</span>
+</li>
+<li><p class="first">From one of the running Galera Cluster nodes, copy the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file into the data directory of the former MySQL master server.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> scp grastate.dat user@server-master-ip:/path/to/datadir
 </pre></div>
 </div>
-<p>If you receive this error, restart the failing transaction.  It will then issue on its own, without another to put it into conflict.</p>
+</li>
+<li><p class="first">Using your preferred text editor, on the former MySQL master server update the sequence number (that is, the seqno) in the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file from <code class="docutils literal"><span class="pre">-1</span></code> to <code class="docutils literal"><span class="pre">0</span></code>.</p>
+</li>
+<li><p class="first">Restart the master and slave servers.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql restart
+</pre></div>
+</div>
+<p>For servers that use <code class="docutils literal"><span class="pre">systemd</span></code>, instead run this command:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl restart mysql
+</pre></div>
+</div>
+</li>
+<li><p class="first">Resume load on these servers.</p>
+</li>
+</ol>
+<p>When the former MySQL master and slave servers come back after restarting, they establish network connectivity with the cluster and begin catching up with recent changes.  All of the servers now function as nodes in Galera Cluster.</p>
 </div>
 </div>
 </div>
@@ -310,29 +359,17 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-        <p class="logo"><a href="../index.html" title="index">
-          <img class="logo" src="../_static/logo.png" alt="Logo"/>
+        <p class="logo"><a href="../../index.html" title="index">
+          <img class="logo" src="../../_static/logo.png" alt="Logo"/>
         </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
+    <h3><a href="../../index.html">Page contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Differences from a Standalone MySQL Server</a><ul>
-<li><a class="reference internal" href="#server-differences">Server Differences</a><ul>
-<li><a class="reference internal" href="#operating-system-support">Operating System Support</a></li>
-<li><a class="reference internal" href="#binary-log-support">Binary Log Support</a></li>
-<li><a class="reference internal" href="#unsupported-character-sets">Unsupported Character Sets</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#differences-in-table-configurations">Differences in Table Configurations</a><ul>
-<li><a class="reference internal" href="#storage-engine-support">Storage Engine Support</a></li>
-<li><a class="reference internal" href="#tables-without-primary-keys">Tables without Primary Keys</a></li>
-<li><a class="reference internal" href="#table-locking">Table Locking</a></li>
-<li><a class="reference internal" href="#query-logs">Query Logs</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#differences-in-transactions">Differences in Transactions</a><ul>
-<li><a class="reference internal" href="#distributed-transaction-processing">Distributed Transaction Processing</a></li>
-<li><a class="reference internal" href="#transaction-size">Transaction Size</a></li>
-<li><a class="reference internal" href="#transaction-commits">Transaction Commits</a></li>
+<li><a class="reference internal" href="#">Migrating to Galera Cluster</a><ul>
+<li><a class="reference internal" href="#upgrading-system-tables">Upgrading System Tables</a></li>
+<li><a class="reference internal" href="#migrating-from-mysql-to-galera-cluster">Migrating from MySQL to Galera Cluster</a><ul>
+<li><a class="reference internal" href="#infrastructure-preparation">Infrastructure Preparation</a></li>
+<li><a class="reference internal" href="#data-migration">Data Migration</a></li>
+<li><a class="reference internal" href="#database-migration">Database Migration</a></li>
 </ul>
 </li>
 </ul>
@@ -342,17 +379,17 @@
   </div>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="migrate.html"
-                          title="Previous page">&larr; Migration</a></p>
+    <p class="topless"><a href="differences.html"
+                          title="Previous page">&larr; Differences from a Standalone MySQL Server</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="migration.html"
-                          title="Next page">&rarr; Migrating to Galera Cluster</a></p>
+    <p class="topless"><a href="getting-started-docker-pt1.html"
+                          title="Next page">&rarr; Getting Started Galera with Docker, Part 1</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
+    <form class="search" action="../../search.html" method="get">
       <div><input type="text" name="q" /></div>
       <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
@@ -399,7 +436,7 @@
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/documentation/differences.rst.rst" title="Edit 'Differences from a Standalone MySQL Server' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/migration.rst.rst" title="Edit 'Migrating to Galera Cluster' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -408,29 +445,30 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
+          <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="migration.html" title="Migrating to Galera Cluster"
+          <a href="getting-started-docker-pt1.html" title="Getting Started Galera with Docker, Part 1"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="migrate.html" title="Migration"
+          <a href="differences.html" title="Differences from a Standalone MySQL Server"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
+    <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="migrate.html" accesskey="U">Migration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Tutorials</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="migrate.html" accesskey="U">Migration</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="migrate.html" title="Migration">&lt; Previous</a></li>
+				<li><a href="differences.html" title="Differences from a Standalone MySQL Server">&lt; Previous</a></li>
 			
 
 			
-				<li><a href="migration.html" title="Migrating to Galera Cluster">Next &gt;</a></li>
+				<li><a href="getting-started-docker-pt1.html" title="Getting Started Galera with Docker, Part 1">Next &gt;</a></li>
 			
 
 		</ul>

@@ -222,106 +222,126 @@
 </pre></div>
 </div>
 <p>Bear in mind, some XtraBackup parameters require that you match the configuration on donor and joiner nodes, (as designated in the table below).</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="57%" />
-<col width="27%" />
-<col width="16%" />
+<col width="30%" />
+<col width="15%" />
+<col width="10%" />
+<col width="45%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Option</th>
 <th class="head">Default</th>
 <th class="head">Match</th>
+<th class="head">&nbsp;</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><a class="reference internal" href="#xtra-compressor"><span class="std std-ref">compressor</span></a></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#xtra-cpat"><span class="std std-ref">cpat</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#xtra-decompressor"><span class="std std-ref">decompressor</span></a></td>
+<td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#xtra-encrypt"><span class="std std-ref">encrypt</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 <td>Yes</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#xtra-encrypt-algo"><span class="std std-ref">encrypt-algo</span></a></td>
+<td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#xtra-progress"><span class="std std-ref">progress</span></a></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#xtra-rebuild"><span class="std std-ref">rebuild</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#xtra-rlimit"><span class="std std-ref">rlimit</span></a></td>
+<td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#xtra-sst-initial-timeout"><span class="std std-ref">sst_initial_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">100</span></code></td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#xtra-sst-special-dirs"><span class="std std-ref">sst_special_dirs</span></a></td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#xtra-sockopt"><span class="std std-ref">sockopt</span></a></td>
+<td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#xtra-streamfmt"><span class="std std-ref">streamfmt</span></a></td>
 <td><code class="docutils literal"><span class="pre">xbstream</span></code></td>
 <td>Yes</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#xtra-tca"><span class="std std-ref">tca</span></a></td>
+<td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#xtra-tcert"><span class="std std-ref">tcert</span></a></td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#xtra-time"><span class="std std-ref">time</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
+<td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#xtra-transferfmt"><span class="std std-ref">transferfmt</span></a></td>
 <td><code class="docutils literal"><span class="pre">socat</span></code></td>
 <td>Yes</td>
+<td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric" id="xtra-compressor"><code class="docutils literal"><span class="pre">compressor</span></code></p>
 <p>Defines the compression utility the donor node uses to compress the state transfer.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="42%" />
-<col width="31%" />
-<col width="27%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">compressor</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>String</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -332,25 +352,27 @@
 </div>
 <p class="rubric" id="xtra-compact"><code class="docutils literal"><span class="pre">compact</span></code></p>
 <p>Defines whether the joiner node performs compaction when rebuilding indexes after applying a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">compact</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>Boolean</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
 </tbody>
@@ -362,25 +384,27 @@
 </div>
 <p class="rubric" id="xtra-cpat"><code class="docutils literal"><span class="pre">cpat</span></code></p>
 <p>Defines what files to clean up from the datadir during state transfers.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="42%" />
-<col width="31%" />
-<col width="27%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">cpat</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>String</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -391,25 +415,27 @@
 </div>
 <p class="rubric" id="xtra-decompressor"><code class="docutils literal"><span class="pre">decompressor</span></code></p>
 <p>Defines the decompression utility the joiner node uses to decompress the state transfer.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">decompressor</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>String</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -420,31 +446,33 @@
 </div>
 <p class="rubric" id="xtra-encrypt"><code class="docutils literal"><span class="pre">encrypt</span></code></p>
 <p>Defines whether the node uses SSL encryption for XtraBackup and what kind of encryption it uses.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">encrypt</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>Integer</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 </tr>
 </tbody>
 </table>
 <p>This parameter determines the type of SSL encryption the node uses when sending state transfers through xtrabackup.  The recommended type is <code class="docutils literal"><span class="pre">2</span></code> when using the cluster over WAN.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
 <col width="10%" />
 <col width="90%" />
@@ -462,12 +490,10 @@
 <td>The node encrypts State Snapshot Transfers through XtraBackup.</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">2</span></code></td>
-<td>The node encrypts State Snapshot Transfers through OpenSSL,
-using Socat.</td>
+<td>The node encrypts State Snapshot Transfers through OpenSSL, using Socat.</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">3</span></code></td>
-<td>The node encrypts State Snapshot Transfers through the
-key and certificate files implemented for Galera Cluster.</td>
+<td>The node encrypts State Snapshot Transfers through the key and certificate files implemented for Galera Cluster.</td>
 </tr>
 </tbody>
 </table>
@@ -479,25 +505,27 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-encrypt-algo"><code class="docutils literal"><span class="pre">encrypt-algo</span></code></p>
 <p>Defines the SSL encryption type the node uses for XtraBackup state transfers.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">encrypt-algo</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>Integer</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 </tr>
 </tbody>
@@ -510,31 +538,32 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-progress"><code class="docutils literal"><span class="pre">progress</span></code></p>
 <p>Defines whether where the node reports <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> progress.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">progress</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="4"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>String</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><em>Valid Values:</em></td>
-<td><code class="docutils literal"><span class="pre">1</span></code></td>
-</tr>
-<tr class="row-even"><td>/path/to/file</td>
+<tr class="row-odd"><th class="stub">&nbsp;</th>
+<td>Valid Values:</td>
+<td><code class="docutils literal"><span class="pre">1</span></code>; /path/to/file</td>
 </tr>
 </tbody>
 </table>
@@ -548,25 +577,27 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-rebuild"><code class="docutils literal"><span class="pre">rebuild</span></code></p>
 <p>Defines whether the joiner node rebuilds indexes during a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">rebuild</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>Boolean</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
 </tbody>
@@ -578,25 +609,27 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-rlimit"><code class="docutils literal"><span class="pre">rlimit</span></code></p>
 <p>Defines the rate limit for the donor node.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">rlimit</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>Integer</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -607,25 +640,27 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-sst-initial-timeout"><code class="docutils literal"><span class="pre">sst_initial_timeout</span></code></p>
 <p>Defines the initial timeout to receive the first state transfer packet.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="37%" />
-<col width="26%" />
-<col width="37%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">sst_initial_timeout</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>Integer</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td><code class="docutils literal"><span class="pre">100</span></code></td>
 </tr>
 </tbody>
@@ -636,25 +671,27 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-sst-special-dirs"><code class="docutils literal"><span class="pre">sst_special_dirs</span></code></p>
 <p>Defines whether the node uses special InnoDB home and log directories.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="38%" />
-<col width="28%" />
-<col width="34%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">sst_special_dirs</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>Boolean</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
 </tbody>
@@ -671,25 +708,27 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-sockopt"><code class="docutils literal"><span class="pre">sockopt</span></code></p>
 <p>Defines socket options.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="38%" />
-<col width="28%" />
-<col width="34%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">sockopt</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>String</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -697,31 +736,32 @@ key and certificate files implemented for Galera Cluster.</td>
 <p>This parameter allows you to define one or more socket options for XtraBackup using the Socat transfer format.</p>
 <p class="rubric" id="xtra-streamfmt"><code class="docutils literal"><span class="pre">streamfmt</span></code></p>
 <p>Defines the stream formatting utility.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">streamfmt</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td rowspan="4"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>String</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td><code class="docutils literal"><span class="pre">xbstream</span></code></td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><em>Valid Values:</em></td>
-<td><code class="docutils literal"><span class="pre">tar</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">xbstream</span></code></td>
+<tr class="row-odd"><th class="stub">&nbsp;</th>
+<td>Valid Values:</td>
+<td><code class="docutils literal"><span class="pre">tar</span></code>; <code class="docutils literal"><span class="pre">xbstream</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -732,25 +772,27 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-tca"><code class="docutils literal"><span class="pre">tca</span></code></p>
 <p>Defines the Certificate Authority (CA) to use in SSL encryption.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">tca</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
-<td>path</td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>Path</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -763,25 +805,27 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-tcert"><code class="docutils literal"><span class="pre">tcert</span></code></p>
 <p>Defines the certificate to use in SSL encryption.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">tcert</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>String</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -794,25 +838,27 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-time"><code class="docutils literal"><span class="pre">time</span></code></p>
 <p>Defines whether XtraBackup instruments key stages in the backup and restore process for state transfers.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">time</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>Boolean</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
 </tbody>
@@ -823,31 +869,32 @@ key and certificate files implemented for Galera Cluster.</td>
 </div>
 <p class="rubric" id="xtra-transferfmt"><code class="docutils literal"><span class="pre">transferfmt</span></code></p>
 <p>Defines the transfer stream utility.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="41%" />
-<col width="30%" />
-<col width="30%" />
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td rowspan="2"><strong>System Variable</strong></td>
-<td><em>Name:</em></td>
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
 <td><code class="docutils literal"><span class="pre">transferfmt</span></code></td>
 </tr>
-<tr class="row-even"><td><em>Match:</em></td>
-<td>Yes</td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Match:</td>
+<td>YesNo&#8221;</td>
 </tr>
-<tr class="row-odd"><td rowspan="4"><strong>Permitted Values</strong></td>
-<td><em>Type:</em></td>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
 <td>String</td>
 </tr>
-<tr class="row-even"><td><em>Default Value:</em></td>
+<tr class="row-even"><th class="stub">&nbsp;</th>
+<td>Default Value:</td>
 <td><code class="docutils literal"><span class="pre">socat</span></code></td>
 </tr>
-<tr class="row-odd"><td rowspan="2"><em>Valid Values:</em></td>
-<td><code class="docutils literal"><span class="pre">socat</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">nc</span></code></td>
+<tr class="row-odd"><th class="stub">&nbsp;</th>
+<td>Valid Values:</td>
+<td><code class="docutils literal"><span class="pre">socat</span></code>; <code class="docutils literal"><span class="pre">nc</span></code></td>
 </tr>
 </tbody>
 </table>

@@ -215,10 +215,7 @@
 </dd>
 <dt id="term-galera-replication-plugin">Galera Replication Plugin</dt>
 <dd><p class="first">Galera Replication Plugin is a general purpose replication plugin for any transactional system. It can be used to create a synchronous multi-master replication solution to achieve high availability and scale-out.</p>
-<div class="last admonition note">
-<p class="first admonition-title">Note</p>
 <p class="last">See <a class="reference internal" href="architecture.html#galera-replication-plugin"><span class="std std-ref">Galera Replication Plugin</span></a> for more details.</p>
-</div>
 </dd>
 <dt id="term-gcache">GCache</dt>
 <dd>See <a class="reference internal" href="#term-write-set-cache"><span class="xref std std-term">Write-set Cache</span></a>.</dd>
@@ -229,7 +226,7 @@
 </dd>
 <dt id="term-incremental-state-transfer">Incremental State Transfer</dt>
 <dd><p class="first">In an Incremental State Transfer (IST) a node only receives the missing write-sets and catches up with the group by replaying them. See also the definition for State Snapshot Transfer (SST).</p>
-<p class="last">For more information on IST&#8217;s, see <span class="xref std std-ref">Incremental State Transfer (IST)</span>.</p>
+<p class="last">For more information on IST&#8217;s, see <a class="reference internal" href="state-transfer.html#state-transfer-ist"><span class="std std-ref">Incremental State Transfer (IST)</span></a>.</p>
 </dd>
 <dt id="term-ist">IST</dt>
 <dd>See <a class="reference internal" href="#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</dd>
@@ -278,7 +275,7 @@
 <dd>Transaction commits the node sends to and receives from the cluster.</dd>
 <dt id="term-write-set-cache">Write-set Cache</dt>
 <dd><p class="first">Galera stores write-sets in a special cache called, Write-set Cache (GCache). GCache is a memory allocator for write-sets. Its primary purpose is to minimize the write set footprint on the RAM.</p>
-<p class="last">For more information, see <span class="xref std std-ref">Write-set Cache (GCache)</span>.</p>
+<p class="last">For more information, see <a class="reference internal" href="state-transfer.html#state-transfer-gcache"><span class="std std-ref">Write-Set Cache (GCache)</span></a>.</p>
 </dd>
 <dt id="term-wsrep-api">wsrep API</dt>
 <dd><p class="first">The wsrep API is a generic replication plugin interface for databases.  The API defines a set of application callbacks and replication plugin calls.</p>

@@ -207,273 +207,317 @@
   <div class="library-document section" id="mysql-wsrep-options">
 <h1>MySQL wsrep Options<a class="headerlink" href="#mysql-wsrep-options" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="id1"></span><span class="target" id="index-0"></span><p id="index-1">These are MySQL system variables introduced by wsrep API patch version 0.8. Almost all of the variables are global except for a few. Those are session variables.  If you click on a particular variable in this table, your web browser will scroll down to the entry for it with more details and an explanation.</p>
-<table border="1" class="docutils">
+<table border="1" class="doc-options tight-header docutils">
 <colgroup>
-<col width="41%" />
-<col width="31%" />
-<col width="9%" />
-<col width="10%" />
-<col width="10%" />
+<col width="30%" />
+<col width="42%" />
+<col width="6%" />
+<col width="6%" />
+<col width="8%" />
+<col width="8%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Option</th>
-<th class="head">Default</th>
-<th class="head">Global</th>
-<th class="head">Support</th>
-<th class="head">Dynamic</th>
+<tr class="row-odd"><th class="head"><br /> Option</th>
+<th class="head"><br /> Default Value</th>
+<th class="head"><br /> Global</th>
+<th class="head"><br /> Dynamic</th>
+<th class="head">Initial <br /> Version</th>
+<th class="head">Version <br /> Deprecated</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-auto-increment-control"><span class="std std-ref">wsrep_auto_increment_control</span></a></td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-causal-reads"><span class="std std-ref">wsrep_causal_reads</span></a></td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 <td>&nbsp;</td>
-<td>1 - 3.6</td>
 <td>&nbsp;</td>
+<td>1.0</td>
+<td>3.6</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-certify-nonpk"><span class="std std-ref">wsrep_certify_nonPK</span></a></td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
+<td>&nbsp;</td>
 <td>Yes</td>
-<td>1+</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></td>
-<td>&nbsp;</td>
+<td><code class="docutils literal"><span class="pre">ON</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-cluster-name"><span class="std std-ref">wsrep_cluster_name</span></a></td>
 <td><code class="docutils literal"><span class="pre">example_cluster</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-convert-lock-to-trx"><span class="std std-ref">wsrep_convert_LOCK_to_trx</span></a></td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-data-home-dir"><span class="std std-ref">wsrep_data_home_dir</span></a></td>
-<td><code class="docutils literal"><span class="pre">/path/to/data_home</span></code></td>
+<td><code class="docutils literal"><span class="pre">/path/to/datadir</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-dbug-option"><span class="std std-ref">wsrep_dbug_option</span></a></td>
 <td>&nbsp;</td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a></td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-desync"><span class="std std-ref">wsrep_desync</span></a></td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-dirty-reads"><span class="std std-ref">wsrep_dirty_reads</span></a></td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
-<td>&nbsp;</td>
 <td>Yes</td>
+<td>1.0</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-drupal-282555-workaround"><span class="std std-ref">wsrep_drupal_282555_workaround</span></a></td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-forced-binlog-format"><span class="std std-ref">wsrep_forced_binlog_format</span></a></td>
 <td><code class="docutils literal"><span class="pre">NONE</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-load-data-splitting"><span class="std std-ref">wsrep_load_data_splitting</span></a></td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-log-conflicts"><span class="std std-ref">wsrep_log_conflicts</span></a></td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-max-ws-rows"><span class="std std-ref">wsrep_max_ws_rows</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-max-ws-size"><span class="std std-ref">wsrep_max_ws_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">1G</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a></td>
 <td><em>host address:default port</em></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a></td>
 <td><em>host address:mysqld port</em></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></td>
 <td><code class="docutils literal"><span class="pre">&lt;hostname&gt;</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></td>
 <td>&nbsp;</td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-on"><span class="std std-ref">wsrep_on</span></a></td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
+<td>Yes</td>
 <td>&nbsp;</td>
-<td>1+</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-osu-method"><span class="std std-ref">wsrep_OSU_method</span></a></td>
 <td><code class="docutils literal"><span class="pre">TOI</span></code></td>
 <td>&nbsp;</td>
-<td>3+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-preordered"><span class="std std-ref">wsrep_preordered</span></a></td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a></td>
 <td><code class="docutils literal"><span class="pre">NONE</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></td>
 <td>&nbsp;</td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-reject-queries"><span class="std std-ref">wsrep_reject_queries</span></a></td>
 <td><code class="docutils literal"><span class="pre">NONE</span></code></td>
 <td>Yes</td>
-<td>&nbsp;</td>
 <td>Yes</td>
+<td>???</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-restart-slave"><span class="std std-ref">wsrep_restart_slave</span></a></td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
-<td>1+</td>
 <td>Yes</td>
+<td>1.0</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-retry-autocommit"><span class="std std-ref">wsrep_retry_autocommit</span></a></td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-slave-fk-checks"><span class="std std-ref">wsrep_slave_FK_checks</span></a></td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
 <td>Yes</td>
-<td>1+</td>
 <td>Yes</td>
+<td>1.0</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a></td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-slave-uk-checks"><span class="std std-ref">wsrep_slave_UK_checks</span></a></td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
-<td>1+</td>
 <td>Yes</td>
+<td>1.0</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a></td>
 <td>&nbsp;</td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></td>
 <td>&nbsp;</td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-sst-donor-rejects-queries"><span class="std std-ref">wsrep_sst_donor_rejects_queries</span></a></td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></td>
 <td><code class="docutils literal"><span class="pre">mysqldump</span></code></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-sst-receive-address"><span class="std std-ref">wsrep_sst_receive_address</span></a></td>
 <td><em>node IP address</em></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-start-position"><span class="std std-ref">wsrep_start_position</span></a></td>
 <td><em>see reference entry</em></td>
 <td>Yes</td>
-<td>1+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 <td>Yes</td>
-<td>3.6+</td>
 <td>Yes</td>
+<td>3.6</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-trx-fragment-size"><span class="std std-ref">wsrep_trx_fragment_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 <td>Yes</td>
-<td>4+</td>
 <td>Yes</td>
+<td>4.0</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-trx-fragment-unit"><span class="std std-ref">wsrep_trx_fragment_unit</span></a></td>
 <td><code class="docutils literal"><span class="pre">bytes</span></code></td>
 <td>Yes</td>
-<td>4+</td>
 <td>Yes</td>
+<td>4.0</td>
+<td>&nbsp;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-ws-persistency"><span class="std std-ref">wsrep_ws_persistency</span></a></td>
 <td>&nbsp;</td>
 <td>Yes</td>
-<td>1</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -509,8 +553,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -552,8 +596,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1, Deprecated in Version 3.6</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0, Deprecated in Version 3.6</td>
 </tr>
 </tbody>
 </table>
@@ -563,7 +607,7 @@
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">This feature has been <strong>deprecated</strong>.  It has been replaced by <a class="reference internal" href="#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a>.</p>
+<p class="last">The <code class="docutils literal"><span class="pre">wsrep_causal_reads</span></code> option has been <strong>deprecated</strong>.  It has been replaced by <a class="reference internal" href="#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a>.</p>
 </div>
 <p class="rubric" id="wsrep-certification-rules"><code class="docutils literal"><span class="pre">wsrep_certification_rules</span></code></p>
 <p id="index-4">Certification rules to use in the cluster.</p>
@@ -594,8 +638,8 @@
 <tr class="row-odd"><td>Valid Value</td>
 <td><code class="docutils literal"><span class="pre">OPTIMIZED</span></code>, <code class="docutils literal"><span class="pre">STRICT</span></code></td>
 </tr>
-<tr class="row-even"><td>Support</td>
-<td>Introduced in Version ???</td>
+<tr class="row-even"><td>Initial Version</td>
+<td>Version ???</td>
 </tr>
 </tbody>
 </table>
@@ -639,8 +683,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -681,8 +725,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -702,7 +746,7 @@
 <p>Using the string <code class="docutils literal"><span class="pre">gcomm://</span></code> without any address will cause the node to startup alone, thus initializing a new cluster&#8211;that the other nodes can join to.  Using <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> is the newer, preferred way.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Never use an empty <code class="docutils literal"><span class="pre">gcomm://</span></code> string in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file. If a node restarts, that will cause the node not to rejoin the cluster of which it was a member. Instead, it will initialize a new one-node cluster and cause a split brain. To bootstrap a cluster, you should only pass the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> string at the command-line&#8211;instead of using <code class="docutils literal"><span class="pre">--wsrep-cluster-address=&quot;gcomm://&quot;</span></code>. For more information, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
+<p class="last">Never use an empty <code class="docutils literal"><span class="pre">gcomm://</span></code> string with the <code class="docutils literal"><span class="pre">wsrep_cluster_address</span></code> option in the configuration file. If a node restarts, it will cause the node not to rejoin the cluster. Instead, it will initialize a new one-node cluster and cause a split brain. To bootstrap a cluster, you should only pass the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> string at the command-line&#8211;instead of using <code class="docutils literal"><span class="pre">--wsrep-cluster-address=&quot;gcomm://&quot;</span></code>. For more information, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting the Cluster</span></a>.</p>
 </div>
 <p>You can execute the following SQL statement to see how this variable is set:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_address&#39;</span><span class="p">;</span>
@@ -740,8 +784,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">exmaple_cluster</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -782,8 +826,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -829,8 +873,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td>/path/mysql_datadir</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -871,8 +915,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -912,15 +956,15 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
 <p>Under normal operation, error events are logged to an error log file for the database server.  By default, the name of this file is the server hostname with the <code class="docutils literal"><span class="pre">.err</span></code> extension.  You can define a custom path using the <a class="reference external" href="https://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html#sysvar_log_error">log_error</a> parameter. When you enable <a class="reference internal" href="#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a>, the database server logs additional events surrounding these errors to help in identifying and correcting problems.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">In addition to useful debugging information, this parameter also causes the database server to print authentication information (i.e., passwords) to the error logs.  Don&#8217;t enable it in production environments.</p>
+<p class="last">In addition to useful debugging information, the <code class="docutils literal"><span class="pre">wsrep_debug</span></code> parameter also causes the database server to print authentication information (i.e., passwords) to the error logs.  Don&#8217;t enable it in production environments.</p>
 </div>
 <p>You can execute the following <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">VARIABLES</span></code> statement with a <code class="docutils literal"><span class="pre">LIKE</span></code> operator to see if this variable is enabled:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_debug&#39;</span><span class="p">;</span>
@@ -958,8 +1002,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1002,7 +1046,7 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
@@ -1054,8 +1098,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1100,8 +1144,8 @@
 <tr class="row-odd"><td>Valid Values</td>
 <td><code class="docutils literal"><span class="pre">ROW</span></code>, <code class="docutils literal"><span class="pre">STATEMENT</span></code>, <code class="docutils literal"><span class="pre">MIXED</span></code>, <code class="docutils literal"><span class="pre">NONE</span></code></td>
 </tr>
-<tr class="row-even"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-even"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1143,8 +1187,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1186,8 +1230,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1229,8 +1273,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1271,8 +1315,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">2G</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1313,8 +1357,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td>Server IP Address, Port <code class="docutils literal"><span class="pre">4567</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1370,8 +1414,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1412,8 +1456,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td>Server Hostname</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1455,8 +1499,8 @@
 <tr class="row-even"><td>Default Value</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1465,50 +1509,69 @@
 <p class="first admonition-title">Warning</p>
 <p class="last">The node will block and wait until the script completes and returns before it can proceed. If the script performs any potentially blocking or long-running operations, such as network communication, you may wish initiate such operations in the background and have the script return immediately.</p>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">For an example script that updates two tables on the local node, with changes taking place at the cluster level, see the <a class="reference internal" href="notification-cmd.html"><span class="doc">Notification Command</span></a>.</p>
-</div>
-<p>When the node calls the command, it passes one or more arguments that you can use in configuring your custom notification script and how it responds to the change.  The options are:</p>
-<table class="docutils option-list" frame="void" rules="none">
-<col class="option" />
-<col class="description" />
+<p>For an example script that updates two tables on the local node, with changes taking place at the cluster level, see the <a class="reference internal" href="notification-cmd.html"><span class="doc">Notification Command</span></a>.</p>
+<p>When the node calls the command, it passes one or more arguments that you can use in configuring your custom notification script and how it responds to the change.  Below are these options and explanations of each:</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Purpose</th>
+<th class="head">Possible Values</th>
+</tr>
+</thead>
 <tbody valign="top">
-<tr><td class="option-group" colspan="2">
-<kbd><span class="option">--status <var>&lt;status str&gt;</var></span></kbd></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">--status</span> <span class="pre">&lt;status</span> <span class="pre">str&gt;</span></code></td>
+<td>The status of this node.</td>
+<td><code class="docutils literal"><span class="pre">Undefined</span></code> The node has just started up and is not connected to any <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</td>
 </tr>
-<tr><td>&nbsp;</td><td><p class="first">The status of this node. The possible statuses are:</p>
-<ul class="last simple">
-<li><code class="docutils literal"><span class="pre">Undefined</span></code> The node has just started up and is not connected to any <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</li>
-<li><code class="docutils literal"><span class="pre">Joiner</span></code> The node is connected to a primary component and now is receiving state snapshot.</li>
-<li><code class="docutils literal"><span class="pre">Donor</span></code> The node is connected to primary component and now is sending state snapshot.</li>
-<li><code class="docutils literal"><span class="pre">Joined</span></code> The node has a complete state and now is catching up with the cluster.</li>
-<li><code class="docutils literal"><span class="pre">Synced</span></code> The node has synchronized itself with the cluster.</li>
-<li><code class="docutils literal"><span class="pre">Error(&lt;error</span> <span class="pre">code</span> <span class="pre">if</span> <span class="pre">available&gt;)</span></code> The node is in an error state.</li>
-</ul>
-</td></tr>
-<tr><td class="option-group" colspan="2">
-<kbd><span class="option">--uuid <var>&lt;state UUID&gt;</var></span></kbd></td>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><code class="docutils literal"><span class="pre">Joiner</span></code> The node is connected to a primary component and now is receiving state snapshot.</td>
 </tr>
-<tr><td>&nbsp;</td><td>The cluster state UUID.</td></tr>
-<tr><td class="option-group" colspan="2">
-<kbd><span class="option">--primary <var>&lt;yes/no&gt;</var></span></kbd></td>
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><code class="docutils literal"><span class="pre">Donor</span></code> The node is connected to primary component and now is sending state snapshot.</td>
 </tr>
-<tr><td>&nbsp;</td><td>Whether the current cluster component is primary or not.</td></tr>
-<tr><td class="option-group" colspan="2">
-<kbd><span class="option">--members <var>&lt;list&gt;</var></span></kbd></td>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><code class="docutils literal"><span class="pre">Joined</span></code> The node has a complete state and now is catching up with the cluster.</td>
 </tr>
-<tr><td>&nbsp;</td><td><p class="first">A comma-separated list of the component member UUIDs.
-The members are presented in the following syntax:</p>
-<ul class="last simple">
-<li><code class="docutils literal"><span class="pre">&lt;node</span> <span class="pre">UUID&gt;</span></code> A unique node ID. The wsrep Provider automatically assigns this ID for each node.</li>
-<li><code class="docutils literal"><span class="pre">&lt;node</span> <span class="pre">name&gt;</span></code> The node name as it is set in the <code class="docutils literal"><span class="pre">wsrep_node_name</span></code> option.</li>
-<li><code class="docutils literal"><span class="pre">&lt;incoming</span> <span class="pre">address&gt;</span></code> The address for client connections as it is set in the <code class="docutils literal"><span class="pre">wsrep_node_incoming_address</span></code> option.</li>
-</ul>
-</td></tr>
-<tr><td class="option-group">
-<kbd><span class="option">--index</span></kbd></td>
-<td>The index of this node in the node list.</td></tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><code class="docutils literal"><span class="pre">Synced</span></code> The node has synchronized itself with the cluster.</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><code class="docutils literal"><span class="pre">Error(&lt;error</span> <span class="pre">code</span> <span class="pre">if</span> <span class="pre">available&gt;)</span></code> The node is in an error state.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">--uuid</span> <span class="pre">&lt;state</span> <span class="pre">UUID&gt;</span></code></td>
+<td>The cluster state UUID.</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">--primary</span> <span class="pre">&lt;yes/no&gt;</span></code></td>
+<td>Whether the current cluster component is primary or not.</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">--members</span> <span class="pre">&lt;list&gt;</span></code></td>
+<td>A comma-separated list of the component member UUIDs.</td>
+<td><code class="docutils literal"><span class="pre">&lt;node</span> <span class="pre">UUID&gt;</span></code>; A unique node ID. The wsrep Provider automatically assigns this ID for each node.</td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><code class="docutils literal"><span class="pre">&lt;node</span> <span class="pre">name&gt;</span></code>; The node name as it is set in the <code class="docutils literal"><span class="pre">wsrep_node_name</span></code> option.</td>
+</tr>
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><code class="docutils literal"><span class="pre">&lt;incoming</span> <span class="pre">address&gt;</span></code>; The address for client connections as it is set in the <code class="docutils literal"><span class="pre">wsrep_node_incoming_address</span></code> option.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">--index</span></code></td>
+<td>The index of this node in the node list.</td>
+<td>&nbsp;</td>
+</tr>
 </tbody>
 </table>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_notify_cmd&#39;</span><span class="p">;</span>
@@ -1546,8 +1609,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1590,8 +1653,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-odd"><td>Valid Values</td>
 <td><code class="docutils literal"><span class="pre">TOI</span></code>, <code class="docutils literal"><span class="pre">RSU</span></code></td>
 </tr>
-<tr class="row-even"><td>Support</td>
-<td>Introduced in Version 3, Patch 5.5.17-22.3</td>
+<tr class="row-even"><td>Initial Version</td>
+<td>Version 3, Patch 5.5.17-22.3</td>
 </tr>
 </tbody>
 </table>
@@ -1636,8 +1699,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1678,8 +1741,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1719,8 +1782,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1770,8 +1833,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-odd"><td>Valid Values</td>
 <td><code class="docutils literal"><span class="pre">NONE</span></code>, <code class="docutils literal"><span class="pre">ALL</span></code>, <code class="docutils literal"><span class="pre">ALL_KILL</span></code></td>
 </tr>
-<tr class="row-even"><td>Support</td>
-<td>Introduced in Version ???</td>
+<tr class="row-even"><td>Initial Version</td>
+<td>Version ???</td>
 </tr>
 </tbody>
 </table>
@@ -1826,8 +1889,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version ???</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version ???</td>
 </tr>
 </tbody>
 </table>
@@ -1867,8 +1930,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1908,8 +1971,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">ON</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1949,8 +2012,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -1996,8 +2059,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version ???</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version ???</td>
 </tr>
 </tbody>
 </table>
@@ -2037,8 +2100,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -2083,8 +2146,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -2135,8 +2198,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">OFF</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -2144,7 +2207,7 @@ The members are presented in the following syntax:</p>
 <p>Given that a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> is scriptable, there is no way to tell whether the requested method is blocking or not.  You may also want to avoid querying the donor even with non-blocking state transfers.  As a result, when this parameter is enabled the donor node rejects queries regardless the state transfer and even if the initial request concerned a blocking-only transfer, (meaning, it also rejects during <code class="docutils literal"><span class="pre">xtrabackup</span></code>).</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">The <code class="docutils literal"><span class="pre">mysqldump</span></code> state transfer method does not work with this setting, given that <code class="docutils literal"><span class="pre">mysqldump</span></code> runs queries on the donor and there is no way to differentiate its session from the regular client session.</p>
+<p class="last">The <code class="docutils literal"><span class="pre">mysqldump</span></code> state transfer method does not work with the <code class="docutils literal"><span class="pre">wsrep_sst_donor_rejects_queries</span></code> parameter, given that <code class="docutils literal"><span class="pre">mysqldump</span></code> runs queries on the donor and there is no way to differentiate its session from the regular client session.</p>
 </div>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_sst_donor_rejects_queries&#39;</span><span class="p">;</span>
 
@@ -2181,8 +2244,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">rsync</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -2249,8 +2312,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><a class="reference internal" href="#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -2295,8 +2358,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">00000000-0000-0000-0000-00000000000000:-1</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 1</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
 </tr>
 </tbody>
 </table>
@@ -2337,8 +2400,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 3.6</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 3.6</td>
 </tr>
 </tbody>
 </table>
@@ -2425,8 +2488,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version 4.0</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 4.0</td>
 </tr>
 </tbody>
 </table>
@@ -2469,8 +2532,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-odd"><td>Valid Values</td>
 <td><code class="docutils literal"><span class="pre">bytes</span></code>, <code class="docutils literal"><span class="pre">events</span></code>, <code class="docutils literal"><span class="pre">rows</span></code>, <code class="docutils literal"><span class="pre">statements</span></code></td>
 </tr>
-<tr class="row-even"><td>Support</td>
-<td>Introduced in Version 4.0</td>
+<tr class="row-even"><td>Initial Version</td>
+<td>Version 4.0</td>
 </tr>
 </tbody>
 </table>
@@ -2517,8 +2580,8 @@ The members are presented in the following syntax:</p>
 <tr class="row-even"><td>Default Value</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Support</td>
-<td>Introduced in Version ???, Deprecated in Version 0.8</td>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version ???, Deprecated in Version 0.8</td>
 </tr>
 </tbody>
 </table>
