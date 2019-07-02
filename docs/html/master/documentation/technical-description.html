@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="technical-description">
-<h1>Technical Description<a class="headerlink" href="#technical-description" title="Permalink to this headline">¶</a></h1>
-<p id="tech-description">Galera Cluster is a synchronous certification-based replication solution for MySQL, MariaDB and Percona XtraDB.  Cluster nodes are identical and fully representative of the cluster state. They allow for unconstrained transparent client access, acting as a single-distributed database server.  In order to better understand Galera Cluster, this section provides detailed information on how it works and how you can benefit from it.</p>
+<span id="tech-description"></span><h1>Technical Description<a class="headerlink" href="#technical-description" title="Permalink to this headline">¶</a></h1>
+<p>Galera Cluster is a synchronous certification-based replication solution for MySQL, MariaDB and Percona XtraDB.  Cluster nodes are identical and fully representative of the cluster state. They allow for unconstrained transparent client access, acting as a single-distributed database server.  In order to better understand Galera Cluster, this section provides detailed information on how it works and how you can benefit from it.</p>
 <p class="rubric" id="understanding-repl">Understanding Replication</p>
 <p>Replication in the context of databases refers to the frequent copying of data from one database server to another.  These sections provide a high-level explanation of replication both in the general sense of how it works, as well as the particulars of how Galera Cluster implements these core concepts.</p>
 <ul>
@@ -235,7 +235,7 @@
 <li><p class="first"><a class="reference internal" href="recovery.html"><span class="doc">Node Failure and Recovery</span></a></p>
 <p>Nodes fail to operate when they lose their connection with the cluster.  This can occur for various reasons, such as hardware failures, software crashes, or the loss of network connectivity.  This section provides an overview of how nodes and the cluster cope with failure and how they may recover.</p>
 </li>
-<li><p class="first"><a class="reference internal" href="weighted-quorum.html"><span class="doc">Weighted Quorum</span></a></p>
+<li><p class="first"><a class="reference internal" href="weighted-quorum.html"><span class="doc">Quorum Components</span></a></p>
 <p>When nodes connect to each other, they form components.  The Primary Component is a component that has quorum: it carries the majority of nodes in the cluster.  By default, each node represents one vote in quorum calculations. However, you can modify this feature in order to ensure certain stable nodes with strong connections carry a greater value.  This section provides an overview of how Galera Cluster handles weighted values in quorum calculations.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="streaming-replication.html"><span class="doc">Streaming Replication</span></a></p>

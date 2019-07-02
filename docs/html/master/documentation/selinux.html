@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="selinux-configuration">
-<h1>SELinux Configuration<a class="headerlink" href="#selinux-configuration" title="Permalink to this headline">¶</a></h1>
-<p id="selinux">Security-Enhanced Linux, or SELinux, is a kernel module for improving security of Linux operating systems.  It integrates support for access control security policies, including mandatory access control (MAC), that limit user applications and system daemons access to files and network resources.  Some Linux distributions, such as Fedora, ship with SELinux enabled by default.</p>
+<span id="selinux"></span><h1>SELinux Configuration<a class="headerlink" href="#selinux-configuration" title="Permalink to this headline">¶</a></h1>
+<p>Security-Enhanced Linux, or SELinux, is a kernel module for improving security of Linux operating systems.  It integrates support for access control security policies, including mandatory access control (MAC), that limit user applications and system daemons access to files and network resources.  Some Linux distributions, such as Fedora, ship with SELinux enabled by default.</p>
 <p>In the context of Galera Cluster, systems with SELinux may block the database server, keeping it from starting or preventing the node from establishing connections with other nodes in the cluster.  To prevent this, you need to configure SELinux policies to allow the node to operate.</p>
 <div class="section" id="generating-an-selinux-policy">
 <span id="gen-selinux-policy"></span><h2>Generating an SELinux Policy<a class="headerlink" href="#generating-an-selinux-policy" title="Permalink to this headline">¶</a></h2>

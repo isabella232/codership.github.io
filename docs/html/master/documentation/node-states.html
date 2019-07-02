@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="flow-control">
-<h1>Flow Control<a class="headerlink" href="#flow-control" title="Permalink to this headline">¶</a></h1>
-<p id="id1">Galera Cluster manages the replication process using a feedback mechanism, called Flow Control.  Flow Control allows a node to pause and resume replication according to its needs.  This prevents any node from lagging too far behind the others in applying transactions.</p>
+<span id="id1"></span><h1>Flow Control<a class="headerlink" href="#flow-control" title="Permalink to this headline">¶</a></h1>
+<p>Galera Cluster manages the replication process using a feedback mechanism, called Flow Control.  Flow Control allows a node to pause and resume replication according to its needs.  This prevents any node from lagging too far behind the others in applying transactions.</p>
 <div class="section" id="how-flow-control-works">
 <span id="id2"></span><h2>How Flow Control Works<a class="headerlink" href="#how-flow-control-works" title="Permalink to this headline">¶</a></h2>
 <p>Galera Cluster achieves synchronous replication by ensuring that transactions copy to all nodes an execute according to a cluster-wide ordering.  That said, the transaction applies and commits occur asynchronously as they replicate through the cluster.</p>

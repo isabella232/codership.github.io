@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="kb-article section" id="wan-replication">
-<h1>WAN Replication<a class="headerlink" href="#wan-replication" title="Permalink to this headline">¶</a></h1>
-<p id="kb-best-wan-replication">When running the cluster over a <abbr title="Wide Area Network">WAN</abbr>, you may frequently experience transient network connectivity failures.  To prevent this from partitioning the cluster, you may want to increase the <em>keepalive</em> timeouts.</p>
+<span id="kb-best-wan-replication"></span><h1>WAN Replication<a class="headerlink" href="#wan-replication" title="Permalink to this headline">¶</a></h1>
+<p>When running the cluster over a <abbr title="Wide Area Network">WAN</abbr>, you may frequently experience transient network connectivity failures.  To prevent this from partitioning the cluster, you may want to increase the <em>keepalive</em> timeouts.</p>
 <p class="kb rubric">Recommendations</p>
 <p>The following parameters can tolerate 30 second connectivity outages:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;evs.keepalive_period = PT3S;</span>

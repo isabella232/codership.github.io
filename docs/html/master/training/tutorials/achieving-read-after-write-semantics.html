@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="tutorial-article section" id="achieving-read-after-write-semantics-with-galera">
-<h1>Achieving Read-After-Write Semantics with Galera<a class="headerlink" href="#achieving-read-after-write-semantics-with-galera" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="achieving-read-after-write-semantics">Length:  599 words; Writer: Philip Stoev; Published: June 17, 2015; Topic: General; Level: Intermediate</p>
+<span id="achieving-read-after-write-semantics"></span><h1>Achieving Read-After-Write Semantics with Galera<a class="headerlink" href="#achieving-read-after-write-semantics-with-galera" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  599 words; Writer: Philip Stoev; Published: June 17, 2015; Topic: General; Level: Intermediate</p>
 <p>Some applications, particularly those written with a single-node database server in mind, attempt to immediately read a value they have just inserted into the database, without making those those operations part of a single transaction. A read/write splitting proxy or a connection pool combined with a load-balancer can direct each operation to a different database node.</p>
 <p>Since Galera allows, for performance reasons, a very small amount of “slave lag”, the node that is processing the read may have not yet applied the write. It can return old data, causing an application that did not expect that to misbehave or produce an error.</p>
 <div class="section" id="the-solution">

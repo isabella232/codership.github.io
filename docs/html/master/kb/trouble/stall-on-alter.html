@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="kb-article section" id="cluster-stalls-on-alter">
-<h1>Cluster Stalls on <code class="docutils literal"><span class="pre">ALTER</span></code><a class="headerlink" href="#cluster-stalls-on-alter" title="Permalink to this headline">¶</a></h1>
-<p id="kb-trouble-stall-on-alter">There may be times in which a cluster will stall when an <code class="docutils literal"><span class="pre">ALTER</span></code> statement is executed on an unused table.</p>
+<span id="kb-trouble-stall-on-alter"></span><h1>Cluster Stalls on <code class="docutils literal"><span class="pre">ALTER</span></code><a class="headerlink" href="#cluster-stalls-on-alter" title="Permalink to this headline">¶</a></h1>
+<p>There may be times in which a cluster will stall when an <code class="docutils literal"><span class="pre">ALTER</span></code> statement is executed on an unused table.</p>
 <p class="kb rubric">Scenario</p>
 <p>There may be a situation in which you attempt to execute an <code class="docutils literal"><span class="pre">ALTER</span></code> statement on one node, but it takes a long time to execute&#8211;longer than expected.  During that period all of the other nodes may stall, leading to performance problems throughout the cluster.</p>
 <p>What&#8217;s happening is a side effect of a multi-master cluster with several appliers.  The cluster needs to control when a <abbr title="Data Definition Language">DDL</abbr> statement ends in relation to other transactions, in order deterministically to detect conflicts and then schedule parallel appliers.  Basically, the DDL statement must execute in isolation.</p>

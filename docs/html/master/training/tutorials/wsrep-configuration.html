@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="tutorial-article section" id="replication-configuration">
-<h1>Replication Configuration<a class="headerlink" href="#replication-configuration" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="wsrep-configuration">Length:  964 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+<span id="wsrep-configuration"></span><h1>Replication Configuration<a class="headerlink" href="#replication-configuration" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  964 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>In addition to the configuration for the database server, there are some specific options that you need to set to enable write-set replication.  You must apply these changes to the configuration file (i.e., <code class="docutils literal"><span class="pre">my.cnf</span></code>) for each node in the cluster.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-name"><span class="std std-ref">wsrep_cluster_name</span></a>: Use this parameter to set the logical name for the cluster.  You must use the same name for each node in the cluster.  The connection will fail on nodes that have different values for this parameter.</p>

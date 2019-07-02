@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Installing Galera Cluster" href="install.html" />
-    <link rel="prev" title="Weighted Quorum" href="weighted-quorum.html" />
+    <link rel="prev" title="Quorum Components" href="weighted-quorum.html" />
 
 
 
@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="streaming-replication">
-<h1>Streaming Replication<a class="headerlink" href="#streaming-replication" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="id1"></span><p id="index-0">Under normal operation, the node performs all replication and certification events when a transaction commits.  When working with small transactions this is fine. However, it poses an issue with long-running writes and changes to large data-sets.</p>
+<span id="id1"></span><h1>Streaming Replication<a class="headerlink" href="#streaming-replication" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Under normal operation, the node performs all replication and certification events when a transaction commits.  When working with small transactions this is fine. However, it poses an issue with long-running writes and changes to large data-sets.</p>
 <p>In <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, the node breaks the transaction into fragments, then certifies and replicates them on the slaves while the transaction is still in progress.  Once certified, the fragment can no longer be aborted by conflicting transactions.</p>
 <p>Additionally, Streaming Replication allows the node to process transaction write-sets greater than 2Gb.</p>
 <div class="admonition note">
@@ -285,7 +285,7 @@
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="weighted-quorum.html"
-                          title="Previous page">&larr; Weighted Quorum</a></p>
+                          title="Previous page">&larr; Quorum Components</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -356,7 +356,7 @@
           <a href="install.html" title="Installing Galera Cluster"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="weighted-quorum.html" title="Weighted Quorum"
+          <a href="weighted-quorum.html" title="Quorum Components"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
@@ -368,7 +368,7 @@
 
 
 			
-				<li><a href="weighted-quorum.html" title="Weighted Quorum">&lt; Previous</a></li>
+				<li><a href="weighted-quorum.html" title="Quorum Components">&lt; Previous</a></li>
 			
 
 			

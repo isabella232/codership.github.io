@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="kb-article section" id="write-set-caching-during-state-transfers">
-<h1>Write-Set Caching during State Transfers<a class="headerlink" href="#write-set-caching-during-state-transfers" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="kb-best-gcache-during-state-transfers"></span><p id="index-0">Under normal operations, nodes do not consume much more memory than the regular standalone MySQL database server.  The certification index and uncommitted write-sets do cause some additional usage, but in typical applications this is not usually noticeable. Write-set caching during state transfers is the exception.</p>
+<span id="kb-best-gcache-during-state-transfers"></span><h1>Write-Set Caching during State Transfers<a class="headerlink" href="#write-set-caching-during-state-transfers" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Under normal operations, nodes do not consume much more memory than the regular standalone MySQL database server.  The certification index and uncommitted write-sets do cause some additional usage, but in typical applications this is not usually noticeable. Write-set caching during state transfers is the exception.</p>
 <p class="kb rubric">Scenario</p>
 <p>When a node receives a state transfer, it cannot process or apply incoming write-sets as it does not yet have a state to apply them to.  Depending on the state transfer method, (<code class="docutils literal"><span class="pre">mysqldump</span></code>, for instance), the sending node may also be unable to apply write-sets.</p>
 <p class="kb rubric">Recommendations</p>

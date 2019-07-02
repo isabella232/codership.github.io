@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="kb-article section" id="customizing-the-write-set-cache-size">
-<h1>Customizing the Write-Set Cache Size<a class="headerlink" href="#customizing-the-write-set-cache-size" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="kb-best-customizing-gcache-size"></span><span class="target" id="index-0"></span><p id="index-1">You can define the size of the write-set cache using the <a class="reference internal" href="../../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter.  The set the size to one less than that of the data directory.</p>
+<span id="kb-best-customizing-gcache-size"></span><h1>Customizing the Write-Set Cache Size<a class="headerlink" href="#customizing-the-write-set-cache-size" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><p id="index-1">You can define the size of the write-set cache using the <a class="reference internal" href="../../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter.  The set the size to one less than that of the data directory.</p>
 <p class="kb rubric">Scenario</p>
 <p>If you have storage issues, there are some guidelines to consider in adjusting this issue.  For example, your preferred state snapshot method.  <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code> copy the InnoDB log files, while <code class="docutils literal"><span class="pre">mysqldump</span></code> does not.  So, if you use <code class="docutils literal"><span class="pre">mysqldump</span></code> for state snapshot transfers, you can subtract the size of the log files from your calculation of the data directory size.</p>
 <div class="admonition note">

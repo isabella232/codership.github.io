@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="using-status-variables">
-<h1>Using Status Variables<a class="headerlink" href="#using-status-variables" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="monitoring-cluster"></span><p id="index-0">From the database client, you can check the status of write-set replication throughout the cluster using standard queries.  Status variables that relate to write-set replication have the prefix <code class="docutils literal"><span class="pre">wsrep_</span></code>, meaning that you can display them all using the following query:</p>
+<span id="monitoring-cluster"></span><h1>Using Status Variables<a class="headerlink" href="#using-status-variables" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">From the database client, you can check the status of write-set replication throughout the cluster using standard queries.  Status variables that relate to write-set replication have the prefix <code class="docutils literal"><span class="pre">wsrep_</span></code>, meaning that you can display them all using the following query:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">GLOBAL</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_%&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+-------+</span>

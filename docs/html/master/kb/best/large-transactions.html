@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="kb-article section" id="handling-large-transactions">
-<h1>Handling Large Transactions<a class="headerlink" href="#handling-large-transactions" title="Permalink to this headline">¶</a></h1>
-<p id="kb-best-large-transactions">Large transactions, especially ones deleting removes millions of rows from a table at once, can lead to diminished performance. One reason is that the table may reindexed and rescanned after each row is deleted.</p>
+<span id="kb-best-large-transactions"></span><h1>Handling Large Transactions<a class="headerlink" href="#handling-large-transactions" title="Permalink to this headline">¶</a></h1>
+<p>Large transactions, especially ones deleting removes millions of rows from a table at once, can lead to diminished performance. One reason is that the table may reindexed and rescanned after each row is deleted.</p>
 <p class="kb rubric">Scenario</p>
 <p>Suppose you have a node called <code class="docutils literal"><span class="pre">dbhost</span></code> with a database called <code class="docutils literal"><span class="pre">keystone</span></code>.  Suppose further that you execute a large transaction, which includes a <code class="docutils literal"><span class="pre">DELETE</span></code> statement that deletes expired tokens from their table in that database and on that host. If this transaction involves millions of rows, it could affect the overall performance of the cluster.</p>
 <p class="kb rubric">Recommendations</p>

@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="kb-article section" id="using-galera-cluster-with-selinux">
-<h1>Using Galera Cluster with SELinux<a class="headerlink" href="#using-galera-cluster-with-selinux" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="kb-best-galera-with-selinux"></span><p id="index-0">When you first enable Galera Cluster on a node that runs SELinux, it will prohibit all cluster activities.  In order to enable replication on the node, you need a policy so that SELinux can recognize cluster activities as legitimate.</p>
+<span id="kb-best-galera-with-selinux"></span><h1>Using Galera Cluster with SELinux<a class="headerlink" href="#using-galera-cluster-with-selinux" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">When you first enable Galera Cluster on a node that runs SELinux, it will prohibit all cluster activities.  In order to enable replication on the node, you need a policy so that SELinux can recognize cluster activities as legitimate.</p>
 <p class="kb rubric">Recommendations</p>
 <p>To create a policy for Galera Cluster, set SELinux to run in permissive mode.  Permissive mode does not block cluster activity, but it does log the actions as warnings.  By collecting these warnings, you can iteratively create a policy for Galera Cluster.  You can make this change generally by editing the SELinux configuration file (e.g., <code class="docutils literal"><span class="pre">/etc/selinux/config</span></code>) to include an uncommented line like so:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELINUX=permissive</span>

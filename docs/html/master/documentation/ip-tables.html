@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="firewall-configuration-with-iptables">
-<h1>Firewall Configuration with <code class="docutils literal"><span class="pre">iptables</span></code><a class="headerlink" href="#firewall-configuration-with-iptables" title="Permalink to this headline">¶</a></h1>
-<p id="ip-tables">Linux provides packet filtering support at the kernel level.  Using <code class="docutils literal"><span class="pre">iptables</span></code> and <code class="docutils literal"><span class="pre">ip6tables</span></code> you can set up, maintain and inspect tables of IPv4 and IPv6 packet filtering rules.</p>
+<span id="ip-tables"></span><h1>Firewall Configuration with <code class="docutils literal"><span class="pre">iptables</span></code><a class="headerlink" href="#firewall-configuration-with-iptables" title="Permalink to this headline">¶</a></h1>
+<p>Linux provides packet filtering support at the kernel level.  Using <code class="docutils literal"><span class="pre">iptables</span></code> and <code class="docutils literal"><span class="pre">ip6tables</span></code> you can set up, maintain and inspect tables of IPv4 and IPv6 packet filtering rules.</p>
 <p>There are several tables that the kernel uses for packet filtering and within these tables are chains that it match specific kinds of traffic.  In order to open the relevant ports for Galera Cluster, you need to append new rules to the <code class="docutils literal"><span class="pre">INPUT</span></code> chain on the filter table.</p>
 <div class="section" id="opening-ports-for-galera-cluster">
 <span id="iptables-ports"></span><h2>Opening Ports for Galera Cluster<a class="headerlink" href="#opening-ports-for-galera-cluster" title="Permalink to this headline">¶</a></h2>

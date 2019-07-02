@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="scriptable-state-snapshot-transfers">
-<h1>Scriptable State Snapshot Transfers<a class="headerlink" href="#scriptable-state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
-<p id="scriptable-sst">When a node sends and receives a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>, it manage it through processes that run external to the database server.  In the event that you need more from these processes that the default behavior provides, Galera Cluster provides an interface for custom shell scripts to manage state snapshot transfers on the node.</p>
+<span id="scriptable-sst"></span><h1>Scriptable State Snapshot Transfers<a class="headerlink" href="#scriptable-state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
+<p>When a node sends and receives a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>, it manage it through processes that run external to the database server.  In the event that you need more from these processes that the default behavior provides, Galera Cluster provides an interface for custom shell scripts to manage state snapshot transfers on the node.</p>
 <div class="section" id="using-the-common-sst-script">
 <span id="writing-custom-sst"></span><h2>Using the Common SST Script<a class="headerlink" href="#using-the-common-sst-script" title="Permalink to this headline">¶</a></h2>
 <p>Galera Cluster includes a common script for managing a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>, which you can use as a starting point in building your own custom script.  The filename is <code class="docutils literal"><span class="pre">wsrep_sst_common.sh</span></code>.  For Linux users, the package manager typically installs it for you in <code class="docutils literal"><span class="pre">/usr/bin</span></code>.</p>

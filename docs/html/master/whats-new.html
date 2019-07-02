@@ -204,8 +204,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="what-s-new-in-galera-cluster-4-x">
-<h1>What&#8217;s New in Galera Cluster 4.x<a class="headerlink" href="#what-s-new-in-galera-cluster-4-x" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="whats-new"></span><span class="target" id="index-0"></span><span class="target" id="index-1"></span><p id="index-2">With the latest release of Galera Cluster in the 4.x branch, there are some new features available to you, including the following:</p>
+<span id="whats-new"></span><h1>What&#8217;s New in Galera Cluster 4.x<a class="headerlink" href="#what-s-new-in-galera-cluster-4-x" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><p id="index-2">With the latest release of Galera Cluster in the 4.x branch, there are some new features available to you, including the following:</p>
 <ul>
 <li><p class="first"><strong>Streaming Replication</strong> Under normal operation, the node initiates all replication and certification operations when the transaction commits.  For large transactions, this can result in conflicts: smaller transactions can get in first and cause the large transactions to abort.  With Streaming Replication, the node breaks the transaction into fragments, then certifies and replicates them on all slave nodes while the transaction is still in progress.  Once certified, conflicting transactions can no longer abort the fragment.</p>
 <p>This provides an alternative replication method for handling large or long-running write transactions, or when working with hot records.</p>

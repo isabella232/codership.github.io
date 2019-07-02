@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="kb-article section" id="detecting-a-slow-node">
-<h1>Detecting a Slow Node<a class="headerlink" href="#detecting-a-slow-node" title="Permalink to this headline">¶</a></h1>
-<p id="kb-best-detecting-slow-node">By design, the performance of a cluster cannot be higher than the performance of the slowest node in the cluster. Even if you have only one node, its performance can be considerably slower when compared with running the same server in a standalone mode (i.e., without a wsrep Provider).</p>
+<span id="kb-best-detecting-slow-node"></span><h1>Detecting a Slow Node<a class="headerlink" href="#detecting-a-slow-node" title="Permalink to this headline">¶</a></h1>
+<p>By design, the performance of a cluster cannot be higher than the performance of the slowest node in the cluster. Even if you have only one node, its performance can be considerably slower when compared with running the same server in a standalone mode (i.e., without a wsrep Provider).</p>
 <p>This is particularly true for large transactions&#8212;even if they are within transaction size limits. This is why it&#8217;s important to be able to detect a slow node on a cluster.</p>
 <p class="kb rubric">Scenario</p>
 <p id="finding-slow-nodes">Suppose you suspect that your cluster is running slowly, that transactions are slow to commit to all nodes. However, you&#8217;re not sure which node is the slowest.</p>

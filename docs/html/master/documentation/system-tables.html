@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="galera-system-tables">
-<h1>Galera System Tables<a class="headerlink" href="#galera-system-tables" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="system-tables"></span><p id="index-0">Starting with version 4 of Galera, three system tables related to Galera replication were added to the <code class="docutils literal"><span class="pre">mysql</span></code> database: <code class="docutils literal"><span class="pre">wsrep_cluster</span></code>, <code class="docutils literal"><span class="pre">wsrep_cluster_members</span></code>, and <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code>.  These system tables may be used by database administrators to get a sense of the current layout of the nodes in a cluster.</p>
+<span id="system-tables"></span><h1>Galera System Tables<a class="headerlink" href="#galera-system-tables" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Starting with version 4 of Galera, three system tables related to Galera replication were added to the <code class="docutils literal"><span class="pre">mysql</span></code> database: <code class="docutils literal"><span class="pre">wsrep_cluster</span></code>, <code class="docutils literal"><span class="pre">wsrep_cluster_members</span></code>, and <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code>.  These system tables may be used by database administrators to get a sense of the current layout of the nodes in a cluster.</p>
 <p>To see these tables on your server, execute the following SQL statement one of them using the <code class="docutils literal"><span class="pre">mysql</span></code> client or a similar client:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SHOW TABLES FROM mysql LIKE &#39;wsrep%&#39;;</span>
 

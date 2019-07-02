@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="schema-upgrades">
-<h1>Schema Upgrades<a class="headerlink" href="#schema-upgrades" title="Permalink to this headline">¶</a></h1>
-<p id="id1">Schema changes are of particular interest related to Galara Cluster. Schema changes are  <abbr title="Data Definition Language">DDL</abbr> statement executed on a database (e.g., <code class="docutils literal"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code>, <code class="docutils literal"><span class="pre">GRANT</span></code>).  These <abbr title="Data Definition Language">DDL</abbr> statements change the database itself and are non-transactional.</p>
+<span id="id1"></span><h1>Schema Upgrades<a class="headerlink" href="#schema-upgrades" title="Permalink to this headline">¶</a></h1>
+<p>Schema changes are of particular interest related to Galara Cluster. Schema changes are  <abbr title="Data Definition Language">DDL</abbr> statement executed on a database (e.g., <code class="docutils literal"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code>, <code class="docutils literal"><span class="pre">GRANT</span></code>).  These <abbr title="Data Definition Language">DDL</abbr> statements change the database itself and are non-transactional.</p>
 <p>Galera Cluster processes schema changes by two different methods:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#toi"><span class="std std-ref">Total Order Isolation</span></a>: Abbreviated as TOI, these are schema changes made on all cluster nodes in the same total order sequence, preventing other transations from committing for the duration of the operation.</li>

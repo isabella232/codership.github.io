@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="kb-article section" id="wan-latency">
-<h1>WAN Latency<a class="headerlink" href="#wan-latency" title="Permalink to this headline">¶</a></h1>
-<p id="kb-best-wan-latency">When using Galera Cluster over a <abbr title="Wide Area Network">WAN</abbr>, remember that WAN links can have exceptionally high latency.  You can check this by taking Round-Trip Time (RTT) measurements between cluster nodes. If there is a latency, you can correct for this by adjusting all of the temporal parameters.</p>
+<span id="kb-best-wan-latency"></span><h1>WAN Latency<a class="headerlink" href="#wan-latency" title="Permalink to this headline">¶</a></h1>
+<p>When using Galera Cluster over a <abbr title="Wide Area Network">WAN</abbr>, remember that WAN links can have exceptionally high latency.  You can check this by taking Round-Trip Time (RTT) measurements between cluster nodes. If there is a latency, you can correct for this by adjusting all of the temporal parameters.</p>
 <p class="kb rubric">Recommendations</p>
 <p>To take RTT measurements, use <code class="docutils literal"><span class="pre">ping</span></code> on each cluster node to ping the others.  For example, if you were to log into the node at <code class="docutils literal"><span class="pre">192.168.1.1</span></code>, you might execute something like the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> ping -c <span class="m">3</span> <span class="m">192</span>.168.1.2

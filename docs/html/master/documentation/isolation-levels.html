@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="isolation-levels">
-<h1>Isolation Levels<a class="headerlink" href="#isolation-levels" title="Permalink to this headline">¶</a></h1>
-<p id="id1">In a database system, concurrent transactions are processed in &#8220;isolation&#8221; from each other. The level of isolation determines how transactions can affect each other.</p>
+<span id="id1"></span><h1>Isolation Levels<a class="headerlink" href="#isolation-levels" title="Permalink to this headline">¶</a></h1>
+<p>In a database system, concurrent transactions are processed in &#8220;isolation&#8221; from each other. The level of isolation determines how transactions can affect each other.</p>
 <div class="section" id="intra-node-vs-inter-node-isolation-in-galera-cluster">
 <h2>Intra-Node vs. Inter-Node Isolation in Galera Cluster<a class="headerlink" href="#intra-node-vs-inter-node-isolation-in-galera-cluster" title="Permalink to this headline">¶</a></h2>
 <p>Before going into details about possible isolation levels which can be set for a client session in Galera Cluster it is important to make a distinction between single node and global cluster transaction isolation. Individual cluster nodes can provide any isolation level <em>to the extent</em> it is supported by MySQL/InnoDB. However isolation level <em>between</em> the nodes in the cluster is affected by replication protocol, so transactions issued on different nodes may not be isolated <em>identically</em> to transactions issued on the same node.</p>

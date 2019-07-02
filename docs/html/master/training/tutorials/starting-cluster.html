@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="tutorial-article section" id="starting-the-cluster">
-<h1>Starting the Cluster<a class="headerlink" href="#starting-the-cluster" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="starting-cluster">Length:  1,097 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+<span id="starting-cluster"></span><h1>Starting the Cluster<a class="headerlink" href="#starting-the-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  1,097 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>After you finish installing MySQL (or MariaDB or Percona XtraDB to Galera Cluster) and Galera and have added the necessary settings for the configuration file needed for Galera Cluster, the next steps are to start the nodes that will form the cluster.  To do this, you will need to start the <code class="docutils literal"><span class="pre">mysqld</span></code> daemon on one node, using the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.  This initializes the new <a class="reference internal" href="../../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> for the cluster.  Each node you start after that will connect to the component and begin replication.</p>
 <p>Before you attempt to initialize the cluster, there are a few things you should verify are in place on each node and related services:</p>
 <ul>

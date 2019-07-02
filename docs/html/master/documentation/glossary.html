@@ -205,7 +205,7 @@
           <div class="body" role="main">
             
   <div class="library-document section" id="glossary">
-<h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
 <dl class="glossary docutils">
 <dt id="term-galera-arbitrator">Galera Arbitrator</dt>
 <dd><p class="first">An external process that functions as an additional node in certain cluster operations, such as quorum calculations and generating consistent application state snapshots.</p>
@@ -240,7 +240,7 @@
 </dd>
 <dt id="term-primary-component">Primary Component</dt>
 <dd><p class="first">In addition to single-node failures, the cluster may be split into several components due to network failure. In such a situation, only one of the components can continue to modify the database state to avoid history divergence. This component is called the Primary Component (PC).</p>
-<p class="last">For more information on the Primary Component, see <a class="reference internal" href="weighted-quorum.html"><span class="doc">Weighted Quorum</span></a>.</p>
+<p class="last">For more information on the Primary Component, see <a class="reference internal" href="weighted-quorum.html"><span class="doc">Quorum Components</span></a>.</p>
 </dd>
 <dt id="term-rolling-schema-upgrade">Rolling Schema Upgrade</dt>
 <dd><p class="first">The rolling schema upgrade is a <abbr title="Data Definition Language">DDL</abbr> processing method in which the <abbr title="Data Definition Language">DDL</abbr> will only be processed locally on the node. The node is desynchronized from the cluster for the duration of the <abbr title="Data Definition Language">DDL</abbr> processing in a way that it doesn&#8217;t block the other nodes.  When the <abbr title="Data Definition Language">DDL</abbr> processing is complete, the node applies the delayed replication events and synchronizes with the cluster.</p>

@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="tutorial-article section" id="restarting-the-cluster">
-<h1>Restarting the Cluster<a class="headerlink" href="#restarting-the-cluster" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="restarting-cluster">Length:  791 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+<span id="restarting-cluster"></span><h1>Restarting the Cluster<a class="headerlink" href="#restarting-the-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  791 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>Occasionally, you may have to restart an entire Galera Cluster.  This may happen, for example, when there is a power failure in which every node is shut down and you have no <code class="docutils literal"><span class="pre">mysqld</span></code> process.  Restarting a cluster, starting nodes in the wrong order, starting the wrong nodes first, can be devastating and lead to loss of data.</p>
 <p>When restarting an entire Galera Cluster, you&#8217;ll need to determine which node has the most advanced node state ID. This is covered in the next section.  Once you&#8217;ve identified the most advanced node, you&#8217;ll need to start that node first.  Then you can start the rest of the nodes in any order.  They will each look to the first node as the most up-to-date node.</p>
 <div class="section" id="identifying-the-most-advanced-node">

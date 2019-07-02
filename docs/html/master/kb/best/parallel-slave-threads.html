@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <div class="kb-article section" id="setting-parallel-slave-threads">
-<h1>Setting Parallel Slave Threads<a class="headerlink" href="#setting-parallel-slave-threads" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="kb-best-parallel-slave-threads"></span><span class="target" id="index-0"></span><p id="index-1">There is no rule about how many slave threads you need for replication.  Parallel threads do not guarantee better performance, but they don&#8217;t impair regular operation performance and they may in fact speed up the synchronization of new nodes joining a cluster.</p>
+<span id="kb-best-parallel-slave-threads"></span><h1>Setting Parallel Slave Threads<a class="headerlink" href="#setting-parallel-slave-threads" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><p id="index-1">There is no rule about how many slave threads you need for replication.  Parallel threads do not guarantee better performance, but they don&#8217;t impair regular operation performance and they may in fact speed up the synchronization of new nodes joining a cluster.</p>
 <p class="kb rubric">Scenario</p>
 <p>Suppose you have a cluster of a few nodes, but occasionally you add a couple of new nodes to the cluster to handle unexpected surges in traffic.  When these surges happen, you want the new nodes to be synchronized rapidly and not be a drain on the performance of the cluster in the process.</p>
 <p>You may be able to do this, to get new nodes synchronized and handling traffic faster by making changes to a couple of settings.</p>

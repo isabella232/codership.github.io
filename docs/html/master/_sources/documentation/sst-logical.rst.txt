@@ -1,9 +1,9 @@
 .. cssclass:: library-document
+.. _`sst-logical`:
 
 ========================
 Logical State Snapshot
 ========================
-.. _`sst-logical`:
 
 There is one back-end method available for a Logical State Snapshots: ``mysqldump``.
 
@@ -24,7 +24,7 @@ The Logical State Transfer Method has the following disadvantages:
 - The receiving server must have a non-corrupted database.
 
 
-.. _`mysqldump`:
+.. _`sst-mysqldump`:
 
 --------------------------
 ``mysqldump``
@@ -44,8 +44,10 @@ The ``mysqldump`` script only runs on the sending node.  The output from the scr
 
 Because ``mysqldump`` interfaces through the database client, configuring it requires several steps beyond setting the :ref:`wsrep_sst_method <wsrep_sst_method>` parameter.  For more information on its configuration, see:
 
-.. toctree::
-
-   mysqldump
-
 For more information on ``mysqldump``, see `mysqldump Documentation <http://dev.mysql.com/doc/refman/5.6/en/mysqldump.html>`_.
+
+
+.. toctree::
+   :hidden:
+   
+   mysqldump

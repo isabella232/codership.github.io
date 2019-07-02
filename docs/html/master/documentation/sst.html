@@ -205,8 +205,8 @@
           <div class="body" role="main">
             
   <style> .red {color:red} </style><style> .green {color:green} </style><div class="library-document section" id="state-snapshot-transfers">
-<h1>State Snapshot Transfers<a class="headerlink" href="#state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
-<p id="sst">When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full data copy to the new node, known as the joiner.</p>
+<span id="sst"></span><h1>State Snapshot Transfers<a class="headerlink" href="#state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
+<p>When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full data copy to the new node, known as the joiner.</p>
 <p>You can designate in advance which node should be the donor with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a> parameter. If you don&#8217;t set the donor node, the <em>Group Communication</em> module will select a donor based on the information available about the node states.</p>
 <p>Group Communication monitors node states for the purposes of flow control, state transfers and quorum calculations.  It ensures that a node that shows as <code class="docutils literal"><span class="pre">JOINING</span></code> doesn&#8217;t count towards flow control and quorum.</p>
 <p>A node can serve as a donor when it is in the <code class="docutils literal"><span class="pre">SYNCED</span></code> state.  The joiner node selects a donor from the available synced nodes.  It shows preference to synced nodes that have the same <a class="reference internal" href="galera-parameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a> wsrep Provider option, or it selects the first in the index.  When a donor node is chosen, its state changes immediately to <code class="docutils literal"><span class="pre">DONOR</span></code>. It&#8217;s no longer available for requests.</p>
@@ -232,7 +232,7 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference internal" href="sst-logical.html#mysqldump"><span class="std std-ref">mysqldump</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="mysqldump.html#mysqldump"><span class="std std-ref">mysqldump</span></a></td>
 <td><span class="red">Slow</span></td>
 <td><span class="green">Blocks</span></td>
 <td><span class="green">Available</span></td>
