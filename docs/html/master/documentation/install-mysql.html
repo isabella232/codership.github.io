@@ -259,8 +259,8 @@
 </li>
 <li><p class="first">Add the Codership repository to your sources list.  Using your preferred text editor, create a <cite>galera.list</cite> file in the <code class="docutils literal"><span class="pre">/etc/apt/sources.list.d/</span></code> directory.</p>
 <div class="highlight-linux-config"><div class="highlight"><pre><span></span><span class="c1"># Codership Repository (Galera Cluster for MySQL)</span>
-deb http://releases.galeracluster.com/mysql-wsrep-VERSION/DIST RELEASE main
-deb http://releases.galeracluster.com/galera-3/DIST RELEASE main
+deb https://releases.galeracluster.com/mysql-wsrep-VERSION/DIST RELEASE main
+deb https://releases.galeracluster.com/galera-3/DIST RELEASE main
 </pre></div>
 </div>
 <p>For the repository address, make the following changes:</p>
@@ -298,14 +298,14 @@ Pin-Priority: <span class="mi">1001</span>
 <p>Using your preferred text editor, create the <code class="docutils literal"><span class="pre">galera.repo</span></code> file.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[galera]</span>
 <span class="na">name</span> <span class="o">=</span> <span class="s">Galera</span>
-<span class="na">baseurl</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/galera-3/DIST/RELEASE/ARCH</span>
-<span class="na">gpgkey</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/GPG-KEY-galeracluster.com</span>
+<span class="na">baseurl</span> <span class="o">=</span> <span class="s">https://releases.galeracluster.com/galera-3/DIST/RELEASE/ARCH</span>
+<span class="na">gpgkey</span> <span class="o">=</span> <span class="s">https://releases.galeracluster.com/GPG-KEY-galeracluster.com</span>
 <span class="na">gpgcheck</span> <span class="o">=</span> <span class="s">1</span>
 
 <span class="k">[mysql-wsrep]</span>
 <span class="na">name</span> <span class="o">=</span> <span class="s">MySQL-wsrep</span>
-<span class="na">baseurl</span> <span class="o">=</span>  <span class="s">http://releases.galeracluster.com/mysql-wsrep-VERSION/DIST/RELEASE/ARCH</span>
-<span class="na">gpgkey</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/GPG-KEY-galeracluster.com</span>
+<span class="na">baseurl</span> <span class="o">=</span>  <span class="s">https://releases.galeracluster.com/mysql-wsrep-VERSION/DIST/RELEASE/ARCH</span>
+<span class="na">gpgkey</span> <span class="o">=</span> <span class="s">https://releases.galeracluster.com/GPG-KEY-galeracluster.com</span>
 <span class="na">gpgcheck</span> <span class="o">=</span> <span class="s">1</span>
 </pre></div>
 </div>
@@ -321,18 +321,18 @@ Pin-Priority: <span class="mi">1001</span>
 <p>For distributions that use <code class="docutils literal"><span class="pre">zypper</span></code> for package management, such as openSUSE and SUSE Linux Enterprise Server, you can enable the Codership repository by importing the GPG key and then creating a <code class="docutils literal"><span class="pre">galera.repo</span></code> file in the local directory.</p>
 <ol class="arabic">
 <li><p class="first">Import the GPG key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo rpm --import <span class="s2">&quot;http://releases.galeracluster.com/GPG-KEY-galeracluster.com&quot;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo rpm --import <span class="s2">&quot;https://releases.galeracluster.com/GPG-KEY-galeracluster.com&quot;</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Create a <code class="docutils literal"><span class="pre">galera.repo</span></code> file in the local directory.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[galera]</span>
 <span class="na">name</span> <span class="o">=</span> <span class="s">Galera</span>
-<span class="na">baseurl</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/galera-3/DIST/RELEASE/ARCH</span>
+<span class="na">baseurl</span> <span class="o">=</span> <span class="s">https://releases.galeracluster.com/galera-3/DIST/RELEASE/ARCH</span>
 
 <span class="k">[MySQL-wsrep]</span>
 <span class="na">name</span> <span class="o">=</span> <span class="s">MySQL-wsrep</span>
-<span class="na">baseurl</span> <span class="o">=</span> <span class="s">http://releases.galeracluster.com/mysql-wsrep-VERSION/DIST/RELEASE/ARCH</span>
+<span class="na">baseurl</span> <span class="o">=</span> <span class="s">https://releases.galeracluster.com/mysql-wsrep-VERSION/DIST/RELEASE/ARCH</span>
 </pre></div>
 </div>
 <p>For the <code class="docutils literal"><span class="pre">baseurl</span></code> repository address, make the following changes:</p>

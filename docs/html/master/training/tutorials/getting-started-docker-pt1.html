@@ -247,7 +247,7 @@
 <span class="go">RUN apt-get update</span>
 <span class="go">RUN apt-get install -y software-properties-common</span>
 <span class="go">RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 BC19DDBA</span>
-<span class="go">RUN add-apt-repository &#39;deb http://releases.galeracluster.com/ubuntu trusty main&#39;</span>
+<span class="go">RUN add-apt-repository &#39;deb https://releases.galeracluster.com/ubuntu trusty main&#39;</span>
 <span class="go">RUN apt-get update</span>
 <span class="go">RUN apt-get install -y galera-3 galera-arbitrator-3 mysql-wsrep-5.6 rsync lsof</span>
 <span class="go">COPY my.cnf /etc/mysql/my.cnf</span>

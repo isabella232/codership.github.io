@@ -257,7 +257,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_sst_method</span> <span class="o">=</span> <span class="s">rsync</span>
 </pre></div>
 </div>
-<p>For more information about <code class="docutils literal"><span class="pre">rsync</span></code>, see the <a class="reference external" href="http://rsync.samba.org/">rsync Documentation</a>.</p>
+<p>For more information about <code class="docutils literal"><span class="pre">rsync</span></code>, see the <a class="reference external" href="https://rsync.samba.org/">rsync Documentation</a>.</p>
 <p class="rubric-1 rubric" id="sst-physical-xtrabackup"><code class="docutils literal"><span class="pre">xtrabackup</span></code></p>
 <p>The most popular back-end method for State Snapshot Transfers is <code class="docutils literal"><span class="pre">xtrabackup</span></code>.  It carries all the advantages and disadvantages of a Physical State Snapshot, but is virtually non-blocking on the donor node.</p>
 <p><code class="docutils literal"><span class="pre">xtrabackup</span></code> only blocks the donor for the short period of time it takes to copy the MyISAM tables, (for instance, the system tables).  If these tables are small, the blocking time remains very short.  However, this comes at the cost of speed: a state snapshot transfer that uses <code class="docutils literal"><span class="pre">xtrabackup</span></code> can be considerably slower than one that uses <code class="docutils literal"><span class="pre">rsync</span></code>.</p>
@@ -275,7 +275,7 @@
 <span class="na">socket</span> <span class="o">=</span> <span class="s">/path/to/socket</span>
 </pre></div>
 </div>
-<p>For more information on <code class="docutils literal"><span class="pre">xtrabackup</span></code>, see the <a class="reference external" href="https://www.percona.com/doc/percona-xtrabackup/2.1/manual.html?id=percona-xtrabackup:xtrabackup_manual">Percona XtraBackup User Manual</a> and <a class="reference external" href="http://www.percona.com/doc/percona-xtradb-cluster/5.6/manual/xtrabackup_sst.html">XtraBackup SST Configuration</a>.</p>
+<p>For more information on <code class="docutils literal"><span class="pre">xtrabackup</span></code>, see the <a class="reference external" href="https://www.percona.com/doc/percona-xtrabackup/2.1/manual.html?id=percona-xtrabackup:xtrabackup_manual">Percona XtraBackup User Manual</a> and <a class="reference external" href="https://www.percona.com/doc/percona-xtradb-cluster/5.6/manual/xtrabackup_sst.html">XtraBackup SST Configuration</a>.</p>
 </div>
 
 

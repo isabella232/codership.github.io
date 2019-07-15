@@ -255,7 +255,7 @@
 </div>
 </li>
 <li><p class="first">Add the Percona repository to your sources list:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> add-apt-repository <span class="s1">&#39;deb http://repo.percona.com/apt release main&#39;</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> add-apt-repository <span class="s1">&#39;deb https://repo.percona.com/apt release main&#39;</span>
 </pre></div>
 </div>
 <p>For the repository address, make the following changes:</p>
@@ -274,14 +274,14 @@
 </div>
 </li>
 </ol>
-<p>For more information on the repository, available packages and mirrors, see the <a class="reference external" href="http://www.percona.com/doc/percona-server/5.5/installation/apt_repo.html">Percona apt Repository</a></p>
+<p>For more information on the repository, available packages and mirrors, see the <a class="reference external" href="https://www.percona.com/doc/percona-server/5.5/installation/apt_repo.html">Percona apt Repository</a></p>
 <p>Packages in the Percona repository are now available for installation on your server through <code class="docutils literal"><span class="pre">apt-get</span></code>.</p>
 <p class="rubric-2 rubric" id="xtradb-yum">Enabling the <code class="docutils literal"><span class="pre">yum</span></code> Repository</p>
 <p>For RPM-based distributions, you can enable the Percona repository through <code class="docutils literal"><span class="pre">yum</span></code> using the following command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> yum install http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> yum install https://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
 </pre></div>
 </div>
-<p>For more information on the repository, package names or available mirrors, see the <a class="reference external" href="http://www.percona.com/doc/percona-server/5.5/installation/yum_repo.html">Percona yum Repository</a>.</p>
+<p>For more information on the repository, package names or available mirrors, see the <a class="reference external" href="https://www.percona.com/doc/percona-server/5.5/installation/yum_repo.html">Percona yum Repository</a>.</p>
 <p>Packages in the Percona repository are now available for installation on your server through <code class="docutils literal"><span class="pre">yum</span></code>.</p>
 <p class="rubric-1 rubric" id="xtradb-galera-install">Installing Percona XtraDB Cluster</p>
 <p>There are three packages involved in the installation of Percona XtraDB Cluster: the Percona XtraDB client, a command line tool for accessing the database; the percona XtraDB database server, built to include the <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> patch and the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>.</p>

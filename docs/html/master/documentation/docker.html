@@ -242,7 +242,7 @@
 <p>Galera Cluster can run from within a such a container, within Docker.  You may find containers useful in portable deployment across numerous machines, testing applications that depend on Galera Cluster, or scripting the installation and configuration process.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">This guide assumes that you are only running one container node per server.  For more information on running multiple nodes per server, see <em>Getting Started Galera with Docker, `Part I &lt;http://galeracluster.com/2015/05/getting-started-galera-with-docker-part-1/&gt;`_ and `Part II &lt;http://galeracluster.com/2015/05/getting-started-galera-with-docker-part-2-2/&gt;`_.</em></p>
+<p class="last">This guide assumes that you are only running one container node per server.  For more information on running multiple nodes per server, see <em>Getting Started Galera with Docker, `Part I &lt;https://galeracluster.com/2015/05/getting-started-galera-with-docker-part-1/&gt;`_ and `Part II &lt;https://galeracluster.com/2015/05/getting-started-galera-with-docker-part-2-2/&gt;`_.</em></p>
 </div>
 <p class="rubric-1 rubric" id="configure-container">Configuring a Container</p>
 <p>Images are the containers that Docker has available to run.  There are a number of base images available through <a class="reference external" href="https://registry.hub.docker.com">Docker Hub</a>.  You can pull these to your system through the <code class="docutils literal"><span class="pre">docker</span></code> command-line tool.  You can also build new images.</p>
@@ -256,8 +256,8 @@
 <span class="k">RUN</span> apt-get update
 <span class="k">RUN</span> apt-get install -y  software-properties-common
 <span class="k">RUN</span> apt-key adv --keyserver keyserver.ubuntu.com --recv BC19DDBA
-<span class="k">RUN</span> add-apt-repository <span class="s1">&#39;deb http://releases.galeracluster.com/galera-3/ubuntu trusty main&#39;</span>
-<span class="k">RUN</span> add-apt-repository <span class="s1">&#39;deb http://releases.galeracluster.com/mysql-wsrep-5.6/ubuntu trusty main&#39;</span>
+<span class="k">RUN</span> add-apt-repository <span class="s1">&#39;deb https://releases.galeracluster.com/galera-3/ubuntu trusty main&#39;</span>
+<span class="k">RUN</span> add-apt-repository <span class="s1">&#39;deb https://releases.galeracluster.com/mysql-wsrep-5.6/ubuntu trusty main&#39;</span>
 
 
 <span class="k">RUN</span> apt-get update

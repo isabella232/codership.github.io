@@ -281,7 +281,7 @@
 <p>Don&#8217;t change this value afterwards.  Other modes may cause <code class="docutils literal"><span class="pre">INSERT</span></code> statements to fail on tables with <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> columns.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">When <a class="reference external" href="http://dev.mysql.com/doc/refman/5.5/en/innodb-parameters.html#sysvar_innodb_autoinc_lock_mode">innodb_autoinc_lock_mode</a> is set to traditional lock mode (i.e., a value of <code class="docutils literal"><span class="pre">0</span></code>) or to consecutive lock mode (i.e., a value of <code class="docutils literal"><span class="pre">1</span></code>) it can cause unresolved deadlocks and make the system unresponsive in Galera Cluster.</p>
+<p class="last">When <a class="reference external" href="https://dev.mysql.com/doc/refman/5.5/en/innodb-parameters.html#sysvar_innodb_autoinc_lock_mode">innodb_autoinc_lock_mode</a> is set to traditional lock mode (i.e., a value of <code class="docutils literal"><span class="pre">0</span></code>) or to consecutive lock mode (i.e., a value of <code class="docutils literal"><span class="pre">1</span></code>) it can cause unresolved deadlocks and make the system unresponsive in Galera Cluster.</p>
 </div>
 <p>After all of that, make sure the InnoDB log buffer is written to file once per second, rather than on each commit, to improve performance. To do this, set the <code class="docutils literal"><span class="pre">innodb_flush_log_at_trx_commit</span></code> variable to 0 like so;</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">innodb_flush_log_at_trx_commit=0</span>
@@ -289,13 +289,13 @@
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Although setting <a class="reference external" href="http://dev.mysql.com/doc/refman/5.1/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit">innodb_flush_log_at_trx_commit</a> to a value of <code class="docutils literal"><span class="pre">0</span></code> or <code class="docutils literal"><span class="pre">2</span></code> improves performance, it also introduces potential problems.  Operating system crashes or power outages can erase the last second of transaction.  Although normally you can recover this data from another node, it can still be lost entirely in the event that the cluster goes down at the same time.</p>
+<p class="last">Although setting <a class="reference external" href="https://dev.mysql.com/doc/refman/5.1/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit">innodb_flush_log_at_trx_commit</a> to a value of <code class="docutils literal"><span class="pre">0</span></code> or <code class="docutils literal"><span class="pre">2</span></code> improves performance, it also introduces potential problems.  Operating system crashes or power outages can erase the last second of transaction.  Although normally you can recover this data from another node, it can still be lost entirely in the event that the cluster goes down at the same time.</p>
 </div>
 <p>After you make all of these changes and additions to the configuration file, you&#8217;re ready to configure the database privileges.</p>
 <div class="section" id="configuring-the-innodb-buffer-pool">
 <h2>Configuring the InnoDB Buffer Pool<a class="headerlink" href="#configuring-the-innodb-buffer-pool" title="Permalink to this headline">¶</a></h2>
 <p id="config-innodb-buffer-pool-size">The InnoDB storage engine uses its own memory buffer to cache data and for indexes of tables. You can configure this memory buffer through the
-<a class="reference external" href="http://dev.mysql.com/doc/refman/5.1/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> parameter.  The default value is 128 MB.  To compensate for the increased memory usage of Galera Cluster over a standalone MySQL database server, you should scale your usual value back by five percent.</p>
+<a class="reference external" href="https://dev.mysql.com/doc/refman/5.1/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> parameter.  The default value is 128 MB.  To compensate for the increased memory usage of Galera Cluster over a standalone MySQL database server, you should scale your usual value back by five percent.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">innodb_buffer_pool_size=122M</span>
 </pre></div>
 </div>
