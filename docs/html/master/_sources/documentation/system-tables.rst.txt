@@ -1,8 +1,46 @@
+.. meta::
+   :title: Galera Cluster related System Tables
+   :description:
+   :language: en-US
+   :keywords:
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+
+
+.. topic:: The Library
+   :name: left-margin
+
+   .. cssclass:: no-bull
+
+      - :doc:`Documentation <./index>`
+      - :doc:`Knowledge Base <../kb/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Troubleshooting <../kb/trouble/index>`
+         - :doc:`Best Practices <../kb/best/index>`
+
+      - :doc:`FAQ <../faq>`
+      - :doc:`Training <../training/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Tutorial Articles <../training/tutorials/index>`
+         - :doc:`Training Videos <../training/videos/index>`
+
+      .. cssclass:: bull-head
+
+         Related Documents
+
+      .. cssclass:: bull-head
+
+         Related Articles
+
+
 .. cssclass:: library-document
 .. _`system-tables`:
 
 =========================
- Galera System Tables
+Galera System Tables
 =========================
 
 .. index::
@@ -12,7 +50,7 @@ Starting with version 4 of Galera, three system tables related to Galera replica
 
 To see these tables on your server, execute the following SQL statement one of them using the ``mysql`` client or a similar client:
 
-.. code-block:: console
+.. code-block:: mysql
 
    SHOW TABLES FROM mysql LIKE 'wsrep%';
 
@@ -28,16 +66,14 @@ Database administrators and clients with the access to the ``mysql`` database ma
 
 
 .. _`cluster-view`:
-
------------------
-Cluster View
------------------
+.. rst-class:: rubric-1
+.. rubric:: Cluster View
 
 One of the new Galera related system tables is the ``wsrep_cluster`` table. This new table, starting in version 4 of Galera, contains a current view of the cluster. That is to say, it stores the UUID of the cluster and some other identification information, as well as the cluster's capabilities.
 
 To see the names of the columns in this table, either use the ``DESCRIBE`` statement or execute the following SQL statement from the ``mysql`` client on one of the nodes in the cluster:
 
-.. code-block:: console
+.. code-block:: mysql
 
    SELECT COLUMN_NAME FROM information_schema.columns
    WHERE table_schema='mysql'
@@ -74,16 +110,14 @@ In the results here, you can see the cluster UUID. This can also be found by usi
 
 
 .. _`cluster-members`:
-
------------------
-Cluster Members
------------------
+.. rst-class:: rubric-1
+.. rubric:: Cluster Members
 
 Another Galera related system tables is the ``wsrep_cluster_members`` table. This system table will provide the current membership of the cluster; it will contain a row for each node in the cluster.  That is to say, each node in the cluster known to the node upon which the table is queried.
 
 To see the names of columns in this table, either use the ``DESCRIBE`` statement or execute the following SQL statement from the ``mysql`` client on one of the nodes in the cluster:
 
-.. code-block:: console
+.. code-block:: mysql
 
    SELECT COLUMN_NAME FROM information_schema.columns
    WHERE table_schema='mysql'
@@ -128,10 +162,8 @@ In the results of this example you can see that this cluster is composed of thre
 
 
 .. _`cluster-streaming-log`:
-
------------------------
-Cluster Streaming Log
------------------------
+.. rst-class:: rubric-1
+.. rubric:: Cluster Streaming Log
 
 The last Galera related system tables is the ``wsrep_streaming_log`` table. This system table contains meta data and row events for ongoing streaming transactions, write set fragment per row.
 
@@ -139,7 +171,7 @@ The ``node_uuid`` column contains the node UUID of the hosting node for the tran
 
 To see the names of columns in this table, either use the ``DESCRIBE`` statement or execute the following SQL statement from the ``mysql`` client on one of the nodes in the cluster:
 
-.. code-block:: console
+.. code-block:: mysql
 
    SELECT COLUMN_NAME FROM information_schema.columns
    WHERE table_schema='mysql'
@@ -163,7 +195,7 @@ If you execute the following SQL statement from any node in a cluster, you can s
 
 Typically, you won't see any results since it will contain entries only for transactions which have streaming replication enabled. For example:
 
-.. code-block:: console
+.. code-block:: mysql
 
    CREATE TABLE table1 (col1 INT PRIMARY KEY);
 

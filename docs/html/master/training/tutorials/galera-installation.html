@@ -7,8 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Installation &#8212; Galera Cluster Documentation</title>
+    <meta content="Installing Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
+    <title>Installing Galera Cluster &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -32,7 +35,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="System Configuration" href="configuration.html" />
-    <link rel="prev" title="Getting Started" href="getting-started.html" />
+    <link rel="prev" title="Getting Started with Galera Cluster" href="getting-started.html" />
 
 
 
@@ -204,8 +207,35 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="installation">
-<span id="galera-installation"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/selinux.html"><span class="doc">SELinux</span></a></li>
+<li><a class="reference internal" href="../../documentation/firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
+<li><a class="reference internal" href="migration.html"><span class="doc">Migration</span></a></li>
+<li><a class="reference internal" href="configuration.html#swap-config"><span class="std std-ref">Configuring Swap Space</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="installing-galera-cluster">
+<span id="galera-installation"></span><h1>Installing Galera Cluster<a class="headerlink" href="#installing-galera-cluster" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length: 946 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>Galera Cluster requires server hardware for a minimum of three nodes.</p>
 <p>If your cluster runs on a single switch, use three nodes.  If your cluster spans switches, use three switches.  If your cluster spans networks, use three networks.  If your cluster spans data centers, use three data centers.  This ensures that the cluster can maintain a Primary Component in the event of network outages.</p>
@@ -231,11 +261,10 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Binary installation packages for Galera Cluster include the database server with the wsrep API patch.  When building from source, though, you must apply this patch manually.</p>
 </div>
-<div class="section" id="preparing-the-server">
-<h2>Preparing the Server<a class="headerlink" href="#preparing-the-server" title="Permalink to this headline">¶</a></h2>
-<p id="system-requirements">Before you begin the installation process, there are a few tasks that you need to do to prepare the servers for Galera Cluster.  You must perform the following steps on each node in your cluster.</p>
+<p class="rubric-1 rubric" id="system-requirements">Preparing the Server</p>
+<p>Before you begin the installation process, there are a few tasks that you need to do to prepare the servers for Galera Cluster.  You must perform the following steps on each node in your cluster.</p>
 <div class="section" id="disabling-selinux-for-mysqld">
-<h3>Disabling SELinux for mysqld<a class="headerlink" href="#disabling-selinux-for-mysqld" title="Permalink to this headline">¶</a></h3>
+<h2>Disabling SELinux for mysqld<a class="headerlink" href="#disabling-selinux-for-mysqld" title="Permalink to this headline">¶</a></h2>
 <p id="disable-selinux">If SELinux (Security-Enhanced Linux) is enabled on the servers, it may block <code class="docutils literal"><span class="pre">mysqld</span></code> from performing required operations.  You must either disable SELinux for <code class="docutils literal"><span class="pre">mysqld</span></code> or configure it to allow <code class="docutils literal"><span class="pre">mysqld</span></code> to run external programs and open listen sockets on unprivileged ports—that is, operations that an unprivileged user may do.</p>
 <p>To disable SELinux for <code class="docutils literal"><span class="pre">mysqld</span></code>, execute the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> semanage permissive -a mysqld_t
@@ -249,7 +278,7 @@
 </div>
 </div>
 <div class="section" id="firewall-configuration">
-<h3>Firewall Configuration<a class="headerlink" href="#firewall-configuration" title="Permalink to this headline">¶</a></h3>
+<h2>Firewall Configuration<a class="headerlink" href="#firewall-configuration" title="Permalink to this headline">¶</a></h2>
 <p id="firewall-config">Next, you will need to update the firewall settings on each node so that they may communicate with the cluster.  How you do this varies depending upon your distribution and the particular firewall software that you use.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -287,7 +316,7 @@
 <p>For more information on setting up the firewall for Galera Cluster and other programs for configuring packet filtering in Linux and FreeBSD, see <a class="reference internal" href="../../documentation/firewall-settings.html"><span class="doc">Firewall Settings</span></a>.</p>
 </div>
 <div class="section" id="disabling-apparmor">
-<h3>Disabling AppArmor<a class="headerlink" href="#disabling-apparmor" title="Permalink to this headline">¶</a></h3>
+<h2>Disabling AppArmor<a class="headerlink" href="#disabling-apparmor" title="Permalink to this headline">¶</a></h2>
 <p id="disable-apparmor">By default, some servers—for instance, Ubuntu—include AppArmor, which may prevent <code class="docutils literal"><span class="pre">mysqld</span></code> from opening additional ports or running scripts.  You must disable AppArmor or configure it to allow <code class="docutils literal"><span class="pre">mysqld</span></code> to run external programs and open listen sockets on unprivileged ports.</p>
 <p>To disable AppArmor, run the following commands:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo ln -s /etc/apparmor.d/usr /etc/apparmor.d/disable/.sbin.mysqld
@@ -301,13 +330,11 @@
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo systemctl restart apparmor
 </pre></div>
 </div>
+<p class="rubric-1 rubric" id="galera-install">Installing Galera Cluster</p>
+<p>There are two versions of Galera Cluster for MySQL: the original Codership reference implementation and MariaDB Galera Cluster.  For each database server, binary packages are available for Debian- and RPM-based Linux distributions, or you can build them from source.</p>
 </div>
-</div>
-<div class="section" id="installing-galera-cluster">
-<h2>Installing Galera Cluster<a class="headerlink" href="#installing-galera-cluster" title="Permalink to this headline">¶</a></h2>
-<p id="galera-install">There are two versions of Galera Cluster for MySQL: the original Codership reference implementation and MariaDB Galera Cluster.  For each database server, binary packages are available for Debian- and RPM-based Linux distributions, or you can build them from source.</p>
 <div class="section" id="galera-cluster-for-mysql">
-<h3>Galera Cluster for MySQL<a class="headerlink" href="#galera-cluster-for-mysql" title="Permalink to this headline">¶</a></h3>
+<h2>Galera Cluster for MySQL<a class="headerlink" href="#galera-cluster-for-mysql" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../documentation/install-mysql.html">Galera Cluster for MySQL - Binary Installation</a></li>
@@ -316,17 +343,16 @@
 </div>
 </div>
 <div class="section" id="mariadb-galera-cluster">
-<h3>MariaDB Galera Cluster<a class="headerlink" href="#mariadb-galera-cluster" title="Permalink to this headline">¶</a></h3>
+<h2>MariaDB Galera Cluster<a class="headerlink" href="#mariadb-galera-cluster" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../documentation/install-mariadb.html">MariaDB Galera Cluster - Binary Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../documentation/install-mariadb-src.html">MariaDB Galera Cluster- Source Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/install-mariadb-src.html">MariaDB Galera Cluster - Source Installation</a></li>
 </ul>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">In the event that you build or install Galera Cluster over an existing standalone instance of MySQL or MariaDB, there are some additional steps that you need to take in order to update your system to the new database server.  For more information, see <a class="reference internal" href="migration.html"><span class="doc">Migration</span></a>.</p>
-</div>
 </div>
 </div>
 </div>
@@ -342,18 +368,12 @@
         </a></p><div class="sphinx-toc sphinxlocaltoc">
     <h3><a href="../../index.html">Page contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Installation</a><ul>
-<li><a class="reference internal" href="#preparing-the-server">Preparing the Server</a><ul>
+<li><a class="reference internal" href="#">Installing Galera Cluster</a><ul>
 <li><a class="reference internal" href="#disabling-selinux-for-mysqld">Disabling SELinux for mysqld</a></li>
 <li><a class="reference internal" href="#firewall-configuration">Firewall Configuration</a></li>
 <li><a class="reference internal" href="#disabling-apparmor">Disabling AppArmor</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#installing-galera-cluster">Installing Galera Cluster</a><ul>
 <li><a class="reference internal" href="#galera-cluster-for-mysql">Galera Cluster for MySQL</a></li>
 <li><a class="reference internal" href="#mariadb-galera-cluster">MariaDB Galera Cluster</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -362,7 +382,7 @@
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="getting-started.html"
-                          title="Previous page">&larr; Getting Started</a></p>
+                          title="Previous page">&larr; Getting Started with Galera Cluster</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -418,7 +438,7 @@
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/galera-installation.rst.rst" title="Edit 'Installation' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/galera-installation.rst.rst" title="Edit 'Installing Galera Cluster' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -433,20 +453,20 @@
           <a href="configuration.html" title="System Configuration"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="getting-started.html" title="Getting Started"
+          <a href="getting-started.html" title="Getting Started with Galera Cluster"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Tutorials</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Codership Tutorials on Galera Cluster</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started with Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="getting-started.html" title="Getting Started">&lt; Previous</a></li>
+				<li><a href="getting-started.html" title="Getting Started with Galera Cluster">&lt; Previous</a></li>
 			
 
 			

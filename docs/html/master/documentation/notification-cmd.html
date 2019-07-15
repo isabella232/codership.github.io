@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Notification Command" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Notification Command &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,7 +207,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="notification-command">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="notification-cmd-example.html#example-notification-script"><span class="std std-ref">Notification Script</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="notification-command">
 <span id="notification-cmd"></span><h1>Notification Command<a class="headerlink" href="#notification-command" title="Permalink to this headline">¶</a></h1>
 <p>You can use the database client (e.g., <code class="docutils literal"><span class="pre">mysql</span></code> client) to check the status of a cluster, individual nodes, and the health of replication. However, you may find it counterproductive to log in on each node to run such checks.</p>
 <p>As an alternative and better method, Galera Cluster provides a method to call a notification script. Such a script may be customized to automate the monitoring process of a cluster.</p>
@@ -212,8 +242,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">For an example of such a custom script and related instructions, see <a class="reference internal" href="notification-cmd-example.html#example-notification-script"><span class="std std-ref">Notification Script Example</span></a>.</p>
 </div>
-<div class="section" id="notification-parameters">
-<span id="notification-cmd-parameters"></span><h2>Notification Parameters<a class="headerlink" href="#notification-parameters" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="notification-cmd-parameters">Notification Parameters</p>
 <p>When a node registers a change in itself or the cluster, it will trigger the notification script or command. In so doing, it will pass certain parameters to notification script.  Below is a list of them and their basic meaning:</p>
 <ul class="no-bull simple">
 <li><code class="docutils literal"><span class="pre">--status</span></code> The node passes a string indicating its current state.  For a list of the strings it uses, see <a class="reference internal" href="#node-status"><span class="std std-ref">Node Status Strings</span></a> below.</li>
@@ -223,8 +252,7 @@
 </ul>
 <p>You will have to include code in the notificaiton script to capture the values of these parameters and then have the script act as you wish (e.g., notify you of certain values).</p>
 <p>Only nodes in the <code class="docutils literal"><span class="pre">Synced</span></code> state will accept connections from the cluster.  For more information on node states, see <a class="reference internal" href="node-states.html#node-state-changes"><span class="std std-ref">Node State Changes</span></a>.</p>
-<div class="section" id="node-status-strings">
-<span id="node-status"></span><h3>Node Status Strings<a class="headerlink" href="#node-status-strings" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="node-status">Node Status Strings</p>
 <p>The notification script may pass one of six values for the <code class="docutils literal"><span class="pre">--status</span></code> parameter to indicate the current state of the node:</p>
 <ul class="no-bull simple">
 <li><code class="docutils literal"><span class="pre">Undefined</span></code> indicates a starting node that is not part of the Primary Component.</li>
@@ -235,9 +263,7 @@
 <li><code class="docutils literal"><span class="pre">Error</span></code> indicates that an error has occurred.  This status string may provide an error code with more information on what occurred.</li>
 </ul>
 <p>Again, you will have to prepare your script to capture the value of the <code class="docutils literal"><span class="pre">--status</span></code> parameter and act accordingly.</p>
-</div>
-<div class="section" id="members-list-format">
-<span id="member-list-format"></span><h3>Members List Format<a class="headerlink" href="#members-list-format" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="member-list-format">Members List Format</p>
 <p>The notification script will pass with the <code class="docutils literal"><span class="pre">--member</span></code> parameter, a list containing entries for each node connected to the cluster component.  For each entry in the list the node uses this format:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>&lt;node UUID&gt; / &lt;node name&gt; / &lt;incoming address&gt;
 </pre></div>
@@ -247,17 +273,13 @@
 <li><strong>Node Name</strong> refers to the node name, as it&#8217;s defined with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> parameter in the configuration file.</li>
 <li><strong>Incoming Address</strong> refers to the IP address for client connections, as set with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a> parameter in the configuration file.</li>
 </ul>
-</div>
-</div>
-<div class="section" id="enabling-the-notification-script">
-<span id="enable-notification-command"></span><h2>Enabling the Notification Script<a class="headerlink" href="#enabling-the-notification-script" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="enable-notification-command">Enabling the Notification Script</p>
 <p>You can enable your notification script or command through the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a> parameter in the configuration file.  Below is an excerpt from that file showing how it might look:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_notify_cmd</span><span class="o">=</span><span class="s">/path/wsrep_notify.sh</span>
 </pre></div>
 </div>
 <p>The node will call the script for each change in cluster membership and node status.  You can use these status changes in configuring load balancers, raising alerts or scripting for any other situation in which you need your infrastructure to respond to changes to the cluster.</p>
 <p>Galera Cluster provides a default script, <code class="docutils literal"><span class="pre">wsrep_notify.sh</span></code>, for you to use in handling notifications or as a starting point in writing your own custom notification script.</p>
-</div>
 </div>
 
 
@@ -268,21 +290,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Notification Command</a><ul>
-<li><a class="reference internal" href="#notification-parameters">Notification Parameters</a><ul>
-<li><a class="reference internal" href="#node-status-strings">Node Status Strings</a></li>
-<li><a class="reference internal" href="#members-list-format">Members List Format</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#enabling-the-notification-script">Enabling the Notification Script</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="log.html"

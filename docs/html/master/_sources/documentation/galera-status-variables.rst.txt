@@ -1,8 +1,46 @@
+.. meta::
+   :title: Galera Cluster Status Variables
+   :description:
+   :language: en-US
+   :keywords:
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+
+
+.. topic:: The Library
+   :name: left-margin
+
+   .. cssclass:: no-bull
+
+      - :doc:`Documentation <./index>`
+      - :doc:`Knowledge Base <../kb/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Troubleshooting <../kb/trouble/index>`
+         - :doc:`Best Practices <../kb/best/index>`
+
+      - :doc:`FAQ <../faq>`
+      - :doc:`Training <../training/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Tutorial Articles <../training/tutorials/index>`
+         - :doc:`Training Videos <../training/videos/index>`
+
+      .. cssclass:: bull-head
+
+         Related Documents
+
+      .. cssclass:: bull-head
+
+         Related Articles
+
+
 .. cssclass:: library-document
 .. _`galera-status-variables`:
 
 =========================
- Galera Status Variables
+Galera Status Variables
 =========================
 
 These variables are *Galera Cluster* 0.8.x status variables. There are two types of wsrep-related status variables:
@@ -80,7 +118,9 @@ This distinction is of importance for developers only.  For convenience, all sta
 
 
 .. _`wsrep_apply_oooe`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_apply_oooe``
+
 .. index::
    pair: Status Variables; wsrep_apply_oooe
 
@@ -107,7 +147,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_apply_oool`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_apply_oool``
+
 .. index::
    pair: Status Variables; wsrep_apply_oool
 
@@ -134,7 +176,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_apply_window`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_apply_window``
+
 .. index::
    pair: Status Variables; wsrep_apply_window
 
@@ -161,7 +205,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_cert_deps_distance`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_cert_deps_distance``
+
 .. index::
    pair: Status Variables; wsrep_cert_deps_distance
 
@@ -188,7 +234,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_cert_index_size`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_cert_index_size``
+
 .. index::
    pair: Status Variables; wsrep_cert_index_size
 
@@ -215,7 +263,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_cert_interval`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_cert_interval``
+
 .. index::
    pair: Status Variables; wsrep_cert_interval
 
@@ -248,7 +298,9 @@ This shows you the number of write-sets concurrently replicating to the cluster.
 
 
 .. _`wsrep_cluster_conf_id`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_cluster_conf_id``
+
 .. index::
    pair: Status Variables; wsrep_cluster_conf_id
 
@@ -275,7 +327,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_cluster_size`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_cluster_size``
+
 .. index::
    pair: Status Variables; wsrep_cluster_size
 
@@ -302,7 +356,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_cluster_state_uuid`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_cluster_state_uuid``
+
 .. index::
    pair: Status Variables; wsrep_cluster_state_uuid
 
@@ -331,7 +387,9 @@ For more information on the state UUID, see :ref:`wsrep API <wsrep-api>`.
 
 
 .. _`wsrep_cluster_status`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_cluster_status``
+
 .. index::
    pair: Status Variables; wsrep_cluster_status
 
@@ -358,7 +416,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_cluster_weight`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_cluster_weight``
+
 .. index::
    pair: Status Variables; wsrep_cluster_weight
 
@@ -386,7 +446,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_commit_oooe`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_commit_oooe``
+
 .. index::
    pair: Status Variables; wsrep_commit_oooe
 
@@ -413,7 +475,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_commit_oool`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_commit_oool``
+
 .. index::
    pair: Status Variables; wsrep_commit_oool
 
@@ -440,7 +504,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_commit_window`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_commit_window``
+
 .. index::
    pair: Status Variables; wsrep_commit_window
 
@@ -467,7 +533,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_connected`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_connected``
+
 .. index::
    pair: Status Variables; wsrep_connected
 
@@ -494,7 +562,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_desync_count`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_desync_count``
+
 .. index::
    pair: Status Variables; wsrep_desync_count
 
@@ -523,7 +593,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_evs_delayed`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_evs_delayed``
+
 .. index::
    pair: Status Variables; wsrep_evs_delayed
 
@@ -546,7 +618,9 @@ This refers to the UUID and IP address of the delayed node, with a count of the 
 
 
 .. _`wsrep_evs_evict_list`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_evs_evict_list``
+
 .. index::
    pair: Status Variables; wsrep_evs_evict_list
 
@@ -573,7 +647,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_evs_repl_latency`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_evs_repl_latency``
+
 .. index::
    pair: Parameters; wsrep_evs_repl_latency
 
@@ -608,7 +684,9 @@ This variable periodically resets.  You can control the reset interval using the
 
 
 .. _`wsrep_evs_state`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_evs_state``
+
 .. index::
    pair: Status Variables; wsrep_evs_state
 
@@ -635,7 +713,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_flow_control_paused`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_flow_control_paused``
+
 .. index::
    pair: Status Variables; wsrep_flow_control_paused
 
@@ -664,7 +744,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_flow_control_paused_ns`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_flow_control_paused_ns``
+
 .. index::
    pair: Status Variables; wsrep_flow_control_paused_ns
 
@@ -691,7 +773,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_flow_control_recv`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_flow_control_recv``
+
 .. index::
    pair: Status Variables; wsrep_flow_control_recv
 
@@ -718,7 +802,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_flow_control_sent`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_flow_control_sent``
+
 .. index::
    pair: Status Variables; wsrep_flow_control_sent
 
@@ -745,7 +831,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_gcomm_uuid`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_gcomm_uuid``
+
 .. index::
    pair: Status Variables; wsrep_gcomm_uuid
 
@@ -772,7 +860,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_incoming_addresses`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_incoming_addresses``
+
 .. index::
    pair: Status Variables; wsrep_incoming_addresses
 
@@ -799,7 +889,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_last_committed`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_last_committed``
+
 .. index::
    pair: Status Variables; wsrep_last_committed
 
@@ -828,7 +920,9 @@ For more information, see :ref:`wsrep API <wsrep-api>`.
 
 
 .. _`wsrep_local_bf_aborts`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_bf_aborts``
+
 .. index::
    pair: Status Variables; wsrep_local_bf_aborts
 
@@ -855,7 +949,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_cached_downto`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_cached_downto``
+
 .. index::
    pair: Status Variables; wsrep_local_cached_downto
 
@@ -882,7 +978,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_cert_failures`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_cert_failures``
+
 .. index::
    pair: Status Variables; wsrep_local_cert_failures
 
@@ -909,7 +1007,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_commits`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_commits``
+
 .. index::
    pair: Status Variables; wsrep_local_commits
 
@@ -936,7 +1036,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_index`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_index``
+
 .. index::
    pair: Status Variables; wsrep_local_index
 
@@ -963,7 +1065,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_recv_queue`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_recv_queue``
+
 .. index::
    pair: Status Variables; wsrep_local_recv_queue
 
@@ -990,7 +1094,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_recv_queue_avg`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_recv_queue_avg``
+
 .. index::
    pair: Status Variables; wsrep_local_recv_queue_avg
 
@@ -1017,7 +1123,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_recv_queue_max`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_recv_queue_max``
+
 .. index::
    pair: Status Variables; wsrep_local_recv_queue_max
 
@@ -1044,7 +1152,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_recv_queue_min`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_recv_queue_min``
+
 .. index::
    pair: Status Variables; wsrep_local_recv_queue_min
 
@@ -1071,7 +1181,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_replays`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_replays``
+
 .. index::
    pair: Status Variables; wsrep_local_replays
 
@@ -1098,7 +1210,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_send_queue`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_send_queue``
+
 .. index::
    pair: Status Variables; wsrep_local_send_queue
 
@@ -1125,7 +1239,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_send_queue_avg`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_send_queue_avg``
+
 .. index::
    pair: Status Variables; wsrep_local_send_queue_avg
 
@@ -1152,7 +1268,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_send_queue_max`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_send_queue_max``
+
 .. index::
    pair: Status Variables; wsrep_local_send_queue_max
 
@@ -1179,7 +1297,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_send_queue_min`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_send_queue_min``
+
 .. index::
    pair: Status Variables; wsrep_local_send_queue_min
 
@@ -1206,7 +1326,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_state`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_state``
+
 .. index::
    pair: Status Variables; wsrep_local_state
 
@@ -1235,7 +1357,9 @@ For more information on the possible node states, see :ref:`Node State Changes <
 
 
 .. _`wsrep_local_state_comment`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_state_comment``
+
 .. index::
    pair: Status Variables; wsrep_local_state_comment
 
@@ -1262,7 +1386,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_local_state_uuid`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_local_state_uuid``
+
 .. index::
    pair: Status Variables; wsrep_local_state_uuid
 
@@ -1291,7 +1417,9 @@ For more information on the state UUID, see :ref:`wsrep API <wsrep-api>`.
 
 
 .. _`wsrep_open_connections`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_open_connections``
+
 .. index::
    pair: Status Variables; wsrep_open_connections
 
@@ -1318,7 +1446,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_open_transactions`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_open_transactions``
+
 .. index::
    pair: Status Variables; wsrep_open_transactions
 
@@ -1345,7 +1475,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_protocol_version`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_protocol_version``
+
 .. index::
    pair: Status Variables; wsrep_protocol_version
 
@@ -1372,7 +1504,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_provider_name`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_provider_name``
+
 .. index::
    pair: Status Variables; wsrep_provider_name
 
@@ -1399,7 +1533,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_provider_vendor`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_provider_vendor``
+
 .. index::
    pair: Status Variables; wsrep_provider_vendor
 
@@ -1426,7 +1562,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_provider_version`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_provider_version``
+
 .. index::
    pair: Status Variables; wsrep_provider_version
 
@@ -1453,7 +1591,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_ready`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_ready``
+
 .. index::
    pair: Status Variables; wsrep_ready
 
@@ -1486,7 +1626,9 @@ unless the ``wsrep_on`` session variable is set to ``0``.
 
 
 .. _`wsrep_received`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_received``
+
 .. index::
    pair: Status Variables; wsrep_received
 
@@ -1513,7 +1655,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_received_bytes`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_received_bytes``
+
 .. index::
    pair: Status Variables; wsrep_received_bytes
 
@@ -1540,7 +1684,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_repl_data_bytes`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_repl_data_bytes``
+
 .. index::
    pair: Status Variables; wsrep_repl_data_bytes
 
@@ -1567,7 +1713,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_repl_keys`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_repl_keys``
+
 .. index::
    pair: Status Variables; wsrep_repl_keys
 
@@ -1594,7 +1742,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_repl_keys_bytes`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_repl_keys_bytes``
+
 .. index::
    pair: Status Variables; wsrep_repl_keys_bytes
 
@@ -1621,7 +1771,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_repl_other_bytes`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_repl_other_bytes``
+
 .. index::
    pair: Status Variables; wsrep_repl_other_bytes
 
@@ -1648,7 +1800,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_replicated`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_replicated``
+
 .. index::
    pair: Status Variables; wsrep_replicated
 
@@ -1675,7 +1829,9 @@ To see retrieve the value of this status variable, execute the ``SHOW STATUS`` s
 
 
 .. _`wsrep_replicated_bytes`:
+.. rst-class:: rubric-1
 .. rubric:: ``wsrep_replicated_bytes``
+
 .. index::
    pair: Status Variables; wsrep_replicated_bytes
 

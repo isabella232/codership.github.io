@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="State Transfers with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>State Transfers &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,15 +207,43 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <style> .red {color:red} </style><style> .green {color:green} </style><div class="library-document section" id="state-transfers">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcache-dir"><span class="std std-ref">gcache.dir</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcache-recover"><span class="std std-ref">gcache.recover</span></a></li>
+<li><a class="reference internal" href="#state-transfer-ist"><span class="std std-ref">Incremental St. Transfr.</span></a></li>
+<li><a class="reference internal" href="sst.html"><span class="doc">State Snapshot Transfers</span></a></li>
+<li><a class="reference internal" href="#state-transfer-sst"><span class="std std-ref">State Snap. Transfr.</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<style> .red {color:red} </style><style> .green {color:green} </style><div class="library-document section" id="state-transfers">
 <span id="state-transfer"></span><h1>State Transfers<a class="headerlink" href="#state-transfers" title="Permalink to this headline">¶</a></h1>
 <p>The process of replicating data from the cluster to the individual node, bringing the node into sync with the cluster, is known as provisioning.  There are two methods available in Galera Cluster to provision nodes:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#state-transfer-sst"><span class="std std-ref">State Snapshot Transfers (SST)</span></a> Where a snapshot of the entire node state transfers.</li>
 <li><a class="reference internal" href="#state-transfer-ist"><span class="std std-ref">Incremental State Transfers (IST)</span></a> Where only the missing transactions transfer.</li>
 </ul>
-<div class="section" id="state-snapshot-transfer-sst">
-<span id="state-transfer-sst"></span><h2>State Snapshot Transfer (SST)<a class="headerlink" href="#state-snapshot-transfer-sst" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="state-transfer-sst">State Snapshot Transfer (SST)</p>
 <span class="target" id="index-0"></span><p id="index-1">In a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST), the cluster provisions nodes by transferring a full data copy from one node to another.  When a new node joins the cluster, the new node initiates a State Snapshot Transfer to synchronize its data with a node that is already part of the cluster.</p>
 <p>You can choose from two conceptually different approaches in Galera Cluster to transfer a state from one database to another:</p>
 <ul>
@@ -230,9 +261,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">rsync_wan</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="incremental-state-transfer-ist">
-<span id="state-transfer-ist"></span><h2>Incremental State Transfer (IST)<a class="headerlink" href="#incremental-state-transfer-ist" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="state-transfer-ist">Incremental State Transfer (IST)</p>
 <span class="target" id="index-2"></span><p id="index-3">In an <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a> (IST), the cluster provisions a node by identifying the missing transactions on the joiner and sends them only, instead of the entire state.</p>
 <p>This provisioning method is only available under certain conditions:</p>
 <ul class="simple">
@@ -255,8 +284,7 @@
 <p>The most important parameter for Incremental State Transfers is <code class="docutils literal"><span class="pre">gcache.size</span></code> on the donor node.  This controls how much space you allocate in system memory for caching write-sets.  The more space available the more write-sets you can store.  The more write-sets you can store the wider the seqno gaps you can close through Incremental State Transfers.</p>
 <p class="last">On the other hand, if the write-set cache is much larger than the size of your database state, Incremental State Transfers begun less efficient than sending a state snapshot.</p>
 </div>
-<div class="section" id="write-set-cache-gcache">
-<span id="state-transfer-gcache"></span><h3>Write-set Cache (GCache)<a class="headerlink" href="#write-set-cache-gcache" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="state-transfer-gcache">Write-set Cache (GCache)</p>
 <span class="target" id="index-4"></span><p id="index-5">Galera Cluster stores write-sets in a special cache called the <a class="reference internal" href="glossary.html#term-write-set-cache"><span class="xref std std-term">Write-set Cache</span></a>, or GCache.  GCache cache is a memory allocator for write-sets.  Its primary purpose is to minimize the <a class="reference internal" href="glossary.html#term-write-set"><span class="xref std std-term">write-set</span></a> footprint on the <abbr title="Random Access Memory">RAM</abbr>.  Galera Cluster improves upon this through the offload write-set storage to disk.</p>
 <p>GCache employs three types of storage:</p>
 <ul>
@@ -283,8 +311,6 @@
 <p class="last">If the <a class="reference internal" href="galera-parameters.html#gcache-recover"><span class="std std-ref">gcache.recover</span></a> parameter is set to <code class="docutils literal"><span class="pre">yes</span></code>, an attempt to recover the gcache will be performed on startup, so that the node may continue to serve IST to other nodes. If set to <code class="docutils literal"><span class="pre">no</span></code>, gcache will be invalidated on startup and the node will only be able to serve SST.</p>
 </div>
 </div>
-</div>
-</div>
 
 
           </div>
@@ -294,20 +320,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">State Transfers</a><ul>
-<li><a class="reference internal" href="#state-snapshot-transfer-sst">State Snapshot Transfer (SST)</a></li>
-<li><a class="reference internal" href="#incremental-state-transfer-ist">Incremental State Transfer (IST)</a><ul>
-<li><a class="reference internal" href="#write-set-cache-gcache">Write-set Cache (GCache)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="isolation-levels.html"

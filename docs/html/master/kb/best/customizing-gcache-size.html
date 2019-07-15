@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Customizing the Write-Set Cache Size" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Customizing the Write-Set Cache Size &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,7 +207,32 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="customizing-the-write-set-cache-size">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="customizing-the-write-set-cache-size">
 <span id="kb-best-customizing-gcache-size"></span><h1>Customizing the Write-Set Cache Size<a class="headerlink" href="#customizing-the-write-set-cache-size" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="index-0"></span><p id="index-1">You can define the size of the write-set cache using the <a class="reference internal" href="../../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter.  The set the size to one less than that of the data directory.</p>
 <p class="kb rubric">Scenario</p>
@@ -249,12 +277,6 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Consider these configuration tips as guidelines only. For example, in cases where you must avoid state snapshot transfers as much as possible, you may end up using a much larger write-set cache than suggested above.</p>
 </div>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter</li>
-<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a> status variable</li>
-</ul>
 </div>
 
 

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Example of a Galera Notification Script" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Notification Script Example &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,7 +207,31 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="notification-script-example">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="notification-script-example">
 <span id="example-notification-script"></span><h1>Notification Script Example<a class="headerlink" href="#notification-script-example" title="Permalink to this headline">¶</a></h1>
 <p>Nodes can call a notification script when changes happen in the membership of the cluster, that is when nodes join or leave the cluster.  You can specify the name of the script the node calls using the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a>.  While you can use whatever script meets the particular needs of a deployment, you may find it helpful to consider the example below as a starting point.</p>
 <div class="highlight-sh"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -eu</span>
@@ -318,8 +345,7 @@ status_update<span class="o">()</span>
 <span class="nb">exit</span> <span class="m">0</span>
 </pre></div>
 </div>
-<div class="section" id="path-and-permissions">
-<h2>Path and Permissions<a class="headerlink" href="#path-and-permissions" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="notification-cmd-path-permissions">Path and Permissions</p>
 <p>After you modify this script to fit your requirements, you need to move it into a directory in the <code class="docutils literal"><span class="pre">$PATH</span></code> or the binaries directory for your system.  On Linux, the binaries directory is typically at <code class="docutils literal"><span class="pre">/usr/bin</span></code>, while on FreeBSD it is at <code class="docutils literal"><span class="pre">/usr/local/bin</span></code>.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> mv my-wsrep-notify.sh /usr/bin
 </pre></div>
@@ -331,7 +357,6 @@ status_update<span class="o">()</span>
 </div>
 <p>This ensures that only the <code class="docutils literal"><span class="pre">mysql</span></code> user can execute and read the notification script, preventing all other users from seeing the root password.</p>
 </div>
-</div>
 
 
           </div>
@@ -341,16 +366,7 @@ status_update<span class="o">()</span>
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Notification Script Example</a><ul>
-<li><a class="reference internal" href="#path-and-permissions">Path and Permissions</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="notification-cmd.html"

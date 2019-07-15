@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Deciding with to use SST or Not in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>To SST or Not To SST? &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -31,7 +34,7 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Training Videos" href="../videos/index.html" />
+    <link rel="next" title="Codership Training Videos" href="../videos/index.html" />
     <link rel="prev" title="The Safe-To-Bootstrap Feature" href="safe-to-bootstrap-feature.html" />
 
 
@@ -204,13 +207,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="to-sst-or-not-to-sst">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="to-sst-or-not-to-sst">
 <span id="sst-or-not"></span><h1>To SST or Not To SST?<a class="headerlink" href="#to-sst-or-not-to-sst" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length:  1001 words; Writer: Philip Stoev; Published: December 6, 2016; Topic: General; Level: Intermediate</p>
 <p>If a node leaves the cluster and subsequently rejoins, Galera will internally make sure that the node is brought up to speed with the rest of the cluster. It is important for DBAs that this process completes quickly, so ideally SST is avoided altogether and IST is used. However, when looking at the log, SST is still mentioned even if IST is ultimately chosen, which may cause confusion.
 In this article, we will describe the entire process of getting a restarted node back to speed with the rest of the cluster and explain the logic behind the various log messages.</p>
-<div class="section" id="basic-principles">
-<h2>Basic Principles<a class="headerlink" href="#basic-principles" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Basic Principles</p>
 <p>State transfers in Galera are governed by the following basic principles:
 The cluster will pick a donor node using an algorithm that favors IST and attempts to avoid any transfers over a wide-area network. A specific donor can be explicitly chosen using the wsrep_sst_donor variable.
 The joiner will declare if IST, SST or both are possible:</p>
@@ -218,9 +241,7 @@ The joiner will declare if IST, SST or both are possible:</p>
 If a node is starting from an unknown state (such as empty database or a missing grastate.dat file), only SST can be performed;
 If the node was temporarily disconnected from the cluster while the mysqld process remains running, only IST can happen if the SST method is set to xtrabackup, xtrabackup-v2 or rsync. This is because the entire data directory can not be copied over to a running server.
 If both methods are possible, as is the case during a vanilla server restart, it is up to the donor node to decide if it can deliver IST. If needed, the donor has the ability to fall back to SST instead.</p>
-</div>
-<div class="section" id="step-by-step-walkthrough">
-<h2>Step-by-Step Walkthrough<a class="headerlink" href="#step-by-step-walkthrough" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Step-by-Step Walkthrough</p>
 <p>This section describes the entire state transfer process during a normal server restart and shows the typical log messages that happen at each phase.
 First, the joining node establishes its current replication position and compares it to the position the rest of the cluster has moved to while the node was disconnected:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">WSREP: State transfer required:</span>
@@ -271,13 +292,10 @@ First, the joining node establishes its current replication position and compare
 <span class="go">WSREP: Synchronized with group, ready for connections</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="catch-up">
-<h2>Catch-Up<a class="headerlink" href="#catch-up" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Catch-Up</p>
 <p>After the joiner has received a State Transfer, it must also catch up with any transactions that were issued on the rest of the cluster while the State Transfer was in progress. Those transactions are continuously received by the joiner and stored in the gcache. As soon as the state transfer completes, the donor needs to apply them all.</p>
 <p>An attentive reader may ask &#8220;What happens if the joining node is never able to catch up because there are too many new transactions? Will flow-control kick in?&#8221;. The answer is yes, however rather than applying flow control immediately and stopping the entire cluster in its tracks until the catch-up phase is complete, Galera uses a heuristics to determine when throttling is required.
 If the node is able to make progress towards catching up, as evidenced by a decreasing length of its receive queue, no flow control will kick in. However, if the node begins to fall further behind and the queue continues to grow, the cluster will be throttled so that the node is given some breathing room. This way the entire procedure for joining a new node is guaranteed to complete even in the presence of continuing load on the database.</p>
-</div>
 </div>
 
 
@@ -288,18 +306,7 @@ If the node is able to make progress towards catching up, as evidenced by a decr
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">To SST or Not To SST?</a><ul>
-<li><a class="reference internal" href="#basic-principles">Basic Principles</a></li>
-<li><a class="reference internal" href="#step-by-step-walkthrough">Step-by-Step Walkthrough</a></li>
-<li><a class="reference internal" href="#catch-up">Catch-Up</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="safe-to-bootstrap-feature.html"
@@ -308,7 +315,7 @@ If the node is able to make progress towards catching up, as evidenced by a decr
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="../videos/index.html"
-                          title="Next page">&rarr; Training Videos</a></p>
+                          title="Next page">&rarr; Codership Training Videos</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -371,15 +378,15 @@ If the node is able to make progress towards catching up, as evidenced by a decr
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../videos/index.html" title="Training Videos"
+          <a href="../videos/index.html" title="Codership Training Videos"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
           <a href="safe-to-bootstrap-feature.html" title="The Safe-To-Bootstrap Feature"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -390,7 +397,7 @@ If the node is able to make progress towards catching up, as evidenced by a decr
 			
 
 			
-				<li><a href="../videos/index.html" title="Training Videos">Next &gt;</a></li>
+				<li><a href="../videos/index.html" title="Codership Training Videos">Next &gt;</a></li>
 			
 
 		</ul>

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Certification-Based Replication" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Certification-Based Replication &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,21 +207,39 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="certification-based-replication">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="certification-based-replication">
 <span id="id1"></span><h1>Certification-Based Replication<a class="headerlink" href="#certification-based-replication" title="Permalink to this headline">¶</a></h1>
 <p>Certification-based replication uses group communication and transaction ordering techniques to achieve synchronous replication.</p>
 <p>Transactions execute optimistically in a single node, or replica, and then at commit time, they run a coordinated certification process to enforce global consistency.  It achieves global coordination with the help of a broadcast service that establishes a global total order among concurrent transactions.</p>
-<div class="section" id="certification-based-replication-requirements">
-<h2>Certification-Based Replication Requirements<a class="headerlink" href="#certification-based-replication-requirements" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="cert-repl-requirements">Certification-Based Replication Requirements</p>
 <p>It&#8217;s not possible to implement certification-based replication for all database systems.  It requires certain features of the database in order to work;</p>
 <ul class="simple">
 <li><strong>Transactional Database:</strong> The database must be transactional. Specifically, it has to be able to rollback uncommitted changes.</li>
 <li><strong>Atomic Changes:</strong> Replication events must be able to change the database, atomically.  All of a series of database operations in a transaction must occur, else nothing occurs.</li>
 <li><strong>Global Ordering:</strong> Replication events must be ordered globally.  Specifically, they are applied on all instances in the same order.</li>
 </ul>
-</div>
-<div class="section" id="how-certification-based-replication-works">
-<h2>How Certification-Based Replication Works<a class="headerlink" href="#how-certification-based-replication-works" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="cert-repl-workings">How Certification-Based Replication Works</p>
 <p>The main idea in certification-based replication is that a transaction executes conventionally until it reaches the commit point, assuming there is no conflict.  This is called optimistic execution.</p>
 <div class="figure" id="id2">
 <img alt="../_images/certificationbasedreplication.png" src="../_images/certificationbasedreplication.png" />
@@ -227,13 +248,10 @@
 <p>When the client issues a <code class="docutils literal"><span class="pre">COMMIT</span></code> command, but before the actual commit occurs, all changes made to the database by the transaction and primary keys of the changed rows, are collected into a write-set.  The database then sends this write-set to all of the other nodes.</p>
 <p>The write-set then undergoes a deterministic certification test, using the primary keys.  This is done on each node in the cluster, including the node that originates the write-set.  It determines whether or not the node can apply the write-set.</p>
 <p>If the certification test fails, the node drops the write-set and the cluster rolls back the original transaction.  If the test succeeds, though, the transaction commits and the write-set is applied to the rest of the cluster.</p>
-</div>
-<div class="section" id="certification-based-replication-in-galera-cluster">
-<h2>Certification-Based Replication in Galera Cluster<a class="headerlink" href="#certification-based-replication-in-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="cert-repl-in-galera">Certification-Based Replication in Galera Cluster</p>
 <p>The implementation of certification-based replication in Galera Cluster depends on the global ordering of transactions.</p>
 <p>Galera Cluster assigns each transaction a global ordinal sequence number, or <code class="docutils literal"><span class="pre">seqno</span></code>, during replication.  When a transaction reaches the commit point, the node checks the sequence number against that of the last successful transaction.  The interval between the two is the area of concern, given that transactions that occur within this interval have not seen the effects of each other.  All transactions in this interval are checked for primary key conflicts with the transaction in question.  The certification test fails if it detects a conflict.</p>
 <p>The procedure is deterministic and all replica receive transactions in the same order.  Thus, all nodes reach the same decision about the outcome of the transaction.  The node that started the transaction can then notify the client application whether or not it has committed the transaction.</p>
-</div>
 </div>
 
 
@@ -244,18 +262,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Certification-Based Replication</a><ul>
-<li><a class="reference internal" href="#certification-based-replication-requirements">Certification-Based Replication Requirements</a></li>
-<li><a class="reference internal" href="#how-certification-based-replication-works">How Certification-Based Replication Works</a></li>
-<li><a class="reference internal" href="#certification-based-replication-in-galera-cluster">Certification-Based Replication in Galera Cluster</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="tech-desc-introduction.html"

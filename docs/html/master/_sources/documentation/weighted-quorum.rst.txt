@@ -1,3 +1,46 @@
+.. meta::
+   :title: Galera Cluster Quorum Components
+   :description:
+   :language: en-US
+   :keywords:
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+
+
+.. topic:: The Library
+   :name: left-margin
+
+   .. cssclass:: no-bull
+
+      - :doc:`Documentation <./index>`
+      - :doc:`Knowledge Base <../kb/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Troubleshooting <../kb/trouble/index>`
+         - :doc:`Best Practices <../kb/best/index>`
+
+      - :doc:`FAQ <../faq>`
+      - :doc:`Training <../training/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Tutorial Articles <../training/tutorials/index>`
+         - :doc:`Training Videos <../training/videos/index>`
+
+      .. cssclass:: bull-head
+
+         Related Documents
+
+      - :ref:`evs.suspect_timeout <evs.suspect_timeout>`
+      - :doc:`arbitrator`
+      - :ref:`pc.weight <pc.weight>`
+      - :doc:`Reset Quorum <quorum-reset>`
+
+      .. cssclass:: bull-head
+
+         Related Articles
+
+
 .. cssclass:: library-document
 .. _`quorum-components`:
 
@@ -13,10 +56,8 @@ Under normal operations, your Primary Component is the cluster.  When cluster pa
 
 
 .. _`weighted-quorum`:
-
--------------------
- Weighted Quorum
--------------------
+.. rst-class:: rubric-1
+.. rubric:: Weighted Quorum
 
 .. index::
    pair: Weighted Quorum; Descriptions
@@ -54,10 +95,8 @@ In order to enable automatic failovers, you need to use at least three nodes.  B
 
 
 .. _`split-brain-condition`:
-
-^^^^^^^^^^^^^^^^^^^^^^^
-Split-Brain Condition
-^^^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: Split-Brain Condition
 
 Cluster failures that result in database nodes operating autonomous of each other are called split-brain conditions.  When this occurs, data can become irreparably corrupted, such as would occur when two database nodes independently update the same row on the same table.  As is the case with any quorum-based system, Galera Cluster is subject to split-brain conditions when the quorum algorithm fails to select a :term:`Primary Component`.
 
@@ -80,10 +119,8 @@ For more information on configuring and managing the quorum, see :doc:`quorum-re
 
 
 .. _`quorum-calculation`:
-
--------------------
-Quorum Calculation
--------------------
+.. rst-class:: rubric-1
+.. rubric:: Quorum Calculation
 
 .. index::
    pair: Parameters; pc.weight
@@ -112,33 +149,27 @@ What this means is that the quorum is preserved if (and only if) the sum weight 
 
 You can customize node weight using the :ref:`pc.weight <pc.weight>` parameter.  By default, node weight is ``1``, which translates to the traditional node count behavior.
 
-.. note:: You can change node weight in runtime by setting the :ref:`pc.weight <pc.weight>` parameter.
+You can change the node weight during runtime by setting the :ref:`pc.weight <pc.weight>` parameter.
 
    .. code-block:: mysql
 
       SET GLOBAL wsrep_provider_options="pc.weight=3";
 
-   Galera Cluster applies the new weight on the delivery of a message that carries a weight.  At the moment, there is no mechanism to notify the application of a new weight, but will eventually happen when the message is delivered.
+Galera Cluster applies the new weight on the delivery of a message that carries a weight.  At the moment, there is no mechanism to notify the application of a new weight, but will eventually happen when the message is delivered.
 
-.. warning:: If a group partitions at the moment when the weight change message is delivered, all partitioned components that deliver weight change messages in the transitional view will become non-primary components.  Partitions that deliver messages in the regular view will go through quorum computation with the applied weight when the following transitional view is delivered.
-
-   In other words, there is a corner case where the entire cluster can become non-primary component, if the weight changing message is sent at the moment when partitioning takes place.  Recovering from such a situation should be done either by waiting for a re-merge or by inspecting which partition is most advanced and by bootstrapping it as a new Primary Component.
+.. warning:: If a group partitions at the moment when the weight-change message is delivered, all partitioned components that deliver weight-change messages in the transitional view will become non-primary components.  Partitions that deliver messages in the regular view, will go through quorum computation with the applied weight when the subsequential transitional view is delivered. |br| |br| In other words, there is a corner case where the entire cluster can become non-primary component, if the weight changing message is sent at the moment when partitioning takes place.  Recovering from such a situation should be done either by waiting for a re-merge or by inspecting which partition is most advanced and by bootstrapping it as a new Primary Component.
 
 
 .. _`weighted-quorum-examples`:
-
----------------------------------
- Weighted Quorum Examples
----------------------------------
+.. rst-class:: rubric-1
+.. rubric:: Weighted Quorum Examples
 
 Now that you understand how quorum weights work, here are some examples of deployment patterns and how to use them.
 
 
 .. _`wq-three-nodes`:
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Weighted Quorum for Three Nodes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: Weighted Quorum for Three Nodes
 
 When configuring quorum weights for three nodes, use the following pattern:
 
@@ -152,10 +183,8 @@ Under this pattern, killing ``node2`` and ``node3`` simultaneously preserves the
 
 
 .. _`wq-simple-master-slave`:
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Weighted Quorum for a Simple Master-Slave Scenario
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: Weighted Quorum for a Simple Master-Slave Scenario
 
 When configuring quorum weights for a simple master-slave scenario, use the following pattern:
 
@@ -168,10 +197,8 @@ Under this pattern, if the master ``node`` dies, ``node2`` becomes a non-primary
 
 
 .. _`wq-master-multi-slave`:
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Weighted Quorum for a Master and Multiple Slaves Scenario
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: Weighted Quorum for a Master and Multiple Slaves Scenario
 
 When configuring quorum weights for a master-slave scenario that features multiple slave nodes, use the following pattern:
 
@@ -187,10 +214,8 @@ Under this pattern, if ``node1`` dies, all remaining nodes end up as non-primary
 
 
 .. _`wq-primary-secondary-site`:
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Weighted Quorum for a Primary and Secondary Site Scenario
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: Weighted Quorum for a Primary and Secondary Site Scenario
 
 When configuring quorum weights for primary and secondary sites, use the following pattern:
 
@@ -207,7 +232,9 @@ When configuring quorum weights for primary and secondary sites, use the followi
 Under this pattern, some nodes are located at the primary site while others are at the secondary site.  In the event that the secondary site goes down or if network connectivity is lost between the sites, the nodes at the primary site remain the :term:`Primary Component`.  Additionally, either ``node1`` or ``node2`` can crash without the rest of the nodes becoming non-primary components.
 
 
-
-
 .. |---|   unicode:: U+2014 .. EM DASH
    :trim:
+
+.. |br| raw:: html
+
+  <br/>

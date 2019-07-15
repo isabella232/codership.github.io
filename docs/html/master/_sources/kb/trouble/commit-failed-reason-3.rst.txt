@@ -1,3 +1,43 @@
+.. meta::
+   :title: Resolving Commit Failures (Reason 3)
+   :description:
+   :language: en-US
+   :keywords:
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+
+
+.. topic:: The Library
+   :name: left-margin
+
+   .. cssclass:: no-bull
+
+      - :doc:`Documentation <../../documentation/index>`
+      - :doc:`Knowledge Base <../index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Troubleshooting <./index>`
+         - :doc:`Best Practices <../best/index>`
+
+      - :doc:`FAQ <../../faq>`
+      - :doc:`Training <../../training/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Tutorial Articles <../../training/tutorials/index>`
+         - :doc:`Training Videos <../../training/videos/index>`
+
+      .. cssclass:: bull-head
+
+         Related Documents
+
+      - :ref:`wsrep_debug <wsrep_debug>`
+
+      .. cssclass:: bull-head
+
+         Related Articles
+
+
 .. cssclass:: kb-article
 .. _`kb-trouble-node-requested-state-transfer`:
 
@@ -8,8 +48,8 @@ Commit Failed for Reason 3
 When you have :ref:`wsrep_debug <wsrep_debug>` turned ``ON``, you may occasionally see a message noting that a commit has failed due to reason ``3``.
 
 
+.. rst-class:: kb
 .. rubric:: Scenario
-   :class: kb
 
 Suppose you attempt to change locally the data contained in a database and you have  :ref:`wsrep_debug <wsrep_debug>` enabled, and see a message in the error log saying that a commit has failed due to reason ``3``.  Below is an example of an excerpt from a database server's error log showing this:
 
@@ -25,17 +65,10 @@ When attempting to apply a replicated write-set, slave threads occasionally enco
 This is a consequence of optimistic transaction execution.  The database server executes transactions with the expectation that there won't be any row conflicts.  It's an expected issue in a multi-master configuration.
 
 
+.. rst-class:: kb
 .. rubric:: Solution
-   :class: kb
 
 To mitigate such conflicts, there are a couple of things you can do. You could use the cluster in a master-slave configuration: you would direct all writes to a single node.  The other option is to use the same approach as master-slave read/write splitting.
-
-
-.. rubric:: Additional Information
-
-For more information related to this KB article, see the following documents:
-
- - :ref:`wsrep_debug <wsrep_debug>`
 
 .. |---|   unicode:: U+2014 .. EM DASH
    :trim:

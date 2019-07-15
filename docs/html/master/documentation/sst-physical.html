@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Physical State Snapshots within Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Physical State Snapshot &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,7 +207,28 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="physical-state-snapshot">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="physical-state-snapshot">
 <span id="sst-physical"></span><h1>Physical State Snapshot<a class="headerlink" href="#physical-state-snapshot" title="Permalink to this headline">¶</a></h1>
 <p>There are two back-end methods available for Physical State Snapshots: <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code>.</p>
 <p>The <a class="reference internal" href="glossary.html#term-physical-state-transfer-method"><span class="xref std std-term">Physical State Transfer Method</span></a> has the following advantages:</p>
@@ -221,8 +245,7 @@
 <p>What this means is that when your node requires a state snapshot transfer, the database server must restart to apply the changes.  The database server remains inaccessible to the client until the state snapshot transfer is complete, since it cannot perform authentication without the storage engines.</p>
 </li>
 </ul>
-<div class="section" id="rsync">
-<span id="sst-physical-rsync"></span><h2><code class="docutils literal"><span class="pre">rsync</span></code><a class="headerlink" href="#rsync" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="sst-physical-rsync"><code class="docutils literal"><span class="pre">rsync</span></code></p>
 <p>The fastest back-end method for State Snapshot Transfers is <code class="docutils literal"><span class="pre">rsync</span></code>.  It carries all the advantages and disadvantages of of the Physical Snapshot Transfer.  While it does block the donor node during transfer, <code class="docutils literal"><span class="pre">rsync</span></code> does not require database configuration or root access, which makes it easier to configure.</p>
 <p>When using terabyte-scale databases, <code class="docutils literal"><span class="pre">rsync</span></code> is considerably faster, (1.5 to 2 times faster), than <code class="docutils literal"><span class="pre">xtrabackup</span></code>.  This translates to a reduction in transfer times by several hours.</p>
 <p><code class="docutils literal"><span class="pre">rsync</span></code> also features the rsync-wan modification, which engages the <code class="docutils literal"><span class="pre">rsync</span></code> delta transfer algorithm.  However, given that this makes it more I/O intensive, you should only use it when the network throughput is the bottleneck, which is usually the case in <abbr title="Wide Area Network">WAN</abbr> deployments.</p>
@@ -235,9 +258,7 @@
 </pre></div>
 </div>
 <p>For more information about <code class="docutils literal"><span class="pre">rsync</span></code>, see the <a class="reference external" href="http://rsync.samba.org/">rsync Documentation</a>.</p>
-</div>
-<div class="section" id="xtrabackup">
-<span id="sst-physical-xtrabackup"></span><h2><code class="docutils literal"><span class="pre">xtrabackup</span></code><a class="headerlink" href="#xtrabackup" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="sst-physical-xtrabackup"><code class="docutils literal"><span class="pre">xtrabackup</span></code></p>
 <p>The most popular back-end method for State Snapshot Transfers is <code class="docutils literal"><span class="pre">xtrabackup</span></code>.  It carries all the advantages and disadvantages of a Physical State Snapshot, but is virtually non-blocking on the donor node.</p>
 <p><code class="docutils literal"><span class="pre">xtrabackup</span></code> only blocks the donor for the short period of time it takes to copy the MyISAM tables, (for instance, the system tables).  If these tables are small, the blocking time remains very short.  However, this comes at the cost of speed: a state snapshot transfer that uses <code class="docutils literal"><span class="pre">xtrabackup</span></code> can be considerably slower than one that uses <code class="docutils literal"><span class="pre">rsync</span></code>.</p>
 <p>Given that <code class="docutils literal"><span class="pre">xtrabackup</span></code> copies a large amount of data in the shortest possible time, it may also noticeably degrade donor performance.</p>
@@ -256,7 +277,6 @@
 </div>
 <p>For more information on <code class="docutils literal"><span class="pre">xtrabackup</span></code>, see the <a class="reference external" href="https://www.percona.com/doc/percona-xtrabackup/2.1/manual.html?id=percona-xtrabackup:xtrabackup_manual">Percona XtraBackup User Manual</a> and <a class="reference external" href="http://www.percona.com/doc/percona-xtradb-cluster/5.6/manual/xtrabackup_sst.html">XtraBackup SST Configuration</a>.</p>
 </div>
-</div>
 
 
           </div>
@@ -266,17 +286,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Physical State Snapshot</a><ul>
-<li><a class="reference internal" href="#rsync"><code class="docutils literal"><span class="pre">rsync</span></code></a></li>
-<li><a class="reference internal" href="#xtrabackup"><code class="docutils literal"><span class="pre">xtrabackup</span></code></a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="mysqldump.html"

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Architecture" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Replication API &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,10 +207,31 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="replication-api">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="replication-api">
 <span id="id1"></span><h1>Replication API<a class="headerlink" href="#replication-api" title="Permalink to this headline">¶</a></h1>
 <p>Synchronous replication systems generally use eager replication.  Nodes in a cluster will synchronize with all of the other nodes by updating the replicas through a single transaction.  This means that when a transaction commits, all of the nodes will have the same value.  This process takes place using <em>write-set</em> replication through group communication.</p>
-<div class="figure" id="id6">
+<div class="figure" id="id2">
 <img alt="../_images/replicationapi.png" src="../_images/replicationapi.png" />
 <p class="caption"><span class="caption-text"><em>Replication API</em></span></p>
 </div>
@@ -226,21 +250,19 @@
 <li><strong>Galera Replication Plugin:</strong> This plugin enables write-set replication service functionality.</li>
 <li><strong>Group Communication Plugins:</strong> There several group communication systems available to Galera Cluster (e.g., <em>gcomm</em> and <a class="reference external" href="http://www.spread.org/">Spread</a>).</li>
 </ul>
-<div class="section" id="wsrep-api">
-<span id="id2"></span><h2>wsrep API<a class="headerlink" href="#wsrep-api" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="wsrep-api">wsrep API</p>
 <span class="target" id="index-0"></span><p id="index-1">The <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> is a generic replication plugin interface for databases.  It defines a set of application callbacks and replication plugin calls.</p>
 <p>The wsrep API uses a replication model that considers the database server to have a state.  That state refers to the contents of the database.  When a database is in use and clients modify the database content, its state is changed.  The wsrep API represents changes in the database state as a series of atomic changes, or transactions.</p>
 <p>In a database cluster, all of the nodes always have the same state.  They synchronize with each other by replicating and applying state changes in the same serial order.</p>
 <p>From a more technical perspective, Galera Cluster handles state changes in the following way:</p>
-<ol class="arabic simple">
+<ul class="simple">
 <li>On one node in the cluster, a state change occurs in the database.</li>
 <li>In the database, the wsrep hooks translate the changes to the write-set.</li>
 <li><code class="docutils literal"><span class="pre">dlopen()</span></code> then makes the wsrep provider functions available to the wsrep hooks.</li>
 <li>The Galera Replication plugin handles write-set certification and replication to the cluster.</li>
-</ol>
+</ul>
 <p>For each node in the cluster, the application process occurs by high-priority transactions.</p>
-<div class="section" id="global-transaction-id">
-<span id="id3"></span><h3>Global Transaction ID<a class="headerlink" href="#global-transaction-id" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-1 rubric" id="global-transaction-id">Global Transaction ID</p>
 <p>In order to keep the state identical across the cluster, the wsrep API uses a <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>, or GTID.  This allows it to identify state changes and to identify the current state in relation to the last state change. Below is an example of a GTID:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>45eec521-2f34-11e0-0800-2a36050b826b:94530586304
 </pre></div>
@@ -251,25 +273,19 @@
 <li><strong>Ordinal Sequence Number:</strong> The seqno is a 64-bit signed integer used to denote the position of the change in the sequence.</li>
 </ul>
 <p>The Global Transaction ID allows you to compare the application state and establish the order of state changes.  You can use it to determine whether or not a change was applied and whether the change is applicable to a given state.</p>
-</div>
-</div>
-<div class="section" id="galera-replication-plugin">
-<span id="id4"></span><h2>Galera Replication Plugin<a class="headerlink" href="#galera-replication-plugin" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="galera-replication-plugin">Galera Replication Plugin</p>
 <p>The <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> implements the <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a>.  It operates as the wsrep Provider. From a more technical perspective, the Galera Replication Plugin consists of the following components:</p>
 <ul class="simple">
 <li><strong>Certification Layer:</strong> This layer prepares the write-sets and performs the certification checks on them, ensuring that they can be applied.</li>
 <li><strong>Replication Layer:</strong> This layer manages the replication protocol and provides the total ordering capability.</li>
 <li><strong>Group Communication Framework:</strong> This layer provides a plugin architecture for the various group communication systems that connect to Galera Cluster.</li>
 </ul>
-</div>
-<div class="section" id="group-communication-plugins">
-<span id="id5"></span><h2>Group Communication Plugins<a class="headerlink" href="#group-communication-plugins" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="group-communication-plugins">Group Communication Plugins</p>
 <p id="index-2">The Group Communication Framework provides a plugin architecture for the various gcomm systems.</p>
 <p>Galera Cluster is built on top of a proprietary group communication system layer, which implements a virtual synchrony <abbr title="Quality of Service">QoS</abbr>.  Virtual synchrony unifies the data delivery and cluster membership services, providing clear formalism for message delivery semantics.</p>
 <p>While virtual synchrony guarantees consistency, it does not guarantee temporal synchrony, which is necessary for smooth multi-master operations.  To address this, Galera Cluster implements its own runtime-configurable temporal flow control.  Flow control keeps nodes synchronized to a fraction of a second.</p>
 <p>Group Communication Framework also provides a total ordering of messages from multiple sources.  It uses this to generate <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>&#8216;s in a multi-master cluster.</p>
-<p>At the transport level, Galera Cluster is a symmetric undirected graph.  All database nodes connect to each other over a <abbr title="Transmission Control Protocl">TCP</abbr> connection.  By default, <abbr title="Transmission Control Protocl">TCP</abbr> is used for both message replication and the cluster membership services. However, you can also use <abbr title="User Datagram Protocol">UDP</abbr> multicast for replication in a <abbr title="Local Area Network">LAN</abbr>.</p>
-</div>
+<p>At the transport level, Galera Cluster is a symmetric undirected graph.  All database nodes connect to each other over a <abbr title="Transmission Control Protocol">TCP</abbr> connection.  By default, <abbr title="Transmission Control Protocol">TCP</abbr> is used for both message replication and the cluster membership services. However, you can also use <abbr title="User Datagram Protocol">UDP</abbr> multicast for replication in a <abbr title="Local Area Network">LAN</abbr>.</p>
 </div>
 
 
@@ -280,21 +296,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Replication API</a><ul>
-<li><a class="reference internal" href="#wsrep-api">wsrep API</a><ul>
-<li><a class="reference internal" href="#global-transaction-id">Global Transaction ID</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#galera-replication-plugin">Galera Replication Plugin</a></li>
-<li><a class="reference internal" href="#group-communication-plugins">Group Communication Plugins</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="certification-based-replication.html"

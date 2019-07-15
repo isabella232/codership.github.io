@@ -7,8 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Migration &#8212; Galera Cluster Documentation</title>
+    <meta content="Factors related to Migrating to Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
+    <title>Factors related to Migrating to Galera Cluster &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -31,8 +34,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Differences from a Standalone MySQL Server" href="differences.html" />
-    <link rel="prev" title="Setting Up a Galera Cluster on AWS" href="aws-galera-cluster.html" />
+    <link rel="next" title="Differences from a Stand-Alone MySQL Server" href="differences.html" />
+    <link rel="prev" title="Installing a Galera Cluster on AWS" href="aws-galera-cluster.html" />
 
 
 
@@ -204,12 +207,40 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="migration">
-<span id="migrate"></span><h1>Migration<a class="headerlink" href="#migration" title="Permalink to this headline">¶</a></h1>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="differences.html"><span class="doc">Differences from a Stand-Alone MySQL Server</span></a></li>
+<li><a class="reference internal" href="migration.html"><span class="doc">Migrating to Galera Cluster</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="getting-started.html"><span class="doc">Getting Started Guide</span></a></li>
+</ul>
+</div>
+<div class="tutorial-article section" id="factors-related-to-migrating-to-galera-cluster">
+<span id="migrate"></span><h1>Factors related to Migrating to Galera Cluster<a class="headerlink" href="#factors-related-to-migrating-to-galera-cluster" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length: 173 words; Published: October 20, 2014; Topic: Migration; Level: Beginner</p>
 <p>In the <a class="reference internal" href="getting-started.html"><span class="doc">Getting Started Guide</span></a>, the installation guides were written on the assumption that Galera Cluster is the first database in your infrastructure. However, this won&#8217;t always be the case.  Sometimes, you may need to migrate to Galera Cluster from an existing database infrastructure: such as a single MySQL server or several database servers that were part of a MySQL master-slave cluster.</p>
 <ul>
-<li><p class="first"><a class="reference internal" href="differences.html"><span class="doc">Differences from a Standalone MySQL Server</span></a></p>
+<li><p class="first"><a class="reference internal" href="differences.html"><span class="doc">Differences from a Stand-Alone MySQL Server</span></a></p>
 <p class="list-stats">Length:  808 words; Writer: Staff; Published: October 20, 2014; Topic: Migration; Level: Beginner</p>
 <p>While clusters operate as distributed database servers, there are some key differences between them and the standard stand-alone MySQL implementations.</p>
 </li>
@@ -235,12 +266,12 @@
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="aws-galera-cluster.html"
-                          title="Previous page">&larr; Setting Up a Galera Cluster on AWS</a></p>
+                          title="Previous page">&larr; Installing a Galera Cluster on AWS</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="differences.html"
-                          title="Next page">&rarr; Differences from a Standalone MySQL Server</a></p>
+                          title="Next page">&rarr; Differences from a Stand-Alone MySQL Server</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -291,7 +322,7 @@
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/migrate.rst.rst" title="Edit 'Migration' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/migrate.rst.rst" title="Edit 'Factors related to Migrating to Galera Cluster' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -303,26 +334,26 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="differences.html" title="Differences from a Standalone MySQL Server"
+          <a href="differences.html" title="Differences from a Stand-Alone MySQL Server"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="aws-galera-cluster.html" title="Setting Up a Galera Cluster on AWS"
+          <a href="aws-galera-cluster.html" title="Installing a Galera Cluster on AWS"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="aws-galera-cluster.html" title="Setting Up a Galera Cluster on AWS">&lt; Previous</a></li>
+				<li><a href="aws-galera-cluster.html" title="Installing a Galera Cluster on AWS">&lt; Previous</a></li>
 			
 
 			
-				<li><a href="differences.html" title="Differences from a Standalone MySQL Server">Next &gt;</a></li>
+				<li><a href="differences.html" title="Differences from a Stand-Alone MySQL Server">Next &gt;</a></li>
 			
 
 		</ul>

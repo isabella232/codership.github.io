@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster - Firewall Settings" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Firewall Settings &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,7 +207,28 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="firewall-settings">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="firewall-settings">
 <span id="id1"></span><h1>Firewall Settings<a class="headerlink" href="#firewall-settings" title="Permalink to this headline">¶</a></h1>
 <p>Galera Cluster requires a number of ports to maintain network connectivity between the nodes.  Depending on your deployment, you may not require all of these ports, but a cluster might require all of them on each node.  Below is a list of these ports and their purpose:</p>
 <ul class="simple">
@@ -216,22 +240,9 @@
 <p>How these ports are enabled for Galera Cluster can vary depending upon your operating system distribution and what you use to configure the firewall.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ip-tables.html">Firewall Configuration with <code class="docutils literal"><span class="pre">iptables</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ip-tables.html#opening-ports-for-galera-cluster">Opening Ports for Galera Cluster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ip-tables.html#making-firewall-changes-persistent">Making Firewall Changes Persistent</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="firewalld.html">Firewall Configuration with FirewallD</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="firewalld.html#opening-ports-for-galera-cluster">Opening Ports for Galera Cluster</a></li>
-<li class="toctree-l2"><a class="reference internal" href="firewalld.html#making-firewall-changes-persistent">Making Firewall Changes Persistent</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="firewall-pf.html">Firewall Configuration with PF</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="firewall-pf.html#enabling-pf">Enabling PF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="firewall-pf.html#configuring-pf-rules">Configuring PF Rules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="firewall-pf.html#starting-pf">Starting PF</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="ip-tables.html">Firewall Configuration with <code class="docutils literal"><span class="pre">iptables</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="firewalld.html">Firewall Configuration with FirewallD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="firewall-pf.html">Firewall Configuration with PF</a></li>
 </ul>
 </div>
 </div>

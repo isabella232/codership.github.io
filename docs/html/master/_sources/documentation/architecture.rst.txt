@@ -1,8 +1,47 @@
+.. meta::
+   :title: Galera Cluster Architecture
+   :description:
+   :language: en-US
+   :keywords:
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+
+
+.. topic:: The Library
+   :name: left-margin
+
+   .. cssclass:: no-bull
+
+      - :doc:`Documentation <./index>`
+      - :doc:`Knowledge Base <../kb/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Troubleshooting <../kb/trouble/index>`
+         - :doc:`Best Practices <../kb/best/index>`
+
+      - :doc:`FAQ <../faq>`
+      - :doc:`Training <../training/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Tutorial Articles <../training/tutorials/index>`
+         - :doc:`Training Videos <../training/videos/index>`
+
+      .. cssclass:: bull-head
+
+         Related Documents
+
+      .. cssclass:: bull-head
+
+         Related Articles
+
+
+
 .. cssclass:: library-document
 .. _`replication-api`:
 
 ===================
- Replication API
+Replication API
 ===================
 
 Synchronous replication systems generally use eager replication.  Nodes in a cluster will synchronize with all of the other nodes by updating the replicas through a single transaction.  This means that when a transaction commits, all of the nodes will have the same value.  This process takes place using *write-set* replication through group communication.
@@ -29,10 +68,8 @@ The internal architecture of Galera Cluster revolves around four components:
 
 
 .. _`wsrep-api`:
-
----------------
- wsrep API
----------------
+.. rst-class:: rubric-1
+.. rubric:: wsrep API
 
 .. index::
    pair: Global Transaction ID; Descriptions
@@ -47,22 +84,20 @@ In a database cluster, all of the nodes always have the same state.  They synchr
 
 From a more technical perspective, Galera Cluster handles state changes in the following way:
 
-1. On one node in the cluster, a state change occurs in the database.
+- On one node in the cluster, a state change occurs in the database.
 
-2. In the database, the wsrep hooks translate the changes to the write-set.
+- In the database, the wsrep hooks translate the changes to the write-set.
 
-3. ``dlopen()`` then makes the wsrep provider functions available to the wsrep hooks.
+- ``dlopen()`` then makes the wsrep provider functions available to the wsrep hooks.
 
-4. The Galera Replication plugin handles write-set certification and replication to the cluster.
+- The Galera Replication plugin handles write-set certification and replication to the cluster.
 
 For each node in the cluster, the application process occurs by high-priority transactions.
 
 
 .. _`global-transaction-id`:
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Global Transaction ID
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-1
+.. rubric:: Global Transaction ID
 
 In order to keep the state identical across the cluster, the wsrep API uses a :term:`Global Transaction ID`, or GTID.  This allows it to identify state changes and to identify the current state in relation to the last state change. Below is an example of a GTID:
 
@@ -80,10 +115,8 @@ The Global Transaction ID allows you to compare the application state and establ
 
 
 .. _`galera-replication-plugin`:
-
----------------------------
- Galera Replication Plugin
----------------------------
+.. rst-class:: rubric-1
+.. rubric:: Galera Replication Plugin
 
 The :term:`Galera Replication Plugin` implements the :term:`wsrep API`.  It operates as the wsrep Provider. From a more technical perspective, the Galera Replication Plugin consists of the following components:
 
@@ -95,10 +128,9 @@ The :term:`Galera Replication Plugin` implements the :term:`wsrep API`.  It oper
 
 
 .. _`group-communication-plugins`:
+.. rst-class:: rubric-1
+.. rubric:: Group Communication Plugins
 
-------------------------------
- Group Communication Plugins
-------------------------------
 .. index::
    pair: Virtual Synchrony; Descriptions
 
@@ -110,7 +142,7 @@ While virtual synchrony guarantees consistency, it does not guarantee temporal s
 
 Group Communication Framework also provides a total ordering of messages from multiple sources.  It uses this to generate :term:`Global Transaction ID`'s in a multi-master cluster.
 
-At the transport level, Galera Cluster is a symmetric undirected graph.  All database nodes connect to each other over a :abbr:`TCP (Transmission Control Protocl)` connection.  By default, :abbr:`TCP (Transmission Control Protocl)` is used for both message replication and the cluster membership services. However, you can also use :abbr:`UDP (User Datagram Protocol)` multicast for replication in a :abbr:`LAN (Local Area Network)`.
+At the transport level, Galera Cluster is a symmetric undirected graph.  All database nodes connect to each other over a :abbr:`TCP (Transmission Control Protocol)` connection.  By default, :abbr:`TCP (Transmission Control Protocol)` is used for both message replication and the cluster membership services. However, you can also use :abbr:`UDP (User Datagram Protocol)` multicast for replication in a :abbr:`LAN (Local Area Network)`.
 
 
 .. |---|   unicode:: U+2014 .. EM DASH

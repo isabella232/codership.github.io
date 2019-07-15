@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Install XtraDB Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Percona XtraDB Cluster - Binary Installation &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -32,7 +35,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Percona XtraDB Cluster - Source Installation" href="install-xtradb-src.html" />
-    <link rel="prev" title="MariaDB Galera Cluster- Source Installation" href="install-mariadb-src.html" />
+    <link rel="prev" title="MariaDB Galera Cluster - Source Installation" href="install-mariadb-src.html" />
 
 
 
@@ -204,14 +207,36 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="percona-xtradb-cluster-binary-installation">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/migration.html"><span class="doc">Migrating to Galera Cluster</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="percona-xtradb-cluster-binary-installation">
 <span id="install-xtradb-binary"></span><h1>Percona XtraDB Cluster - Binary Installation<a class="headerlink" href="#percona-xtradb-cluster-binary-installation" title="Permalink to this headline">¶</a></h1>
 <p>Percona XtraDB Cluster is the Percona implementation of Galera Cluster for MySQL.  Binary installation packages are available for Debian- and RPM-based distributions through the Percona repository.</p>
-<div class="section" id="enabling-the-percona-repository">
-<span id="xtradb-repo"></span><h2>Enabling the Percona Repository<a class="headerlink" href="#enabling-the-percona-repository" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="xtradb-repo">Enabling the Percona Repository</p>
 <p>In order to install Percona XtraDB Cluster through your package manager, you need to first enable the Percona repository on your system.  There are two different ways to accomplish this, depending upon which Linux distribution you use.</p>
-<div class="section" id="enabling-the-apt-repository">
-<span id="xtradb-apt"></span><h3>Enabling the <code class="docutils literal"><span class="pre">apt</span></code> Repository<a class="headerlink" href="#enabling-the-apt-repository" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="xtradb-apt">Enabling the <code class="docutils literal"><span class="pre">apt</span></code> Repository</p>
 <p>For Debian and Debian-based Linux distributions, the procedure for adding the Percona repository requires that you first install Software Properties on your system.  The package names vary depending upon which distribution you use.  For Debian, in the terminal run the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install python-software-properties
 </pre></div>
@@ -251,19 +276,14 @@
 </ol>
 <p>For more information on the repository, available packages and mirrors, see the <a class="reference external" href="http://www.percona.com/doc/percona-server/5.5/installation/apt_repo.html">Percona apt Repository</a></p>
 <p>Packages in the Percona repository are now available for installation on your server through <code class="docutils literal"><span class="pre">apt-get</span></code>.</p>
-</div>
-<div class="section" id="enabling-the-yum-repository">
-<span id="xtradb-yum"></span><h3>Enabling the <code class="docutils literal"><span class="pre">yum</span></code> Repository<a class="headerlink" href="#enabling-the-yum-repository" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="xtradb-yum">Enabling the <code class="docutils literal"><span class="pre">yum</span></code> Repository</p>
 <p>For RPM-based distributions, you can enable the Percona repository through <code class="docutils literal"><span class="pre">yum</span></code> using the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> yum install http://www.percona.com/downloads/percona-release/redhat/0.1-3/percona-release-0.1-3.noarch.rpm
 </pre></div>
 </div>
 <p>For more information on the repository, package names or available mirrors, see the <a class="reference external" href="http://www.percona.com/doc/percona-server/5.5/installation/yum_repo.html">Percona yum Repository</a>.</p>
 <p>Packages in the Percona repository are now available for installation on your server through <code class="docutils literal"><span class="pre">yum</span></code>.</p>
-</div>
-</div>
-<div class="section" id="installing-percona-xtradb-cluster">
-<span id="xtradb-galera-install"></span><h2>Installing Percona XtraDB Cluster<a class="headerlink" href="#installing-percona-xtradb-cluster" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="xtradb-galera-install">Installing Percona XtraDB Cluster</p>
 <p>There are three packages involved in the installation of Percona XtraDB Cluster: the Percona XtraDB client, a command line tool for accessing the database; the percona XtraDB database server, built to include the <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> patch and the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>.</p>
 <p>For most Debian-based distributions, you can install all of these through a single package.  In the terminal run the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install percona-xtradb-cluster
@@ -284,7 +304,6 @@
 <p class="last">If you installed Percona XtraDB Cluster over an existing standalone instance of Percona XtraDB, there are some additional steps that you need to take in order to update your system to the new database server.  For more information, see <a class="reference internal" href="../training/tutorials/migration.html"><span class="doc">Migrating to Galera Cluster</span></a>.</p>
 </div>
 </div>
-</div>
 
 
           </div>
@@ -294,25 +313,11 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Percona XtraDB Cluster - Binary Installation</a><ul>
-<li><a class="reference internal" href="#enabling-the-percona-repository">Enabling the Percona Repository</a><ul>
-<li><a class="reference internal" href="#enabling-the-apt-repository">Enabling the <code class="docutils literal"><span class="pre">apt</span></code> Repository</a></li>
-<li><a class="reference internal" href="#enabling-the-yum-repository">Enabling the <code class="docutils literal"><span class="pre">yum</span></code> Repository</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#installing-percona-xtradb-cluster">Installing Percona XtraDB Cluster</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="install-mariadb-src.html"
-                          title="Previous page">&larr; MariaDB Galera Cluster- Source Installation</a></p>
+                          title="Previous page">&larr; MariaDB Galera Cluster - Source Installation</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -383,7 +388,7 @@
           <a href="install-xtradb-src.html" title="Percona XtraDB Cluster - Source Installation"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="install-mariadb-src.html" title="MariaDB Galera Cluster- Source Installation"
+          <a href="install-mariadb-src.html" title="MariaDB Galera Cluster - Source Installation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
@@ -395,7 +400,7 @@
 
 
 			
-				<li><a href="install-mariadb-src.html" title="MariaDB Galera Cluster- Source Installation">&lt; Previous</a></li>
+				<li><a href="install-mariadb-src.html" title="MariaDB Galera Cluster - Source Installation">&lt; Previous</a></li>
 			
 
 			

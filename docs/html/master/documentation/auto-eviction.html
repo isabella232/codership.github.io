@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Auto-Eviction" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Auto-Eviction &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,11 +207,43 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="auto-eviction">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera Cluster</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-auto-evict"><span class="std std-ref">evs.auto_evict</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-delayed-keep-period"><span class="std std-ref">evs.delayed_keep_period</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-delayed-margin"><span class="std std-ref">evs.delayed_margin</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-evict"><span class="std std-ref">evs.evict</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-version"><span class="std std-ref">evs.version</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-delayed"><span class="std std-ref">wsrep_evs_delayed</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-evict-list"><span class="std std-ref">wsrep_evs_evict_list</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-state"><span class="std std-ref">wsrep_evs_state</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="auto-eviction">
 <span id="id1"></span><h1>Auto-Eviction<a class="headerlink" href="#auto-eviction" title="Permalink to this headline">¶</a></h1>
 <p>When Galera Cluster notices erratic behavior in a node (e.g., unusually delayed response times), it can initiate a process to remove the node permanently from the cluster.  This process is called <em>Auto-Eviction</em>.</p>
-<div class="section" id="configuring-auto-eviction">
-<span id="config-auto-eviction"></span><h2>Configuring Auto-Eviction<a class="headerlink" href="#configuring-auto-eviction" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="config-auto-eviction">Configuring Auto-Eviction</p>
 <p>Each node in a cluster monitors the group communication response times from all other nodes in the cluster.  When a cluster registers delayed responses from a node, it makes an entry about the node to the delayed list.</p>
 <p>If the delayed node becomes responsive again for a fixed period, entries for that node are removed from the delayed list.  However, if the node receives enough delayed entries and it&#8217;s found on the delayed list for the majority of the cluster, the delayed node is evicted permanently from the cluster. Evicted nodes cannot rejoin the cluster until restarted.</p>
 <p>You can configure the parameters of Auto-Eviction by setting the following options through  <a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a>:</p>
@@ -228,9 +263,7 @@
 <p>The default value is version <code class="docutils literal"><span class="pre">0</span></code>, for backwards compatibility.</p>
 </li>
 </ul>
-</div>
-<div class="section" id="checking-eviction-status">
-<span id="eviction-status"></span><h2>Checking Eviction Status<a class="headerlink" href="#checking-eviction-status" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="eviction-status">Checking Eviction Status</p>
 <p>If you suspect a node is becoming delayed, you can check its eviction status through Galera status variables. You can do this by using the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement from the database client.  You would enter something like this:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_evs_delayed&#39;</span><span class="p">;</span>
 </pre></div>
@@ -241,9 +274,7 @@
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-delayed"><span class="std std-ref">wsrep_evs_delayed</span></a>: This status variable gives a comma separated list of nodes on the delayed list. The format used in that list is <code class="docutils literal"><span class="pre">uuid:address:count</span></code>.  The <code class="docutils literal"><span class="pre">count</span></code> refers to the number of entries for the given delayed node.</li>
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-evict-list"><span class="std std-ref">wsrep_evs_evict_list</span></a>: This status variable lists the UUID&#8217;s of evicted nodes.</li>
 </ul>
-</div>
-<div class="section" id="upgrading-from-previous-versions">
-<span id="upgrade-evs"></span><h2>Upgrading from Previous Versions<a class="headerlink" href="#upgrading-from-previous-versions" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="upgrade-evs">Upgrading from Previous Versions</p>
 <p>Releases of Galera Cluster prior to version 3.8 use EVS Protocol version 0, which is not directly compatible with version 1.  As such, when you upgrade Galera Cluster for a node, the node continues to use EVS Protocol version 0.</p>
 <p>To update the EVS Protocol version, you must first update the Galera Cluster software on each node. Here are the steps to do that:</p>
 <ol class="arabic">
@@ -323,7 +354,6 @@
 <p>These steps will update the EVS Protocol version for one node in a cluster. Repeat the process on each of the remaining nodes so that they all use EVS Protocol version 1.</p>
 <p>For more information on upgrading in general, see <a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera Cluster</span></a>.</p>
 </div>
-</div>
 
 
           </div>
@@ -333,18 +363,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Auto-Eviction</a><ul>
-<li><a class="reference internal" href="#configuring-auto-eviction">Configuring Auto-Eviction</a></li>
-<li><a class="reference internal" href="#checking-eviction-status">Checking Eviction Status</a></li>
-<li><a class="reference internal" href="#upgrading-from-previous-versions">Upgrading from Previous Versions</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="managing-fc.html"

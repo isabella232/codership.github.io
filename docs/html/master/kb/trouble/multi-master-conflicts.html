@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Handling Multi-Master Conflicts in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Multi-Master Conflicts &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,7 +207,36 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="multi-master-conflicts">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/certification-based-replication.html"><span class="doc">Certification Based Replication</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#cert-log-conflicts"><span class="std std-ref">cert.log_conflicts</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-local-bf-aborts"><span class="std std-ref">wsrep_local_bf_aborts</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-local-cert-failures"><span class="std std-ref">wsrep_local_cert_failures</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-retry-autocommit"><span class="std std-ref">wsrep_retry_autocommit</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="multi-master-conflicts">
 <span id="kb-trouble-multi-master-conflicts"></span><h1>Multi-Master Conflicts<a class="headerlink" href="#multi-master-conflicts" title="Permalink to this headline">¶</a></h1>
 <p>These types of conflicts relate to multi-master database environments and typically involve inconsistencies of row amongst nodes.</p>
 <p class="kb rubric">Scenario</p>
@@ -276,16 +308,6 @@ g: 8749172, s: 8749171, d: 8749170, ts: 12637839897662340)
 <li>Last, limit the number of master nodes or switch to a master-slave model.</li>
 </ul>
 <p>If you can filter out access to the hot-spot table, it may be enough to treat writes only to the hot-spot table as master-slave.</p>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/certification-based-replication.html"><span class="doc">Certification Based Replication</span></a></li>
-<li><a class="reference internal" href="../../documentation/galera-parameters.html#cert-log-conflicts"><span class="std std-ref">cert.log_conflicts</span></a> option</li>
-<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a> option</li>
-<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-local-bf-aborts"><span class="std std-ref">wsrep_local_bf_aborts</span></a> option</li>
-<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-local-cert-failures"><span class="std std-ref">wsrep_local_cert_failures</span></a> option</li>
-<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-retry-autocommit"><span class="std std-ref">wsrep_retry_autocommit</span></a></li>
-</ul>
 </div>
 
 

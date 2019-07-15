@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Configuring SSL with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>SSL Configuration &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,22 +207,52 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="ssl-configuration">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a></li>
+<li><a class="reference internal" href="ssl-sst.html"><span class="doc">SSL for State Snapshot Transfers</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-cert"><span class="std std-ref">socket.ssl_cert</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-ca"><span class="std std-ref">socket.ssl_ca</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-checksum"><span class="std std-ref">socket.checksum</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="ssl-configuration">
 <span id="ssl-config"></span><h1>SSL Configuration<a class="headerlink" href="#ssl-configuration" title="Permalink to this headline">¶</a></h1>
 <p>When you finish generating the SSL certificates for your cluster, you need to enable it for each node.  If you have not yet generated the SSL certificates, see <a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a> for a guide on how to do so.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For Gelera Cluster, SSL configurations are not dynamic.  Since they must be set on every node in the cluster, if you are enabling this feature with a running cluster you need to restart the entire cluster.</p>
+<p class="last">For Galera Cluster, SSL configurations are not dynamic.  Since they must be set on every node in the cluster, if you are enabling this feature with a running cluster you need to restart the entire cluster.</p>
 </div>
-<div class="section" id="enabling-ssl">
-<span id="enable-ssl"></span><h2>Enabling SSL<a class="headerlink" href="#enabling-ssl" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="enable-ssl">Enabling SSL</p>
 <p>There are three vectors that you can secure through <abbr title="Secure Socket Layer">SSL</abbr>: traffic between the database server and client, replication traffic within Galera Cluster, and the <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The configurations shown here cover the first two.  The procedure for securing state snapshot transfers through SSL varies depending on the SST method you use.  For more information, see <a class="reference internal" href="ssl-sst.html"><span class="doc">SSL for State Snapshot Transfers</span></a>.</p>
 </div>
-<div class="section" id="securing-the-database">
-<span id="securing-database"></span><h3>Securing the Database<a class="headerlink" href="#securing-the-database" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="securing-database">Securing the Database</p>
 <p>For securing database server and client connections, you can use the internal MySQL <abbr title="Secure Socket Layer">SSL</abbr> support.  In the event that you use logical transfer methods for state snapshot transfer, such as <code class="docutils literal"><span class="pre">mysqldump</span></code>, this is the only step you need to take in securing your state snapshot transfers.</p>
 <p>In the configuration file, (<code class="docutils literal"><span class="pre">my.cnf</span></code>), add the follow parameters to each unit:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># MySQL Server</span>
@@ -236,9 +269,7 @@
 </pre></div>
 </div>
 <p>These parameters tell the database server and client which files to use in encrypting and decrypting their interactions through <abbr title="Secure Socket Layer">SSL</abbr>.  The node will begin to use them once it restarts.</p>
-</div>
-<div class="section" id="securing-replication-traffic">
-<span id="id1"></span><h3>Securing Replication Traffic<a class="headerlink" href="#securing-replication-traffic" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="securing-replication-traffic">Securing Replication Traffic</p>
 <p>In order to enable SSL on the internal node processes, you need to define the paths to the key, certificate and certificate authority files that you want the node to use in encrypting replication traffic.</p>
 <ul class="simple">
 <li><a class="reference internal" href="galera-parameters.html#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a> The key file.</li>
@@ -250,17 +281,13 @@
 </pre></div>
 </div>
 <p>This tells Galera Cluster which files to use in encrypting and decrypting replication traffic through SSL.  The node will begin to use them once it restarts.</p>
-</div>
-</div>
-<div class="section" id="configuring-ssl">
-<span id="id2"></span><h2>Configuring SSL<a class="headerlink" href="#configuring-ssl" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="configuring-ssl">Configuring SSL</p>
 <p>In the event that you want or need to further configure how the node uses <abbr title="Secure Sockets Layer">SSL</abbr>, Galera Cluster provides some additional parameters, including defining the cyclic redundancy check and setting the cryptographic cipher algorithm you want to use.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For a complete list of available configurations available for <abbr title="Secure Sockets Layer">SSL</abbr>, see the options with the <code class="docutils literal"><span class="pre">socket.</span></code> prefix at <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
 </div>
-<div class="section" id="configuring-the-socket-checksum">
-<span id="configuring-socket-checksum"></span><h3>Configuring the Socket Checksum<a class="headerlink" href="#configuring-the-socket-checksum" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="configuring-socket-checksum">Configuring the Socket Checksum</p>
 <p>Using the <a class="reference internal" href="galera-parameters.html#socket-checksum"><span class="std std-ref">socket.checksum</span></a> parameter, you can define whether or which cyclic redundancy check the node uses in detecting errors.  There are three available settings for this parameter, which are defined by an integer:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">0</span></code> Disables the checksum.</li>
@@ -271,14 +298,10 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;socket.checksum=2&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="configuring-the-encryption-cipher">
-<span id="configuring-cipher"></span><h3>Configuring the Encryption Cipher<a class="headerlink" href="#configuring-the-encryption-cipher" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="configuring-cipher">Configuring the Encryption Cipher</p>
 <p>Using the <a class="reference internal" href="galera-parameters.html#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a> parameter, one can override the default <abbr title="Secure Sockets Layer">SSL</abbr> cipher the node uses to encrypt replication traffic.  Galera Cluster uses whatever ciphers are available to the <abbr title="Secure Sockets Layer">SSL</abbr> implementation installed on the nodes. For instance, if you install OpenSSL on your node, Galera Cluster can use any cipher supported by OpenSSL, as well as use filters to ensure that &#8220;weak&#8221; algorithms are not accepted on connection handshake.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;socket.ssl_cipher=ALL:!EXP:!NULL:!ADH:!LOW:!SSLv2:!SSLv3:!MD5:!RC4:!RSA&quot;</span>
 </pre></div>
-</div>
-</div>
 </div>
 </div>
 
@@ -290,25 +313,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">SSL Configuration</a><ul>
-<li><a class="reference internal" href="#enabling-ssl">Enabling SSL</a><ul>
-<li><a class="reference internal" href="#securing-the-database">Securing the Database</a></li>
-<li><a class="reference internal" href="#securing-replication-traffic">Securing Replication Traffic</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#configuring-ssl">Configuring SSL</a><ul>
-<li><a class="reference internal" href="#configuring-the-socket-checksum">Configuring the Socket Checksum</a></li>
-<li><a class="reference internal" href="#configuring-the-encryption-cipher">Configuring the Encryption Cipher</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="ssl-cert.html"

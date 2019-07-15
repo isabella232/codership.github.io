@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Testing a Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Testing a Cluster &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,13 +207,38 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="testing-a-cluster">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-local-state-comment"><span class="std std-ref">wsrep_local_state_comment</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-ready"><span class="std std-ref">wsrep_ready</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="testing-a-cluster">
 <span id="testing-cluster"></span><h1>Testing a Cluster<a class="headerlink" href="#testing-a-cluster" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length:  499 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>When you have a cluster running, you may want to test certain features to ensure that they are working properly or to prepare yourself for handling actual problems that may arise.</p>
-<div class="section" id="replication-testing">
-<h2>Replication Testing<a class="headerlink" href="#replication-testing" title="Permalink to this headline">¶</a></h2>
-<p id="id1">There are a few step to do to test that Galera Cluster is working as expected.  First, using the database client, verify that all nodes have connected to each other.  To do this, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
+<p class="rubric-1 rubric" id="replication-testing">Replication Testing</p>
+<p>There are a few step to do to test that Galera Cluster is working as expected.  First, using the database client, verify that all nodes have connected to each other.  To do this, execute the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement like so:</p>
 <blockquote>
 <div><div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_%&#39;</span><span class="p">;</span>
 
@@ -277,10 +305,8 @@ Hello, again, cluster dear.</td>
 </table>
 </div></blockquote>
 <p>The results returned  from the <code class="docutils literal"><span class="pre">SELECT</span></code> statement indicates that the data entered on <code class="docutils literal"><span class="pre">node1</span></code> was replicated on <code class="docutils literal"><span class="pre">node2</span></code>.</p>
-</div>
-<div class="section" id="split-brain-testing">
-<h2>Split-Brain Testing<a class="headerlink" href="#split-brain-testing" title="Permalink to this headline">¶</a></h2>
-<p id="id2">There are a few steps to test Galera Cluster for split-brain situations on a two-node cluster.  First, disconnect the network connection between the two nodes. At this point, the quorum will be lost and the nodes won&#8217;t serve requests.</p>
+<p class="rubric-1 rubric" id="split-brain-testing">Split-Brain Testing</p>
+<p>There are a few steps to test Galera Cluster for split-brain situations on a two-node cluster.  First, disconnect the network connection between the two nodes. At this point, the quorum will be lost and the nodes won&#8217;t serve requests.</p>
 <p>Now, reconnect the network connection.  The quorum will remain lost and the nodes still won&#8217;t serve requests.</p>
 <p>To reset the quorum, on one of the database clients, execute the following SQL statement:</p>
 <blockquote>
@@ -290,10 +316,8 @@ Hello, again, cluster dear.</td>
 <p>SET GLOBAL wsrep_provider_options=&#8217;pc.bootstrap=1&#8217;;</p>
 </div></blockquote>
 <p>At this point the quorum should be reset and the cluster recovered.</p>
-</div>
-<div class="section" id="failure-simulation">
-<h2>Failure Simulation<a class="headerlink" href="#failure-simulation" title="Permalink to this headline">¶</a></h2>
-<p id="id3">You can also test Galera Cluster by simulating various failure situations on three nodes.  To simulate a crash of a single <code class="docutils literal"><span class="pre">mysqld</span></code> process, execute the following from the command-line on one of the nodes:</p>
+<p class="rubric-1 rubric" id="failure-simulation">Failure Simulation</p>
+<p>You can also test Galera Cluster by simulating various failure situations on three nodes.  To simulate a crash of a single <code class="docutils literal"><span class="pre">mysqld</span></code> process, execute the following from the command-line on one of the nodes:</p>
 <blockquote>
 <div><div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> killall -9 mysqld
 </pre></div>
@@ -302,7 +326,6 @@ Hello, again, cluster dear.</td>
 <p>To simulate a network disconnection, use <code class="docutils literal"><span class="pre">iptables</span></code> or <code class="docutils literal"><span class="pre">netem</span></code> to block all TCP/IP traffic to a node.</p>
 <p>To simulate an entire server crash, run each <code class="docutils literal"><span class="pre">mysqld</span></code> in a virtualized guest, and abrubtly terminate the entire virtual instance.</p>
 <p>If you have three or more Galera Cluster nodes, the cluster should be able to survive the simulations.</p>
-</div>
 </div>
 
 
@@ -313,18 +336,7 @@ Hello, again, cluster dear.</td>
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Testing a Cluster</a><ul>
-<li><a class="reference internal" href="#replication-testing">Replication Testing</a></li>
-<li><a class="reference internal" href="#split-brain-testing">Split-Brain Testing</a></li>
-<li><a class="reference internal" href="#failure-simulation">Failure Simulation</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="starting-cluster.html"
@@ -403,9 +415,9 @@ Hello, again, cluster dear.</td>
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Tutorials</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Codership Tutorials on Galera Cluster</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started with Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Detecting a Slow Node" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Detecting a Slow Node &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,7 +207,32 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="detecting-a-slow-node">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="detecting-a-slow-node">
 <span id="kb-best-detecting-slow-node"></span><h1>Detecting a Slow Node<a class="headerlink" href="#detecting-a-slow-node" title="Permalink to this headline">¶</a></h1>
 <p>By design, the performance of a cluster cannot be higher than the performance of the slowest node in the cluster. Even if you have only one node, its performance can be considerably slower when compared with running the same server in a standalone mode (i.e., without a wsrep Provider).</p>
 <p>This is particularly true for large transactions&#8212;even if they are within transaction size limits. This is why it&#8217;s important to be able to detect a slow node on a cluster.</p>
@@ -225,12 +253,6 @@
 </div>
 <p>The <code class="docutils literal"><span class="pre">wsrep_flow_control_sent</span></code> variable provides the number of times a node sent a pause event due to flow control since the last status query. The <code class="docutils literal"><span class="pre">wsrep_local_recv_queue_avg</span></code> varaible returns an average of the received queue length since the last status query. Nodes that return values much higher than <code class="docutils literal"><span class="pre">0.0</span></code> indicate that it cannot apply write-sets as fast as they are received and can generate replication throttling.</p>
 <p>Check these status variables on each node in your cluster.  The node that returns the highest value is the slowest node.  Lower values are preferable.</p>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a></li>
-<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a></li>
-</ul>
 </div>
 
 

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="InnoDB Isolation Levels" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Isolation Levels &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,11 +207,37 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="isolation-levels">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="#read-committed"><span class="std std-ref">READ-COMMITTED</span></a></li>
+<li><a class="reference internal" href="#read-uncommitted"><span class="std std-ref">READ-UNCOMMITTED</span></a></li>
+<li><a class="reference internal" href="#repeatable-read"><span class="std std-ref">REPEATABLE-READ</span></a></li>
+<li><a class="reference internal" href="#serializable"><span class="std std-ref">SERIALIZABLE</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="isolation-levels">
 <span id="id1"></span><h1>Isolation Levels<a class="headerlink" href="#isolation-levels" title="Permalink to this headline">¶</a></h1>
 <p>In a database system, concurrent transactions are processed in &#8220;isolation&#8221; from each other. The level of isolation determines how transactions can affect each other.</p>
-<div class="section" id="intra-node-vs-inter-node-isolation-in-galera-cluster">
-<h2>Intra-Node vs. Inter-Node Isolation in Galera Cluster<a class="headerlink" href="#intra-node-vs-inter-node-isolation-in-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Intra-Node vs. Inter-Node Isolation in Galera Cluster</p>
 <p>Before going into details about possible isolation levels which can be set for a client session in Galera Cluster it is important to make a distinction between single node and global cluster transaction isolation. Individual cluster nodes can provide any isolation level <em>to the extent</em> it is supported by MySQL/InnoDB. However isolation level <em>between</em> the nodes in the cluster is affected by replication protocol, so transactions issued on different nodes may not be isolated <em>identically</em> to transactions issued on the same node.</p>
 <p>Overall isolation levels that are supported cluster-wide are</p>
 <ul class="simple">
@@ -220,34 +249,23 @@
 <p><a class="reference internal" href="#serializable"><span class="std std-ref">SERIALIZABLE</span></a>
 isolation level is honored only between transactions issued on the same node and thus should be avoided.</p>
 <p>Data consistency between the nodes is always guaranteed regardless of the isolation level chosen by the client. However the client logic may break if it relies on an isolation level which is not not supported in the given configuration.</p>
-</div>
-<div class="section" id="understanding-isolation-levels">
-<h2>Understanding Isolation Levels<a class="headerlink" href="#understanding-isolation-levels" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Understanding Isolation Levels</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">When using Galera Cluster in master-slave mode, all four levels are available to you, to the extend that MySQL supports it.  In multi-master mode, however, you can only use the <code class="docutils literal"><span class="pre">REPEATABLE-READ</span></code> level.</p>
 </div>
-<div class="section" id="read-uncommitted">
-<span id="id2"></span><h3>READ-UNCOMMITTED<a class="headerlink" href="#read-uncommitted" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="read-uncommitted">READ-UNCOMMITTED</p>
 <p>Here transactions can see changes to data made by other transactions that are not yet committed.</p>
 <p>In other words, transactions can read data that eventually may not exist, given that other transactions can always rollback the changes without commit.  This is known as a dirty read.  Effectively, <code class="docutils literal"><span class="pre">READ-UNCOMMITTED</span></code> has no real isolation at all.</p>
-</div>
-<div class="section" id="read-committed">
-<span id="id3"></span><h3>READ-COMMITTED<a class="headerlink" href="#read-committed" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="read-committed">READ-COMMITTED</p>
 <p>Here dirty reads are not possible.  Uncommitted changes remain invisible to other transactions until the transaction commits.</p>
 <p>However, at this isolation level <code class="docutils literal"><span class="pre">SELECT</span></code> queries use their own snapshots of committed data, that is data committed before the <code class="docutils literal"><span class="pre">SELECT</span></code> query executed.  As a result, <code class="docutils literal"><span class="pre">SELECT</span></code> queries, when run multiple times within the same transaction, can return different result sets.  This is called a non-repeatable read.</p>
-</div>
-<div class="section" id="repeatable-read">
-<span id="id4"></span><h3>REPEATABLE-READ<a class="headerlink" href="#repeatable-read" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="repeatable-read">REPEATABLE-READ</p>
 <p>Here non-repeatable reads are not possible.  Snapshots taken for the <code class="docutils literal"><span class="pre">SELECT</span></code> query are taken the first time the <code class="docutils literal"><span class="pre">SELECT</span></code> query runs during the transaction.</p>
 <p>The snapshot remains in use throughout the entire transaction for the <code class="docutils literal"><span class="pre">SELECT</span></code> query.  It always returns the same result set.  This level does not take into account changes to data made by other transactions, regardless of whether or not they have been committed.  IN this way, reads remain repeatable.</p>
-</div>
-<div class="section" id="serializable">
-<span id="id5"></span><h3>SERIALIZABLE<a class="headerlink" href="#serializable" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="serializable">SERIALIZABLE</p>
 <p>Here all records accessed within a transaction are locked.  The resource locks in a way that also prevents you from appending records to the table the transaction operates upon.</p>
 <p><code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> prevents a phenomenon known as a phantom read.  Phantom reads occur when, within a transaction, two identical queries execute, and the rows the second query returns differ from the first.</p>
-</div>
-</div>
 </div>
 
 
@@ -258,23 +276,7 @@ isolation level is honored only between transactions issued on the same node and
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Isolation Levels</a><ul>
-<li><a class="reference internal" href="#intra-node-vs-inter-node-isolation-in-galera-cluster">Intra-Node vs. Inter-Node Isolation in Galera Cluster</a></li>
-<li><a class="reference internal" href="#understanding-isolation-levels">Understanding Isolation Levels</a><ul>
-<li><a class="reference internal" href="#read-uncommitted">READ-UNCOMMITTED</a></li>
-<li><a class="reference internal" href="#read-committed">READ-COMMITTED</a></li>
-<li><a class="reference internal" href="#repeatable-read">REPEATABLE-READ</a></li>
-<li><a class="reference internal" href="#serializable">SERIALIZABLE</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="architecture.html"

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Node Failure and Recovery in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Node Failure and Recovery &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,11 +207,41 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="node-failure-and-recovery">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="galera-parameters.html#evs-consensus-timeout"><span class="std std-ref">evs.consensus_timeout</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-inactive-check-period"><span class="std std-ref">evs.inactive_check_period</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-keepalive-period"><span class="std std-ref">evs.keepalive_period</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></li>
+<li><a class="reference internal" href="monitoring-cluster.html"><span class="doc">Monitoring the Cluster</span></a></li>
+<li><a class="reference internal" href="notification-cmd.html"><span class="doc">Notification Command</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-state"><span class="std std-ref">wsrep_local_state</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="node-failure-and-recovery">
 <span id="recovery"></span><h1>Node Failure and Recovery<a class="headerlink" href="#node-failure-and-recovery" title="Permalink to this headline">¶</a></h1>
 <p>Individual nodes fail to operate when they lose touch with the cluster.  This can occur due to various reasons.  For instance, in the event of hardware failure or software crash, the loss of network connectivity or the failure of a state transfer.  Anything that prevents the node from communicating with the cluster is generalized behind the concept of node failure.  Understanding how nodes fail will help in planning for their recovery.</p>
-<div class="section" id="detecting-single-node-failures">
-<span id="single-node-failure-detection"></span><h2>Detecting Single Node Failures<a class="headerlink" href="#detecting-single-node-failures" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-2 rubric" id="single-node-failure-detection">Detecting Single Node Failures</p>
 <span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">When a node fails the only sign is the loss of connection to the node processes as seen by other nodes.  Thus nodes are considered failed when they lose membership with the cluster&#8217;s <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  That is, from the perspective of the cluster when the nodes that form the Primary Component can no longer see the node, that node is failed.  From the perspective of the failed node itself, assuming that it has not crashed, it has lost its connection with the Primary Component.</p>
 <p>Although there are third-party tools for monitoring nodes—such as ping, Heartbeat, and Pacemaker—they can be grossly off in their estimates on node failures.  These utilities do not participate in the Galera Cluster group communications and remain unaware of the Primary Component.</p>
 <p>If you want to monitor the Galera Cluster node status poll the <a class="reference internal" href="galera-status-variables.html#wsrep-local-state"><span class="std std-ref">wsrep_local_state</span></a> status variable or through the <a class="reference internal" href="notification-cmd.html"><span class="doc">Notification Command</span></a>.</p>
@@ -245,22 +278,15 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Unresponsive nodes that fail to send messages or heartbeat beacons on time—for instance, in the event of heavy swapping—may also be pronounced failed.  This prevents them from locking up the operations of the rest of the cluster.  If you find this behavior undesirable, increase the timeout parameters.</p>
 </div>
-</div>
-<div class="section" id="cluster-availability-vs-partition-tolerance">
-<span id="availability-partition-tolerance"></span><h2>Cluster Availability vs. Partition Tolerance<a class="headerlink" href="#cluster-availability-vs-partition-tolerance" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-2 rubric" id="availability-partition-tolerance">Cluster Availability vs. Partition Tolerance</p>
 <p>Within the <a class="reference external" href="http://en.wikipedia.org/wiki/CAP_theorem">CAP theorem</a>, Galera Cluster emphasizes data safety and consistency.  This leads to a trade-off between cluster availability and partition tolerance.  That is, when using unstable networks, such as <abbr title="Wide Area Network">WAN</abbr>, low <a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> and <a class="reference internal" href="galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> values may result in false node failure detections, while higher values on these parameters may result in longer availability outages in the event of actual node failures.</p>
 <p>Essentially what this means is that the <a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter defines the minimum time needed to detect a failed node.  During this period, the cluster is unavailable due to the consistency constraint.</p>
-</div>
-<div class="section" id="recovering-from-single-node-failures">
-<span id="recovery-single-node-failure"></span><h2>Recovering from Single Node Failures<a class="headerlink" href="#recovering-from-single-node-failures" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-2 rubric" id="recovery-single-node-failure">Recovering from Single Node Failures</p>
 <p>If one node in the cluster fails, the other nodes continue to operate as usual.  When the failed node comes back online, it automatically synchronizes with the other nodes before it is allowed back into the cluster.</p>
 <p>No data is lost in single node failures.</p>
-<div class="section" id="state-transfer-failure">
-<span id="id1"></span><h3>State Transfer Failure<a class="headerlink" href="#state-transfer-failure" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-1 rubric" id="state-transfer-failure">State Transfer Failure</p>
 <p>Single node failures can also occur when a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">state snapshot transfer</span></a> fails.  This failure renders the receiving node unusable, as the receiving node aborts when it detects a state transfer failure.</p>
 <p>When the node fails while using <code class="docutils literal"><span class="pre">mysqldump</span></code>, restarting may require you to manually restore the administrative tables.  For the <code class="docutils literal"><span class="pre">rsync</span></code> method in state transfers this is not an issue, given that it does not require the database server to be in an operational state to work.</p>
-</div>
-</div>
 </div>
 
 
@@ -271,21 +297,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Node Failure and Recovery</a><ul>
-<li><a class="reference internal" href="#detecting-single-node-failures">Detecting Single Node Failures</a></li>
-<li><a class="reference internal" href="#cluster-availability-vs-partition-tolerance">Cluster Availability vs. Partition Tolerance</a></li>
-<li><a class="reference internal" href="#recovering-from-single-node-failures">Recovering from Single Node Failures</a><ul>
-<li><a class="reference internal" href="#state-transfer-failure">State Transfer Failure</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="node-states.html"

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="SSL Certificates to use with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>SSL Certificates &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,22 +207,44 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="ssl-certificates">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="ssl-certificates">
 <span id="ssl-cert"></span><h1>SSL Certificates<a class="headerlink" href="#ssl-certificates" title="Permalink to this headline">¶</a></h1>
 <p>Before you can enable encryption for your cluster, you first need to generate the relevant certificates for the nodes to use.  This procedure assumes that you are using OpenSSL.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This chapter only covers certificate generation.  For information on its use in Galera Cluster, see <a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a>.</p>
 </div>
-<div class="section" id="generating-certificates">
-<span id="gen-certs"></span><h2>Generating Certificates<a class="headerlink" href="#generating-certificates" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="gen-certs">Generating Certificates</p>
 <p>There are three certificates that you need to create in order to secure Galera Cluster: the Certificate Authority (CA) key and cert; the server certificate, to secure <code class="docutils literal"><span class="pre">mysqld</span></code> activity and replication traffic; and the client certificate to secure the database client and <code class="docutils literal"><span class="pre">stunnel</span></code> for state snapshot transfers.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">When certificates expire there is no way to update the cluster without a complete shutdown.  You can minimize the frequency of this downtime by using large values for the <code class="docutils literal"><span class="pre">-days</span></code> parameter when generating your certificates.</p>
 </div>
-<div class="section" id="ca-certificate">
-<span id="gen-ca"></span><h3>CA Certificate<a class="headerlink" href="#ca-certificate" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="gen-ca">CA Certificate</p>
 <p>The node uses the Certificate Authority to verify the signature on the certificates.  As such, you need this key and cert file to generate the server and client certificates.</p>
 <p>To create the CA key and cert, complete the following steps:</p>
 <ol class="arabic">
@@ -236,9 +261,7 @@
 </li>
 </ol>
 <p>This creates a key and certificate file for the Certificate Authority.  They are in the current working directory as <code class="docutils literal"><span class="pre">ca-key.pem</span></code> and <code class="docutils literal"><span class="pre">ca-cert.pem</span></code>.  You need both to generate the server and client certificates.  Additionally, each node requires <code class="docutils literal"><span class="pre">ca-cert.pem</span></code> to verify certificate signatures.</p>
-</div>
-<div class="section" id="server-certificate">
-<span id="gen-server-cert"></span><h3>Server Certificate<a class="headerlink" href="#server-certificate" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="gen-server-cert">Server Certificate</p>
 <p>The node uses the server certificate to secure both the database server activity and replication traffic from Galera Cluster.</p>
 <ol class="arabic">
 <li><p class="first">Create the server key.</p>
@@ -261,9 +284,7 @@
 </li>
 </ol>
 <p>This creates a key and certificate file for the server.  They are in the current working directory as <code class="docutils literal"><span class="pre">server-key.pem</span></code> and <code class="docutils literal"><span class="pre">server-cert.pem</span></code>.  Each node requires both to secure database server activity and replication traffic.</p>
-</div>
-<div class="section" id="client-certificate">
-<span id="gen-client-cert"></span><h3>Client Certificate<a class="headerlink" href="#client-certificate" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="gen-client-cert">Client Certificate</p>
 <p>The node uses the client certificate to secure client-side activity.  In the event that you prefer physical transfer methods for state snapshot transfers, <code class="docutils literal"><span class="pre">rsync</span></code> for instance, the node also uses this key and certificate to secure <code class="docutils literal"><span class="pre">stunnel</span></code>.</p>
 <ol class="arabic">
 <li><p class="first">Create the client key.</p>
@@ -286,10 +307,7 @@
 </li>
 </ol>
 <p>This creates a key and certificate file for the database client.  They are in the current working directory as <code class="docutils literal"><span class="pre">client-key.pem</span></code> and <code class="docutils literal"><span class="pre">client-cert.pem</span></code>.  Each node requires both to secure client activity and state snapshot transfers.</p>
-</div>
-</div>
-<div class="section" id="verifying-the-certificates">
-<span id="verify-cert"></span><h2>Verifying the Certificates<a class="headerlink" href="#verifying-the-certificates" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="verify-cert">Verifying the Certificates</p>
 <p>When you finish creating the key and certificate files, use <code class="docutils literal"><span class="pre">openssl</span></code> to verify that they were generated correctly:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl verify -CAfile ca-cert.pem <span class="se">\</span>
       server-cert.pem client-cert.pem
@@ -307,7 +325,6 @@
 </ul>
 <p>Place these files in the <code class="docutils literal"><span class="pre">/etc/mysql/certs</span></code> directory of each node, or a similar location where you can find them later in configuring the cluster to use <abbr title="Secure Socket Layer">SSL</abbr>.</p>
 </div>
-</div>
 
 
           </div>
@@ -317,22 +334,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">SSL Certificates</a><ul>
-<li><a class="reference internal" href="#generating-certificates">Generating Certificates</a><ul>
-<li><a class="reference internal" href="#ca-certificate">CA Certificate</a></li>
-<li><a class="reference internal" href="#server-certificate">Server Certificate</a></li>
-<li><a class="reference internal" href="#client-certificate">Client Certificate</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#verifying-the-certificates">Verifying the Certificates</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="ssl.html"

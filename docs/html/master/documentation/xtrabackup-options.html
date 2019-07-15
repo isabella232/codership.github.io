@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="XtraBackup Parameters" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>XtraBackup Parameters &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,7 +207,28 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="xtrabackup-parameters">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="xtrabackup-parameters">
 <span id="id1"></span><h1>XtraBackup Parameters<a class="headerlink" href="#xtrabackup-parameters" title="Permalink to this headline">¶</a></h1>
 <p>When using <code class="docutils literal"><span class="pre">xtrabackup-v2</span></code> as your <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> method, you can fine tune how the script operates using the <code class="docutils literal"><span class="pre">[sst]</span></code> unit in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
@@ -319,7 +343,7 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric" id="xtra-compressor"><code class="docutils literal"><span class="pre">compressor</span></code></p>
+<p class="rubric-1 rubric" id="xtra-compressor"><code class="docutils literal"><span class="pre">compressor</span></code></p>
 <p>Defines the compression utility the donor node uses to compress the state transfer.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -350,7 +374,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">compression</span><span class="o">=</span><span class="s">&quot;gzip&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-compact"><code class="docutils literal"><span class="pre">compact</span></code></p>
+<p class="rubric-1 rubric" id="xtra-compact"><code class="docutils literal"><span class="pre">compact</span></code></p>
 <p>Defines whether the joiner node performs compaction when rebuilding indexes after applying a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -382,7 +406,7 @@
 <span class="na">compact</span><span class="o">=</span><span class="s">ON</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-cpat"><code class="docutils literal"><span class="pre">cpat</span></code></p>
+<p class="rubric-1 rubric" id="xtra-cpat"><code class="docutils literal"><span class="pre">cpat</span></code></p>
 <p>Defines what files to clean up from the datadir during state transfers.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -413,7 +437,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">cpat</span><span class="o">=</span><span class="s">&quot;.*glaera\.cache$\|.*sst_in_progress$\|.*grastate\.dat$\|.*\.err&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-decompressor"><code class="docutils literal"><span class="pre">decompressor</span></code></p>
+<p class="rubric-1 rubric" id="xtra-decompressor"><code class="docutils literal"><span class="pre">decompressor</span></code></p>
 <p>Defines the decompression utility the joiner node uses to decompress the state transfer.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -444,7 +468,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">decompressor</span><span class="o">=</span><span class="s">&quot;gzip -dc&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-encrypt"><code class="docutils literal"><span class="pre">encrypt</span></code></p>
+<p class="rubric-1 rubric" id="xtra-encrypt"><code class="docutils literal"><span class="pre">encrypt</span></code></p>
 <p>Defines whether the node uses SSL encryption for XtraBackup and what kind of encryption it uses.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -503,7 +527,7 @@
 <span class="na">tca</span><span class="o">=</span><span class="s">&quot;/path/to/ca.pem&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-encrypt-algo"><code class="docutils literal"><span class="pre">encrypt-algo</span></code></p>
+<p class="rubric-1 rubric" id="xtra-encrypt-algo"><code class="docutils literal"><span class="pre">encrypt-algo</span></code></p>
 <p>Defines the SSL encryption type the node uses for XtraBackup state transfers.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -536,7 +560,7 @@
 <span class="na">encrypt-algo</span><span class="o">=</span><span class="s">3</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-progress"><code class="docutils literal"><span class="pre">progress</span></code></p>
+<p class="rubric-1 rubric" id="xtra-progress"><code class="docutils literal"><span class="pre">progress</span></code></p>
 <p>Defines whether where the node reports <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> progress.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -575,7 +599,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">progress</span><span class="o">=</span><span class="s">&quot;/var/log/mysql/xtrabackup-progress.log&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-rebuild"><code class="docutils literal"><span class="pre">rebuild</span></code></p>
+<p class="rubric-1 rubric" id="xtra-rebuild"><code class="docutils literal"><span class="pre">rebuild</span></code></p>
 <p>Defines whether the joiner node rebuilds indexes during a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -607,7 +631,7 @@
 <span class="na">compact</span><span class="o">=</span><span class="s">ON</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-rlimit"><code class="docutils literal"><span class="pre">rlimit</span></code></p>
+<p class="rubric-1 rubric" id="xtra-rlimit"><code class="docutils literal"><span class="pre">rlimit</span></code></p>
 <p>Defines the rate limit for the donor node.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -638,7 +662,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">rlimit</span><span class="o">=</span><span class="s">300M</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-sst-initial-timeout"><code class="docutils literal"><span class="pre">sst_initial_timeout</span></code></p>
+<p class="rubric-1 rubric" id="xtra-sst-initial-timeout"><code class="docutils literal"><span class="pre">sst_initial_timeout</span></code></p>
 <p>Defines the initial timeout to receive the first state transfer packet.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -669,7 +693,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">sst_initial_timeout</span><span class="o">=</span><span class="s">130</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-sst-special-dirs"><code class="docutils literal"><span class="pre">sst_special_dirs</span></code></p>
+<p class="rubric-1 rubric" id="xtra-sst-special-dirs"><code class="docutils literal"><span class="pre">sst_special_dirs</span></code></p>
 <p>Defines whether the node uses special InnoDB home and log directories.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -706,7 +730,7 @@
 <span class="na">sst_special_dirs</span><span class="o">=</span><span class="s">TRUE</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-sockopt"><code class="docutils literal"><span class="pre">sockopt</span></code></p>
+<p class="rubric-1 rubric" id="xtra-sockopt"><code class="docutils literal"><span class="pre">sockopt</span></code></p>
 <p>Defines socket options.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -734,7 +758,7 @@
 </tbody>
 </table>
 <p>This parameter allows you to define one or more socket options for XtraBackup using the Socat transfer format.</p>
-<p class="rubric" id="xtra-streamfmt"><code class="docutils literal"><span class="pre">streamfmt</span></code></p>
+<p class="rubric-1 rubric" id="xtra-streamfmt"><code class="docutils literal"><span class="pre">streamfmt</span></code></p>
 <p>Defines the stream formatting utility.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -770,7 +794,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">streamfmt</span><span class="o">=</span><span class="s">&#39;xbstream&#39;</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-tca"><code class="docutils literal"><span class="pre">tca</span></code></p>
+<p class="rubric-1 rubric" id="xtra-tca"><code class="docutils literal"><span class="pre">tca</span></code></p>
 <p>Defines the Certificate Authority (CA) to use in SSL encryption.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -803,7 +827,7 @@
 <span class="na">tca</span><span class="o">=</span><span class="s">&quot;/path/to/ca.pem&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-tcert"><code class="docutils literal"><span class="pre">tcert</span></code></p>
+<p class="rubric-1 rubric" id="xtra-tcert"><code class="docutils literal"><span class="pre">tcert</span></code></p>
 <p>Defines the certificate to use in SSL encryption.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -836,7 +860,7 @@
 <span class="na">tcert</span><span class="o">=</span><span class="s">&quot;/path/to/cert.pem&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-time"><code class="docutils literal"><span class="pre">time</span></code></p>
+<p class="rubric-1 rubric" id="xtra-time"><code class="docutils literal"><span class="pre">time</span></code></p>
 <p>Defines whether XtraBackup instruments key stages in the backup and restore process for state transfers.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -867,7 +891,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">time</span><span class="o">=</span><span class="s">ON</span>
 </pre></div>
 </div>
-<p class="rubric" id="xtra-transferfmt"><code class="docutils literal"><span class="pre">transferfmt</span></code></p>
+<p class="rubric-1 rubric" id="xtra-transferfmt"><code class="docutils literal"><span class="pre">transferfmt</span></code></p>
 <p>Defines the transfer stream utility.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>

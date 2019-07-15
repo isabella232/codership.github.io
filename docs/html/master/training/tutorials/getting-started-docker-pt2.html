@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Getting Started Galera with Docker, Part 2" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Getting Started Galera with Docker, Part 2 &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,7 +207,28 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="getting-started-galera-with-docker-part-2">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="getting-started-galera-with-docker-part-2">
 <span id="getting-started-docker-pt2"></span><h1>Getting Started Galera with Docker, Part 2<a class="headerlink" href="#getting-started-galera-with-docker-part-2" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length:  654 words; Writer: Erkan Yanar; Published: May 12, 2015; Topic: Container; Level: Intermediate</p>
 <p>In the previous article of this series, we described how to run a multi-node Galera Cluster on a single Docker host.</p>
@@ -221,8 +245,7 @@
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> aa-complain /etc/apparmor.d/docker
 </pre></div>
 </div>
-<div class="section" id="building-a-multi-node-cluster-using-the-default-ports">
-<h2>Building a Multi-Node Cluster using the Default Ports<a class="headerlink" href="#building-a-multi-node-cluster-using-the-default-ports" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Building a Multi-Node Cluster using the Default Ports</p>
 <p>Building a multi-node cluster using the default ports is not complicated. Besides mapping the ports 1:1, we also need to set <cite>–wsrep-node-address</cite> to the IP address of the host.</p>
 <p>We assume following 3 nodes</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">nodea 10.10.10.10</span>
@@ -250,9 +273,7 @@
 </pre></div>
 </div>
 <p>In this example, we used the image from the previous blog post. Docker is going to download the image if it is not already present on the node.</p>
-</div>
-<div class="section" id="building-a-multi-node-cluster-using-non-default-ports">
-<h2>Building a Multi-Node Cluster using Non-Default Ports<a class="headerlink" href="#building-a-multi-node-cluster-using-non-default-ports" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Building a Multi-Node Cluster using Non-Default Ports</p>
 <p>In the long run, we may want to start more than one instance of Galera on a host in order to run more than one Galera cluster using the same set of hosts.</p>
 <p>For the purpose, we set Galera Cluster to use non-default ports and then map MySQL’s default port to 4306:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">MySQL port 3306 is mapped to 4306</span>
@@ -289,11 +310,8 @@
 <span class="go">4444 SST port is configured using `–wsrep-sst-receive-address`</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Summary</p>
 <p>In this blog post, we described how to run Galera Cluster inside Docker on multiple hosts, even with non-standard ports. It is also possible to use solutions such as weave, socketplane.io and flannel that provide a multi-host network for the containers.</p>
-</div>
 </div>
 
 
@@ -304,18 +322,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Getting Started Galera with Docker, Part 2</a><ul>
-<li><a class="reference internal" href="#building-a-multi-node-cluster-using-the-default-ports">Building a Multi-Node Cluster using the Default Ports</a></li>
-<li><a class="reference internal" href="#building-a-multi-node-cluster-using-non-default-ports">Building a Multi-Node Cluster using Non-Default Ports</a></li>
-<li><a class="reference internal" href="#summary">Summary</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="getting-started-docker-pt1.html"
@@ -394,8 +401,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>

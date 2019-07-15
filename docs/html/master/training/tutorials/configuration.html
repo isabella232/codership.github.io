@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster System Configuration" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>System Configuration &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -32,7 +35,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Replication Configuration" href="wsrep-configuration.html" />
-    <link rel="prev" title="Installation" href="galera-installation.html" />
+    <link rel="prev" title="Installing Galera Cluster" href="galera-installation.html" />
 
 
 
@@ -204,7 +207,28 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="system-configuration">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="system-configuration">
 <span id="configuration"></span><h1>System Configuration<a class="headerlink" href="#system-configuration" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length:  964 words; Writer: Staff; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>After you finish installing Galera Cluster on your server, you&#8217;re ready to configure the database itself to serve as a node in a cluster.  To do this, you&#8217;ll need to edit the MySQL configuration file.</p>
@@ -231,9 +255,8 @@
 </pre></div>
 </div>
 <p>Depending on your system and the location of your installation of MySQL or MariaDB, you will need to adjust the valuables for variables (e.g., the path to the data directory).</p>
-<div class="section" id="configuring-the-database-server">
-<h2>Configuring the Database Server<a class="headerlink" href="#configuring-the-database-server" title="Permalink to this headline">¶</a></h2>
-<p id="db-config">In addition to settings for the system, there are other basic configurations that you will need to set in the <code class="docutils literal"><span class="pre">/etc/my.cnf</span></code> file.  Make these changes before starting the database server.</p>
+<p class="rubric-1 rubric" id="db-config">Configuring the Database Server</p>
+<p>In addition to settings for the system, there are other basic configurations that you will need to set in the <code class="docutils literal"><span class="pre">/etc/my.cnf</span></code> file.  Make these changes before starting the database server.</p>
 <p>First, make sure that <code class="docutils literal"><span class="pre">mysqld</span></code> is not bound to 127.0.0.1.  This is the IP address for localhost.  If the <code class="docutils literal"><span class="pre">bind-address</span></code> variable is in the file, comment it out by adding a hash sign (i.e., <code class="docutils literal"><span class="pre">#</span></code>) at the start of the line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> bind-address <span class="o">=</span> <span class="m">127</span>.0.0.1
 </pre></div>
@@ -270,17 +293,14 @@
 </div>
 <p>After you make all of these changes and additions to the configuration file, you&#8217;re ready to configure the database privileges.</p>
 <div class="section" id="configuring-the-innodb-buffer-pool">
-<h3>Configuring the InnoDB Buffer Pool<a class="headerlink" href="#configuring-the-innodb-buffer-pool" title="Permalink to this headline">¶</a></h3>
+<h2>Configuring the InnoDB Buffer Pool<a class="headerlink" href="#configuring-the-innodb-buffer-pool" title="Permalink to this headline">¶</a></h2>
 <p id="config-innodb-buffer-pool-size">The InnoDB storage engine uses its own memory buffer to cache data and for indexes of tables. You can configure this memory buffer through the
 <a class="reference external" href="http://dev.mysql.com/doc/refman/5.1/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> parameter.  The default value is 128 MB.  To compensate for the increased memory usage of Galera Cluster over a standalone MySQL database server, you should scale your usual value back by five percent.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">innodb_buffer_pool_size=122M</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="configuring-swap-space">
-<h2>Configuring Swap Space<a class="headerlink" href="#configuring-swap-space" title="Permalink to this headline">¶</a></h2>
-<p id="swap-config">Memory requirements for Galera Cluster are difficult to predict with any precision.  The particular amount of memory it uses can vary significantly, depending upon the load the given node receives.  In the event that Galera Cluster attempts to use more memory than the node has available, the <code class="docutils literal"><span class="pre">mysqld</span></code> instance will crash.</p>
+<p class="rubric-1 rubric" id="swap-config">Configuring Swap Space</p>
+<p>Memory requirements for Galera Cluster are difficult to predict with any precision.  The particular amount of memory it uses can vary significantly, depending upon the load the given node receives.  In the event that Galera Cluster attempts to use more memory than the node has available, the <code class="docutils literal"><span class="pre">mysqld</span></code> instance will crash.</p>
 <p>The way to protect a node from such crashes is to ensure that there is sufficient swap space available on the server. This can be either in the form of a swap partition or swap files.  To check the available swap space, execute the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> swapon --summary
 
@@ -338,11 +358,7 @@
     <h3><a href="../../index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">System Configuration</a><ul>
-<li><a class="reference internal" href="#configuring-the-database-server">Configuring the Database Server</a><ul>
 <li><a class="reference internal" href="#configuring-the-innodb-buffer-pool">Configuring the InnoDB Buffer Pool</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#configuring-swap-space">Configuring Swap Space</a></li>
 </ul>
 </li>
 </ul>
@@ -351,7 +367,7 @@
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="galera-installation.html"
-                          title="Previous page">&larr; Installation</a></p>
+                          title="Previous page">&larr; Installing Galera Cluster</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -422,20 +438,20 @@
           <a href="wsrep-configuration.html" title="Replication Configuration"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="galera-installation.html" title="Installation"
+          <a href="galera-installation.html" title="Installing Galera Cluster"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Tutorials</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Codership Tutorials on Galera Cluster</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started with Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="galera-installation.html" title="Installation">&lt; Previous</a></li>
+				<li><a href="galera-installation.html" title="Installing Galera Cluster">&lt; Previous</a></li>
 			
 
 			

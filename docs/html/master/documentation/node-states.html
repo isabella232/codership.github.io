@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Flow Control with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Flow Control &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,17 +207,47 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="flow-control">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="#catching-up"><span class="std std-ref">Catching Up</span></a></li>
+<li><a class="reference internal" href="#cluster-sync"><span class="std std-ref">Cluster Sync</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-fc-factor"><span class="std std-ref">gcs.fc_factor</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-fc-limit"><span class="std std-ref">gcs.fc_limit</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-max-throttle"><span class="std std-ref">gcs.max_throttle</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a></li>
+<li><a class="reference internal" href="#no-flow-control"><span class="std std-ref">No Flow Control</span></a></li>
+<li><a class="reference internal" href="#writeset-caching"><span class="std std-ref">Write-set Caching</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-ready"><span class="std std-ref">wsrep_ready</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="flow-control">
 <span id="id1"></span><h1>Flow Control<a class="headerlink" href="#flow-control" title="Permalink to this headline">¶</a></h1>
 <p>Galera Cluster manages the replication process using a feedback mechanism, called Flow Control.  Flow Control allows a node to pause and resume replication according to its needs.  This prevents any node from lagging too far behind the others in applying transactions.</p>
-<div class="section" id="how-flow-control-works">
-<span id="id2"></span><h2>How Flow Control Works<a class="headerlink" href="#how-flow-control-works" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="how-flow-control-works">How Flow Control Works</p>
 <p>Galera Cluster achieves synchronous replication by ensuring that transactions copy to all nodes an execute according to a cluster-wide ordering.  That said, the transaction applies and commits occur asynchronously as they replicate through the cluster.</p>
 <p>Nodes receive write-sets and organize them into the global ordering.  Transactions that the node receives from the cluster but which it has not applied and committed, are kept in the received queue.</p>
 <p>When the received queue reaches a certain size the node triggers Flow Control.  The node pauses replication, then works through the received queue.  When it reduces the received queue to a more manageable size, the node resumes replication.</p>
-</div>
-<div class="section" id="understanding-node-states">
-<span id="node-states"></span><h2>Understanding Node States<a class="headerlink" href="#understanding-node-states" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-2 rubric" id="node-states">Understanding Node States</p>
 <span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><span class="target" id="index-4"></span><p id="index-5">Galera Cluster implements several forms of Flow Control, depending on the node state.  This ensures temporal synchrony and consistency—as opposed to logical, which virtual synchrony provides.</p>
 <p>There are four primary kinds of Flow Control:</p>
 <ul class="simple">
@@ -223,13 +256,10 @@
 <li><a class="reference internal" href="#catching-up"><span class="std std-ref">Catching Up</span></a></li>
 <li><a class="reference internal" href="#cluster-sync"><span class="std std-ref">Cluster Sync</span></a></li>
 </ul>
-<div class="section" id="no-flow-control">
-<span id="id3"></span><h3>No Flow Control<a class="headerlink" href="#no-flow-control" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="no-flow-control">No Flow Control</p>
 <p>This Flow Control takes effect when nodes are in the <code class="docutils literal"><span class="pre">OPEN</span></code> or <code class="docutils literal"><span class="pre">PRIMARY</span></code> states.</p>
 <p>When nodes hold these states, they are not considered part of the cluster.  These nodes are not allowed to replicate, apply or cache any write-sets.</p>
-</div>
-<div class="section" id="write-set-caching">
-<span id="writeset-caching"></span><h3>Write-set Caching<a class="headerlink" href="#write-set-caching" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="writeset-caching">Write-set Caching</p>
 <p>This Flow Control takes effect when nodes are in the <code class="docutils literal"><span class="pre">JOINER</span></code> and <code class="docutils literal"><span class="pre">DONOR</span></code> states.</p>
 <p>Nodes cannot apply any write-sets while in this state and must cache them for later.  There is no reasonable way to keep the node synchronized with the cluster, except for stopping all replication.</p>
 <p>It is possible to limit the replication rate, ensuring that the write-set cache does not exceed the configured size.  You can control the write-set cache with the following parameters:</p>
@@ -238,9 +268,7 @@
 <li><a class="reference internal" href="galera-parameters.html#gcs-max-throttle"><span class="std std-ref">gcs.max_throttle</span></a> Smallest fraction to the normal replication rate the node can tolerate in the cluster.</li>
 <li><a class="reference internal" href="galera-parameters.html#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a> Estimate of the average replication rate for the node.</li>
 </ul>
-</div>
-<div class="section" id="catching-up">
-<span id="id4"></span><h3>Catching Up<a class="headerlink" href="#catching-up" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="catching-up">Catching Up</p>
 <p>This Flow Control takes effect when nodes are in the <code class="docutils literal"><span class="pre">JOINED</span></code> state.</p>
 <p>Nodes in this state can apply write-sets.  Flow Control here ensures that the node can eventually catch up with the cluster.  It specifically ensures that its write-set cache never grows.  Because of this, the cluster wide replication rate remains limited by the rate at which a node in this state can apply write-sets.  Since applying write-sets is usually several times faster than processing a transaction, nodes in this state hardly ever effect cluster performance.</p>
 <p>The one occasion when nodes in the <code class="docutils literal"><span class="pre">JOINED</span></code> state do effect cluster performance is at the very beginning, when the buffer pool on the node in question is empty.</p>
@@ -248,21 +276,16 @@
 <p class="first admonition-title">Note</p>
 <p class="last">You can significantly speed this up with parallel applying.</p>
 </div>
-</div>
-<div class="section" id="cluster-sync">
-<span id="id5"></span><h3>Cluster Sync<a class="headerlink" href="#cluster-sync" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="cluster-sync">Cluster Sync</p>
 <p>This Flow Control takes effect when nodes are in the <code class="docutils literal"><span class="pre">SYNCED</span></code> state.</p>
 <p>When nodes enter this state Flow Control attempts to keep the slave queue to a minimum.  You can configure how the node handles this using the following parameters:</p>
 <ul class="simple">
 <li><a class="reference internal" href="galera-parameters.html#gcs-fc-limit"><span class="std std-ref">gcs.fc_limit</span></a> Used to determine the point where Flow Control engages.</li>
 <li><a class="reference internal" href="galera-parameters.html#gcs-fc-factor"><span class="std std-ref">gcs.fc_factor</span></a> Used to determine the point where Flow Control disengages.</li>
 </ul>
-</div>
-</div>
-<div class="section" id="changes-in-the-node-state">
-<span id="node-state-changes"></span><h2>Changes in the Node State<a class="headerlink" href="#changes-in-the-node-state" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="node-state-changes">Changes in the Node State</p>
 <p id="index-6">The node state machine handles different state changes on different layers of Galera Cluster.  These are the node state changes that occur at the top most layer:</p>
-<div class="figure" id="id6">
+<div class="figure" id="id2">
 <img alt="../_images/galerafsm.png" src="../_images/galerafsm.png" />
 <p class="caption"><span class="caption-text"><em>Galera Cluster Node State Changes</em></span></p>
 </div>
@@ -289,7 +312,6 @@
 </ul>
 <p>For more information on Flow Control see <a class="reference external" href="http://www.mysqlperformanceblog.com/2013/05/02/galera-flow-control-in-percona-xtradb-cluster-for-mysql/">Galera Flow Control in Percona XtraDB Cluster</a>.</p>
 </div>
-</div>
 
 
           </div>
@@ -299,24 +321,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Flow Control</a><ul>
-<li><a class="reference internal" href="#how-flow-control-works">How Flow Control Works</a></li>
-<li><a class="reference internal" href="#understanding-node-states">Understanding Node States</a><ul>
-<li><a class="reference internal" href="#no-flow-control">No Flow Control</a></li>
-<li><a class="reference internal" href="#write-set-caching">Write-set Caching</a></li>
-<li><a class="reference internal" href="#catching-up">Catching Up</a></li>
-<li><a class="reference internal" href="#cluster-sync">Cluster Sync</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#changes-in-the-node-state">Changes in the Node State</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="state-transfer.html"

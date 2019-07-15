@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Troubleshooting Unknown Command Errors" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Unknown Command Errors &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,7 +207,35 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="unknown-command-errors">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-on"><span class="std std-ref">wsrep_on</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="unknown-command-errors">
 <span id="kb-trouble-error-unknown-command"></span><h1>Unknown Command Errors<a class="headerlink" href="#unknown-command-errors" title="Permalink to this headline">¶</a></h1>
 <p>If a cluster experiences a temporary split&#8211;that is to say, a portion of the nodes loses connectivity to the <a class="reference internal" href="../../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>&#8211;when they reconnect, nodes from the former non-operational component drop their client connections.  New connections to the database client will return <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> errors.</p>
 <p class="kb rubric">Scenario</p>
@@ -252,15 +283,6 @@
 </pre></div>
 </div>
 <p>The node on which you executed this will now operate as the starting point in a new Primary Component.  Nodes that are part of non-operational components and have network connectivity will attempt to initiate a state transfer to bring their own databases up-to-date with this node.  At this point, the cluster will begin accepting SQL requests.</p>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
-<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></li>
-<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a></li>
-<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-on"><span class="std std-ref">wsrep_on</span></a></li>
-<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a></li>
-</ul>
 </div>
 
 

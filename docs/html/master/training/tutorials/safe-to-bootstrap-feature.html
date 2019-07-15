@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="The Safe-To-Bootstrap Feature in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>The Safe-To-Bootstrap Feature &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,22 +207,40 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="the-safe-to-bootstrap-feature">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="the-safe-to-bootstrap-feature">
 <span id="safe-to-bootstrap-feature"></span><h1>The Safe-To-Bootstrap Feature<a class="headerlink" href="#the-safe-to-bootstrap-feature" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length:  745 words; Writer: Philip Stoev; Published: November 18, 2016; Topic: General; Level: Intermediate</p>
 <p>Galera Clusters are generally meant to run non-stop, so shutting down the entire cluster is not required during normal operation. Yet, if there is a need to perform such a procedure, it is likely that it will be happening under pressure, so it is important for it to complete safely and as quickly as possible in order to avoid extended downtime and potential data loss.</p>
 <p>Galera 3.19 includes two important improvements to whole-cluster restart: the “Safe-to-Bootstrap” protection and Gcache recovery. In this article, we will describe the first feature.</p>
-<div class="section" id="whole-cluster-restart">
-<h2>Whole-Cluster Restart<a class="headerlink" href="#whole-cluster-restart" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Whole-Cluster Restart</p>
 <p>First, a few words on cluster restarts in general. Regardless of whether it was an orderly shutdown or a sudden crash of all nodes, restarting the entire cluster is governed by the following principles:</p>
 <ul class="simple">
 <li>Since the old cluster no longer logically exists, a new logical cluster is being created</li>
 <li>The first node that is being started must be bootstrapped</li>
 <li>It is important to select the node that has the last transactions committed as the first node in the new cluster</li>
 </ul>
-</div>
-<div class="section" id="the-safe-to-bootstrap-protection">
-<h2>The Safe-to-Bootstrap Protection<a class="headerlink" href="#the-safe-to-bootstrap-protection" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">The Safe-to-Bootstrap Protection</p>
 <p>In an orderly shutdown, the node that was shut down last will be the one that has the last transaction committed and should be chosen as the first node in the new cluster. Selecting another node for that role may cause errors down the road and open an opportunity for those last transactions to be lost.</p>
 <p>To facilitate that decision and prevent unsafe choices, Galera, starting with version 3.19, will keep track of the order in which nodes are being shut down. The node that was shut down last will be marked as “Safe-to-Bootstrap” from. All the other nodes will be marked as unsafe to bootstrap from.</p>
 <p>When bootstrapping the new cluster, Galera will refuse to use as a first node a node that was marked as unsafe to bootstrap from. You will see the following message in the logs:</p>
@@ -229,9 +250,7 @@
 </pre></div>
 </div>
 <p>In case of a sudden crash of the entire cluster, all nodes will be considered unsafe to bootstrap from, so operator action will always be required to force the use of a particular node as a bootstrap node.</p>
-</div>
-<div class="section" id="selecting-the-right-node">
-<h2>Selecting the Right Node<a class="headerlink" href="#selecting-the-right-node" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Selecting the Right Node</p>
 <p>The procedure to select the right node to bootstrap from depends on how the cluster terminated: via an orderly shutdown or a crash.</p>
 <p>In case of an orderly shutdown, it is sufficient to follow the recommendations of the “Safe-to-Bootstrap” feature. Look for the node whose grastate.dat has <code class="docutils literal"><span class="pre">safe_to_bootstrap:</span> <span class="pre">1</span></code>:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> GALERA saved state
@@ -261,11 +280,8 @@
 </pre></div>
 </div>
 <p>By doing that, you indicate to Galera that you have willfully selected that node and it will allow you to bootstrap from it.</p>
-</div>
-<div class="section" id="practice-practice-practice">
-<h2>Practice, Practice, Practice<a class="headerlink" href="#practice-practice-practice" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Practice</p>
 <p>Similar to restoring from backup, restarting the entire cluster is an operation that deserves practice. In addition the data consistency protections provided by Galera, having a proven sequence of steps to perform when the occasion arises will reduce downtime and decrease the chance of accidental data loss. Last but not least, it will lower the stress on the administrator, which is an important goal in its own right!</p>
-</div>
 </div>
 
 
@@ -276,19 +292,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">The Safe-To-Bootstrap Feature</a><ul>
-<li><a class="reference internal" href="#whole-cluster-restart">Whole-Cluster Restart</a></li>
-<li><a class="reference internal" href="#the-safe-to-bootstrap-protection">The Safe-to-Bootstrap Protection</a></li>
-<li><a class="reference internal" href="#selecting-the-right-node">Selecting the Right Node</a></li>
-<li><a class="reference internal" href="#practice-practice-practice">Practice, Practice, Practice</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="supporting-transaction-isolation-levels.html"
@@ -367,8 +371,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>

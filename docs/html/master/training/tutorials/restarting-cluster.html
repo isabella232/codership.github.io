@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Restarting Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Restarting the Cluster &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -31,7 +34,7 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Setting Up a Galera Cluster on AWS" href="aws-galera-cluster.html" />
+    <link rel="next" title="Installing a Galera Cluster on AWS" href="aws-galera-cluster.html" />
     <link rel="prev" title="Testing a Cluster" href="testing-cluster.html" />
 
 
@@ -204,14 +207,37 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="restarting-the-cluster">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#gcache-recover"><span class="std std-ref">gcache.recover</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="restarting-the-cluster">
 <span id="restarting-cluster"></span><h1>Restarting the Cluster<a class="headerlink" href="#restarting-the-cluster" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length:  791 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>Occasionally, you may have to restart an entire Galera Cluster.  This may happen, for example, when there is a power failure in which every node is shut down and you have no <code class="docutils literal"><span class="pre">mysqld</span></code> process.  Restarting a cluster, starting nodes in the wrong order, starting the wrong nodes first, can be devastating and lead to loss of data.</p>
 <p>When restarting an entire Galera Cluster, you&#8217;ll need to determine which node has the most advanced node state ID. This is covered in the next section.  Once you&#8217;ve identified the most advanced node, you&#8217;ll need to start that node first.  Then you can start the rest of the nodes in any order.  They will each look to the first node as the most up-to-date node.</p>
-<div class="section" id="identifying-the-most-advanced-node">
-<h2>Identifying the Most Advanced Node<a class="headerlink" href="#identifying-the-most-advanced-node" title="Permalink to this headline">¶</a></h2>
-<p id="identify-most-advanced-node">Identifying the most advanced node state ID is done by comparing the <a class="reference internal" href="../../documentation/glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> values on each node in your cluster.  You can find this in the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file, located in the data directory for your database.</p>
+<p class="rubric-1 rubric" id="identify-most-advanced-node">Identifying the Most Advanced Node</p>
+<p>Identifying the most advanced node state ID is done by comparing the <a class="reference internal" href="../../documentation/glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> values on each node in your cluster.  You can find this in the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file, located in the data directory for your database.</p>
 <p>If the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file looks like the example below, you have found the most advanced node state ID:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span># GALERA saved state
 version: 2.1
@@ -226,10 +252,8 @@ cert_index:
 </pre></div>
 </div>
 <p>This value is the node state ID.  You can use it to update manually the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file, by entering it in the value of the <code class="docutils literal"><span class="pre">seqno</span></code> field. As an alternative, you can just let <code class="docutils literal"><span class="pre">mysqld_safe</span></code> recover automatically and pass the value to your database server the next time you start it.</p>
-</div>
-<div class="section" id="safe-to-bootstrap-protection">
-<h2>&#8216;Safe to Bootstrap&#8217; Protection<a class="headerlink" href="#safe-to-bootstrap-protection" title="Permalink to this headline">¶</a></h2>
-<p id="id1">Starting with provider version 3.19, Galera has an additional protection against attempting to boostrap the cluster using a node that may not have been the last node remaining in the cluster prior to cluster shutdown.</p>
+<p class="rubric-1 rubric" id="safe-to-bootstrap-protection">&#8216;Safe to Bootstrap&#8217; Protection</p>
+<p>Starting with provider version 3.19, Galera has an additional protection against attempting to boostrap the cluster using a node that may not have been the last node remaining in the cluster prior to cluster shutdown.</p>
 <p>If Galera can conclusively determine which node was the last node standing, it will be marked as &#8216;safe to bootstrap&#8217;, as seen in this example <code class="docutils literal"><span class="pre">grastate.dat</span></code>:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span># GALERA saved state
 version: 2.1
@@ -246,17 +270,13 @@ safe_to_bootstrap: 1
 </div>
 <p>To override this protection, edit the <code class="docutils literal"><span class="pre">safe_to_bootstrap</span></code> line in the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file of the node you intend to use as the first node.</p>
 <p>In the case when all nodes crashed simultaneously, no node will be considered safe to bootstrap until the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file is edited manually.</p>
-</div>
-<div class="section" id="gcache-recovery">
-<h2>Gcache Recovery<a class="headerlink" href="#gcache-recovery" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Gcache Recovery</p>
 <p>Starting with provider version 3.19, Galera provides the <a class="reference internal" href="../../documentation/galera-parameters.html#gcache-recover"><span class="std std-ref">gcache.recover</span></a> parameter. If set to <code class="docutils literal"><span class="pre">yes</span></code>, Galera will attempt to recover the gcache on node startup.</p>
 <p>If gcache recovery is successful, the node will be in position to provide IST to other joining nodes, which can speed up the overall restart time for the entire cluster.</p>
 <p>Gcache recovery requires that the entire gcache file is read twice. For large gcache files located on slow disks, this operation may take some time.</p>
 <p>Gcache recovery is a &#8220;best effort&#8221; operation. If recovery was not successful, the node will continue to operate normally however other nodes will fall back to SST when attempting to join.</p>
-</div>
-<div class="section" id="identifying-crashed-nodes">
-<h2>Identifying Crashed Nodes<a class="headerlink" href="#identifying-crashed-nodes" title="Permalink to this headline">¶</a></h2>
-<p id="identify-crashed-node">You can easily determine if a node has crashed by looking at the contents of the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file. If it looks like the example below, the node has either crashed during execution of a non-transactional operation (e.g., <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code>), or the node aborted due to a database inconsistency.</p>
+<p class="rubric-1 rubric" id="identify-crashed-node">Identifying Crashed Nodes</p>
+<p>You can easily determine if a node has crashed by looking at the contents of the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file. If it looks like the example below, the node has either crashed during execution of a non-transactional operation (e.g., <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code>), or the node aborted due to a database inconsistency.</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span># GALERA saved state
 version: 2.1
 uuid:    5ee99582-bb8d-11e2-b8e3-23de375c1d30
@@ -267,7 +287,6 @@ cert_index:
 <p>It&#8217;s possible for you to recover the <a class="reference internal" href="../../documentation/glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> of the last committed transaction from InnoDB, as described above. However, the recovery is rather meaningless.  After the crash, the node state is probably corrupted and may not prove functional.</p>
 <p>If there are no other nodes in the cluster with a well-defined state, there is no need to preserve the node state ID.  You must perform a thorough database recovery procedure, similar to that used on stand-alone database servers.  Once you recover one node, use it as the first node in a new cluster.</p>
 </div>
-</div>
 
 
           </div>
@@ -277,19 +296,7 @@ cert_index:
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Restarting the Cluster</a><ul>
-<li><a class="reference internal" href="#identifying-the-most-advanced-node">Identifying the Most Advanced Node</a></li>
-<li><a class="reference internal" href="#safe-to-bootstrap-protection">&#8216;Safe to Bootstrap&#8217; Protection</a></li>
-<li><a class="reference internal" href="#gcache-recovery">Gcache Recovery</a></li>
-<li><a class="reference internal" href="#identifying-crashed-nodes">Identifying Crashed Nodes</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="testing-cluster.html"
@@ -298,7 +305,7 @@ cert_index:
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="aws-galera-cluster.html"
-                          title="Next page">&rarr; Setting Up a Galera Cluster on AWS</a></p>
+                          title="Next page">&rarr; Installing a Galera Cluster on AWS</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -361,16 +368,16 @@ cert_index:
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="aws-galera-cluster.html" title="Setting Up a Galera Cluster on AWS"
+          <a href="aws-galera-cluster.html" title="Installing a Galera Cluster on AWS"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
           <a href="testing-cluster.html" title="Testing a Cluster"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Tutorials</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Codership Tutorials on Galera Cluster</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started with Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -381,7 +388,7 @@ cert_index:
 			
 
 			
-				<li><a href="aws-galera-cluster.html" title="Setting Up a Galera Cluster on AWS">Next &gt;</a></li>
+				<li><a href="aws-galera-cluster.html" title="Installing a Galera Cluster on AWS">Next &gt;</a></li>
 			
 
 		</ul>

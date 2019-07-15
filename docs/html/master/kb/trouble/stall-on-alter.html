@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Troubleshooting Galera Cluster when it Stalls on ALTER" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Cluster Stalls on ALTER &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,7 +207,32 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="cluster-stalls-on-alter">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/schema-upgrades.html"><span class="doc">Schema Upgrades</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-osu-method"><span class="std std-ref">wsrep_OSU_method</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="cluster-stalls-on-alter">
 <span id="kb-trouble-stall-on-alter"></span><h1>Cluster Stalls on <code class="docutils literal"><span class="pre">ALTER</span></code><a class="headerlink" href="#cluster-stalls-on-alter" title="Permalink to this headline">¶</a></h1>
 <p>There may be times in which a cluster will stall when an <code class="docutils literal"><span class="pre">ALTER</span></code> statement is executed on an unused table.</p>
 <p class="kb rubric">Scenario</p>
@@ -226,12 +254,6 @@
 </div>
 </div></blockquote>
 <p>The first SQL statement here will change the Schema Upgrade method to <em>Rolling Schema Upgrade</em> (i.e., <code class="docutils literal"><span class="pre">RSU</span></code>).  The second SQL statement represents an <code class="docutils literal"><span class="pre">ALTER</span></code> statement you want to execute. Once that&#8217;s finished, the last <code class="docutils literal"><span class="pre">SET</span></code> statement will reset the Schema Upgrade method back to <em>Total Order Isolation</em> (i.e., <code class="docutils literal"><span class="pre">TOI</span></code>).  After you&#8217;ve done this on each node, the cluster will now run with the desired updates.</p>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/schema-upgrades.html"><span class="doc">Schema Upgrades</span></a></li>
-<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-osu-method"><span class="std std-ref">wsrep_OSU_method</span></a> parameter</li>
-</ul>
 </div>
 
 

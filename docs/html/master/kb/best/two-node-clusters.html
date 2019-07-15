@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Maintaining a Two-Node Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Two-Node Clusters &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,7 +207,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="two-node-clusters">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.boostrap</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a></li>
+<li><a class="reference internal" href="../../documentation/arbitrator.html#arbitrator"><span class="std std-ref">Arbitrator</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="two-node-clusters">
 <span id="kb-best-two-node-clusters"></span><h1>Two-Node Clusters<a class="headerlink" href="#two-node-clusters" title="Permalink to this headline">¶</a></h1>
 <p>Although it may seem simple to maintain a cluster of only two nodes, there is an inherent potential problem. In a two-node cluster, when one node fails, it will cause the other to stop.</p>
 <p class="kb rubric">Scenario</p>
@@ -226,11 +255,6 @@
 <p class="last">Enabling <a class="reference internal" href="../../documentation/galera-parameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> is dangerous in a multi-master setup due to the aforementioned risk for split-brain situations.  However, it does simplify things in master-slave clusters&#8211;especially in situations with only two nodes.</p>
 </div>
 <p>In addition to the solutions provided here, you can avoid this situation entirely by using Galera Arbitrator.  Galera Arbitrator functions as an odd node in quorum calculations.  If you enable Galera Arbitrator on one node in a two-node cluster, that node will remain the Primary Component, even if the other node fails or loses network connectivity.</p>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/arbitrator.html#arbitrator"><span class="std std-ref">Arbitrator</span></a></li>
-</ul>
 </div>
 
 

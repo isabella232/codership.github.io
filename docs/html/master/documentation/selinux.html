@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Using SELinux with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>SELinux Configuration &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,15 +207,37 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="selinux-configuration">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="selinux-configuration">
 <span id="selinux"></span><h1>SELinux Configuration<a class="headerlink" href="#selinux-configuration" title="Permalink to this headline">¶</a></h1>
 <p>Security-Enhanced Linux, or SELinux, is a kernel module for improving security of Linux operating systems.  It integrates support for access control security policies, including mandatory access control (MAC), that limit user applications and system daemons access to files and network resources.  Some Linux distributions, such as Fedora, ship with SELinux enabled by default.</p>
 <p>In the context of Galera Cluster, systems with SELinux may block the database server, keeping it from starting or preventing the node from establishing connections with other nodes in the cluster.  To prevent this, you need to configure SELinux policies to allow the node to operate.</p>
-<div class="section" id="generating-an-selinux-policy">
-<span id="gen-selinux-policy"></span><h2>Generating an SELinux Policy<a class="headerlink" href="#generating-an-selinux-policy" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="gen-selinux-policy">Generating an SELinux Policy</p>
 <p>In order to create an SELinux policy for Galera Cluster, you need to first open ports and set SELinux to permissive mode.  Then, after generating various replication events, state transfers and notifications, create a policy from the logs of this activity and reset SELinux from to enforcing mode.</p>
-<div class="section" id="setting-selinux-to-permissive-mode">
-<span id="permissive-selinux"></span><h3>Setting SELinux to Permissive Mode<a class="headerlink" href="#setting-selinux-to-permissive-mode" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="permissive-selinux">Setting SELinux to Permissive Mode</p>
 <p>When SELinux registers a system event, there are three modes that define its response: enforcing, permissive and disabled.  While you can set it to permit all activity on the system, this is not a good security practice.  Instead, set SELinux to permit activity on the relevant ports and to ignore the database server.</p>
 <p>To set SELinux to permissive mode, complete the following steps:</p>
 <ol class="arabic">
@@ -234,9 +259,7 @@
 </li>
 </ol>
 <p>SELinux now permits the database server to function on the server and no longer blocks the node from network connectivity with the cluster.</p>
-</div>
-<div class="section" id="defining-the-selinux-policy">
-<span id="define-selinux-policy"></span><h3>Defining the SELinux Policy<a class="headerlink" href="#defining-the-selinux-policy" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="define-selinux-policy">Defining the SELinux Policy</p>
 <p>While SELinux remains in permissive mode, it continues to log activity from the database server.  In order for it to understand normal operation for the database, you need to start the database and generate routine events for SELinux to see.</p>
 <p>For servers that use <code class="docutils literal"><span class="pre">init</span></code>, start the database with the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql start
@@ -257,9 +280,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">In order to for your policy to work you must generate both State Snapshot and Incremental State transfers.</p>
 </div>
-</div>
-<div class="section" id="enabling-an-selinux-policy">
-<span id="enable-selinux"></span><h3>Enabling an SELinux Policy<a class="headerlink" href="#enabling-an-selinux-policy" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="enable-selinux">Enabling an SELinux Policy</p>
 <p>Generating an SELinux policy requires that you search log events for the relevant information and pipe it to the <code class="docutils literal"><span class="pre">audit2allow</span></code> utility, creating a <code class="docutils literal"><span class="pre">galera.te</span></code> file to load into SELinux.</p>
 <p>To generate and load an SELinux policy for Galera Cluster, complete the following steps:</p>
 <ol class="arabic">
@@ -294,8 +315,6 @@
 </ol>
 <p>SELinux returns to enforcement mode, now using new policies that work with Galera Cluster.</p>
 </div>
-</div>
-</div>
 
 
           </div>
@@ -305,21 +324,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">SELinux Configuration</a><ul>
-<li><a class="reference internal" href="#generating-an-selinux-policy">Generating an SELinux Policy</a><ul>
-<li><a class="reference internal" href="#setting-selinux-to-permissive-mode">Setting SELinux to Permissive Mode</a></li>
-<li><a class="reference internal" href="#defining-the-selinux-policy">Defining the SELinux Policy</a></li>
-<li><a class="reference internal" href="#enabling-an-selinux-policy">Enabling an SELinux Policy</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="ssl-sst.html"

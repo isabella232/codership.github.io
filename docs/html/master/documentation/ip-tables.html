@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Configuring IP Tables for Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Firewall Configuration with iptables &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,15 +207,37 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="firewall-configuration-with-iptables">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="#persistent-config"><span class="std std-ref">Making Firewall Changes Persistent</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="firewall-configuration-with-iptables">
 <span id="ip-tables"></span><h1>Firewall Configuration with <code class="docutils literal"><span class="pre">iptables</span></code><a class="headerlink" href="#firewall-configuration-with-iptables" title="Permalink to this headline">¶</a></h1>
 <p>Linux provides packet filtering support at the kernel level.  Using <code class="docutils literal"><span class="pre">iptables</span></code> and <code class="docutils literal"><span class="pre">ip6tables</span></code> you can set up, maintain and inspect tables of IPv4 and IPv6 packet filtering rules.</p>
 <p>There are several tables that the kernel uses for packet filtering and within these tables are chains that it match specific kinds of traffic.  In order to open the relevant ports for Galera Cluster, you need to append new rules to the <code class="docutils literal"><span class="pre">INPUT</span></code> chain on the filter table.</p>
-<div class="section" id="opening-ports-for-galera-cluster">
-<span id="iptables-ports"></span><h2>Opening Ports for Galera Cluster<a class="headerlink" href="#opening-ports-for-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="iptables-ports">Opening Ports for Galera Cluster</p>
 <p>Galera Cluster requires four ports for replication.  There are two approaches to configuring the firewall to open these <code class="docutils literal"><span class="pre">iptables</span></code>.  The method you use depends on whether you deploy the cluster in a <abbr title="Local Area Network">LAN</abbr> environment, such as an office network, or if you deploy the cluster in a <abbr title="Wide Area Network">WAN</abbr> environment, such as on several cloud servers over the internet.</p>
-<div class="section" id="lan-configuration">
-<span id="iptables-lan-config"></span><h3>LAN Configuration<a class="headerlink" href="#lan-configuration" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="iptables-lan-config">LAN Configuration</p>
 <p>When configuring packet filtering rules for a <abbr title="Local Area Network">LAN</abbr> environment, such as on an office network, there are four ports that you need to open to <abbr title="Transmission Control Protocol">TCP</abbr> for Galera Cluster and one to <abbr title="User Datagram Protocol">UDP</abbr> transport to enable multicast replication.  This means five commands that you must run on each cluster node:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> iptables --append INPUT --in-interface eth0 <span class="se">\</span>
    --protocol tcp --match tcp --dport <span class="m">3306</span> <span class="se">\</span>
@@ -237,9 +262,7 @@
 <p class="last">The IP addresses in the example are for demonstration purposes only.  Use the real values from your nodes and netmask in your <code class="docutils literal"><span class="pre">iptables</span></code> configuration.</p>
 </div>
 <p>Galera Cluster can now pass packets through the firewall to the node, but the configuration reverts to default on reboot.  In order to update the default firewall configuration, see <a class="reference internal" href="#persistent-config"><span class="std std-ref">Making Firewall Changes Persistent</span></a>.</p>
-</div>
-<div class="section" id="wan-configuration">
-<span id="iptables-wan-config"></span><h3>WAN Configuration<a class="headerlink" href="#wan-configuration" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="iptables-wan-config">WAN Configuration</p>
 <p>While the configuration shown above for <abbr title="Local Area Network">LAN</abbr> deployments offers the better security, only opening those ports necessary for cluster operation, it does not scale well into <abbr title="Wide Area Network">WAN</abbr> deployments.  The reason is that in a <abbr title="Wide Area Network">WAN</abbr> environment the IP addresses are not in sequence.  The four commands to open the relevant ports to <abbr title="Transmission Control Protocol">TCP</abbr> would grow to four commands per node on each node.  That is, for ten nodes you would need to run four hundred <code class="docutils literal"><span class="pre">iptables</span></code> commands across the cluster in order to set up the firewall on each node.</p>
 <p>Without much loss in security, you can instead open a range of ports between trusted hosts.  This reduces the number of commands to one per node on each node.  For example, firewall configuration in a three node cluster would look something like:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> iptables --append INPUT --protocol tcp <span class="se">\</span>
@@ -256,10 +279,7 @@
 <p class="last">The IP addresses in the example are for demonstration purposes only.  Use the real values from your nodes and netmask in your <code class="docutils literal"><span class="pre">iptables</span></code> configuration.</p>
 </div>
 <p>Galera Cluster can now pass packets through the firewall to the node, but the configuration reverts to default on reboot.  In order to update the default firewall configuration, see <a class="reference internal" href="#persistent-config"><span class="std std-ref">Making Firewall Changes Persistent</span></a>.</p>
-</div>
-</div>
-<div class="section" id="making-firewall-changes-persistent">
-<span id="persistent-config"></span><h2>Making Firewall Changes Persistent<a class="headerlink" href="#making-firewall-changes-persistent" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="persistent-config">Making Firewall Changes Persistent</p>
 <p>Whether you decide to open ports individually for <abbr title="Local Area Network">LAN</abbr> deployment or in a range between trusted hosts for a <abbr title="Wide Area Network">WAN</abbr> deployment, the tables you configure in the above sections are not persistent.  When the server reboots, the firewall reverts to its default state.</p>
 <p>For systems that use <code class="docutils literal"><span class="pre">init</span></code>, you can save the packet filtering state with one command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service save iptables
@@ -276,7 +296,6 @@
 </div>
 <p>When your system reboots, it now reads this file as the default packet filtering rules.</p>
 </div>
-</div>
 
 
           </div>
@@ -286,21 +305,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Firewall Configuration with <code class="docutils literal"><span class="pre">iptables</span></code></a><ul>
-<li><a class="reference internal" href="#opening-ports-for-galera-cluster">Opening Ports for Galera Cluster</a><ul>
-<li><a class="reference internal" href="#lan-configuration">LAN Configuration</a></li>
-<li><a class="reference internal" href="#wan-configuration">WAN Configuration</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#making-firewall-changes-persistent">Making Firewall Changes Persistent</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="firewall-settings.html"

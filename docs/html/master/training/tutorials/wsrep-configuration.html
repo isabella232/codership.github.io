@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Replication Configuration" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Replication Configuration &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,7 +207,36 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="replication-configuration">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-name"><span class="std std-ref">wsrep_cluster_name</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="replication-configuration">
 <span id="wsrep-configuration"></span><h1>Replication Configuration<a class="headerlink" href="#replication-configuration" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length:  964 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>In addition to the configuration for the database server, there are some specific options that you need to set to enable write-set replication.  You must apply these changes to the configuration file (i.e., <code class="docutils literal"><span class="pre">my.cnf</span></code>) for each node in the cluster.</p>
@@ -229,17 +261,14 @@
 <span class="go">wsrep_node_address=&quot;192.168.0.1&quot;</span>
 </pre></div>
 </div>
-<div class="section" id="backend-schema">
-<h2>Backend Schema<a class="headerlink" href="#backend-schema" title="Permalink to this headline">¶</a></h2>
-<p id="id1">There are two backend schemata available with Galera Cluster.</p>
+<p class="rubric-1 rubric" id="backend-schema">Backend Schema</p>
+<p>There are two backend schemata available with Galera Cluster.</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">dummy</span></code>: This provides a pass-through back-end for testing and profiling purposes.  It doesn&#8217;t connect to other nodes and will ignore any values given to it.</li>
 <li><code class="docutils literal"><span class="pre">gcomm</span></code>: This provides the group communications back-end for use in production.  It accepts an address and has several settings that may be enabled through the option list, or by using the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> parameter.</li>
 </ul>
-</div>
-<div class="section" id="cluster-addresses">
-<h2>Cluster Addresses<a class="headerlink" href="#cluster-addresses" title="Permalink to this headline">¶</a></h2>
-<p id="id2">For the cluster address section, you have to provide a comma-separate list of IP addresses for all of the nodes in the cluster.  You would do this using the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter.  Cluster addresses are listed in the configuration file using a particular syntax, like so:</p>
+<p class="rubric-1 rubric" id="cluster-addresses">Cluster Addresses</p>
+<p>For the cluster address section, you have to provide a comma-separate list of IP addresses for all of the nodes in the cluster.  You would do this using the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter.  Cluster addresses are listed in the configuration file using a particular syntax, like so:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">&lt;backend schema&gt;://&lt;cluster address&gt;[?&lt;option1&gt;</span><span class="o">=</span><span class="s">&lt;value1&gt;[&amp;&lt;option2&gt;=&lt;value2&gt;]]</span>
 </pre></div>
 </div>
@@ -250,10 +279,8 @@
 <p>Here, the backend schema is <code class="docutils literal"><span class="pre">gcomm</span></code>.  The cluster addresses (i.e., <code class="docutils literal"><span class="pre">192.168.0.1</span></code>, etc.) are listed next, separted by commas.  You can add options after that, within the quotes. You would start with a question mark, followed by each option setting. Option key/value pairs are separated by an ampersand. This is covered in the Options section below.</p>
 <p>The IP addresses given in the configuration file should include any current members of the cluster.  The list may also include the IP addresses of any possible cluster members. Members can belong to no more than one Primary Component;</p>
 <p>If you start a node without proving an IP address for this parameter, the node will assume that it&#8217;s the first node of a new cluster.  It will initialize the cluster as though you launched <code class="docutils literal"><span class="pre">mysqld</span></code> with the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.</p>
-</div>
-<div class="section" id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
-<p id="cluster-address-options">When setting the IP address in the configuration file using the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter, you can also set some options. You can set backend parameters, such as the listen address and timeout values.</p>
+<p class="rubric-1 rubric" id="cluster-address-options">Options</p>
+<p>When setting the IP address in the configuration file using the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter, you can also set some options. You can set backend parameters, such as the listen address and timeout values.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> options list is not durable.  The node must resubmit the options on each connection to a cluster.  To make these options durable, set them in the configuration file using the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> parameter.</p>
@@ -267,7 +294,6 @@
 <p>In this example, the <code class="docutils literal"><span class="pre">segment</span></code> option for <code class="docutils literal"><span class="pre">gcomm</span></code> and the <code class="docutils literal"><span class="pre">max_install_timeouts</span></code> option for <code class="docutils literal"><span class="pre">evs</span></code> are set.</p>
 <p>Incidentally, if the listen address and port are not set in the parameter list, <code class="docutils literal"><span class="pre">gcomm</span></code> will listen on all interfaces.  The listen port will be taken from the cluster address.  If it&#8217;s not specified in the cluster address, the default port is <code class="docutils literal"><span class="pre">4567</span></code>.</p>
 </div>
-</div>
 
 
           </div>
@@ -277,18 +303,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Replication Configuration</a><ul>
-<li><a class="reference internal" href="#backend-schema">Backend Schema</a></li>
-<li><a class="reference internal" href="#cluster-addresses">Cluster Addresses</a></li>
-<li><a class="reference internal" href="#options">Options</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="configuration.html"
@@ -367,9 +382,9 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Tutorials</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Codership Tutorials on Galera Cluster</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started with Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>

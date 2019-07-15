@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Security Settings related to Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Security &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,19 +207,47 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="security">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/galera-installation.html#firewall-config"><span class="std std-ref">Configure Firewall</span></a></li>
+<li><a class="reference internal" href="../training/tutorials/galera-installation.html#disable-selinux"><span class="std std-ref">Disable SELinux</span></a></li>
+<li><a class="reference internal" href="firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
+<li><a class="reference internal" href="selinux.html"><span class="doc">SELinux Configuration</span></a></li>
+<li><a class="reference internal" href="ssl.html"><span class="doc">SSL Settings</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="security">
 <span id="id1"></span><h1>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h1>
 <p>On occasion, you may want or need to enable degrees of security that go beyond the basics of Unix file permissions and secure database management.  For situations such as these,  you can secure both node communications and client connections between the application servers and the cluster.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="firewall-settings.html"><span class="doc">Firewall Settings</span></a></p>
-<p>In order to use Galera Cluster, nodes must have access to a number of ports to maintain network connectivity with the cluster.  While it was touched upon briefly in the <a class="reference internal" href="../training/tutorials/galera-installation.html#firewall-config"><span class="std std-ref">Installation</span></a> chapter, this chapter provides more detailed guides on configuring a system firewall using <code class="docutils literal"><span class="pre">iptables</span></code>, FirewallD and PF.</p>
+<p>In order to use Galera Cluster, nodes must have access to a number of ports to maintain network connectivity with the cluster.  While it was touched upon briefly in the <a class="reference internal" href="../training/tutorials/galera-installation.html#firewall-config"><span class="std std-ref">Installation</span></a> section, this section provides more detailed guides on configuring a system firewall using <code class="docutils literal"><span class="pre">iptables</span></code>, FirewallD and PF.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="ssl.html"><span class="doc">SSL Settings</span></a></p>
-<p>To secure communications between nodes and from the application severs, you can enable encryption through the SSL protocol for client connections, replication traffic and State Snapshot Transfers.  This chapter provides guidance to configuring SSL on Galera Cluster.</p>
+<p>To secure communications between nodes and from the application severs, you can enable encryption through the SSL protocol for client connections, replication traffic and State Snapshot Transfers.  This section provides guidance to configuring SSL on Galera Cluster.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="selinux.html"><span class="doc">SELinux Configuration</span></a></p>
-<p>Without proper configuration, SELinux can either block nodes from communicating or it can block the database server from starting at all.  When it does so, it causes the given process to fail silently, without any notification sent to standard output or error as to why.  While you can configure SELinux to permit all activity from the database server, (as was explained in the <a class="reference internal" href="../training/tutorials/galera-installation.html#disable-selinux"><span class="std std-ref">Installation</span></a> chapter, this is not a good long-term solution.</p>
-<p>This chapter provides a guide to creating an SELinux security policy for Galera Cluster.</p>
+<p>Without proper configuration, SELinux can either block nodes from communicating or it can block the database server from starting at all.  When it does so, it causes the given process to fail silently, without any notification sent to standard output or error as to why.  While you can configure SELinux to permit all activity from the database server, (as was explained in the <a class="reference internal" href="../training/tutorials/galera-installation.html#disable-selinux"><span class="std std-ref">Installation</span></a> section, this is not a good long-term solution.</p>
+<p>This section provides a guide to creating an SELinux security policy for Galera Cluster.</p>
 </li>
 </ul>
 <div class="toctree-wrapper compound">

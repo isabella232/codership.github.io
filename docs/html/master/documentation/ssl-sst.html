@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Using SSL for State Snapshot Transfers" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>SSL for State Snapshot Transfers &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,7 +207,38 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="ssl-for-state-snapshot-transfers">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a></li>
+<li><a class="reference internal" href="schema-upgrades.html"><span class="doc">Schema Upgrades</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-osu-method"><span class="std std-ref">wsrep_OSU_method</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting a Cluster</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="ssl-for-state-snapshot-transfers">
 <span id="ssl-sst"></span><h1>SSL for State Snapshot Transfers<a class="headerlink" href="#ssl-for-state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
 <p>When you finish generating the SSL certificates for your cluster, you can begin configuring the node for their use.  Where <a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a> covers how to enable SSL for replication traffic and the database client, this page covers enabling it for <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> scripts.</p>
 <p>The particular method you use to secure the State Snapshot Transfer through SSL depends upon the method you use in state snapshot transfers: <code class="docutils literal"><span class="pre">mysqldump</span></code> or <code class="docutils literal"><span class="pre">xtrabackup</span></code>.</p>
@@ -212,8 +246,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">For Gelera Cluster, SSL configurations are not dynamic.  Since they must be set on every node in the cluster, if you want to enable this feature with an existing cluster you need to restart the entire cluster.</p>
 </div>
-<div class="section" id="enabling-ssl-for-mysqldump">
-<span id="ssl-mysqldump"></span><h2>Enabling SSL for <code class="docutils literal"><span class="pre">mysqldump</span></code><a class="headerlink" href="#enabling-ssl-for-mysqldump" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="ssl-mysqldump">Enabling SSL for <code class="docutils literal"><span class="pre">mysqldump</span></code></p>
 <p>The procedure for securing <code class="docutils literal"><span class="pre">mysqldump</span></code> is fairly similar to that of securing the database server and client through SSL.  Given that <code class="docutils literal"><span class="pre">mysqldump</span></code> connects through the database client, you can use the same SSL certificates you created for replication traffic.</p>
 <p>Before you shut down the cluster, you need to create a user for <code class="docutils literal"><span class="pre">mysqldump</span></code> on the database server and grant it privileges through the cluster.  This ensures that when the cluster comes back up, the nodes have the correct privileges to execute the incoming state snapshot transfers.  In the event that you use the <a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> online schema upgrade method, you only need to execute the following commands on a single node.</p>
 <ol class="arabic">
@@ -283,9 +316,7 @@
 </li>
 </ol>
 <p>This configures the node to use <code class="docutils literal"><span class="pre">mysqldump</span></code> for state snapshot transfers over SSL.  When all nodes are updated to SSL, you can begin restarting the cluster.  For more information on how to do this, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting a Cluster</span></a>.</p>
-</div>
-<div class="section" id="enabling-ssl-for-xtrabackup">
-<span id="ssl-xtrabackup"></span><h2>Enabling SSL for <code class="docutils literal"><span class="pre">xtrabackup</span></code><a class="headerlink" href="#enabling-ssl-for-xtrabackup" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="ssl-xtrabackup">Enabling SSL for <code class="docutils literal"><span class="pre">xtrabackup</span></code></p>
 <p>The <a class="reference internal" href="glossary.html#term-physical-state-transfer-method"><span class="xref std std-term">Physical State Transfer Method</span></a> for state snapshot transfers, uses an external script to copy the physical data directly from the file system on one cluster node into another.  Unlike <code class="docutils literal"><span class="pre">rsync</span></code>, <code class="docutils literal"><span class="pre">xtrabackup</span></code> includes support for SSL encryption built in.</p>
 <p>Configurations for <code class="docutils literal"><span class="pre">xtrabackup</span></code> are handled through the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file, in the same as the database server and client.  Use the <code class="docutils literal"><span class="pre">[sst]</span></code> unit to configure SSL for the script.  You can use the same SSL certificate files as the node uses on the database server, client and with replication traffic.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># xtrabackup Configuration</span>
@@ -302,7 +333,6 @@
 <p class="last">In order to use SSL with <code class="docutils literal"><span class="pre">xtrabackup</span></code>, you need to set <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> to <code class="docutils literal"><span class="pre">xtrabackup-v2</span></code>, instead of <code class="docutils literal"><span class="pre">xtrabackup</span></code>.</p>
 </div>
 </div>
-</div>
 
 
           </div>
@@ -312,17 +342,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">SSL for State Snapshot Transfers</a><ul>
-<li><a class="reference internal" href="#enabling-ssl-for-mysqldump">Enabling SSL for <code class="docutils literal"><span class="pre">mysqldump</span></code></a></li>
-<li><a class="reference internal" href="#enabling-ssl-for-xtrabackup">Enabling SSL for <code class="docutils literal"><span class="pre">xtrabackup</span></code></a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="ssl-config.html"

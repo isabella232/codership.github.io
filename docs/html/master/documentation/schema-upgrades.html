@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Upgrading a Schema in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Schema Upgrades &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,7 +207,32 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="schema-upgrades">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="#toi"><span class="std std-ref">Total Order Isolation</span></a></li>
+<li><a class="reference internal" href="#rsu"><span class="std std-ref">Rolling Schema Upgrade</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="schema-upgrades">
 <span id="id1"></span><h1>Schema Upgrades<a class="headerlink" href="#schema-upgrades" title="Permalink to this headline">¶</a></h1>
 <p>Schema changes are of particular interest related to Galara Cluster. Schema changes are  <abbr title="Data Definition Language">DDL</abbr> statement executed on a database (e.g., <code class="docutils literal"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code>, <code class="docutils literal"><span class="pre">GRANT</span></code>).  These <abbr title="Data Definition Language">DDL</abbr> statements change the database itself and are non-transactional.</p>
 <p>Galera Cluster processes schema changes by two different methods:</p>
@@ -217,8 +245,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">If you&#8217;re using Galera Cluster for Percona XtraDB Cluster, see the the <a class="reference external" href="http://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html">pt-online-schema-change</a> in the Percona Toolkit.</p>
 </div>
-<div class="section" id="total-order-isolation">
-<span id="toi"></span><h2>Total Order Isolation<a class="headerlink" href="#total-order-isolation" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="toi">Total Order Isolation</p>
 <p id="index-0">When you want an online schema change to replicate through the cluster and don&#8217;t care that other transactions will be blocked while the cluster processes the <abbr title="Data Definition Language">DDL</abbr> statements, use the <a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> method. You would do this with the <code class="docutils literal"><span class="pre">SET</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;TOI&#39;</span><span class="p">;</span>
 </pre></div>
@@ -230,9 +257,7 @@
 <li>Transactions that were in progress while the DDL was running and that involved the same database resource will get a deadlock error at commit time and will be rolled back.</li>
 <li>The cluster replicates the schema change query as a statement before its execution.  There is no way to know whether or not individual nodes succeed in processing the query.  This prevents error checking on schema changes in Total Order Isolation.</li>
 </ul>
-</div>
-<div class="section" id="rolling-schema-upgrade">
-<span id="rsu"></span><h2>Rolling Schema Upgrade<a class="headerlink" href="#rolling-schema-upgrade" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="rsu">Rolling Schema Upgrade</p>
 <span class="target" id="index-1"></span><p id="index-2">When you want to maintain high-availability during schema upgrades and can avoid conflicts between new and old schema definitions, use the <a class="reference internal" href="glossary.html#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a> method.  You would do this with the <code class="docutils literal"><span class="pre">SET</span></code> statement like so:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;RSU&#39;</span><span class="p">;</span>
 </pre></div>
@@ -245,7 +270,6 @@
 <p class="last">To avoid conflicts between new and old schema definitions, execute SQL statements such as <code class="docutils literal"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code> and <code class="docutils literal"><span class="pre">DROP</span> <span class="pre">TABLE</span></code> using the <a class="reference internal" href="#toi"><span class="std std-ref">Total Order Isolation</span></a> method.</p>
 </div>
 </div>
-</div>
 
 
           </div>
@@ -255,17 +279,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Schema Upgrades</a><ul>
-<li><a class="reference internal" href="#total-order-isolation">Total Order Isolation</a></li>
-<li><a class="reference internal" href="#rolling-schema-upgrade">Rolling Schema Upgrade</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="system-tables.html"

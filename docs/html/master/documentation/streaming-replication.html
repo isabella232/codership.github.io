@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Streaming Replication with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Streaming Replication &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,7 +207,32 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="streaming-replication">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="#sr-limit"><span class="std std-ref">Limitations</span></a></li>
+<li><a class="reference internal" href="using-sr.html#usr-hot-records"><span class="std std-ref">Streaming Replication</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="streaming-replication">
 <span id="id1"></span><h1>Streaming Replication<a class="headerlink" href="#streaming-replication" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">Under normal operation, the node performs all replication and certification events when a transaction commits.  When working with small transactions this is fine. However, it poses an issue with long-running writes and changes to large data-sets.</p>
 <p>In <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, the node breaks the transaction into fragments, then certifies and replicates them on the slaves while the transaction is still in progress.  Once certified, the fragment can no longer be aborted by conflicting transactions.</p>
@@ -213,45 +241,31 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Streaming Replication is a new feature introduced in version 4.0 of Galera Cluster.  Older versions do not support these operations.</p>
 </div>
-<div class="section" id="when-to-use-streaming-replication">
-<span id="when-use-sr"></span><h2>When to Use Streaming Replication<a class="headerlink" href="#when-to-use-streaming-replication" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="when-use-sr">When to Use Streaming Replication</p>
 <p>In most cases, the normal method Galera Cluster uses in replication is sufficient in transferring data from a node to a cluster.  <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> provides you with an alternative for situations in which this is not the case.  Keep in mind that there are some limitations to its use.  It&#8217;s recommended that you only enable it at a session-level, and then only on specific transactions that require the feature.</p>
 <p>For more information on the limitations to Streaming Replication, see <a class="reference internal" href="#sr-limit"><span class="std std-ref">Limitations</span></a>.</p>
-<div class="section" id="long-running-write-transactions">
-<span id="longrun-write-trx"></span><h3>Long-Running Write Transactions<a class="headerlink" href="#long-running-write-transactions" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="longrun-write-trx">Long-Running Write Transactions</p>
 <p>When using normal replication, you may occasionally encounter issues with long-running write transactions.</p>
 <p>The longer it takes for a node to commit a transaction, the greater the likelihood that the cluster will apply a smaller, conflicting transaction before the longer one can replicate to the cluster.  When this happens, the cluster aborts the long-running transaction.</p>
 <p>Using <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> on long-running transactions mitigates this situation.  Once the node replicates and certifies a fragment, it is no longer possible for other transactions to abort it.</p>
 <p>Certification keys are generated from record locks, therefore they don&#8217;t cover gap locks or next key locks. If the transaction takes a gap lock, it is possible that a transaction, which is executed on another node, will apply a write set which encounters the gap log and will abort the streaming transaction.</p>
-</div>
-<div class="section" id="large-data-write-transactions">
-<span id="large-write-trx"></span><h3>Large Data Write Transactions<a class="headerlink" href="#large-data-write-transactions" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="large-write-trx">Large Data Write Transactions</p>
 <p>When using normal replication, the node locally processes the transaction and doesn&#8217;t replicate the data until you commit.  This can create problems when updating a large volume of data, especially on nodes with slower network connections.</p>
 <p>Additionally, while slave nodes apply a large transaction, they cannot commit other transactions they receive, which may result in Flow Control throttling of the entire cluster.</p>
 <p>With <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, the node begins to replicate the data with each transaction fragment, rather than waiting for the commit.  This allows you to spread the replication over the lifetime of the transaction.</p>
 <p>In the case of the slave nodes, after the slave applies a fragment, it&#8217;s free to apply and commit other, concurrent transactions without blocking.  This allows the slave node to process incrementally the entire large transaction with a minimal impact on the cluster.</p>
-</div>
-<div class="section" id="hot-records">
-<span id="id2"></span><h3>Hot Records<a class="headerlink" href="#hot-records" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="hot-records">Hot Records</p>
 <p>In situations in which an application frequently updates one and the same records from the same table (e.g., when implementing a locking scheme, a counter, or a job queue), you can use <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> to force critical updates to replicate to the entire cluster.</p>
 <p>Running a transaction in this way effectively locks the hot record on all nodes, preventing other transactions from modifying the row.  It also increases the chances that the transaction will commit successfully and that the client in turn will receive the desired outcome.</p>
 <p>For more information and an example of how to implement Streaming Replication in situations such as this, see <a class="reference internal" href="using-sr.html#usr-hot-records"><span class="std std-ref">Using Streaming Replication with Hot Records</span></a>.</p>
-</div>
-</div>
-<div class="section" id="limitations">
-<span id="sr-limit"></span><h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="sr-limit">Limitations</p>
 <p>In deciding whether you want to use <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> with your application, consider the following limitations.</p>
-<div class="section" id="performance-during-a-transaction">
-<span id="limit-in-trx"></span><h3>Performance During a Transaction<a class="headerlink" href="#performance-during-a-transaction" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="limit-in-trx">Performance During a Transaction</p>
 <p>When you enable <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, as of version 4 of Galera, each node in the cluster begins recording its write-sets to the <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code> table in the <code class="docutils literal"><span class="pre">mysql</span></code> database. Nodes do this to ensure the persistence of Streaming Replication updates in the event that they crash.  However, this operation increases the load on the node, which may adversely affect its performance.</p>
 <p>As such, it&#8217;s recommended that you only enable Streaming Replication at a session-level and then only for transactions that would not run correctly without it.</p>
-</div>
-<div class="section" id="performance-during-rollbacks">
-<span id="limit-rollback"></span><h3>Performance During Rollbacks<a class="headerlink" href="#performance-during-rollbacks" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="limit-rollback">Performance During Rollbacks</p>
 <p>Occasionally, you may encounter situations in which the cluster needs to roll back a transaction while <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> is in use.  In these situations, the rollback operation consumes system resources on all nodes.</p>
 <p>When long-running write transactions frequently need to be rolled back, this can become a performance problem.  Therefore, it&#8217;s a good application design policy to use shorter transactions whenever possible.  In the event that your application performs batch processing or scheduled housekeeping tasks, consider splitting these into smaller transactions in addition to using Streaming Replication.</p>
-</div>
-</div>
 </div>
 
 
@@ -262,26 +276,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Streaming Replication</a><ul>
-<li><a class="reference internal" href="#when-to-use-streaming-replication">When to Use Streaming Replication</a><ul>
-<li><a class="reference internal" href="#long-running-write-transactions">Long-Running Write Transactions</a></li>
-<li><a class="reference internal" href="#large-data-write-transactions">Large Data Write Transactions</a></li>
-<li><a class="reference internal" href="#hot-records">Hot Records</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#limitations">Limitations</a><ul>
-<li><a class="reference internal" href="#performance-during-a-transaction">Performance During a Transaction</a></li>
-<li><a class="reference internal" href="#performance-during-rollbacks">Performance During Rollbacks</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="weighted-quorum.html"

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster - High Availability Proxy" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>HAProxy &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,11 +207,31 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="haproxy">
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="haproxy">
 <span id="ha-proxy"></span><h1>HAProxy<a class="headerlink" href="#haproxy" title="Permalink to this headline">¶</a></h1>
 <p>High Availability Proxy, or HAProxy is a single-threaded event-driven non-blocking engine that combines a fast I/O layer with a priority-based scheduler.  You can use it to balance  TCP connections between application servers and Galera Cluster.</p>
-<div class="section" id="installation">
-<span id="install-haproxy"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="install-haproxy">Installation</p>
 <p>HAProxy is available in the software repositories of most Linux distributions and it&#8217;s the ports tree of FreeBSD.  You can install it using the appropriate package manager.</p>
 <ul>
 <li><p class="first">For DEB-based Linux distributions (e.g., Debian and Ubuntu), run the following from the command-line:</p>
@@ -233,9 +256,7 @@
 </li>
 </ul>
 <p>Whichever method you use, it installs HAProxy on your server.  In the event that the command for your Linux distribution or operating system doesn&#8217;t work as expected, check  your system&#8217;s documentation or software repository for the correct procedure to install HAProxy.</p>
-</div>
-<div class="section" id="configuration">
-<span id="haproxy-config"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="haproxy-config">Configuration</p>
 <p>Configuration options for HAProxy are managed through an <code class="docutils literal"><span class="pre">haproxy.cfg</span></code> configuration file.  The above package installations generally put this file in the <code class="docutils literal"><span class="pre">/etc/haproxy/</span></code> directory. However, it may have a different path depending on your operating system distribution.</p>
 <p>To configure HAProxy to work with Galera Cluster, add the lines to the <code class="docutils literal"><span class="pre">haproxy.cfg</span></code> configuration file similar to the following:</p>
 <div class="highlight-squid"><div class="highlight"><pre><span></span><span class="c"># Load Balancing for Galera Cluster</span><span class="w"></span>
@@ -257,8 +278,7 @@ listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192
 <li><code class="docutils literal"><span class="pre">option</span> <span class="pre">mysql-check</span> <span class="pre">user</span> <span class="pre">&lt;username&gt;</span></code> enables a database server check to determine whether the node is currently operational.</li>
 <li><code class="docutils literal"><span class="pre">server</span> <span class="pre">&lt;server-name&gt;</span> <span class="pre">&lt;IP_address&gt;</span> <span class="pre">check</span> <span class="pre">weight</span> <span class="pre">1</span></code> defines the nodes HAProxy should use in routing connections.</li>
 </ul>
-<div class="section" id="destination-selection-policies">
-<span id="haproxy-destination-selection"></span><h3>Destination Selection Policies<a class="headerlink" href="#destination-selection-policies" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="haproxy-destination-selection">Destination Selection Policies</p>
 <p>When HAProxy receives a new connection, there are a number of options available to define which algorithm it uses to choose where to route the connection.  This algorithm is its destination selection policy.  It&#8217;s defined by the <code class="docutils literal"><span class="pre">balance</span></code> parameter.</p>
 <ul class="simple">
 <li><strong>Round Robin</strong> directs new connections to the next destination in a circular order list, modified by the server&#8217;s weight.  Enable it with <code class="docutils literal"><span class="pre">balance</span> <span class="pre">roundrobin</span></code>.</li>
@@ -268,19 +288,14 @@ listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192
 <li><strong>Source Tracking</strong> divides the source IP address by the total weight of running servers.  Ensures that client connections from the same source IP always reach the same server.  Enable it with <code class="docutils literal"><span class="pre">balance</span> <span class="pre">source</span></code>.</li>
 </ul>
 <p>In the above configuration example, HAProxy is configured to use the source selection policy.  For your implementation, choose the policy that works best with your infrastructure and load.</p>
-</div>
-<div class="section" id="enabling-database-server-checks">
-<span id="haproxy-mysql-check"></span><h3>Enabling Database Server Checks<a class="headerlink" href="#enabling-database-server-checks" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="haproxy-mysql-check">Enabling Database Server Checks</p>
 <p>In addition to routing TCP connections to Galera Cluster, HAProxy can also perform basic health checks on the database server.  When enabled, HAProxy attempts to establish a connection with the node and parses its response, or any errors, to determine if the node is operational.</p>
 <p>For HAProxy, you can enable this through the <code class="docutils literal"><span class="pre">mysql-check</span></code> option.  However, it requires that you also create a user in the cluster for HAProxy to use when connecting.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="n">USER</span> <span class="s1">&#39;haproxy&#39;</span><span class="o">@</span><span class="s1">&#39;192.168.1.10&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>Make the user name the same as given in the <code class="docutils literal"><span class="pre">haproxy.cfg</span></code> configuration file for the <code class="docutils literal"><span class="pre">mysql-check</span></code> option.  Replace the IP address with that of the server that runs HAProxy.</p>
-</div>
-</div>
-<div class="section" id="using-haproxy">
-<span id="haproxy-use"></span><h2>Using HAProxy<a class="headerlink" href="#using-haproxy" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="haproxy-use">Using HAProxy</p>
 <p>When you finish configuring HAProxy and the nodes to work with HAProxy, you can start it on the server.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service haproxy start
 </pre></div>
@@ -291,7 +306,6 @@ listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192
 </div>
 <p>After doing this, the server will be running HAProxy.  When new connections are made to this server, it routes them through to nodes in the cluster.</p>
 </div>
-</div>
 
 
           </div>
@@ -301,22 +315,7 @@ listen<span class="w"> </span>galera<span class="w"> </span><span class="mf">192
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">HAProxy</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#configuration">Configuration</a><ul>
-<li><a class="reference internal" href="#destination-selection-policies">Destination Selection Policies</a></li>
-<li><a class="reference internal" href="#enabling-database-server-checks">Enabling Database Server Checks</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#using-haproxy">Using HAProxy</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="load-balancing.html"
