@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Starting a Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Starting the Cluster &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,9 +207,38 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="starting-the-cluster">
-<h1>Starting the Cluster<a class="headerlink" href="#starting-the-cluster" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="starting-cluster">Length:  1,097 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="migration.html"><span class="doc">Migration</span></a></li>
+<li><a class="reference internal" href="migration.html"><span class="doc">Migration</span></a></li>
+<li><a class="reference internal" href="../../documentation/quorum-reset.html"><span class="doc">Quorum Reset</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="starting-the-cluster">
+<span id="starting-cluster"></span><h1>Starting the Cluster<a class="headerlink" href="#starting-the-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  1,097 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>After you finish installing MySQL (or MariaDB or Percona XtraDB to Galera Cluster) and Galera and have added the necessary settings for the configuration file needed for Galera Cluster, the next steps are to start the nodes that will form the cluster.  To do this, you will need to start the <code class="docutils literal"><span class="pre">mysqld</span></code> daemon on one node, using the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.  This initializes the new <a class="reference internal" href="../../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> for the cluster.  Each node you start after that will connect to the component and begin replication.</p>
 <p>Before you attempt to initialize the cluster, there are a few things you should verify are in place on each node and related services:</p>
 <ul>
@@ -225,15 +257,14 @@
 <p>Once you have at least three hosts ready, you can initialize the cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">When migrating from an existing, stand-alone instance of MySQL, MariaDB or Percona XtraDB to Galera Cluster, there will be some additional steps that you must take.  For more information on what you need to do, see <a class="reference internal" href="../../documentation/migration.html"><span class="doc">Migration</span></a>.</p>
+<p class="last">When migrating from an existing, stand-alone instance of MySQL, MariaDB or Percona XtraDB to Galera Cluster, there will be some additional steps that you must take.  For more information on what you need to do, see <a class="reference internal" href="migration.html"><span class="doc">Migration</span></a>.</p>
 </div>
-<div class="section" id="starting-the-first-node">
-<h2>Starting the First Node<a class="headerlink" href="#starting-the-first-node" title="Permalink to this headline">¶</a></h2>
-<p id="starting-first-cluster-node">By default, a node don&#8217;t start as part of the <a class="reference internal" href="../../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Instead, it assumes that the Primary Component is already running and it is merely joining an existing cluster.  For each node it encounters in the cluster, it checks whether or not it&#8217;s a part of the Primary Component.  When it finds the Primary Component, it requests a state transfer to bring its database into sync with the cluster.  If it can&#8217;t find the Primary Component, it will remains in a non-operational state.</p>
+<p class="rubric-1 rubric" id="starting-first-cluster-node">Starting the First Node</p>
+<p>By default, a node don&#8217;t start as part of the <a class="reference internal" href="../../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Instead, it assumes that the Primary Component is already running and it is merely joining an existing cluster.  For each node it encounters in the cluster, it checks whether or not it&#8217;s a part of the Primary Component.  When it finds the Primary Component, it requests a state transfer to bring its database into sync with the cluster.  If it can&#8217;t find the Primary Component, it will remains in a non-operational state.</p>
 <p>The problem is that there is no Primary Component when a cluster starts, when the first node is initiated.  Therefore, you need explicitly to tell that first node to do so with the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> argument.  Althought this initiate node is said to be the first node, it can fall behind and leave the cluster without necessarily affecting the Primary Component.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">When you start a new cluster, any node can serve as the first node, since all the databases are empty.  When you migrate from MySQL to Galera Cluster, use the original master node as the first node.  When restarting the cluster, use the most advanced node.  For more information, see <a class="reference internal" href="../../documentation/migration.html"><span class="doc">Migration</span></a> and <a class="reference internal" href="../../documentation/quorum-reset.html"><span class="doc">Quorum Reset</span></a>.</p>
+<p class="last">When you start a new cluster, any node can serve as the first node, since all the databases are empty.  When you migrate from MySQL to Galera Cluster, use the original master node as the first node.  When restarting the cluster, use the most advanced node.  For more information, see <a class="reference internal" href="migration.html"><span class="doc">Migration</span></a> and <a class="reference internal" href="../../documentation/quorum-reset.html"><span class="doc">Quorum Reset</span></a>.</p>
 </div>
 <p>To start the first node&#8211;which should have MySQL, MariaDB or Percona XtraDB, and Galera installed&#8211;you&#8217;ll have to launch the database server on it with the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.  There are a few ways you might do this, depending on the operating system. For systems that use <code class="docutils literal"><span class="pre">init</span></code>, execute the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> systemctl start mysql --wsrep-new-cluster
@@ -271,10 +302,8 @@
 </pre></div>
 </div>
 <p>The variable <code class="docutils literal"><span class="pre">safe_to_bootstrap</span></code> is set to 0 on the first node after it&#8217;s been bootstrapped to protect against you inadvertently bootstrapping again while the cluster is runnning.  You&#8217;ll have to change the value to 1 to be able to bootstrap anew.</p>
-</div>
-<div class="section" id="adding-nodes-to-the-cluster">
-<h2>Adding Nodes to the Cluster<a class="headerlink" href="#adding-nodes-to-the-cluster" title="Permalink to this headline">¶</a></h2>
-<p id="add-nodes-to-cluster">Once you have successfully started the first node and thereby initialized a new cluster, the procedure for adding all the other nodes is even simpler. You just launch <code class="docutils literal"><span class="pre">mysqld</span></code> as you would normally&#8211;without the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.  You would enter something like the following from the command-line, depending on your operating system and database system (see above for other methods):</p>
+<p class="rubric-1 rubric" id="add-nodes-to-cluster">Adding Nodes to the Cluster</p>
+<p>Once you have successfully started the first node and thereby initialized a new cluster, the procedure for adding all the other nodes is even simpler. You just launch <code class="docutils literal"><span class="pre">mysqld</span></code> as you would normally&#8211;without the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.  You would enter something like the following from the command-line, depending on your operating system and database system (see above for other methods):</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl start mariadb
 </pre></div>
 </div>
@@ -291,7 +320,6 @@
 </div>
 <p>This indicates that the two nodes are now connected to the cluster.  When the nodes in the cluster agree on the membership state, they initiate state exchange.  In state exchange, a new node will check the cluster state.  If the state of a new node differs from the cluster state&#8211;which is normally the case&#8211;the new node requests a state snapshot transfer (SST) from the cluster and it installs it on its local database.  After this is done, the new node is ready for use.</p>
 </div>
-</div>
 
 
           </div>
@@ -301,17 +329,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Starting the Cluster</a><ul>
-<li><a class="reference internal" href="#starting-the-first-node">Starting the First Node</a></li>
-<li><a class="reference internal" href="#adding-nodes-to-the-cluster">Adding Nodes to the Cluster</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="wsrep-configuration.html"
@@ -390,9 +408,9 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" >Tutorials</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Codership Tutorials on Galera Cluster</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="getting-started.html" accesskey="U">Getting Started with Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>

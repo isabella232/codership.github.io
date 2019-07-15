@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Parameters, Status, and Functions" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Reference &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -32,7 +35,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="MySQL wsrep Options" href="mysql-wsrep-options.html" />
-    <link rel="prev" title="Percona XtraDB Cluster - Source Installation" href="install-xtradb-src.html" />
+    <link rel="prev" title="SELinux Configuration" href="selinux.html" />
 
 
 
@@ -204,10 +207,41 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="reference">
-<h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
-<p id="id1">In the event that you need more information about particular variables or parameters or status variable or would like a clearer explanation about various terms used in the documentation, these chapters provide general reference material to Galera Cluster configuration and use.</p>
-<p class="rubric" id="ref-vars">Variable Reference</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html"><span class="doc">Galera Status Variables</span></a></li>
+<li><a class="reference internal" href="system-tables.html"><span class="doc">Galera System Tables</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html"><span class="doc">GLB Parameters</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html"><span class="doc">MySQL wsrep Options</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-functions.html"><span class="doc">MySQL wsrep Functions</span></a></li>
+<li><a class="reference internal" href="versioning-information.html"><span class="doc">Versioning Information</span></a></li>
+<li><a class="reference internal" href="xtrabackup-options.html"><span class="doc">XtraBackup Parameters</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="reference">
+<span id="id1"></span><h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
+<p>In the event that you need more information about particular variables or parameters or status variable or would like a clearer explanation about various terms used in the documentation, these chapters provide general reference material to Galera Cluster configuration and use.</p>
+<p class="rubric-1 rubric" id="ref-vars">Variable Reference</p>
 <p>Defining persistent configurations in Galera Cluster is done through the underlying database server, using the <code class="docutils literal"><span class="pre">[mysqld]</span></code> unit in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.  These chapters provide reference guides to the base replication status and configuration variables as well as the specific wsrep Provider options implemented through the Galera Replication Plugin.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="mysql-wsrep-options.html"><span class="doc">MySQL wsrep Options</span></a></p>
@@ -223,7 +257,7 @@
 <p>In addition to the standard status variables available through the database server, Galera Cluster also implements several that you can use in determining the status and health of the node and the cluster.  This chapter provides a reference guide to these new status variables in Galera Cluster.</p>
 </li>
 </ul>
-<p class="rubric" id="ref-utils">Utility Reference</p>
+<p class="rubric-1 rubric" id="ref-utils">Utility Reference</p>
 <p>In some cases your configuration or implementation may require that you work with external utilities in your deployment of Galera Cluster.  These chapters provide reference guides for two such utilities: XtraBackup and Galera Load Balancer.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="glb-parameters.html"><span class="doc">Galera Load Balancer Parameters</span></a></p>
@@ -236,7 +270,7 @@
 <p>This page provides information on the Galera specific system tables.  These were added as of version 4 of Galera.</p>
 </li>
 </ul>
-<p class="rubric" id="ref-misc">Miscellaneous References</p>
+<p class="rubric-1 rubric" id="ref-misc">Miscellaneous References</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="versioning-information.html"><span class="doc">Versioning Information</span></a></p>
 <p>While the documentation follows a convention of 3.x in speaking of release versions for Galera Cluster, in practice the numbering system is somewhat more complicated: covering releases of the underlying database server, the wsrep Provider and the wsrep API.  This chapter provides a more thorough explanation of versioning with Galera Cluster.</p>
@@ -266,8 +300,8 @@
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="install-xtradb-src.html"
-                          title="Previous page">&larr; Percona XtraDB Cluster - Source Installation</a></p>
+    <p class="topless"><a href="selinux.html"
+                          title="Previous page">&larr; SELinux Configuration</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -338,7 +372,7 @@
           <a href="mysql-wsrep-options.html" title="MySQL wsrep Options"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="install-xtradb-src.html" title="Percona XtraDB Cluster - Source Installation"
+          <a href="selinux.html" title="SELinux Configuration"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
@@ -349,7 +383,7 @@
 
 
 			
-				<li><a href="install-xtradb-src.html" title="Percona XtraDB Cluster - Source Installation">&lt; Previous</a></li>
+				<li><a href="selinux.html" title="SELinux Configuration">&lt; Previous</a></li>
 			
 
 			

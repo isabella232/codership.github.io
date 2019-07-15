@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Versioning Information" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Versioning Information &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,9 +207,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="versioning-information">
-<h1>Versioning Information<a class="headerlink" href="#versioning-information" title="Permalink to this headline">¶</a></h1>
-<p id="id1">Galera Cluster for MySQL is available in binary software packages for several different Linux distributions, as well as in source code for other distributions and other Unix-like operating systems, such as FreeBSD and Solaris.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="versioning-information">
+<span id="id1"></span><h1>Versioning Information<a class="headerlink" href="#versioning-information" title="Permalink to this headline">¶</a></h1>
+<p>Galera Cluster for MySQL is available in binary software packages for several different Linux distributions, as well as in source code for other distributions and other Unix-like operating systems, such as FreeBSD and Solaris.</p>
 <p>For Linux distributions, binary packages in 32-bit and 64-bit for both the MySQL database server with the wsrep API patch and the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> are available from the <a class="reference external" href="http://releases.galeracluster.com">Codership Repository</a>.  These include support for:</p>
 <ul class="simple">
 <li>Red Hat Enterprise Linux</li>
@@ -225,19 +252,15 @@
 </ul>
 <p>For users of FreeBSD and similar operating systems, the Galera Replication Plugin is also available in ports, at <code class="docutils literal"><span class="pre">/usr/ports/databases/galera</span></code>, which corrects for certain compatibility issues with Linux dependencies.</p>
 <p>For more information on the installation process, see <a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Galera Installation</span></a>.</p>
-<div class="section" id="release-numbering-schemes">
-<span id="galera-release-number"></span><h2>Release Numbering Schemes<a class="headerlink" href="#release-numbering-schemes" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="galera-release-number">Release Numbering Schemes</p>
 <p>Software packages for Galera Cluster have their own release numbering schemas.  There are two schemas to consider in version numbering:</p>
 <ul class="simple">
 <li><strong>Galera wsrep Provider</strong>  Also, referred to as the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>.  The wsrep Provider uses the following versioning schema: <code class="docutils literal"><span class="pre">&lt;wsrep</span> <span class="pre">API</span> <span class="pre">main</span> <span class="pre">version&gt;.&lt;Galera</span> <span class="pre">version&gt;</span></code>.  For example, release 24.2.4 indicates wsrep API version 24.x.x with Galera wsrep Provider version 2.4.</li>
 <li><strong>MySQL Server with wsrep API patch</strong>  The second versioning schema relates to the database server.  Here, the MySQL server uses the following versioning schema <code class="docutils literal"><span class="pre">&lt;MySQL</span> <span class="pre">server</span> <span class="pre">version&gt;-&lt;wsrep</span> <span class="pre">API</span> <span class="pre">version&gt;</span></code>.  For example, release 5.5.29-23.7.3 indicates a MySQL database server in 5.5.29 with wsrep API version 23.7.3.</li>
 </ul>
 <p>For instances of Galera Cluster that use the MariaDB database server, consult the MariaDB documentation for version and release information.</p>
-</div>
-<div class="section" id="third-party-implementations-of-galera-cluster">
-<span id="third-party-galera"></span><h2>Third-party Implementations of Galera Cluster<a class="headerlink" href="#third-party-implementations-of-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="third-party-galera">Third-party Implementations of Galera Cluster</p>
 <p>In addition to the Galera Cluster for MySQL, the reference implementation from Codership Oy, there is a third-party implementation of Galera Cluster - <a class="reference external" href="https://mariadb.com">MariaDB Galera Cluster</a> which uses the Galera library for the replication implementation.  To interface with the Galera Replication Plugin, MariaDB has been enhanced to support the replication API definition in the wsrep API project.  Additionally, releases of MariaDB Server starting from version 10.1 on are packaged with Galera Cluster already included.  For more information, see <a class="reference external" href="https://mariadb.com/kb/en/mariadb/what-is-mariadb-galera-cluster/">What is MariaDB Galera Cluster</a>.</p>
-</div>
 </div>
 
 
@@ -248,17 +271,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Versioning Information</a><ul>
-<li><a class="reference internal" href="#release-numbering-schemes">Release Numbering Schemes</a></li>
-<li><a class="reference internal" href="#third-party-implementations-of-galera-cluster">Third-party Implementations of Galera Cluster</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="glb-parameters.html"

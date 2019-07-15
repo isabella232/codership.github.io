@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Using Streaming Replication" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Using Streaming Replication &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,16 +207,41 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="using-streaming-replication">
-<h1>Using Streaming Replication<a class="headerlink" href="#using-streaming-replication" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="using-sr"></span><p id="index-0">When a node replicates a transaction under <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, it breaks the transaction into fragments, and then certifies and applies the fragments to slave nodes while the transaction is still in progress.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="streaming-replication.html#when-use-sr"><span class="std std-ref">When to Stream</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-trx-fragment-unit"><span class="std std-ref">wsrep_trx_fragment_unit</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-trx-fragment-size"><span class="std std-ref">wsrep_trx_fragment_size</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="using-streaming-replication">
+<span id="using-sr"></span><h1>Using Streaming Replication<a class="headerlink" href="#using-streaming-replication" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">When a node replicates a transaction under <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, it breaks the transaction into fragments, and then certifies and applies the fragments to slave nodes while the transaction is still in progress.</p>
 <p>This allows you to work with larger data-sets, manage hot records, and help avoid conflicts and hangs in the case of long-running transactions.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Streaming Replication is a new feature introduced in version 4.0 of Galera Cluster.  Older versions do not support these operations.</p>
 </div>
-<div class="section" id="enabling-streaming-replication">
-<span id="enable-sr"></span><h2>Enabling Streaming Replication<a class="headerlink" href="#enabling-streaming-replication" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="enable-sr">Enabling Streaming Replication</p>
 <p>The best practice when working with <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> is to enable it at a session-level for specific transactions, or parts thereof.  The reason is that Streaming Replication increases the load on all nodes when applying and rolling back transactions.  You&#8217;ll get better performance if you only enable Streaming Replication on those transactions that won&#8217;t run correctly without it.</p>
 <p>For more information, see <a class="reference internal" href="streaming-replication.html#when-use-sr"><span class="std std-ref">When to Use Streaming Replication</span></a>.</p>
 <p>Enabling Streaming Replication requires you to define the replication unit and number of units to use in forming the transaction fragments.  Two parameters control these variables: <a class="reference internal" href="mysql-wsrep-options.html#wsrep-trx-fragment-unit"><span class="std std-ref">wsrep_trx_fragment_unit</span></a> and <a class="reference internal" href="mysql-wsrep-options.html#wsrep-trx-fragment-size"><span class="std std-ref">wsrep_trx_fragment_size</span></a>.</p>
@@ -230,9 +258,7 @@
 <li><strong>statements</strong> This defines the fragment size as the number of statements in a fragment.</li>
 </ul>
 <p>Choose the replication unit and fragment size that best suits the specific operation you want to run.</p>
-</div>
-<div class="section" id="streaming-replication-with-hot-records">
-<span id="usr-hot-records"></span><h2>Streaming Replication with Hot Records<a class="headerlink" href="#streaming-replication-with-hot-records" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="usr-hot-records">Streaming Replication with Hot Records</p>
 <p>When your application needs to update frequently the same records from the same table (e.g., implementing a locking scheme, a counter, or a job queue), Streaming Replication allows you to force critical changes to replicate to the entire cluster.</p>
 <p>For instance, consider the use case of a web application that creates work orders for a company.  When the transaction starts, it updates the table <code class="docutils literal"><span class="pre">work_orders</span></code>, setting the queue position for the order.  Under normal replication, two transactions can come into conflict if they attempt to update the queue position at the same time.</p>
 <p>You can avoid this with Streaming Replication.  As an example of how to do this, you would first execute the following SQL statement to begin the transaction:</p>
@@ -269,7 +295,6 @@
 </div></blockquote>
 <p>During the work order transaction, the client initiates Streaming Replication for a single statement, which it uses to set the queue position.  The queue position update then replicates throughout the cluster, which prevents other nodes from coming into conflict with the new work order.</p>
 </div>
-</div>
 
 
           </div>
@@ -279,17 +304,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Using Streaming Replication</a><ul>
-<li><a class="reference internal" href="#enabling-streaming-replication">Enabling Streaming Replication</a></li>
-<li><a class="reference internal" href="#streaming-replication-with-hot-records">Streaming Replication with Hot Records</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="auto-eviction.html"

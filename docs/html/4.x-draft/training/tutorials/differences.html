@@ -7,16 +7,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="Differences between Galera Cluster and a Stand-Alone MySQL Server" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
+    <title>Differences from a Stand-Alone MySQL Server &#8212; Galera Cluster Documentation</title>
     
-    <title>Differences from a Standalone MySQL Server &#8212; Galera Cluster Documentation</title>
-    
-    <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
+        URL_ROOT:    '../../',
         VERSION:     '',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -24,15 +27,15 @@
         SOURCELINK_SUFFIX: '.txt'
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../_static/cloud.js"></script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../_static/cloud.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Migrating to Galera Cluster" href="migration.html" />
-    <link rel="prev" title="Migration" href="migrate.html" />
+    <link rel="prev" title="Factors related to Migrating to Galera Cluster" href="migrate.html" />
 
 
 
@@ -204,36 +207,57 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="differences-from-a-standalone-mysql-server">
-<h1>Differences from a Standalone MySQL Server<a class="headerlink" href="#differences-from-a-standalone-mysql-server" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="differences"></span><p id="index-0">Although Galera Cluster is built on providing write-set replication to MySQL and related database systems, there are certain key differences between how it handles and the standard standalone MySQL server.</p>
-<div class="section" id="server-differences">
-<span id="server-difference"></span><h2>Server Differences<a class="headerlink" href="#server-differences" title="Permalink to this headline">¶</a></h2>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="differences-from-a-stand-alone-mysql-server">
+<span id="differences"></span><h1>Differences from a Stand-Alone MySQL Server<a class="headerlink" href="#differences-from-a-stand-alone-mysql-server" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats" id="index-0">Length: xxx words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+<p>Although Galera Cluster is built on providing write-set replication to MySQL and related database systems, there are certain key differences between how it handles and the standard standalone MySQL server.</p>
+<p class="rubric-1 rubric" id="server-difference">Server Differences</p>
 <p>Using a server with Galera Cluster is not the same as one with MySQL.  Galera Cluster does not support the same range of operating systems as MySQL, and there are differences in how it handles binary logs and character sets.</p>
 <div class="section" id="operating-system-support">
-<span id="os-support"></span><h3>Operating System Support<a class="headerlink" href="#operating-system-support" title="Permalink to this headline">¶</a></h3>
+<span id="os-support"></span><h2>Operating System Support<a class="headerlink" href="#operating-system-support" title="Permalink to this headline">¶</a></h2>
 <p>Galera Cluster requires that you use Linux or a similar UNIX-like operating system.  Binary packages are not supplied for FreeBSD, Solaris and Mac OS X.  There is no support available for Microsoft Windows.</p>
 </div>
 <div class="section" id="binary-log-support">
-<span id="binlog-support"></span><h3>Binary Log Support<a class="headerlink" href="#binary-log-support" title="Permalink to this headline">¶</a></h3>
+<span id="binlog-support"></span><h2>Binary Log Support<a class="headerlink" href="#binary-log-support" title="Permalink to this headline">¶</a></h2>
 <p>Do not use the <code class="docutils literal"><span class="pre">binlog-do-db</span></code> and <code class="docutils literal"><span class="pre">binlog-ignore-db</span></code> options.</p>
 <p>These binary log options are only supported for <abbr title="Data Manipulation Language">DML</abbr> statements.  They provide no support for <abbr title="Data Definition Language">DDL</abbr> statements.  This creates a discrepancy in the binary logs and will cause replication to abort.</p>
 </div>
 <div class="section" id="unsupported-character-sets">
-<span id="unicode-support"></span><h3>Unsupported Character Sets<a class="headerlink" href="#unsupported-character-sets" title="Permalink to this headline">¶</a></h3>
+<span id="unicode-support"></span><h2>Unsupported Character Sets<a class="headerlink" href="#unsupported-character-sets" title="Permalink to this headline">¶</a></h2>
 <p>Do not use the <code class="docutils literal"><span class="pre">character_set_server</span></code> with UTF-16, UTF-32 or UCS-2.</p>
-<p>When you use <code class="docutils literal"><span class="pre">rsync</span></code> for <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>, the use of these unsupported character sets can cause the server to crash.</p>
+<p>When you use <code class="docutils literal"><span class="pre">rsync</span></code> for <a class="reference internal" href="../../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>, the use of these unsupported character sets can cause the server to crash.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">This is also a problem when you use automatic donor selection in your cluster, as the cluster may choose to use <code class="docutils literal"><span class="pre">rsync</span></code> on its own.</p>
 </div>
-</div>
-</div>
 <div class="section" id="differences-in-table-configurations">
-<span id="db-config-limitations"></span><h2>Differences in Table Configurations<a class="headerlink" href="#differences-in-table-configurations" title="Permalink to this headline">¶</a></h2>
+<span id="db-config-limitations"></span><h3>Differences in Table Configurations<a class="headerlink" href="#differences-in-table-configurations" title="Permalink to this headline">¶</a></h3>
 <p>There are certain features and configurations available in MySQL that do not work as expected in Galera Cluster, such as storage engine support, certain queries and the query cache.</p>
+</div>
+</div>
 <div class="section" id="storage-engine-support">
-<span id="id1"></span><h3>Storage Engine Support<a class="headerlink" href="#storage-engine-support" title="Permalink to this headline">¶</a></h3>
+<span id="id1"></span><h2>Storage Engine Support<a class="headerlink" href="#storage-engine-support" title="Permalink to this headline">¶</a></h2>
 <p>Galera Cluster requires the InnoDB storage engine.  Writes made to tables of other types, including the system <code class="docutils literal"><span class="pre">mysql-*</span></code> tables, do not replicate to the cluster.</p>
 <p>That said, <abbr title="Data Definition Language">DDL</abbr> statements do replicate at the statement level, meaning that changes made to the <code class="docutils literal"><span class="pre">mysql-*</span></code> tables do replicate that way.</p>
 <p>What this means is that if you were to issue a statement like</p>
@@ -257,7 +281,7 @@
 </div>
 </div>
 <div class="section" id="tables-without-primary-keys">
-<span id="table-without-pk"></span><h3>Tables without Primary Keys<a class="headerlink" href="#tables-without-primary-keys" title="Permalink to this headline">¶</a></h3>
+<span id="table-without-pk"></span><h2>Tables without Primary Keys<a class="headerlink" href="#tables-without-primary-keys" title="Permalink to this headline">¶</a></h2>
 <p>Do not use tables without a primary key.</p>
 <p>When tables lack a primary key, rows can appear in different order on different nodes in your cluster.  As such, queries like <code class="docutils literal"><span class="pre">SELECT...LIMIT...</span></code> can return different results.  Additionally, on such tables the <code class="docutils literal"><span class="pre">DELETE</span></code> statement is unsupported.</p>
 <div class="admonition note">
@@ -266,33 +290,31 @@
 </div>
 </div>
 <div class="section" id="table-locking">
-<span id="unsupported-queries"></span><h3>Table Locking<a class="headerlink" href="#table-locking" title="Permalink to this headline">¶</a></h3>
+<span id="unsupported-queries"></span><h2>Table Locking<a class="headerlink" href="#table-locking" title="Permalink to this headline">¶</a></h2>
 <p>Galera Cluster does not support table locking, as they conflict with multi-master replication.  As such, the <code class="docutils literal"><span class="pre">LOCK</span> <span class="pre">TABLES</span></code> and <code class="docutils literal"><span class="pre">UNLOCK</span> <span class="pre">TABLES</span></code> queries are not supported.  This also applies to lock functions, such as <code class="docutils literal"><span class="pre">GET_LOCK()</span></code> and <code class="docutils literal"><span class="pre">RELEASE_LOCK()...</span></code> for the same reason.</p>
 </div>
 <div class="section" id="query-logs">
-<span id="query-log-support"></span><h3>Query Logs<a class="headerlink" href="#query-logs" title="Permalink to this headline">¶</a></h3>
+<span id="query-log-support"></span><h2>Query Logs<a class="headerlink" href="#query-logs" title="Permalink to this headline">¶</a></h2>
 <p>You cannot direct query logs to a table.  If you would like to enable query logging in Galera Cluster, you must forward the logs to a file.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">log_output</span> <span class="o">=</span> <span class="s">FILE</span>
 </pre></div>
 </div>
 <p>Use <code class="docutils literal"><span class="pre">general_log</span></code> and <code class="docutils literal"><span class="pre">general_log_file</span></code> to choose query logging and to set the filename for your log file.</p>
-</div>
-</div>
-<div class="section" id="differences-in-transactions">
-<span id="diff-transactions"></span><h2>Differences in Transactions<a class="headerlink" href="#differences-in-transactions" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="diff-transactions">Differences in Transactions</p>
 <p>There are some differences in how Galera Cluster handles transactions from MySQL, such as <abbr title="eXtended Architecture">XA</abbr> transactions and limitations on transaction size.</p>
+</div>
 <div class="section" id="distributed-transaction-processing">
-<span id="xa-transactions"></span><h3>Distributed Transaction Processing<a class="headerlink" href="#distributed-transaction-processing" title="Permalink to this headline">¶</a></h3>
+<span id="xa-transactions"></span><h2>Distributed Transaction Processing<a class="headerlink" href="#distributed-transaction-processing" title="Permalink to this headline">¶</a></h2>
 <p>The standard MySQL server provides support for distributed transaction processing using the Open Group <abbr title="eXtended Architecture">XA</abbr> standard.  This feature is <em>not</em> available for Galera Cluster, given that it can lead to possible rollbacks on commit.</p>
 </div>
 <div class="section" id="transaction-size">
-<span id="id2"></span><h3>Transaction Size<a class="headerlink" href="#transaction-size" title="Permalink to this headline">¶</a></h3>
+<span id="id2"></span><h2>Transaction Size<a class="headerlink" href="#transaction-size" title="Permalink to this headline">¶</a></h2>
 <p>Although Galera Cluster does not explicitly limit the transaction size, the hardware you run it on does impose a size limitation on your transactions.  Nodes process write-sets in a single memory-resident buffer.  As such, extremely large transactions, such as <code class="docutils literal"><span class="pre">LOAD</span> <span class="pre">DATA</span></code> can adversely effect node performance.</p>
-<p>You can avoid situations of this kind using the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-max-ws-rows"><span class="std std-ref">wsrep_max_ws_rows</span></a> and the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-max-ws-size"><span class="std std-ref">wsrep_max_ws_size</span></a> parameters.  Limit the transaction rows to 128 KB and the transaction size to 1 GB.</p>
+<p>You can avoid situations of this kind using the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-max-ws-rows"><span class="std std-ref">wsrep_max_ws_rows</span></a> and the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-max-ws-size"><span class="std std-ref">wsrep_max_ws_size</span></a> parameters.  Limit the transaction rows to 128 KB and the transaction size to 1 GB.</p>
 <p>If necessary, you can increase these limits.</p>
 </div>
 <div class="section" id="transaction-commits">
-<span id="id3"></span><h3>Transaction Commits<a class="headerlink" href="#transaction-commits" title="Permalink to this headline">¶</a></h3>
+<span id="id3"></span><h2>Transaction Commits<a class="headerlink" href="#transaction-commits" title="Permalink to this headline">¶</a></h2>
 <p>Galera Cluster uses at the cluster-level optimistic concurrency control, which can result in transactions that issue a <code class="docutils literal"><span class="pre">COMMIT</span></code> aborting at that stage.</p>
 <p>For example, say that you have two transactions that will write to the same rows, but commit on separate nodes in the cluster and that only one of them can successfully commit.  The commit that fails is aborted, while the successful one replicates.</p>
 <p>When aborts occur at the cluster level, Galera Cluster gives a deadlock error.</p>
@@ -302,7 +324,6 @@
 <p>If you receive this error, restart the failing transaction.  It will then issue on its own, without another to put it into conflict.</p>
 </div>
 </div>
-</div>
 
 
           </div>
@@ -310,31 +331,25 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-        <p class="logo"><a href="../index.html" title="index">
-          <img class="logo" src="../_static/logo.png" alt="Logo"/>
+        <p class="logo"><a href="../../index.html" title="index">
+          <img class="logo" src="../../_static/logo.png" alt="Logo"/>
         </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
+    <h3><a href="../../index.html">Page contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Differences from a Standalone MySQL Server</a><ul>
-<li><a class="reference internal" href="#server-differences">Server Differences</a><ul>
+<li><a class="reference internal" href="#">Differences from a Stand-Alone MySQL Server</a><ul>
 <li><a class="reference internal" href="#operating-system-support">Operating System Support</a></li>
 <li><a class="reference internal" href="#binary-log-support">Binary Log Support</a></li>
-<li><a class="reference internal" href="#unsupported-character-sets">Unsupported Character Sets</a></li>
+<li><a class="reference internal" href="#unsupported-character-sets">Unsupported Character Sets</a><ul>
+<li><a class="reference internal" href="#differences-in-table-configurations">Differences in Table Configurations</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#differences-in-table-configurations">Differences in Table Configurations</a><ul>
 <li><a class="reference internal" href="#storage-engine-support">Storage Engine Support</a></li>
 <li><a class="reference internal" href="#tables-without-primary-keys">Tables without Primary Keys</a></li>
 <li><a class="reference internal" href="#table-locking">Table Locking</a></li>
 <li><a class="reference internal" href="#query-logs">Query Logs</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#differences-in-transactions">Differences in Transactions</a><ul>
 <li><a class="reference internal" href="#distributed-transaction-processing">Distributed Transaction Processing</a></li>
 <li><a class="reference internal" href="#transaction-size">Transaction Size</a></li>
 <li><a class="reference internal" href="#transaction-commits">Transaction Commits</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -343,7 +358,7 @@
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="migrate.html"
-                          title="Previous page">&larr; Migration</a></p>
+                          title="Previous page">&larr; Factors related to Migrating to Galera Cluster</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -352,7 +367,7 @@
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
+    <form class="search" action="../../search.html" method="get">
       <div><input type="text" name="q" /></div>
       <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
@@ -399,7 +414,7 @@
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/documentation/differences.rst.rst" title="Edit 'Differences from a Standalone MySQL Server' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/differences.rst.rst" title="Edit 'Differences from a Stand-Alone MySQL Server' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -408,25 +423,26 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
+          <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
           <a href="migration.html" title="Migrating to Galera Cluster"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="migrate.html" title="Migration"
+          <a href="migrate.html" title="Factors related to Migrating to Galera Cluster"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
+    <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="migrate.html" accesskey="U">Migration</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Codership Tutorials on Galera Cluster</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="migrate.html" accesskey="U">Factors related to Migrating to Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="migrate.html" title="Migration">&lt; Previous</a></li>
+				<li><a href="migrate.html" title="Factors related to Migrating to Galera Cluster">&lt; Previous</a></li>
 			
 
 			

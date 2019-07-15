@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Handling Large Transactions" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Handling Large Transactions &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,9 +207,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="handling-large-transactions">
-<h1>Handling Large Transactions<a class="headerlink" href="#handling-large-transactions" title="Permalink to this headline">¶</a></h1>
-<p id="kb-best-large-transactions">Large transactions, especially ones deleting removes millions of rows from a table at once, can lead to diminished performance. One reason is that the table may reindexed and rescanned after each row is deleted.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference external" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a></li>
+<li><a class="reference external" href="http://www.percona.com/doc/percona-toolkit/2.1/pt-archiver.html">pt-archiver</a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="handling-large-transactions">
+<span id="kb-best-large-transactions"></span><h1>Handling Large Transactions<a class="headerlink" href="#handling-large-transactions" title="Permalink to this headline">¶</a></h1>
+<p>Large transactions, especially ones deleting removes millions of rows from a table at once, can lead to diminished performance. One reason is that the table may reindexed and rescanned after each row is deleted.</p>
 <p class="kb rubric">Scenario</p>
 <p>Suppose you have a node called <code class="docutils literal"><span class="pre">dbhost</span></code> with a database called <code class="docutils literal"><span class="pre">keystone</span></code>.  Suppose further that you execute a large transaction, which includes a <code class="docutils literal"><span class="pre">DELETE</span></code> statement that deletes expired tokens from their table in that database and on that host. If this transaction involves millions of rows, it could affect the overall performance of the cluster.</p>
 <p class="kb rubric">Recommendations</p>
@@ -225,12 +253,6 @@
 <p>This allows you to delete rows efficiently from the cluster.</p>
 <p>The <code class="docutils literal"><span class="pre">--source</span></code> parameter provides the host, database, and table. Since there is no  <code class="docutils literal"><span class="pre">--destination</span></code> parameter given, it won&#8217;t move the data to another table for archiving, per the primary function of <code class="docutils literal"><span class="pre">pt-archiver</span></code>. The <code class="docutils literal"><span class="pre">--purge</span></code> parameter instructs <code class="docutils literal"><span class="pre">pt-archiver</span></code> to remove the rows from the database. The <code class="docutils literal"><span class="pre">--where</span></code> parameter provides the <code class="docutils literal"><span class="pre">WHERE</span></code> clause of the <code class="docutils literal"><span class="pre">DELETE</span></code> statement.</p>
 <p>The <code class="docutils literal"><span class="pre">--primary-key-only</span></code> parameter is efficient when purging rows. It prevents fetching each row in its entirety, when only the primary key column is used in the <code class="docutils literal"><span class="pre">WHERE</span></code> clause for <code class="docutils literal"><span class="pre">DELETE</span></code> statements.</p>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference external" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> variable</li>
-<li><a class="reference external" href="http://www.percona.com/doc/percona-toolkit/2.1/pt-archiver.html">pt-archiver</a></li>
-</ul>
 </div>
 
 

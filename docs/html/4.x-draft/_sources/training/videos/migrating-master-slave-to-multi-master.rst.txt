@@ -1,9 +1,47 @@
+.. meta::
+   :title: Migrating from Master-Slave MySQL Replication to Multi-Master Galera Cluster
+   :description:
+   :language: en-US
+   :keywords:
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+
+
+.. topic:: The Library
+   :name: left-margin
+
+   .. cssclass:: no-bull
+
+      - :doc:`Documentation <../../documentation/index>`
+      - :doc:`Knowledge Base <../../kb/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Troubleshooting <../../kb/trouble/index>`
+         - :doc:`Best Practices <../../kb/best/index>`
+
+      - :doc:`FAQ <../../faq>`
+      - :doc:`Training <../index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Tutorial Articles <../tutorials/index>`
+         - :doc:`Training Videos <./index>`
+
+      .. cssclass:: bull-head
+
+         Related Documents
+
+      .. cssclass:: bull-head
+
+         Related Articles
+
+
 .. cssclass:: tutorial-video
+.. _`video-migrating-master-slave-to-multi-master`:
 
 =============================================================================
 Migrating from Master-Slave MySQL Replication to Multi-Master Galera Cluster
 =============================================================================
-.. _`migrating-master-slave-to-multi-master`:
 
 .. rst-class:: video-stats
 
@@ -16,11 +54,3 @@ This video provides the practical aspects of migrating a database setup based on
 .. raw:: html
 
     <iframe width="560" height="315" src="http://www.youtube.com/embed/u7H7C12vRpU?rel=0" frameborder="0" allowfullscreen></iframe>
-
-
-.. rubric:: Additional Information
-   :class: kb
-
-For more information related to this video, see the following:
-
-- :doc:`Frequently Asked Questions <../../faq>`

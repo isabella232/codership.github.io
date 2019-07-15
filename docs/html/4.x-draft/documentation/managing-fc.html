@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Managing Flow Control with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Managing Flow Control &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,12 +207,44 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="managing-flow-control">
-<h1>Managing Flow Control<a class="headerlink" href="#managing-flow-control" title="Permalink to this headline">¶</a></h1>
-<p id="managing-fc">The cluster replicates changes synchronously through global ordering, but applies these changes asynchronously from the originating node out.  To prevent any one node from falling too far behind the cluster, Galera Cluster implements a feedback mechanism called Flow Control.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="galera-status-variables.html"><span class="doc">Galera Status Variables</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-fc-limit"><span class="std std-ref">gcs.fc_limit</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-max-throttle"><span class="std std-ref">gcs.max_throttle</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-fc-factor"><span class="std std-ref">gcs.fc_factor</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-recv"><span class="std std-ref">wsrep_flow_control_recv</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused"><span class="std std-ref">wsrep_flow_control_paused</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused-ns"><span class="std std-ref">wsrep_flow_control_paused_ns</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="managing-flow-control">
+<span id="managing-fc"></span><h1>Managing Flow Control<a class="headerlink" href="#managing-flow-control" title="Permalink to this headline">¶</a></h1>
+<p>The cluster replicates changes synchronously through global ordering, but applies these changes asynchronously from the originating node out.  To prevent any one node from falling too far behind the cluster, Galera Cluster implements a feedback mechanism called Flow Control.</p>
 <p>Nodes queue the write-sets they receive in the global order and begin to apply and commit them on the database.  In the event that the received queue grows too large, the node initiates Flow Control.  The node pauses replication while it works the received queue.  Once it reduces the received queue to a more manageable size, the node resumes replication.</p>
-<div class="section" id="monitoring-flow-control">
-<span id="monitoring-fc"></span><h2>Monitoring Flow Control<a class="headerlink" href="#monitoring-flow-control" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="monitoring-fc">Monitoring Flow Control</p>
 <p>Galera Cluster provides global status variables for use in monitoring Flow Control.  These break down into those status variables that count Flow Control pause events and those that measure the effects of pauses.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_flow_control_%&#39;</span><span class="p">;</span>
 </pre></div>
@@ -233,29 +268,22 @@
 </div>
 <p>You can find the slave queue under the <code class="docutils literal"><span class="pre">Queue</span> <span class="pre">Dn</span></code> column and <code class="docutils literal"><span class="pre">FC</span> <span class="pre">pau</span></code> refers to Flow Control pauses.  When the slave queue rises to a certain point, Flow Control changes the pause value to <code class="docutils literal"><span class="pre">1.0</span></code>.  The node will hold to this value until the slave queue is worked down to a more manageable size.</p>
 <p>For more information on status variables that relate to flow control, see <a class="reference internal" href="galera-status-variables.html"><span class="doc">Galera Status Variables</span></a>.</p>
-<div class="section" id="monitoring-for-flow-control-pauses">
-<span id="monitor-pauses"></span><h3>Monitoring for Flow Control Pauses<a class="headerlink" href="#monitoring-for-flow-control-pauses" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="monitor-pauses">Monitoring for Flow Control Pauses</p>
 <p>When Flow Control engages, it notifies the cluster that it is pausing replication using an <code class="docutils literal"><span class="pre">FC_Pause</span></code> event.  Galera Cluster provides two status variables that monitor for these events.</p>
 <ul class="simple">
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a> This status variable shows the number of Flow Control pause events sent by the local node since the last status query.</li>
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-recv"><span class="std std-ref">wsrep_flow_control_recv</span></a> This status variable shows the number of Flow Control pause events on the cluster, both those from other nodes and those sent by the local node, since the last status query.</li>
 </ul>
-</div>
-<div class="section" id="measuring-the-flow-control-pauses">
-<span id="measure-fc-pauses"></span><h3>Measuring the Flow Control Pauses<a class="headerlink" href="#measuring-the-flow-control-pauses" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="measure-fc-pauses">Measuring the Flow Control Pauses</p>
 <p>In addition to tracking Flow Control pauses, Galera Cluster also allows you to track the amount of time since the last <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> query during which replication was paused due to Flow Control.</p>
 <p>You can find this using one of two status variables:</p>
 <ul class="simple">
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused"><span class="std std-ref">wsrep_flow_control_paused</span></a> Provides the amount of time replication was paused as a fraction.  Effectively, how much the slave lag is slowing the cluster.  The value <code class="docutils literal"><span class="pre">1.0</span></code> indicates replication is paused now.</li>
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused-ns"><span class="std std-ref">wsrep_flow_control_paused_ns</span></a> Provides the amount of time replication was paused in nanoseconds.</li>
 </ul>
-</div>
-</div>
-<div class="section" id="configuring-flow-control">
-<span id="configuring-fc"></span><h2>Configuring Flow Control<a class="headerlink" href="#configuring-flow-control" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="configuring-fc">Configuring Flow Control</p>
 <p>Galera Cluster provides two sets of parameters that allow you to manage how nodes handle the replication rate and Flow Control.  The first set controls the write-set cache, the second relates to the points at which the node engages and disengages Flow Control.</p>
-<div class="section" id="managing-the-replication-rate">
-<span id="managing-gcache-fc"></span><h3>Managing the Replication Rate<a class="headerlink" href="#managing-the-replication-rate" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="managing-gcache-fc">Managing the Replication Rate</p>
 <p>These three parameters control how nodes respond to changes in the replication rate.  They allow you to manage the write-set cache on an individual node.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="galera-parameters.html#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a> This sets the maximum write-set cache size (in bytes).  The parameter value depends on the amount of RAM, swap size and performance considerations.</p>
@@ -274,9 +302,7 @@
 </li>
 </ul>
 <p>The write-set cache grows semi-logarithmically with time after the <a class="reference internal" href="galera-parameters.html#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a> and the time needed for a state transfer to complete.</p>
-</div>
-<div class="section" id="id1">
-<span id="id2"></span><h3>Managing Flow Control<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="id1">Managing Flow Control</p>
 <p>These parameters control the point at which the node triggers Flow Control and the factor used in determining when it should disengage Flow Control and resume replication.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="galera-parameters.html#gcs-fc-limit"><span class="std std-ref">gcs.fc_limit</span></a> This parameter determines the point at which Flow Control engages.  When the slave queue exceeds this limit, the node pauses replication.</p>
@@ -298,8 +324,6 @@
 <p class="last">That node can still exceed that limit from a 1Gb write-set.</p>
 </div>
 </div>
-</div>
-</div>
 
 
           </div>
@@ -309,25 +333,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Managing Flow Control</a><ul>
-<li><a class="reference internal" href="#monitoring-flow-control">Monitoring Flow Control</a><ul>
-<li><a class="reference internal" href="#monitoring-for-flow-control-pauses">Monitoring for Flow Control Pauses</a></li>
-<li><a class="reference internal" href="#measuring-the-flow-control-pauses">Measuring the Flow Control Pauses</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#configuring-flow-control">Configuring Flow Control</a><ul>
-<li><a class="reference internal" href="#managing-the-replication-rate">Managing the Replication Rate</a></li>
-<li><a class="reference internal" href="#id1">Managing Flow Control</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="quorum-reset.html"

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Introduction to Database Replication and Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Database Replication &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,12 +207,43 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="database-replication">
-<h1>Database Replication<a class="headerlink" href="#database-replication" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="id1"></span><p id="index-0">Database replication refers to the frequent copying of data from one node—a database on a server—into another.  Think of a database replication system as a distributed database, where all nodes share the same level of information.  This system is also known as a <em>database cluster</em>.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="certification-based-replication.html"><span class="doc">Certification Replication</span></a></li>
+<li><a class="reference internal" href="#"><span class="doc">Database Replication</span></a></li>
+<li><a class="reference internal" href="node-states.html"><span class="doc">Flow Control</span></a></li>
+<li><a class="reference internal" href="isolation-levels.html"><span class="doc">Isolation Levels</span></a></li>
+<li><a class="reference internal" href="recovery.html"><span class="doc">Node Recovery</span></a></li>
+<li><a class="reference internal" href="weighted-quorum.html"><span class="doc">Quorum Components</span></a></li>
+<li><a class="reference internal" href="architecture.html"><span class="doc">Replicaiton Architecture</span></a></li>
+<li><a class="reference internal" href="state-transfer.html"><span class="doc">State Transfers</span></a></li>
+<li><a class="reference internal" href="streaming-replication.html"><span class="doc">Streaming Replication</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="database-replication">
+<span id="id1"></span><h1>Database Replication<a class="headerlink" href="#database-replication" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Database replication refers to the frequent copying of data from one node—a database on a server—into another.  Think of a database replication system as a distributed database, where all nodes share the same level of information.  This system is also known as a <em>database cluster</em>.</p>
 <p>The database clients, such as web browsers or computer applications, do not see the database replication system, but they benefit from close to native <abbr title="Database Management System">DBMS</abbr> behavior.</p>
-<div class="section" id="masters-and-slaves">
-<span id="masters-slaves"></span><h2>Masters and Slaves<a class="headerlink" href="#masters-and-slaves" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="masters-slaves">Masters and Slaves</p>
 <p>Many <abbr title="DBMS">Database Management Systems</abbr> replicate the database.</p>
 <p>The most common replication setup uses a master/slave relationship between the original data set and the copies.</p>
 <div class="figure" id="id2">
@@ -223,16 +257,13 @@
 <p class="caption"><span class="caption-text"><em>Multi-master Replication</em></span></p>
 </div>
 <p>In a multi-master replication system, you can submit updates to any database node.  These updates then propagate through the network to other database nodes.  All database nodes function as masters.  There are no logs available and the system provides no indicators sent to tell you if the updates were successful.</p>
-</div>
-<div class="section" id="asynchronous-and-synchronous-replication">
-<span id="asynchronous-synchronous-replication"></span><h2>Asynchronous and Synchronous Replication<a class="headerlink" href="#asynchronous-and-synchronous-replication" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="asynchronous-synchronous-replication">Asynchronous and Synchronous Replication</p>
 <span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">In addition to the setup of how different nodes relate to one another, there is also the protocol for how they propagate database transactions through the cluster.</p>
 <ul class="simple">
 <li><strong>Synchronous Replication</strong> Uses the approach of eager replication.  Nodes keep all replicas synchronized by updating all replicas in a single transaction.  In other words, when a transaction commits, all nodes have the same value.</li>
 <li><strong>Asynchronous Replication</strong> Uses the approach of lazy replication.  The master database asynchronously propagates replica updates to other nodes.  After the master node propagates the replica, the transaction commits.  In other words, when a transaction commits, for at least a short time, some nodes hold different values.</li>
 </ul>
-<div class="section" id="advantages-of-synchronous-replication">
-<span id="advantages-synchronous-replication"></span><h3>Advantages of Synchronous Replication<a class="headerlink" href="#advantages-of-synchronous-replication" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="advantages-synchronous-replication">Advantages of Synchronous Replication</p>
 <p>In theory, there are several advantages that synchronous replication has over asynchronous replication.  For instance:</p>
 <ul class="simple">
 <li><strong>High Availability</strong> Synchronous replication provides highly available clusters and guarantees 24/7 service availability, given that:<ul>
@@ -244,18 +275,13 @@
 <li><strong>Improved Performance</strong> Synchronous replications allows you to execute transactions on all nodes in the cluster in parallel to each other, increasing performance.</li>
 <li><strong>Causality across the Cluster</strong> Synchronous replication guarantees causality across the whole cluster.  For example, a <code class="docutils literal"><span class="pre">SELECT</span></code> query issued after a transaction always sees the effects of the transaction, even if it were executed on another node.</li>
 </ul>
-</div>
-<div class="section" id="disadvantages-of-synchronous-replication">
-<span id="disadvantages-synchronous-replication"></span><h3>Disadvantages of Synchronous Replication<a class="headerlink" href="#disadvantages-of-synchronous-replication" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="disadvantages-synchronous-replication">Disadvantages of Synchronous Replication</p>
 <p>Traditionally, eager replication protocols coordinate nodes one operation at a time.  They use a two phase commit, or distributed locking.  A system with <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> number of nodes due to process <img class="math" src="../_images/math/21736df275793e73d4849d98709ef561b459defd.png" alt="o"/> operations with a throughput of <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/> transactions per second gives you <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> messages per second with:</p>
 <div class="math">
 <p><img src="../_images/math/4341bfcf2c93cce181abfbb4afc1a1b2b8e7697b.png" alt="m = n \times o \times t"/></p>
 </div><p>What this means that any increase in the number of nodes leads to an exponential growth in the transaction response times and in the probability of conflicts and deadlock rates.</p>
 <p>For this reason, asynchronous replication remains the dominant replication protocol for database performance, scalability and availability.  Widely adopted open source databases, such as MySQL and PostgreSQL only provide asynchronous replication solutions.</p>
-</div>
-</div>
-<div class="section" id="solving-the-issues-in-synchronous-replication">
-<span id="solving-issues-synchronous-replication"></span><h2>Solving the Issues in Synchronous Replication<a class="headerlink" href="#solving-the-issues-in-synchronous-replication" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="solving-issues-synchronous-replication">Solving the Issues in Synchronous Replication</p>
 <p>There are several issues with the traditional approach to synchronous replication systems.  Over the past few years, researchers from around the world have begun to suggest alternative approaches to synchronous database replication.</p>
 <p>In addition to theory, several prototype implementations have shown much promise.  These are some of the most important improvements that these studies have brought about:</p>
 <ul class="simple">
@@ -266,7 +292,6 @@
 </ul>
 <p>The certification-based replication system that Galera Cluster uses is built on these approaches.</p>
 </div>
-</div>
 
 
           </div>
@@ -276,22 +301,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Database Replication</a><ul>
-<li><a class="reference internal" href="#masters-and-slaves">Masters and Slaves</a></li>
-<li><a class="reference internal" href="#asynchronous-and-synchronous-replication">Asynchronous and Synchronous Replication</a><ul>
-<li><a class="reference internal" href="#advantages-of-synchronous-replication">Advantages of Synchronous Replication</a></li>
-<li><a class="reference internal" href="#disadvantages-of-synchronous-replication">Disadvantages of Synchronous Replication</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#solving-the-issues-in-synchronous-replication">Solving the Issues in Synchronous Replication</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="technical-description.html"

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Write-Set Caching during State Transfers" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Write-Set Caching during State Transfers &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,9 +207,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="write-set-caching-during-state-transfers">
-<h1>Write-Set Caching during State Transfers<a class="headerlink" href="#write-set-caching-during-state-transfers" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="kb-best-gcache-during-state-transfers"></span><p id="index-0">Under normal operations, nodes do not consume much more memory than the regular standalone MySQL database server.  The certification index and uncommitted write-sets do cause some additional usage, but in typical applications this is not usually noticeable. Write-set caching during state transfers is the exception.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/managing-fc.html#configuring-fc"><span class="std std-ref">Configuring Flow Control</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="write-set-caching-during-state-transfers">
+<span id="kb-best-gcache-during-state-transfers"></span><h1>Write-Set Caching during State Transfers<a class="headerlink" href="#write-set-caching-during-state-transfers" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Under normal operations, nodes do not consume much more memory than the regular standalone MySQL database server.  The certification index and uncommitted write-sets do cause some additional usage, but in typical applications this is not usually noticeable. Write-set caching during state transfers is the exception.</p>
 <p class="kb rubric">Scenario</p>
 <p>When a node receives a state transfer, it cannot process or apply incoming write-sets as it does not yet have a state to apply them to.  Depending on the state transfer method, (<code class="docutils literal"><span class="pre">mysqldump</span></code>, for instance), the sending node may also be unable to apply write-sets.</p>
 <p class="kb rubric">Recommendations</p>
@@ -215,11 +242,6 @@
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information on configuring write-set caching to improve performance, see <a class="reference internal" href="../../documentation/managing-fc.html#configuring-fc"><span class="std std-ref">Configuring Flow Control</span></a>.</p>
 </div>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/managing-fc.html#configuring-fc"><span class="std std-ref">Configuring Flow Control</span></a></li>
-</ul>
 </div>
 
 

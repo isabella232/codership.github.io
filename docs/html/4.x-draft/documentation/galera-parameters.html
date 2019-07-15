@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Parameters" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Galera Parameters &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,438 +207,680 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="galera-parameters">
-<h1>Galera Parameters<a class="headerlink" href="#galera-parameters" title="Permalink to this headline">¶</a></h1>
-<p id="id1">As of version 0.8, Galera Cluster accepts parameters as semicolon-separated key value pair lists, such as <code class="docutils literal"><span class="pre">key1</span> <span class="pre">=</span> <span class="pre">value1;</span> <span class="pre">key2</span> <span class="pre">=</span> <span class="pre">value2</span></code>.  In this way, you can configure an arbitrary number of Galera Cluster parameters in one call. A key consists of parameter group and parameter name:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">group</span><span class="o">&gt;.&lt;</span><span class="n">name</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<p>Where <code class="docutils literal"><span class="pre">&lt;group&gt;</span></code> roughly corresponds to some Galera module.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">All <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code> settings need to be specified on a single line. In case of multiple instances of <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code>, only the last one is used.</p>
-</div>
-<p>Table legend:</p>
-<ul class="simple">
-<li><strong>Numeric values</strong> Galera Cluster understands the following numeric modifiers:
-<code class="docutils literal"><span class="pre">K</span></code>, <code class="docutils literal"><span class="pre">M</span></code>, <code class="docutils literal"><span class="pre">G</span></code>, <code class="docutils literal"><span class="pre">T</span></code> standing for 2<sup>10</sup>, 2<sup>20</sup>, 2<sup>30</sup> and 2<sup>40</sup> respectively.</li>
-<li><strong>Boolean values</strong> Galera Cluster accepts the following boolean values: <code class="docutils literal"><span class="pre">0</span></code>, <code class="docutils literal"><span class="pre">1</span></code>, <code class="docutils literal"><span class="pre">YES</span></code>, <code class="docutils literal"><span class="pre">NO</span></code>, <code class="docutils literal"><span class="pre">TRUE</span></code>, <code class="docutils literal"><span class="pre">FALSE</span></code>, <code class="docutils literal"><span class="pre">ON</span></code>, <code class="docutils literal"><span class="pre">OFF</span></code>.</li>
-<li>Time periods must be expressed in the ISO8601 format. See also the examples below.</li>
-<li><strong>T</strong> indicates parameters that are strictly for use in troubleshooting problems.  You should not implement these in production environments.</li>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
 </ul>
-<table border="1" class="docutils">
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a></li>
+<li><a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="galera-parameters">
+<span id="id1"></span><h1>Galera Parameters<a class="headerlink" href="#galera-parameters" title="Permalink to this headline">¶</a></h1>
+<p>As of version 0.8, Galera Cluster accepts parameters as semicolon-separated key value pair lists, such as <code class="docutils literal"><span class="pre">key1</span> <span class="pre">=</span> <span class="pre">value1;</span> <span class="pre">key2</span> <span class="pre">=</span> <span class="pre">value2</span></code>.  In this way, you can configure an arbitrary number of Galera Cluster parameters in one call. A key consists of parameter group and parameter name: <code class="docutils literal"><span class="pre">&lt;group&gt;.&lt;name&gt;</span></code>, where <code class="docutils literal"><span class="pre">&lt;group&gt;</span></code> corresponds roughly to some Galera module.</p>
+<p>All <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code> settings need to be specified on a single line. In case of multiple instances of <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code>, only the last one is used.</p>
+<p>Below is a list of all of the Galera parameters.  Each is also a link to further down the page where you may find more information.  There are a few things to know about this table:</p>
+<ul class="simple">
+<li>For numeric values related to memory size, Galera Cluster accepts the numeric modifiers, <code class="docutils literal"><span class="pre">K</span></code>, <code class="docutils literal"><span class="pre">M</span></code>, <code class="docutils literal"><span class="pre">G</span></code>, and <code class="docutils literal"><span class="pre">T</span></code> to represent 2<sup>10</sup>, 2<sup>20</sup>, 2<sup>30</sup> and 2<sup>40</sup>, respectively.</li>
+<li>Galera Cluster accepts the following boolean values: <code class="docutils literal"><span class="pre">0</span></code>, <code class="docutils literal"><span class="pre">1</span></code>, <code class="docutils literal"><span class="pre">YES</span></code>, <code class="docutils literal"><span class="pre">NO</span></code>, <code class="docutils literal"><span class="pre">TRUE</span></code>, <code class="docutils literal"><span class="pre">FALSE</span></code>, <code class="docutils literal"><span class="pre">ON</span></code>, <code class="docutils literal"><span class="pre">OFF</span></code>.</li>
+<li>Time periods must be expressed in the ISO8601 format. See some of the examples below.</li>
+<li>The parameters that are noted as for debugging only are strictly for use in troubleshooting problems. You should not implement these in production environments.</li>
+</ul>
+<table border="1" class="doc-options docutils">
 <colgroup>
-<col width="46%" />
-<col width="27%" />
-<col width="14%" />
-<col width="12%" />
+<col width="30%" />
+<col width="40%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Parameter</th>
-<th class="head">Default</th>
-<th class="head">Support</th>
-<th class="head">Dynamic</th>
+<tr class="row-odd"><th class="head"><br /> Parameter</th>
+<th class="head"><br /> Default</th>
+<th class="head"><br /> Dynamic</th>
+<th class="head">Debug <br /> Only</th>
+<th class="head">Initial <br /> Version</th>
 </tr>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><a class="reference internal" href="#base-host"><span class="std std-ref">base_host</span></a></td>
-<td>detected network
-address</td>
-<td>1+</td>
+<td>detected network address</td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#base-port"><span class="std std-ref">base_port</span></a></td>
 <td><code class="docutils literal"><span class="pre">4567</span></code></td>
-<td>1+</td>
 <td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#cert-log-conflicts"><span class="std std-ref">cert.log_conflicts</span></a></td>
 <td><code class="docutils literal"><span class="pre">NO</span></code></td>
-<td>2+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#cert-optimistic-pa"><span class="std std-ref">cert.optimistic_pa</span></a></td>
 <td><code class="docutils literal"><span class="pre">YES</span></code></td>
-<td>3.25+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.25</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#debug"><span class="std std-ref">debug</span></a></td>
 <td><code class="docutils literal"><span class="pre">NO</span></code></td>
-<td>2+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-auto-evict"><span class="std std-ref">evs.auto_evict</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>3.8+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.8</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-causal-keepalive-period"><span class="std std-ref">evs.causal_keepalive_period</span></a></td>
+<td><code class="docutils literal"><span class="pre">0</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td>1.0</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#evs-consensus-timeout"><span class="std std-ref">evs.consensus_timeout</span></a> <sup>T</sup></td>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-consensus-timeout"><span class="std std-ref">evs.consensus_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT30S</span></code></td>
-<td>1 - 2</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0, 2.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-debug-log-mask"><span class="std std-ref">evs.debug_log_mask</span></a></td>
 <td><code class="docutils literal"><span class="pre">0x1</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-delayed-keep-period"><span class="std std-ref">evs.delayed_keep_period</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT30S</span></code></td>
-<td>3.8+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.8</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-delayed-margin"><span class="std std-ref">evs.delayed_margin</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT1S</span></code></td>
-<td>3.8+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.8</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-evict"><span class="std std-ref">evs.evict</span></a></td>
 <td>&nbsp;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
 <td>3.8</td>
-<td>No</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-inactive-check-period"><span class="std std-ref">evs.inactive_check_period</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT1S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT15S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-info-log-mask"><span class="std std-ref">evs.info_log_mask</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT15S</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-join-retrans-period"><span class="std std-ref">evs.join_retrans_period</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT1S</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-keepalive-period"><span class="std std-ref">evs.keepalive_period</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT1S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-max-install-timeouts"><span class="std std-ref">evs.max_install_timeouts</span></a></td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-send-window"><span class="std std-ref">evs.send_window</span></a></td>
 <td><code class="docutils literal"><span class="pre">4</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-stats-report-period"><span class="std std-ref">evs.stats_report_period</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT1M</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT5S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-use-aggregate"><span class="std std-ref">evs.use_aggregate</span></a></td>
 <td><code class="docutils literal"><span class="pre">TRUE</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#evs-user-send-window"><span class="std std-ref">evs.user_send_window</span></a></td>
 <td><code class="docutils literal"><span class="pre">2</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#evs-view-forget-timeout"><span class="std std-ref">evs.view_forget_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT5M</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#evs-version"><span class="std std-ref">evs.version</span></a> <sup>T</sup></td>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-version"><span class="std std-ref">evs.version</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcache-dir"><span class="std std-ref">gcache.dir</span></a></td>
 <td>working directory</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
 <td>1.0</td>
-<td>No</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcache-name"><span class="std std-ref">gcache.name</span></a></td>
 <td><code class="docutils literal"><span class="pre">galera.cache</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcache-keep-pages-size"><span class="std std-ref">gcache.keep_pages_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcache-page-size"><span class="std std-ref">gcache.page_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">128Mb</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcache-recover"><span class="std std-ref">gcache.recover</span></a></td>
 <td><code class="docutils literal"><span class="pre">no</span></code></td>
-<td>3.19+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.19</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcache-size"><span class="std std-ref">gcache.size</span></a></td>
 <td><code class="docutils literal"><span class="pre">128Mb</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcomm-thread-prio"><span class="std std-ref">gcomm.thread_prio</span></a></td>
 <td>&nbsp;</td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcs-fc-debug"><span class="std std-ref">gcs.fc_debug</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcs-fc-factor"><span class="std std-ref">gcs.fc_factor</span></a></td>
 <td><code class="docutils literal"><span class="pre">1.0</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcs-fc-limit"><span class="std std-ref">gcs.fc_limit</span></a></td>
 <td><code class="docutils literal"><span class="pre">16</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcs-fc-master-slave"><span class="std std-ref">gcs.fc_master_slave</span></a></td>
 <td><code class="docutils literal"><span class="pre">NO</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcs-max-packet-size"><span class="std std-ref">gcs.max_packet_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">32616</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcs-max-throttle"><span class="std std-ref">gcs.max_throttle</span></a></td>
 <td><code class="docutils literal"><span class="pre">0.25</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a></td>
 <td><code class="docutils literal"><span class="pre">LLONG_MAX</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a></td>
 <td><code class="docutils literal"><span class="pre">0.25</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcs-sync-donor"><span class="std std-ref">gcs.sync_donor</span></a></td>
 <td><code class="docutils literal"><span class="pre">NO</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gmcast-listen-addr"><span class="std std-ref">gmcast.listen_addr</span></a></td>
 <td><code class="docutils literal"><span class="pre">tcp://0.0.0.0:4567</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gmcast-mcast-addr"><span class="std std-ref">gmcast.mcast_addr</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gmcast-mcast-ttl"><span class="std std-ref">gmcast.mcast_ttl</span></a></td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gmcast-peer-timeout"><span class="std std-ref">gmcast.peer_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT3S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a></td>
 <td><code class="docutils literal"><span class="pre">0</span></code></td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gmcast-time-wait"><span class="std std-ref">gmcast.time_wait</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT5S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#gmcast-version"><span class="std std-ref">gmcast.version</span></a> <sup>T</sup></td>
+<tr class="row-even"><td><a class="reference internal" href="#gmcast-version"><span class="std std-ref">gmcast.version</span></a></td>
 <td>n/a</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#ist-recv-addr"><span class="std std-ref">ist.recv_addr</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#ist-recv-bind"><span class="std std-ref">ist.recv_bind</span></a></td>
 <td>&nbsp;</td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-recovery"><span class="std std-ref">pc.recovery</span></a></td>
 <td><code class="docutils literal"><span class="pre">TRUE</span></code></td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a></td>
 <td>n/a</td>
-<td>2+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-announce-timeout"><span class="std std-ref">pc.announce_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT3S</span></code></td>
-<td>2+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pc-checksum"><span class="std std-ref">pc.checksum</span></a></td>
 <td><code class="docutils literal"><span class="pre">FALSE</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a></td>
 <td><code class="docutils literal"><span class="pre">FALSE</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pc-ignore-quorum"><span class="std std-ref">pc.ignore_quorum</span></a></td>
 <td><code class="docutils literal"><span class="pre">FALSE</span></code></td>
-<td>1+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-linger"><span class="std std-ref">pc.linger</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT2S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pc-npvo"><span class="std std-ref">pc.npvo</span></a></td>
 <td><code class="docutils literal"><span class="pre">FALSE</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-wait-prim"><span class="std std-ref">pc.wait_prim</span></a></td>
 <td><code class="docutils literal"><span class="pre">TRUE</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#pc-wait-prim-timeout"><span class="std std-ref">pc.wait_prim_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT30S</span></code></td>
-<td>2+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#pc-weight"><span class="std std-ref">pc.weight</span></a></td>
 <td><code class="docutils literal"><span class="pre">1</span></code></td>
-<td>2.4+</td>
-<td>Yes</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#pc-version"><span class="std std-ref">pc.version</span></a> <sup>T</sup></td>
-<td>n/a</td>
-<td>1+</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
 <td>&nbsp;</td>
+<td>2.4</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pc-version"><span class="std std-ref">pc.version</span></a></td>
+<td>n/a</td>
+<td>No</td>
+<td>Yes</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#protonet-backend"><span class="std std-ref">protonet.backend</span></a></td>
 <td><code class="docutils literal"><span class="pre">asio</span></code></td>
-<td>1+</td>
-<td>No</td>
-</tr>
-<tr class="row-even"><td><a class="reference internal" href="#protonet-version"><span class="std std-ref">protonet.version</span></a> <sup>T</sup></td>
-<td>n/a</td>
-<td>1+</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
 <td>&nbsp;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#protonet-version"><span class="std std-ref">protonet.version</span></a></td>
+<td>n/a</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#repl-commit-order"><span class="std std-ref">repl.commit_order</span></a></td>
 <td><code class="docutils literal"><span class="pre">3</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#repl-causal-read-timeout"><span class="std std-ref">repl.causal_read_timeout</span></a></td>
 <td><code class="docutils literal"><span class="pre">PT30S</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#repl-key-format"><span class="std std-ref">repl.key_format</span></a></td>
 <td><code class="docutils literal"><span class="pre">FLAT8</span></code></td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#repl-max-ws-size"><span class="std std-ref">repl.max_ws_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">2147483647</span></code></td>
-<td>3+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#repl-proto-max"><span class="std std-ref">repl.proto_max</span></a></td>
 <td><code class="docutils literal"><span class="pre">5</span></code></td>
-<td>2+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#socket-recv-buf-size"><span class="std std-ref">socket.recv_buf_size</span></a></td>
 <td><code class="docutils literal"><span class="pre">212992</span></code></td>
-<td>3.17+</td>
-<td>Yes</td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>3.17</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-ca"><span class="std std-ref">socket.ssl_ca</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#socket-ssl-cert"><span class="std std-ref">socket.ssl_cert</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#socket-checksum"><span class="std std-ref">socket.checksum</span></a></td>
-<td><p class="first"><code class="docutils literal"><span class="pre">1</span></code> (for version 2)</p>
-<p class="last"><code class="docutils literal"><span class="pre">2</span></code> (for version 3+)</p>
+<td><code class="docutils literal"><span class="pre">1</span></code> (vs. 2); <code class="docutils literal"><span class="pre">2</span></code> (vs. 3)</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
 </td>
-<td>2+</td>
-<td>No</td>
+<td>&nbsp;</td>
+<td>2.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a></td>
-<td><code class="docutils literal"><span class="pre">AES128-SHA</span></code> before
-version 3.24, system
-default after</td>
-<td>1+</td>
-<td>No</td>
+<td><code class="docutils literal"><span class="pre">AES128-SHA</span></code> (vs. 1); <br /> system default (vs. 3.24)</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-compression"><span class="std std-ref">socket.ssl_compression</span></a></td>
 <td><code class="docutils literal"><span class="pre">YES</span></code></td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-password-file"><span class="std std-ref">socket.ssl_password_file</span></a></td>
 <td>&nbsp;</td>
-<td>1+</td>
-<td>No</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td>1.0</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric" id="base-host"><code class="docutils literal"><span class="pre">base_host</span></code></p>
+<p class="rubric-1 rubric" id="base-host"><code class="docutils literal"><span class="pre">base_host</span></code></p>
 <p id="index-0">Global variable for internal use.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -649,16 +894,16 @@ default after</td>
 <tr class="row-even"><td>Dynamic</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Do not manually set this variable.</p>
+<p class="last">Since this is for internal use only, don&#8217;t manually set the <code class="docutils literal"><span class="pre">base_host</span></code> variable.</p>
 </div>
-<p class="rubric" id="base-port"><code class="docutils literal"><span class="pre">base_port</span></code></p>
+<p class="rubric-1 rubric" id="base-port"><code class="docutils literal"><span class="pre">base_port</span></code></p>
 <p id="index-1">Global variable for internal use.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -672,16 +917,16 @@ default after</td>
 <tr class="row-even"><td>Dynamic</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>???</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Do not manually set this variable.</p>
+<p class="last">Since this is for internal use only, don&#8217;t manually set the <code class="docutils literal"><span class="pre">base_port</span></code> variable.</p>
 </div>
-<p class="rubric" id="cert-log-conflicts"><code class="docutils literal"><span class="pre">cert.log_conflicts</span></code></p>
+<p class="rubric-1 rubric" id="cert-log-conflicts"><code class="docutils literal"><span class="pre">cert.log_conflicts</span></code></p>
 <p id="index-2">Log details of certification failures.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -695,7 +940,7 @@ default after</td>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -704,7 +949,7 @@ default after</td>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;cert.log_conflicts=NO&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="cert-optimistic-pa"><code class="docutils literal"><span class="pre">cert.optimistic_pa</span></code></p>
+<p class="rubric-1 rubric" id="cert-optimistic-pa"><code class="docutils literal"><span class="pre">cert.optimistic_pa</span></code></p>
 <p id="index-3">Controls parallel applying of slave actions. When enabled allows full range
 of parallelization as determined by certification algorithm. When disabled
 limits parallel applying window to not exceed that seen on master. In other
@@ -722,7 +967,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.25</td>
 </tr>
 </tbody>
@@ -730,7 +975,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;cert.optimistic_pa=NO&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="debug"><code class="docutils literal"><span class="pre">debug</span></code></p>
+<p class="rubric-1 rubric" id="debug"><code class="docutils literal"><span class="pre">debug</span></code></p>
 <p id="index-4">Enable debugging.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -744,7 +989,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -752,7 +997,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;debug=NO&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-auto-evict"><code class="docutils literal"><span class="pre">evs.auto_evict</span></code></p>
+<p class="rubric-1 rubric" id="evs-auto-evict"><code class="docutils literal"><span class="pre">evs.auto_evict</span></code></p>
 <p id="index-5">Defines how many entries the node allows for given a delayed node before it triggers the Auto Eviction protocol.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -766,7 +1011,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -779,7 +1024,7 @@ on the master are committed.</p>
 </pre></div>
 </div>
 <p>For more information on the Auto Eviction process, see <a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a>.</p>
-<p class="rubric" id="evs-causal-keepalive-period"><code class="docutils literal"><span class="pre">evs.causal_keepalive_period</span></code></p>
+<p class="rubric-1 rubric" id="evs-causal-keepalive-period"><code class="docutils literal"><span class="pre">evs.causal_keepalive_period</span></code></p>
 <p id="index-6">For developer use only. Defaults to <code class="docutils literal"><span class="pre">evs.keepalive_period</span></code>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -793,12 +1038,12 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
 </table>
-<p class="rubric" id="evs-consensus-timeout"><code class="docutils literal"><span class="pre">evs.consensus_timeout</span></code></p>
+<p class="rubric-1 rubric" id="evs-consensus-timeout"><code class="docutils literal"><span class="pre">evs.consensus_timeout</span></code></p>
 <p id="index-7">Timeout on reaching the consensus about cluster membership.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -812,7 +1057,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 <tr class="row-even"><td>Deprecated</td>
@@ -829,7 +1074,7 @@ on the master are committed.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">This feature has been <strong>deprecated</strong>. It is succeeded by <a class="reference internal" href="#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a>.</p>
 </div>
-<p class="rubric" id="evs-debug-log-mask"><code class="docutils literal"><span class="pre">evs.debug_log_mask</span></code></p>
+<p class="rubric-1 rubric" id="evs-debug-log-mask"><code class="docutils literal"><span class="pre">evs.debug_log_mask</span></code></p>
 <p id="index-8">Control EVS debug logging, only effective when <code class="docutils literal"><span class="pre">wsrep_debug</span></code> is in use.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -843,7 +1088,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -852,7 +1097,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.debug_log_mask=0x1&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-delayed-keep-period"><code class="docutils literal"><span class="pre">evs.delayed_keep_period</span></code></p>
+<p class="rubric-1 rubric" id="evs-delayed-keep-period"><code class="docutils literal"><span class="pre">evs.delayed_keep_period</span></code></p>
 <p id="index-9">Defines how long this node requires a delayed node to remain responsive before it removes an entry from the delayed list.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -866,7 +1111,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -878,7 +1123,7 @@ on the master are committed.</p>
 </pre></div>
 </div>
 <p>For more information on the delayed list and the Auto Eviction process, see <a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a>.</p>
-<p class="rubric" id="evs-delayed-margin"><code class="docutils literal"><span class="pre">evs.delayed_margin</span></code></p>
+<p class="rubric-1 rubric" id="evs-delayed-margin"><code class="docutils literal"><span class="pre">evs.delayed_margin</span></code></p>
 <p id="index-10">Defines how long the node allows response times to deviate before adding an entry to the delayed list.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -892,7 +1137,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
@@ -904,7 +1149,7 @@ on the master are committed.</p>
 </pre></div>
 </div>
 <p>For more information on the delayed list and the Auto Eviction process, see <a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a>.</p>
-<p class="rubric" id="evs-evict"><code class="docutils literal"><span class="pre">evs.evict</span></code></p>
+<p class="rubric-1 rubric" id="evs-evict"><code class="docutils literal"><span class="pre">evs.evict</span></code></p>
 <p id="index-11">If set to the gcomm UUID of some node, that node will be evicted from the cluster.  Setting this parameter to an empty string causes the eviction list to be cleared on the node where it is set.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -918,13 +1163,13 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.8</td>
 </tr>
 </tbody>
 </table>
 <p>For more information on the eviction and Auto Eviction process, see <a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a>.</p>
-<p class="rubric" id="evs-inactive-check-period"><code class="docutils literal"><span class="pre">evs.inactive_check_period</span></code></p>
+<p class="rubric-1 rubric" id="evs-inactive-check-period"><code class="docutils literal"><span class="pre">evs.inactive_check_period</span></code></p>
 <p id="index-12">Defines how often you want the node to check for peer inactivity.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -938,7 +1183,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -949,7 +1194,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.inactive_check_period=PT1S&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-inactive-timeout"><code class="docutils literal"><span class="pre">evs.inactive_timeout</span></code></p>
+<p class="rubric-1 rubric" id="evs-inactive-timeout"><code class="docutils literal"><span class="pre">evs.inactive_timeout</span></code></p>
 <p id="index-13">Defines a hard limit on node inactivity.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -963,7 +1208,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -975,7 +1220,7 @@ on the master are committed.</p>
 </pre></div>
 </div>
 <p>This parameter sets a hard limit for node inactivity.  If a delayed node remains unresponsive for longer than this period, the node pronounces the delayed node as dead.</p>
-<p class="rubric" id="evs-info-log-mask"><code class="docutils literal"><span class="pre">evs.info_log_mask</span></code></p>
+<p class="rubric-1 rubric" id="evs-info-log-mask"><code class="docutils literal"><span class="pre">evs.info_log_mask</span></code></p>
 <p id="index-14">Defines additional logging options for the EVS Protocol.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -989,7 +1234,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1005,7 +1250,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.info_log_mask=0x4&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-install-timeout"><code class="docutils literal"><span class="pre">evs.install_timeout</span></code></p>
+<p class="rubric-1 rubric" id="evs-install-timeout"><code class="docutils literal"><span class="pre">evs.install_timeout</span></code></p>
 <p id="index-15">Defines the timeout for install message acknowledgments.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1019,7 +1264,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1033,7 +1278,7 @@ on the master are committed.</p>
 <p class="first admonition-title">Note</p>
 <p class="last">This parameter replaces <a class="reference internal" href="#evs-consensus-timeout"><span class="std std-ref">evs.consensus_timeout</span></a>.</p>
 </div>
-<p class="rubric" id="evs-join-retrans-period"><code class="docutils literal"><span class="pre">evs.join_retrans_period</span></code></p>
+<p class="rubric-1 rubric" id="evs-join-retrans-period"><code class="docutils literal"><span class="pre">evs.join_retrans_period</span></code></p>
 <p id="index-16">Defines how often the node retransmits EVS join messages when forming cluster membership.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1047,7 +1292,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1056,7 +1301,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.join_retrans_period=PT1S&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-keepalive-period"><code class="docutils literal"><span class="pre">evs.keepalive_period</span></code></p>
+<p class="rubric-1 rubric" id="evs-keepalive-period"><code class="docutils literal"><span class="pre">evs.keepalive_period</span></code></p>
 <p id="index-17">Defines how often the node emits keepalive signals.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1070,7 +1315,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1080,7 +1325,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.keepalive_period=PT1S&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-max-install-timeouts"><code class="docutils literal"><span class="pre">evs.max_install_timeouts</span></code></p>
+<p class="rubric-1 rubric" id="evs-max-install-timeouts"><code class="docutils literal"><span class="pre">evs.max_install_timeouts</span></code></p>
 <p id="index-18">Defines the number of membership install rounds to try before giving up.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1094,7 +1339,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1104,7 +1349,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.max_install_timeouts=1&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-send-window"><code class="docutils literal"><span class="pre">evs.send_window</span></code></p>
+<p class="rubric-1 rubric" id="evs-send-window"><code class="docutils literal"><span class="pre">evs.send_window</span></code></p>
 <p id="index-19">Defines the maximum number of packets at a time in replication.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1118,7 +1363,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1129,7 +1374,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.send_window=4&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-stats-report-period"><code class="docutils literal"><span class="pre">evs.stats_report_period</span></code></p>
+<p class="rubric-1 rubric" id="evs-stats-report-period"><code class="docutils literal"><span class="pre">evs.stats_report_period</span></code></p>
 <p id="index-20">Control period of EVS statistics reporting. The node is pronounced dead.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1143,7 +1388,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1152,7 +1397,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.stats_report_period=PT1M&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-suspect-timeout"><code class="docutils literal"><span class="pre">evs.suspect_timeout</span></code></p>
+<p class="rubric-1 rubric" id="evs-suspect-timeout"><code class="docutils literal"><span class="pre">evs.suspect_timeout</span></code></p>
 <p id="index-21">Defines the inactivity period after which a node is <em>suspected</em> as dead.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1166,7 +1411,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1176,7 +1421,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.suspect_timeout=PT5S&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-use-aggregate"><code class="docutils literal"><span class="pre">evs.use_aggregate</span></code></p>
+<p class="rubric-1 rubric" id="evs-use-aggregate"><code class="docutils literal"><span class="pre">evs.use_aggregate</span></code></p>
 <p id="index-22">Defines whether the node aggregates small packets into one when possible.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1190,7 +1435,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1199,7 +1444,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.use_aggregate=TRUE&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-user-send-window"><code class="docutils literal"><span class="pre">evs.user_send_window</span></code></p>
+<p class="rubric-1 rubric" id="evs-user-send-window"><code class="docutils literal"><span class="pre">evs.user_send_window</span></code></p>
 <p id="index-23">Defines the maximum number of data packets at a time in replication.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1213,7 +1458,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1225,7 +1470,7 @@ on the master are committed.</p>
 </pre></div>
 </div>
 <p>For more information, see <a class="reference internal" href="#evs-send-window"><span class="std std-ref">evs.send_window</span></a>.</p>
-<p class="rubric" id="evs-view-forget-timeout"><code class="docutils literal"><span class="pre">evs.view_forget_timeout</span></code></p>
+<p class="rubric-1 rubric" id="evs-view-forget-timeout"><code class="docutils literal"><span class="pre">evs.view_forget_timeout</span></code></p>
 <p id="index-24">Defines how long the node saves past views from the view history.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1239,7 +1484,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1249,7 +1494,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.view_forget_timeout=PT5M&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="evs-version"><code class="docutils literal"><span class="pre">evs.version</span></code></p>
+<p class="rubric-1 rubric" id="evs-version"><code class="docutils literal"><span class="pre">evs.version</span></code></p>
 <p id="index-25">Defines the EVS Protocol version.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1263,7 +1508,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1274,7 +1519,7 @@ on the master are committed.</p>
 </pre></div>
 </div>
 <p>For more information on the procedure to upgrade from one version to another, see <a class="reference internal" href="auto-eviction.html#upgrade-evs"><span class="std std-ref">Upgrading the EVS Protocol</span></a>.</p>
-<p class="rubric" id="gcache-dir"><code class="docutils literal"><span class="pre">gcache.dir</span></code></p>
+<p class="rubric-1 rubric" id="gcache-dir"><code class="docutils literal"><span class="pre">gcache.dir</span></code></p>
 <p id="index-26">Defines the directory where the write-set cache places its files.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1288,7 +1533,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1299,7 +1544,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.dir=/usr/share/galera&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcache-keep-pages-size"><code class="docutils literal"><span class="pre">gcache.keep_pages_size</span></code></p>
+<p class="rubric-1 rubric" id="gcache-keep-pages-size"><code class="docutils literal"><span class="pre">gcache.keep_pages_size</span></code></p>
 <p id="index-27">Total size of the page storage pages to keep for caching purposes. If only page storage is enabled, one page is always present.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1313,7 +1558,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1322,7 +1567,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.keep_pages_size=0&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcache-name"><code class="docutils literal"><span class="pre">gcache.name</span></code></p>
+<p class="rubric-1 rubric" id="gcache-name"><code class="docutils literal"><span class="pre">gcache.name</span></code></p>
 <p id="index-28">Defines the filename for the write-set cache.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1336,7 +1581,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1347,7 +1592,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.name=galera.cache&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcache-page-size"><code class="docutils literal"><span class="pre">gcache.page_size</span></code></p>
+<p class="rubric-1 rubric" id="gcache-page-size"><code class="docutils literal"><span class="pre">gcache.page_size</span></code></p>
 <p id="index-29">Size of the page files in page storage. The limit on overall page storage is the size of the disk.  Pages are prefixed by <code class="docutils literal"><span class="pre">gcache.page</span></code>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1361,7 +1606,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1370,7 +1615,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.page_size=128Mb&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcache-recover"><code class="docutils literal"><span class="pre">gcache.recover</span></code></p>
+<p class="rubric-1 rubric" id="gcache-recover"><code class="docutils literal"><span class="pre">gcache.recover</span></code></p>
 <p id="index-30">Determines whether gcache recovery takes place on node startup. If gcache could be recovered successfully, the node can then provide IST to other joining nodes, which is useful when the whole cluster is being restarted.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1384,7 +1629,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.19</td>
 </tr>
 </tbody>
@@ -1393,7 +1638,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.recover=yes&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcache-size"><code class="docutils literal"><span class="pre">gcache.size</span></code></p>
+<p class="rubric-1 rubric" id="gcache-size"><code class="docutils literal"><span class="pre">gcache.size</span></code></p>
 <p id="index-31">Defines the disk space you want to node to use in caching write-sets.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1407,7 +1652,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1419,7 +1664,7 @@ on the master are committed.</p>
 </pre></div>
 </div>
 <p>For more information on customizing the write-set cache, see the <a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practice Articles</span></a>.</p>
-<p class="rubric" id="gcomm-thread-prio"><code class="docutils literal"><span class="pre">gcomm.thread_prio</span></code></p>
+<p class="rubric-1 rubric" id="gcomm-thread-prio"><code class="docutils literal"><span class="pre">gcomm.thread_prio</span></code></p>
 <p id="index-32">Defines the policy and priority for the gcomm thread.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1433,7 +1678,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -1449,7 +1694,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcomm.thread_prio=rr:2&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcs-fc-debug"><code class="docutils literal"><span class="pre">gcs.fc_debug</span></code></p>
+<p class="rubric-1 rubric" id="gcs-fc-debug"><code class="docutils literal"><span class="pre">gcs.fc_debug</span></code></p>
 <p id="index-33">Post debug statistics about replication flow every this number of writesets.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1463,7 +1708,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1472,7 +1717,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.fc_debug=0&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcs-fc-factor"><code class="docutils literal"><span class="pre">gcs.fc_factor</span></code></p>
+<p class="rubric-1 rubric" id="gcs-fc-factor"><code class="docutils literal"><span class="pre">gcs.fc_factor</span></code></p>
 <p id="index-34">Resume replication after recv queue drops below this fraction of <code class="docutils literal"><span class="pre">gcs.fc_limit</span></code>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1486,7 +1731,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1495,7 +1740,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.fc_factor=0.5&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcs-fc-limit"><code class="docutils literal"><span class="pre">gcs.fc_limit</span></code></p>
+<p class="rubric-1 rubric" id="gcs-fc-limit"><code class="docutils literal"><span class="pre">gcs.fc_limit</span></code></p>
 <p id="index-35">Pause replication if recv queue exceeds this number of  writesets. For master-slave setups this number can be increased considerably.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1509,7 +1754,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1518,7 +1763,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.fc_limit=16&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcs-fc-master-slave"><code class="docutils literal"><span class="pre">gcs.fc_master_slave</span></code></p>
+<p class="rubric-1 rubric" id="gcs-fc-master-slave"><code class="docutils literal"><span class="pre">gcs.fc_master_slave</span></code></p>
 <p id="index-36">Defines whether there is only one master node in the group.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1532,7 +1777,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1541,7 +1786,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.fc_master_slave=NO&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcs-max-packet-size"><code class="docutils literal"><span class="pre">gcs.max_packet_size</span></code></p>
+<p class="rubric-1 rubric" id="gcs-max-packet-size"><code class="docutils literal"><span class="pre">gcs.max_packet_size</span></code></p>
 <p id="index-37">All writesets exceeding that size will be fragmented.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1555,7 +1800,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1564,7 +1809,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.max_packet_size=32616&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcs-max-throttle"><code class="docutils literal"><span class="pre">gcs.max_throttle</span></code></p>
+<p class="rubric-1 rubric" id="gcs-max-throttle"><code class="docutils literal"><span class="pre">gcs.max_throttle</span></code></p>
 <p id="index-38">How much to throttle replication rate during state transfer (to avoid running out of memory). Set the value to 0.0 if stopping replication is acceptable for completing state transfer.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1578,7 +1823,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1587,7 +1832,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.max_throttle=0.25&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcs-recv-q-hard-limit"><code class="docutils literal"><span class="pre">gcs.recv_q_hard_limit</span></code></p>
+<p class="rubric-1 rubric" id="gcs-recv-q-hard-limit"><code class="docutils literal"><span class="pre">gcs.recv_q_hard_limit</span></code></p>
 <p id="index-39">Maximum allowed size of recv queue. This should normally be half of (RAM + swap). If this limit is exceeded, Galera Cluster will abort the server.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1601,7 +1846,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1610,7 +1855,7 @@ on the master are committed.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.recv_q_hard_limit=LLONG_MAX&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcs-recv-q-soft-limit"><code class="docutils literal"><span class="pre">gcs.recv_q_soft_limit</span></code></p>
+<p class="rubric-1 rubric" id="gcs-recv-q-soft-limit"><code class="docutils literal"><span class="pre">gcs.recv_q_soft_limit</span></code></p>
 <p id="index-40">The fraction of <a class="reference internal" href="#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a> after which replication rate will be throttled.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1624,7 +1869,7 @@ on the master are committed.</p>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1635,7 +1880,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.recv_q_soft_limit=0.25&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gcs-sync-donor"><code class="docutils literal"><span class="pre">gcs.sync_donor</span></code></p>
+<p class="rubric-1 rubric" id="gcs-sync-donor"><code class="docutils literal"><span class="pre">gcs.sync_donor</span></code></p>
 <p id="index-41">Should the rest of the cluster keep in sync with the donor? <code class="docutils literal"><span class="pre">YES</span></code> means that if the donor is blocked by state transfer, the whole cluster is blocked with it.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1649,7 +1894,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1659,7 +1904,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.sync_donor=NO&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gmcast-listen-addr"><code class="docutils literal"><span class="pre">gmcast.listen_addr</span></code></p>
+<p class="rubric-1 rubric" id="gmcast-listen-addr"><code class="docutils literal"><span class="pre">gmcast.listen_addr</span></code></p>
 <p id="index-42">Address at which <em>Galera Cluster</em> listens to connections from other nodes. By default the port to listen at is taken from the connection address. This setting can be used to overwrite that.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1673,7 +1918,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1682,7 +1927,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.listen_addr=tcp://0.0.0.0:4567&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gmcast-mcast-addr"><code class="docutils literal"><span class="pre">gmcast.mcast_addr</span></code></p>
+<p class="rubric-1 rubric" id="gmcast-mcast-addr"><code class="docutils literal"><span class="pre">gmcast.mcast_addr</span></code></p>
 <p id="index-43">If set, UDP multicast will be used for replication, for example:</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1696,7 +1941,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1707,7 +1952,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.mcast_addr=239.192.0.11&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gmcast-mcast-ttl"><code class="docutils literal"><span class="pre">gmcast.mcast_ttl</span></code></p>
+<p class="rubric-1 rubric" id="gmcast-mcast-ttl"><code class="docutils literal"><span class="pre">gmcast.mcast_ttl</span></code></p>
 <p id="index-44">Time to live value for multicast packets.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1721,7 +1966,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1730,7 +1975,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.mcast_ttl=1&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gmcast-peer-timeout"><code class="docutils literal"><span class="pre">gmcast.peer_timeout</span></code></p>
+<p class="rubric-1 rubric" id="gmcast-peer-timeout"><code class="docutils literal"><span class="pre">gmcast.peer_timeout</span></code></p>
 <p id="index-45">Connection timeout to initiate message relaying.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1744,7 +1989,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1753,7 +1998,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.peer_timeout=PT3S&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gmcast-segment"><code class="docutils literal"><span class="pre">gmcast.segment</span></code></p>
+<p class="rubric-1 rubric" id="gmcast-segment"><code class="docutils literal"><span class="pre">gmcast.segment</span></code></p>
 <p id="index-46">Define which network segment this node is in. Optimisations on communication are performed to minimise the amount of traffic between network segments including writeset relaying and IST and SST donor selection.  The <a class="reference internal" href="#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a> value is an integer from <code class="docutils literal"><span class="pre">0</span></code> to <code class="docutils literal"><span class="pre">255</span></code>. By default all nodes are placed in the same segment (<code class="docutils literal"><span class="pre">0</span></code>).</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1767,7 +2012,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -1776,7 +2021,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.segment=0&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gmcast-time-wait"><code class="docutils literal"><span class="pre">gmcast.time_wait</span></code></p>
+<p class="rubric-1 rubric" id="gmcast-time-wait"><code class="docutils literal"><span class="pre">gmcast.time_wait</span></code></p>
 <p id="index-47">Time to wait until allowing peer declared outside of stable view to reconnect.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1790,7 +2035,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1799,7 +2044,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.time_wait=PT5S&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="gmcast-version"><code class="docutils literal"><span class="pre">gmcast.version</span></code></p>
+<p class="rubric-1 rubric" id="gmcast-version"><code class="docutils literal"><span class="pre">gmcast.version</span></code></p>
 <p id="index-48">This status variable is used to check which gmcast protocol version is used.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1813,13 +2058,13 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
 </table>
 <p>This variable is mostly used for troubleshooting purposes and should not be implemented in a production environment.</p>
-<p class="rubric" id="ist-recv-addr"><code class="docutils literal"><span class="pre">ist.recv_addr</span></code></p>
+<p class="rubric-1 rubric" id="ist-recv-addr"><code class="docutils literal"><span class="pre">ist.recv_addr</span></code></p>
 <p id="index-49">Address to listen on for Incremental State Transfer. By default this is the <code class="docutils literal"><span class="pre">&lt;address&gt;:&lt;port+1&gt;</span></code> from <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1833,7 +2078,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -1842,7 +2087,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;ist.recv_addr=192.168.1.1&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="ist-recv-bind"><code class="docutils literal"><span class="pre">ist.recv_bind</span></code></p>
+<p class="rubric-1 rubric" id="ist-recv-bind"><code class="docutils literal"><span class="pre">ist.recv_bind</span></code></p>
 <p id="index-50">Defines the address that the node binds on for receiving an <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1856,7 +2101,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.16</td>
 </tr>
 </tbody>
@@ -1866,7 +2111,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;ist.recv_bind=192.168.1.1&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-recovery"><code class="docutils literal"><span class="pre">pc.recovery</span></code></p>
+<p class="rubric-1 rubric" id="pc-recovery"><code class="docutils literal"><span class="pre">pc.recovery</span></code></p>
 <span class="target" id="index-51"></span><p id="index-52">When set to <code class="docutils literal"><span class="pre">TRUE</span></code>, the node stores the Primary Component state to disk, in the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file.  The Primary Component can then recover automatically when all nodes that were part of the last saved state reestablish communications with each other.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1880,7 +2125,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -1898,7 +2143,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <p class="first admonition-title">Note</p>
 <p class="last">In the event that the wsrep position differs between nodes, recovery also requires a full State Snapshot Transfer.</p>
 </div>
-<p class="rubric" id="pc-bootstrap"><code class="docutils literal"><span class="pre">pc.bootstrap</span></code></p>
+<p class="rubric-1 rubric" id="pc-bootstrap"><code class="docutils literal"><span class="pre">pc.bootstrap</span></code></p>
 <p id="index-53">If you set this value to <code class="docutils literal"><span class="pre">TRUE</span></code> is a signal to turn a <code class="docutils literal"><span class="pre">NON-PRIMARY</span></code> component into <code class="docutils literal"><span class="pre">PRIMARY</span></code>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1912,7 +2157,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -1921,7 +2166,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.bootstrap=TRUE&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-announce-timeout"><code class="docutils literal"><span class="pre">pc.announce_timeout</span></code></p>
+<p class="rubric-1 rubric" id="pc-announce-timeout"><code class="docutils literal"><span class="pre">pc.announce_timeout</span></code></p>
 <p id="index-54">Cluster joining announcements are sent every <img class="math" src="../_images/math/582d85cfa35dc89f5ae0a4903ea8eef0da364ab7.png" alt="\frac{1}{2}"/> second for this period of time or less if the other nodes are discovered.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1935,7 +2180,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -1944,7 +2189,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.announce_timeout=PT3S&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-checksum"><code class="docutils literal"><span class="pre">pc.checksum</span></code></p>
+<p class="rubric-1 rubric" id="pc-checksum"><code class="docutils literal"><span class="pre">pc.checksum</span></code></p>
 <p id="index-55">Checksum replicated messages.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1958,7 +2203,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1967,7 +2212,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.checksum=TRUE&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-ignore-sb"><code class="docutils literal"><span class="pre">pc.ignore_sb</span></code></p>
+<p class="rubric-1 rubric" id="pc-ignore-sb"><code class="docutils literal"><span class="pre">pc.ignore_sb</span></code></p>
 <p id="index-56">Should we allow nodes to process updates even in the case of split brain? This is a dangerous setting in multi-master setup, but should simplify things in master-slave cluster (especially if only 2 nodes are used).</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1981,7 +2226,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -1990,7 +2235,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.ignore_sb=FALSE&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-ignore-quorum"><code class="docutils literal"><span class="pre">pc.ignore_quorum</span></code></p>
+<p class="rubric-1 rubric" id="pc-ignore-quorum"><code class="docutils literal"><span class="pre">pc.ignore_quorum</span></code></p>
 <p id="index-57">Completely ignore quorum calculations. For example if the master splits from several slaves it still remains operational. Use with extreme caution even in master-slave setups, as slaves will not automatically reconnect to master in this case.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2004,7 +2249,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2013,7 +2258,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.ignore_quorum=FALSE&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-linger"><code class="docutils literal"><span class="pre">pc.linger</span></code></p>
+<p class="rubric-1 rubric" id="pc-linger"><code class="docutils literal"><span class="pre">pc.linger</span></code></p>
 <p id="index-58">The period for which the PC protocol waits for the EVS termination.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2027,7 +2272,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2036,7 +2281,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.linger=PT2S&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-npvo"><code class="docutils literal"><span class="pre">pc.npvo</span></code></p>
+<p class="rubric-1 rubric" id="pc-npvo"><code class="docutils literal"><span class="pre">pc.npvo</span></code></p>
 <p id="index-59">If set to <code class="docutils literal"><span class="pre">TRUE</span></code>, the more recent primary component overrides older ones in the case of conflicting primaries.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2050,7 +2295,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2059,7 +2304,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.npvo=FALSE&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-wait-prim"><code class="docutils literal"><span class="pre">pc.wait_prim</span></code></p>
+<p class="rubric-1 rubric" id="pc-wait-prim"><code class="docutils literal"><span class="pre">pc.wait_prim</span></code></p>
 <p id="index-60">If set to <code class="docutils literal"><span class="pre">TRUE</span></code>, the node waits for the <a class="reference internal" href="#pc-wait-prim-timeout"><span class="std std-ref">pc.wait_prim_timeout</span></a> time period. Useful to bring up a non-primary component and make it primary with <a class="reference internal" href="#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2073,7 +2318,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2082,7 +2327,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.wait_prim=FALSE&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-wait-prim-timeout"><code class="docutils literal"><span class="pre">pc.wait_prim_timeout</span></code></p>
+<p class="rubric-1 rubric" id="pc-wait-prim-timeout"><code class="docutils literal"><span class="pre">pc.wait_prim_timeout</span></code></p>
 <p id="index-61">The period of time to wait for a primary component.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2096,7 +2341,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -2105,7 +2350,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.wait_prim_timeout=PT30S&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-weight"><code class="docutils literal"><span class="pre">pc.weight</span></code></p>
+<p class="rubric-1 rubric" id="pc-weight"><code class="docutils literal"><span class="pre">pc.weight</span></code></p>
 <p id="index-62">As of version 2.4. Node weight for quorum calculation.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2119,7 +2364,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>Yes</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.4</td>
 </tr>
 </tbody>
@@ -2128,7 +2373,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.weight=1&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="pc-version"><code class="docutils literal"><span class="pre">pc.version</span></code></p>
+<p class="rubric-1 rubric" id="pc-version"><code class="docutils literal"><span class="pre">pc.version</span></code></p>
 <p id="index-63">This status variable is used to check which pc protocol version is used.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2142,13 +2387,13 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
 </table>
 <p>This variable is mostly used for troubleshooting purposes and should not be implemented in a production environment.</p>
-<p class="rubric" id="protonet-backend"><code class="docutils literal"><span class="pre">protonet.backend</span></code></p>
+<p class="rubric-1 rubric" id="protonet-backend"><code class="docutils literal"><span class="pre">protonet.backend</span></code></p>
 <p id="index-64">Which transport backend to use. Currently only ASIO is supported.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2162,7 +2407,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2171,7 +2416,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;protonet.backend=asio&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="protonet-version"><code class="docutils literal"><span class="pre">protonet.version</span></code></p>
+<p class="rubric-1 rubric" id="protonet-version"><code class="docutils literal"><span class="pre">protonet.version</span></code></p>
 <p id="index-65">This status variable is used to check which transport backend protocol version is used.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2185,13 +2430,13 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
 </table>
 <p>This variable is mostly used for troubleshooting purposes and should not be implemented in a production environment.</p>
-<p class="rubric" id="repl-commit-order"><code class="docutils literal"><span class="pre">repl.commit_order</span></code></p>
+<p class="rubric-1 rubric" id="repl-commit-order"><code class="docutils literal"><span class="pre">repl.commit_order</span></code></p>
 <p id="index-66">Whether to allow Out-Of-Order committing (improves parallel applying performance).</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2205,7 +2450,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2221,7 +2466,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;repl.commit_order=2&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="repl-causal-read-timeout"><code class="docutils literal"><span class="pre">repl.causal_read_timeout</span></code></p>
+<p class="rubric-1 rubric" id="repl-causal-read-timeout"><code class="docutils literal"><span class="pre">repl.causal_read_timeout</span></code></p>
 <p id="index-67">Sometimes causal reads need to timeout.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2235,7 +2480,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2244,7 +2489,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;repl.causal_read_timeout=PT30S&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="repl-key-format"><code class="docutils literal"><span class="pre">repl.key_format</span></code></p>
+<p class="rubric-1 rubric" id="repl-key-format"><code class="docutils literal"><span class="pre">repl.key_format</span></code></p>
 <p id="index-68">The hash size to use for key formats (in bytes). An <code class="docutils literal"><span class="pre">A</span></code> suffix annotates the version.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2258,7 +2503,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -2274,7 +2519,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;repl.key_format=FLAT8&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="repl-max-ws-size"><code class="docutils literal"><span class="pre">repl.max_ws_size</span></code></p>
+<p class="rubric-1 rubric" id="repl-max-ws-size"><code class="docutils literal"><span class="pre">repl.max_ws_size</span></code></p>
 <p id="index-69">The maximum size of a write-set in bytes. This is limited to 2G.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2288,7 +2533,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.0</td>
 </tr>
 </tbody>
@@ -2297,7 +2542,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;repl.max_ws_size=2147483647&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="repl-proto-max"><code class="docutils literal"><span class="pre">repl.proto_max</span></code></p>
+<p class="rubric-1 rubric" id="repl-proto-max"><code class="docutils literal"><span class="pre">repl.proto_max</span></code></p>
 <p id="index-70">The maximum protocol version in replication. Changes to this parameter will only take effect after a provider restart.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2311,7 +2556,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -2320,7 +2565,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;repl.proto_max=5&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="socket-recv-buf-size"><code class="docutils literal"><span class="pre">socket.recv_buf_size</span></code></p>
+<p class="rubric-1 rubric" id="socket-recv-buf-size"><code class="docutils literal"><span class="pre">socket.recv_buf_size</span></code></p>
 <p id="index-71">The size of the receive buffer that used on the network sockets between nodes. Galera passes the value to the kernel via the <code class="docutils literal"><span class="pre">SO_RCVBUF</span></code> socket option.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2334,7 +2579,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>3.17</td>
 </tr>
 </tbody>
@@ -2343,7 +2588,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.recv_buf_size=212992&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="socket-ssl-ca"><code class="docutils literal"><span class="pre">socket.ssl_ca</span></code></p>
+<p class="rubric-1 rubric" id="socket-ssl-ca"><code class="docutils literal"><span class="pre">socket.ssl_ca</span></code></p>
 <p id="index-72">Defines the path to the SSL Certificate Authority (CA) file.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2357,7 +2602,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2368,7 +2613,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 </pre></div>
 </div>
 <p>For more information on generating <abbr title="Secure Socket Layer">SSL</abbr> certificate files for your cluster, see <a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a>.</p>
-<p class="rubric" id="socket-ssl-cert"><code class="docutils literal"><span class="pre">socket.ssl_cert</span></code></p>
+<p class="rubric-1 rubric" id="socket-ssl-cert"><code class="docutils literal"><span class="pre">socket.ssl_cert</span></code></p>
 <p id="index-73">Defines the path to the <abbr title="Secure Socket Layer">SSL</abbr> certificate.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2382,7 +2627,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2393,7 +2638,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 </pre></div>
 </div>
 <p>For more information on generating <abbr title="Secure Socket Layer">SSL</abbr> certificate files for your cluster, see <a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a>.</p>
-<p class="rubric" id="socket-checksum"><code class="docutils literal"><span class="pre">socket.checksum</span></code></p>
+<p class="rubric-1 rubric" id="socket-checksum"><code class="docutils literal"><span class="pre">socket.checksum</span></code></p>
 <p id="index-74">Checksum to use on socket layer.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2407,7 +2652,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>2.0</td>
 </tr>
 </tbody>
@@ -2422,7 +2667,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.checksum=2&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="socket-ssl-cipher"><code class="docutils literal"><span class="pre">socket.ssl_cipher</span></code></p>
+<p class="rubric-1 rubric" id="socket-ssl-cipher"><code class="docutils literal"><span class="pre">socket.ssl_cipher</span></code></p>
 <p id="index-75">Symmetric cipher to use. By default SSL library implementation default cipher is used.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2436,7 +2681,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2445,7 +2690,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.ssl_cipher=AES128-SHA256&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="socket-ssl-compression"><code class="docutils literal"><span class="pre">socket.ssl_compression</span></code></p>
+<p class="rubric-1 rubric" id="socket-ssl-compression"><code class="docutils literal"><span class="pre">socket.ssl_compression</span></code></p>
 <p id="index-76">Whether to enable compression on SSL connections.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2459,7 +2704,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2468,7 +2713,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.ssl_compression=YES&quot;</span>
 </pre></div>
 </div>
-<p class="rubric" id="socket-ssl-key"><code class="docutils literal"><span class="pre">socket.ssl_key</span></code></p>
+<p class="rubric-1 rubric" id="socket-ssl-key"><code class="docutils literal"><span class="pre">socket.ssl_key</span></code></p>
 <p id="index-77">Defines the path to the <abbr title="Secure Socket Layer">SSL</abbr> certificate key.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2482,7 +2727,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>
@@ -2493,7 +2738,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 </pre></div>
 </div>
 <p>For more information on generating <abbr title="Secure Socket Layer">SSL</abbr> certificate files for your cluster, see <a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a>.</p>
-<p class="rubric" id="socket-ssl-password-file"><code class="docutils literal"><span class="pre">socket.ssl_password_file</span></code></p>
+<p class="rubric-1 rubric" id="socket-ssl-password-file"><code class="docutils literal"><span class="pre">socket.ssl_password_file</span></code></p>
 <p id="index-78">Defines a password file for use in <abbr title="Secure Socket Layer">SSL</abbr> connections.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2507,7 +2752,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
 </tr>
-<tr class="row-odd"><td>Introduced</td>
+<tr class="row-odd"><td>Initial Version</td>
 <td>1.0</td>
 </tr>
 </tbody>

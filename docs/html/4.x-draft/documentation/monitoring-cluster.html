@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Use Status Variables to Monitor Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Using Status Variables &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,9 +207,50 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="using-status-variables">
-<h1>Using Status Variables<a class="headerlink" href="#using-status-variables" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="monitoring-cluster"></span><p id="index-0">From the database client, you can check the status of write-set replication throughout the cluster using standard queries.  Status variables that relate to write-set replication have the prefix <code class="docutils literal"><span class="pre">wsrep_</span></code>, meaning that you can display them all using the following query:</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="notification-cmd.html"><span class="doc">Notification Command</span></a></li>
+<li><a class="reference internal" href="quorum-reset.html"><span class="doc">Reset Quorum</span></a></li>
+<li><a class="reference internal" href="#check-node-status"><span class="std std-ref">checking node status</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-conf-id"><span class="std std-ref">wsrep_cluster_conf_id</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-cluster-name"><span class="std std-ref">wsrep_cluster_name</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-state-uuid"><span class="std std-ref">wsrep_cluster_state_uuid</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-connected"><span class="std std-ref">wsrep_connected</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-send-queue-avg"><span class="std std-ref">wsrep_local_send_queue_avg</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-state-comment"><span class="std std-ref">wsrep_local_state_comment</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-recv-queue-max"><span class="std std-ref">wsrep_local_recv_queue_max</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-recv-queue-min"><span class="std std-ref">wsrep_local_recv_queue_min</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-ready"><span class="std std-ref">wsrep_ready</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="using-status-variables">
+<span id="monitoring-cluster"></span><h1>Using Status Variables<a class="headerlink" href="#using-status-variables" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">From the database client, you can check the status of write-set replication throughout the cluster using standard queries.  Status variables that relate to write-set replication have the prefix <code class="docutils literal"><span class="pre">wsrep_</span></code>, meaning that you can display them all using the following query:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">GLOBAL</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_%&#39;</span><span class="p">;</span>
 
 <span class="o">+------------------------+-------+</span>
@@ -223,8 +267,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">In addition to checking status variables through the database client, you can also monitor for changes in cluster membership and node status through <code class="docutils literal"><span class="pre">wsrep_notify_cmd.sh</span></code>.  For more information on its use, see <a class="reference internal" href="notification-cmd.html"><span class="doc">Notification Command</span></a>.</p>
 </div>
-<div class="section" id="checking-cluster-integrity">
-<span id="check-cluster-integrity"></span><h2>Checking Cluster Integrity<a class="headerlink" href="#checking-cluster-integrity" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="check-cluster-integrity">Checking Cluster Integrity</p>
 <span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">The cluster has integrity when all nodes in it receive and replicate write-sets from all other nodes.  The cluster begins to lose integrity when this breaks down, such as when the cluster goes down, becomes partitioned, or experiences a split-brain situation.</p>
 <p>You can check cluster integrity using the following status variables:</p>
 <ul>
@@ -282,9 +325,7 @@
 </li>
 </ul>
 <p>When these status variables check out and return the desired results on each node, the cluster is up and has integrity.  What this means is that replication is able to occur normally on every node.  The next step then is <a class="reference internal" href="#check-node-status"><span class="std std-ref">checking node status</span></a> to ensure that they are all in working order and able to receive write-sets.</p>
-</div>
-<div class="section" id="checking-the-node-status">
-<span id="check-node-status"></span><h2>Checking the Node Status<a class="headerlink" href="#checking-the-node-status" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="check-node-status">Checking the Node Status</p>
 <span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><p id="index-8">In addition to checking cluster integrity, you can also monitor the status of individual nodes.  This shows whether nodes receive and process updates from the cluster write-sets and can indicate problems that may prevent replication.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="galera-status-variables.html#wsrep-ready"><span class="std std-ref">wsrep_ready</span></a> shows whether the node can accept queries.</p>
@@ -337,9 +378,7 @@
 </li>
 </ul>
 <p>In the event that each status variable returns the desired values, the node is in working order.  This means that it is receiving write-sets from the cluster and replicating them to tables in the local database.</p>
-</div>
-<div class="section" id="checking-the-replication-health">
-<span id="check-replication-health"></span><h2>Checking the Replication Health<a class="headerlink" href="#checking-the-replication-health" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="check-replication-health">Checking the Replication Health</p>
 <span class="target" id="index-9"></span><span class="target" id="index-10"></span><span class="target" id="index-11"></span><span class="target" id="index-12"></span><p id="index-13">Monitoring cluster integrity and node status can show you issues that may prevent or otherwise block replication.  These status variables will help in identifying performance issues and identifying problem areas so that you can get the most from your cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -390,9 +429,7 @@
 <p>This represents the node&#8217;s potential degree for parallelization.  In other words, the optimal value you can use with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a> parameter, given that there is no reason to assign more slave threads than transactions you can apply in parallel.</p>
 </li>
 </ul>
-</div>
-<div class="section" id="detecting-slow-network-issues">
-<span id="check-network-issues"></span><h2>Detecting Slow Network Issues<a class="headerlink" href="#detecting-slow-network-issues" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="check-network-issues">Detecting Slow Network Issues</p>
 <span class="target" id="index-14"></span><span class="target" id="index-15"></span><p id="index-16">While checking the status of Flow Control and the received queue can tell you how the database server copes with incoming write-sets, you can check the send queue to monitor for outgoing connectivity issues.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -414,7 +451,6 @@
 <p class="last">In addition to this status variable, you can also use <a class="reference internal" href="galera-status-variables.html#wsrep-local-send-queue-max"><span class="std std-ref">wsrep_local_send_queue_max</span></a> and <a class="reference internal" href="galera-status-variables.html#wsrep-local-send-queue-min"><span class="std std-ref">wsrep_local_send_queue_min</span></a> to see the maximum and minimum sizes the node recorded for the local send queue.</p>
 </div>
 </div>
-</div>
 
 
           </div>
@@ -424,19 +460,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Using Status Variables</a><ul>
-<li><a class="reference internal" href="#checking-cluster-integrity">Checking Cluster Integrity</a></li>
-<li><a class="reference internal" href="#checking-the-node-status">Checking the Node Status</a></li>
-<li><a class="reference internal" href="#checking-the-replication-health">Checking the Replication Health</a></li>
-<li><a class="reference internal" href="#detecting-slow-network-issues">Detecting Slow Network Issues</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="monitor.html"

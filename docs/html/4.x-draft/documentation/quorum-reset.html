@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Resetting a Galera Cluster Quorum" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Resetting the Quorum &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -32,7 +35,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Managing Flow Control" href="managing-fc.html" />
-    <link rel="prev" title="Recovering the Primary Component" href="pc-recovery.html" />
+    <link rel="prev" title="Recovering Primary Component" href="pc-recovery.html" />
 
 
 
@@ -204,9 +207,36 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="resetting-the-quorum">
-<h1>Resetting the Quorum<a class="headerlink" href="#resetting-the-quorum" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="quorum-reset"></span><span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">Occasionally, you may find your nodes no longer consider themselves part of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  For instance, in the event of a network failure, the failure of more than half of the cluster, or a split-brain situation.  In these cases, the node come to suspect that there is another Primary Component, to which they are no longer connected.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="resetting-the-quorum">
+<span id="quorum-reset"></span><h1>Resetting the Quorum<a class="headerlink" href="#resetting-the-quorum" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">Occasionally, you may find your nodes no longer consider themselves part of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  For instance, in the event of a network failure, the failure of more than half of the cluster, or a split-brain situation.  In these cases, the node come to suspect that there is another Primary Component, to which they are no longer connected.</p>
 <p>When this occurs, all nodes return an <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> error to all queries.  You can check if this is happening using the <a class="reference internal" href="galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a> status variable.  Run the following query on each node:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">GLOBAL</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_status&#39;</span><span class="p">;</span>
 
@@ -222,8 +252,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Bear in mind that situations where none of the nodes show as part of the Primary Component are very rare.  In the event that you do find one or more nodes that return the value <code class="docutils literal"><span class="pre">Primary</span></code>, this indicates an issue with network connectivity rather than a need to reset the quorum.  Troubleshoot the connection issue.  Once the nodes regain network connectivity they automatically resynchronize with the Primary Component.</p>
 </div>
-<div class="section" id="finding-the-most-advanced-node">
-<span id="finding-most-advanced-node"></span><h2>Finding the Most Advanced Node<a class="headerlink" href="#finding-the-most-advanced-node" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="finding-most-advanced-node">Finding the Most Advanced Node</p>
 <p>Before you can reset the quorum, you need to identify the most advanced node in the cluster.  That is, you must find the node whose local database committed the last transaction.  Regardless of the method you use in resetting the quorum, this node serves as the starting point for the new <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</p>
 <p>Identifying the most advanced node in the cluster requires that you find the node with the most advanced sequence number, or seqno.  You can determine this using the <a class="reference internal" href="galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a> status variable.</p>
 <p>From the database client on each node, run the following query:</p>
@@ -237,26 +266,21 @@
 </pre></div>
 </div>
 <p>The return value is the seqno for the last transaction the node committed.  The node that provides the highest seqno is the most advanced node in your cluster.  Use it as the starting point in the next section when bootstrapping the new Primary Component.</p>
-</div>
-<div class="section" id="resetting-quorum">
-<span id="id1"></span><h2>Resetting the Quorum<a class="headerlink" href="#resetting-quorum" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="resetting-quorum">Resetting the Quorum</p>
 <p>When you reset the quorum what you are doing is bootstrapping the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> on the most advanced node you have available.  This node then functions as the new Primary Component, bringing the rest of the cluster into line with its state.</p>
 <p>There are two methods available to you in this process: automatic and manual.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The preferred method for a quorum reset is the automatic method.  Unlike the manual method, automatic bootstraps preserve the write-set cache, or GCache, on each node.  What this means is that when the new Primary Component starts, some or all of the joining nodes can provision themselves using the <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a> (IST) method, rather than the much slower <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method.</p>
 </div>
-<div class="section" id="automatic-bootstrap">
-<span id="id2"></span><h3>Automatic Bootstrap<a class="headerlink" href="#automatic-bootstrap" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="automatic-bootstrap">Automatic Bootstrap</p>
 <p>Resetting the quorum bootstraps the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> onto the most advanced node.  In the automatic method this is done by enabling <a class="reference internal" href="galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a> under <a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> dynamically through the database client.  This makes the node a new Primary Component.</p>
 <p>To perform an automatic bootstrap, on the database client of the most advanced node, run the following command:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.bootstrap=YES&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>The node now operates as the starting node in a new Primary Component.  Nodes in nonoperational components that have network connectivity attempt to initiate incremental state transfers if possible, state snapshot transfers if not, with this node, bringing their own databases up-to-date.</p>
-</div>
-<div class="section" id="manual-bootstrap">
-<span id="id3"></span><h3>Manual Bootstrap<a class="headerlink" href="#manual-bootstrap" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="manual-bootstrap">Manual Bootstrap</p>
 <p>Resetting the quorum bootstraps the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> onto the most advanced node.  In the manual method this is done by shutting down the cluster, then starting it up again beginning with the most advanced node.</p>
 <p>To manually bootstrap your cluster, complete the following steps:</p>
 <ol class="arabic">
@@ -294,8 +318,6 @@
 </ol>
 <p>When the first node starts with the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option, it initializes a new cluster using the data from the most advanced state available from the previous cluster.  As the other nodes start they connect to this node and request state snapshot transfers, to bring their own databases up-to-date.</p>
 </div>
-</div>
-</div>
 
 
           </div>
@@ -305,25 +327,11 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Resetting the Quorum</a><ul>
-<li><a class="reference internal" href="#finding-the-most-advanced-node">Finding the Most Advanced Node</a></li>
-<li><a class="reference internal" href="#resetting-quorum">Resetting the Quorum</a><ul>
-<li><a class="reference internal" href="#automatic-bootstrap">Automatic Bootstrap</a></li>
-<li><a class="reference internal" href="#manual-bootstrap">Manual Bootstrap</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="pc-recovery.html"
-                          title="Previous page">&larr; Recovering the Primary Component</a></p>
+                          title="Previous page">&larr; Recovering Primary Component</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -394,7 +402,7 @@
           <a href="managing-fc.html" title="Managing Flow Control"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="pc-recovery.html" title="Recovering the Primary Component"
+          <a href="pc-recovery.html" title="Recovering Primary Component"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
@@ -406,7 +414,7 @@
 
 
 			
-				<li><a href="pc-recovery.html" title="Recovering the Primary Component">&lt; Previous</a></li>
+				<li><a href="pc-recovery.html" title="Recovering Primary Component">&lt; Previous</a></li>
 			
 
 			

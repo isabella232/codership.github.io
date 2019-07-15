@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Support for Transaction Isolation Levels" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Support for Transaction Isolation Levels &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,9 +207,30 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="support-for-transaction-isolation-levels">
-<h1>Support for Transaction Isolation Levels<a class="headerlink" href="#support-for-transaction-isolation-levels" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="supporting-transaction-isolation-levels">Length:  1009 words; Writer: Seppo Jaakola; Published: September 21, 2015; Topic: General; Level: Intermediate</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="support-for-transaction-isolation-levels">
+<span id="supporting-transaction-isolation-levels"></span><h1>Support for Transaction Isolation Levels<a class="headerlink" href="#support-for-transaction-isolation-levels" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  1009 words; Writer: Seppo Jaakola; Published: September 21, 2015; Topic: General; Level: Intermediate</p>
 <p>There appears to be great misunderstanding as to what MySQL transaction isolation levels Galera CLuster actually supports and how. This blog post tries to give answer to those uncertainties.</p>
 <p>Galera Cluster provides <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> between transactions running on separate cluster nodes. Transactions running on the same node are isolated by whatever was configured as the transaction isolation level in the MySQL configuration. So, if you have configured the default <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> isolation, transactions issued on the same node will behave under <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> semantics. However, for transactions issued on separate cluster nodes, the ‘first committer wins’ rule of <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> is provided, and this will fix the lost update problem that generally hurts REPEATABLE READ isolation.</p>
 <p>Therefore, it is not safe for the application to rely on <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> semantics. But in general, transaction isolation in Galera CLuster is no less than what was configured for transaction isolation level in MySQL.</p>
@@ -491,8 +515,8 @@ But, as the outcome of running these transactions in parallel, transaction #1’
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>

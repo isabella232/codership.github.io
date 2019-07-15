@@ -1,18 +1,65 @@
+.. meta::
+   :title: Flow Control with Galera Cluster
+   :description:
+   :language: en-US
+   :keywords:
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+
+
+.. topic:: The Library
+   :name: left-margin
+
+   .. cssclass:: no-bull
+
+      - :doc:`Documentation <./index>`
+      - :doc:`Knowledge Base <../kb/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Troubleshooting <../kb/trouble/index>`
+         - :doc:`Best Practices <../kb/best/index>`
+
+      - :doc:`FAQ <../faq>`
+      - :doc:`Training <../training/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Tutorial Articles <../training/tutorials/index>`
+         - :doc:`Training Videos <../training/videos/index>`
+
+      .. cssclass:: bull-head
+
+         Related Documents
+
+      - :ref:`Catching Up <catching-up>`
+      - :ref:`Cluster Sync <cluster-sync>`
+      - :ref:`gcs.fc_factor <gcs.fc_factor>`
+      - :ref:`gcs.fc_limit <gcs.fc_limit>`
+      - :ref:`gcs.max_throttle <gcs.max_throttle>`
+      - :ref:`gcs.recv_q_hard_limit <gcs.recv_q_hard_limit>`
+      - :ref:`gcs.recv_q_soft_limit <gcs.recv_q_soft_limit>`
+      - :ref:`No Flow Control <no-flow-control>`
+      - :ref:`Write-set Caching <writeset-caching>`
+      - :ref:`wsrep_ready <wsrep_ready>`
+
+      .. cssclass:: bull-head
+
+         Related Articles
+
+
 .. cssclass:: library-document
+.. _`flow-control`:
 
 =============
- Flow Control
+Flow Control
 =============
-.. _`flow-control`:
 
 Galera Cluster manages the replication process using a feedback mechanism, called Flow Control.  Flow Control allows a node to pause and resume replication according to its needs.  This prevents any node from lagging too far behind the others in applying transactions.
 
 
 .. _`how-flow-control-works`:
-
------------------------
-How Flow Control Works
------------------------
+.. rst-class:: rubric-1
+.. rubric:: How Flow Control Works
 
 Galera Cluster achieves synchronous replication by ensuring that transactions copy to all nodes an execute according to a cluster-wide ordering.  That said, the transaction applies and commits occur asynchronously as they replicate through the cluster.
 
@@ -22,10 +69,8 @@ When the received queue reaches a certain size the node triggers Flow Control.  
 
 
 .. _`node-states`:
-
---------------------------
-Understanding Node States
---------------------------
+.. rst-class:: rubric-2
+.. rubric:: Understanding Node States
 
 .. index::
    pair: Node states; OPEN
@@ -51,10 +96,8 @@ There are four primary kinds of Flow Control:
 
 
 .. _`no-flow-control`:
-
-^^^^^^^^^^^^^^^^^^^^^^
-No Flow Control
-^^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: No Flow Control
 
 This Flow Control takes effect when nodes are in the ``OPEN`` or ``PRIMARY`` states.
 
@@ -62,10 +105,8 @@ When nodes hold these states, they are not considered part of the cluster.  Thes
 
 
 .. _`writeset-caching`:
-
-^^^^^^^^^^^^^^^^^^^^^
-Write-set Caching
-^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: Write-set Caching
 
 This Flow Control takes effect when nodes are in the ``JOINER`` and ``DONOR`` states.
 
@@ -79,10 +120,8 @@ It is possible to limit the replication rate, ensuring that the write-set cache 
 
 
 .. _`catching-up`:
-
-^^^^^^^^^^^^^^^^^
-Catching Up
-^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: Catching Up
 
 This Flow Control takes effect when nodes are in the ``JOINED`` state.
 
@@ -94,10 +133,8 @@ The one occasion when nodes in the ``JOINED`` state do effect cluster performanc
 
 
 .. _`cluster-sync`:
-
-^^^^^^^^^^^^^^
-Cluster Sync
-^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: Cluster Sync
 
 This Flow Control takes effect when nodes are in the ``SYNCED`` state.
 
@@ -108,17 +145,13 @@ When nodes enter this state Flow Control attempts to keep the slave queue to a m
 
 
 .. _`node-state-changes`:
-
----------------------------
- Changes in the Node State
----------------------------
+.. rst-class:: rubric-1
+.. rubric:: Changes in the Node State
 
 .. index::
    pair: Node states; Node state changes
 
 The node state machine handles different state changes on different layers of Galera Cluster.  These are the node state changes that occur at the top most layer:
-
-
 
 .. figure:: ../images/galerafsm.png
 

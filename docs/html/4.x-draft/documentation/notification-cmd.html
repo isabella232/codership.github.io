@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Notification Command" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Notification Command &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -31,7 +34,7 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Security" href="security.html" />
+    <link rel="next" title="Notification Script Example" href="notification-cmd-example.html" />
     <link rel="prev" title="Database Server Logs" href="log.html" />
 
 
@@ -204,181 +207,79 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="notification-command">
-<h1>Notification Command<a class="headerlink" href="#notification-command" title="Permalink to this headline">¶</a></h1>
-<p id="notification-cmd">While you can use the database client to check the status of your cluster, the individual nodes and the health of replication, you may find it counterproductive to log into the client on each node to run these checks.  Galera Cluster provides a notification script and interface for customization, allowing you to automate the monitoring process for your cluster.</p>
-<div class="section" id="notification-command-parameters">
-<span id="notification-cmd-parameters"></span><h2>Notification Command Parameters<a class="headerlink" href="#notification-command-parameters" title="Permalink to this headline">¶</a></h2>
-<p>When the node registers a change in the cluster or itself that triggers the notification command, it passes a number of parameters in calling the script.</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">--status</span></code> The node passes a string indicating it&#8217;s current state.  For a list of the strings it uses, see <a class="reference internal" href="#node-status"><span class="std std-ref">Node Status Strings</span></a> below.</li>
-<li><code class="docutils literal"><span class="pre">--uuid</span></code> The node passes a string of either <cite>yes</cite> or <cite>no</cite>, indicating whether it considers itself part of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</li>
-<li><code class="docutils literal"><span class="pre">--members</span></code> The node passes a list of the current cluster members.  For more information on the format of these listings, see <a class="reference internal" href="#member-list-format"><span class="std std-ref">Member List Format</span></a> below.</li>
-<li><code class="docutils literal"><span class="pre">--index</span></code> The node passes a string that indicates its index value in the membership list.</li>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
 </ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="notification-cmd-example.html#example-notification-script"><span class="std std-ref">Notification Script</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="notification-command">
+<span id="notification-cmd"></span><h1>Notification Command<a class="headerlink" href="#notification-command" title="Permalink to this headline">¶</a></h1>
+<p>You can use the database client (e.g., <code class="docutils literal"><span class="pre">mysql</span></code> client) to check the status of a cluster, individual nodes, and the health of replication. However, you may find it counterproductive to log in on each node to run such checks.</p>
+<p>As an alternative and better method, Galera Cluster provides a method to call a notification script. Such a script may be customized to automate the monitoring process of a cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Only those nodes that in the <code class="docutils literal"><span class="pre">Synced</span></code> state accept connections from the cluster.  For more information on node states, see <a class="reference internal" href="node-states.html#node-state-changes"><span class="std std-ref">Node State Changes</span></a>.</p>
+<p class="last">For an example of such a custom script and related instructions, see <a class="reference internal" href="notification-cmd-example.html#example-notification-script"><span class="std std-ref">Notification Script Example</span></a>.</p>
 </div>
-<div class="section" id="node-status-strings">
-<span id="node-status"></span><h3>Node Status Strings<a class="headerlink" href="#node-status-strings" title="Permalink to this headline">¶</a></h3>
-<p>The notification command passes one of six values with the <code class="docutils literal"><span class="pre">--status</span></code> parameter to indicate the current status of the node:</p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">Undefined</span></code> Indicates a starting node that is not part of the Primary Component.</li>
-<li><code class="docutils literal"><span class="pre">Joiner</span></code> Indicates a node that is part of the Primary Component that is receiving a state  snapshot transfer.</li>
-<li><code class="docutils literal"><span class="pre">Donor</span></code> Indicates a node that is part of the Primary Component that is sending a state snapshot transfer.</li>
-<li><code class="docutils literal"><span class="pre">Joined</span></code> Indicates a node that is part of the Primary Component  that is in a complete state and is catching up with the cluster.</li>
-<li><code class="docutils literal"><span class="pre">Synced</span></code> Indicates a node that is syncrhonized with the cluster.</li>
-<li><code class="docutils literal"><span class="pre">Error</span></code> Indicates that an error has occurred.  This status string may provide an error code with more information on what occurred.</li>
+<p class="rubric-1 rubric" id="notification-cmd-parameters">Notification Parameters</p>
+<p>When a node registers a change in itself or the cluster, it will trigger the notification script or command. In so doing, it will pass certain parameters to notification script.  Below is a list of them and their basic meaning:</p>
+<ul class="no-bull simple">
+<li><code class="docutils literal"><span class="pre">--status</span></code> The node passes a string indicating its current state.  For a list of the strings it uses, see <a class="reference internal" href="#node-status"><span class="std std-ref">Node Status Strings</span></a> below.</li>
+<li><code class="docutils literal"><span class="pre">--uuid</span></code> The node passes a string, <cite>yes</cite> or <cite>no</cite>, to indicate whether it considers itself part of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</li>
+<li><code class="docutils literal"><span class="pre">--members</span></code> The node passes a list of the current cluster members.  For more information on the format of these, see <a class="reference internal" href="#member-list-format"><span class="std std-ref">Member List Format</span></a> below.</li>
+<li><code class="docutils literal"><span class="pre">--index</span></code> The node passes a string that indicates its index value in the membership list.</li>
 </ul>
-</div>
-<div class="section" id="members-list-format">
-<span id="member-list-format"></span><h3>Members List Format<a class="headerlink" href="#members-list-format" title="Permalink to this headline">¶</a></h3>
-<p>The notification command passes with the <code class="docutils literal"><span class="pre">--member</span></code> parameter a list containing entries for each node that is connected to the cluster component to which the node belongs.  For each entry in the list the node uses this format:</p>
+<p>You will have to include code in the notificaiton script to capture the values of these parameters and then have the script act as you wish (e.g., notify you of certain values).</p>
+<p>Only nodes in the <code class="docutils literal"><span class="pre">Synced</span></code> state will accept connections from the cluster.  For more information on node states, see <a class="reference internal" href="node-states.html#node-state-changes"><span class="std std-ref">Node State Changes</span></a>.</p>
+<p class="rubric-2 rubric" id="node-status">Node Status Strings</p>
+<p>The notification script may pass one of six values for the <code class="docutils literal"><span class="pre">--status</span></code> parameter to indicate the current state of the node:</p>
+<ul class="no-bull simple">
+<li><code class="docutils literal"><span class="pre">Undefined</span></code> indicates a starting node that is not part of the Primary Component.</li>
+<li><code class="docutils literal"><span class="pre">Joiner</span></code> indicates a node that is part of the Primary Component and is receiving a state snapshot transfer.</li>
+<li><code class="docutils literal"><span class="pre">Donor</span></code> indicates a node that is part of the Primary Component and is sending a state snapshot transfer.</li>
+<li><code class="docutils literal"><span class="pre">Joined</span></code> indicates a node that is part of the Primary Component and is in a complete state and is catching up with the cluster.</li>
+<li><code class="docutils literal"><span class="pre">Synced</span></code> indicates a node that is syncrhonized with the cluster.</li>
+<li><code class="docutils literal"><span class="pre">Error</span></code> indicates that an error has occurred.  This status string may provide an error code with more information on what occurred.</li>
+</ul>
+<p>Again, you will have to prepare your script to capture the value of the <code class="docutils literal"><span class="pre">--status</span></code> parameter and act accordingly.</p>
+<p class="rubric-2 rubric" id="member-list-format">Members List Format</p>
+<p>The notification script will pass with the <code class="docutils literal"><span class="pre">--member</span></code> parameter, a list containing entries for each node connected to the cluster component.  For each entry in the list the node uses this format:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>&lt;node UUID&gt; / &lt;node name&gt; / &lt;incoming address&gt;
 </pre></div>
 </div>
-<ul class="simple">
-<li><strong>Node UUID</strong>  Refers to the unique identifier the node receives from the wsrep Provider.</li>
-<li><strong>Node Name</strong> Refers to the node name, as you define it for the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> parameter, in the configuration file.</li>
-<li><strong>Incoming Address</strong> Refers to the IP address for client connections, as set for the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a> parameter, in the configuration file.</li>
+<ul class="no-bull simple">
+<li><strong>Node UUID</strong> refers to the unique identifier the node received from the wsrep Provider.</li>
+<li><strong>Node Name</strong> refers to the node name, as it&#8217;s defined with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> parameter in the configuration file.</li>
+<li><strong>Incoming Address</strong> refers to the IP address for client connections, as set with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a> parameter in the configuration file.</li>
 </ul>
-</div>
-</div>
-<div class="section" id="example-notification-script">
-<span id="id1"></span><h2>Example Notification Script<a class="headerlink" href="#example-notification-script" title="Permalink to this headline">¶</a></h2>
-<p>Nodes can call a notification script when changes happen in the membership of the cluster, that is when nodes join or leave the cluster.  You can specify the name of the script the node calls using the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a>.  While you can use whatever script meets the particular needs of your deployment, you may find it helpful to consider the example below as a starting point.</p>
-<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -eu</span>
-
-<span class="c1"># This is a simple example of wsrep notification script (wsrep_notify_cmd).</span>
-<span class="c1"># It will create &#39;wsrep&#39; schema and two tables in it: &#39;membeship&#39; and &#39;status&#39;</span>
-<span class="c1"># and fill them on every membership or node status change.</span>
-<span class="c1">#</span>
-<span class="c1"># Edit parameters below to specify the address and login to server.</span>
-
-<span class="nv">USER</span><span class="o">=</span>root
-<span class="nv">PSWD</span><span class="o">=</span>rootpass
-<span class="nv">HOST</span><span class="o">=</span>&lt;host_IP_address&gt;
-<span class="nv">PORT</span><span class="o">=</span><span class="m">3306</span>
-
-<span class="nv">SCHEMA</span><span class="o">=</span><span class="s2">&quot;wsrep&quot;</span>
-<span class="nv">MEMB_TABLE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$SCHEMA</span><span class="s2">.membership&quot;</span>
-<span class="nv">STATUS_TABLE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$SCHEMA</span><span class="s2">.status&quot;</span>
-
-<span class="nv">BEGIN</span><span class="o">=</span><span class="s2">&quot;</span>
-<span class="s2">   SET wsrep_on=0;</span>
-<span class="s2">   DROP SCHEMA IF EXISTS </span><span class="nv">$SCHEMA</span><span class="s2">; CREATE SCHEMA </span><span class="nv">$SCHEMA</span><span class="s2">;</span>
-<span class="s2">   CREATE TABLE </span><span class="nv">$MEMB_TABLE</span><span class="s2"> (</span>
-<span class="s2">      idx  INT UNIQUE PRIMARY KEY,</span>
-<span class="s2">      uuid CHAR(40) UNIQUE, /* node UUID */</span>
-<span class="s2">      name VARCHAR(32),     /* node name */</span>
-<span class="s2">      addr VARCHAR(256)     /* node address */</span>
-<span class="s2">   ) ENGINE=MEMORY;</span>
-<span class="s2">   CREATE TABLE </span><span class="nv">$STATUS_TABLE</span><span class="s2"> (</span>
-<span class="s2">      size   INT,      /* component size   */</span>
-<span class="s2">      idx    INT,      /* this node index  */</span>
-<span class="s2">      status CHAR(16), /* this node status */</span>
-<span class="s2">      uuid   CHAR(40), /* cluster UUID */</span>
-<span class="s2">      prim   BOOLEAN   /* if component is primary */</span>
-<span class="s2">   ) ENGINE=MEMORY;</span>
-<span class="s2">   BEGIN;</span>
-<span class="s2">   DELETE FROM </span><span class="nv">$MEMB_TABLE</span><span class="s2">;</span>
-<span class="s2">   DELETE FROM </span><span class="nv">$STATUS_TABLE</span><span class="s2">;</span>
-<span class="s2">&quot;</span>
-<span class="nv">END</span><span class="o">=</span><span class="s2">&quot;COMMIT;&quot;</span>
-
-configuration_change<span class="o">()</span>
-<span class="o">{</span>
-   <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$BEGIN</span><span class="s2">;&quot;</span>
-
-   <span class="nb">local</span> <span class="nv">idx</span><span class="o">=</span><span class="m">0</span>
-
-   <span class="k">for</span> NODE in <span class="k">$(</span><span class="nb">echo</span> <span class="nv">$MEMBERS</span> <span class="p">|</span> sed s/,/<span class="se">\ </span>/g<span class="k">)</span>
-   <span class="k">do</span>
-      <span class="nb">echo</span> <span class="s2">&quot;INSERT INTO </span><span class="nv">$MEMB_TABLE</span><span class="s2"> VALUES ( </span><span class="nv">$idx</span><span class="s2">, &quot;</span>
-      <span class="c1"># Don&#39;t forget to properly quote string values</span>
-      <span class="nb">echo</span> <span class="s2">&quot;&#39;</span><span class="nv">$NODE</span><span class="s2">&#39;&quot;</span> <span class="p">|</span> sed  s/<span class="se">\\</span>//<span class="se">\&#39;</span>,<span class="se">\&#39;</span>/g
-      <span class="nb">echo</span> <span class="s2">&quot;);&quot;</span>
-      <span class="nv">idx</span><span class="o">=</span><span class="k">$((</span> <span class="nv">$idx</span> <span class="o">+</span> <span class="m">1</span> <span class="k">))</span>
-   <span class="k">done</span>
-
-   <span class="nb">echo</span> <span class="s2">&quot;</span>
-<span class="s2">      INSERT INTO </span><span class="nv">$STATUS_TABLE</span><span class="s2"></span>
-<span class="s2">      VALUES(</span><span class="nv">$idx</span><span class="s2">, </span><span class="nv">$INDEX</span><span class="s2">,&#39;</span><span class="nv">$STATUS</span><span class="s2">&#39;, &#39;</span><span class="nv">$CLUSTER_UUID</span><span class="s2">&#39;, </span><span class="nv">$PRIMARY</span><span class="s2">);</span>
-<span class="s2">   &quot;</span>
-
-   <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$END</span><span class="s2">&quot;</span>
-<span class="o">}</span>
-
-status_update<span class="o">()</span>
-<span class="o">{</span>
-   <span class="nb">echo</span> <span class="s2">&quot;</span>
-<span class="s2">      SET wsrep_on=0;</span>
-<span class="s2">      BEGIN;</span>
-<span class="s2">      UPDATE </span><span class="nv">$STATUS_TABLE</span><span class="s2"> SET status=&#39;</span><span class="nv">$STATUS</span><span class="s2">&#39;;</span>
-<span class="s2">      COMMIT;</span>
-<span class="s2">   &quot;</span>
-<span class="o">}</span>
-
-<span class="nv">COM</span><span class="o">=</span>status_update <span class="c1"># not a configuration change by default</span>
-
-<span class="k">while</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span>
-<span class="k">do</span>
-   <span class="k">case</span> <span class="nv">$1</span> in
-      --status<span class="o">)</span>
-         <span class="nv">STATUS</span><span class="o">=</span><span class="nv">$2</span>
-         <span class="nb">shift</span>
-         <span class="p">;;</span>
-      --uuid<span class="o">)</span>
-         <span class="nv">CLUSTER_UUID</span><span class="o">=</span><span class="nv">$2</span>
-         <span class="nb">shift</span>
-         <span class="p">;;</span>
-      --primary<span class="o">)</span>
-         <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">PRIMARY</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="o">||</span> <span class="nv">PRIMARY</span><span class="o">=</span><span class="s2">&quot;0&quot;</span>
-         <span class="nv">COM</span><span class="o">=</span>configuration_change
-         <span class="nb">shift</span>
-         <span class="p">;;</span>
-      --index<span class="o">)</span>
-         <span class="nv">INDEX</span><span class="o">=</span><span class="nv">$2</span>
-         <span class="nb">shift</span>
-         <span class="p">;;</span>
-      --members<span class="o">)</span>
-         <span class="nv">MEMBERS</span><span class="o">=</span><span class="nv">$2</span>
-         <span class="nb">shift</span>
-         <span class="p">;;</span>
-         <span class="k">esac</span>
-         <span class="nb">shift</span>
-   <span class="k">done</span>
-
-<span class="c1"># Undefined means node is shutting down</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$STATUS</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;Undefined&quot;</span> <span class="o">]</span>
-<span class="k">then</span>
-   <span class="nv">$COM</span> <span class="p">|</span> mysql -B -u<span class="nv">$USER</span> -p<span class="nv">$PSWD</span> -h<span class="nv">$HOST</span> -P<span class="nv">$PORT</span>
-<span class="k">fi</span>
-
-<span class="nb">exit</span> <span class="m">0</span>
+<p class="rubric-1 rubric" id="enable-notification-command">Enabling the Notification Script</p>
+<p>You can enable your notification script or command through the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a> parameter in the configuration file.  Below is an excerpt from that file showing how it might look:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_notify_cmd</span><span class="o">=</span><span class="s">/path/wsrep_notify.sh</span>
 </pre></div>
 </div>
-<p>When you finish editing the script to fit your needs, you need to move it into a directory in the <code class="docutils literal"><span class="pre">$PATH</span></code> environment variable or the binaries directory for your system.  On Linux, the binaries directory is typically at <code class="docutils literal"><span class="pre">/usr/bin</span></code>, while on FreeBSD it is at <code class="docutils literal"><span class="pre">/usr/local/bin</span></code>.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> mv my-wsrep-notify.sh /usr/bin
-</pre></div>
-</div>
-<p>In addition to this, given that the notification command contains your root password, change the ownership to the <code class="docutils literal"><span class="pre">mysql</span></code> user and make the script executable only to that user.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> chown mysql:mysql /usr/bin/my-wsrep-notify.sh
-<span class="gp">#</span> chmod <span class="m">700</span> /usr/bin/my-wsrep-notify.sh.
-</pre></div>
-</div>
-<p>This ensures that only the <code class="docutils literal"><span class="pre">mysql</span></code> user executes and can read the notification script, preventing all other users from seeing your root password.</p>
-</div>
-<div class="section" id="enabling-the-notification-command">
-<span id="enable-notification-command"></span><h2>Enabling the Notification Command<a class="headerlink" href="#enabling-the-notification-command" title="Permalink to this headline">¶</a></h2>
-<p>You can enable the  notification command through the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a> parameter in the configuration file.</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_notify_cmd</span><span class="o">=</span><span class="s">/path/to/wsrep_notify.sh</span>
-</pre></div>
-</div>
-<p>The node then calls the script for each change in cluster membership and node status.  You can use these status changes in configuring load balancers, raising alerts or scripting for any other situation where you need your infrastructure to respond to changes to the cluster.</p>
+<p>The node will call the script for each change in cluster membership and node status.  You can use these status changes in configuring load balancers, raising alerts or scripting for any other situation in which you need your infrastructure to respond to changes to the cluster.</p>
 <p>Galera Cluster provides a default script, <code class="docutils literal"><span class="pre">wsrep_notify.sh</span></code>, for you to use in handling notifications or as a starting point in writing your own custom notification script.</p>
-</div>
 </div>
 
 
@@ -389,22 +290,7 @@ status_update<span class="o">()</span>
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Notification Command</a><ul>
-<li><a class="reference internal" href="#notification-command-parameters">Notification Command Parameters</a><ul>
-<li><a class="reference internal" href="#node-status-strings">Node Status Strings</a></li>
-<li><a class="reference internal" href="#members-list-format">Members List Format</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#example-notification-script">Example Notification Script</a></li>
-<li><a class="reference internal" href="#enabling-the-notification-command">Enabling the Notification Command</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="log.html"
@@ -412,8 +298,8 @@ status_update<span class="o">()</span>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="security.html"
-                          title="Next page">&rarr; Security</a></p>
+    <p class="topless"><a href="notification-cmd-example.html"
+                          title="Next page">&rarr; Notification Script Example</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -476,7 +362,7 @@ status_update<span class="o">()</span>
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="security.html" title="Security"
+          <a href="notification-cmd-example.html" title="Notification Script Example"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
           <a href="log.html" title="Database Server Logs"
@@ -495,7 +381,7 @@ status_update<span class="o">()</span>
 			
 
 			
-				<li><a href="security.html" title="Security">Next &gt;</a></li>
+				<li><a href="notification-cmd-example.html" title="Notification Script Example">Next &gt;</a></li>
 			
 
 		</ul>

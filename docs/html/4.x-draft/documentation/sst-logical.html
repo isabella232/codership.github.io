@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Logical State Snapshots within Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Logical State Snapshot &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,9 +207,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="logical-state-snapshot">
-<h1>Logical State Snapshot<a class="headerlink" href="#logical-state-snapshot" title="Permalink to this headline">¶</a></h1>
-<p id="sst-logical">There is one back-end method available for a Logical State Snapshots: <code class="docutils literal"><span class="pre">mysqldump</span></code>.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="logical-state-snapshot">
+<span id="sst-logical"></span><h1>Logical State Snapshot<a class="headerlink" href="#logical-state-snapshot" title="Permalink to this headline">¶</a></h1>
+<p>There is one back-end method available for a Logical State Snapshots: <code class="docutils literal"><span class="pre">mysqldump</span></code>.</p>
 <p>The <a class="reference internal" href="glossary.html#term-logical-state-transfer-method"><span class="xref std std-term">Logical State Transfer Method</span></a> has the following advantages:</p>
 <ul>
 <li><p class="first">These transfers are available on live servers.  In fact, only a fully initialized server can receive a Logical State Snapshot.</p>
@@ -221,8 +248,7 @@
 <li>These transfers require that you configure the receiving database server to accept root connections from potential donor nodes.</li>
 <li>The receiving server must have a non-corrupted database.</li>
 </ul>
-<div class="section" id="mysqldump">
-<span id="id1"></span><h2><code class="docutils literal"><span class="pre">mysqldump</span></code><a class="headerlink" href="#mysqldump" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="sst-mysqldump"><code class="docutils literal"><span class="pre">mysqldump</span></code></p>
 <p>The main advantage of <code class="docutils literal"><span class="pre">mysqldump</span></code> is that you can transfer a state snapshot to a working server.  That is, you start the server standalone and then instruct it to join a cluster from within the database client command line.  You can also use it to migrate from an older database format to a newer one.</p>
 <p><code class="docutils literal"><span class="pre">mysqldump</span></code> requires that the receiving node have a fully functional database, which can be empty.  It also requires the same root credentials as the donor and root access from the other nodes.</p>
 <p>This transfer method is several times slower than the others on sizable databases, but it may prove faster in cases of very small databases.  For instance, on a database that is smaller than the log files.</p>
@@ -233,16 +259,8 @@
 <p>On occasion, <code class="docutils literal"><span class="pre">mysqldump</span></code> is the only option available.  For instance, if you upgrade from a cluster using MySQL 5.1 with the built-in InnoDB support to MySQL 5.5, which uses the InnoDB plugin.</p>
 <p>The <code class="docutils literal"><span class="pre">mysqldump</span></code> script only runs on the sending node.  The output from the script gets piped to the MySQL client that connects to the joiner node.</p>
 <p>Because <code class="docutils literal"><span class="pre">mysqldump</span></code> interfaces through the database client, configuring it requires several steps beyond setting the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter.  For more information on its configuration, see:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="mysqldump.html">Enabling <code class="docutils literal"><span class="pre">mysqldump</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="mysqldump.html#configuring-sst-privileges">Configuring SST Privileges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mysqldump.html#granting-sst-privileges">Granting SST Privileges</a></li>
-</ul>
-</li>
-</ul>
-</div>
 <p>For more information on <code class="docutils literal"><span class="pre">mysqldump</span></code>, see <a class="reference external" href="http://dev.mysql.com/doc/refman/5.6/en/mysqldump.html">mysqldump Documentation</a>.</p>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -254,16 +272,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Logical State Snapshot</a><ul>
-<li><a class="reference internal" href="#mysqldump"><code class="docutils literal"><span class="pre">mysqldump</span></code></a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="sst.html"

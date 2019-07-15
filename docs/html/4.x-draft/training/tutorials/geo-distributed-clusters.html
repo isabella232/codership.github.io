@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Geo-Distributed Database Clusters with Galera" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Geo-Distributed Database Clusters with Galera &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,12 +207,32 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="geo-distributed-database-clusters-with-galera">
-<h1>Geo-Distributed Database Clusters with Galera<a class="headerlink" href="#geo-distributed-database-clusters-with-galera" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="geo-distributed-clusters">Length:  1043 words; Writer: Philip Stoev; Published: October 20, 2014; Topic: General; Level: Intermediate</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="geo-distributed-database-clusters-with-galera">
+<span id="geo-distributed-clusters"></span><h1>Geo-Distributed Database Clusters with Galera<a class="headerlink" href="#geo-distributed-database-clusters-with-galera" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  1043 words; Writer: Philip Stoev; Published: October 20, 2014; Topic: General; Level: Intermediate</p>
 <p>With Galera you can construct database clusters where each node is located in a different physical or even geographical location. In this blog post we will show some of the benefits from having such a geo-distributed cluster and the specific Galera features that enable practical replication across WAN links.</p>
-<div class="section" id="benefits-from-geo-distribution">
-<h2>Benefits from Geo-Distribution<a class="headerlink" href="#benefits-from-geo-distribution" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Benefits from Geo-Distribution</p>
 <p>Geo-distribution allows database to break out from the single data center, which opens a whole new approach to redundancy and performance.</p>
 <p><strong>Increased Redundancy</strong></p>
 <p>Having database nodes in various geographic locations increases redundancy considerably, so that a local power failure or network outage can not possibly affect all nodes in the cluster. Outages that affect multiple availability zones within a single facility are not unheard of, but Galera allows you to go beyond the availability zones and have a truly multi-datacenter database cluster.</p>
@@ -220,9 +243,7 @@
 <p><strong>Committing To Network</strong></p>
 <p>If all nodes in a cluster share a common power supply or storage infrastructure, they need to durably commit transactions to disk in order to avoid data loss due to datacenter-wide power failures or, in a cloud deployment, failures affecting the entire storage back-end. Constantly flushing transactions to disk imposes an upper bound on the number of transactions that can be committed per second, unless expensive SSDs or battery-backed write caches are used.</p>
 <p>With geographically-distributed nodes, it is possible to skip flushing every transaction to disk altogether and still have transaction persistency even after a catastrophic failure. As long as at least one node in any datacenter survived the outage, the remaining nodes, upon restart, will fetch from it all the transactions they had missed. The <code class="docutils literal"><span class="pre">innodb_flush_log_at_trx_commit</span></code> InnoDB option can be used to configure flushing behavior.</p>
-</div>
-<div class="section" id="galera-features-for-geo-distribution">
-<h2>Galera Features for Geo-Distribution<a class="headerlink" href="#galera-features-for-geo-distribution" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Galera Features for Geo-Distribution</p>
 <p>Galera Cluster does not just happen to work well in geo-distributed environments. In fact, the transaction certification and replication approach taken by Galera is uniquely suited for high-latency links. The product also includes various features and enhancements targeted specifically for geo-distribution.</p>
 <p><strong>Minimized Latency Penalty</strong></p>
 <p>With Galera Cluster, the penalty for synchronizing the nodes over a high-latency link is only incurred at commit time. There are no delays or communication between the remote nodes during the transaction itself. Galera does not use distributed locking, so each row-level lock does not have to be communicated across datacenters.</p>
@@ -249,11 +270,8 @@
 <p>Galera Cluster can be configured to use public IP addresses if individual nodes are behind NAT or have been assigned private IPs on their network interfaces.</p>
 <p><strong>Compatibility with Asynchronous Replication</strong></p>
 <p>Galera Cluster also supports traditional MySQL replication and GTIDs. In high-latency situations where complete avoidance of slave lag is not required, asynchronous replication can be set up between two otherwise independent Galera clusters, each running in its own datacenter.</p>
-</div>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Summary</p>
 <p>The case for building geo-distributed database clusters is strong. The Galera approach to replication and the specific features in the product make it practical to build Galera clusters that span multiple data centers and multiple users have such clusters already in production.</p>
-</div>
 </div>
 
 
@@ -264,18 +282,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Geo-Distributed Database Clusters with Galera</a><ul>
-<li><a class="reference internal" href="#benefits-from-geo-distribution">Benefits from Geo-Distribution</a></li>
-<li><a class="reference internal" href="#galera-features-for-geo-distribution">Galera Features for Geo-Distribution</a></li>
-<li><a class="reference internal" href="#summary">Summary</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="debug-problems-with-sst.html"
@@ -354,8 +361,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>

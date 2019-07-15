@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Troubleshooting SQL Syntax Errors in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>SQL Syntax Errors &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,9 +207,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="sql-syntax-errors">
-<h1>SQL Syntax Errors<a class="headerlink" href="#sql-syntax-errors" title="Permalink to this headline">¶</a></h1>
-<p id="kb-trouble-sql-syntax-error">When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a <a class="reference internal" href="../../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full data copy to the new node, known as the joiner. To get this snapshot, some administrators opt to use a <a class="reference internal" href="../../documentation/glossary.html#term-logical-state-transfer-method"><span class="xref std std-term">Logical State Transfer Method</span></a>, in particular <code class="docutils literal"><span class="pre">mysqldump</span></code>. This doesn&#8217;t always work well.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/sst.html"><span class="doc">SST</span></a></li>
+<li><a class="reference internal" href="../../documentation/sst-logical.html"><span class="doc">SST Logical</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="sql-syntax-errors">
+<span id="kb-trouble-sql-syntax-error"></span><h1>SQL Syntax Errors<a class="headerlink" href="#sql-syntax-errors" title="Permalink to this headline">¶</a></h1>
+<p>When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a <a class="reference internal" href="../../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full data copy to the new node, known as the joiner. To get this snapshot, some administrators opt to use a <a class="reference internal" href="../../documentation/glossary.html#term-logical-state-transfer-method"><span class="xref std std-term">Logical State Transfer Method</span></a>, in particular <code class="docutils literal"><span class="pre">mysqldump</span></code>. This doesn&#8217;t always work well.</p>
 <p class="kb rubric">Scenario</p>
 <dl class="docutils">
 <dt>Suppose a new node joins a cluster and fails to get a copy of the database, the <a class="reference internal" href="../../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> fails using <code class="docutils literal"><span class="pre">mysqldump</span></code>. Suppose further you check the database logs (e.g., <code class="docutils literal"><span class="pre">/var/log/mysqld.log</span></code>) and you see a message</dt>
@@ -214,12 +242,6 @@
 </dl>
 <p class="kb rubric">Troubleshooting</p>
 <p>This SQL statement that was logged is not the actual SQL statement; it&#8217;s a pseudo-statement.  You can find the actual error message the state transfer returned within the <code class="docutils literal"><span class="pre">SQL</span> <span class="pre">SYNTAX</span></code> entry.  It will provide the underlying SQL statement and other informaiton for correcting the problem.</p>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/sst.html"><span class="doc">SST</span></a></li>
-<li><a class="reference internal" href="../../documentation/sst-logical.html"><span class="doc">SST Logical</span></a></li>
-</ul>
 </div>
 
 

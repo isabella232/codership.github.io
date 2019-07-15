@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Deployment" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Deployment &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,9 +207,35 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="deployment">
-<h1>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h1>
-<p id="id1">When you start Galera Cluster, you have to do so by initializing a series of nodes that are configured to communicate with each other and to replicate each other.  Each node in the cluster is a particular instance of a MySQL, MariaDB, or Percona XtraDB database server.  How your application servers interact with the cluster and how you manage the load and the individual nodes represents your deployment.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="containers.html"><span class="doc">Container Deployments</span></a></li>
+<li><a class="reference internal" href="deployment-variants.html"><span class="doc">Deployment Variants</span></a></li>
+<li><a class="reference internal" href="load-balancing.html"><span class="doc">Load Balancing</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="deployment">
+<span id="id1"></span><h1>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h1>
+<p>When you start Galera Cluster, you have to do so by initializing a series of nodes that are configured to communicate with each other and to replicate each other.  Each node in the cluster is a particular instance of a MySQL, MariaDB, or Percona XtraDB database server.  How your application servers interact with the cluster and how you manage the load and the individual nodes represents your deployment.</p>
 <p><a class="reference internal" href="deployment-variants.html"><span class="doc">Cluster Deployment Variants</span></a></p>
 <p>Galera Cluster provides synchronous multi-master replication.  This means that the nodes collectively operate as a single database server that listens across many interfaces.  This section provides various examples of how you might deploy a cluster in relation to your application servers.</p>
 <p><a class="reference internal" href="load-balancing.html"><span class="doc">Load Balancing</span></a></p>

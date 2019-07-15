@@ -7,8 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Migration &#8212; Galera Cluster Documentation</title>
+    <meta content="Example of a Galera Notification Script" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
+    <title>Notification Script Example &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -31,8 +34,8 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Differences from a Standalone MySQL Server" href="differences.html" />
-    <link rel="prev" title="SELinux Configuration" href="selinux.html" />
+    <link rel="next" title="Security" href="security.html" />
+    <link rel="prev" title="Notification Command" href="notification-cmd.html" />
 
 
 
@@ -204,20 +207,155 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="migration">
-<h1>Migration<a class="headerlink" href="#migration" title="Permalink to this headline">¶</a></h1>
-<p id="migrate">In the <a class="reference internal" href="../training/tutorials/getting-started.html"><span class="doc">Getting Started Guide</span></a>, the installation guides were written on the assumption that Galera Cluster is the first database in your infrastructure. However, this won&#8217;t always be the case.  Sometimes, you may need to migrate to Galera Cluster from an existing database infrastructure: such as a single MySQL server or several database servers that were part of a MySQL master-slave cluster.</p>
-<ul>
-<li><p class="first"><a class="reference internal" href="differences.html"><span class="doc">Differences from a Standalone MySQL Server</span></a></p>
-<p>While clusters operate as distributed database servers, there are some key differences between them and the standard stand-alone MySQL implementations.</p>
-</li>
-<li><p class="first"><a class="reference internal" href="migration.html"><span class="doc">Migrating to Galera Cluster</span></a></p>
-<p>When migrating from the standard MySQL implementations to Galera Cluster, there are some additional steps that you need to take to ensure that you safely transfer the data from the existing database to the new cluster.  This section covers the procedure to update system tables and how to migrate from stand-alone MySQL, as well as from MySQL master-slave replication clusters.</p>
-</li>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
 </ul>
-<p>For more information on the installation and basic management of Galera Cluster, see the <a class="reference internal" href="../training/tutorials/getting-started.html"><span class="doc">Getting Started Guide</span></a>.</p>
-<div class="toctree-wrapper compound">
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
 </div>
+<div class="library-document section" id="notification-script-example">
+<span id="example-notification-script"></span><h1>Notification Script Example<a class="headerlink" href="#notification-script-example" title="Permalink to this headline">¶</a></h1>
+<p>Nodes can call a notification script when changes happen in the membership of the cluster, that is when nodes join or leave the cluster.  You can specify the name of the script the node calls using the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a>.  While you can use whatever script meets the particular needs of a deployment, you may find it helpful to consider the example below as a starting point.</p>
+<div class="highlight-sh"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -eu</span>
+
+<span class="c1"># This is a simple example of wsrep notification script (wsrep_notify_cmd).</span>
+<span class="c1"># It will create &#39;wsrep&#39; schema and two tables in it: &#39;membeship&#39; and &#39;status&#39;</span>
+<span class="c1"># and fill them on every membership or node status change.</span>
+<span class="c1">#</span>
+<span class="c1"># Edit parameters below to specify the address and login to server.</span>
+
+<span class="nv">USER</span><span class="o">=</span>root
+<span class="nv">PSWD</span><span class="o">=</span>rootpass
+<span class="nv">HOST</span><span class="o">=</span>&lt;host_IP_address&gt;
+<span class="nv">PORT</span><span class="o">=</span><span class="m">3306</span>
+
+<span class="nv">SCHEMA</span><span class="o">=</span><span class="s2">&quot;wsrep&quot;</span>
+<span class="nv">MEMB_TABLE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$SCHEMA</span><span class="s2">.membership&quot;</span>
+<span class="nv">STATUS_TABLE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$SCHEMA</span><span class="s2">.status&quot;</span>
+
+<span class="nv">BEGIN</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">   SET wsrep_on=0;</span>
+<span class="s2">   DROP SCHEMA IF EXISTS </span><span class="nv">$SCHEMA</span><span class="s2">; CREATE SCHEMA </span><span class="nv">$SCHEMA</span><span class="s2">;</span>
+<span class="s2">   CREATE TABLE </span><span class="nv">$MEMB_TABLE</span><span class="s2"> (</span>
+<span class="s2">      idx  INT UNIQUE PRIMARY KEY,</span>
+<span class="s2">      uuid CHAR(40) UNIQUE, /* node UUID */</span>
+<span class="s2">      name VARCHAR(32),     /* node name */</span>
+<span class="s2">      addr VARCHAR(256)     /* node address */</span>
+<span class="s2">   ) ENGINE=MEMORY;</span>
+<span class="s2">   CREATE TABLE </span><span class="nv">$STATUS_TABLE</span><span class="s2"> (</span>
+<span class="s2">      size   INT,      /* component size   */</span>
+<span class="s2">      idx    INT,      /* this node index  */</span>
+<span class="s2">      status CHAR(16), /* this node status */</span>
+<span class="s2">      uuid   CHAR(40), /* cluster UUID */</span>
+<span class="s2">      prim   BOOLEAN   /* if component is primary */</span>
+<span class="s2">   ) ENGINE=MEMORY;</span>
+<span class="s2">   BEGIN;</span>
+<span class="s2">   DELETE FROM </span><span class="nv">$MEMB_TABLE</span><span class="s2">;</span>
+<span class="s2">   DELETE FROM </span><span class="nv">$STATUS_TABLE</span><span class="s2">;</span>
+<span class="s2">&quot;</span>
+<span class="nv">END</span><span class="o">=</span><span class="s2">&quot;COMMIT;&quot;</span>
+
+configuration_change<span class="o">()</span>
+<span class="o">{</span>
+   <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$BEGIN</span><span class="s2">;&quot;</span>
+
+   <span class="nb">local</span> <span class="nv">idx</span><span class="o">=</span><span class="m">0</span>
+
+   <span class="k">for</span> NODE in <span class="k">$(</span><span class="nb">echo</span> <span class="nv">$MEMBERS</span> <span class="p">|</span> sed s/,/<span class="se">\ </span>/g<span class="k">)</span>
+   <span class="k">do</span>
+      <span class="nb">echo</span> <span class="s2">&quot;INSERT INTO </span><span class="nv">$MEMB_TABLE</span><span class="s2"> VALUES ( </span><span class="nv">$idx</span><span class="s2">, &quot;</span>
+      <span class="c1"># Don&#39;t forget to properly quote string values</span>
+      <span class="nb">echo</span> <span class="s2">&quot;&#39;</span><span class="nv">$NODE</span><span class="s2">&#39;&quot;</span> <span class="p">|</span> sed  s/<span class="se">\\</span>//<span class="se">\&#39;</span>,<span class="se">\&#39;</span>/g
+      <span class="nb">echo</span> <span class="s2">&quot;);&quot;</span>
+      <span class="nv">idx</span><span class="o">=</span><span class="k">$((</span> <span class="nv">$idx</span> <span class="o">+</span> <span class="m">1</span> <span class="k">))</span>
+   <span class="k">done</span>
+
+   <span class="nb">echo</span> <span class="s2">&quot;</span>
+<span class="s2">      INSERT INTO </span><span class="nv">$STATUS_TABLE</span><span class="s2"></span>
+<span class="s2">      VALUES(</span><span class="nv">$idx</span><span class="s2">, </span><span class="nv">$INDEX</span><span class="s2">,&#39;</span><span class="nv">$STATUS</span><span class="s2">&#39;, &#39;</span><span class="nv">$CLUSTER_UUID</span><span class="s2">&#39;, </span><span class="nv">$PRIMARY</span><span class="s2">);</span>
+<span class="s2">   &quot;</span>
+
+   <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$END</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+status_update<span class="o">()</span>
+<span class="o">{</span>
+   <span class="nb">echo</span> <span class="s2">&quot;</span>
+<span class="s2">      SET wsrep_on=0;</span>
+<span class="s2">      BEGIN;</span>
+<span class="s2">      UPDATE </span><span class="nv">$STATUS_TABLE</span><span class="s2"> SET status=&#39;</span><span class="nv">$STATUS</span><span class="s2">&#39;;</span>
+<span class="s2">      COMMIT;</span>
+<span class="s2">   &quot;</span>
+<span class="o">}</span>
+
+<span class="nv">COM</span><span class="o">=</span>status_update <span class="c1"># not a configuration change by default</span>
+
+<span class="k">while</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span>
+<span class="k">do</span>
+   <span class="k">case</span> <span class="nv">$1</span> in
+      --status<span class="o">)</span>
+         <span class="nv">STATUS</span><span class="o">=</span><span class="nv">$2</span>
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+      --uuid<span class="o">)</span>
+         <span class="nv">CLUSTER_UUID</span><span class="o">=</span><span class="nv">$2</span>
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+      --primary<span class="o">)</span>
+         <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">PRIMARY</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="o">||</span> <span class="nv">PRIMARY</span><span class="o">=</span><span class="s2">&quot;0&quot;</span>
+         <span class="nv">COM</span><span class="o">=</span>configuration_change
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+      --index<span class="o">)</span>
+         <span class="nv">INDEX</span><span class="o">=</span><span class="nv">$2</span>
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+      --members<span class="o">)</span>
+         <span class="nv">MEMBERS</span><span class="o">=</span><span class="nv">$2</span>
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+         <span class="k">esac</span>
+         <span class="nb">shift</span>
+   <span class="k">done</span>
+
+<span class="c1"># Undefined means node is shutting down</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$STATUS</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;Undefined&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+   <span class="nv">$COM</span> <span class="p">|</span> mysql -B -u<span class="nv">$USER</span> -p<span class="nv">$PSWD</span> -h<span class="nv">$HOST</span> -P<span class="nv">$PORT</span>
+<span class="k">fi</span>
+
+<span class="nb">exit</span> <span class="m">0</span>
+</pre></div>
+</div>
+<p class="rubric-1 rubric" id="notification-cmd-path-permissions">Path and Permissions</p>
+<p>After you modify this script to fit your requirements, you need to move it into a directory in the <code class="docutils literal"><span class="pre">$PATH</span></code> or the binaries directory for your system.  On Linux, the binaries directory is typically at <code class="docutils literal"><span class="pre">/usr/bin</span></code>, while on FreeBSD it is at <code class="docutils literal"><span class="pre">/usr/local/bin</span></code>.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> mv my-wsrep-notify.sh /usr/bin
+</pre></div>
+</div>
+<p>In addition to this, given that the notification command contains your root password, change the ownership to the <code class="docutils literal"><span class="pre">mysql</span></code> user and make the script is executable only by that user.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> chown mysql:mysql /usr/bin/my-wsrep-notify.sh
+<span class="gp">#</span> chmod <span class="m">700</span> /usr/bin/my-wsrep-notify.sh.
+</pre></div>
+</div>
+<p>This ensures that only the <code class="docutils literal"><span class="pre">mysql</span></code> user can execute and read the notification script, preventing all other users from seeing the root password.</p>
 </div>
 
 
@@ -231,13 +369,13 @@
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="selinux.html"
-                          title="Previous page">&larr; SELinux Configuration</a></p>
+    <p class="topless"><a href="notification-cmd.html"
+                          title="Previous page">&larr; Notification Command</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="differences.html"
-                          title="Next page">&rarr; Differences from a Standalone MySQL Server</a></p>
+    <p class="topless"><a href="security.html"
+                          title="Next page">&rarr; Security</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -288,7 +426,7 @@
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/documentation/migrate.rst.rst" title="Edit 'Migration' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/documentation/notification-cmd-example.rst.rst" title="Edit 'Notification Script Example' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -300,25 +438,26 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="differences.html" title="Differences from a Standalone MySQL Server"
+          <a href="security.html" title="Security"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="selinux.html" title="SELinux Configuration"
+          <a href="notification-cmd.html" title="Notification Command"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">The Codership Documentation</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="monitor.html" accesskey="U">Cluster Monitoring</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="selinux.html" title="SELinux Configuration">&lt; Previous</a></li>
+				<li><a href="notification-cmd.html" title="Notification Command">&lt; Previous</a></li>
 			
 
 			
-				<li><a href="differences.html" title="Differences from a Standalone MySQL Server">Next &gt;</a></li>
+				<li><a href="security.html" title="Security">Next &gt;</a></li>
 			
 
 		</ul>

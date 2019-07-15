@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Setting Parallel Slave Threads in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Setting Parallel Slave Threads &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,9 +207,35 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="setting-parallel-slave-threads">
-<h1>Setting Parallel Slave Threads<a class="headerlink" href="#setting-parallel-slave-threads" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="kb-best-parallel-slave-threads"></span><span class="target" id="index-0"></span><p id="index-1">There is no rule about how many slave threads you need for replication.  Parallel threads do not guarantee better performance, but they don&#8217;t impair regular operation performance and they may in fact speed up the synchronization of new nodes joining a cluster.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="setting-parallel-slave-threads">
+<span id="kb-best-parallel-slave-threads"></span><h1>Setting Parallel Slave Threads<a class="headerlink" href="#setting-parallel-slave-threads" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><p id="index-1">There is no rule about how many slave threads you need for replication.  Parallel threads do not guarantee better performance, but they don&#8217;t impair regular operation performance and they may in fact speed up the synchronization of new nodes joining a cluster.</p>
 <p class="kb rubric">Scenario</p>
 <p>Suppose you have a cluster of a few nodes, but occasionally you add a couple of new nodes to the cluster to handle unexpected surges in traffic.  When these surges happen, you want the new nodes to be synchronized rapidly and not be a drain on the performance of the cluster in the process.</p>
 <p>You may be able to do this, to get new nodes synchronized and handling traffic faster by making changes to a couple of settings.</p>
@@ -236,12 +265,6 @@
 <p class="first admonition-title">Warning</p>
 <p class="last">Do not use a value for <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a> that is higher than the average given by the <a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a> status variable.</p>
 </div>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a></li>
-<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a></li>
-</ul>
 </div>
 
 

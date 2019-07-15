@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Improving WAN Replication with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>WAN Replication &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,9 +207,35 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="wan-replication">
-<h1>WAN Replication<a class="headerlink" href="#wan-replication" title="Permalink to this headline">¶</a></h1>
-<p id="kb-best-wan-replication">When running the cluster over a <abbr title="Wide Area Network">WAN</abbr>, you may frequently experience transient network connectivity failures.  To prevent this from partitioning the cluster, you may want to increase the <em>keepalive</em> timeouts.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="wan-replication">
+<span id="kb-best-wan-replication"></span><h1>WAN Replication<a class="headerlink" href="#wan-replication" title="Permalink to this headline">¶</a></h1>
+<p>When running the cluster over a <abbr title="Wide Area Network">WAN</abbr>, you may frequently experience transient network connectivity failures.  To prevent this from partitioning the cluster, you may want to increase the <em>keepalive</em> timeouts.</p>
 <p class="kb rubric">Recommendations</p>
 <p>The following parameters can tolerate 30 second connectivity outages:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;evs.keepalive_period = PT3S;</span>
@@ -224,13 +253,6 @@
 <li>You want the <a class="reference internal" href="../../documentation/galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter set as high as possible to avoid partitions.  Partitions cause state transfers, which can effect performance.</li>
 <li>You must set the <a class="reference internal" href="../../documentation/galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> parameter to a value higher than that of the <a class="reference internal" href="../../documentation/galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter.</li>
 <li>You must set the <a class="reference internal" href="../../documentation/galera-parameters.html#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a> parameter to a value higher than the value of the <a class="reference internal" href="../../documentation/galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> parameter.</li>
-</ul>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter</li>
-<li><a class="reference internal" href="../../documentation/galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> parameter</li>
-<li><a class="reference internal" href="../../documentation/galera-parameters.html#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a> parameter</li>
 </ul>
 </div>
 

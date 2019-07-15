@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Provisioning Node for Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Node Provisioning &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,9 +207,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <style> .red {color:red} </style><style> .green {color:green} </style><div class="library-document section" id="node-provisioning">
-<h1>Node Provisioning<a class="headerlink" href="#node-provisioning" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="id1"></span><span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><p id="index-3">When the state of a new or failed node differs from that of the cluster&#8217;s <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, the new or failed node must be synchronized with the cluster.  Because of this, the provisioning of new nodes and the recover of failed nodes are essentially the same process as that of joining a node to the cluster Primary Component.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="node-provisioning">
+<span id="id1"></span><h1>Node Provisioning<a class="headerlink" href="#node-provisioning" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><p id="index-3">When the state of a new or failed node differs from that of the cluster&#8217;s <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, the new or failed node must be synchronized with the cluster.  Because of this, the provisioning of new nodes and the recover of failed nodes are essentially the same process as that of joining a node to the cluster Primary Component.</p>
 <p>Galera reads the initial node state ID from the <strong>grastate.txt</strong> file, found in the directory assigned by the <code class="docutils literal"><span class="pre">wsrep_data_dir</span></code> parameter.  Each time the node gracefully shuts down, Galera saves to this file.</p>
 <p>In the event that the node crashes while in <a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> mode, its database state is unknown and its initial node state remains undefined:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span>
@@ -216,8 +244,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">In normal transaction processing, only the seqno part of the GTID remains undefined, (that is, with a value of <code class="docutils literal"><span class="pre">-1</span></code>.  The UUID, (that is, the remainder of the node state), remains valid.  In such cases, you can recover the node through an <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</p>
 </div>
-<div class="section" id="how-nodes-join-the-cluster">
-<h2>How Nodes Join the Cluster<a class="headerlink" href="#how-nodes-join-the-cluster" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="node-provisioning-about-joiners">How Nodes Join the Cluster</p>
 <p>When a node joins the cluster, it compares its own <a class="reference internal" href="glossary.html#term-state-uuid"><span class="xref std std-term">state UUID</span></a> to that of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  If the state UUID does not match, the joining node requests a state transfer from the cluster.</p>
 <p>There are two options available to determining the state transfer donor:</p>
 <ul class="simple">
@@ -232,9 +259,7 @@
 <p>When a state transfer is in process, the joining node caches write-sets that it receives from other nodes in a slave queue.  Once the state transfer is complete, it applies the write-sets from the slave queue to catch up with the current Primary Component state.  Since the state snapshot carries a state UUID, it is easy to determine which write-sets the snapshot contains and which it should discard.</p>
 <p>During the catch-up phase, flow control ensures that the slave queue shortens, (that is, it limits the cluster replication rates to the write-set application rate on the node that is catching up).</p>
 <p>While there is no guarantee on how soon a node will catch up, when it does the node status updates to <code class="docutils literal"><span class="pre">SYNCED</span></code> and it begins to accept client connections.</p>
-</div>
-<div class="section" id="state-transfers">
-<span id="node-provisioning-state-transfer"></span><h2>State Transfers<a class="headerlink" href="#state-transfers" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="node-provisioning-state-transfer">State Transfers</p>
 <p>There are two types of state transfers available to bring the node up to date with the cluster:</p>
 <ul class="simple">
 <li><a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) Where donor transfers to the joining node a snapshot of the entire node state as it stands.</li>
@@ -248,7 +273,6 @@
 <li>Where there are several local or remote nodes available that can safely perform an incremental state transfer, the cluster chooses the node with the highest seqno to serve as the donor.</li>
 </ul>
 </div>
-</div>
 
 
           </div>
@@ -258,17 +282,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Node Provisioning</a><ul>
-<li><a class="reference internal" href="#how-nodes-join-the-cluster">How Nodes Join the Cluster</a></li>
-<li><a class="reference internal" href="#state-transfers">State Transfers</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="administration.html"

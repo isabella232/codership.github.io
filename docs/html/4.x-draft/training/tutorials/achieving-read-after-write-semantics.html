@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Achieving Read-After-Write Semantics with Galera" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Achieving Read-After-Write Semantics with Galera &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,23 +207,39 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="achieving-read-after-write-semantics-with-galera">
-<h1>Achieving Read-After-Write Semantics with Galera<a class="headerlink" href="#achieving-read-after-write-semantics-with-galera" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="achieving-read-after-write-semantics">Length:  599 words; Writer: Philip Stoev; Published: June 17, 2015; Topic: General; Level: Intermediate</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="achieving-read-after-write-semantics-with-galera">
+<span id="achieving-read-after-write-semantics"></span><h1>Achieving Read-After-Write Semantics with Galera<a class="headerlink" href="#achieving-read-after-write-semantics-with-galera" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  599 words; Writer: Philip Stoev; Published: June 17, 2015; Topic: General; Level: Intermediate</p>
 <p>Some applications, particularly those written with a single-node database server in mind, attempt to immediately read a value they have just inserted into the database, without making those those operations part of a single transaction. A read/write splitting proxy or a connection pool combined with a load-balancer can direct each operation to a different database node.</p>
 <p>Since Galera allows, for performance reasons, a very small amount of “slave lag”, the node that is processing the read may have not yet applied the write. It can return old data, causing an application that did not expect that to misbehave or produce an error.</p>
-<div class="section" id="the-solution">
-<h2>The Solution<a class="headerlink" href="#the-solution" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">The Solution</p>
 <p>Through the mechanism of flow control, slave lag is kept to a minimum, but additionally Galera provides the causal wait facility for those queries that must always see the most up-to-date view of the database. It allows achieving truly read-after-write semantics, where a read will always see all writes that were performed prior to it, on any node.</p>
 <p>Enabling causal wait causes Galera to wait before a query until all transactions that were started prior to the current transaction have been applied on the node. Transactions committed or updates made on other nodes after the start of the current transaction are not taken into account.</p>
-</div>
-<div class="section" id="configuring-causal-wait">
-<h2>Configuring Causal Wait<a class="headerlink" href="#configuring-causal-wait" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Configuring Causal Wait</p>
 <p>Causal wait is controlled via the wsrep_sync_wait variable. It is a bitmask that specifies what classes of queries (selects, inserts, updates, or deletes) should wait for complete synchronization. The documentation has a list of allowed values.</p>
 <p>wsrep_sync_wait is a session variable, so it can be targeted at the connections, transactions or queries that require it. The remaining application workload, which does not require the extra freshness guarantee can use the default behavior and proceed without any additional waits.</p>
-</div>
-<div class="section" id="a-practical-example">
-<h2>A Practical Example<a class="headerlink" href="#a-practical-example" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">A Practical Example</p>
 <p>Consider the case where you have set up a read/write splitting proxy in front of your application so that your writes go to the master and the reads are serviced by the slaves. Such a setup would work for a wide range of queries and applications and you would like to keep it and its performance characteristics.
 If access to the source code is available, it is possible to surgically cure problematic queries with as little change as possible. You could do the following:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SET @wsrep_sync_wait_orig = @@wsrep_sync_wait;</span>
@@ -257,7 +276,6 @@ Here is how to achieve that in various languages:</p>
 </div>
 <p>The MySQL Manual has more information on Connector/Python and option files.</p>
 </div>
-</div>
 
 
           </div>
@@ -267,18 +285,7 @@ Here is how to achieve that in various languages:</p>
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Achieving Read-After-Write Semantics with Galera</a><ul>
-<li><a class="reference internal" href="#the-solution">The Solution</a></li>
-<li><a class="reference internal" href="#configuring-causal-wait">Configuring Causal Wait</a></li>
-<li><a class="reference internal" href="#a-practical-example">A Practical Example</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="getting-started-docker-pt2.html"
@@ -357,8 +364,8 @@ Here is how to achieve that in various languages:</p>
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>

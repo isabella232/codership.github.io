@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Documentation" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>The Codership Documentation &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,30 +207,49 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="the-codership-documentation">
-<h1>The Codership Documentation<a class="headerlink" href="#the-codership-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="#"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="the-codership-documentation">
+<span id="documentation"></span><h1>The Codership Documentation<a class="headerlink" href="#the-codership-documentation" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="index-0"></span><p id="index-1">This is the Codership Documentation. It documents the latest version of Galera Cluster, as well as related Galera tools, such as the Galera Arbitrator. It may include information on features available in upcoming versins of Galera Cluster that haven&#8217;t been released yet. For such text, the new version number is noted.</p>
 <table border="1" class="doc-links docutils" id="id1">
-<caption><span class="caption-text"><a class="reference internal" href="technical-description.html"><span class="doc">Configuration</span></a></span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text"><a class="reference internal" href="technical-description.html"><span class="doc">Installation &amp; Configuration</span></a></span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
 <colgroup>
 <col width="50%" />
 <col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="tech-desc-introduction.html"><span class="doc">Database Replication</span></a></td>
+<td><a class="reference internal" href="state-transfer.html"><span class="doc">State Transfers</span></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="architecture.html"><span class="doc">Replication API</span></a></td>
 <td><a class="reference internal" href="node-states.html"><span class="doc">Flow Control</span></a></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="certification-based-replication.html"><span class="doc">Certification-Based Replication</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="install.html"><span class="doc">Installing Galera Cluster</span></a></td>
 <td><a class="reference internal" href="recovery.html"><span class="doc">Node Failure and Recovery</span></a></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="architecture.html"><span class="doc">Replication API</span></a></td>
-<td><a class="reference internal" href="weighted-quorum.html"><span class="doc">Weighted Quorum</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="certification-based-replication.html"><span class="doc">Certification-Based Replication</span></a></td>
+<td><a class="reference internal" href="weighted-quorum.html"><span class="doc">Quorum Components</span></a></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="isolation-levels.html"><span class="doc">Isolation Levels</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="isolation-levels.html"><span class="doc">Isolation Levels</span></a></td>
 <td><a class="reference internal" href="streaming-replication.html"><span class="doc">Streaming Replication</span></a></td>
-</tr>
-<tr class="row-odd"><td><a class="reference internal" href="state-transfer.html"><span class="doc">State Transfers</span></a></td>
-<td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -256,7 +278,7 @@
 <tr class="row-even"><td><a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera Cluster</span></a></td>
 <td><a class="reference internal" href="backup-cluster.html"><span class="doc">Backing Up Cluster Data</span></a></td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="pc-recovery.html"><span class="doc">Recovering the Primary Component</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="pc-recovery.html"><span class="doc">Recovering Primary Component</span></a></td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -268,11 +290,11 @@
 <col width="50%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="migrate.html"><span class="doc">Migration</span></a></td>
-<td><a class="reference internal" href="load-balancing.html"><span class="doc">Load Balancing</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="load-balancing.html"><span class="doc">Load Balancing</span></a></td>
+<td><a class="reference internal" href="deployment-variants.html"><span class="doc">Cluster Deployment Variants</span></a></td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="deployment-variants.html"><span class="doc">Cluster Deployment Variants</span></a></td>
-<td><a class="reference internal" href="containers.html"><span class="doc">Container Deployments</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="containers.html"><span class="doc">Container Deployments</span></a></td>
+<td>&nbsp;</td>
 </tr>
 </tbody>
 </table>

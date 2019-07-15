@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Load Balancing Galera Cluster Nodes" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Load Balancing &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,9 +207,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="load-balancing">
-<h1>Load Balancing<a class="headerlink" href="#load-balancing" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="id1"></span><p id="index-0">Galera Cluster guarantees node consistency regardless of where and when the query is issued. In other words, you are free to choose a load-balancing approach that best suits your purposes. If you decide to place the load balancing mechanism between the database and the application, you can consider, for example, the following tools:</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="deployment-variants.html"><span class="doc">Deployment Variants</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="load-balancing">
+<span id="id1"></span><h1>Load Balancing<a class="headerlink" href="#load-balancing" title="Permalink to this headline">¶</a></h1>
+<p>Galera Cluster guarantees node consistency regardless of where and when the query is issued. In other words, you are free to choose a load-balancing approach that best suits your purposes. If you decide to place the load balancing mechanism between the database and the application, you can consider, for example, the following tools:</p>
 <ul class="simple">
 <li><strong>HAProxy</strong> an open source TCP/HTTP load balancer.</li>
 <li><strong>Pen</strong> another open source TCP/HTTP load balancer. Pen performs better than HAProxy on SQL traffic.</li>
@@ -215,23 +242,9 @@
 <p>For more information or ideas on where to use load balancers in your infrastructure, see <a class="reference internal" href="deployment-variants.html"><span class="doc">Cluster Deployment Variants</span></a>.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ha-proxy.html">HAProxy</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ha-proxy.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ha-proxy.html#configuration">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ha-proxy.html#using-haproxy">Using HAProxy</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pen.html">Pen</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pen.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pen.html#using-pen">Using Pen</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="glb.html">Galera Load Balancer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="glb.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="glb.html#configuration">Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="glb.html#using-galera-load-balancer">Using Galera Load Balancer</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="ha-proxy.html">HAProxy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pen.html">Pen Load Balancer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glb.html">Galera Load Balancer</a></li>
 </ul>
 </div>
 </div>

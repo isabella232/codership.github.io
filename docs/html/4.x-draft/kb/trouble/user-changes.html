@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="User Changes not Replicating in Galera" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>User Changes not Replicating &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,9 +207,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="user-changes-not-replicating">
-<h1>User Changes not Replicating<a class="headerlink" href="#user-changes-not-replicating" title="Permalink to this headline">¶</a></h1>
-<p id="kb-trouble-user-changes">Galera replicates only InnoDB tables.  Therefore, databases should not use other storage engines.  However, the system tables contained in the <code class="docutils literal"><span class="pre">mysql</span></code> database use the MyISAM storage engine. This includes the <code class="docutils literal"><span class="pre">user</span></code> table and other tables containing user permissions.  Since these tables are not replicated, you must make changes to them manually on each node.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/migration.html"><span class="doc">Migration</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="user-changes-not-replicating">
+<span id="kb-trouble-user-changes"></span><h1>User Changes not Replicating<a class="headerlink" href="#user-changes-not-replicating" title="Permalink to this headline">¶</a></h1>
+<p>Galera replicates only InnoDB tables.  Therefore, databases should not use other storage engines.  However, the system tables contained in the <code class="docutils literal"><span class="pre">mysql</span></code> database use the MyISAM storage engine. This includes the <code class="docutils literal"><span class="pre">user</span></code> table and other tables containing user permissions.  Since these tables are not replicated, you must make changes to them manually on each node.</p>
 <p class="kb rubric">Scenario</p>
 <p>Suppose you have made some changes to database users, but when you check the other nodes, you find they have not replicated to the cluster. For instance, suppose you want to change the host address from which a user, <em>Bob</em> may access the cluster.  Suppose further that you had logged into a node and use an <code class="docutils literal"><span class="pre">UPDATE</span></code> statement to update the <code class="docutils literal"><span class="pre">mysql.user</span></code> table.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="nf">user</span> <span class="p">(</span><span class="n">User</span><span class="p">,</span><span class="n">Host</span><span class="p">,</span> <span class="n">Password</span><span class="p">)</span>
@@ -231,11 +258,6 @@
 </pre></div>
 </div>
 <p>This change the host address for the user in a way that replicates through the cluster.  The user may now access the database from the given IP address through any node in the cluster.</p>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/migration.html"><span class="doc">Migration</span></a></li>
-</ul>
 </div>
 
 

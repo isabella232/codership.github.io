@@ -7,8 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Recovering the Primary Component &#8212; Galera Cluster Documentation</title>
+    <meta content="Recovering a Primary Component" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
+    <title>Recovering Primary Component &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -204,13 +207,36 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="recovering-the-primary-component">
-<h1>Recovering the Primary Component<a class="headerlink" href="#recovering-the-primary-component" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="pc-recovery"></span><p id="index-0">Cluster nodes can store the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state to disk.  The node records the state of the Primary Component and the UUID&#8217;s of the nodes connected to it.  In the event of an outage, once all nodes that were part of the last saved state achieve connectivity, the cluster recovers the Primary Component.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="galera-parameters.html#pc-recovery"><span class="std std-ref">pc.recovery</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="recovering-primary-component">
+<span id="pc-recovery"></span><h1>Recovering Primary Component<a class="headerlink" href="#recovering-primary-component" title="Permalink to this headline">¶</a></h1>
+<p id="index-0">Cluster nodes can store the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state to disk.  The node records the state of the Primary Component and the UUID&#8217;s of the nodes connected to it.  In the event of an outage, once all nodes that were part of the last saved state achieve connectivity, the cluster recovers the Primary Component.</p>
 <p>In the event that the write-set position differs between the nodes, the recovery process also requires a full state snapshot transfer.</p>
 <p>For more information on this feature, see the <a class="reference internal" href="galera-parameters.html#pc-recovery"><span class="std std-ref">pc.recovery</span></a> parameter.  By default, it is enabled starting in version 3.6.</p>
-<div class="section" id="understanding-the-primary-component-state">
-<span id="understand-pc-state"></span><h2>Understanding the Primary Component State<a class="headerlink" href="#understanding-the-primary-component-state" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="understand-pc-state">Understanding the Primary Component State</p>
 <p>When a node stores the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state to disk, it saves it as the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file.  The node creates and updates this file when the cluster forms or changes the Primary Component.  This ensures that the node retains the latest Primary Component state that it was in.  If the node loses connectivity, it has the file to reference.  If the node shuts down gracefully, it deletes the file.</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>my_uuid: d3124bc8-1605-11e4-aa3d-ab44303c044a
 #vwbeg
@@ -236,9 +262,7 @@ member: d3124bc8-1605-11e4-aa3d-ab44303c044a 1
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="modifying-the-saved-primary-component-state">
-<span id="modifying-pc-state"></span><h2>Modifying the Saved Primary Component State<a class="headerlink" href="#modifying-the-saved-primary-component-state" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="modifying-pc-state">Modifying the Saved Primary Component State</p>
 <p>In the event that you find yourself in the unusual situation where you need to force certain nodes to join each other specifically, you can do so by manually changing the saved <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -291,7 +315,6 @@ member: d3124bc8-1605-11e4-aa3d-ab44303c044a 1
 </div>
 <p>Then start all three nodes without the bootstrap flag.  When they start, Galera Cluster reads the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file for each.  It pulls its UUID from the file and uses those of the <code class="docutils literal"><span class="pre">member</span></code> field to determine which nodes it should join in order to form a new Primary Component.</p>
 </div>
-</div>
 
 
           </div>
@@ -301,17 +324,7 @@ member: d3124bc8-1605-11e4-aa3d-ab44303c044a 1
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Recovering the Primary Component</a><ul>
-<li><a class="reference internal" href="#understanding-the-primary-component-state">Understanding the Primary Component State</a></li>
-<li><a class="reference internal" href="#modifying-the-saved-primary-component-state">Modifying the Saved Primary Component State</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="upgrading.html"
@@ -371,7 +384,7 @@ member: d3124bc8-1605-11e4-aa3d-ab44303c044a 1
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/documentation/pc-recovery.rst.rst" title="Edit 'Recovering the Primary Component' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/documentation/pc-recovery.rst.rst" title="Edit 'Recovering Primary Component' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">

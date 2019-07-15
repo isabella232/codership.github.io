@@ -1,9 +1,49 @@
+.. meta::
+   :title: SSL Certificates to use with Galera Cluster
+   :description:
+   :language: en-US
+   :keywords:
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+
+
+.. topic:: The Library
+   :name: left-margin
+
+   .. cssclass:: no-bull
+
+      - :doc:`Documentation <./index>`
+      - :doc:`Knowledge Base <../kb/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Troubleshooting <../kb/trouble/index>`
+         - :doc:`Best Practices <../kb/best/index>`
+
+      - :doc:`FAQ <../faq>`
+      - :doc:`Training <../training/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Tutorial Articles <../training/tutorials/index>`
+         - :doc:`Training Videos <../training/videos/index>`
+
+      .. cssclass:: bull-head
+
+         Related Documents
+
+      - :doc:`ssl-config`
+
+      .. cssclass:: bull-head
+
+         Related Articles
+
+
 .. cssclass:: library-document
+.. _`ssl-cert`:
 
 ===================
 SSL Certificates
 ===================
-.. _`ssl-cert`:
 
 
 Before you can enable encryption for your cluster, you first need to generate the relevant certificates for the nodes to use.  This procedure assumes that you are using OpenSSL.
@@ -12,10 +52,8 @@ Before you can enable encryption for your cluster, you first need to generate th
 
 
 .. _`gen-certs`:
-
--------------------------
-Generating Certificates
--------------------------
+.. rst-class:: rubric-1
+.. rubric:: Generating Certificates
 
 There are three certificates that you need to create in order to secure Galera Cluster: the Certificate Authority (CA) key and cert; the server certificate, to secure ``mysqld`` activity and replication traffic; and the client certificate to secure the database client and ``stunnel`` for state snapshot transfers.
 
@@ -23,10 +61,8 @@ There are three certificates that you need to create in order to secure Galera C
 
 
 .. _`gen-ca`:
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-CA Certificate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: CA Certificate
 
 The node uses the Certificate Authority to verify the signature on the certificates.  As such, you need this key and cert file to generate the server and client certificates.
 
@@ -49,10 +85,8 @@ This creates a key and certificate file for the Certificate Authority.  They are
 
 
 .. _`gen-server-cert`:
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Server Certificate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: Server Certificate
 
 The node uses the server certificate to secure both the database server activity and replication traffic from Galera Cluster.
 
@@ -81,10 +115,8 @@ This creates a key and certificate file for the server.  They are in the current
 
 
 .. _`gen-client-cert`:
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Client Certificate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. rst-class:: rubric-2
+.. rubric:: Client Certificate
 
 The node uses the client certificate to secure client-side activity.  In the event that you prefer physical transfer methods for state snapshot transfers, ``rsync`` for instance, the node also uses this key and certificate to secure ``stunnel``.
 
@@ -113,10 +145,8 @@ This creates a key and certificate file for the database client.  They are in th
 
 
 .. _`verify-cert`:
-
----------------------------
-Verifying the Certificates
----------------------------
+.. rst-class:: rubric-1
+.. rubric:: Verifying the Certificates
 
 When you finish creating the key and certificate files, use ``openssl`` to verify that they were generated correctly:
 

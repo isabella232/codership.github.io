@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Install MariaDB Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>MariaDB Galera Cluster - Binary Installation &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -31,7 +34,7 @@
     <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="MariaDB Galera Cluster- Source Installation" href="install-mariadb-src.html" />
+    <link rel="next" title="MariaDB Galera Cluster - Source Installation" href="install-mariadb-src.html" />
     <link rel="prev" title="Galera Cluster for MySQL - Source Installation" href="install-mysql-src.html" />
 
 
@@ -204,14 +207,37 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="mariadb-galera-cluster-binary-installation">
-<h1>MariaDB Galera Cluster - Binary Installation<a class="headerlink" href="#mariadb-galera-cluster-binary-installation" title="Permalink to this headline">¶</a></h1>
-<p id="install-mariadb-binary">MariaDB Galera Cluster is the MariaDB implementation of Galera Cluster.  Binary installation packages are available for Debian-based and RPM-based distributions of Linux through the MariaDB repository (<a class="reference external" href="https://downloads.mariadb.org/mariadb/repositories/">MariaDB Repository Generator</a>).</p>
-<div class="section" id="enabling-the-mariadb-repository">
-<span id="mariadb-repo"></span><h2>Enabling the MariaDB Repository<a class="headerlink" href="#enabling-the-mariadb-repository" title="Permalink to this headline">¶</a></h2>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/migration.html"><span class="doc">Migrating to Galera Cluster</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="mariadb-galera-cluster-binary-installation">
+<span id="install-mariadb-binary"></span><h1>MariaDB Galera Cluster - Binary Installation<a class="headerlink" href="#mariadb-galera-cluster-binary-installation" title="Permalink to this headline">¶</a></h1>
+<p>MariaDB Galera Cluster is the MariaDB implementation of Galera Cluster.  Binary installation packages are available for Debian-based and RPM-based distributions of Linux through the MariaDB repository (<a class="reference external" href="https://downloads.mariadb.org/mariadb/repositories/">MariaDB Repository Generator</a>).</p>
+<a class="tutorial-screenshot reference internal image-reference" href="../_images/mariadb-repository-tool.png"><img alt="MariaDB Repository Tool" class="tutorial-screenshot" src="../_images/mariadb-repository-tool.png" style="width: 600px;" /></a>
+<p class="rubric-1 rubric" id="mariadb-repo">Enabling the MariaDB Repository</p>
 <p>In order to install MariaDB Galera Cluster through your package manager, you need to enable the MariaDB repository on your server.  There are two different ways to accomplish this, depending on which Linux distribution you use.</p>
-<div class="section" id="enabling-the-apt-repository">
-<span id="mariadb-deb"></span><h3>Enabling the <code class="docutils literal"><span class="pre">apt</span></code> Repository<a class="headerlink" href="#enabling-the-apt-repository" title="Permalink to this headline">¶</a></h3>
+<p class="rubric-2 rubric" id="mariadb-deb">Enabling the <code class="docutils literal"><span class="pre">apt</span></code> Repository</p>
 <p>For Debian and Debian-based Linux distributions, the procedure for adding a repository requires that you first install the software properties.  The package names vary depending on your distribution.  For Debian, at the command-line execute the following:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install python-software-properties
 </pre></div>
@@ -249,11 +275,9 @@
 </div>
 <p>For more information on the MariaDB repository, package names and available mirrors, see the <a class="reference external" href="https://downloads.mariadb.org/mariadb/repositories/">MariaDB Repository Generator</a>.</p>
 <p>Packages in the MariaDB repository are now available for installation through <code class="docutils literal"><span class="pre">apt-get</span></code>.</p>
-</div>
-<div class="section" id="enabling-the-yum-repository">
-<span id="mariadb-rpm"></span><h3>Enabling the <code class="docutils literal"><span class="pre">yum</span></code> Repository<a class="headerlink" href="#enabling-the-yum-repository" title="Permalink to this headline">¶</a></h3>
-<p>For RPM-based distributions (e.g., CentOS, Red Hat and Fedora), you can enable the MariaDB repository by creating a text file with <code class="docutils literal"><span class="pre">.repo</span></code> as the file extention to the <code class="docutils literal"><span class="pre">/etc/yum/repos.d/</span></code> directory.</p>
-<p>Using a simple text editor, create a new <code class="docutils literal"><span class="pre">.repo</span></code> file containing something like the follwing:</p>
+<p class="rubric-2 rubric" id="mariadb-rpm">Enabling the <code class="docutils literal"><span class="pre">yum</span></code> Repository</p>
+<p>For RPM-based distributions (e.g., CentOS, Red Hat and Fedora), you can enable the MariaDB repository by creating a text file with <code class="docutils literal"><span class="pre">.repo</span></code> as the file extension to the <code class="docutils literal"><span class="pre">/etc/yum/repos.d/</span></code> directory.</p>
+<p>Using a simple text editor, create a new <code class="docutils literal"><span class="pre">.repo</span></code> file containing something like the following:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># MariaDB.repo</span>
 
 <span class="k">[mariadb]</span>
@@ -269,10 +293,7 @@
 <li><code class="docutils literal"><span class="pre">package</span></code> will have to be changed to the package name for your operating system distribution, release and architecture.  For example, <code class="docutils literal"><span class="pre">rhel6-amd64</span></code> would reference packages for a Red Hat Enterprise Linux 6 server running on 64-bit hardware.</li>
 </ul>
 <p>For more information on the repository, package names or available mirrors, see the <a class="reference external" href="https://downloads.mariadb.org/mariadb/repositories/">MariaDB Repository Generator</a>. It will generate the actual text you will need to put in your repository configuration file. In fact, by clicking through the choices presented, you can just copy the results and paste them into your configuration file without any modification.</p>
-</div>
-</div>
-<div class="section" id="installing-mariadb-galera-cluster">
-<span id="mariadb-install"></span><h2>Installing MariaDB Galera Cluster<a class="headerlink" href="#installing-mariadb-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="mariadb-install">Installing MariaDB Galera Cluster</p>
 <p>There are three packages involved in the installation of MariaDB Galera Cluster: the MariaDB database client, a command-line tool for accessing the database; the MariaDB database server, built to include the <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> patch; and the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>.</p>
 <p>For Debian-based distributions, from the command-line run the following command:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install mariadb-client <span class="se">\</span>
@@ -289,8 +310,7 @@
 <p>Once you&#8217;ve done this, MariaDB Galera Cluster will be installed on your server.  You&#8217;ll need to repeat this process for each node in your cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If you installed MariaDB Galera Cluster over an existing stand-alone instance of MariaDB, there are some additional steps that you&#8217;ll need to take to update your system to the new database server.  For more information on this, see <a class="reference internal" href="migration.html"><span class="doc">Migrating to Galera Cluster</span></a>.</p>
-</div>
+<p class="last">If you installed MariaDB Galera Cluster over an existing stand-alone instance of MariaDB, there are some additional steps that you&#8217;ll need to take to update your system to the new database server.  For more information on this, see <a class="reference internal" href="../training/tutorials/migration.html"><span class="doc">Migrating to Galera Cluster</span></a>.</p>
 </div>
 </div>
 
@@ -302,21 +322,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">MariaDB Galera Cluster - Binary Installation</a><ul>
-<li><a class="reference internal" href="#enabling-the-mariadb-repository">Enabling the MariaDB Repository</a><ul>
-<li><a class="reference internal" href="#enabling-the-apt-repository">Enabling the <code class="docutils literal"><span class="pre">apt</span></code> Repository</a></li>
-<li><a class="reference internal" href="#enabling-the-yum-repository">Enabling the <code class="docutils literal"><span class="pre">yum</span></code> Repository</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#installing-mariadb-galera-cluster">Installing MariaDB Galera Cluster</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="install-mysql-src.html"
@@ -325,7 +331,7 @@
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="install-mariadb-src.html"
-                          title="Next page">&rarr; MariaDB Galera Cluster- Source Installation</a></p>
+                          title="Next page">&rarr; MariaDB Galera Cluster - Source Installation</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -388,7 +394,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="install-mariadb-src.html" title="MariaDB Galera Cluster- Source Installation"
+          <a href="install-mariadb-src.html" title="MariaDB Galera Cluster - Source Installation"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
           <a href="install-mysql-src.html" title="Galera Cluster for MySQL - Source Installation"
@@ -396,9 +402,7 @@
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >The Codership Documentation</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="migrate.html" >Migration</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="migration.html" >Migrating to Galera Cluster</a> &#187;</li>
-          <li class="nav-item nav-item-4"><a href="install.html" accesskey="U">Installing Galera Cluster</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="install.html" accesskey="U">Installing Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
@@ -409,7 +413,7 @@
 			
 
 			
-				<li><a href="install-mariadb-src.html" title="MariaDB Galera Cluster- Source Installation">Next &gt;</a></li>
+				<li><a href="install-mariadb-src.html" title="MariaDB Galera Cluster - Source Installation">Next &gt;</a></li>
 			
 
 		</ul>

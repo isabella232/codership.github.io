@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="The Primary Component in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>The Primary Component in Galera Cluster &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,16 +207,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="the-primary-component-in-galera-cluster">
-<h1>The Primary Component in Galera Cluster<a class="headerlink" href="#the-primary-component-in-galera-cluster" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="primary-component">Length:  782 words; Writer: Philip Stoev; Published: August 25, 2015; Topic: General; Level: Intermediate</p>
-<p>In this post, we will describe the Primary Component, a central concept in how Galera ensures that there is no opportunity for database inconsistency or divergence between the nodes in case of a network split.</p>
-<div class="section" id="what-is-the-primary-component">
-<h2>What is the Primary Component?<a class="headerlink" href="#what-is-the-primary-component" title="Permalink to this headline">¶</a></h2>
-<p>The Primary Component is that set of Galera nodes that can communicate with each other over the network and contains the majority of the nodes. In case of a network partition, it is those nodes that can safely commit a transaction. A cluster can only have one such set of nodes, as there can only be one majority. No other set of nodes will commit transactions, thus removing the possibility of two parts of the cluster committing different transactions and thus diverging and becoming inconsistent.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
 </div>
-<div class="section" id="the-healthy-cluster">
-<h2>The Healthy Cluster<a class="headerlink" href="#the-healthy-cluster" title="Permalink to this headline">¶</a></h2>
+<div class="tutorial-article section" id="the-primary-component-in-galera-cluster">
+<span id="primary-component"></span><h1>The Primary Component in Galera Cluster<a class="headerlink" href="#the-primary-component-in-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  782 words; Writer: Philip Stoev; Published: August 25, 2015; Topic: General; Level: Intermediate</p>
+<p>In this post, we will describe the Primary Component, a central concept in how Galera ensures that there is no opportunity for database inconsistency or divergence between the nodes in case of a network split.</p>
+<p class="rubric-1 rubric">What is the Primary Component?</p>
+<p>The Primary Component is that set of Galera nodes that can communicate with each other over the network and contains the majority of the nodes. In case of a network partition, it is those nodes that can safely commit a transaction. A cluster can only have one such set of nodes, as there can only be one majority. No other set of nodes will commit transactions, thus removing the possibility of two parts of the cluster committing different transactions and thus diverging and becoming inconsistent.</p>
+<p class="rubric-1 rubric">The Healthy Cluster</p>
 <p>In a healthy cluster, all nodes nodes can communicate with each other, so they all belong to the Primary Component and can all receive updates. There are no network partitions and therefore there are no nodes which have become separated. The wsrep_cluster_status status variable reports Primary on all nodes.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">MySQL [test]&gt; show status like &#39;wsrep_cluster_status&#39;;</span>
 
@@ -237,22 +258,16 @@
 </pre></div>
 </div>
 <p>If you have a need for the data to be replicated to N servers or locations for reliability reasons, configure your monitoring framework to alert you if the value of <code class="docutils literal"><span class="pre">wsrep_cluster_size</span></code> drops below N.</p>
-</div>
-<div class="section" id="handling-network-partitions">
-<h2>Handling Network Partitions<a class="headerlink" href="#handling-network-partitions" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Handling Network Partitions</p>
 <p>If one or more nodes becomes separated from the Cluster by a network partition, each node in the cluster will decide if it is on the majority (primary) or the minority side of the partition.</p>
 <p>The nodes that detect they are in the minority will transition to a state of Non-Primary and refuse further queries. Writes to those nodes will be prevented as they can no longer guarantee that a conflicting write is not being performed on the Primary Component at the same time.</p>
 <p>Reading from the non-Primary nodes will also be disabled, as they are no longer up-to-date with respect to the authoritative data held on the majority portion of the cluster.</p>
 <p>Any transactions that were being committed while the network outage was in the process of being detected will return an error and must be retried by the application.</p>
 <p>The nodes that detect they are in the majority will remain in a state of Primary and will continue to process future transactions. The value of the <code class="docutils literal"><span class="pre">wsrep_cluster_size</span></code> on those nodes will reflect the size of the now reduced primary component of the cluster.</p>
-</div>
-<div class="section" id="recovery-after-a-network-partition">
-<h2>Recovery after a Network Partition<a class="headerlink" href="#recovery-after-a-network-partition" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Recovery after a Network Partition</p>
 <p>As soon as the network partition or the outage is healed, any nodes not in the Primary component that have continued to run will synchronize with the nodes from the Primary component and will rejoin the cluster. The <code class="docutils literal"><span class="pre">wsrep_cluster_size</span></code> will increase accordingly with the number of nodes that have rejoined.</p>
 <p>Any nodes where the mysqld processes have terminated will need to be restarted in order to rejoin.</p>
-</div>
-<div class="section" id="the-split-brain-problem">
-<h2>The Split Brain Problem<a class="headerlink" href="#the-split-brain-problem" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">The Split Brain Problem</p>
 <p>A problem that happens both in theory and in practice is the so called split-brain situation, where the cluster gets split by a network outage into two exactly equal parts. A software system that is not prepared to handle that eventuality could allow conflicting transactions to be executed on the separate parts of the cluster while they are not coordinating. This would cause the databases on each side to diverge without the possibility of an automatic reconciliation later.</p>
 <p>Galera Cluster safeguards against this particular problem. As no set of nodes will have the majority, no part of the cluster can be considered Primary, so all parts of the cluster will transition to state of Non-Primary, all refusing further queries in order to protect the integrity of the database.</p>
 <p>To prevent split-brain scenarios, never use an even number of nodes or data centers in your setup. If it is not practical to do so, Galera provides several alternatives:</p>
@@ -260,7 +275,6 @@
 <li>Install a Galera Arbitrator process to serve for the purpose of breaking ties. Note that this process, even though not a fully-featured database, continues to receive all replication traffic, so must be secured appropriately and provided with sufficient bandwidth.</li>
 <li>Use the <code class="docutils literal"><span class="pre">pc.weight</span></code> setting of <code class="docutils literal"><span class="pre">wsrep_provider_options</span></code> to assign a weight greater than 1 to one of the nodes; This weight will then be considered in majority calculations and ties may be avoided;</li>
 </ul>
-</div>
 </div>
 
 
@@ -271,20 +285,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">The Primary Component in Galera Cluster</a><ul>
-<li><a class="reference internal" href="#what-is-the-primary-component">What is the Primary Component?</a></li>
-<li><a class="reference internal" href="#the-healthy-cluster">The Healthy Cluster</a></li>
-<li><a class="reference internal" href="#handling-network-partitions">Handling Network Partitions</a></li>
-<li><a class="reference internal" href="#recovery-after-a-network-partition">Recovery after a Network Partition</a></li>
-<li><a class="reference internal" href="#the-split-brain-problem">The Split Brain Problem</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="geo-distributed-clusters.html"
@@ -363,8 +364,8 @@
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>

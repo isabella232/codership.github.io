@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Handling WAN Latency in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>WAN Latency &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,9 +207,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="kb-article section" id="wan-latency">
-<h1>WAN Latency<a class="headerlink" href="#wan-latency" title="Permalink to this headline">¶</a></h1>
-<p id="kb-best-wan-latency">When using Galera Cluster over a <abbr title="Wide Area Network">WAN</abbr>, remember that WAN links can have exceptionally high latency.  You can check this by taking Round-Trip Time (RTT) measurements between cluster nodes. If there is a latency, you can correct for this by adjusting all of the temporal parameters.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/galera-parameters.html#evs-join-retrans-period"><span class="std std-ref">evs.join_retrans_period</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="kb-article section" id="wan-latency">
+<span id="kb-best-wan-latency"></span><h1>WAN Latency<a class="headerlink" href="#wan-latency" title="Permalink to this headline">¶</a></h1>
+<p>When using Galera Cluster over a <abbr title="Wide Area Network">WAN</abbr>, remember that WAN links can have exceptionally high latency.  You can check this by taking Round-Trip Time (RTT) measurements between cluster nodes. If there is a latency, you can correct for this by adjusting all of the temporal parameters.</p>
 <p class="kb rubric">Recommendations</p>
 <p>To take RTT measurements, use <code class="docutils literal"><span class="pre">ping</span></code> on each cluster node to ping the others.  For example, if you were to log into the node at <code class="docutils literal"><span class="pre">192.168.1.1</span></code>, you might execute something like the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> ping -c <span class="m">3</span> <span class="m">192</span>.168.1.2
@@ -228,11 +255,6 @@
 </pre></div>
 </div>
 <p>This allows the cluster to compensate for the latency issues of the <abbr title="Wide Area Network">WAN</abbr> links between the cluster nodes.</p>
-<p class="kb rubric">Additional Information</p>
-<p>For more information related to this KB article, see the following documents:</p>
-<ul class="simple">
-<li><a class="reference internal" href="../../documentation/galera-parameters.html#evs-join-retrans-period"><span class="std std-ref">evs.join_retrans_period</span></a></li>
-</ul>
 </div>
 
 

@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Debugging Transaction Conflicts in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Debugging Transaction Conflicts in Galera Cluster &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,14 +207,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="debugging-transaction-conflicts-in-galera-cluster">
-<h1>Debugging Transaction Conflicts in Galera Cluster<a class="headerlink" href="#debugging-transaction-conflicts-in-galera-cluster" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="debugging-transaction-conflicts">Length:  1,086 words; Writer: Philip Stoev; Published: June 29, 2015; Topic: General; Level: Beginner</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="debugging-transaction-conflicts-in-galera-cluster">
+<span id="debugging-transaction-conflicts"></span><h1>Debugging Transaction Conflicts in Galera Cluster<a class="headerlink" href="#debugging-transaction-conflicts-in-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  1,086 words; Writer: Philip Stoev; Published: June 29, 2015; Topic: General; Level: Beginner</p>
 <p>If you are using Galera Cluster in multi-master mode, you will most likely run into transaction conflicts if two clients attempt to modify the same row at the same time. Such conflicts are reported a deadlock errors to the application.
 Legacy applications are frequently unable to handle transaction conflicts properly and may not provide sufficient information to debug the source of the problem.</p>
 <p>If the <code class="docutils literal"><span class="pre">wsrep_log_conflicts</span></code> option is set, Galera can output all the information about transaction conflicts that is available to it to the error log. As it is a dynamic option, you can enable it while the server is running, collect some entries for examination, and disable it to avoid filling up the log.</p>
-<div class="section" id="decoding-the-output">
-<h2>Decoding the Output<a class="headerlink" href="#decoding-the-output" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Decoding the Output</p>
 <p>The output from <code class="docutils literal"><span class="pre">wsrep_log_conflicts</span></code> may look a bit intimidating at first, but in fact contains a lot of information that can be used to pin-point the offending application, module or SQL operation. The relevant pieces of information have been underlined:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">*** Priority TRANSACTION:</span>
 <span class="go">TRANSACTION 1375, ACTIVE 0 sec starting index read</span>
@@ -267,9 +290,7 @@ This section comes directly from the InnoDB storage engine and follows the forma
 As the key is declared as <code class="docutils literal"><span class="pre">UNSIGNED</span> <span class="pre">INTEGER</span></code>, the value has a leading sign bit that should be taken into account when converting to decimal.</p>
 <p>problematic_key_value21 - any string fields will be decoded and visible in the output.</p>
 <p>seqno: 24 - the binary log ID of the winning transaction.</p>
-</div>
-<div class="section" id="determining-the-winning-transaction">
-<h2>Determining the Winning Transaction<a class="headerlink" href="#determining-the-winning-transaction" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Determining the Winning Transaction</p>
 <p>All the information from the output above, except for the seqno, pertains to the victim transaction of a conflict. Sometimes it is useful to determine the transaction that won the conflict and was not aborted, and the seqno can be used to obtain that information from the binary log.</p>
 <p>In order to be able to fetch this information, the server needs to be running with binary logging enabled. If <code class="docutils literal"><span class="pre">log-slave-updates</span></code> is enabled, then the binlog on each server will contain all updates, so only one server needs to be searched in order to find the transaction. Otherwise the binlogs of all servers need to be searched separately.</p>
 <p>MariaDB Cluster provides the actual SQL update statements from the transaction if the <code class="docutils literal"><span class="pre">--binlog-annotate-row-events</span></code> option is enabled. Galera Cluster and Percona XtraDB Cluster will only provide a list of the updates made by the transaction.</p>
@@ -304,7 +325,6 @@ As the key is declared as <code class="docutils literal"><span class="pre">UNSIG
 </div>
 <p>From this output, we can see what updates the winning transaction made, as artificially-generated SQL statements. MariaDB Cluster with <code class="docutils literal"><span class="pre">--binlog-annotate-row-events</span></code> would provide the original SQL that was issued.</p>
 </div>
-</div>
 
 
           </div>
@@ -314,17 +334,7 @@ As the key is declared as <code class="docutils literal"><span class="pre">UNSIG
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Debugging Transaction Conflicts in Galera Cluster</a><ul>
-<li><a class="reference internal" href="#decoding-the-output">Decoding the Output</a></li>
-<li><a class="reference internal" href="#determining-the-winning-transaction">Determining the Winning Transaction</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="achieving-read-after-write-semantics.html"
@@ -403,8 +413,8 @@ As the key is declared as <code class="docutils literal"><span class="pre">UNSIG
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>

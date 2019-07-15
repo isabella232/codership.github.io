@@ -1,4 +1,43 @@
+.. meta::
+   :title: High Availability with Galera Cluster
+   :description:
+   :language: en-US
+   :keywords:
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+
+
+.. topic:: The Library
+   :name: left-margin
+
+   .. cssclass:: no-bull
+
+      - :doc:`Documentation <../../documentation/index>`
+      - :doc:`Knowledge Base <../../kb/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Troubleshooting <../../kb/trouble/index>`
+         - :doc:`Best Practices <../../kb/best/index>`
+
+      - :doc:`FAQ <../../faq>`
+      - :doc:`Training <../index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Tutorial Articles <../tutorials/index>`
+         - :doc:`Training Videos <./index>`
+
+      .. cssclass:: bull-head
+
+         Related Documents
+
+      .. cssclass:: bull-head
+
+         Related Articles
+
+
 .. cssclass:: tutorial-video
+.. _`video-high-availability-galera`:
 
 ======================================
 High Availability with Galera Cluster
@@ -15,11 +54,3 @@ The MySQL Server High Availability landscape provides with a slew of tools to he
 .. raw:: html
 
     <iframe width="560" height="315" src="http://www.youtube.com/embed/qjquSaWfO4s?rel=0" frameborder="0" allowfullscreen></iframe>
-
-
-.. rubric:: Additional Information
-   :class: kb
-
-For more information related to this video, see the following:
-
-- :doc:`Frequently Asked Questions <../../faq>`

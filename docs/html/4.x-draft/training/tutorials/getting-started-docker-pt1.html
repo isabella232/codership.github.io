@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Getting Started Galera with Docker, Part 1" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Getting Started Galera with Docker, Part 1 &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -32,7 +35,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Getting Started Galera with Docker, Part 2" href="getting-started-docker-pt2.html" />
-    <link rel="prev" title="Restarting the Cluster" href="restarting-cluster.html" />
+    <link rel="prev" title="Migrating to Galera Cluster" href="migration.html" />
 
 
 
@@ -204,9 +207,30 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="getting-started-galera-with-docker-part-1">
-<h1>Getting Started Galera with Docker, Part 1<a class="headerlink" href="#getting-started-galera-with-docker-part-1" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="getting-started-docker-pt1">Length: 762 words; Writer: Erkan Yanar; Published: May 6, 2015; Topic: Container; Level: Intermediate</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="getting-started-galera-with-docker-part-1">
+<span id="getting-started-docker-pt1"></span><h1>Getting Started Galera with Docker, Part 1<a class="headerlink" href="#getting-started-galera-with-docker-part-1" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length: 762 words; Writer: Erkan Yanar; Published: May 6, 2015; Topic: Container; Level: Intermediate</p>
 <p>Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications. Consisting of Docker Engine, a portable, lightweight runtime and packaging tool, and Docker Hub, a cloud service for sharing applications and automating workflows, Docker enables apps to be quickly assembled from components and eliminates the friction between development, QA, and production environments. As a result, it can ship faster and run the same app, unchanged, on laptops, data center VMs, and any cloud.</p>
 <p>This is the first of a series of blog posts about using Galera with Docker. In this post, we are going to get started with Docker and Galera:</p>
 <ul class="simple">
@@ -214,8 +238,7 @@
 <li>Deploy on a test cluster on a local machine</li>
 </ul>
 <p>The instructions have been tested on Ubuntu 14.04 with Docker 1.5.</p>
-<div class="section" id="build-a-basic-docker-image">
-<h2>Build a Basic Docker Image<a class="headerlink" href="#build-a-basic-docker-image" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Build a Basic Docker Image</p>
 <p>In Docker, Dockerfiles are used to describe the Docker images we are going to use to start our Galera Cluster. We are using the following Dockerfile:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">FROM ubuntu:14.04</span>
 <span class="go">MAINTAINER Erkan Yanar &lt;erkan.yanar@linsenraum.de&gt;</span>
@@ -251,13 +274,9 @@
 </pre></div>
 </div>
 <p>(All commands in this article need to run as root.)</p>
-</div>
-<div class="section" id="deploy-on-a-test-cluster-on-a-local-machine">
-<h2>Deploy on a Test Cluster on a Local Machine<a class="headerlink" href="#deploy-on-a-test-cluster-on-a-local-machine" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Deploy on a Test Cluster on a Local Machine</p>
 <p>Next, we are going to start a Galera Cluster on the local host. The instructions below are for demonstration purposes only and will not work when deploying on multiple hosts, as networking between containers needs to be set up. Configuring Docker networking across multiple hosts will be described in a following post.</p>
-</div>
-<div class="section" id="starting-a-cluster">
-<h2>Starting a Cluster<a class="headerlink" href="#starting-a-cluster" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Starting a Cluster</p>
 <p>There have been a number of blog posts showing how to start Galera Cluster on a single host. This post is going to show the simplest way to do that in Docker by using simple commands, which will not work for a multi-host installation. First, if working on Ubuntu, we need to put AppArmor’s Docker profile in complain mode in advance.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo aa-complain /etc/apparmor.d/docker
 </pre></div>
@@ -283,9 +302,7 @@ For the next two containers, we use a simple Docker trick. The <cite>–link</ci
 <span class="go">+--------------------+-------+</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Summary</p>
 <p>We built a simple Galera Cluster on one host.</p>
 <ul class="simple">
 <li>Without using SSH;</li>
@@ -293,7 +310,6 @@ For the next two containers, we use a simple Docker trick. The <cite>–link</ci
 </ul>
 <p>Note that this setup does not support restarting the container — you should remove the container and recreate it instead.</p>
 <p>In the next blog post we will describe deploying Galera with Docker on multiple hosts.</p>
-</div>
 </div>
 
 
@@ -304,23 +320,11 @@ For the next two containers, we use a simple Docker trick. The <cite>–link</ci
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Getting Started Galera with Docker, Part 1</a><ul>
-<li><a class="reference internal" href="#build-a-basic-docker-image">Build a Basic Docker Image</a></li>
-<li><a class="reference internal" href="#deploy-on-a-test-cluster-on-a-local-machine">Deploy on a Test Cluster on a Local Machine</a></li>
-<li><a class="reference internal" href="#starting-a-cluster">Starting a Cluster</a></li>
-<li><a class="reference internal" href="#summary">Summary</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="restarting-cluster.html"
-                          title="Previous page">&larr; Restarting the Cluster</a></p>
+    <p class="topless"><a href="migration.html"
+                          title="Previous page">&larr; Migrating to Galera Cluster</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -391,19 +395,19 @@ For the next two containers, we use a simple Docker trick. The <cite>–link</ci
           <a href="getting-started-docker-pt2.html" title="Getting Started Galera with Docker, Part 2"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="restarting-cluster.html" title="Restarting the Cluster"
+          <a href="migration.html" title="Migrating to Galera Cluster"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="restarting-cluster.html" title="Restarting the Cluster">&lt; Previous</a></li>
+				<li><a href="migration.html" title="Migrating to Galera Cluster">&lt; Previous</a></li>
 			
 
 			

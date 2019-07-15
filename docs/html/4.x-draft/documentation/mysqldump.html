@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Using mysqldump to Synchronize and Provision Nodes" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Enabling mysqldump &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,11 +207,35 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="enabling-mysqldump">
-<h1>Enabling <code class="docutils literal"><span class="pre">mysqldump</span></code><a class="headerlink" href="#enabling-mysqldump" title="Permalink to this headline">¶</a></h1>
-<p id="mysqldump">The <a class="reference internal" href="glossary.html#term-logical-state-transfer-method"><span class="xref std std-term">Logical State Transfer Method</span></a> <code class="docutils literal"><span class="pre">mysqldump</span></code> works by interfacing through the database server rather than the physical data.  As such, it requires some additional configuration, besides setting the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter.</p>
-<div class="section" id="configuring-sst-privileges">
-<span id="sst-privileges"></span><h2>Configuring SST Privileges<a class="headerlink" href="#configuring-sst-privileges" title="Permalink to this headline">¶</a></h2>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="enabling-mysqldump">
+<span id="mysqldump"></span><h1>Enabling <code class="docutils literal"><span class="pre">mysqldump</span></code><a class="headerlink" href="#enabling-mysqldump" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="glossary.html#term-logical-state-transfer-method"><span class="xref std std-term">Logical State Transfer Method</span></a>, <code class="docutils literal"><span class="pre">mysqldump</span></code> works by interfacing through the database server rather than the physical data.  As such, it requires some additional configuration, besides setting the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter.</p>
+<p class="rubric-1 rubric" id="sst-privileges">Configuring SST Privileges</p>
 <p>In order for <code class="docutils literal"><span class="pre">mysqldump</span></code> to interface with the database server, it requires root connections for both the donor and joiner nodes.  You can enable this through the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a> parameter.</p>
 <p>Using a text editor, open the <code class="docutils literal"><span class="pre">wsrep.cnf</span></code> file&#8211;it should be in the <code class="docutils literal"><span class="pre">/etc/mysql/conf.d/</span></code> directory.  Add a line like the following to that file:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># wsrep SST Authentication</span>
@@ -216,9 +243,7 @@
 </pre></div>
 </div>
 <p>You would use your own authentication parameters in place of <code class="docutils literal"><span class="pre">wsrep_sst_user</span></code> and <code class="docutils literal"><span class="pre">password</span></code>. This line will provide authentication information that the node will need to establish connections. Use the same values for every node in the cluster.</p>
-</div>
-<div class="section" id="granting-sst-privileges">
-<span id="sst-authorization"></span><h2>Granting SST Privileges<a class="headerlink" href="#granting-sst-privileges" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="sst-authorization">Granting SST Privileges</p>
 <p>When the database server starts, it will read from the <code class="docutils literal"><span class="pre">wsrep.cnf</span></code> file to get the authentication information it needs to access another database server.  In order for the node to accept connections from the cluster, you must also create and configure the State Snapshot Transfer user through the database client.</p>
 <p>In order to do this, you need to start the database server.  If you haven&#8217;t used this node on the cluster before, start it with replication disabled.  For servers that use <code class="docutils literal"><span class="pre">init</span></code>, execute the following from the command-line:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql start --wsrep-on<span class="o">=</span>off
@@ -247,7 +272,6 @@
 </pre></div>
 </div>
 </div>
-</div>
 
 
           </div>
@@ -257,17 +281,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Enabling <code class="docutils literal"><span class="pre">mysqldump</span></code></a><ul>
-<li><a class="reference internal" href="#configuring-sst-privileges">Configuring SST Privileges</a></li>
-<li><a class="reference internal" href="#granting-sst-privileges">Granting SST Privileges</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="sst-logical.html"

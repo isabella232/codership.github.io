@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster with Packet Filtering" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Firewall Configuration with PF &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,15 +207,35 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="firewall-configuration-with-pf">
-<h1>Firewall Configuration with PF<a class="headerlink" href="#firewall-configuration-with-pf" title="Permalink to this headline">¶</a></h1>
-<p id="firewall-pf">FreeBSD provides packet filtering support at the kernel level.  Using PF you can set up, maintain and inspect the packet filtering rule sets.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="firewall-configuration-with-pf">
+<span id="firewall-pf"></span><h1>Firewall Configuration with PF<a class="headerlink" href="#firewall-configuration-with-pf" title="Permalink to this headline">¶</a></h1>
+<p>FreeBSD provides packet filtering (i.e., <a class="reference internal" href="glossary.html#term-pf"><span class="xref std std-term">PF</span></a>) support at the kernel level.  Using PF you can set up, maintain and inspect the packet filtering rule sets.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Different versions of FreeBSD use different versions of PF.  Examples here are from FreeBSD 10.1, which uses the same version of PF as OpenBSD 4.5.</p>
 </div>
-<div class="section" id="enabling-pf">
-<span id="using-pf"></span><h2>Enabling PF<a class="headerlink" href="#enabling-pf" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="using-pf">Enabling PF</p>
 <p>In order to use PF on FreeBSD, you must first set the system up to load its kernel module.  Additionally, you need to set the path to the configuration file for PF.</p>
 <p>Using your preferred text editor, add the following lines to <code class="docutils literal"><span class="pre">/etc/rc.conf</span></code>:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">pf_enable=&quot;YES&quot;</span>
@@ -225,9 +248,7 @@
 </pre></div>
 </div>
 <p>FreeBSD now loads the PF kernel module with logging features at boot.</p>
-</div>
-<div class="section" id="configuring-pf-rules">
-<span id="pf-config"></span><h2>Configuring PF Rules<a class="headerlink" href="#configuring-pf-rules" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="pf-config">Configuring PF Rules</p>
 <p>In the above section, the configuration file for PF was set to <code class="docutils literal"><span class="pre">/etc/pf.conf</span></code>.  This file allows you to set up the default firewall configuration that you want to use on your server.  The settings you add to this file are the same for each cluster node.</p>
 <p>There are two variables that you need to define for Galera Cluster in the PF configuration file:  a list for the ports it needs open for <abbr title="Transmission Control Protocol">TCP</abbr> and a table for the IP addresses of nodes in the cluster.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> Galera Cluster Macros
@@ -240,7 +261,7 @@
 <span class="go">pass in proto tcp from &lt;wsrep_cluster_address&gt; to any port $wsrep_ports keep state</span>
 </pre></div>
 </div>
-<p>In the event that you deployed your cluster in a <abbr title="Local Area Network">LAN</abbr> environment, you need to also create on additional rule to open port <code class="docutils literal"><span class="pre">4568</span></code> to <abbr title="User Datagram Protocol">UDP</abbr> transport for mutlicast replication.</p>
+<p>If you deployed a cluster in a <abbr title="Local Area Network">LAN</abbr> environment, you need to also create on additional rule to open port <code class="docutils literal"><span class="pre">4568</span></code> to <abbr title="User Datagram Protocol">UDP</abbr> transport for mutlicast replication.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> Galera Cluster UDP Filter Rule
 <span class="go">pass in proto udp from &lt;wsrep_cluster_address&gt; to any port 4568 keep state</span>
 </pre></div>
@@ -262,9 +283,7 @@
 <p class="first admonition-title">Warning</p>
 <p class="last">The IP addresses in the example are for demonstration purposes only.  Use the real values from your nodes and netmask in your PF configuration.</p>
 </div>
-</div>
-<div class="section" id="starting-pf">
-<span id="pf-start"></span><h2>Starting PF<a class="headerlink" href="#starting-pf" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="pf-start">Starting PF</p>
 <p>When you finish configuring packet filtering for Galera Cluster and for any other service you may require on your FreeBSD server, you can start the service.  This is done with two commands: one to start the service itself and one to start the logging service.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service pf start
 <span class="gp">#</span> service pflog start
@@ -273,7 +292,6 @@
 <p>In the event that you have PF running already and want to update the rule set to use the settings in the configuration file for PF, (for example, the rules you added for Galera Cluster), you can load the new rules through the <code class="docutils literal"><span class="pre">pfctl</span></code> command.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> pfctl -f /etc/pf.conf
 </pre></div>
-</div>
 </div>
 </div>
 
@@ -285,18 +303,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Firewall Configuration with PF</a><ul>
-<li><a class="reference internal" href="#enabling-pf">Enabling PF</a></li>
-<li><a class="reference internal" href="#configuring-pf-rules">Configuring PF Rules</a></li>
-<li><a class="reference internal" href="#starting-pf">Starting PF</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="firewalld.html"

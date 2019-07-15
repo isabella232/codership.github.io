@@ -7,7 +7,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Galera Cluster Administration" name="title" />
+<meta content="A menu of pages on the administration and management of Galera Cluster." name="description" />
+<meta content="en-US" name="language" />
+<meta content="galera, cluster, mysql, mariadb, dba, admin, node provisioning" name="keywords" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Galera Cluster Administration &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -32,7 +37,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Node Provisioning" href="node-provisioning.html" />
-    <link rel="prev" title="Streaming Replication" href="streaming-replication.html" />
+    <link rel="prev" title="Percona XtraDB Cluster - Source Installation" href="install-xtradb-src.html" />
 
 
 
@@ -204,11 +209,53 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="galera-cluster-administration">
-<h1>Galera Cluster Administration<a class="headerlink" href="#galera-cluster-administration" title="Permalink to this headline">¶</a></h1>
-<p id="administration">With the basics of how the cluster works and how to install and initialize it covered, this part begins a five part series on the administration and management of Galera Cluster.</p>
-<p>The sections in this part relate to the administration of nodes and the cluster.  <a class="reference internal" href="deployment.html"><span class="doc">Deployment</span></a>, covers how to use Galera Cluster in relation to your wider infrastructure, how to configure load balancers to work with the cluster and edge case deployments, such as running nodes in containers.  The pages in <a class="reference internal" href="monitor.html"><span class="doc">Cluster Monitoring</span></a> show how to keep tabs on the status of the cluster and automate reporting.  <a class="reference internal" href="security.html"><span class="doc">Security</span></a> covers configuring Galera Cluster to work with firewalls, SELinux and SSL encryption.  <a class="reference internal" href="migrate.html"><span class="doc">Migration</span></a> how to transition from a standalone instance of MySQL, MariaDB or Percona XtraDB to Galera Cluster.</p>
-<p class="rubric" id="node-admin">Node Administration</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="no-bull bull-head">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="arbitrator.html"><span class="doc">Arbitrator</span></a></li>
+<li><a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a></li>
+<li><a class="reference internal" href="backup-cluster.html"><span class="doc">Backups</span></a></li>
+<li><a class="reference internal" href="monitor.html"><span class="doc">Cluster Monitoring</span></a></li>
+<li><a class="reference internal" href="deployment.html"><span class="doc">Deployment</span></a></li>
+<li><a class="reference internal" href="managing-fc.html"><span class="doc">Flow Control</span></a></li>
+<li><a class="reference internal" href="system-tables.html"><span class="doc">Galera System Tables</span></a></li>
+<li><a class="reference internal" href="node-provisioning.html"><span class="doc">Node Provisioning</span></a></li>
+<li><a class="reference internal" href="pc-recovery.html"><span class="doc">Recover Primary</span></a></li>
+<li><a class="reference internal" href="quorum-reset.html"><span class="doc">Reset Quorum</span></a></li>
+<li><a class="reference internal" href="schema-upgrades.html"><span class="doc">Schema Upgrades</span></a></li>
+<li><a class="reference internal" href="scriptable-sst.html"><span class="doc">Scriptable SST</span></a></li>
+<li><a class="reference internal" href="security.html"><span class="doc">Security</span></a></li>
+<li><a class="reference internal" href="sst.html"><span class="doc">State Snapshot Transfers</span></a></li>
+<li><a class="reference internal" href="using-sr.html"><span class="doc">Streaming Replication</span></a></li>
+<li><a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera</span></a></li>
+</ul>
+<p class="no-bull bull-head">Related Articles</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/migrate.html"><span class="doc">Factors related to Migrating to Galera Cluster</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="galera-cluster-administration">
+<span id="administration"></span><h1>Galera Cluster Administration<a class="headerlink" href="#galera-cluster-administration" title="Permalink to this headline">¶</a></h1>
+<p>With the basics of how the cluster works and how to install and initialize it covered, this part begins a five part series on the administration and management of Galera Cluster.</p>
+<p>The sections in this part relate to the administration of nodes and the cluster.  <a class="reference internal" href="deployment.html"><span class="doc">Deployment</span></a>, covers how to use Galera Cluster in relation to your wider infrastructure, how to configure load balancers to work with the cluster and edge case deployments, such as running nodes in containers.  The pages in <a class="reference internal" href="monitor.html"><span class="doc">Cluster Monitoring</span></a> show how to keep tabs on the status of the cluster and automate reporting.  <a class="reference internal" href="security.html"><span class="doc">Security</span></a> covers configuring Galera Cluster to work with firewalls, SELinux and SSL encryption.  <a class="reference internal" href="../training/tutorials/migrate.html"><span class="doc">Factors related to Migrating to Galera Cluster</span></a> how to transition from a standalone instance of MySQL, MariaDB or Percona XtraDB to Galera Cluster.</p>
+<p class="rubric-1 rubric" id="node-admin">Node Administration</p>
 <p>Managing and administering nodes in Galera Cluster is similar to the administration and management of the standard standalone MySQL, MariaDB and Percona XtraDB database servers, with some additional features used to manage its interaction with the cluster.  These pages cover the administration of individual nodes, how they handle write-set replication and schema updates, and the procedure for upgrading Galera Cluster software.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="node-provisioning.html"><span class="doc">Node Provisioning</span></a></p>
@@ -218,7 +265,7 @@
 <p>When a node falls too far behind the cluster, they request State Snapshot Transfers from another node in order to bring its local database up to date with the cluster.  This section provides a guide to each state transfer method Galera Cluster supports.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="scriptable-sst.html"><span class="doc">Scriptable State Snapshot Transfers</span></a></p>
-<p>When nodes send and receive State Snapshot Transfers, they manage the process through external scripts that call the standard state transfer methods.  In event that you require additional functionality than what is available by default, you can use scripts to implement your own custom state snapshot transfer methods.</p>
+<p>When nodes send and receive State Snapshot Transfers, they manage the process through external scripts that call the standard state transfer methods.  If you require additional functionality than what is available by default, you can create a script to implement your own custom state snapshot transfer methods.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="system-tables.html"><span class="doc">Galera System Tables</span></a></p>
 <p>When you install Galera Cluster, it creates a set of system tables in the <code class="docutils literal"><span class="pre">mysql</span></code> database, which it uses to store configuration information.  Similar to how the underlying database server uses the <code class="docutils literal"><span class="pre">performance_schema</span></code> and <code class="docutils literal"><span class="pre">information_schema</span></code>, Galera Cluster uses these tables to record information relevant to replication.  This section provides a guide to what you&#8217;ll find in these tables and how you might query them for useful information about the status of the node and the cluster.</p>
@@ -231,9 +278,9 @@
 </li>
 </ul>
 <p class="rubric" id="cluster-admin">Cluster Administration</p>
-<p>In addition to node administration, Galera Cluster also provides interfaces for managing and administering the cluster.  These sections cover Primary Component recovery, managing Flow Control and Auto Eviction, as well as Galera Arbitrator and how to handle backups.</p>
+<p class="rubric-1">In addition to node administration, Galera Cluster also provides interfaces for managing and administering the cluster.  These sections cover Primary Component recovery, managing Flow Control and Auto Eviction, as well as Galera Arbitrator and how to handle backups.</p>
 <ul>
-<li><p class="first"><a class="reference internal" href="pc-recovery.html"><span class="doc">Recovering the Primary Component</span></a></p>
+<li><p class="first"><a class="reference internal" href="pc-recovery.html"><span class="doc">Recovering Primary Component</span></a></p>
 <p>When nodes establish connections with each other, they form components.  The operational component in the cluster is called the Primary Component.  This section covers a new feature in version 3.6 of Galera Cluster, which sets the nodes to save the Primary Component state to disk.  In the event of an outage, once all the nodes that previously formed the Primary Component reestablish network connectivity, they automatically restore themselves as the new Primary Component.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="quorum-reset.html"><span class="doc">Resetting the Quorum</span></a></p>
@@ -270,8 +317,8 @@
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="streaming-replication.html"
-                          title="Previous page">&larr; Streaming Replication</a></p>
+    <p class="topless"><a href="install-xtradb-src.html"
+                          title="Previous page">&larr; Percona XtraDB Cluster - Source Installation</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
@@ -342,7 +389,7 @@
           <a href="node-provisioning.html" title="Node Provisioning"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="streaming-replication.html" title="Streaming Replication"
+          <a href="install-xtradb-src.html" title="Percona XtraDB Cluster - Source Installation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../index.html">Galera Cluster Documentation</a> &#187;</li>
 
@@ -353,7 +400,7 @@
 
 
 			
-				<li><a href="streaming-replication.html" title="Streaming Replication">&lt; Previous</a></li>
+				<li><a href="install-xtradb-src.html" title="Percona XtraDB Cluster - Source Installation">&lt; Previous</a></li>
 			
 
 			

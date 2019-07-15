@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="State Snapshot Transfers among Galera Cluster Nodes" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>State Snapshot Transfers &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,14 +207,45 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <style> .red {color:red} </style><style> .green {color:green} </style><div class="library-document section" id="state-snapshot-transfers">
-<h1>State Snapshot Transfers<a class="headerlink" href="#state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
-<p id="sst">When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full data copy to the new node, known as the joiner.</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a></li>
+<li><a class="reference internal" href="mysqldump.html#mysqldump"><span class="std std-ref">mysqldump</span></a>&#8220;</li>
+<li><a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical</span></a></li>
+<li><a class="reference internal" href="sst-physical.html#sst-physical-rsync"><span class="std std-ref">rsync</span></a></li>
+<li><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></li>
+<li><a class="reference internal" href="sst-physical.html#sst-physical-xtrabackup"><span class="std std-ref">xtrabackup</span></a></li>
+<li><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="state-snapshot-transfers">
+<span id="sst"></span><h1>State Snapshot Transfers<a class="headerlink" href="#state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
+<p>When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full data copy to the new node, known as the joiner.</p>
 <p>You can designate in advance which node should be the donor with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a> parameter. If you don&#8217;t set the donor node, the <em>Group Communication</em> module will select a donor based on the information available about the node states.</p>
 <p>Group Communication monitors node states for the purposes of flow control, state transfers and quorum calculations.  It ensures that a node that shows as <code class="docutils literal"><span class="pre">JOINING</span></code> doesn&#8217;t count towards flow control and quorum.</p>
 <p>A node can serve as a donor when it is in the <code class="docutils literal"><span class="pre">SYNCED</span></code> state.  The joiner node selects a donor from the available synced nodes.  It shows preference to synced nodes that have the same <a class="reference internal" href="galera-parameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a> wsrep Provider option, or it selects the first in the index.  When a donor node is chosen, its state changes immediately to <code class="docutils literal"><span class="pre">DONOR</span></code>. It&#8217;s no longer available for requests.</p>
-<div class="section" id="sst-methods">
-<span id="id1"></span><h2>SST Methods<a class="headerlink" href="#sst-methods" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric" id="sst-methods">SST Methods</p>
 <p>Galera supports several back-end methods for use in state snapshot transfers.  There are two types: Logical State Snapshots, which interface through the database server and client; and Physical State Snapshots, which directly copy the data files from node to node.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -226,32 +260,32 @@
 <tr class="row-odd"><th class="head">Method</th>
 <th class="head">Speed</th>
 <th class="head">Blocks Donor</th>
-<th class="head">Available on Live Node</th>
+<th class="head">Live Node Availability</th>
 <th class="head">Type</th>
 <th class="head">DB Root Access</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference internal" href="sst-logical.html#mysqldump"><span class="std std-ref">mysqldump</span></a></td>
-<td><span class="red">Slow</span></td>
-<td><span class="green">Blocks</span></td>
-<td><span class="green">Available</span></td>
+<tr class="row-even"><td><a class="reference internal" href="mysqldump.html#mysqldump"><span class="std std-ref">mysqldump</span></a></td>
+<td>Slow</td>
+<td>Blocks</td>
+<td>Available</td>
 <td><a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical</span></a></td>
 <td>Donor and Joiner</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="sst-physical.html#sst-physical-rsync"><span class="std std-ref">rsync</span></a></td>
-<td><span class="green">Fastest</span></td>
-<td><span class="green">Blocks</span></td>
-<td><span class="red">Unavailable</span></td>
+<td>Fastest</td>
+<td>Blocks</td>
+<td>Unavailable</td>
 <td><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></td>
 <td>None</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="sst-physical.html#sst-physical-xtrabackup"><span class="std std-ref">xtrabackup</span></a></td>
-<td><span class="green">Fast</span></td>
+<td>Fast</td>
 <td>Briefly</td>
-<td><span class="red">Unavailable</span></td>
+<td>Unavailable</td>
 <td><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></td>
-<td>Donor only</td>
+<td>Only Donor</td>
 </tr>
 </tbody>
 </table>
@@ -268,7 +302,6 @@
 </ul>
 </div>
 </div>
-</div>
 
 
           </div>
@@ -278,16 +311,7 @@
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../index.html" title="index">
           <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">State Snapshot Transfers</a><ul>
-<li><a class="reference internal" href="#sst-methods">SST Methods</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="node-provisioning.html"

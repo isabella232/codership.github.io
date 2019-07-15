@@ -1,15 +1,53 @@
+.. meta::
+   :title: Single Master Setup in Galera Cluster
+   :description:
+   :language: en-US
+   :keywords:
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+
+
+.. topic:: The Library
+   :name: left-margin
+
+   .. cssclass:: no-bull
+
+      - :doc:`Documentation <../../documentation/index>`
+      - :doc:`Knowledge Base <../index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Troubleshooting <../trouble/index>`
+         - :doc:`Best Practices <./index>`
+
+      - :doc:`FAQ <../../faq>`
+      - :doc:`Training <../../training/index>`
+
+      .. cssclass:: no-bull-sub
+
+         - :doc:`Tutorial Articles <../../training/tutorials/index>`
+         - :doc:`Training Videos <../../training/videos/index>`
+
+      .. cssclass:: bull-head
+
+         Related Documents
+
+      .. cssclass:: bull-head
+
+         Related Articles
+
+
 .. cssclass:: kb-article
+.. _`kb-best-single-master-setup`:
 
 =======================
 Single Master Setup
 =======================
-.. _`kb-best-single-master-setup`:
 
 If a cluster uses only one node as a master, there are certain requirements (e.g., the slave queue size) that can be relaxed.
 
 
+.. rst-class:: kb
 .. rubric:: Recommendations
-   :class: kb
 
 To relax flow control, you might use the settings below:
 

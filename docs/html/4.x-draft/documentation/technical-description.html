@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Technical Description of Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Technical Description &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
@@ -204,10 +207,42 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="library-document section" id="technical-description">
-<h1>Technical Description<a class="headerlink" href="#technical-description" title="Permalink to this headline">¶</a></h1>
-<p id="tech-description">Galera Cluster is a synchronous certification-based replication solution for MySQL, MariaDB and Percona XtraDB.  Cluster nodes are identical and fully representative of the cluster state. They allow for unconstrained transparent client access, acting as a single-distributed database server.  In order to better understand Galera Cluster, this section provides detailed information on how it works and how you can benefit from it.</p>
-<p class="rubric" id="understanding-repl">Understanding Replication</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="certification-based-replication.html"><span class="doc">Certification Replication</span></a></li>
+<li><a class="reference internal" href="tech-desc-introduction.html"><span class="doc">Database Replication</span></a></li>
+<li><a class="reference internal" href="node-states.html"><span class="doc">Flow Control</span></a></li>
+<li><a class="reference internal" href="isolation-levels.html"><span class="doc">Isolation Levels</span></a></li>
+<li><a class="reference internal" href="recovery.html"><span class="doc">Node Recovery</span></a></li>
+<li><a class="reference internal" href="weighted-quorum.html"><span class="doc">Quorum Components</span></a></li>
+<li><a class="reference internal" href="architecture.html"><span class="doc">Replication Architecture</span></a></li>
+<li><a class="reference internal" href="state-transfer.html"><span class="doc">State Transfers</span></a></li>
+<li><a class="reference internal" href="streaming-replication.html"><span class="doc">Streaming Replication</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="library-document section" id="technical-description">
+<span id="tech-description"></span><h1>Technical Description<a class="headerlink" href="#technical-description" title="Permalink to this headline">¶</a></h1>
+<p>Galera Cluster is a synchronous certification-based replication solution for MySQL, MariaDB and Percona XtraDB.  Cluster nodes are identical and fully representative of the cluster state. They allow for unconstrained transparent client access, acting as a single-distributed database server.  In order to better understand Galera Cluster, this section provides detailed information on how it works and how you can benefit from it.</p>
+<p class="rubric-1 rubric" id="understanding-repl">Understanding Replication</p>
 <p>Replication in the context of databases refers to the frequent copying of data from one database server to another.  These sections provide a high-level explanation of replication both in the general sense of how it works, as well as the particulars of how Galera Cluster implements these core concepts.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="tech-desc-introduction.html"><span class="doc">Database Replication</span></a></p>
@@ -217,7 +252,7 @@
 <p>Using group communications and transaction ordering techniques, certification-based replication allows for synchronous replication.</p>
 </li>
 </ul>
-<p class="rubric" id="understanding-galera">Understanding Galera Cluster</p>
+<p class="rubric-1 rubric" id="understanding-galera">Understanding Galera Cluster</p>
 <p>With a better grasp on how replication works, these pages provide a more detailed explanation of how Galera Cluster implements certification-based replication, including the specific architecture of the nodes, how they communicate with each other, as well as replicate data and manage the replication process.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="architecture.html"><span class="doc">Replication API</span></a></p>
@@ -235,7 +270,7 @@
 <li><p class="first"><a class="reference internal" href="recovery.html"><span class="doc">Node Failure and Recovery</span></a></p>
 <p>Nodes fail to operate when they lose their connection with the cluster.  This can occur for various reasons, such as hardware failures, software crashes, or the loss of network connectivity.  This section provides an overview of how nodes and the cluster cope with failure and how they may recover.</p>
 </li>
-<li><p class="first"><a class="reference internal" href="weighted-quorum.html"><span class="doc">Weighted Quorum</span></a></p>
+<li><p class="first"><a class="reference internal" href="weighted-quorum.html"><span class="doc">Quorum Components</span></a></p>
 <p>When nodes connect to each other, they form components.  The Primary Component is a component that has quorum: it carries the majority of nodes in the cluster.  By default, each node represents one vote in quorum calculations. However, you can modify this feature in order to ensure certain stable nodes with strong connections carry a greater value.  This section provides an overview of how Galera Cluster handles weighted values in quorum calculations.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="streaming-replication.html"><span class="doc">Streaming Replication</span></a></p>

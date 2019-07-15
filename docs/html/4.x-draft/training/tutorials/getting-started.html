@@ -7,8 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Getting Started &#8212; Galera Cluster Documentation</title>
+    <meta content="Getting Started with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
+    <title>Getting Started with Galera Cluster &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -31,8 +34,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Installation" href="galera-installation.html" />
-    <link rel="prev" title="Tutorials" href="index.html" />
+    <link rel="next" title="Installing Galera Cluster" href="galera-installation.html" />
+    <link rel="prev" title="Codership Tutorials on Galera Cluster" href="index.html" />
 
 
 
@@ -204,9 +207,45 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="getting-started">
-<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="id1">Length: 840 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../whats-new.html"><span class="doc">What&#8217;s New</span></a></li>
+<li><a class="reference internal" href="galera-installation.html"><span class="doc">Installation</span></a></li>
+<li><a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Binary Installation</span></a></li>
+<li><a class="reference internal" href="../../documentation/install-mysql-src.html"><span class="doc">Source Build</span></a></li>
+<li><a class="reference internal" href="../../documentation/install-xtradb.html"><span class="doc">Install XtraDB Binary Installation</span></a></li>
+<li><a class="reference internal" href="../../documentation/install-xtradb-src.html"><span class="doc">Source Build</span></a></li>
+<li><a class="reference internal" href="../../documentation/install-mariadb.html"><span class="doc">Install MariaDB Binary Installation</span></a></li>
+<li><a class="reference internal" href="../../documentation/install-mariadb-src.html"><span class="doc">Source Build</span></a></li>
+<li><a class="reference internal" href="configuration.html"><span class="doc">System Configuration</span></a></li>
+<li><a class="reference internal" href="wsrep-configuration.html"><span class="doc">Replication Configuration</span></a></li>
+<li><a class="reference internal" href="starting-cluster.html"><span class="doc">Starting the Cluster</span></a></li>
+<li><a class="reference internal" href="testing-cluster.html"><span class="doc">Testing a Cluster</span></a></li>
+<li><a class="reference internal" href="restarting-cluster.html"><span class="doc">Restarting the Cluster</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="getting-started-with-galera-cluster">
+<span id="getting-started"></span><h1>Getting Started with Galera Cluster<a class="headerlink" href="#getting-started-with-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length: 840 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>Galera Cluster is a synchronous replication solution to improve availability and performance of the MySQL database service.  All nodes in Galera Cluster are identical and fully representative of the cluster.  They allow for unconstrained transparent client access, operating as a single, distributed MySQL server.  It provides,</p>
 <ul class="simple">
 <li>Transparent client connections, so it&#8217;s highly compatible with existing applications;</li>
@@ -218,8 +257,8 @@
 <p class="first admonition-title">Note</p>
 <p class="last">With the latest release Galerea Cluster begins the 4.x branch, introducing a number of new features.  For more information on these features, see <a class="reference internal" href="../../whats-new.html"><span class="doc">What&#8217;s New</span></a>.</p>
 </div>
-<p class="rubric">How Galera Cluster Works</p>
-<p id="how-galera-works">The primary focus is data consistency.  The transactions are either applied on every node or not all.  So, the databases stay synchronized, provided that they were properly configured and synchronized at the beginning.</p>
+<p class="rubric-1 rubric" id="how-galera-works">How Galera Cluster Works</p>
+<p>The primary focus is data consistency.  The transactions are either applied on every node or not all.  So, the databases stay synchronized, provided that they were properly configured and synchronized at the beginning.</p>
 <p>The <a class="reference internal" href="../../documentation/glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> differs from the standard MySQL Replication by addressing several issues, including multi-master write conflicts, replication lag and slaves being out of sync with the master.</p>
 <div class="figure">
 <img alt="../../_images/galerausecases11.png" src="../../_images/galerausecases11.png" />
@@ -230,8 +269,8 @@
 <p class="first admonition-title">Note</p>
 <p class="last">For security and performance reasons, it&#8217;s recommended that you run Galera Cluster on its own subnet.</p>
 </div>
-<p class="rubric">Node Initialization</p>
-<p id="node-init">Individual nodes in Galera Cluster are MySQL, MariaDB or Percona XtraDB.  But, deploying a node is not exactly the same as the standard standalone instance of the database server.  You need to take a few additional steps in order to properly install and configure the software.  The software runs on any unix-like operating system.  These articles provide guides to installing and configuring nodes for Galera Cluster.</p>
+<p class="rubric-1 rubric" id="node-init">Node Initialization</p>
+<p>Individual nodes in Galera Cluster are MySQL, MariaDB or Percona XtraDB.  But, deploying a node is not exactly the same as the standard standalone instance of the database server.  You need to take a few additional steps in order to properly install and configure the software.  The software runs on any unix-like operating system.  These articles provide guides to installing and configuring nodes for Galera Cluster.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="galera-installation.html"><span class="doc">Installation</span></a></p>
 <p>Once you have your server hardware ready, including at least three hosts running either Linux or FreeBSD and their respective IP addresses.  This article provides guides to preparing the server and installing Galera Cluster.  When you install Galera Cluster, you must choose between three implementations available.  For each implementations, you can install the software using Debian- and RPM-based binary packages or by building the node from source.</p>
@@ -248,8 +287,8 @@
 <p>With the system-level configurations complete, this article provides a guide to configuring the database server to connect and communicate with the cluster and explains the syntax format used in cluster addresses.</p>
 </li>
 </ul>
-<p class="rubric">Cluster Initialization</p>
-<p id="cluster-init">With the software installed on the relevant servers in your your infrastructure, you can now initialize Galera Cluster, by bootstrapping the Primary Component then starting all the other nodes as you would any other database server instance.  These tutorial articles provide guides to starting the cluster, ways of testing that it&#8217;s operational and, when you need to, how to restart the entire cluster.</p>
+<p class="rubric-1 rubric" id="cluster-init">Cluster Initialization</p>
+<p>With the software installed on the relevant servers in your your infrastructure, you can now initialize Galera Cluster, by bootstrapping the Primary Component then starting all the other nodes as you would any other database server instance.  These tutorial articles provide guides to starting the cluster, ways of testing that it&#8217;s operational and, when you need to, how to restart the entire cluster.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="starting-cluster.html"><span class="doc">Starting the Cluster</span></a></p>
 <p>In order to start Galera Cluster, you need to bootstrap the Primary Component.  Afterwards, you can start nodes using the same command as you would the standard standalone MySQL, MariaDB or Percona XtraDB database server.  This article provides a guide to initializing the cluster.</p>
@@ -277,12 +316,12 @@
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="index.html"
-                          title="Previous page">&larr; Tutorials</a></p>
+                          title="Previous page">&larr; Codership Tutorials on Galera Cluster</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="galera-installation.html"
-                          title="Next page">&rarr; Installation</a></p>
+                          title="Next page">&rarr; Installing Galera Cluster</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
@@ -333,7 +372,7 @@
 		<ul class="nav-link">
 			
 
-				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/getting-started.rst.rst" title="Edit 'Getting Started' on Github">Edit on Github</a></li>
+				<li><a href="https://github.com/codership/documentation/edit/draft/galeracluster/source/training/tutorials/getting-started.rst.rst" title="Edit 'Getting Started with Galera Cluster' on Github">Edit on Github</a></li>
 
 			 
     <div class="relbar-bottom">
@@ -345,26 +384,26 @@
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="galera-installation.html" title="Installation"
+          <a href="galera-installation.html" title="Installing Galera Cluster"
              accesskey="N">next</a> &nbsp; &nbsp;</li>
         <li class="right" >
-          <a href="index.html" title="Tutorials"
+          <a href="index.html" title="Codership Tutorials on Galera Cluster"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
 
 
 			
-				<li><a href="index.html" title="Tutorials">&lt; Previous</a></li>
+				<li><a href="index.html" title="Codership Tutorials on Galera Cluster">&lt; Previous</a></li>
 			
 
 			
-				<li><a href="galera-installation.html" title="Installation">Next &gt;</a></li>
+				<li><a href="galera-installation.html" title="Installing Galera Cluster">Next &gt;</a></li>
 			
 
 		</ul>

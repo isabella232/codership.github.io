@@ -7,7 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
+    <meta content="Debugging Problems with SST in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
     <title>Debugging Problems with SST &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
@@ -204,13 +207,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="tutorial-article section" id="debugging-problems-with-sst">
-<h1>Debugging Problems with SST<a class="headerlink" href="#debugging-problems-with-sst" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats" id="debug-problems-with-sst">Length:  985 words; Writer: Philip Stoev; Published: July 6, 2015; Topic: Troubleshooting; Level: Intermediate</p>
+  <div class="topic" id="left-margin">
+<p class="topic-title first">The Library</p>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+</ul>
+<ul class="no-bull simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="no-bull-sub no-bull simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<p class="bull-head no-bull">Related Documents</p>
+<p class="bull-head no-bull">Related Articles</p>
+</div>
+<div class="tutorial-article section" id="debugging-problems-with-sst">
+<span id="debug-problems-with-sst"></span><h1>Debugging Problems with SST<a class="headerlink" href="#debugging-problems-with-sst" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length:  985 words; Writer: Philip Stoev; Published: July 6, 2015; Topic: Troubleshooting; Level: Intermediate</p>
 <p>Galera Cluster has the ability to add new nodes to the cluster by handling internally the transfer of the entire dataset to the new node. The same procedure, called State Snapshot Transfer (SST), applies to nodes that are rejoining the cluster after being down for a longer period of time.</p>
 <p>A lot of operations happen during SST and there are various things that could go wrong. This article describes how to configure our server optimally for SST and how to debug any issues that arise.</p>
-<div class="section" id="the-basics">
-<h2>The Basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">The Basics</p>
 <p>Let’s first consider all the items that play a role in the preparation and configuration of SST.</p>
 <p><strong>Selecting an SST Method</strong></p>
 <p>Galera Cluster supports several different methods for performing SST so, before adding a new node, it is worth examining the alternatives:</p>
@@ -242,9 +265,7 @@
 <li>For mysqldump you need to set up SSL client connections and set up your MySQL configuration file’s [client] section so that mysqldump uses SSL by default.</li>
 </ul>
 <p>End-to-end encryption via VPN can also be used. Tunnelling individual ports over SSH would be more complicated as more than one TCP port may be used during the process.</p>
-</div>
-<div class="section" id="debugging-sst-errors">
-<h2>Debugging SST Errors<a class="headerlink" href="#debugging-sst-errors" title="Permalink to this headline">¶</a></h2>
+<p class="rubric-1 rubric">Debugging SST Errors</p>
 <p>SST is a complex process that internally involves running scripts and calling third-party binaries, so there are various opportunities for a failure.
 The first step when debugging is to examine the MySQL error logs, and you should look at the logs from both the joining node and the donor node in order to figure out what is going on. Both nodes participate equally in the process, so an error could happen on either side.</p>
 <p><strong>Xtrabackup Errors</strong></p>
@@ -259,7 +280,6 @@ The first step when debugging is to examine the MySQL error logs, and you should
 <p><strong>mysqldump Errors</strong></p>
 <p>Mysqldump errors will be written to the MySQL error log. Authentication and permission errors are the ones most frequently encountered, so make sure that the user you have specified part of the wsrep_sst_auth variable (the user name is the portion of the value that is before the semicolon) exists, has full rights to the entire server and can be connected using the password (which is the second part of the value).</p>
 </div>
-</div>
 
 
           </div>
@@ -269,17 +289,7 @@ The first step when debugging is to examine the MySQL error logs, and you should
         <div class="sphinxsidebarwrapper">
         <p class="logo"><a href="../../index.html" title="index">
           <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p><div class="sphinx-toc sphinxlocaltoc">
-    <h3><a href="../../index.html">Page contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Debugging Problems with SST</a><ul>
-<li><a class="reference internal" href="#the-basics">The Basics</a></li>
-<li><a class="reference internal" href="#debugging-sst-errors">Debugging SST Errors</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
+        </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="debugging-transaction-conflicts.html"
@@ -358,8 +368,8 @@ The first step when debugging is to examine the MySQL error logs, and you should
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="../../index.html">Galera Cluster Documentation</a> &#187;</li>
 
-          <li class="nav-item nav-item-1"><a href="../index.html" >Training</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Tutorials</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="../index.html" >Codership Training</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Codership Tutorials on Galera Cluster</a> &#187;</li> 
       </ul>
     </div>
     </div>
