@@ -10,7 +10,7 @@
     <meta content="Galera Cluster Administration" name="title" />
 <meta content="A menu of pages on the administration and management of Galera Cluster." name="description" />
 <meta content="en-US" name="language" />
-<meta content="galera, cluster, mysql, mariadb, dba, admin, node provisioning" name="keywords" />
+<meta content="galera cluster, mysql, mariadb, dba, admin, node provisioning" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Galera Cluster Administration &#8212; Galera Cluster Documentation</title>
@@ -277,8 +277,8 @@
 <p>In order to upgrade Galera Cluster to a new version or increment of the software, there are a few additional steps you need to take in order to maintain the cluster during the upgrade.  This section provides guides to different methods in handling this process.</p>
 </li>
 </ul>
-<p class="rubric" id="cluster-admin">Cluster Administration</p>
-<p class="rubric-1">In addition to node administration, Galera Cluster also provides interfaces for managing and administering the cluster.  These sections cover Primary Component recovery, managing Flow Control and Auto Eviction, as well as Galera Arbitrator and how to handle backups.</p>
+<p class="rubric-1 rubric" id="cluster-admin">Cluster Administration</p>
+<p>In addition to node administration, Galera Cluster also provides interfaces for managing and administering the cluster.  These sections cover Primary Component recovery, managing Flow Control and Auto Eviction, as well as Galera Arbitrator and how to handle backups.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="pc-recovery.html"><span class="doc">Recovering Primary Component</span></a></p>
 <p>When nodes establish connections with each other, they form components.  The operational component in the cluster is called the Primary Component.  This section covers a new feature in version 3.6 of Galera Cluster, which sets the nodes to save the Primary Component state to disk.  In the event of an outage, once all the nodes that previously formed the Primary Component reestablish network connectivity, they automatically restore themselves as the new Primary Component.</p>

@@ -293,7 +293,7 @@
 <span class="o">+-----------------------+-------+</span>
 </pre></div>
 </div>
-<p>Each node in the cluster should provide the same value.  When a node carries a different, this indicates that the cluster is partitioned.  Once the node reestablish network connectivity, the value aligns itself with the others.</p>
+<p>Each node in the cluster should provide the same value.  When a node carries a different, this indicates that the cluster is partitioned.  Once the node reestablishes network connectivity, the value aligns itself with the others.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a> shows the number of nodes in the cluster, which you can use to determine if any are missing.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">GLOBAL</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_size&#39;</span><span class="p">;</span>
@@ -370,7 +370,7 @@
 <span class="o">+---------------------------+--------+</span>
 </pre></div>
 </div>
-<p>When the node is part of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, the typical return values are <code class="docutils literal"><span class="pre">Joining</span></code>, <code class="docutils literal"><span class="pre">Waiting</span> <span class="pre">on</span> <span class="pre">SST</span></code>, <code class="docutils literal"><span class="pre">Joined</span></code>, <code class="docutils literal"><span class="pre">Synced</span></code> or <code class="docutils literal"><span class="pre">Donor</span></code>.  In the event that the node is part of a nonoperational component, the return value is <code class="docutils literal"><span class="pre">Initialized</span></code>.</p>
+<p>When the node is part of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, the typical return values are <code class="docutils literal"><span class="pre">Joining</span></code>, <code class="docutils literal"><span class="pre">Waiting</span> <span class="pre">on</span> <span class="pre">SST</span></code>, <code class="docutils literal"><span class="pre">Joined</span></code>, <code class="docutils literal"><span class="pre">Synced</span></code> or <code class="docutils literal"><span class="pre">Donor</span></code>.  If the node is part of a nonoperational component, the return value is <code class="docutils literal"><span class="pre">Initialized</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If the node returns any value other than the one listed here, the state comment is momentary and transient.  Check the status variable again for an update.</p>

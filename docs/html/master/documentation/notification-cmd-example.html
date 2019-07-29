@@ -9,6 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="Example of a Galera Notification Script" name="title" />
 <meta content="en-US" name="language" />
+<meta content="galera cluster, notification, notify command, trigger, script" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Notification Script Example &#8212; Galera Cluster Documentation</title>
@@ -237,8 +238,8 @@
 <div class="highlight-sh"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -eu</span>
 
 <span class="c1"># This is a simple example of wsrep notification script (wsrep_notify_cmd).</span>
-<span class="c1"># It will create &#39;wsrep&#39; schema and two tables in it: &#39;membeship&#39; and &#39;status&#39;</span>
-<span class="c1"># and fill them on every membership or node status change.</span>
+<span class="c1"># It will create &#39;wsrep&#39; schema and two tables in it: &#39;membership&#39; and &#39;status&#39;</span>
+<span class="c1"># and insert data into them on every membership or node status change.</span>
 <span class="c1">#</span>
 <span class="c1"># Edit parameters below to specify the address and login to server.</span>
 
@@ -350,7 +351,7 @@ status_update<span class="o">()</span>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> mv my-wsrep-notify.sh /usr/bin
 </pre></div>
 </div>
-<p>In addition to this, given that the notification command contains your root password, change the ownership to the <code class="docutils literal"><span class="pre">mysql</span></code> user and make the script is executable only by that user.</p>
+<p>In addition to this, given that the notification command contains your root password, change the ownership to the <code class="docutils literal"><span class="pre">mysql</span></code> user and make sure the script is executable only by that user.</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> chown mysql:mysql /usr/bin/my-wsrep-notify.sh
 <span class="gp">#</span> chmod <span class="m">700</span> /usr/bin/my-wsrep-notify.sh.
 </pre></div>

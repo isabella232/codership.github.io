@@ -9,6 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta content="Galera Cluster Notification Command" name="title" />
 <meta content="en-US" name="language" />
+<meta content="galera cluster, notification, notify command, trigger, script" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Notification Command &#8212; Galera Cluster Documentation</title>
@@ -271,7 +272,7 @@
 <ul class="no-bull simple">
 <li><strong>Node UUID</strong> refers to the unique identifier the node received from the wsrep Provider.</li>
 <li><strong>Node Name</strong> refers to the node name, as it&#8217;s defined with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> parameter in the configuration file.</li>
-<li><strong>Incoming Address</strong> refers to the IP address for client connections, as set with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a> parameter in the configuration file.</li>
+<li><strong>Incoming Address</strong> refers to the IP address for client connections, as set with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a> parameter in the configuration file. If this is not set, then the default value will be <code class="docutils literal"><span class="pre">AUTO</span></code>.</li>
 </ul>
 <p class="rubric-1 rubric" id="enable-notification-command">Enabling the Notification Script</p>
 <p>You can enable your notification script or command through the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a> parameter in the configuration file.  Below is an excerpt from that file showing how it might look:</p>
