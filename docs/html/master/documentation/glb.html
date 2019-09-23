@@ -245,13 +245,13 @@
 <p>Galera Load Balancer provides simple TCP connection balancing. It was developed with scalability and performance in mind.  It draws on Pen for inspiration, but its functionality is limited to only balancing TCP connections.  It provides several features:</p>
 <ul class="simple">
 <li>Support for configuring back-end servers at runtime.</li>
-<li>Support for draning servers.</li>
+<li>Support for draining servers.</li>
 <li>Support for the epoll API for routing performance.</li>
 <li>Support for multithreaded operations.</li>
 <li>Optional watchdog module to monitor destinations and adjust the routing table.</li>
 </ul>
 <p class="rubric-1 rubric" id="glb-install">Installation</p>
-<p>Unlike Galera Cluster, there is no binary installation available for Galera Load Balancer.  Installing it on your system will requires you to build it from the source files.  They&#8217;re available on GitHub at <a class="reference external" href="https://github.com/codership/glb">glb</a>.</p>
+<p>Unlike Galera Cluster, there is no binary installation available for Galera Load Balancer.  Installing it on your system will require you to build it from the source files.  They&#8217;re available on GitHub at <a class="reference external" href="https://github.com/codership/glb">glb</a>.</p>
 <p>To build Galera Load Balancer, you will need to complete a few steps.  First, from a directory convenient for source builds (e.g., <code class="docutils literal"><span class="pre">/opt</span></code>), use the <code class="docutils literal"><span class="pre">git</span></code> utility to clone the GitHub repository for Galera Load Balancer. You would do this like so:</p>
 <blockquote>
 <div><div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/codership/glb
