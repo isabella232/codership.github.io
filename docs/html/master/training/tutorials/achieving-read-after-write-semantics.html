@@ -11,7 +11,7 @@
 <meta content="en-US" name="language" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
-    <title>Achieving Read-After-Write Semantics with Galera &#8212; Galera Cluster Documentation</title>
+    <title>Read-After-Write Semantics with Galera &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -34,8 +34,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Debugging Transaction Conflicts in Galera Cluster" href="debugging-transaction-conflicts.html" />
-    <link rel="prev" title="Getting Started Galera with Docker, Part 2" href="getting-started-docker-pt2.html" />
+    <link rel="next" title="Debugging Transaction Conflicts" href="debugging-transaction-conflicts.html" />
+    <link rel="prev" title="Getting Started Galera with Docker" href="getting-started-docker.html" />
 
 
 
@@ -228,8 +228,8 @@
 <p class="bull-head no-bull">Related Documents</p>
 <p class="bull-head no-bull">Related Articles</p>
 </div>
-<div class="tutorial-article section" id="achieving-read-after-write-semantics-with-galera">
-<span id="achieving-read-after-write-semantics"></span><h1>Achieving Read-After-Write Semantics with Galera<a class="headerlink" href="#achieving-read-after-write-semantics-with-galera" title="Permalink to this headline">¶</a></h1>
+<div class="tutorial-article section" id="read-after-write-semantics-with-galera">
+<span id="achieving-read-after-write-semantics"></span><h1>Read-After-Write Semantics with Galera<a class="headerlink" href="#read-after-write-semantics-with-galera" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length:  599 words; Writer: Philip Stoev; Published: June 17, 2015; Topic: General; Level: Intermediate</p>
 <p>Some applications, particularly those written with a single-node database server in mind, attempt to immediately read a value they have just inserted into the database, without making those those operations part of a single transaction. A read/write splitting proxy or a connection pool combined with a load-balancer can direct each operation to a different database node.</p>
 <p>Since Galera allows, for performance reasons, a very small amount of “slave lag”, the node that is processing the read may have not yet applied the write. It can return old data, causing an application that did not expect that to misbehave or produce an error.</p>
@@ -288,13 +288,13 @@ Here is how to achieve that in various languages:</p>
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="getting-started-docker-pt2.html"
-                          title="Previous page">&larr; Getting Started Galera with Docker, Part 2</a></p>
+    <p class="topless"><a href="getting-started-docker.html"
+                          title="Previous page">&larr; Getting Started Galera with Docker</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="debugging-transaction-conflicts.html"
-                          title="Next page">&rarr; Debugging Transaction Conflicts in Galera Cluster</a></p>
+                          title="Next page">&rarr; Debugging Transaction Conflicts</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>

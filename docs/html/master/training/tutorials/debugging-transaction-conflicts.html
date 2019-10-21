@@ -11,7 +11,7 @@
 <meta content="en-US" name="language" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
-    <title>Debugging Transaction Conflicts in Galera Cluster &#8212; Galera Cluster Documentation</title>
+    <title>Debugging Transaction Conflicts &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -35,7 +35,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Debugging Problems with SST" href="debug-problems-with-sst.html" />
-    <link rel="prev" title="Achieving Read-After-Write Semantics with Galera" href="achieving-read-after-write-semantics.html" />
+    <link rel="prev" title="Read-After-Write Semantics with Galera" href="achieving-read-after-write-semantics.html" />
 
 
 
@@ -228,8 +228,8 @@
 <p class="bull-head no-bull">Related Documents</p>
 <p class="bull-head no-bull">Related Articles</p>
 </div>
-<div class="tutorial-article section" id="debugging-transaction-conflicts-in-galera-cluster">
-<span id="debugging-transaction-conflicts"></span><h1>Debugging Transaction Conflicts in Galera Cluster<a class="headerlink" href="#debugging-transaction-conflicts-in-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<div class="tutorial-article section" id="debugging-transaction-conflicts">
+<span id="id1"></span><h1>Debugging Transaction Conflicts<a class="headerlink" href="#debugging-transaction-conflicts" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length:  1,086 words; Writer: Philip Stoev; Published: June 29, 2015; Topic: General; Level: Beginner</p>
 <p>If you are using Galera Cluster in multi-master mode, you will most likely run into transaction conflicts if two clients attempt to modify the same row at the same time. Such conflicts are reported a deadlock errors to the application.
 Legacy applications are frequently unable to handle transaction conflicts properly and may not provide sufficient information to debug the source of the problem.</p>
@@ -338,7 +338,7 @@ As the key is declared as <code class="docutils literal"><span class="pre">UNSIG
   <div class="sphinxprev">
     <h4>Previous page</h4>
     <p class="topless"><a href="achieving-read-after-write-semantics.html"
-                          title="Previous page">&larr; Achieving Read-After-Write Semantics with Galera</a></p>
+                          title="Previous page">&larr; Read-After-Write Semantics with Galera</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>

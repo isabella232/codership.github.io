@@ -229,30 +229,58 @@
 <div class="library-list section" id="codership-troubleshooting-articles">
 <span id="kb-trouble"></span><h1>Codership Troubleshooting Articles<a class="headerlink" href="#codership-troubleshooting-articles" title="Permalink to this headline">¶</a></h1>
 <p>This is the Troubleshooting section of the Galera Knowledge Base (KB). It contains information on resolving problems you might experience with Galera Cluster. It includes articles on how to diagnose and address various performance and replication trouble. For articles related to performance and other ways to improve usage of Galera Cluster, see the :doc:` Best Practices &lt;../best/index&gt;` section of the KB.</p>
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="stall-on-alter.html"><span class="doc">Cluster Stalls on ALTER</span></a></p>
-<p class="list-stats">Length: 358 words; Published: ; Topic:</p>
-<p class="list-abstract">There may be times in which a cluster will stall when an <code class="docutils literal"><span class="pre">ALTER</span></code> statement is executed on an unused table.</p>
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="commit-failed-reason-3.html"><span class="doc">Commit Failed for Reason 3</span></a></p>
-<p class="list-stats">Length: 246 words; Published: ; Topic:</p>
-<p class="list-abstract">When you have <code class="docutils literal"><span class="pre">wsrep_debug</span></code> enabled, you may occasionally see a message noting that a commit has failed due to reason <code class="docutils literal"><span class="pre">3</span></code>.</p>
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="multi-master-conflicts.html"><span class="doc">Multi-Master Conflicts</span></a></p>
-<p class="list-stats">Length: 751 words; Published: ; Topic:</p>
-<p class="list-abstract">These types of conflicts relate to multi-master database environments and typically involve inconsistencies of row amongst nodes.</p>
+<div class="banner container" id="kb-trouble-state-transfers">
+<p class="rubric-1 rubric">State Transfers</p>
+</div>
+<div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="node-crash-rsync.html"><span class="doc">Node Crashes during rsync SST</span></a></p>
-<p class="list-stats">Length: 221 words; Published: ; Topic:</p>
+<p class="list-stats">Length: 221 words; Published: ; Topic: State Transfers</p>
 <p class="list-abstract">When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a State Snapshot Transfer (SST) method to provide a full data copy to the new node, known as the joiner.  This should work well, but it doesn&#8217;t always.</p>
+</div>
+<div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="requested-state-transfer-failed.html"><span class="doc">Requested State Transfer Failed</span></a></p>
-<p class="list-stats">Length: 301 words; Published: ; Topic:</p>
+<p class="list-stats">Length: 301 words; Published: ; Topic: State Transfers</p>
 <p class="list-abstract">When a new node joins a cluster, it will try to synchronize with the cluster by getting a full copy of the databases from one of the other nodes.  Sometimes this will fail.</p>
+</div>
+<div class="banner container" id="kb-trouble-sql-syntax">
+<p class="rubric-1 rubric">SQL &amp; Syntax Errors</p>
+</div>
+<div class="list-col1 container">
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="stall-on-alter.html"><span class="doc">Cluster Stalls on ALTER</span></a></p>
+<p class="list-stats">Length: 358 words; Published: ; Topic: SQL &amp; Syntax Errors</p>
+<p class="list-abstract">There may be times in which a cluster will stall when an <code class="docutils literal"><span class="pre">ALTER</span></code> statement is executed on an unused table.</p>
+</div>
+<div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="sql-syntax-error.html"><span class="doc">SQL Syntax Errors</span></a></p>
-<p class="list-stats">Length: 159 words; Published: ; Topic:</p>
+<p class="list-stats">Length: 159 words; Published: ; Topic: SQL &amp; Syntax Errors</p>
 <p class="list-abstract">When a new node joins a cluster, it will request data from the cluster.  One node, known as a donor, will use a State Snapshot Transfer (SST) method to provide a full data copy to the new node, known as the joiner. To get this snapshot, some administrators opt to use a Logical State Transfer Method, in particular <code class="docutils literal"><span class="pre">mysqldump</span></code>. This doesn&#8217;t always work well.</p>
+</div>
+<div class="banner container" id="kb-trouble-splits-topology">
+<p class="rubric-1 rubric">Splits &amp; Topology</p>
+</div>
+<div class="list-col1 container">
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="multi-master-conflicts.html"><span class="doc">Multi-Master Conflicts</span></a></p>
+<p class="list-stats">Length: 751 words; Published: ; Topic: Splits &amp; Topology</p>
+<p class="list-abstract">These types of conflicts relate to multi-master database environments and typically involve inconsistencies of row amongst nodes.</p>
+</div>
+<div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="error-unknown-command.html"><span class="doc">Unknown Command Errors</span></a></p>
-<p class="list-stats">Length: 599 words; Published: ; Topic:</p>
-<p class="list-abstract">If a cluster experiences a temporary split&#8211;that is to say, a portion of the nodes loses connectivity to the Primary Component&#8211;when they reconnect, nodes from the former non-operational component drop their client connections.  New connections to the database client will return <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> errors.</p>
+<p class="list-stats">Length: 599 words; Published: ; Topic: Splits &amp; Topology</p>
+<p class="list-abstract">If a cluster experiences a temporary split—that is to say, a portion of the nodes loses connectivity to the Primary Component—when they reconnect, nodes from the former non-operational component drop their client connections.  New connections to the database client will return <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> errors.</p>
+</div>
+<div class="banner container" id="kb-trouble-other">
+<p class="rubric-1 rubric">Other</p>
+</div>
+<div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="user-changes.html"><span class="doc">User Changes not Replicating</span></a></p>
-<p class="list-stats">Length: 373 words; Published: ; Topic:</p>
+<p class="list-stats">Length: 373 words; Published: ; Topic: Security</p>
 <p class="list-abstract">Galera replicates only InnoDB tables.  Therefore, databases should not use other storage engines.  However, the system tables contained in the <code class="docutils literal"><span class="pre">mysql</span></code> database use the MyISAM storage engine. This includes the <code class="docutils literal"><span class="pre">user</span></code> table and other tables containing user permissions.  Since these tables are not replicated, you must make changes to them manually on each node.</p>
+</div>
+<div class="list-col2 container">
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="commit-failed-reason-3.html"><span class="doc">Commit Failed for Reason 3</span></a></p>
+<p class="list-stats">Length: 246 words; Published: ; Topic: Transactions</p>
+<p class="list-abstract">When you have <code class="docutils literal"><span class="pre">wsrep_debug</span></code> enabled, you may occasionally see a message noting that a commit has failed due to reason <code class="docutils literal"><span class="pre">3</span></code>.</p>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </div>

@@ -7,11 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Getting Started Galera with Docker, Part 2" name="title" />
+    <meta content="Getting Started Galera with Docker, Part 1" name="title" />
 <meta content="en-US" name="language" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
-    <title>Getting Started Galera with Docker, Part 2 &#8212; Galera Cluster Documentation</title>
+    <title>Getting Started Galera with Docker &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -34,8 +34,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Achieving Read-After-Write Semantics with Galera" href="achieving-read-after-write-semantics.html" />
-    <link rel="prev" title="Getting Started Galera with Docker, Part 1" href="getting-started-docker-pt1.html" />
+    <link rel="next" title="Read-After-Write Semantics with Galera" href="achieving-read-after-write-semantics.html" />
+    <link rel="prev" title="Migrating to Galera Cluster" href="migration.html" />
 
 
 
@@ -228,12 +228,78 @@
 <p class="bull-head no-bull">Related Documents</p>
 <p class="bull-head no-bull">Related Articles</p>
 </div>
-<div class="tutorial-article section" id="getting-started-galera-with-docker-part-2">
-<span id="getting-started-docker-pt2"></span><h1>Getting Started Galera with Docker, Part 2<a class="headerlink" href="#getting-started-galera-with-docker-part-2" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats">Length:  654 words; Writer: Erkan Yanar; Published: May 12, 2015; Topic: Container; Level: Intermediate</p>
-<p>In the previous article of this series, we described how to run a multi-node Galera Cluster on a single Docker host.</p>
-<p>In this article, we will describe how to deploy Galera Cluster over multiple Docker hosts.</p>
-<p>By design, Docker containers are reachable using port-forwarded TCP ports only, even if the containers have IP addresses. So we will set up port forwarding for all TCP ports that are required for Galera to operate.</p>
+<div class="tutorial-article section" id="getting-started-galera-with-docker">
+<span id="getting-started-docker"></span><h1>Getting Started Galera with Docker<a class="headerlink" href="#getting-started-galera-with-docker" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Length: 1416 words; Writer: Erkan Yanar; Published: May 6, 2015; Topic: Container; Level: Intermediate</p>
+<p>Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications. Consisting of Docker Engine, a portable, lightweight runtime and packaging tool, and Docker Hub, a cloud service for sharing applications and automating workflows, Docker enables apps to be quickly assembled from components and eliminates the friction between development, QA, and production environments. As a result, it can ship faster and run the same app, unchanged, on laptops, data center VMs, and any cloud.</p>
+<p>let&#8217;s first look at how to build a basic Docker Image, which we will extend later. Then we&#8217;ll deploy on a test cluster on a local machine. The examples here have been tested on Ubuntu 14.04 with Docker 1.5.</p>
+<p class="rubric-1 rubric">Build a Basic Docker Image</p>
+<p>In Docker, Dockerfiles are used to describe the Docker images we are going to use to start our Galera Cluster. We are using the following Dockerfile:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">FROM ubuntu:14.04</span>
+<span class="go">MAINTAINER Erkan Yanar &lt;erkan.yanar@linsenraum.de&gt;</span>
+<span class="go">ENV DEBIAN_FRONTEND noninteractive</span>
+
+<span class="go">RUN apt-get update</span>
+<span class="go">RUN apt-get install -y software-properties-common</span>
+<span class="go">RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 BC19DDBA</span>
+<span class="go">RUN add-apt-repository &#39;deb https://releases.galeracluster.com/ubuntu trusty main&#39;</span>
+<span class="go">RUN apt-get update</span>
+<span class="go">RUN apt-get install -y galera-3 galera-arbitrator-3 mysql-wsrep-5.6 rsync lsof</span>
+<span class="go">COPY my.cnf /etc/mysql/my.cnf</span>
+<span class="go">ENTRYPOINT [&quot;mysqld&quot;]</span>
+</pre></div>
+</div>
+<p>This image builds on top of the Ubuntu 14.04 image. It simply installs Galera using the Codership repository and copies the my.cnf over.</p>
+<p>The <cite>my.cnf</cite> is quite simple.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">[mysqld]</span>
+<span class="go">user = mysql</span>
+<span class="go">bind-address = 0.0.0.0</span>
+<span class="go">wsrep_provider = /usr/lib/galera/libgalera_smm.so</span>
+<span class="go">wsrep_sst_method = rsync</span>
+<span class="go">default_storage_engine = innodb</span>
+<span class="go">binlog_format = row</span>
+<span class="go">innodb_autoinc_lock_mode = 2</span>
+<span class="go">innodb_flush_log_at_trx_commit = 0</span>
+<span class="go">query_cache_size = 0</span>
+<span class="go">query_cache_type = 0</span>
+</pre></div>
+</div>
+<p>A pre-built image is available from Docker Hub. You can pull it by running:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">sudo docker pull erkules/galera:basic</span>
+</pre></div>
+</div>
+<p>(All commands in this article need to run as root.)</p>
+<p class="rubric-1 rubric">Deploy on a Test Cluster on a Local Machine</p>
+<p>Next, we are going to start a Galera Cluster on the local host. The instructions below are for demonstration purposes only and will not work when deploying on multiple hosts, as networking between containers needs to be set up. Configuring Docker networking across multiple hosts will be described in a following post.</p>
+<p class="rubric-1 rubric">Starting a Cluster</p>
+<p>There have been a number of blog posts showing how to start Galera Cluster on a single host. This post is going to show the simplest way to do that in Docker by using simple commands, which will not work for a multi-host installation. First, if working on Ubuntu, we need to put AppArmor’s Docker profile in complain mode in advance.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo aa-complain /etc/apparmor.d/docker
+</pre></div>
+</div>
+<p>Then we can start the first Galera node by instructing Docker to create a container and run mysqld in it.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo docker run --detach<span class="o">=</span><span class="nb">true</span> --name node1 -h node1 erkules/galera:basic --wsrep-cluster-name<span class="o">=</span>local-test --wsrep-cluster-address<span class="o">=</span>gcomm://
+</pre></div>
+</div>
+<p>In addition to defining the internal name and hostname, we also define the name of the cluster.</p>
+<p>MySQLs error log is not configured explicitly, and Docker records STDOUT and STDERR of every container. So, using <cite>sudo docker logs node1</cite>, the log output from the first node can be displayed without having to enter the container.
+For the next two containers, we use a simple Docker trick. The <cite>–link</cite> option writes the name and the IP of host1 into the <cite>/etc/hosts</cite> file of the container. This way, we can connect the remaining nodes to node1 without having to obtain its IP from its container.</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo docker run --detach<span class="o">=</span><span class="nb">true</span> --name node2 -h node2 --link node1:node1 erkules/galera:basic --wsrep-cluster-name<span class="o">=</span>local-test --wsrep-cluster-address<span class="o">=</span>gcomm://node1
+<span class="gp">$</span> sudo docker run --detach<span class="o">=</span><span class="nb">true</span> --name node3 -h node3 --link node1:node1 erkules/galera:basic --wsrep-cluster-name<span class="o">=</span>local-test --wsrep-cluster-address<span class="o">=</span>gcomm://node1
+</pre></div>
+</div>
+<p>Now we have a running Galera cluster. We can check the number of nodes in the Cluster by running the mysql client from inside one of the containers:</p>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo docker <span class="nb">exec</span> -ti node1 mysql -e <span class="s1">&#39;show status like &quot;wsrep_cluster_size&quot;&#39;</span>
+
+<span class="go">+--------------------+-------+</span>
+<span class="go">| Variable_name      | Value |</span>
+<span class="go">+--------------------+-------+</span>
+<span class="go">| wsrep_cluster_size |     3 |</span>
+<span class="go">+--------------------+-------+</span>
+</pre></div>
+</div>
+<p>We built a simple Galera Cluster on one host, without using SSH and without the need to configure any IP addresses. This setup does not support restarting the container—you should remove the container and recreate it instead.</p>
+<p class="rubric-1 rubric">Deploying Galera on Mutiple Docker Hosts</p>
+<p>Now let&#8217;s discuss how to deploy Galera on multiple Docker hosts. By design, Docker containers are reachable using port-forwarded TCP ports only, even if the containers have IP addresses. So we will set up port forwarding for all TCP ports that are required for Galera to operate.</p>
 <p>The following TCP port are used by Galera:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">3306-MySQL port</span>
 <span class="go">4567-Galera Cluster</span>
@@ -311,7 +377,7 @@
 </pre></div>
 </div>
 <p class="rubric-1 rubric">Summary</p>
-<p>In this blog post, we described how to run Galera Cluster inside Docker on multiple hosts, even with non-standard ports. It is also possible to use solutions such as weave, socketplane.io and flannel that provide a multi-host network for the containers.</p>
+<p>That concludes this tutorial. As you can see, it&#8217;s easy to run Galera on Docker and inside Docker on multiple hosts, even with non-standard ports. It is also possible to use solutions such as weave, socketplane.io and flannel that provide a multi-host network for the containers.</p>
 </div>
 
 
@@ -325,13 +391,13 @@
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="getting-started-docker-pt1.html"
-                          title="Previous page">&larr; Getting Started Galera with Docker, Part 1</a></p>
+    <p class="topless"><a href="migration.html"
+                          title="Previous page">&larr; Migrating to Galera Cluster</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
     <p class="topless"><a href="achieving-read-after-write-semantics.html"
-                          title="Next page">&rarr; Achieving Read-After-Write Semantics with Galera</a></p>
+                          title="Next page">&rarr; Read-After-Write Semantics with Galera</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
