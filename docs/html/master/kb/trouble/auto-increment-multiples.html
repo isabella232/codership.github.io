@@ -7,11 +7,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Troubleshooting Galera Cluster when it Stalls on ALTER" name="title" />
+    <meta content="Auto_Increment Increasing by Multiples" name="title" />
 <meta content="en-US" name="language" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
-    <title>Cluster Stalls on ALTER &#8212; Galera Cluster Documentation</title>
+    <title>Auto_Increment Increasing by Multiples &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -34,8 +34,8 @@
     <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Commit Failed for Reason 3" href="commit-failed-reason-3.html" />
-    <link rel="prev" title="Auto_Increment Increasing by Multiples" href="auto-increment-multiples.html" />
+    <link rel="next" title="Cluster Stalls on ALTER" href="stall-on-alter.html" />
+    <link rel="prev" title="Codership Troubleshooting Articles" href="index.html" />
 
 
 
@@ -227,33 +227,131 @@
 </ul>
 <p class="bull-head no-bull">Related Documents</p>
 <ul class="no-bull simple">
-<li><a class="reference internal" href="../../documentation/schema-upgrades.html"><span class="doc">Schema Upgrades</span></a></li>
-<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-osu-method"><span class="std std-ref">wsrep_OSU_method</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a></li>
 </ul>
 <p class="bull-head no-bull">Related Articles</p>
 </div>
-<div class="kb-article section" id="cluster-stalls-on-alter">
-<span id="kb-trouble-stall-on-alter"></span><h1>Cluster Stalls on <code class="docutils literal"><span class="pre">ALTER</span></code><a class="headerlink" href="#cluster-stalls-on-alter" title="Permalink to this headline">¶</a></h1>
-<p>There may be times in which a cluster will stall when an <code class="docutils literal"><span class="pre">ALTER</span></code> statement is executed on an unused table.</p>
+<div class="kb-article section" id="auto-increment-increasing-by-multiples">
+<span id="kb-trouble-auto-increment-multiples"></span><h1>Auto_Increment Increasing by Multiples<a class="headerlink" href="#auto-increment-increasing-by-multiples" title="Permalink to this headline">¶</a></h1>
+<p>The numeric value of a column which is a key index and uses the <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> attribute, will be increased automatically. Normally, it&#8217;s increased by a factor of one.  So, for the first row, the key auto_increment column should have a value of 1, the second a value of 2, and the third a value of 3.</p>
+<p>However, when using Galera, an auto_increment column will increase by a greater amount.  This isn&#8217;t a problem, but it&#8217;s something you need to understand and it&#8217;s something of which you need to be aware.</p>
 <p class="kb rubric">Scenario</p>
-<p>There may be a situation in which you attempt to execute an <code class="docutils literal"><span class="pre">ALTER</span></code> statement on one node, but it takes a long time to execute&#8211;longer than expected.  During that period all of the other nodes may stall, leading to performance problems throughout the cluster.</p>
-<p>What&#8217;s happening is a side effect of a multi-master cluster with several appliers.  The cluster needs to control when a <abbr title="Data Definition Language">DDL</abbr> statement ends in relation to other transactions, in order deterministically to detect conflicts and then schedule parallel appliers.  Basically, the DDL statement must execute in isolation.</p>
-<p>Galera Cluster has a 65K window of tolerance for transactions applied in parallel, but the cluster must wait when <code class="docutils literal"><span class="pre">ALTER</span></code> statements take too long.</p>
-<p class="kb rubric">Solution</p>
-<p>Given that stalling due to an <code class="docutils literal"><span class="pre">ALTER</span></code> statement is a consequence of something intrinsic to how replication works in Galera Cluster, there is no direct solution to the problem.  However, you can implement a workaround.</p>
-<p>In the event that you can sure that no other session will try to modify the table and that there are no other <abbr title="Data Definition Language">DDL</abbr> statements running, you can shift the schema upgrade method from <a class="reference internal" href="../../documentation/glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> to <a class="reference internal" href="../../documentation/glossary.html#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a> for the duration of the <code class="docutils literal"><span class="pre">ALTER</span></code> statement.  This applies the changes to each node individually, without affecting cluster performance.</p>
-<p>To run an <code class="docutils literal"><span class="pre">ALTER</span></code> statement in this manner, you will need to execute the <code class="docutils literal"><span class="pre">ALTER</span></code> statement between a paid of <code class="docutils literal"><span class="pre">SET</span></code> statements on each node like so:</p>
-<blockquote>
-<div><div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;RSU&#39;</span><span class="p">;</span>
+<p>Suppose we&#8217;re developing a database for a store which sells many things, including toys.  Related to this, we decide to create a simple table called, <code class="docutils literal"><span class="pre">toys</span></code>. Our intention is to store a list of toys that we sell, including how many we have in stock and the prices.</p>
+<p>Below is a description of this new table:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">DESC</span> <span class="n">toys</span><span class="p">;</span>
 
-<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">table1</span>
-<span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">col8</span> <span class="kt">INT</span><span class="p">;</span>
-
-<span class="kt">SET</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;TOI&#39;</span><span class="p">;</span>
+<span class="o">+----------+--------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">Field</span>    <span class="o">|</span> <span class="n">Type</span>         <span class="o">|</span> <span class="no">Null</span> <span class="o">|</span> <span class="k">Key</span> <span class="o">|</span> <span class="k">Default</span> <span class="o">|</span> <span class="n">Extra</span>          <span class="o">|</span>
+<span class="o">+----------+--------------+------+-----+---------+----------------+</span>
+<span class="o">|</span> <span class="n">toy_id</span>   <span class="o">|</span> <span class="kt">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>      <span class="o">|</span> <span class="n">NO</span>   <span class="o">|</span> <span class="n">PRI</span> <span class="o">|</span> <span class="no">NULL</span>    <span class="o">|</span> <span class="kp">auto_increment</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">toy_name</span> <span class="o">|</span> <span class="kt">char</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>     <span class="o">|</span> <span class="n">NO</span>   <span class="o">|</span>     <span class="o">|</span>         <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">quantity</span> <span class="o">|</span> <span class="kt">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>      <span class="o">|</span> <span class="n">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="mi">0</span>       <span class="o">|</span>                <span class="o">|</span>
+<span class="o">|</span> <span class="n">price</span>    <span class="o">|</span> <span class="kt">decimal</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="n">NO</span>   <span class="o">|</span>     <span class="o">|</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span>    <span class="o">|</span>                <span class="o">|</span>
+<span class="o">+----------+--------------+------+-----+---------+----------------+</span>
 </pre></div>
 </div>
-</div></blockquote>
-<p>The first SQL statement here will change the Schema Upgrade method to <em>Rolling Schema Upgrade</em> (i.e., <code class="docutils literal"><span class="pre">RSU</span></code>).  The second SQL statement represents an <code class="docutils literal"><span class="pre">ALTER</span></code> statement you want to execute. Once that&#8217;s finished, the last <code class="docutils literal"><span class="pre">SET</span></code> statement will reset the Schema Upgrade method back to <em>Total Order Isolation</em> (i.e., <code class="docutils literal"><span class="pre">TOI</span></code>).  After you&#8217;ve done this on each node, the cluster will now run with the desired updates.</p>
+<p>As you can see, the first column, called <code class="docutils literal"><span class="pre">toy_id</span></code>, uses auto_increment.  Let&#8217;s see what happens when three rows of data are inserted into the table.  Keep in mind that this is a new table which has never contained data.</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">toys</span> <span class="k">VALUES</span><span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Baseball&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">15</span><span class="p">),</span>
+<span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Frisbee&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">.</span><span class="mi">45</span><span class="p">),</span> <span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Slinky&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">95</span><span class="p">);</span>
+
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">toys</span><span class="p">;</span>
+
+<span class="o">+--------+----------+----------+-------+</span>
+<span class="o">|</span> <span class="n">toy_id</span> <span class="o">|</span> <span class="n">toy_name</span> <span class="o">|</span> <span class="n">quantity</span> <span class="o">|</span> <span class="n">price</span> <span class="o">|</span>
+<span class="o">+--------+----------+----------+-------+</span>
+<span class="o">|</span>      <span class="mi">3</span> <span class="o">|</span> <span class="n">Baseball</span> <span class="o">|</span>       <span class="mi">12</span> <span class="o">|</span>  <span class="mi">6</span><span class="p">.</span><span class="mi">15</span> <span class="o">|</span>
+<span class="o">|</span>      <span class="mi">6</span> <span class="o">|</span> <span class="n">Frisbee</span>  <span class="o">|</span>        <span class="mi">6</span> <span class="o">|</span> <span class="mi">12</span><span class="p">.</span><span class="mi">45</span> <span class="o">|</span>
+<span class="o">|</span>      <span class="mi">9</span> <span class="o">|</span> <span class="n">Slinky</span>   <span class="o">|</span>        <span class="mi">8</span> <span class="o">|</span>  <span class="mi">6</span><span class="p">.</span><span class="mi">95</span> <span class="o">|</span>
+<span class="o">+--------+----------+----------+-------+</span>
+</pre></div>
+</div>
+<p>Look at the values for the <code class="docutils literal"><span class="pre">toy_id</span></code> column. Instead of having values of 1, 2, 3, they have values of 3, 6, 9. They&#8217;re incrementing by a factor of three.  The first time encountering this, it may seem to be a problem, possibly a bug in the software.  It&#8217;s not.  It&#8217;s intentional, by design.</p>
+<p class="kb rubric">Explanation</p>
+<p>In a Galera Cluster, all nodes may write data to the tables.  Imagine a situation in which all nodes in the cluster simultaneously try to insert rows in the same table at the same time.  The result could potentially be duplicate values for any columns which use auto_increment.  To avoid such conflicts, Galera increments values for the columns based on the number of nodes in the cluster.</p>
+<p>Let&#8217;s see how many there in the cluster we&#8217;re using.  We would enter the following SQL statement to get the number of nodes in the cluster:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_size&#39;</span><span class="p">;</span>
+
+<span class="o">+--------------------+-------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>      <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+--------------------+-------+</span>
+<span class="o">|</span> <span class="n">wsrep_cluster_size</span> <span class="o">|</span> <span class="mi">3</span>     <span class="o">|</span>
+<span class="o">+--------------------+-------+</span>
+</pre></div>
+</div>
+<p>There are three nodes. This explains why the <code class="docutils literal"><span class="pre">toy_id</span></code> column is incrementing 3 at a time. It doesn&#8217;t explain why the first three rows didn&#8217;t have values of 1, 4, and 7.  The reason for that is each node has a different starting point.  The node on which the <code class="docutils literal"><span class="pre">INSERT</span></code> statement above was entered, happened to have been the third node to join the cluster.  Let&#8217;s get a list of variables related to auto_increment.  It&#8217;ll make more sense.</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;%auto_increment_%&#39;</span><span class="p">;</span>
+
+<span class="o">+------------------------------+-------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>                <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+------------------------------+-------+</span>
+<span class="o">|</span> <span class="n">auto_increment_increment</span>     <span class="o">|</span> <span class="mi">3</span>     <span class="o">|</span>
+<span class="o">|</span> <span class="n">auto_increment_offset</span>        <span class="o">|</span> <span class="mi">3</span>     <span class="o">|</span>
+<span class="o">|</span> <span class="n">wsrep_auto_increment_control</span> <span class="o">|</span> <span class="k">ON</span>    <span class="o">|</span>
+<span class="o">+------------------------------+-------+</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">auto_increment_increment</span></code> variable indicates that the node is set to increase any auto_increment field by a factor of 3. The <code class="docutils literal"><span class="pre">auto_increment_offset</span></code> variables provides it&#8217;s starting point from the value of the last row inserted. Notice that <code class="docutils literal"><span class="pre">wsrep_auto_increment_control</span></code> is enabled. This feature is what adjusts these other two variables based on the number of nodes in the cluster. If a node leaves the cluster, it will adjust them accordingly.</p>
+<p>If we were to get the <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> value on each of the three nodes for the <code class="docutils literal"><span class="pre">toys</span></code> table, the value would be different for each.  Below shows the results for the initial node in the cluster:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="kp">AUTO_INCREMENT</span>
+<span class="k">FROM</span> <span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="kp">TABLES</span>
+<span class="k">WHERE</span> <span class="n">TABLE_SCHEMA</span> <span class="o">=</span> <span class="s1">&#39;store&#39;</span>
+<span class="k">AND</span> <span class="n">TABLE_NAME</span> <span class="o">=</span> <span class="s1">&#39;toys&#39;</span><span class="p">;</span>
+
+<span class="o">+----------------+</span>
+<span class="o">|</span> <span class="kp">AUTO_INCREMENT</span> <span class="o">|</span>
+<span class="o">+----------------+</span>
+<span class="o">|</span>             <span class="mi">10</span> <span class="o">|</span>
+<span class="o">+----------------+</span>
+</pre></div>
+</div>
+<p>The value of the second node in the cluster is 11; for the third it&#8217;s 12. These values are set as the starting point for each column, the value that will be given to the next row entered from each respective node. With these starting points in mind, let&#8217;s look at the auto_increment system variables on the node which started the cluster:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;%auto_increment_%&#39;</span><span class="p">;</span>
+
+<span class="o">+------------------------------+-------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>                <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
+<span class="o">+------------------------------+-------+</span>
+<span class="o">|</span> <span class="n">auto_increment_increment</span>     <span class="o">|</span> <span class="mi">3</span>     <span class="o">|</span>
+<span class="o">|</span> <span class="n">auto_increment_offset</span>        <span class="o">|</span> <span class="mi">1</span>     <span class="o">|</span>
+<span class="o">|</span> <span class="n">wsrep_auto_increment_control</span> <span class="o">|</span> <span class="k">ON</span>    <span class="o">|</span>
+<span class="o">+------------------------------+-------+</span>
+</pre></div>
+</div>
+<p>You can see here that the auto_increment_offset on this node differs from the third node in the cluster.  On the second node in the cluster, it has a value of 2.</p>
+<p>Let&#8217;s add three more rows to the table, but this time from the first node:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">toys</span> <span class="k">VALUES</span><span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Ping Pong Paddle&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">.</span><span class="mi">95</span><span class="p">),</span>
+<span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Gumby &amp; Pokey&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Etch-A.Sketch&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">.</span><span class="mi">25</span><span class="p">);</span>
+
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">toys</span><span class="p">;</span>
+
+<span class="o">+--------+------------------+----------+-------+</span>
+<span class="o">|</span> <span class="n">toy_id</span> <span class="o">|</span> <span class="n">toy_name</span>         <span class="o">|</span> <span class="n">quantity</span> <span class="o">|</span> <span class="n">price</span> <span class="o">|</span>
+<span class="o">+--------+------------------+----------+-------+</span>
+<span class="o">|</span>      <span class="mi">3</span> <span class="o">|</span> <span class="n">Baseball</span>         <span class="o">|</span>       <span class="mi">12</span> <span class="o">|</span>  <span class="mi">6</span><span class="p">.</span><span class="mi">15</span> <span class="o">|</span>
+<span class="o">|</span>      <span class="mi">6</span> <span class="o">|</span> <span class="n">Frisbee</span>          <span class="o">|</span>        <span class="mi">6</span> <span class="o">|</span> <span class="mi">12</span><span class="p">.</span><span class="mi">45</span> <span class="o">|</span>
+<span class="o">|</span>      <span class="mi">9</span> <span class="o">|</span> <span class="n">Slinky</span>           <span class="o">|</span>        <span class="mi">8</span> <span class="o">|</span>  <span class="mi">6</span><span class="p">.</span><span class="mi">95</span> <span class="o">|</span>
+<span class="o">|</span>     <span class="mi">10</span> <span class="o">|</span> <span class="n">Ping</span> <span class="n">Pong</span> <span class="n">Paddle</span> <span class="o">|</span>        <span class="mi">4</span> <span class="o">|</span> <span class="mi">18</span><span class="p">.</span><span class="mi">95</span> <span class="o">|</span>
+<span class="o">|</span>     <span class="mi">13</span> <span class="o">|</span> <span class="n">Gumby</span> <span class="o">&amp;</span> <span class="n">Pokey</span>    <span class="o">|</span>        <span class="mi">3</span> <span class="o">|</span> <span class="mi">10</span><span class="p">.</span><span class="mi">25</span> <span class="o">|</span>
+<span class="o">|</span>     <span class="mi">16</span> <span class="o">|</span> <span class="n">Etch</span><span class="o">-</span><span class="n">A</span><span class="p">.</span><span class="n">Sketch</span>    <span class="o">|</span>        <span class="mi">2</span> <span class="o">|</span> <span class="mi">14</span><span class="p">.</span><span class="mi">25</span> <span class="o">|</span>
+<span class="o">+--------+------------------+----------+-------+</span>
+</pre></div>
+</div>
+<p>Notice that the first new row has a <code class="docutils literal"><span class="pre">toy_id</span></code> of 10, which matches the <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> value for the table.  For the next row, it jumps to 13, and then 16.  It doesn&#8217;t have the symetry of the results of the first <code class="docutils literal"><span class="pre">INSERT</span></code> statement, but it&#8217;s logical.</p>
+<p>Let&#8217;s insert two more rows, but on the second node:</p>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">toys</span> <span class="k">VALUES</span><span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Tonka Dump Truck&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">24</span><span class="p">.</span><span class="mi">95</span><span class="p">),</span>
+<span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Airport Playset&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">.</span><span class="mi">95</span><span class="p">);</span>
+
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">toys</span> <span class="k">LIMIT</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="o">+--------+------------------+----------+-------+</span>
+<span class="o">|</span> <span class="n">toy_id</span> <span class="o">|</span> <span class="n">toy_name</span>         <span class="o">|</span> <span class="n">quantity</span> <span class="o">|</span> <span class="n">price</span> <span class="o">|</span>
+<span class="o">+--------+------------------+----------+-------+</span>
+<span class="o">|</span>     <span class="mi">17</span> <span class="o">|</span> <span class="n">Tonka</span> <span class="n">Dump</span> <span class="n">Truck</span> <span class="o">|</span>        <span class="mi">2</span> <span class="o">|</span> <span class="mi">24</span><span class="p">.</span><span class="mi">95</span> <span class="o">|</span>
+<span class="o">|</span>     <span class="mi">20</span> <span class="o">|</span> <span class="n">Airport</span> <span class="n">Playset</span>  <span class="o">|</span>        <span class="mi">1</span> <span class="o">|</span> <span class="mi">18</span><span class="p">.</span><span class="mi">95</span> <span class="o">|</span>
+<span class="o">+--------+------------------+----------+-------+</span>
+</pre></div>
+</div>
+<p>To save space, we used the <code class="docutils literal"><span class="pre">LIMIT</span></code> clause to select the last two rows, the two new rows inserted.  As you can see, the second node used the next <code class="docutils literal"><span class="pre">toy_id</span></code> in the sequence (i.e., 17) and then just three just in case the other two nodes were inserting rows.</p>
+<p>The result of setting the value of <code class="docutils literal"><span class="pre">auto_increment_increment</span></code> to the number of nodes, and the <code class="docutils literal"><span class="pre">auto_increment_offset</span></code> from 1 to the number of nodes, is that there will be no conflicts between the nodes.  Just don&#8217;t manually change the value of these two variables or use <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code> to change the value of AUTO_INCREMENT for any table.  That would cause problems.</p>
 </div>
 
 
@@ -267,13 +365,13 @@
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="auto-increment-multiples.html"
-                          title="Previous page">&larr; Auto_Increment Increasing by Multiples</a></p>
+    <p class="topless"><a href="index.html"
+                          title="Previous page">&larr; Codership Troubleshooting Articles</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="commit-failed-reason-3.html"
-                          title="Next page">&rarr; Commit Failed for Reason 3</a></p>
+    <p class="topless"><a href="stall-on-alter.html"
+                          title="Next page">&rarr; Cluster Stalls on <code class="docutils literal"><span class="pre">ALTER</span></code></a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
