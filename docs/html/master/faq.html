@@ -240,7 +240,9 @@
 <li><a class="reference internal" href="#faq-trivial-questions"><span class="std std-ref">Galera Trivia Questions</span></a></li>
 </ul>
 <p>Just below each question is further categorization of the question: the minimum experience level of the person who might be interested—if you&#8217;re new to database clusters, you might want to skip the Intermediate ones; and the type of person who might be interested in such a question (e.g., DBAs, business managers).</p>
-<p class="rubric-1 rubric-separated rubric" id="faq-general-questions">General Questions</p>
+<div class="banner container" id="faq-general-questions">
+<p class="rubric-1 rubric-separated rubric">General Questions</p>
+</div>
 <p class="rubric-2 rubric" id="faq-what-is-galera-cluster">What is Galera Cluster?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">Galera Cluster is a write-set replication service provider in the form of the <em>dlopenable</em> library.  It provides synchronous replication and supports multi-master replication.  Galera Cluster is capable of unconstrained parallel applying (i.e., &#8220;parallel replication&#8221;), multicast replication and automatic node provisioning.</p>
@@ -266,7 +268,9 @@
 <p class="list-stats">Level: All; Interested: DBAs; Category: General</p>
 <p class="list-abstract">Since the software is free, it costs you only a little bit of time to try the software. To start, you might want to set up three new servers to be part of a cluster. If you have an account with Amazon&#8217;s AWS, you could create three instances in there system, just for testing Galera. See <a class="reference internal" href="#faq-codership-offers-support"><span class="std std-ref">the Question on Using AWS</span></a>.</p>
 <p class="list-abstract">If you want to see how well it performs, you might copy your existing databases to your test cluster.  See <a class="reference internal" href="training/tutorials/migration.html#migrate-data"><span class="std std-ref">Data Migration</span></a> for more details on how you might do that.  You can also use a benchmark tool like, <code class="docutils literal"><span class="pre">sysbench</span></code> (see <a class="reference external" href="https://severalnines.com/blog/how-benchmark-performance-mysql-mariadb-using-sysbench">How to Benchmark Performance</a>) to test Galera.</p>
-<p class="rubric-1 rubric-separated rubric" id="faq-learning-questions">Learning &amp; Training Questions</p>
+<div class="banner container" id="faq-learning-questions">
+<p class="rubric-1 rubric-separated rubric">Learning &amp; Training Questions</p>
+</div>
 <p class="rubric-2 rubric" id="faq-galera-cluster-popularity">How Popular is Galera Cluster? Will I be able to Find People we Need?</p>
 <p class="list-stats">Level: All; Interested: Business Managers; Category: Training</p>
 <p class="list-abstract">Galera Cluster is becoming de-facto-standard for MySQL high availability and scalability solution. In 2016, Galera Cluster downloads passed over 1,000,000.</p>
@@ -293,7 +297,9 @@
 <p class="list-abstract">In a way, Galera is a behind-the-scene feature.  It&#8217;s seamless and very much hidden from users. A developer may access any node in a Galera cluster to change table schemata.</p>
 <p class="list-abstract">Developers just need to be mindful to use only InnoDB tables. You can guard against this by setting the <code class="docutils literal"><span class="pre">--default-storage-engine</span> <span class="pre">option</span></code> and <code class="docutils literal"><span class="pre">enforce_storage_engine</span></code> to InnoDB. Be sure to disable <code class="docutils literal"><span class="pre">enforce_storage_engine</span></code>, though, when upgrading the database software.</p>
 <p class="list-abstract">Users would insert or change data in a database the same as they would on a stand-alone database server not using Galera or replication. There&#8217;s no extra login requirements, interfaces, or methods to use a database running on Galera Cluster. Users will be unaware that you&#8217;re using Galera Cluster—other than maybe noticing that your database is much more dependable.</p>
-<p class="rubric-1 rubric-separated rubric" id="faq-assistance-questions">Assistance Questions</p>
+<div class="banner container" id="faq-assistance-questions">
+<p class="rubric-1 rubric-separated rubric">Assistance Questions</p>
+</div>
 <p class="rubric-2 rubric" id="faq-codership-offers-support">Does Codership Offer Support?</p>
 <p class="list-stats">Level: All; Interested: DBAs, Business Managers; Category: Support</p>
 <p class="list-abstract">Codership offers 8/5 and 24/7 support to keep your Galera Cluster installation running. Our support staff includes the core developers of Galera technology. As a result, we’re able to pinpoint and resolve problems, quickly and efficiently.</p>
@@ -320,7 +326,9 @@
 <p class="list-abstract">There are a few forums on Galera and related software. On these forums, you can post questions to the community. It may take a little time, but you will usually receive responses to your posts.</p>
 <p class="list-abstract">We have a forum in which the community, as well as our staff monitor and post responses:  <a class="reference external" href="https://galeracluster.com/community/">Codership Forum</a>. Some of our partners maintain forums on Galera:  <a class="reference external" href="https://www.fromdual.com/forum/513">FromDual Forum</a>.</p>
 <p class="list-abstract">You can also post questions on forums unaffiliated with Codership or our partners:  <a class="reference external" href="https://dba.stackexchange.com/questions/tagged/galera">Stack Exchange (DBA Section)</a>, <a class="reference external" href="https://stackoverflow.com/questions/tagged/galera">Stack Overflow</a>,</p>
-<p class="rubric-1 rubric-separated rubric" id="faq-installation-migration-questions">Installation &amp; Migration Questions</p>
+<div class="banner container" id="faq-installation-migration-questions">
+<p class="rubric-1 rubric-separated rubric">Installation &amp; Migration Questions</p>
+</div>
 <p class="rubric-2 rubric" id="faq-easy-migration-standard-to-galera">If I&#8217;m now using MySQL Standard Replication, will it be Easy to Switch to Galera?</p>
 <p class="list-stats">Level: Newcomer; Interested: DBAs; Category: Installation</p>
 <p class="list-abstract">It&#8217;s potentially very easy. There are a few things to consider, changes you may need to make.</p>
@@ -349,7 +357,9 @@
 <p class="list-abstract">Galera runs only on Linux and similar Unix-like operating systems. Physically, any server on which Linux can be installed, may be used as a node in a Galera cluster.  Galera and the storage engine, InnoDB make good use of RAM and Swap Space.  So, the more memory you can allocate, the better.  Since a cluster runs across a network, get the fastest, best ethernet cards you can get.</p>
 <p class="list-abstract">The best equipment you can afford to buy, the better. If you&#8217;re using virtual servers like those through Amazon&#8217;s AWS, you don&#8217;t need to be concerned about most of these equipment factors. You will just need to allow your servers enough memory and storage space.</p>
 <p class="list-abstract">However you build your server nodes, it&#8217;s best that they be equal in all ways: physical and virtual equipment; operating system configuration; software installation.</p>
-<p class="rubric-1 rubric-separated rubric" id="faq-usage-questions">Usage Questions</p>
+<div class="banner container" id="faq-usage-questions">
+<p class="rubric-1 rubric-separated rubric">Usage Questions</p>
+</div>
 <p class="rubric-2 rubric" id="faq-galera-load-balancing">Does Galera Balance Loads?</p>
 <p class="list-stats">Level: Advanced; Interested: DBAs; Category: Performance</p>
 <p class="list-abstract">For high-traffic clusters, to prevent one node from being overwhelmed with write and read queries, you may want to use a load balancer. Galera Cluster doesn&#8217;t include this feature. However, we could use MariaDB&#8217;s MaxScale, ProxySQL, or some other such load balancer.</p>
@@ -394,7 +404,9 @@
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: Maintenance</p>
 <p class="list-abstract">Standard MySQL replication uses the binary log for replicating. However, Galera doesn&#8217;t use the binary log.  Nevertheless, there may be situations in which you might want to use point-in-time recovery methods to restore tables or data since the last backup.</p>
 <p class="list-abstract">You might also want to attach an asynchronous slave to one of your nodes, using standard MySQL replication and set it on a delay.  This can also help with recovering tables and data lost since the last backup was made.</p>
-<p class="rubric-1 rubric-separated rubric" id="faq-administrative-questions">Administrative Questions</p>
+<div class="banner container" id="faq-administrative-questions">
+<p class="rubric-1 rubric-separated rubric">Administrative Questions</p>
+</div>
 <p class="rubric-2 rubric" id="faq-what-causes-galera-to-stop">What typically Causes a Cluster to Stop?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs, Business Managers; Category: Maintenance</p>
 <p class="list-abstract">Although it doesn&#8217;t happen often, there are several reasons a Galera cluster might crash. Below is a list of them, grouped by type of cause:</p>
@@ -430,7 +442,9 @@
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: Performance</p>
 <p class="list-abstract">Integral to Galera Cluster replication, the cluster will wait for all of the nodes in the cluster to return the status of certification test before committing transactions or rolling them back.  Because of this, a node that is inundated with traffic will delay that node from replying to the cluster and delay the other nodes as they wait for it to report.</p>
 <p class="list-abstract">To alleviate this problem, you would make sure that all of the servers the same physically (i.e., amount of RAM, types of network interfaces), or at least have close the same amount of resources available.  You would also use a load balancer (e.g., MariaDB MaxScale, ProxySQL) to make sure one node is not overloaded with traffic.</p>
-<p class="rubric-1 rubric-separated rubric" id="faq-trivial-questions">Galera Trivia Questions</p>
+<div class="banner container" id="faq-trivial-questions">
+<p class="rubric-1 rubric-separated rubric">Galera Trivia Questions</p>
+</div>
 <p class="rubric-2 rubric" id="faq-why-called-is-galera">Why is the Software Called Galera?</p>
 <p class="list-stats">Level: Newcomer; Interested: DBAs, Business Managers; Category: Background</p>
 <p class="list-abstract">The word <em>galera</em> is the Italian word for <em>galley</em>.  The galley is a class of naval vessel used in the Mediterranean Sea from the second millennium <sub>B.C.E.</sub> until the Renaissance.  Although it used sails when the winds were favorable, its principal method of propulsion came from banks of oars.</p>
