@@ -235,10 +235,13 @@
 <div class="library-document section" id="recovering-primary-component">
 <span id="pc-recovery"></span><h1>Recovering Primary Component<a class="headerlink" href="#recovering-primary-component" title="Permalink to this headline">¶</a></h1>
 <p id="index-0">Cluster nodes can store the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state to disk.  The node records the state of the Primary Component and the UUID&#8217;s of the nodes connected to it.  In the event of an outage, once all nodes that were part of the last saved state achieve connectivity, the cluster recovers the Primary Component.</p>
-<p>In the event that the write-set position differs between the nodes, the recovery process also requires a full state snapshot transfer.</p>
-<p>For more information on this feature, see the <a class="reference internal" href="galera-parameters.html#pc-recovery"><span class="std std-ref">pc.recovery</span></a> parameter.  By default, it is enabled starting in version 3.6.</p>
+<p>If the write-set position differs between the nodes, the recovery process also requires a full state snapshot transfer.</p>
+<p>For more information on this feature, see the <a class="reference internal" href="galera-parameters.html#pc-recovery"><span class="std std-ref">pc.recovery</span></a> parameter.  By default, it&#8217;s enabled starting in version 3.6.</p>
 <p class="rubric-1 rubric" id="understand-pc-state">Understanding the Primary Component State</p>
-<p>When a node stores the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state to disk, it saves it as the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file.  The node creates and updates this file when the cluster forms or changes the Primary Component.  This ensures that the node retains the latest Primary Component state that it was in.  If the node loses connectivity, it has the file to reference.  If the node shuts down gracefully, it deletes the file.</p>
+<p>When a node stores the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state to disk, it saves it as the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file.  You&#8217;ll find this file in the database data directory on the server which is acting as the Primary Component.</p>
+<p>The node creates and updates this file when the cluster forms or changes the Primary Component.  This ensures that the node retains the latest Primary Component state that it was in.  If the node loses connectivity, it has the file to reference.</p>
+<p>If the node shuts down gracefully, it deletes the file. If the cluster continues after the node has shutdown (i.e., there are other nodes that did not shutdown), one of the remaining nodes will become the host to the Primary Component and will create the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file on its file system.</p>
+<p>Below is an example of the contents of the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>my_uuid: d3124bc8-1605-11e4-aa3d-ab44303c044a
 #vwbeg
 view_id: 3 0dae1307-1606-11e4-aa94-5255b1455aa0 12
@@ -249,22 +252,11 @@ member: d3124bc8-1605-11e4-aa3d-ab44303c044a 1
 #vwend
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file breaks into two parts:</p>
-<ul class="simple">
-<li><strong>Node Information</strong> Provides the node&#8217;s UUID, in the <code class="docutils literal"><span class="pre">my_uuid</span></code> field.</li>
-<li><strong>View Information</strong>  Provides information on the node&#8217;s view of the Primary Component, contained between the <code class="docutils literal"><span class="pre">#vwbeg</span></code> and <code class="docutils literal"><span class="pre">#vwend</span></code> tags.<ul>
-<li><code class="docutils literal"><span class="pre">view_id</span></code> Forms an identifier for the view from three parts:<ul>
-<li><em>view_type</em> Always gives a value of <code class="docutils literal"><span class="pre">3</span></code> to indicate the primary view.</li>
-<li><em>view_uuid</em> and <em>view_seq</em> together form a unique value for the identifier.</li>
-</ul>
-</li>
-<li><code class="docutils literal"><span class="pre">bootstrap</span></code> Displays whether or not the node is bootstrapped, but does not effect the Primary Component recovery process.</li>
-<li><code class="docutils literal"><span class="pre">member</span></code> Displays the UUID&#8217;s of nodes in this primary component.</li>
-</ul>
-</li>
-</ul>
+<p>The <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file is composed of two parts. <strong>Node Information</strong> provides the node&#8217;s UUID, in the <code class="docutils literal"><span class="pre">my_uuid</span></code> field. <strong>View Information</strong> provides information on the node&#8217;s view of the Primary Component, contained between the <code class="docutils literal"><span class="pre">#vwbeg</span></code> and <code class="docutils literal"><span class="pre">#vwend</span></code> tags.</p>
+<p>The <code class="docutils literal"><span class="pre">view_id</span></code> forms an identifier for the view from three parts: <em>view_type</em>, which always gives a value of <code class="docutils literal"><span class="pre">3</span></code> to indicate the primary view; and the <em>view_uuid</em> and <em>view_seq</em> together form a unique value for the identifier.</p>
+<p>The <code class="docutils literal"><span class="pre">bootstrap</span></code> variable indicates whether or not the node is bootstrapped. It doesn&#8217;t, though, effect the Primary Component recovery process. The <code class="docutils literal"><span class="pre">member</span></code> variables contain the UUID&#8217;s of nodes connecting to the Primary Component.</p>
 <p class="rubric-1 rubric" id="modifying-pc-state">Modifying the Saved Primary Component State</p>
-<p>In the event that you find yourself in the unusual situation where you need to force certain nodes to join each other specifically, you can do so by manually changing the saved <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state.</p>
+<p>If you find yourself in the unusual situation where you need to force certain nodes to join each other specifically, you can do so by manually changing the saved <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> state.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Under normal circumstances, for safety reasons, you should entirely avoid editing or otherwise modifying the <code class="docutils literal"><span class="pre">gvwstate.dat</span></code> file.  Doing so may lead to unexpected results.</p>

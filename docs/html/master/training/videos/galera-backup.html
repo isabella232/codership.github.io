@@ -7,20 +7,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Install Galera Cluster" name="title" />
+    <meta content="Making Back-Ups with Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
-<meta content="galera cluster, installation, install, mysql, mariadb, xtradb" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
-    <title>Installing Galera Cluster &#8212; Galera Cluster Documentation</title>
+    <title>Making Back-Ups with Galera Cluster &#8212; Galera Cluster Documentation</title>
     
-    <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
+        URL_ROOT:    '../../',
         VERSION:     '',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -28,15 +27,15 @@
         SOURCELINK_SUFFIX: '.txt'
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../_static/cloud.js"></script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Galera Cluster for MySQL—Binary Installation" href="install-mysql.html" />
-    <link rel="prev" title="Streaming Replication" href="streaming-replication.html" />
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../_static/cloud.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="High Availability with Galera Cluster" href="high-availability-with-galera-cluster.html" />
+    <link rel="prev" title="Introduction to Galera Cluster" href="galera-intro.html" />
 
 
 
@@ -211,65 +210,61 @@
   <div class="topic" id="left-margin">
 <p class="topic-title first">The Library</p>
 <ul class="no-bull simple">
-<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
-<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
 </ul>
 <ul class="no-bull-sub no-bull simple">
-<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
-<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
+<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
+<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
 </ul>
 <ul class="no-bull simple">
-<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
-<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
 </ul>
 <ul class="no-bull-sub no-bull simple">
-<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
-<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+<li><a class="reference internal" href="../tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
 <p class="bull-head no-bull">Related Documents</p>
-<p class="bull-head no-bull">Related Articles</p>
 <ul class="bull-head no-bull simple">
-<li><a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Install Galera</span></a></li>
-<li><a class="reference internal" href="../training/tutorials/aws-galera-cluster.html"><span class="doc">Install Galera on AWS</span></a></li>
+<li><a class="reference internal" href="../../documentation/arbitrator.html"><span class="doc">Galera Arbitrator</span></a></li>
+<li><a class="reference internal" href="../../documentation/recovery.html"><span class="doc">Node Recovery</span></a></li>
+<li><a class="reference internal" href="../../documentation/scriptable-sst.html"><span class="doc">Scriptable SST</span></a></li>
+<li><a class="reference internal" href="../../documentation/state-transfer.html"><span class="doc">State Transfer</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html"><span class="doc">wsrep Options</span></a></li>
 </ul>
+<p class="bull-head no-bull">Related Articles</p>
 <p class="bull-head no-bull">Other Resources</p>
-<ul class="no-bull simple">
-<li><a class="reference internal" href="../training/videos/aws-galera-cluster.html"><span class="doc">Galera AWS (video)</span></a></li>
-<li><a class="reference internal" href="../training/videos/galera-mariadb-installing.html"><span class="doc">Galera MariaDB (video)</span></a></li>
-<li><a class="reference internal" href="../training/videos/galera-mysql-installing.html"><span class="doc">Galera MySQL (video)</span></a></li>
+<ul class="bull-head no-bull simple">
+<li><a class="reference external" href="https://mariadb.com/kb/en/mariadb/mysqldump/">mysqldump</a></li>
+<li><a class="reference external" href="https://dev.mysql.com/doc/refman/en/replication-options-slave.html">Slave Options</a></li>
+<li><a class="reference external" href="https://mariadb.com/kb/en/library/using-mariadb-replication-with-mariadb-galera-cluster-using-mariadb-replica/">Std Replication with Galera</a></li>
+<li><a class="reference external" href="https://dev.mysql.com/doc/mysql-backup-excerpt/en/backup-types.html">Types of Back-Ups</a></li>
+<li><a class="reference external" href="https://dev.mysql.com/doc/refman/en/change-master-to.html">CHANGE MASTER</a></li>
+<li><a class="reference external" href="https://dev.mysql.com/doc/refman/en/show-master-status.html">SHOW MASTER STATUS</a></li>
+<li><a class="reference external" href="https://dev.mysql.com/doc/refman/en/show-slave-status.html">SHOW SLAVE STATUS</a></li>
 </ul>
 </div>
-<div class="library-document library-list section" id="installing-galera-cluster">
-<span id="install-galera"></span><h1>Installing Galera Cluster<a class="headerlink" href="#installing-galera-cluster" title="Permalink to this headline">¶</a></h1>
-<p>Galera Cluster is essentially used to form a cluster among multiple database servers.  It&#8217;s widely used in conjunction with MySQL, MariaDB, and XtraDB database software systems.  Galera Cluster is integral to these database systems.  As a result, it may be installed together with one of them.</p>
-<p>There are several methods available for installing the paired systems: you may use binary installation packages or install with the source files. Below is a list of the various pairs and links to how to use whichever method your prefer:</p>
+<div class="tutorial-article video-article section" id="making-back-ups-with-galera-cluster">
+<span id="video-galera-backup"></span><h1>Making Back-Ups with Galera Cluster<a class="headerlink" href="#making-back-ups-with-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="video-stats">Speaker: Russell J.T. Dyer; Date: October 25, 2019; Length of Video: 1 hour, 5 minutes</p>
+<p>A primary responsibility of a database administrator, a DBA, is to make back-ups—or to ensure they are made properly and regularly.  It&#8217;s a key part of ensuring high availability of data. While the average DBA may know well how to perform this essentential administrative task on stand-alone database servers, most aren&#8217;t so sure how best to do so when the database server is part of a Galera Cluster.</p>
+<p>This training video explains in detail how to make back-ups of MySQL and MariaDB databases within a Galera Cluster.  It presents in stages, different methods for removing or pausing a node to make a proper back-up.  Additionally, it presents methods for restoring back-ups—recovering single nodes and an entire cluster.</p>
 <div class="banner container">
-<p class="rubric-1 rubric">Installing MySQL Galera Cluster</p>
+<p class="rubric-1 rubric">Outline of Training Video</p>
 </div>
-<p>MySQL the company and the database software was purchased quite a while ago by Oracle.  They continue to support MySQL software and cooperate with Codership to deliver an excellent database cluster system.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-mysql.html"><span class="doc">MySQL Binary Installation</span></a></p>
-<p>Click on the heading here to read this article on how to install MySQL using a binary installation package. Binary installation packages are available for Linux distributions using <code class="docutils literal"><span class="pre">apt-get</span></code>, <code class="docutils literal"><span class="pre">yum</span></code> and <code class="docutils literal"><span class="pre">zypper</span></code> package managers through the Codership repository.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-mysql-src.html"><span class="doc">MySQL Source Installation</span></a></p>
-<p>If you&#8217;re using a Linux distribution for which we don&#8217;t have binary files that work with its package management system, or if your server uses a different unix-like operating system (e.g., Solaris or FreeBSD), you will need to build Galera Cluster for MySQL from source files.</p>
-<div class="banner container">
-<p class="rubric-1 rubric">Installing MariaDB Galera Cluster</p>
+<div class="list-col1 container">
+<p><strong>1. Back-Up Basics</strong> <span class="raw-html"><small>(time index: 3:30)</small></span> <br/> Covers the basic concepts, reasons and goals in making back-ups of databases.</p>
+<p><strong>2. Using Standard Replication</strong> <span class="raw-html"><small>(time index: 16:23)</small></span> <br/> Presents how to use standard MySQL or MariaDB replication to attach a slave to a Galera node, with it acting as master. With this arrangement, it&#8217;s easy to stop the slave and regularly make back-ups.</p>
+<p><strong>3.  Using Galera Arbitrator</strong> <span class="raw-html"><small>(time index: 27:31)</small></span> <br/> Galera Arbitrator may be used to desynchronize a node and then initiate a back-up script on that node.  When it&#8217;s finished, it will resynchronize the node.</p>
 </div>
-<p>MariaDB the company and the database software is somewhat of a spinoff or fork of MySQL.  The software is basically the same as MySQL; Some people who worked formerly at MySQL, founded MariaDB several years ago.  Because of all of this, MariaDB software works well with Galera.  In fact, starting with version 10.4 of MariaDB, Galera is included.  Before that version, you&#8217;ll have to use one our binary installation packages or install from the source files.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-mariadb.html"><span class="doc">MariaDB Binary Installation</span></a></p>
-<p>This article provides information on how to install MariaDB using a binary installation package. They&#8217;re available for Debian-based and RPM-based distributions of Linux, from the <a class="reference external" href="https://downloads.mariadb.org/mariadb/repositories/">MariaDB Repository Generator</a>.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-mariadb-src.html"><span class="doc">MariaDB Source Installation</span></a></p>
-<p>If there aren&#8217;t a binary installation packages that are suited to the distribution of Linux your servers are using, or you&#8217;re using a different unix-like operating system (e.g., Solaris or FreeBSD), you&#8217;ll have to build MariaDB Galera Cluster from the source files.</p>
-<div class="banner container">
-<p class="rubric-1 rubric">Installing XtraDB Galera Cluster</p>
+<div class="list-col2 container">
+<p><strong>4. Restoring Nodes</strong> <span class="raw-html"><small>(time index: 42:31)</small></span> <br/> Explains how to recover nodes and a cluster by various methods, including using back-up files to restore the data and start an entire cluster.</p>
+<p><strong>5. Back-Up &amp; Restoration Plan</strong> <span class="raw-html"><small>(time index: 59:14)</small></span> <br/> Provides some sound advice on developing a back-up and restoration plan for Galera nodes.</p>
 </div>
-<p>Many years before MariaDB was formed and several years before MySQL was bought by Oracle, some key personnel at MySQL, who specialized in performance tuning MySQL software, left to form Percona—the name is an amalgamation of the words, <em>Performance</em> and <em>Consulting</em>.  In their efforts to get the most out of MySQL software, they developed their own fork with some extra performance enhancements, called XtraDB.  It also works well with Galera Cluster.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-xtradb.html"><span class="doc">XtraDB Binary Installation</span></a></p>
-<p>Binary packages for installing XtraDB with Galera Cluster are available for Debian-based and RPM-based distributions, but through the Percona repository.  This article explains how to install and configure this pairing of software, as well as provides links to the repository.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-xtradb-src.html"><span class="doc">XtraDB Source Installation</span></a></p>
-<p>You may not be able to use one of the binary installation packages available because of your operating system. If so, you&#8217;ll have to use our source files. Actually, you may want to use the source files to make minor changes that will become part of the files you&#8217;ll build.</p>
-<div class="toctree-wrapper compound">
-</div>
-</div>
+<video width="820" height="547" preload="metadata" controls>
+<source src="https://galeracluster.com/library-media/videos/galera-backup.mp4#t=0.5" type="video/mp4">
+</video></div>
 
 
           </div>
@@ -277,22 +272,22 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-        <p class="logo"><a href="../index.html" title="index">
-          <img class="logo" src="../_static/logo.png" alt="Logo"/>
+        <p class="logo"><a href="../../index.html" title="index">
+          <img class="logo" src="../../_static/logo.png" alt="Logo"/>
         </a></p>
   <div class="sphinxprev">
     <h4>Previous page</h4>
-    <p class="topless"><a href="streaming-replication.html"
-                          title="Previous page">&larr; Streaming Replication</a></p>
+    <p class="topless"><a href="galera-intro.html"
+                          title="Previous page">&larr; Introduction to Galera Cluster</a></p>
   </div>
   <div class="sphinxnext">
     <h4>Next page</h4>
-    <p class="topless"><a href="install-mysql.html"
-                          title="Next page">&rarr; Galera Cluster for MySQL—Binary Installation</a></p>
+    <p class="topless"><a href="high-availability-with-galera-cluster.html"
+                          title="Next page">&rarr; High Availability with Galera Cluster</a></p>
   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
+    <form class="search" action="../../search.html" method="get">
       <div><input type="text" name="q" /></div>
       <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
