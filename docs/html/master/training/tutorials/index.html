@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,6 @@
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -30,8 +27,6 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Getting Started with Galera Cluster" href="getting-started.html" />
@@ -71,8 +66,6 @@
 	<meta name="generator" content="WordPress 3.8.3" />
 
 	<link rel='shortlink' href='https://galeracluster.com/?p=12' />
-
-
 
 	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
 	<style type="text/css" id="twentythirteen-header-css">
@@ -200,6 +193,7 @@
 	</div><!-- #navbar -->
 	</header><!-- #masthead -->
 
+
   
 
     <div class="document">
@@ -229,8 +223,8 @@
 <div class="training-list section" id="codership-tutorials-on-galera-cluster">
 <span id="training-tutorials"></span><h1>Codership Tutorials on Galera Cluster<a class="headerlink" href="#codership-tutorials-on-galera-cluster" title="Permalink to this headline">¶</a></h1>
 <p>These are tutorial articles of the training section of the Codership Library. Here you&#8217;ll find tutorial articles on how to get started with Galera and other basic tasks related to initially starting a Galera Cluster. There are also some intermediate articles on a few other aspects of Galera and related software.</p>
-<div class="banner container" id="training-tutorials-entry">
-<p class="rubric-1 rubric">Basic &amp; Entry Level</p>
+<div class="banner container" id="training-tutorials-entry-install">
+<p class="rubric-1 rubric">Introduction &amp; Installation</p>
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="getting-started.html"><span class="doc">Getting Started with Galera Cluster</span></a></p>
@@ -239,6 +233,9 @@
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="galera-installation.html"><span class="doc">Installing Galera Cluster</span></a></p>
 <p class="list-stats">Length: 946 words; Writer: Staff; Pub: Oct 2014</p>
 <p class="list-abstract">This tutorial provides instruction to prepare your servers and installing Galera Cluster on each.  When you install Galera Cluster, you must choose between three implementations available.</p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="galera-on-aws.html"><span class="doc">Installing a Galera Cluster on AWS</span></a></p>
+<p class="list-stats">Length: 2494 words; Writer: Russell J.T. Dyer; Pub: Jun 2019</p>
+<p class="list-abstract">This tutorial explains how to use Amazon Web Services (AWS) to create virtual servers to be used as a Galera Cluster. It will explain how to create and configure AWS, as well as how to install and configure the database and Galera software on each node. It&#8217;ll end by showing you how to start the cluster.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="configuration.html"><span class="doc">System Configuration</span></a></p>
 <p class="list-stats">Length:  964 words; Writer: Staff; Pub: Oct 2014</p>
 <p class="list-abstract">After installing Galera Cluster on your servers, you&#8217;ll need to configure the database itself to serve as a node in a cluster.  This straightforward article provides you a list of parameters to set in each node&#8217;s database configuration file, as well as setting swap space.</p>
@@ -250,20 +247,23 @@
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="starting-cluster.html"><span class="doc">Starting the Cluster</span></a></p>
 <p class="list-stats">Length:  1,097 words; Writer: Staff; Pub: Oct 2014</p>
 <p class="list-abstract">A cluster requires at least two nodes, but you have to start the first node somehow. To do this, you&#8217;ll need to bootstrap the Primary Component. This article explains how to initialize the cluster.</p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="getting-started-docker.html"><span class="doc">Getting Started Galera with Docker</span></a></p>
+<p class="list-stats">Length: 1416 words; Writer: Erkan Yanar; Pub: May 2015</p>
+<p class="list-abstract">Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications. This first of two articles on using Galera with Docker explains how to build a basic Docker Image and locally deploy it on a test cluster. It also describes how to deploy Galera Cluster over multiple Docker hosts.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="testing-cluster.html"><span class="doc">Testing a Cluster</span></a></p>
 <p class="list-stats">Length:  499 words; Writer: Staff; Pub: Oct 2014</p>
 <p class="list-abstract">Once you have a cluster running, you should test some of the features to ensure it’s working properly. This will also help you understand how a cluster works so you can decide on your deployment. This tutorial provides a rough guide to testing replication and similar cluster operations.</p>
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="restarting-cluster.html"><span class="doc">Restarting the Cluster</span></a></p>
-<p class="list-stats">Length:  791 words; Writer: Staff; Pub: Oct 2014</p>
-<p class="list-abstract">You may need occasionally to restart a cluster, perhaps becauser of a major power failure. Whatever the reason, restarting a cluster so that data saved only on one node isn&#8217;t overwritten by another node which just happened to have rejoined the cluster first can be tricky. This article explains how to determine the most up-to&#8217;-date node and then to restart the Primary Component on that one.</p>
 </div>
-<div class="banner container" id="training-tutorials-intermediate">
-<p class="rubric-1 rubric">Intermediate Level</p>
+<div class="banner container" id="training-tutorials-admin">
+<p class="rubric-1 rubric">Administration</p>
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="galera-monitoring.html"><span class="doc">Monitoring a Galera Cluster</span></a></p>
 <p class="list-stats">Length: 2535 words; Writer: Russell J.T. Dyer; Pub: Jul 2019</p>
 <p class="list-abstract">This tutorial explains how to monitor a Galera Cluster, utilizing the Galera specific status variables, as well as employing scripts for logging status information.</p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="galera-backup.html"><span class="doc">Making Back-Ups with Galera Cluster</span></a></p>
+<p class="list-stats">Length: 2693 words; Writer: Russell J.T. Dyer; Pub: Nov 2019</p>
+<p class="list-abstract">This tutorial explains how to make back-ups while using Galera Cluster.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="debug-problems-with-sst.html"><span class="doc">Debugging Problems with SST</span></a></p>
 <p class="list-stats">Length:  985 words; Writer: Philip Stoev; Pub: Jul 2015</p>
 <p class="list-abstract">When new nodes join a cluster, Galera will transfer internally the entire dataset to the joiner. The same procedure, called State Snapshot Transfer (SST), applies to nodes that are rejoining the cluster after being down for a long period of time. This article offers some insights and troubleshooting advice for when there are problems with SST.</p>
@@ -272,18 +272,31 @@
 <p class="list-abstract">This article describes the Primary Component. This is a central concept in how Galera ensures database consistency and no divergence between nodes in case of a network split.</p>
 </div>
 <div class="list-col2 container">
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="migrate.html"><span class="doc">Galera Cluster Migration Factors</span></a></p>
+<p class="list-stats">Length:  2087 words; Writer: Staff; Pub: Oct 2014</p>
+<p class="list-abstract">If you have an existing database, but aren&#8217;t yet using Galera Cluster, you&#8217;ll have to migrate your data. This has to be done a particular way. This tutorial article will help you to understand the concepts involved and take you through the steps to migrate a database.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="supporting-transaction-isolation-levels.html"><span class="doc">Support for Transaction Isolation Levels</span></a></p>
 <p class="list-stats">Length:  1009 words; Writer: Seppo Jaakola; Pub: Sep 2015</p>
 <p class="list-abstract">Many DBAs and database developers don&#8217;t understand what MySQL transaction isolation levels Galera CLuster supports and how it does so. This articles tries to answer those uncertainties.</p>
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="safe-to-bootstrap-feature.html"><span class="doc">The Safe-To-Bootstrap Feature</span></a></p>
-<p class="list-stats">Length:  745 words; Writer: Philip Stoev; Pub: Nov 2016</p>
-<p class="list-abstract">It&#8217;s usually not necessary to shut down an entire cluster for normal operation. However, sometimes it&#8217;s necessary. Often times it&#8217;s in the midst of a stressful situaiton. So it&#8217;s important to shut down a cluster safely and as quickly as possible to avoid extended downtime and potential data loss. This article addresses this situation, in particular “Safe-to-Bootstrap” protection.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="sst-or-not.html"><span class="doc">To SST or Not To SST?</span></a></p>
 <p class="list-stats">Length:  1001 words; Writer: Philip Stoev; Pub: Dec 2016</p>
 <p class="list-abstract">If a node leaves the cluster and subsequently rejoins, Galera will use one of two primary methods of getting the node rejoined and synchronized quickly with the rest of the cluster. This article describes the entire process of doing this and confusing messages one might see in the logs.</p>
 </div>
-<div class="banner container" id="training-tutorials-advanced">
-<p class="rubric-1 rubric">Advanced Level</p>
+<div class="banner container" id="training-tutorials-restart-recover">
+<p class="rubric-1 rubric">Restarting &amp; Recovery</p>
+</div>
+<div class="list-col1 container">
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="restarting-cluster.html"><span class="doc">Restarting the Cluster</span></a></p>
+<p class="list-stats">Length:  791 words; Writer: Staff; Pub: Oct 2014</p>
+<p class="list-abstract">You may need occasionally to restart a cluster, perhaps becauser of a major power failure. Whatever the reason, restarting a cluster so that data saved only on one node isn&#8217;t overwritten by another node which just happened to have rejoined the cluster first can be tricky. This article explains how to determine the most up-to&#8217;-date node and then to restart the Primary Component on that one.</p>
+</div>
+<div class="list-col2 container">
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="safe-to-bootstrap-feature.html"><span class="doc">The Safe-To-Bootstrap Feature</span></a></p>
+<p class="list-stats">Length:  745 words; Writer: Philip Stoev; Pub: Nov 2016</p>
+<p class="list-abstract">It&#8217;s usually not necessary to shut down an entire cluster for normal operation. However, sometimes it&#8217;s necessary. Often times it&#8217;s in the midst of a stressful situaiton. So it&#8217;s important to shut down a cluster safely and as quickly as possible to avoid extended downtime and potential data loss. This article addresses this situation, in particular “Safe-to-Bootstrap” protection.</p>
+</div>
+<div class="banner container" id="training-tutorials-performance-availability">
+<p class="rubric-1 rubric">Performance &amp; High Availability</p>
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="achieving-read-after-write-semantics.html"><span class="doc">Read-After-Write Semantics with Galera</span></a></p>
@@ -298,22 +311,6 @@
 <p class="list-stats">Length:  1,086 words; Writer: Philip Stoev; Pub: Jun 2015</p>
 <p class="list-abstract">When using Galera Cluster in multi-master mode, transaction conflicts may occur if two clients attempt to modify the same row at the same time. Such conflicts are reported a deadlock errors to the application. This article explains how to use the logs to troubleshoot such a problem.</p>
 </div>
-<div class="banner container" id="training-tutorials-special">
-<p class="rubric-1 rubric">Special Topics</p>
-</div>
-<div class="list-col1 container">
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="aws-galera-cluster.html"><span class="doc">Installing a Galera Cluster on AWS</span></a></p>
-<p class="list-stats">Length: 2494 words; Writer: Russell J.T. Dyer; Pub: Jun 2019</p>
-<p class="list-abstract">This tutorial explains how to use Amazon Web Services (AWS) to create virtual servers to be used as a Galera Cluster. It will explain how to create and configure AWS, as well as how to install and configure the database and Galera software on each node. It&#8217;ll end by showing you how to start the cluster.</p>
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="migrate.html"><span class="doc">Galera Cluster Migration Factors</span></a></p>
-<p class="list-stats">Length:  2087 words; Writer: Staff; Pub: Oct 2014</p>
-<p class="list-abstract">If you have an existing database, but aren&#8217;t yet using Galera Cluster, you&#8217;ll have to migrate your data. This has to be done a particular way. This tutorial article will help you to understand the concepts involved and take you through the steps to migrate a database.</p>
-</div>
-<div class="list-col2 container">
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="getting-started-docker.html"><span class="doc">Getting Started Galera with Docker</span></a></p>
-<p class="list-stats">Length: 1416 words; Writer: Erkan Yanar; Pub: May 2015</p>
-<p class="list-abstract">Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications. This first of two articles on using Galera with Docker explains how to build a basic Docker Image and locally deploy it on a test cluster. It also describes how to deploy Galera Cluster over multiple Docker hosts.</p>
-</div>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -324,19 +321,19 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-        <p class="logo"><a href="../../index.html" title="index">
-          <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p>
-  <div class="sphinxprev">
-    <h4>Previous page</h4>
-    <p class="topless"><a href="../index.html"
-                          title="Previous page">&larr; Codership Training</a></p>
-  </div>
-  <div class="sphinxnext">
-    <h4>Next page</h4>
-    <p class="topless"><a href="getting-started.html"
-                          title="Next page">&rarr; Getting Started with Galera Cluster</a></p>
-  </div>
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Codership Training</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Codership Training</a></li>
+      <li>Next: <a href="getting-started.html" title="next chapter">Getting Started with Galera Cluster</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
@@ -349,23 +346,6 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
-    
-    
-        <div class="sidebar-toggle-group no-js">
-            
-            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
-                 «
-                <span class="show-for-small">hide menu</span>
-                
-            </button>
-            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
-                
-                <span class="show-for-small">menu</span>
-                <span class="hide-for-small">sidebar</span>
-                 »
-            </button>
-        </div>
-    
       <div class="clearer"></div>
     </div>
 	<div class="navbar">

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -16,7 +14,6 @@
     
     <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -31,8 +28,6 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Certification-Based Replication" href="certification-based-replication.html" />
@@ -72,8 +67,6 @@
 	<meta name="generator" content="WordPress 3.8.3" />
 
 	<link rel='shortlink' href='https://galeracluster.com/?p=12' />
-
-
 
 	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
 	<style type="text/css" id="twentythirteen-header-css">
@@ -201,6 +194,7 @@
 	</div><!-- #navbar -->
 	</header><!-- #masthead -->
 
+
   
 
     <div class="document">
@@ -277,10 +271,8 @@
 <li><strong>Causality across the Cluster</strong> Synchronous replication guarantees causality across the whole cluster.  For example, a <code class="docutils literal"><span class="pre">SELECT</span></code> query issued after a transaction always sees the effects of the transaction, even if it were executed on another node.</li>
 </ul>
 <p class="rubric-2 rubric" id="disadvantages-synchronous-replication">Disadvantages of Synchronous Replication</p>
-<p>Traditionally, eager replication protocols coordinate nodes one operation at a time.  They use a two phase commit, or distributed locking.  A system with <img class="math" src="../_images/math/e11f2701c4a39c7fe543a6c4150b421d50f1c159.png" alt="n"/> number of nodes due to process <img class="math" src="../_images/math/21736df275793e73d4849d98709ef561b459defd.png" alt="o"/> operations with a throughput of <img class="math" src="../_images/math/5ec053cf70dc1c98cc297322250569eda193e7a4.png" alt="t"/> transactions per second gives you <img class="math" src="../_images/math/edba97b4c0d864d26e92ea7ea73767fa38eef3f7.png" alt="m"/> messages per second with:</p>
-<div class="math">
-<p><img src="../_images/math/4341bfcf2c93cce181abfbb4afc1a1b2b8e7697b.png" alt="m = n \times o \times t"/></p>
-</div><p>What this means that any increase in the number of nodes leads to an exponential growth in the transaction response times and in the probability of conflicts and deadlock rates.</p>
+<p>Traditionally, eager replication protocols coordinate nodes one operation at a time.  They use a two phase commit, or distributed locking.  A system with  number of nodes due to process  operations with a throughput of  transactions per second gives you  messages per second with:</p>
+<p>What this means that any increase in the number of nodes leads to an exponential growth in the transaction response times and in the probability of conflicts and deadlock rates.</p>
 <p>For this reason, asynchronous replication remains the dominant replication protocol for database performance, scalability and availability.  Widely adopted open source databases, such as MySQL and PostgreSQL only provide asynchronous replication solutions.</p>
 <p class="rubric-1 rubric" id="solving-issues-synchronous-replication">Solving the Issues in Synchronous Replication</p>
 <p>There are several issues with the traditional approach to synchronous replication systems.  Over the past few years, researchers from around the world have begun to suggest alternative approaches to synchronous database replication.</p>
@@ -300,19 +292,21 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-        <p class="logo"><a href="../index.html" title="index">
-          <img class="logo" src="../_static/logo.png" alt="Logo"/>
-        </a></p>
-  <div class="sphinxprev">
-    <h4>Previous page</h4>
-    <p class="topless"><a href="technical-description.html"
-                          title="Previous page">&larr; Technical Description</a></p>
-  </div>
-  <div class="sphinxnext">
-    <h4>Next page</h4>
-    <p class="topless"><a href="certification-based-replication.html"
-                          title="Next page">&rarr; Certification-Based Replication</a></p>
-  </div>
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="technical-description.html">Technical Description</a><ul>
+      <li>Previous: <a href="technical-description.html" title="previous chapter">Technical Description</a></li>
+      <li>Next: <a href="certification-based-replication.html" title="next chapter">Certification-Based Replication</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -325,23 +319,6 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
-    
-    
-        <div class="sidebar-toggle-group no-js">
-            
-            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
-                 «
-                <span class="show-for-small">hide menu</span>
-                
-            </button>
-            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
-                
-                <span class="show-for-small">menu</span>
-                <span class="hide-for-small">sidebar</span>
-                 »
-            </button>
-        </div>
-    
       <div class="clearer"></div>
     </div>
 	<div class="navbar">

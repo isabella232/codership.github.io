@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -15,7 +13,6 @@
     
     <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -30,11 +27,9 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.cookie.js"></script>
-    <script type="text/javascript" src="../../_static/cloud.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Installing a Galera Cluster on AWS" href="aws-galera-cluster.html" />
+    <link rel="next" title="Introduction to Galera Cluster" href="galera-intro.html" />
     <link rel="prev" title="To SST or Not To SST?" href="../tutorials/sst-or-not.html" />
 
 
@@ -71,8 +66,6 @@
 	<meta name="generator" content="WordPress 3.8.3" />
 
 	<link rel='shortlink' href='https://galeracluster.com/?p=12' />
-
-
 
 	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
 	<style type="text/css" id="twentythirteen-header-css">
@@ -200,6 +193,7 @@
 	</div><!-- #navbar -->
 	</header><!-- #masthead -->
 
+
   
 
     <div class="document">
@@ -225,12 +219,10 @@
 <li><a class="reference internal" href="../tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
 <li><a class="reference internal" href="#"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Documents</p>
-<p class="bull-head no-bull">Related Articles</p>
 </div>
 <div class="training-list section" id="codership-training-videos">
 <span id="training-videos"></span><h1>Codership Training Videos<a class="headerlink" href="#codership-training-videos" title="Permalink to this headline">¶</a></h1>
-<p>To help you to learn how to install, configure and use Galera Cluster and related software, we have created a series of traiing videos, screencasts and demonstrations.  They&#8217;re grouped on three main catagories:  Introduction &amp; Installation; Administration &amp; Resolution; and Performance &amp; High Availability.</p>
+<p>To help you to learn how to install, configure and use Galera Cluster and related software, we have created a series of traiing videos, screencasts and demonstrations.  They&#8217;re grouped on three main catagories:  Introduction &amp; Installation; Administration &amp; Recovery; and Performance &amp; High Availability.</p>
 <div class="banner container" id="training-videos-intro-install">
 <p class="rubric-1 rubric">Introduction &amp; Installation</p>
 </div>
@@ -246,15 +238,15 @@
 <p class="list-abstract">Shows the basics of how to install Galera Cluster and MariaDB software on three nodes—and configure the ports for security and other basic items.</p>
 </div>
 <div class="list-col2 container">
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="aws-galera-cluster.html"><span class="doc">Installing a Galera Cluster on AWS</span></a></p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="galera-aws-installing.html"><span class="doc">Installing a Galera Cluster on AWS</span></a></p>
 <p class="list-stats">published: jul 2019; length: 52 mins</p>
 <p class="list-abstract">Shows the basics of how to set up server instances on Amazon&#8217;s AWS for a Galera Cluster with either MySQL or MariaDB.</p>
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="standard-replication-galera.html"><span class="doc">Standard Replication &amp; Galera Cluster</span></a></p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="galera-standard-replication.html"><span class="doc">Standard Replication &amp; Galera Cluster</span></a></p>
 <p class="list-stats">published: oct 2019; length: 54 mins</p>
 <p class="list-abstract">Demonstrates how to configure and use standard MySQL and MariaDB replication and Galera Cluster—and compares the two.</p>
 </div>
 <div class="banner container" id="training-videos-admin-trouble">
-<p class="rubric-1 rubric">Administration &amp; Resolution</p>
+<p class="rubric-1 rubric">Administration &amp; Recovery</p>
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="galera-monitoring.html"><span class="doc">Monitoring a Galera Cluster</span></a></p>
@@ -281,7 +273,7 @@
 <p class="list-abstract">How to install and configure a load balancer (e.g., HA Proxy) to balance traffic among nodes in a Galera Cluster.</p>
 </div>
 <div class="list-col2 container">
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="high-availability-with-galera-cluster.html"><span class="doc">High Availability with Galera Cluster</span></a></p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="galera-high-availability.html"><span class="doc">High Availability with Galera Cluster</span></a></p>
 <p class="list-stats">published: april 2019; length: 60 mins</p>
 <p class="list-abstract">This video is of Colin Charles speaking about the MySQL Server High Availability landscape and how Galera Cluster fits into it.</p>
 </div>
@@ -295,19 +287,19 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-        <p class="logo"><a href="../../index.html" title="index">
-          <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-        </a></p>
-  <div class="sphinxprev">
-    <h4>Previous page</h4>
-    <p class="topless"><a href="../tutorials/sst-or-not.html"
-                          title="Previous page">&larr; To SST or Not To SST?</a></p>
-  </div>
-  <div class="sphinxnext">
-    <h4>Next page</h4>
-    <p class="topless"><a href="aws-galera-cluster.html"
-                          title="Next page">&rarr; Installing a Galera Cluster on AWS</a></p>
-  </div>
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Codership Training</a><ul>
+      <li>Previous: <a href="../tutorials/sst-or-not.html" title="previous chapter">To SST or Not To SST?</a></li>
+      <li>Next: <a href="galera-intro.html" title="next chapter">Introduction to Galera Cluster</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../../search.html" method="get">
@@ -320,23 +312,6 @@
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
-    
-    
-        <div class="sidebar-toggle-group no-js">
-            
-            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
-                 «
-                <span class="show-for-small">hide menu</span>
-                
-            </button>
-            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
-                
-                <span class="show-for-small">menu</span>
-                <span class="hide-for-small">sidebar</span>
-                 »
-            </button>
-        </div>
-    
       <div class="clearer"></div>
     </div>
 	<div class="navbar">
