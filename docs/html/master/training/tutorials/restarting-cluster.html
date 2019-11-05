@@ -11,7 +11,7 @@
 
     <title>Restarting the Cluster &#8212; Galera Cluster Documentation</title>
     
-    <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -33,43 +33,30 @@
     <link rel="prev" title="Testing a Cluster" href="testing-cluster.html" />
 
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
 
-<!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/jquery-1.8.3.min.js"></script>
--->
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/swipe.js"></script>
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
 
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript">  google.load("maps", "3",  {other_params:"sensor=false&libraries=geometry,places"});  </script>
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
 
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/main.js?v3"></script>
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/maps.js?v2"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
 
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/css/style_reset.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/fonts/fonts.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/style.css?v3">
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
 
-		<!--[if lt IE 9]>
-		<script src="https://galeracluster.com/wp-content/themes/galeracluster/js/html5.js"></script>
-		<![endif]-->
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
-
-	<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
-
-	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
-	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
-	<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
-	<link rel='next' title='Community' href='https://galeracluster.com/community/' />
-	<meta name="generator" content="WordPress 3.8.3" />
-
-	<link rel='shortlink' href='https://galeracluster.com/?p=12' />
-
-	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
-	<style type="text/css" id="twentythirteen-header-css">
-				.site-title,
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
 			.site-description {
 				position: absolute;
 				clip: rect(1px 1px 1px 1px); /* IE7 */
@@ -78,10 +65,9 @@
 				.site-header .home-link {
 				min-height: 0;
 			}
-	</style>
+</style>
 
-
-	<script type="text/javascript">
+<script type="text/javascript">
 
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-35163478-6']);
@@ -93,7 +79,7 @@
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 
-	</script>
+</script>
 
   </head>
   <body role="document">
@@ -120,70 +106,18 @@
 
 
 	<div id="navbar" class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="menu-main-menu-container">
 
 	<ul id="menu-main-menu" class="nav-menu">
-		<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-		<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-		<ul class="sub-menu">
-		<li id="menu-item-626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-		<li id="menu-item-827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-		<li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-		<li id="menu-item-828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-		<li id="menu-item-829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-		<li id="menu-item-830" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-		<li id="menu-item-831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-		</li>
-		</ul>
-		</li>
-		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-		<ul class="sub-menu">
-		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-		<ul class="sub-menu">
-		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-		<ul class="sub-menu">
-		<li id="menu-item-634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li id="menu-item-1101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-		<ul class="sub-menu">
-		<li id="menu-item-637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li id="menu-item-835" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li id="menu-item-836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li id="menu-item-838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li id="menu-item-837" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
-		<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul>
 	</div>
 
@@ -201,36 +135,42 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="topic" id="left-margin">
-<p class="topic-title first">The Library</p>
-<ul class="no-bull simple">
-<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
-<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
-</ul>
-<ul class="no-bull-sub no-bull simple">
+  <div class="left-margin container">
+<div class="left-margin-top container">
+<a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content container">
+<ul>
+<li><p class="first"><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></p>
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
 <li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
 </ul>
-<ul class="no-bull simple">
-<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<ul class="simple">
 <li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+</ul>
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Documents</p>
-<ul class="no-bull simple">
+<p>Related Documents</p>
+<ul class="simple">
 <li><a class="reference internal" href="../../documentation/galera-parameters.html#gcache-recover"><span class="std std-ref">gcache.recover</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Articles</p>
+<p>Related Articles</p>
+</li>
+</ul>
 </div>
-<div class="tutorial-article section" id="restarting-the-cluster">
+</div>
+<div class="library-article section" id="restarting-the-cluster">
 <span id="restarting-cluster"></span><h1>Restarting the Cluster<a class="headerlink" href="#restarting-the-cluster" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length:  791 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>Occasionally, you may have to restart an entire Galera Cluster.  This may happen, for example, when there is a power failure in which every node is shut down and you have no <code class="docutils literal"><span class="pre">mysqld</span></code> process.  Restarting a cluster, starting nodes in the wrong order, starting the wrong nodes first, can be devastating and lead to loss of data.</p>
 <p>When restarting an entire Galera Cluster, you&#8217;ll need to determine which node has the most advanced node state ID. This is covered in the next section.  Once you&#8217;ve identified the most advanced node, you&#8217;ll need to start that node first.  Then you can start the rest of the nodes in any order.  They will each look to the first node as the most up-to-date node.</p>
-<p class="rubric-1 rubric" id="identify-most-advanced-node">Identifying the Most Advanced Node</p>
+<p class="section-heading rubric" id="identify-most-advanced-node">Identifying the Most Advanced Node</p>
 <p>Identifying the most advanced node state ID is done by comparing the <a class="reference internal" href="../../documentation/glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> values on each node in your cluster.  You can find this in the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file, located in the data directory for your database.</p>
 <p>If the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file looks like the example below, you have found the most advanced node state ID:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span># GALERA saved state
@@ -246,7 +186,7 @@ cert_index:
 </pre></div>
 </div>
 <p>This value is the node state ID.  You can use it to update manually the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file, by entering it in the value of the <code class="docutils literal"><span class="pre">seqno</span></code> field. As an alternative, you can just let <code class="docutils literal"><span class="pre">mysqld_safe</span></code> recover automatically and pass the value to your database server the next time you start it.</p>
-<p class="rubric-1 rubric" id="safe-to-bootstrap-protection">&#8216;Safe to Bootstrap&#8217; Protection</p>
+<p class="section-heading rubric" id="safe-to-bootstrap-protection">&#8216;Safe to Bootstrap&#8217; Protection</p>
 <p>Starting with provider version 3.19, Galera has an additional protection against attempting to boostrap the cluster using a node that may not have been the last node remaining in the cluster prior to cluster shutdown.</p>
 <p>If Galera can conclusively determine which node was the last node standing, it will be marked as &#8216;safe to bootstrap&#8217;, as seen in this example <code class="docutils literal"><span class="pre">grastate.dat</span></code>:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span># GALERA saved state
@@ -264,12 +204,12 @@ safe_to_bootstrap: 1
 </div>
 <p>To override this protection, edit the <code class="docutils literal"><span class="pre">safe_to_bootstrap</span></code> line in the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file of the node you intend to use as the first node.</p>
 <p>In the case when all nodes crashed simultaneously, no node will be considered safe to bootstrap until the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file is edited manually.</p>
-<p class="rubric-1 rubric">Gcache Recovery</p>
+<p class="section-heading rubric">Gcache Recovery</p>
 <p>Starting with provider version 3.19, Galera provides the <a class="reference internal" href="../../documentation/galera-parameters.html#gcache-recover"><span class="std std-ref">gcache.recover</span></a> parameter. If set to <code class="docutils literal"><span class="pre">yes</span></code>, Galera will attempt to recover the gcache on node startup.</p>
 <p>If gcache recovery is successful, the node will be in position to provide IST to other joining nodes, which can speed up the overall restart time for the entire cluster.</p>
 <p>Gcache recovery requires that the entire gcache file is read twice. For large gcache files located on slow disks, this operation may take some time.</p>
 <p>Gcache recovery is a &#8220;best effort&#8221; operation. If recovery was not successful, the node will continue to operate normally however other nodes will fall back to SST when attempting to join.</p>
-<p class="rubric-1 rubric" id="identify-crashed-node">Identifying Crashed Nodes</p>
+<p class="section-heading rubric" id="identify-crashed-node">Identifying Crashed Nodes</p>
 <p>You can easily determine if a node has crashed by looking at the contents of the <code class="docutils literal"><span class="pre">grastate.dat</span></code> file. If it looks like the example below, the node has either crashed during execution of a non-transactional operation (e.g., <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code>), or the node aborted due to a database inconsistency.</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span># GALERA saved state
 version: 2.1
@@ -320,16 +260,6 @@ cert_index:
       <div class="clearer"></div>
     </div>
 	<div class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="nav-bar-container">
 
@@ -347,69 +277,21 @@ cert_index:
 	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
-	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-	</li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-	</ul>
-	</li>
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
 	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul></div>			</div><!-- .footer-menu -->
-	<div class="footer-search">
-	<div class="search-form">
-	<form role="search" method="get" action="https://galeracluster.com/">
-	<input type="search" class="search-field" value="" name="s" title="Search for:" />
-	<input type="submit" class="search-submit" value="" />
-	</form>
-	</div>
-	</div>
+
 
 	<div class="footer-bar">
 	<p class="copyright">2014 Codership Ltd.</p>
-	<a href="https://www.nasa.gov/multimedia/imagegallery/" class="imagery" target="_blank">Images: NASA</a>
 	</div>
 	<div class="footnote">
 	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>

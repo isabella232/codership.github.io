@@ -12,7 +12,7 @@
 
     <title>Installing Galera Cluster &#8212; Galera Cluster Documentation</title>
     
-    <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -34,43 +34,30 @@
     <link rel="prev" title="Streaming Replication" href="streaming-replication.html" />
 
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
 
-<!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/jquery-1.8.3.min.js"></script>
--->
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/swipe.js"></script>
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
 
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript">  google.load("maps", "3",  {other_params:"sensor=false&libraries=geometry,places"});  </script>
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
 
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/main.js?v3"></script>
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/maps.js?v2"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
 
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/css/style_reset.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/fonts/fonts.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/style.css?v3">
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
 
-		<!--[if lt IE 9]>
-		<script src="https://galeracluster.com/wp-content/themes/galeracluster/js/html5.js"></script>
-		<![endif]-->
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
-
-	<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
-
-	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
-	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
-	<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
-	<link rel='next' title='Community' href='https://galeracluster.com/community/' />
-	<meta name="generator" content="WordPress 3.8.3" />
-
-	<link rel='shortlink' href='https://galeracluster.com/?p=12' />
-
-	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
-	<style type="text/css" id="twentythirteen-header-css">
-				.site-title,
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
 			.site-description {
 				position: absolute;
 				clip: rect(1px 1px 1px 1px); /* IE7 */
@@ -79,10 +66,9 @@
 				.site-header .home-link {
 				min-height: 0;
 			}
-	</style>
+</style>
 
-
-	<script type="text/javascript">
+<script type="text/javascript">
 
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-35163478-6']);
@@ -94,7 +80,7 @@
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 
-	</script>
+</script>
 
   </head>
   <body role="document">
@@ -121,70 +107,18 @@
 
 
 	<div id="navbar" class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="menu-main-menu-container">
 
 	<ul id="menu-main-menu" class="nav-menu">
-		<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-		<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-		<ul class="sub-menu">
-		<li id="menu-item-626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-		<li id="menu-item-827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-		<li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-		<li id="menu-item-828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-		<li id="menu-item-829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-		<li id="menu-item-830" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-		<li id="menu-item-831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-		</li>
-		</ul>
-		</li>
-		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-		<ul class="sub-menu">
-		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-		<ul class="sub-menu">
-		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-		<ul class="sub-menu">
-		<li id="menu-item-634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li id="menu-item-1101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-		<ul class="sub-menu">
-		<li id="menu-item-637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li id="menu-item-835" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li id="menu-item-836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li id="menu-item-838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li id="menu-item-837" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
-		<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul>
 	</div>
 
@@ -202,64 +136,68 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="topic" id="left-margin">
-<p class="topic-title first">The Library</p>
-<ul class="no-bull simple">
+  <div class="left-margin container">
+<div class="left-margin-top container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content container">
+<ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
 <li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
 <li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
 </ul>
-<ul class="no-bull simple">
-<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<ul class="simple">
 <li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
 <li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Documents</p>
-<p class="bull-head no-bull">Related Articles</p>
-<ul class="bull-head no-bull simple">
+<p>Related Documents</p>
+<p>Related Articles</p>
+<ul class="simple">
 <li><a class="reference internal" href="../training/tutorials/galera-installation.html"><span class="doc">Install Galera</span></a></li>
 <li><a class="reference internal" href="../training/tutorials/galera-on-aws.html"><span class="doc">Install Galera on AWS</span></a></li>
 </ul>
-<p class="bull-head no-bull">Other Resources</p>
-<ul class="no-bull simple">
+<p>Other Resources</p>
+<ul class="simple">
 <li><a class="reference internal" href="../training/videos/galera-aws-installing.html"><span class="doc">Galera AWS (video)</span></a></li>
 <li><a class="reference internal" href="../training/videos/galera-mariadb-installing.html"><span class="doc">Galera MariaDB (video)</span></a></li>
 <li><a class="reference internal" href="../training/videos/galera-mysql-installing.html"><span class="doc">Galera MySQL (video)</span></a></li>
 </ul>
 </div>
-<div class="library-document library-list section" id="installing-galera-cluster">
+</div>
+<div class="library-document section" id="installing-galera-cluster">
 <span id="install-galera"></span><h1>Installing Galera Cluster<a class="headerlink" href="#installing-galera-cluster" title="Permalink to this headline">¶</a></h1>
 <p>Galera Cluster is essentially used to form a cluster among multiple database servers.  It&#8217;s widely used in conjunction with MySQL, MariaDB, and XtraDB database software systems.  Galera Cluster is integral to these database systems.  As a result, it may be installed together with one of them.</p>
 <p>There are several methods available for installing the paired systems: you may use binary installation packages or install with the source files. Below is a list of the various pairs and links to how to use whichever method your prefer:</p>
 <div class="banner container">
-<p class="rubric-1 rubric">Installing MySQL Galera Cluster</p>
+<p class="section-heading rubric">Installing MySQL Galera Cluster</p>
 </div>
 <p>MySQL the company and the database software was purchased quite a while ago by Oracle.  They continue to support MySQL software and cooperate with Codership to deliver an excellent database cluster system.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-mysql.html"><span class="doc">MySQL Binary Installation</span></a></p>
+<p class="sub-heading rubric"><a class="reference internal" href="install-mysql.html"><span class="doc">MySQL Binary Installation</span></a></p>
 <p>Click on the heading here to read this article on how to install MySQL using a binary installation package. Binary installation packages are available for Linux distributions using <code class="docutils literal"><span class="pre">apt-get</span></code>, <code class="docutils literal"><span class="pre">yum</span></code> and <code class="docutils literal"><span class="pre">zypper</span></code> package managers through the Codership repository.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-mysql-src.html"><span class="doc">MySQL Source Installation</span></a></p>
+<p class="sub-heading rubric"><a class="reference internal" href="install-mysql-src.html"><span class="doc">MySQL Source Installation</span></a></p>
 <p>If you&#8217;re using a Linux distribution for which we don&#8217;t have binary files that work with its package management system, or if your server uses a different unix-like operating system (e.g., Solaris or FreeBSD), you will need to build Galera Cluster for MySQL from source files.</p>
 <div class="banner container">
-<p class="rubric-1 rubric">Installing MariaDB Galera Cluster</p>
+<p class="section-heading rubric">Installing MariaDB Galera Cluster</p>
 </div>
 <p>MariaDB the company and the database software is somewhat of a spinoff or fork of MySQL.  The software is basically the same as MySQL; Some people who worked formerly at MySQL, founded MariaDB several years ago.  Because of all of this, MariaDB software works well with Galera.  In fact, starting with version 10.4 of MariaDB, Galera is included.  Before that version, you&#8217;ll have to use one our binary installation packages or install from the source files.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-mariadb.html"><span class="doc">MariaDB Binary Installation</span></a></p>
+<p class="sub-heading rubric"><a class="reference internal" href="install-mariadb.html"><span class="doc">MariaDB Binary Installation</span></a></p>
 <p>This article provides information on how to install MariaDB using a binary installation package. They&#8217;re available for Debian-based and RPM-based distributions of Linux, from the <a class="reference external" href="https://downloads.mariadb.org/mariadb/repositories/">MariaDB Repository Generator</a>.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-mariadb-src.html"><span class="doc">MariaDB Source Installation</span></a></p>
+<p class="sub-heading rubric"><a class="reference internal" href="install-mariadb-src.html"><span class="doc">MariaDB Source Installation</span></a></p>
 <p>If there aren&#8217;t a binary installation packages that are suited to the distribution of Linux your servers are using, or you&#8217;re using a different unix-like operating system (e.g., Solaris or FreeBSD), you&#8217;ll have to build MariaDB Galera Cluster from the source files.</p>
 <div class="banner container">
-<p class="rubric-1 rubric">Installing XtraDB Galera Cluster</p>
+<p class="section-heading rubric">Installing XtraDB Galera Cluster</p>
 </div>
 <p>Many years before MariaDB was formed and several years before MySQL was bought by Oracle, some key personnel at MySQL, who specialized in performance tuning MySQL software, left to form Percona—the name is an amalgamation of the words, <em>Performance</em> and <em>Consulting</em>.  In their efforts to get the most out of MySQL software, they developed their own fork with some extra performance enhancements, called XtraDB.  It also works well with Galera Cluster.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-xtradb.html"><span class="doc">XtraDB Binary Installation</span></a></p>
+<p class="sub-heading rubric"><a class="reference internal" href="install-xtradb.html"><span class="doc">XtraDB Binary Installation</span></a></p>
 <p>Binary packages for installing XtraDB with Galera Cluster are available for Debian-based and RPM-based distributions, but through the Percona repository.  This article explains how to install and configure this pairing of software, as well as provides links to the repository.</p>
-<p class="rubric-2 rubric"><a class="reference internal" href="install-xtradb-src.html"><span class="doc">XtraDB Source Installation</span></a></p>
+<p class="sub-heading rubric"><a class="reference internal" href="install-xtradb-src.html"><span class="doc">XtraDB Source Installation</span></a></p>
 <p>You may not be able to use one of the binary installation packages available because of your operating system. If so, you&#8217;ll have to use our source files. Actually, you may want to use the source files to make minor changes that will become part of the files you&#8217;ll build.</p>
 <div class="toctree-wrapper compound">
 </div>
@@ -299,16 +237,6 @@
       <div class="clearer"></div>
     </div>
 	<div class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="nav-bar-container">
 
@@ -326,69 +254,21 @@
 	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
-	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-	</li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-	</ul>
-	</li>
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
 	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul></div>			</div><!-- .footer-menu -->
-	<div class="footer-search">
-	<div class="search-form">
-	<form role="search" method="get" action="https://galeracluster.com/">
-	<input type="search" class="search-field" value="" name="s" title="Search for:" />
-	<input type="submit" class="search-submit" value="" />
-	</form>
-	</div>
-	</div>
+
 
 	<div class="footer-bar">
 	<p class="copyright">2014 Codership Ltd.</p>
-	<a href="https://www.nasa.gov/multimedia/imagegallery/" class="imagery" target="_blank">Images: NASA</a>
 	</div>
 	<div class="footnote">
 	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>

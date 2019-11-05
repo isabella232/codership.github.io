@@ -12,7 +12,7 @@
 
     <title>Streaming Replication &#8212; Galera Cluster Documentation</title>
     
-    <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -34,43 +34,30 @@
     <link rel="prev" title="Quorum Components" href="weighted-quorum.html" />
 
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
 
-<!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/jquery-1.8.3.min.js"></script>
--->
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/swipe.js"></script>
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
 
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript">  google.load("maps", "3",  {other_params:"sensor=false&libraries=geometry,places"});  </script>
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
 
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/main.js?v3"></script>
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/maps.js?v2"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
 
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/css/style_reset.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/fonts/fonts.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/style.css?v3">
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
 
-		<!--[if lt IE 9]>
-		<script src="https://galeracluster.com/wp-content/themes/galeracluster/js/html5.js"></script>
-		<![endif]-->
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
-
-	<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
-
-	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
-	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
-	<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
-	<link rel='next' title='Community' href='https://galeracluster.com/community/' />
-	<meta name="generator" content="WordPress 3.8.3" />
-
-	<link rel='shortlink' href='https://galeracluster.com/?p=12' />
-
-	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
-	<style type="text/css" id="twentythirteen-header-css">
-				.site-title,
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
 			.site-description {
 				position: absolute;
 				clip: rect(1px 1px 1px 1px); /* IE7 */
@@ -79,10 +66,9 @@
 				.site-header .home-link {
 				min-height: 0;
 			}
-	</style>
+</style>
 
-
-	<script type="text/javascript">
+<script type="text/javascript">
 
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-35163478-6']);
@@ -94,7 +80,7 @@
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 
-	</script>
+</script>
 
   </head>
   <body role="document">
@@ -121,70 +107,18 @@
 
 
 	<div id="navbar" class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="menu-main-menu-container">
 
 	<ul id="menu-main-menu" class="nav-menu">
-		<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-		<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-		<ul class="sub-menu">
-		<li id="menu-item-626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-		<li id="menu-item-827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-		<li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-		<li id="menu-item-828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-		<li id="menu-item-829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-		<li id="menu-item-830" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-		<li id="menu-item-831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-		</li>
-		</ul>
-		</li>
-		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-		<ul class="sub-menu">
-		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-		<ul class="sub-menu">
-		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-		<ul class="sub-menu">
-		<li id="menu-item-634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li id="menu-item-1101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-		<ul class="sub-menu">
-		<li id="menu-item-637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li id="menu-item-835" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li id="menu-item-836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li id="menu-item-838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li id="menu-item-837" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
-		<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul>
 	</div>
 
@@ -202,30 +136,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="topic" id="left-margin">
-<p class="topic-title first">The Library</p>
-<ul class="no-bull simple">
+  <div class="left-margin container">
+<div class="left-margin-top container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content container">
+<ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
 <li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
 <li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
 </ul>
-<ul class="no-bull simple">
-<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<ul class="simple">
 <li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
 <li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Documents</p>
-<ul class="no-bull simple">
+<p>Related Documents</p>
+<ul class="simple">
 <li><a class="reference internal" href="#sr-limit"><span class="std std-ref">Limitations</span></a></li>
 <li><a class="reference internal" href="using-sr.html#usr-hot-records"><span class="std std-ref">Streaming Replication</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Articles</p>
+<p>Related Articles</p>
+</div>
 </div>
 <div class="library-document section" id="streaming-replication">
 <span id="id1"></span><h1>Streaming Replication<a class="headerlink" href="#streaming-replication" title="Permalink to this headline">¶</a></h1>
@@ -236,29 +174,29 @@
 <p class="first admonition-title">Note</p>
 <p class="last">Streaming Replication is a new feature introduced in version 4.0 of Galera Cluster.  Older versions do not support these operations.</p>
 </div>
-<p class="rubric-1 rubric" id="when-use-sr">When to Use Streaming Replication</p>
+<p class="section-heading rubric" id="when-use-sr">When to Use Streaming Replication</p>
 <p>In most cases, the normal method Galera Cluster uses in replication is sufficient in transferring data from a node to a cluster.  <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> provides you with an alternative for situations in which this is not the case.  Keep in mind that there are some limitations to its use.  It&#8217;s recommended that you only enable it at a session-level, and then only on specific transactions that require the feature.</p>
 <p>For more information on the limitations to Streaming Replication, see <a class="reference internal" href="#sr-limit"><span class="std std-ref">Limitations</span></a>.</p>
-<p class="rubric-2 rubric" id="longrun-write-trx">Long-Running Write Transactions</p>
+<p class="sub-heading rubric" id="longrun-write-trx">Long-Running Write Transactions</p>
 <p>When using normal replication, you may occasionally encounter issues with long-running write transactions.</p>
 <p>The longer it takes for a node to commit a transaction, the greater the likelihood that the cluster will apply a smaller, conflicting transaction before the longer one can replicate to the cluster.  When this happens, the cluster aborts the long-running transaction.</p>
 <p>Using <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> on long-running transactions mitigates this situation.  Once the node replicates and certifies a fragment, it is no longer possible for other transactions to abort it.</p>
 <p>Certification keys are generated from record locks, therefore they don&#8217;t cover gap locks or next key locks. If the transaction takes a gap lock, it is possible that a transaction, which is executed on another node, will apply a write set which encounters the gap log and will abort the streaming transaction.</p>
-<p class="rubric-2 rubric" id="large-write-trx">Large Data Write Transactions</p>
+<p class="sub-heading rubric" id="large-write-trx">Large Data Write Transactions</p>
 <p>When using normal replication, the node locally processes the transaction and doesn&#8217;t replicate the data until you commit.  This can create problems when updating a large volume of data, especially on nodes with slower network connections.</p>
 <p>Additionally, while slave nodes apply a large transaction, they cannot commit other transactions they receive, which may result in Flow Control throttling of the entire cluster.</p>
 <p>With <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, the node begins to replicate the data with each transaction fragment, rather than waiting for the commit.  This allows you to spread the replication over the lifetime of the transaction.</p>
 <p>In the case of the slave nodes, after the slave applies a fragment, it&#8217;s free to apply and commit other, concurrent transactions without blocking.  This allows the slave node to process incrementally the entire large transaction with a minimal impact on the cluster.</p>
-<p class="rubric-2 rubric" id="hot-records">Hot Records</p>
+<p class="sub-heading rubric" id="hot-records">Hot Records</p>
 <p>In situations in which an application frequently updates one and the same records from the same table (e.g., when implementing a locking scheme, a counter, or a job queue), you can use <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> to force critical updates to replicate to the entire cluster.</p>
 <p>Running a transaction in this way effectively locks the hot record on all nodes, preventing other transactions from modifying the row.  It also increases the chances that the transaction will commit successfully and that the client in turn will receive the desired outcome.</p>
 <p>For more information and an example of how to implement Streaming Replication in situations such as this, see <a class="reference internal" href="using-sr.html#usr-hot-records"><span class="std std-ref">Using Streaming Replication with Hot Records</span></a>.</p>
-<p class="rubric-1 rubric" id="sr-limit">Limitations</p>
+<p class="section-heading rubric" id="sr-limit">Limitations</p>
 <p>In deciding whether you want to use <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> with your application, consider the following limitations.</p>
-<p class="rubric-2 rubric" id="limit-in-trx">Performance During a Transaction</p>
+<p class="sub-heading rubric" id="limit-in-trx">Performance During a Transaction</p>
 <p>When you enable <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, as of version 4 of Galera, each node in the cluster begins recording its write-sets to the <code class="docutils literal"><span class="pre">wsrep_streaming_log</span></code> table in the <code class="docutils literal"><span class="pre">mysql</span></code> database. Nodes do this to ensure the persistence of Streaming Replication updates in the event that they crash.  However, this operation increases the load on the node, which may adversely affect its performance.</p>
 <p>As such, it&#8217;s recommended that you only enable Streaming Replication at a session-level and then only for transactions that would not run correctly without it.</p>
-<p class="rubric-2 rubric" id="limit-rollback">Performance During Rollbacks</p>
+<p class="sub-heading rubric" id="limit-rollback">Performance During Rollbacks</p>
 <p>Occasionally, you may encounter situations in which the cluster needs to roll back a transaction while <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> is in use.  In these situations, the rollback operation consumes system resources on all nodes.</p>
 <p>When long-running write transactions frequently need to be rolled back, this can become a performance problem.  Therefore, it&#8217;s a good application design policy to use shorter transactions whenever possible.  In the event that your application performs batch processing or scheduled housekeeping tasks, consider splitting these into smaller transactions in addition to using Streaming Replication.</p>
 </div>
@@ -299,16 +237,6 @@
       <div class="clearer"></div>
     </div>
 	<div class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="nav-bar-container">
 
@@ -326,69 +254,21 @@
 	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
-	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-	</li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-	</ul>
-	</li>
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
 	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul></div>			</div><!-- .footer-menu -->
-	<div class="footer-search">
-	<div class="search-form">
-	<form role="search" method="get" action="https://galeracluster.com/">
-	<input type="search" class="search-field" value="" name="s" title="Search for:" />
-	<input type="submit" class="search-submit" value="" />
-	</form>
-	</div>
-	</div>
+
 
 	<div class="footer-bar">
 	<p class="copyright">2014 Codership Ltd.</p>
-	<a href="https://www.nasa.gov/multimedia/imagegallery/" class="imagery" target="_blank">Images: NASA</a>
 	</div>
 	<div class="footnote">
 	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>

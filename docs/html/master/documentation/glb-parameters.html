@@ -12,7 +12,7 @@
 
     <title>Galera Load Balancer Parameters &#8212; Galera Cluster Documentation</title>
     
-    <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -34,43 +34,30 @@
     <link rel="prev" title="XtraBackup Parameters" href="xtrabackup-options.html" />
 
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
 
-<!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/jquery-1.8.3.min.js"></script>
--->
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/swipe.js"></script>
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
 
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript">  google.load("maps", "3",  {other_params:"sensor=false&libraries=geometry,places"});  </script>
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
 
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/main.js?v3"></script>
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/maps.js?v2"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
 
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/css/style_reset.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/fonts/fonts.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/style.css?v3">
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
 
-		<!--[if lt IE 9]>
-		<script src="https://galeracluster.com/wp-content/themes/galeracluster/js/html5.js"></script>
-		<![endif]-->
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
-
-	<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
-
-	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
-	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
-	<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
-	<link rel='next' title='Community' href='https://galeracluster.com/community/' />
-	<meta name="generator" content="WordPress 3.8.3" />
-
-	<link rel='shortlink' href='https://galeracluster.com/?p=12' />
-
-	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
-	<style type="text/css" id="twentythirteen-header-css">
-				.site-title,
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
 			.site-description {
 				position: absolute;
 				clip: rect(1px 1px 1px 1px); /* IE7 */
@@ -79,10 +66,9 @@
 				.site-header .home-link {
 				min-height: 0;
 			}
-	</style>
+</style>
 
-
-	<script type="text/javascript">
+<script type="text/javascript">
 
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-35163478-6']);
@@ -94,7 +80,7 @@
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 
-	</script>
+</script>
 
   </head>
   <body role="document">
@@ -121,70 +107,18 @@
 
 
 	<div id="navbar" class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="menu-main-menu-container">
 
 	<ul id="menu-main-menu" class="nav-menu">
-		<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-		<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-		<ul class="sub-menu">
-		<li id="menu-item-626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-		<li id="menu-item-827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-		<li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-		<li id="menu-item-828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-		<li id="menu-item-829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-		<li id="menu-item-830" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-		<li id="menu-item-831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-		</li>
-		</ul>
-		</li>
-		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-		<ul class="sub-menu">
-		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-		<ul class="sub-menu">
-		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-		<ul class="sub-menu">
-		<li id="menu-item-634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li id="menu-item-1101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-		<ul class="sub-menu">
-		<li id="menu-item-637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li id="menu-item-835" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li id="menu-item-836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li id="menu-item-838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li id="menu-item-837" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
-		<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul>
 	</div>
 
@@ -202,39 +136,43 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="topic" id="left-margin">
-<p class="topic-title first">The Library</p>
-<ul class="no-bull simple">
+  <div class="left-margin container">
+<div class="left-margin-top container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content container">
+<ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
 <li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
 <li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
 </ul>
-<ul class="no-bull simple">
-<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<ul class="simple">
 <li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
 <li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Documents</p>
-<ul class="no-bull simple">
+<p>Related Documents</p>
+<ul class="simple">
 <li><a class="reference internal" href="#glb-config-options"><span class="std std-ref">Configuration Options</span></a></li>
 <li><a class="reference internal" href="glb.html#glb-dest-select"><span class="std std-ref">Destination Policies</span></a></li>
 <li><a class="reference internal" href="#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a></li>
 <li><a class="reference internal" href="#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a></li>
 <li><a class="reference internal" href="#glb-watchdog"><span class="std std-ref">&#8211;watchdog</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Articles</p>
+<p>Related Articles</p>
+</div>
 </div>
 <div class="library-document section" id="galera-load-balancer-parameters">
 <span id="glb-parameters"></span><h1>Galera Load Balancer Parameters<a class="headerlink" href="#galera-load-balancer-parameters" title="Permalink to this headline">¶</a></h1>
 <p>Galera Load Balancer provides simple TCP connection balancing developed with scalability and performance in mind.  It draws on Pen for inspiration, but its functionality is limited to only balancing TCP connections.</p>
 <p>It can be run either through the <code class="docutils literal"><span class="pre">service</span></code> command or the command-line interface of <code class="docutils literal"><span class="pre">glbd</span></code>.  Configuration for Galera Load Balancer depends on which you use to run it.</p>
-<p class="rubric-1 rubric" id="glb-config-parameters">Configuration Parameters</p>
+<p class="section-heading rubric" id="glb-config-parameters">Configuration Parameters</p>
 <p>When Galera Load Balancer starts as a system service, it reads the <code class="docutils literal"><span class="pre">glbd.cfg</span></code> configuration file for default parameters you want to use.  Only the <a class="reference internal" href="#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a> parameter is mandatory.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -270,7 +208,7 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric-1 rubric" id="glb-control-addr"><code class="docutils literal"><span class="pre">CONTROL_ADDR</span></code></p>
+<p class="section-heading rubric" id="glb-control-addr"><code class="docutils literal"><span class="pre">CONTROL_ADDR</span></code></p>
 <p>Defines the IP address and port for controlling connections.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -293,7 +231,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">CONTROL_ADDR</span><span class="o">=</span><span class="s">&quot;127.0.0.1:8011&quot;</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-control-fifo"><code class="docutils literal"><span class="pre">CONTROL_FIFO</span></code></p>
+<p class="section-heading rubric" id="glb-control-fifo"><code class="docutils literal"><span class="pre">CONTROL_FIFO</span></code></p>
 <p>Defines the path to the FIFO control file.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -316,7 +254,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">CONTROL_FIFO</span><span class="o">=</span><span class="s">&quot;/var/run/glbd.fifo&quot;</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-default-targets"><code class="docutils literal"><span class="pre">DEFAULT_TARGETS</span></code></p>
+<p class="section-heading rubric" id="glb-default-targets"><code class="docutils literal"><span class="pre">DEFAULT_TARGETS</span></code></p>
 <p>Defines the IP addresses and ports of the destination servers.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -336,7 +274,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">DEFAULT_TARGETS</span><span class="o">=</span><span class="s">&quot;192.168.1.1 192.168.1.2 192.168.1.3&quot;</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-listen-addr"><code class="docutils literal"><span class="pre">LISTEN_ADDR</span></code></p>
+<p class="section-heading rubric" id="glb-listen-addr"><code class="docutils literal"><span class="pre">LISTEN_ADDR</span></code></p>
 <p>Defines the IP address and port used for client connections.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -356,7 +294,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">LISTEN_ADDR</span><span class="o">=</span><span class="s">&quot;8010&quot;</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-max-conn-par"><code class="docutils literal"><span class="pre">MAX_CONN</span></code></p>
+<p class="section-heading rubric" id="glb-max-conn-par"><code class="docutils literal"><span class="pre">MAX_CONN</span></code></p>
 <p>Defines the maximum allowed client connections.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -377,13 +315,13 @@
 </pre></div>
 </div>
 <p>This option defines the maximum number of client connections that you want allow to Galera Load Balancer. Bear in mind, that it can be operating system dependent.</p>
-<p class="rubric-1 rubric" id="glb-other-options"><code class="docutils literal"><span class="pre">OTHER_OPTIONS</span></code></p>
+<p class="section-heading rubric" id="glb-other-options"><code class="docutils literal"><span class="pre">OTHER_OPTIONS</span></code></p>
 <p>Defines additional options that you want to pass to Galera Load Balancer.  There is no default configuration and this is not a mandatory parameter.</p>
 <p>This parameter defines various additional options that you would like to pass to Galera Load Balancer, such as a destination selection policy or Watchdog configurations.  Use the same syntax as you would for the command-line arguments.  For more information on the available options, see <a class="reference internal" href="#glb-config-options"><span class="std std-ref">Configuration Options</span></a>.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">OTHER_OPTIONS</span><span class="o">=</span><span class="s">&quot;--random --watchdog exec:&#39;mysql -utest -ptestpass&#39; --discover&quot;</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-threads-par"><code class="docutils literal"><span class="pre">THREADS</span></code></p>
+<p class="section-heading rubric" id="glb-threads-par"><code class="docutils literal"><span class="pre">THREADS</span></code></p>
 <p>Defines the number of threads you want to use.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -403,7 +341,7 @@
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">THREADS</span><span class="o">=</span><span class="s">&quot;6&quot;</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-config-options">Configuration Options</p>
+<p class="section-heading rubric" id="glb-config-options">Configuration Options</p>
 <p>When Galera Load Balancer starts as a daemon process, through the <code class="docutils literal"><span class="pre">/sbin/glbd</span></code> command, it allows you to pass a number of command-line arguments to configure how it operates.  It uses the following syntax:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>/usr/local/sbin/glbd [OPTIONS] LISTEN_ADDRESS [DESTINATION_LIST]
 </pre></div>
@@ -526,7 +464,7 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric-1 rubric" id="glb-control"><code class="docutils literal"><span class="pre">--control</span></code></p>
+<p class="section-heading rubric" id="glb-control"><code class="docutils literal"><span class="pre">--control</span></code></p>
 <p>Defines the IP address and port for control connections.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -553,7 +491,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-daemon"><code class="docutils literal"><span class="pre">--daemon</span></code></p>
+<p class="section-heading rubric" id="glb-daemon"><code class="docutils literal"><span class="pre">--daemon</span></code></p>
 <p>Defines whether you want Galera Load Balancer to run as a daemon process.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -577,7 +515,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-defer-accept"><code class="docutils literal"><span class="pre">--defer-accept</span></code></p>
+<p class="section-heading rubric" id="glb-defer-accept"><code class="docutils literal"><span class="pre">--defer-accept</span></code></p>
 <p>Enables TCP deferred acceptance on the listening socket.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -601,7 +539,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-discover"><code class="docutils literal"><span class="pre">--discover</span></code></p>
+<p class="section-heading rubric" id="glb-discover"><code class="docutils literal"><span class="pre">--discover</span></code></p>
 <p>Defines whether you want to use watchdog results to discover and set new destinations.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -625,7 +563,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-extra"><code class="docutils literal"><span class="pre">--extra</span></code></p>
+<p class="section-heading rubric" id="glb-extra"><code class="docutils literal"><span class="pre">--extra</span></code></p>
 <p>Defines whether you want to perform an extra destination poll on connection attempts.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -649,7 +587,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-fifo"><code class="docutils literal"><span class="pre">--fifo</span></code></p>
+<p class="section-heading rubric" id="glb-fifo"><code class="docutils literal"><span class="pre">--fifo</span></code></p>
 <p>Defines the path to the FIFO control file.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -676,7 +614,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-interval"><code class="docutils literal"><span class="pre">--interval</span></code></p>
+<p class="section-heading rubric" id="glb-interval"><code class="docutils literal"><span class="pre">--interval</span></code></p>
 <p>Defines how often to probe destinations for liveliness.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -700,7 +638,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-keepalive"><code class="docutils literal"><span class="pre">--keepalive</span></code></p>
+<p class="section-heading rubric" id="glb-keepalive"><code class="docutils literal"><span class="pre">--keepalive</span></code></p>
 <p>Defines whether you want to disable the <code class="docutils literal"><span class="pre">SO_KEEPALIVE</span></code> socket option on server-side sockets.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -724,7 +662,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-latency"><code class="docutils literal"><span class="pre">--latency</span></code></p>
+<p class="section-heading rubric" id="glb-latency"><code class="docutils literal"><span class="pre">--latency</span></code></p>
 <p>Defines the number of samples to take in calculating latency for watchdog.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -748,7 +686,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-linger"><code class="docutils literal"><span class="pre">--linger</span></code></p>
+<p class="section-heading rubric" id="glb-linger"><code class="docutils literal"><span class="pre">--linger</span></code></p>
 <p>Defines whether Galera Load Balancer disables sockets lingering after they are closed.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -772,7 +710,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-max-conn-arg"><code class="docutils literal"><span class="pre">--max_conn</span></code></p>
+<p class="section-heading rubric" id="glb-max-conn-arg"><code class="docutils literal"><span class="pre">--max_conn</span></code></p>
 <p>Defines the maximum allowed client connections.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -796,7 +734,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-nodelay"><code class="docutils literal"><span class="pre">--nodelay</span></code></p>
+<p class="section-heading rubric" id="glb-nodelay"><code class="docutils literal"><span class="pre">--nodelay</span></code></p>
 <p>Defines whether it disables the TCP no-delay socket option.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -820,7 +758,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-random"><code class="docutils literal"><span class="pre">--random</span></code></p>
+<p class="section-heading rubric" id="glb-random"><code class="docutils literal"><span class="pre">--random</span></code></p>
 <p>Defines the destination selection policy as Random.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -845,7 +783,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-round"><code class="docutils literal"><span class="pre">--round</span></code></p>
+<p class="section-heading rubric" id="glb-round"><code class="docutils literal"><span class="pre">--round</span></code></p>
 <p>Defines the destination selection policy as Round Robin.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -870,7 +808,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-single"><code class="docutils literal"><span class="pre">--single</span></code></p>
+<p class="section-heading rubric" id="glb-single"><code class="docutils literal"><span class="pre">--single</span></code></p>
 <p>Defines the destination selection policy as Single.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -895,7 +833,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-source"><code class="docutils literal"><span class="pre">--source</span></code></p>
+<p class="section-heading rubric" id="glb-source"><code class="docutils literal"><span class="pre">--source</span></code></p>
 <p>Defines the destination selection policy as Source Tracking.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -921,7 +859,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-threads-arg"><code class="docutils literal"><span class="pre">--threads</span></code></p>
+<p class="section-heading rubric" id="glb-threads-arg"><code class="docutils literal"><span class="pre">--threads</span></code></p>
 <p>Defines the number of threads that you want to use.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -945,7 +883,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-top"><code class="docutils literal"><span class="pre">--top</span></code></p>
+<p class="section-heading rubric" id="glb-top"><code class="docutils literal"><span class="pre">--top</span></code></p>
 <p>Enables balancing to top weights only.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -969,7 +907,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-verbose"><code class="docutils literal"><span class="pre">--verbose</span></code></p>
+<p class="section-heading rubric" id="glb-verbose"><code class="docutils literal"><span class="pre">--verbose</span></code></p>
 <p>Defines whether you want Galera Load Balancer to run as verbose.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -993,7 +931,7 @@
       <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="glb-watchdog"><code class="docutils literal"><span class="pre">--watchdog</span></code></p>
+<p class="section-heading rubric" id="glb-watchdog"><code class="docutils literal"><span class="pre">--watchdog</span></code></p>
 <p>Defines specifications for watchdog operations.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1061,16 +999,6 @@
       <div class="clearer"></div>
     </div>
 	<div class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="nav-bar-container">
 
@@ -1088,69 +1016,21 @@
 	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
-	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-	</li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-	</ul>
-	</li>
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
 	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul></div>			</div><!-- .footer-menu -->
-	<div class="footer-search">
-	<div class="search-form">
-	<form role="search" method="get" action="https://galeracluster.com/">
-	<input type="search" class="search-field" value="" name="s" title="Search for:" />
-	<input type="submit" class="search-submit" value="" />
-	</form>
-	</div>
-	</div>
+
 
 	<div class="footer-bar">
 	<p class="copyright">2014 Codership Ltd.</p>
-	<a href="https://www.nasa.gov/multimedia/imagegallery/" class="imagery" target="_blank">Images: NASA</a>
 	</div>
 	<div class="footnote">
 	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>

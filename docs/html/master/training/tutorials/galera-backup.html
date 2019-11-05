@@ -11,7 +11,7 @@
 
     <title>Making Back-Ups with Galera Cluster &#8212; Galera Cluster Documentation</title>
     
-    <link rel="stylesheet" href="../../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -33,43 +33,30 @@
     <link rel="prev" title="Migrating to Galera Cluster" href="migration.html" />
 
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
 
-<!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/jquery-1.8.3.min.js"></script>
--->
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/swipe.js"></script>
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
 
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript">  google.load("maps", "3",  {other_params:"sensor=false&libraries=geometry,places"});  </script>
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
 
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/main.js?v3"></script>
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/maps.js?v2"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
 
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/css/style_reset.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/fonts/fonts.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/style.css?v3">
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
 
-		<!--[if lt IE 9]>
-		<script src="https://galeracluster.com/wp-content/themes/galeracluster/js/html5.js"></script>
-		<![endif]-->
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
-
-	<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
-
-	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
-	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
-	<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
-	<link rel='next' title='Community' href='https://galeracluster.com/community/' />
-	<meta name="generator" content="WordPress 3.8.3" />
-
-	<link rel='shortlink' href='https://galeracluster.com/?p=12' />
-
-	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
-	<style type="text/css" id="twentythirteen-header-css">
-				.site-title,
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
 			.site-description {
 				position: absolute;
 				clip: rect(1px 1px 1px 1px); /* IE7 */
@@ -78,10 +65,9 @@
 				.site-header .home-link {
 				min-height: 0;
 			}
-	</style>
+</style>
 
-
-	<script type="text/javascript">
+<script type="text/javascript">
 
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-35163478-6']);
@@ -93,7 +79,7 @@
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 
-	</script>
+</script>
 
   </head>
   <body role="document">
@@ -120,70 +106,18 @@
 
 
 	<div id="navbar" class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="menu-main-menu-container">
 
 	<ul id="menu-main-menu" class="nav-menu">
-		<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-		<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-		<ul class="sub-menu">
-		<li id="menu-item-626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-		<li id="menu-item-827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-		<li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-		<li id="menu-item-828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-		<li id="menu-item-829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-		<li id="menu-item-830" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-		<li id="menu-item-831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-		</li>
-		</ul>
-		</li>
-		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-		<ul class="sub-menu">
-		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-		<ul class="sub-menu">
-		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-		<ul class="sub-menu">
-		<li id="menu-item-634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li id="menu-item-1101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-		<ul class="sub-menu">
-		<li id="menu-item-637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li id="menu-item-835" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li id="menu-item-836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li id="menu-item-838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li id="menu-item-837" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
-		<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul>
 	</div>
 
@@ -201,53 +135,59 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="topic" id="left-margin">
-<p class="topic-title first">The Library</p>
-<ul class="no-bull simple">
-<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
-<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
-</ul>
-<ul class="no-bull-sub no-bull simple">
+  <div class="left-margin container">
+<div class="left-margin-top container">
+<a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content container">
+<ul>
+<li><p class="first"><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></p>
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
 <li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
 </ul>
-<ul class="no-bull simple">
-<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+<ul class="simple">
 <li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+</ul>
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Documents</p>
-<ul class="no-bull simple">
+<p>Related Documents</p>
+<ul class="simple">
 <li><a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Galera</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Articles</p>
-<ul class="bull-head no-bull simple">
+<p>Related Articles</p>
+<ul class="simple">
 <li><a class="reference internal" href="../videos/galera-backup.html"><span class="doc">Galera Back-Ups (video)</span></a></li>
 </ul>
+</li>
+</ul>
 </div>
-<div class="tutorial-article section" id="making-back-ups-with-galera-cluster">
+</div>
+<div class="library-article section" id="making-back-ups-with-galera-cluster">
 <span id="galera-backup"></span><h1>Making Back-Ups with Galera Cluster<a class="headerlink" href="#making-back-ups-with-galera-cluster" title="Permalink to this headline">¶</a></h1>
 <p class="list-stats">Length: 2693 words; Writer: Russell J.T Dyer: November 4, 2019; Topic: Administration</p>
 <p>Galera Cluster is a reliable, stable database replication clustering system. Nevertheless, there&#8217;s always the possibility that something will go wrong—in fact, it&#8217;s inevitable and unavoidable.  Therefore, as a database administrator, you should ensure that back-ups of the databases and related systems are made regularly and often.</p>
 <p>Using Galera Cluster, there are a few ways in which you might make a back-up. In this article, we&#8217;ll first look at the basics of back-ups. We&#8217;ll then look at some other methods involving replication and how to automate back-ups by using the functionality of Galera itself.</p>
 <div class="banner container">
-<p class="rubric-1 rubric">Back-Up Basics</p>
+<p class="section-heading rubric">Back-Up Basics</p>
 </div>
 <p>Back-ups are important for many reasons:  User errors are inevitable—such as tables dropped and rows deleted inadvertently—and there’s always the chance that a server crashes or is physically damaged in some other way. As a result, to ensure regular and good back-ups, you should develop some back-up policies.</p>
 <p>First, make sure your back-ups are complete. If you&#8217;re using binary logs, be sure that you make a back-up of them.  Also, make back-up copies of the database configuration files.</p>
 <p>Second, don’t rely on making back-ups manually. Instead, automate your back-ups by using a scheduling tool like <code class="docutils literal"><span class="pre">cron</span></code>.  Set the frequency to something reasonable, such as daily or twice a day. Make sure back-up files are stored in a different location than on the production server.</p>
 <p>There are two basic types of back-ups that can be made of a database: a physical back-up and logical back-up. We&#8217;ll consider each in the next two sections. Whatever method you use, occasionally check your back-ups by performing recovery tests.  This has the advantage of helping you to become more proficient at restoring data, which will be useful when under pressure to do so quickly.</p>
-<p class="rubric-2 rubric">Physical Back-Ups</p>
+<p class="sub-heading rubric">Physical Back-Ups</p>
 <p>A physical back-up is fast; It’s intuitive and simple:  You just copy the data directory using <code class="docutils literal"><span class="pre">cp</span></code> or <code class="docutils literal"><span class="pre">rsync</span></code>. It seems perfect, but there are many inherent problems with this method.</p>
 <p>To get a consistent back-up, you have to stop the <code class="docutils literal"><span class="pre">mysqld</span></code> daemon. That means no one can access the data while the back-up is being made. If any of the files are corrupted, you won’t know until you try to restore the back-up.</p>
-<p class="rubric-2 rubric">Logical Backups</p>
+<p class="sub-heading rubric">Logical Backups</p>
 <p>Logical back-ups are generally preferred. They&#8217;re generated with a utility like <code class="docutils literal"><span class="pre">mysqldump</span></code> and produce text files with SQL statements which may be used to rebuild databases.</p>
 <p>One drawbacks to logical back-ups is that the back-up process requires tables or rows to be locked. This means that tables may be temporarily inaccessible for write traffic. Even read traffic may experience slow results.</p>
 <p>You’ll have to decide which method works best for you. Let’s see how you might make simple back-ups of a Galera node using both of these methods.</p>
-<p class="rubric-2 rubric">Simple Galera Node Back-Ups</p>
+<p class="sub-heading rubric">Simple Galera Node Back-Ups</p>
 <p>Many DBAs will simply run <code class="docutils literal"><span class="pre">mysqldump</span></code> on one of the nodes without removing it from the cluster. This is definitely not a good idea since they may not get consistent data and it will slow the node and thereby affect the performance of the cluster.</p>
 <p>A beter method is to instruct Galera to desynchronize the node to use for making a back-up.  This is done by setting globally the <code class="docutils literal"><span class="pre">wsrep_desync</span></code> parameter to <code class="docutils literal"><span class="pre">ON</span></code>, as you see here:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>mysql -p -u root --execute &quot;SET wsrep_desync = ON&quot;
@@ -263,11 +203,11 @@
 <p>When it&#8217;s finished, we’ll set <code class="docutils literal"><span class="pre">wsrep_desync</span></code> back to <code class="docutils literal"><span class="pre">OFF</span></code>. The node will then process any transactions that are queued and waiting to be executed on the node.</p>
 <p>This simple method of making back-ups of a Galera node works well, but it still require us to take a node out of service. It supposes we&#8217;re using a load balancer to redirect traffic away from the node to the other nodes. Let&#8217;s look at some other methods.</p>
 <div class="banner container">
-<p class="rubric-1 rubric">Using Standard Replication</p>
+<p class="section-heading rubric">Using Standard Replication</p>
 </div>
 <p>Even though Galera is running on a node, it’s possible for it also to be running standard replication and act as a master to another server that’s not part of the cluster, that’s not using Galera software.</p>
 <p>With such an arrangement, the replication slave can be used to make back-ups without disturbing the Galera cluster.  When you want to make a back-up, just stop the slave from replicating. Then run whatever back-up utility you prefer. When you’re finished, just start the slave replicating again.</p>
-<p class="rubric-2 rubric">Galera Master Configuration</p>
+<p class="sub-heading rubric">Galera Master Configuration</p>
 <p>For a Galera node to be able also to serve as a standard replication master, we will have to add some extra parameters to the configuration file.  Let&#8217;s look at those settings.  Below is an excerpt from a database configuration file on the node that&#8217;s to be the master:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>[mysqld]
 ...
@@ -290,7 +230,7 @@ IDENTIFIED BY &#39;Rover123!&#39;;
 </pre></div>
 </div>
 <p>Now we can configure the slave. Again, the slave is not a node in the Galera cluster.  It’s an extra server that will be replicating the transactions of one of the Galera nodes.</p>
-<p class="rubric-2 rubric">Galera Slave Configuration &amp; Preparation</p>
+<p class="sub-heading rubric">Galera Slave Configuration &amp; Preparation</p>
 <p>To attach a server to a Galera node, so that it may act as a slave, we&#8217;ll need to add a few lines to its configuration file.  Actually, we only need <code class="docutils literal"><span class="pre">server-id</span></code> and <code class="docutils literal"><span class="pre">log-bin</span></code>.  You can see them below.  The rest are somewhat optional; They&#8217;re for choosing the name and path of logs and other files.</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>[mysqld]
 ...
@@ -317,7 +257,7 @@ innodb-read-only = 1
 </pre></div>
 </div>
 <p>Once all of this is done, we’ll be ready to start replication and using the slave as a back-up source.</p>
-<p class="rubric-2 rubric">Backing-Up a Slave</p>
+<p class="sub-heading rubric">Backing-Up a Slave</p>
 <p>With replication working, making back-ups is easy.  We just need to stop the slave from replicating and then start whatever back-up utility we want to use.  We&#8217;ll also copy the database configuration files.  Here&#8217;s how that might be done:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>mysql -p -u root -e &quot;STOP SLAVE&quot;
 
@@ -336,18 +276,18 @@ tar -czf mysql-backup-20191025.tgz ./temp/*
 <p>That&#8217;s all we have to do, except start the slave again. Actually, we could have started it before starting <code class="docutils literal"><span class="pre">tar</span></code>.</p>
 <p>This method works well, but it requires an extra server just for back-ups.  A better choice is to use Galera Arbitrator, to use it to conduct the back-ups.  Let’s look at its purpose and how we might utilize it for back-ups.</p>
 <div class="banner container">
-<p class="rubric-1 rubric">Using Galera Arbitrator</p>
+<p class="section-heading rubric">Using Galera Arbitrator</p>
 </div>
 <p>The primary function of Galera Arbitrator, the daemon called, <code class="docutils literal"><span class="pre">garbd</span></code>, is to act as a virtual node.  When there’s a tie vote among nodes about two conflicting transactions, the Arbitrator will cast the deciding vote.  Then all of the nodes will execute the winning transaction and Galera will continue with all nodes in agreement. This is function is portrayed in the diagram here.</p>
 <p>Another function of Galera Arbitrator is to decide whether a joining node is in need of updates or a complete snapshot.  The former is known as an Increment State Transfer, an IST.  The latter is known as a State Snapshot Transfer, an SST.  New nodes will obviously need an SST.  The Arbitrator will then choose which node or nodes will provide the state transfer to the joining node.</p>
 <p>This second function of Galera Arbitrator can be used in the same way to make back-ups, but with a little bit of coding.  Let’s look at how that might be done.</p>
-<p class="rubric-2 rubric">Back-Ups with Galera Arbitrator</p>
+<p class="sub-heading rubric">Back-Ups with Galera Arbitrator</p>
 <p>Although you can make a back-up fairly easily with <code class="docutils literal"><span class="pre">mysqldump</span></code> by removing a node from the cluster, and you can also make a back-up with <code class="docutils literal"><span class="pre">rsync</span></code> by shutting down <code class="docutils literal"><span class="pre">mysqld</span></code> on a node, it can be done more gracefully and with minimal interference with the Galera Cluster by using Galera Arbitrator.</p>
 <p>Galera Arbitrator can receive a request to make a back-up, manually from the command-line using the <code class="docutils literal"><span class="pre">garbd</span></code> daemon, or it can be initiated automatically by a scheduling tool like <code class="docutils literal"><span class="pre">cron</span></code>.</p>
 <p>The Arbitrator chooses a node to be the donor—unless we tell it which to use. That node is then desynced. Incidentally, the back-up can be requested from any node in the cluster, and any node can be used to make the back-up.</p>
 <p>The donor node will then execute the back-up script.  We’ll have to create such a script to use whatever tools we prefer and back-up how and where we want. Once the back-up is completed, the node will be re-synchronized.</p>
 <p>Let’s take a look at how to configure Galera Arbitrator. Then we’ll look at how to create a back-up script.</p>
-<p class="rubric-2 rubric">Configure Galera Arbitrator</p>
+<p class="sub-heading rubric">Configure Galera Arbitrator</p>
 <p>Galera Arbitrator is included in the Galera Cluster software.  The Galera Arbitrator daemon may be called upon from the command-line for single functions, like making a back-up. To do this, we’ll have to construct a simple script to run whichever tool we prefer, such as <code class="docutils literal"><span class="pre">mysqldump</span></code>.</p>
 <p>First, using a plain text editor, we’ll create a configuration file for the Arbitrator daemon. Its file name and location aren&#8217;t important, but <code class="docutils literal"><span class="pre">/etc/garbd.cnf</span></code> is a good choice. Below is an example:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>group=&#39;galera-training&#39;
@@ -363,7 +303,7 @@ sst=&#39;backup_mysqldump&#39;
 <p>The <code class="docutils literal"><span class="pre">donor</span></code> parameter is used to specify which node will perform the backup. The <code class="docutils literal"><span class="pre">log</span></code> parameter is used to specify the path and name of the log file.</p>
 <p>The <code class="docutils literal"><span class="pre">sst</span></code> option provides the suffix of the back-up script.  It must be in the <code class="docutils literal"><span class="pre">/usr/bin</span></code> directory and start with the name <code class="docutils literal"><span class="pre">wsrep_sst_</span></code>. So in the example here, the script’s name is <code class="docutils literal"><span class="pre">wsrep_sst_backup_mysqldump</span></code>.</p>
 <p>Those are all of the settings we need for Galera Arbitrator. We can actually set any or all of them from the command-line, but a configuration file is more convenient.  Now we need a back-up script.</p>
-<p class="rubric-2 rubric">Back-Up Script</p>
+<p class="sub-heading rubric">Back-Up Script</p>
 <p>Below is a very simple back-up script which uses <code class="docutils literal"><span class="pre">bash</span></code> and <code class="docutils literal"><span class="pre">mysqldump</span></code>. However, any scripting language and back-up utility is acceptable.  For some readers, this may be a little complicated.  Don&#8217;t worry; we&#8217;ll go through it.  For other readers, this is amateurish. It’s meant to be simple. What’s important is the basic concepts of how a script might be constructed to use Galera Arbitrator to make a back-up of a node.</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>#!/bin/bash
 
@@ -411,7 +351,7 @@ tar -czf $backup_dir/$backup_today.tgz * --transform &quot;s,^,$backup_today/,&q
 </pre></div>
 </div>
 <p>This one option, <code class="docutils literal"><span class="pre">--cfg</span></code> is to give the path and name of the Galera Arbitrator configuration file.  The daemon will read it before doing anything.</p>
-<p class="rubric-1 rubric">Conclusion</p>
+<p class="section-heading rubric">Conclusion</p>
 <p>Those are the primary ways in which DBAs can make back-ups when using Galera Cluster. There are some third-party software that provide some more advanced methods (e.g., XtraBackup).  But these are the more straightforward and most common methods.</p>
 </div>
 
@@ -451,16 +391,6 @@ tar -czf $backup_dir/$backup_today.tgz * --transform &quot;s,^,$backup_today/,&q
       <div class="clearer"></div>
     </div>
 	<div class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="nav-bar-container">
 
@@ -478,69 +408,21 @@ tar -czf $backup_dir/$backup_today.tgz * --transform &quot;s,^,$backup_today/,&q
 	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
-	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-	</li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-	</ul>
-	</li>
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
 	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul></div>			</div><!-- .footer-menu -->
-	<div class="footer-search">
-	<div class="search-form">
-	<form role="search" method="get" action="https://galeracluster.com/">
-	<input type="search" class="search-field" value="" name="s" title="Search for:" />
-	<input type="submit" class="search-submit" value="" />
-	</form>
-	</div>
-	</div>
+
 
 	<div class="footer-bar">
 	<p class="copyright">2014 Codership Ltd.</p>
-	<a href="https://www.nasa.gov/multimedia/imagegallery/" class="imagery" target="_blank">Images: NASA</a>
 	</div>
 	<div class="footnote">
 	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>

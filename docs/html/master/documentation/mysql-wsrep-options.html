@@ -12,7 +12,7 @@
 
     <title>MySQL wsrep Options &#8212; Galera Cluster Documentation</title>
     
-    <link rel="stylesheet" href="../_static/codership.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -34,43 +34,30 @@
     <link rel="prev" title="Reference" href="reference.html" />
 
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
 
-<!-- jquery-1.8.3.min.js conflicts with jquery.js from Sphinx and therefore documentation search does not work
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/jquery-1.8.3.min.js"></script>
--->
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/swipe.js"></script>
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
 
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript">  google.load("maps", "3",  {other_params:"sensor=false&libraries=geometry,places"});  </script>
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
 
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/main.js?v3"></script>
-	<script type="text/javascript" src="https://galeracluster.com/wp-content/themes/galeracluster/js/maps.js?v2"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
 
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/css/style_reset.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/fonts/fonts.css">
-	<link rel="stylesheet" href="https://galeracluster.com/wp-content/themes/galeracluster/style.css?v3">
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
 
-		<!--[if lt IE 9]>
-		<script src="https://galeracluster.com/wp-content/themes/galeracluster/js/html5.js"></script>
-		<![endif]-->
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
-	<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
-
-	<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
-
-	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
-	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
-	<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
-	<link rel='next' title='Community' href='https://galeracluster.com/community/' />
-	<meta name="generator" content="WordPress 3.8.3" />
-
-	<link rel='shortlink' href='https://galeracluster.com/?p=12' />
-
-	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
-	<style type="text/css" id="twentythirteen-header-css">
-				.site-title,
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
 			.site-description {
 				position: absolute;
 				clip: rect(1px 1px 1px 1px); /* IE7 */
@@ -79,10 +66,9 @@
 				.site-header .home-link {
 				min-height: 0;
 			}
-	</style>
+</style>
 
-
-	<script type="text/javascript">
+<script type="text/javascript">
 
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-35163478-6']);
@@ -94,7 +80,7 @@
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		  })();
 
-	</script>
+</script>
 
   </head>
   <body role="document">
@@ -121,70 +107,18 @@
 
 
 	<div id="navbar" class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="menu-main-menu-container">
 
 	<ul id="menu-main-menu" class="nav-menu">
-		<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-		<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-		<ul class="sub-menu">
-		<li id="menu-item-626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-		<li id="menu-item-827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-		<li id="menu-item-722" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-		<li id="menu-item-828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-		<li id="menu-item-829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-		<li id="menu-item-830" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-		<li id="menu-item-831" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-		</li>
-		</ul>
-		</li>
-		<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-		<ul class="sub-menu">
-		<li id="menu-item-832" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li id="menu-item-833" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-		<ul class="sub-menu">
-		<li id="menu-item-834" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li id="menu-item-1099" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li id="menu-item-1100" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li id="menu-item-1098" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-		<ul class="sub-menu">
-		<li id="menu-item-634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li id="menu-item-1101" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-		<ul class="sub-menu">
-		<li id="menu-item-637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li id="menu-item-835" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li id="menu-item-836" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li id="menu-item-838" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li id="menu-item-837" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-		</ul>
-		</li>
-		<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
-		<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul>
 	</div>
 
@@ -202,26 +136,30 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="topic" id="left-margin">
-<p class="topic-title first">The Library</p>
-<ul class="no-bull simple">
+  <div class="left-margin container">
+<div class="left-margin-top container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content container">
+<ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
 <li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
 <li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
 </ul>
-<ul class="no-bull simple">
-<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<ul class="simple">
 <li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
 <li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p class="bull-head no-bull">Related Documents</p>
-<p class="bull-head no-bull">Related Articles</p>
+<p>Related Documents</p>
+<p>Related Articles</p>
+</div>
 </div>
 <div class="library-document section" id="mysql-wsrep-options">
 <span id="id1"></span><h1>MySQL wsrep Options<a class="headerlink" href="#mysql-wsrep-options" title="Permalink to this headline">¶</a></h1>
@@ -546,7 +484,7 @@
 </pre></div>
 </div>
 <p>The results will vary depending on which version of Galera is running on your server. All of the parameters and variables possible are listed above, but they&#8217;re listed below with explanations of each.</p>
-<p class="rubric-1 rubric" id="wsrep-auto-increment-control"><code class="docutils literal"><span class="pre">wsrep_auto_increment_control</span></code></p>
+<p class="section-heading rubric" id="wsrep-auto-increment-control"><code class="docutils literal"><span class="pre">wsrep_auto_increment_control</span></code></p>
 <p id="index-2">This parameter enables the automatic adjustment of auto increment system variables with changes in cluster membership.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -589,7 +527,7 @@
  <span class="o">+------------------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-causal-reads"><code class="docutils literal"><span class="pre">wsrep_causal_reads</span></code></p>
+<p class="section-heading rubric" id="wsrep-causal-reads"><code class="docutils literal"><span class="pre">wsrep_causal_reads</span></code></p>
 <p id="index-3">This parameter enables the enforcement of strict cluster-wide <code class="docutils literal"><span class="pre">READ</span> <span class="pre">COMMITTED</span></code> semantics on non-transactional reads. It results in larger read latencies.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -628,7 +566,7 @@
 <p class="first admonition-title">Warning</p>
 <p class="last">The <code class="docutils literal"><span class="pre">wsrep_causal_reads</span></code> option has been <strong>deprecated</strong>.  It has been replaced by <a class="reference internal" href="#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a>.</p>
 </div>
-<p class="rubric-1 rubric" id="wsrep-certification-rules"><code class="docutils literal"><span class="pre">wsrep_certification_rules</span></code></p>
+<p class="section-heading rubric" id="wsrep-certification-rules"><code class="docutils literal"><span class="pre">wsrep_certification_rules</span></code></p>
 <p id="index-4">Certification rules to use in the cluster.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -676,7 +614,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">This is a MySQL wsrep parameter. It was introduced in 5.5.61-25.24, 5.6.41-25.23, 5.7.23-25.15.</p>
 </div>
-<p class="rubric-1 rubric" id="wsrep-certify-nonpk"><code class="docutils literal"><span class="pre">wsrep_certify_nonPK</span></code></p>
+<p class="section-heading rubric" id="wsrep-certify-nonpk"><code class="docutils literal"><span class="pre">wsrep_certify_nonPK</span></code></p>
 <p id="index-5">This parameter is used to define whether the node should generate primary keys on rows without them for the purposes of certification.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -718,7 +656,7 @@
 <span class="o">+---------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-cluster-address"><code class="docutils literal"><span class="pre">wsrep_cluster_address</span></code></p>
+<p class="section-heading rubric" id="wsrep-cluster-address"><code class="docutils literal"><span class="pre">wsrep_cluster_address</span></code></p>
 <span class="target" id="index-6"></span><p id="index-7">This parameter sets the back-end schema, IP addresses, ports and options the node uses in connecting to the cluster.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -777,7 +715,7 @@
 <span class="o">+-----------------------+---------------------------------------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-cluster-name"><code class="docutils literal"><span class="pre">wsrep_cluster_name</span></code></p>
+<p class="section-heading rubric" id="wsrep-cluster-name"><code class="docutils literal"><span class="pre">wsrep_cluster_name</span></code></p>
 <p id="index-8">This parameter defines the logical cluster name for the node.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -819,7 +757,7 @@
 <span class="o">+--------------------+-----------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-convert-lock-to-trx"><code class="docutils literal"><span class="pre">wsrep_convert_lock_to_trx</span></code></p>
+<p class="section-heading rubric" id="wsrep-convert-lock-to-trx"><code class="docutils literal"><span class="pre">wsrep_convert_lock_to_trx</span></code></p>
 <p id="index-9">This parameter is used to set whether the node converts <code class="docutils literal"><span class="pre">LOCK/UNLOCK</span> <span class="pre">TABLES</span></code> statements into <code class="docutils literal"><span class="pre">BEGIN/COMMIT</span></code> statements.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -866,7 +804,7 @@
 <span class="o">+---------------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-data-home-dir"><code class="docutils literal"><span class="pre">wsrep_data_home_dir</span></code></p>
+<p class="section-heading rubric" id="wsrep-data-home-dir"><code class="docutils literal"><span class="pre">wsrep_data_home_dir</span></code></p>
 <p id="index-10">Use this parameter to set the directory the wsrep Provider uses for its files.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -908,7 +846,7 @@
 <span class="o">+---------------------+----------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-dbug-option"><code class="docutils literal"><span class="pre">wsrep_dbug_option</span></code></p>
+<p class="section-heading rubric" id="wsrep-dbug-option"><code class="docutils literal"><span class="pre">wsrep_dbug_option</span></code></p>
 <p id="index-11">You can set debug options to pass to the wsrep Provider with this parameter.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -949,7 +887,7 @@
 <span class="o">+-------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-debug"><code class="docutils literal"><span class="pre">wsrep_debug</span></code></p>
+<p class="section-heading rubric" id="wsrep-debug"><code class="docutils literal"><span class="pre">wsrep_debug</span></code></p>
 <p id="index-12">This parameter enables additional debugging output for the database server error log.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -995,7 +933,7 @@
 <span class="o">+---------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-desync"><code class="docutils literal"><span class="pre">wsrep_desync</span></code></p>
+<p class="section-heading rubric" id="wsrep-desync"><code class="docutils literal"><span class="pre">wsrep_desync</span></code></p>
 <p id="index-13">This parameter is used to set whether or not the node participates in Flow Control.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1039,7 +977,7 @@
 <span class="o">+---------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-dirty-reads"><code class="docutils literal"><span class="pre">wsrep_dirty_reads</span></code></p>
+<p class="section-heading rubric" id="wsrep-dirty-reads"><code class="docutils literal"><span class="pre">wsrep_dirty_reads</span></code></p>
 <p id="index-14">This parameter defines whether the node accepts read queries when in a non-operational state.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1091,7 +1029,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">This is a MySQL wsrep parameter.  It was introduced in version 5.6.29.</p>
 </div>
-<p class="rubric-1 rubric" id="wsrep-drupal-282555-workaround"><code class="docutils literal"><span class="pre">wsrep_drupal_282555_workaround</span></code></p>
+<p class="section-heading rubric" id="wsrep-drupal-282555-workaround"><code class="docutils literal"><span class="pre">wsrep_drupal_282555_workaround</span></code></p>
 <p id="index-15">This parameter enables workaround for a bug in MySQL InnoDB that affects Drupal installations.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1134,7 +1072,7 @@
 <span class="o">+-------------------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-forced-binlog-format"><code class="docutils literal"><span class="pre">wsrep_forced_binlog_format</span></code></p>
+<p class="section-heading rubric" id="wsrep-forced-binlog-format"><code class="docutils literal"><span class="pre">wsrep_forced_binlog_format</span></code></p>
 <p id="index-16">This parameter defines the binary log format for all transactions.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1180,7 +1118,7 @@
 <span class="o">+----------------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-load-data-splitting"><code class="docutils literal"><span class="pre">wsrep_load_data_splitting</span></code></p>
+<p class="section-heading rubric" id="wsrep-load-data-splitting"><code class="docutils literal"><span class="pre">wsrep_load_data_splitting</span></code></p>
 <p id="index-17">This parameter defines whether the node splits large <code class="docutils literal"><span class="pre">LOAD</span> <span class="pre">DATA</span></code> commands into more manageable units.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1223,7 +1161,7 @@
 <span class="o">+---------------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-log-conflicts"><code class="docutils literal"><span class="pre">wsrep_log_conflicts</span></code></p>
+<p class="section-heading rubric" id="wsrep-log-conflicts"><code class="docutils literal"><span class="pre">wsrep_log_conflicts</span></code></p>
 <p id="index-18">This parameter defines whether the node logs additional information about conflicts.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1266,7 +1204,7 @@
 <span class="o">+---------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-max-ws-rows"><code class="docutils literal"><span class="pre">wsrep_max_ws_rows</span></code></p>
+<p class="section-heading rubric" id="wsrep-max-ws-rows"><code class="docutils literal"><span class="pre">wsrep_max_ws_rows</span></code></p>
 <p id="index-19">With this parameter you can set the maximum number of rows the node allows in a write-set.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1308,7 +1246,7 @@
 <span class="o">+-------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-max-ws-size"><code class="docutils literal"><span class="pre">wsrep_max_ws_size</span></code></p>
+<p class="section-heading rubric" id="wsrep-max-ws-size"><code class="docutils literal"><span class="pre">wsrep_max_ws_size</span></code></p>
 <p id="index-20">You can set the maximum size the node allows for write-sets with this parameter.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1350,7 +1288,7 @@
 <span class="o">+-------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-node-address"><code class="docutils literal"><span class="pre">wsrep_node_address</span></code></p>
+<p class="section-heading rubric" id="wsrep-node-address"><code class="docutils literal"><span class="pre">wsrep_node_address</span></code></p>
 <p id="index-21">This parameter is used to note the IP address and port of the node.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1407,7 +1345,7 @@
 <span class="o">+--------------------+-------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-node-incoming-address"><code class="docutils literal"><span class="pre">wsrep_node_incoming_address</span></code></p>
+<p class="section-heading rubric" id="wsrep-node-incoming-address"><code class="docutils literal"><span class="pre">wsrep_node_incoming_address</span></code></p>
 <p id="index-22">This parameter is used to provide the IP address and port from which the node should expect client connections.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1449,7 +1387,7 @@
 <span class="o">+-----------------------------+------------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-node-name"><code class="docutils literal"><span class="pre">wsrep_node_name</span></code></p>
+<p class="section-heading rubric" id="wsrep-node-name"><code class="docutils literal"><span class="pre">wsrep_node_name</span></code></p>
 <p id="index-23">You can set the logical name that the node uses for itself with this parameter.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1492,7 +1430,7 @@
 <span class="o">+-----------------+-------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-notify-cmd"><code class="docutils literal"><span class="pre">wsrep_notify_cmd</span></code></p>
+<p class="section-heading rubric" id="wsrep-notify-cmd"><code class="docutils literal"><span class="pre">wsrep_notify_cmd</span></code></p>
 <p id="index-24">Defines the command the node runs whenever cluster membership or the state of the node changes.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1602,7 +1540,7 @@
 <span class="o">+------------------+--------------------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-on"><code class="docutils literal"><span class="pre">wsrep_on</span></code></p>
+<p class="section-heading rubric" id="wsrep-on"><code class="docutils literal"><span class="pre">wsrep_on</span></code></p>
 <p id="index-25">Defines whether replication takes place for updates from the current session.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1643,7 +1581,7 @@
 <span class="o">+---------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-osu-method"><code class="docutils literal"><span class="pre">wsrep_OSU_method</span></code></p>
+<p class="section-heading rubric" id="wsrep-osu-method"><code class="docutils literal"><span class="pre">wsrep_OSU_method</span></code></p>
 <p id="index-26">Defines the Online Schema Upgrade method the node uses to replicate <abbr title="Data Definition Language">DDL</abbr> statements.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1692,7 +1630,7 @@
 <span class="o">+------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-preordered"><code class="docutils literal"><span class="pre">wsrep_preordered</span></code></p>
+<p class="section-heading rubric" id="wsrep-preordered"><code class="docutils literal"><span class="pre">wsrep_preordered</span></code></p>
 <p id="index-27">Defines whether the node uses transparent handling of preordered replication events.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1734,7 +1672,7 @@
 <span class="o">+------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-provider"><code class="docutils literal"><span class="pre">wsrep_provider</span></code></p>
+<p class="section-heading rubric" id="wsrep-provider"><code class="docutils literal"><span class="pre">wsrep_provider</span></code></p>
 <p id="index-28">Defines the path to the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1775,7 +1713,7 @@
 <span class="o">+----------------+----------------------------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-provider-options"><code class="docutils literal"><span class="pre">wsrep_provider_options</span></code></p>
+<p class="section-heading rubric" id="wsrep-provider-options"><code class="docutils literal"><span class="pre">wsrep_provider_options</span></code></p>
 <p id="index-29">Defines optional settings the node passes to the wsrep Provider.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1823,7 +1761,7 @@
 <span class="o">+------------------------+-----------------------------------------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-reject-queries"><code class="docutils literal"><span class="pre">wsrep_reject_queries</span></code></p>
+<p class="section-heading rubric" id="wsrep-reject-queries"><code class="docutils literal"><span class="pre">wsrep_reject_queries</span></code></p>
 <p>Defines whether the node rejects client queries while participating in the cluster.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1882,7 +1820,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">This is a MySQL wsrep parameter.  It was introduced in version 5.6.29.</p>
 </div>
-<p class="rubric-1 rubric" id="wsrep-restart-slave"><code class="docutils literal"><span class="pre">wsrep_restart_slave</span></code></p>
+<p class="section-heading rubric" id="wsrep-restart-slave"><code class="docutils literal"><span class="pre">wsrep_restart_slave</span></code></p>
 <p id="index-30">Defines whether the replication slave restarts when the node joins the cluster.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1923,7 +1861,7 @@
 <span class="o">+---------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-retry-autocommit"><code class="docutils literal"><span class="pre">wsrep_retry_autocommit</span></code></p>
+<p class="section-heading rubric" id="wsrep-retry-autocommit"><code class="docutils literal"><span class="pre">wsrep_retry_autocommit</span></code></p>
 <p id="index-31">Defines the number of retries the node attempts when an autocommit query fails.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1964,7 +1902,7 @@
 <span class="o">+------------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-slave-fk-checks"><code class="docutils literal"><span class="pre">wsrep_slave_FK_checks</span></code></p>
+<p class="section-heading rubric" id="wsrep-slave-fk-checks"><code class="docutils literal"><span class="pre">wsrep_slave_FK_checks</span></code></p>
 <p id="index-32">Defines whether the node performs foreign key checking for applier threads.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2005,7 +1943,7 @@
 <span class="o">+-----------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-slave-threads"><code class="docutils literal"><span class="pre">wsrep_slave_threads</span></code></p>
+<p class="section-heading rubric" id="wsrep-slave-threads"><code class="docutils literal"><span class="pre">wsrep_slave_threads</span></code></p>
 <p id="index-33">Defines the number of threads to use in applying slave write-sets.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2052,7 +1990,7 @@
 <span class="o">+---------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-slave-uk-checks"><code class="docutils literal"><span class="pre">wsrep_slave_UK_checks</span></code></p>
+<p class="section-heading rubric" id="wsrep-slave-uk-checks"><code class="docutils literal"><span class="pre">wsrep_slave_UK_checks</span></code></p>
 <p id="index-34">Defines whether the node performs unique key checking on applier threads.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2093,7 +2031,7 @@
 <span class="o">+-----------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-sst-auth"><code class="docutils literal"><span class="pre">wsrep_sst_auth</span></code></p>
+<p class="section-heading rubric" id="wsrep-sst-auth"><code class="docutils literal"><span class="pre">wsrep_sst_auth</span></code></p>
 <p id="index-35">Defines the authentication information to use in <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2139,7 +2077,7 @@
 <span class="o">+----------------+---------------------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-sst-donor"><code class="docutils literal"><span class="pre">wsrep_sst_donor</span></code></p>
+<p class="section-heading rubric" id="wsrep-sst-donor"><code class="docutils literal"><span class="pre">wsrep_sst_donor</span></code></p>
 <p id="index-36">Defines the name of the node that this node uses as a donor in state transfers.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2191,7 +2129,7 @@
 <span class="o">+-----------------+--------------------------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-sst-donor-rejects-queries"><code class="docutils literal"><span class="pre">wsrep_sst_donor_rejects_queries</span></code></p>
+<p class="section-heading rubric" id="wsrep-sst-donor-rejects-queries"><code class="docutils literal"><span class="pre">wsrep_sst_donor_rejects_queries</span></code></p>
 <span class="target" id="index-37"></span><p id="index-38">Defines whether the node rejects blocking client sessions on a node when it is serving as a donor in a blocking state transfer method, such as <code class="docutils literal"><span class="pre">mysqldump</span></code> and <code class="docutils literal"><span class="pre">rsync</span></code>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2237,7 +2175,7 @@
 <span class="o">+---------------------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-sst-method"><code class="docutils literal"><span class="pre">wsrep_sst_method</span></code></p>
+<p class="section-heading rubric" id="wsrep-sst-method"><code class="docutils literal"><span class="pre">wsrep_sst_method</span></code></p>
 <p id="index-39">Defines the method or script the node uses in a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2305,7 +2243,7 @@
 <span class="o">+------------------+-----------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-sst-receive-address"><code class="docutils literal"><span class="pre">wsrep_sst_receive_address</span></code></p>
+<p class="section-heading rubric" id="wsrep-sst-receive-address"><code class="docutils literal"><span class="pre">wsrep_sst_receive_address</span></code></p>
 <p id="index-40">Defines the address from which the node expects to receive state transfers.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2351,7 +2289,7 @@
 <span class="o">+---------------------------+-------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-start-position"><code class="docutils literal"><span class="pre">wsrep_start_position</span></code></p>
+<p class="section-heading rubric" id="wsrep-start-position"><code class="docutils literal"><span class="pre">wsrep_start_position</span></code></p>
 <p id="index-41">Defines the node start position.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2393,7 +2331,7 @@
 <span class="o">+----------------------+-----------------------------------------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-sync-wait"><code class="docutils literal"><span class="pre">wsrep_sync_wait</span></code></p>
+<p class="section-heading rubric" id="wsrep-sync-wait"><code class="docutils literal"><span class="pre">wsrep_sync_wait</span></code></p>
 <span class="target" id="index-42"></span><p id="index-43">Defines whether the node enforces strict cluster-wide causality checks.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2481,7 +2419,7 @@
 <span class="o">+-----------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-trx-fragment-size"><code class="docutils literal"><span class="pre">wsrep_trx_fragment_size</span></code></p>
+<p class="section-heading rubric" id="wsrep-trx-fragment-size"><code class="docutils literal"><span class="pre">wsrep_trx_fragment_size</span></code></p>
 <span class="target" id="index-44"></span><span class="target" id="index-45"></span><p id="index-46">Defines the number of replication units needed to generate a new fragment in Streaming Replication.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2522,7 +2460,7 @@
 <span class="o">+-------------------------+-------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-trx-fragment-unit"><code class="docutils literal"><span class="pre">wsrep_trx_fragment_unit</span></code></p>
+<p class="section-heading rubric" id="wsrep-trx-fragment-unit"><code class="docutils literal"><span class="pre">wsrep_trx_fragment_unit</span></code></p>
 <span class="target" id="index-47"></span><span class="target" id="index-48"></span><p id="index-49">Defines the replication unit type to use in Streaming Replication.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2573,7 +2511,7 @@
 <span class="o">+-------------------------+--------+</span>
 </pre></div>
 </div>
-<p class="rubric-1 rubric" id="wsrep-ws-persistency"><code class="docutils literal"><span class="pre">wsrep_ws_persistency</span></code></p>
+<p class="section-heading rubric" id="wsrep-ws-persistency"><code class="docutils literal"><span class="pre">wsrep_ws_persistency</span></code></p>
 <p id="index-50">Defines whether the node stores write-sets locally for debugging.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -2652,16 +2590,6 @@
       <div class="clearer"></div>
     </div>
 	<div class="navbar">
-	<a id="mobile-menu-link" href="#">
-	<span class="text">MENU</span>
-
-	<div class="stripes">
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	<div class="stripe"></div>
-	</div>
-	</a>
-
 	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
 	<div class="nav-bar-container">
 
@@ -2679,69 +2607,21 @@
 	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
 		</div></div>
 	<div class="footer-menu">
-	<div class="menu-main-menu-container"><ul id="menu-main-menu-1" class="nav-menu"><li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-626"><a href="https://galeracluster.com/products/">Galera Cluster</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-827"><a href="https://galeracluster.com/products/#use-cases">Use cases</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-722"><a href="https://galeracluster.com/products#success-stories">Success stories</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-828"><a href="https://galeracluster.com/products/#case-studies">Case studies</a></li>
-		</ul>
-		</li>
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-713"><a href="https://galeracluster.com/products/technology/">Technology</a>
-		<ul class="sub-menu">
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-829"><a href="https://galeracluster.com/products/technology/#white-papers-case-studies">White papers</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-830"><a href="https://galeracluster.com/products/technology/#benchmarks">Benchmarks</a></li>
-			<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-831"><a href="https://galeracluster.com/products/technology/#videos-presentations">Videos &#038; presentations</a></li>
-		</ul>
-	</li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-832"><a href="https://galeracluster.com/downloads/#downloads">Software</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-833"><a href="https://galeracluster.com/downloads/#partner-downloads">Partner downloads</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-834"><a href="https://galeracluster.com/support/#support-partners">Support Partners</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1099"><a href="https://galeracluster.com/support/#galera-cluster-support-subscription">Support Subscription</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item menu-item-1100"><a href="https://galeracluster.com/support/#consulting">Consulting</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1098"><a href="https://galeracluster.com/library/">Library (Documentation)</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-634"><a href="https://galeracluster.com/community/">Mailing List</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1101"><a href="https://galeracluster.com/#social-media-plugins">Facebook feed</a></li>
-	</ul>
-	</li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a>
-	<ul class="sub-menu">
-		<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-637"><a href="https://galeracluster.com/company/">Overview</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-835"><a href="https://galeracluster.com/company/#carousel">What we believe</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-836"><a href="https://galeracluster.com/company/#latest-press-releases">News</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-838"><a href="https://galeracluster.com/company/#careers">Careers</a></li>
-		<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-837"><a href="https://galeracluster.com/company/#the-codership-story">Galera Cluster Story</a></li>
-	</ul>
-	</li>
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
 	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
 	</ul></div>			</div><!-- .footer-menu -->
-	<div class="footer-search">
-	<div class="search-form">
-	<form role="search" method="get" action="https://galeracluster.com/">
-	<input type="search" class="search-field" value="" name="s" title="Search for:" />
-	<input type="submit" class="search-submit" value="" />
-	</form>
-	</div>
-	</div>
+
 
 	<div class="footer-bar">
 	<p class="copyright">2014 Codership Ltd.</p>
-	<a href="https://www.nasa.gov/multimedia/imagegallery/" class="imagery" target="_blank">Images: NASA</a>
 	</div>
 	<div class="footnote">
 	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
