@@ -143,28 +143,25 @@
 <li><p class="first"><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></p>
 </li>
 <li><p class="first"><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></p>
-<ul class="sub-links simple">
-<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
-<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
-</ul>
-<ul class="simple">
-<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
-</ul>
+</li>
+<li><p class="first"><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></p>
 <ul class="sub-links here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
 </ul>
 <ul class="sub-links simple">
 <li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p>Related Documents</p>
-<p>Related Articles</p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></p>
 </li>
 </ul>
+<p>Related Documents</p>
+<p>Related Articles</p>
 </div>
 </div>
 <div class="library-article section" id="the-primary-component-in-galera-cluster">
 <span id="primary-component"></span><h1>The Primary Component in Galera Cluster<a class="headerlink" href="#the-primary-component-in-galera-cluster" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats">Length:  782 words; Writer: Philip Stoev; Published: August 25, 2015; Topic: General; Level: Intermediate</p>
+<p class="article-stats">Length:  782 words; Writer: Philip Stoev; Published: August 25, 2015; Topic: General; Level: Intermediate</p>
 <p>In this post, we will describe the Primary Component, a central concept in how Galera ensures that there is no opportunity for database inconsistency or divergence between the nodes in case of a network split.</p>
 <p class="section-heading rubric">What is the Primary Component?</p>
 <p>The Primary Component is that set of Galera nodes that can communicate with each other over the network and contains the majority of the nodes. In case of a network partition, it is those nodes that can safely commit a transaction. A cluster can only have one such set of nodes, as there can only be one majority. No other set of nodes will commit transactions, thus removing the possibility of two parts of the cluster committing different transactions and thus diverging and becoming inconsistent.</p>

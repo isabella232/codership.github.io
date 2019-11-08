@@ -143,28 +143,27 @@
 <li><p class="first"><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></p>
 </li>
 <li><p class="first"><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></p>
-<ul class="sub-links simple">
-<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
-<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
-</ul>
-<ul class="simple">
-<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
-</ul>
+</li>
+<li><p class="first"><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></p>
 <ul class="sub-links here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
 </ul>
 <ul class="sub-links simple">
 <li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p>Related Documents</p>
-<p>Related Articles</p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></p>
 </li>
 </ul>
+<p>Related Documents</p>
+<p>Related Articles</p>
 </div>
 </div>
 <div class="library-article section" id="debugging-transaction-conflicts">
 <span id="id1"></span><h1>Debugging Transaction Conflicts<a class="headerlink" href="#debugging-transaction-conflicts" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats">Length:  1,086 words; Writer: Philip Stoev; Published: June 29, 2015; Topic: General; Level: Beginner</p>
+<p class="article-stats">Length:  1,086 words; Writer: Philip Stoev; Published: June 29, 2015; Topic: General; Level: Beginner</p>
 <p>If you are using Galera Cluster in multi-master mode, you will most likely run into transaction conflicts if two clients attempt to modify the same row at the same time. Such conflicts are reported a deadlock errors to the application.
 Legacy applications are frequently unable to handle transaction conflicts properly and may not provide sufficient information to debug the source of the problem.</p>
 <p>If the <code class="docutils literal"><span class="pre">wsrep_log_conflicts</span></code> option is set, Galera can output all the information about transaction conflicts that is available to it to the error log. As it is a dynamic option, you can enable it while the server is running, collect some entries for examination, and disable it to avoid filling up the log.</p>

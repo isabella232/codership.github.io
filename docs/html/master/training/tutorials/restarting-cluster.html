@@ -143,31 +143,28 @@
 <li><p class="first"><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></p>
 </li>
 <li><p class="first"><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></p>
-<ul class="sub-links simple">
-<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
-<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
-</ul>
-<ul class="simple">
-<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
-</ul>
+</li>
+<li><p class="first"><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></p>
 <ul class="sub-links here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
 </ul>
 <ul class="sub-links simple">
 <li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
+</li>
+<li><p class="first"><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></p>
+</li>
+</ul>
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="../../documentation/galera-parameters.html#gcache-recover"><span class="std std-ref">gcache.recover</span></a></li>
 </ul>
 <p>Related Articles</p>
-</li>
-</ul>
 </div>
 </div>
 <div class="library-article section" id="restarting-the-cluster">
 <span id="restarting-cluster"></span><h1>Restarting the Cluster<a class="headerlink" href="#restarting-the-cluster" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats">Length:  791 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+<p class="article-stats">Length:  791 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
 <p>Occasionally, you may have to restart an entire Galera Cluster.  This may happen, for example, when there is a power failure in which every node is shut down and you have no <code class="docutils literal"><span class="pre">mysqld</span></code> process.  Restarting a cluster, starting nodes in the wrong order, starting the wrong nodes first, can be devastating and lead to loss of data.</p>
 <p>When restarting an entire Galera Cluster, you&#8217;ll need to determine which node has the most advanced node state ID. This is covered in the next section.  Once you&#8217;ve identified the most advanced node, you&#8217;ll need to start that node first.  Then you can start the rest of the nodes in any order.  They will each look to the first node as the most up-to-date node.</p>
 <p class="section-heading rubric" id="identify-most-advanced-node">Identifying the Most Advanced Node</p>

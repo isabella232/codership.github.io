@@ -135,30 +135,26 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="topic" id="left-margin">
-<p class="topic-title first">The Library</p>
-<ul class="no-bull simple">
+  <div class="left-margin container">
+<div class="left-margin-top container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content container">
+<ul class="simple">
 <li><a class="reference internal" href="../documentation/index.html"><span class="doc">Documentation</span></a></li>
 <li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
-</ul>
-<ul class="no-bull-sub no-bull simple">
-<li><a class="reference internal" href="../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
-<li><a class="reference internal" href="../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
-</ul>
-<ul class="no-bull simple">
-<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
 <li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
 </ul>
-<ul class="no-bull-sub no-bull simple">
+<ul class="sub-links simple">
 <li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
 <li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
+</div>
 </div>
 <div class="library-index section" id="new-questions-for-the-faq">
 <span id="library-new-questions"></span><h1>New Questions for the FAQ<a class="headerlink" href="#new-questions-for-the-faq" title="Permalink to this headline">¶</a></h1>
 <p>This page is where we record ideas for new Frequently Asked Questions (i.e., the <a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a>).  The questions are entered here, perhaps in rough form, in the same categories of the FAQ.  We will answer that later, when we have more time or more information.</p>
 <p>If you have any suggestions for new FAQs, please email us at <a class="reference external" href="mailto:library&#37;&#52;&#48;galeracluster&#46;com">library<span>&#64;</span>galeracluster<span>&#46;</span>com</a>.</p>
-<p class="section-heading rubric-separated rubric" id="faq-general-pending">General Questions</p>
+<p class="section-heading rubric" id="faq-general-pending">General Questions</p>
 <p class="rubric-2 rubric" id="faq-pending-1">In simple terms, what is Galera?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">A plugin that allows synchronous multi-master replication for InnoDB tables. It works differently from the standard MySQL replication, which provides Master and Slave structure. The Galera Cluster replication is able to manage true parallel read and write to any cluster node, managing conflicts using a Global Transaction ID mechanism.</p>
@@ -171,17 +167,17 @@
 <p class="rubric-2 rubric" id="faq-pending-2a">How Synchronous is Galera Cluster?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">Some answer. (see <a class="reference external" href="https://stackoverflow.com/questions/49430029">https://stackoverflow.com/questions/49430029</a>)</p>
-<p class="section-heading rubric-separated rubric" id="faq-learning-training-pending">Learning &amp; Training Questions</p>
+<p class="section-heading rubric" id="faq-learning-training-pending">Learning &amp; Training Questions</p>
 <p class="rubric-2 rubric" id="faq-pending-4">Are there on-line videos, screencasts or webinars in which I can learn about Galera?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">Some answer.</p>
-<p class="section-heading rubric-separated rubric" id="faq-assistance-pending">Assistance Questions</p>
+<p class="section-heading rubric" id="faq-assistance-pending">Assistance Questions</p>
 <p>No new  questions in this category.</p>
-<p class="section-heading rubric-separated rubric" id="faq-install-migrate-pending">Installation &amp; Migration</p>
+<p class="section-heading rubric" id="faq-install-migrate-pending">Installation &amp; Migration</p>
 <p class="rubric-2 rubric" id="faq-pending-5">Which database software will work with Galera?  Are they only relational database system, or will a NoSQL system function with Galera?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">Some answer.</p>
-<p class="section-heading rubric-separated rubric" id="faq-usage-pending">Usage Questions</p>
+<p class="section-heading rubric" id="faq-usage-pending">Usage Questions</p>
 <p class="rubric-2 rubric" id="faq-pending-6">How do I make a backup, and will it effect performance?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">Some answer.</p>
@@ -197,7 +193,7 @@
 <p class="rubric-2 rubric" id="faq-pending-10">What is SST and IST?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">There are two different way to get data replica. The State Snapshot Transfer is used to replicate the entire database, e.g. when you add a node to the cluster for the first time. The Incremental State Transfer is used to align smaller portions of the database and uses an internal caching mechanism. After the first State Snapshot Transfer, Galera Cluster prefers to use Incremental State Transfer because it is faster.</p>
-<p class="section-heading rubric-separated rubric" id="faq-admin-pending">Administrative Questions</p>
+<p class="section-heading rubric" id="faq-admin-pending">Administrative Questions</p>
 <p class="rubric-2 rubric" id="faq-pending-11">What if I decide I don&#8217;t like Galera and want to migrate to something else?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">Some answer.</p>
@@ -216,7 +212,7 @@
 <p class="rubric-2 rubric" id="faq-pending-16">How are nodes that were temporarily off-line caught up with the cluster?  How are new nodes jump started? (IST, SST, rsync)?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">Some answer.</p>
-<p class="section-heading rubric-separated rubric" id="faq-trivia-pending">Galera Trivia</p>
+<p class="section-heading rubric" id="faq-trivia-pending">Galera Trivia</p>
 <p class="rubric-2 rubric" id="faq-pending-17">Why is Codership, the maker of Galera based in Finland?  Why are so many software companies and programmers from Scandinavia?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">Some answer.</p>

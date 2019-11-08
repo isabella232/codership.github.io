@@ -143,28 +143,27 @@
 <li><p class="first"><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></p>
 </li>
 <li><p class="first"><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></p>
-<ul class="sub-links simple">
-<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
-<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
-</ul>
-<ul class="simple">
-<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
-</ul>
+</li>
+<li><p class="first"><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></p>
 <ul class="sub-links here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
 </ul>
 <ul class="sub-links simple">
 <li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p>Related Documents</p>
-<p>Related Articles</p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></p>
 </li>
 </ul>
+<p>Related Documents</p>
+<p>Related Articles</p>
 </div>
 </div>
 <div class="library-article section" id="read-after-write-semantics-with-galera">
 <span id="achieving-read-after-write-semantics"></span><h1>Read-After-Write Semantics with Galera<a class="headerlink" href="#read-after-write-semantics-with-galera" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats">Length:  599 words; Writer: Philip Stoev; Published: June 17, 2015; Topic: General; Level: Intermediate</p>
+<p class="article-stats">Length:  599 words; Writer: Philip Stoev; Published: June 17, 2015; Topic: General; Level: Intermediate</p>
 <p>Some applications, particularly those written with a single-node database server in mind, attempt to immediately read a value they have just inserted into the database, without making those those operations part of a single transaction. A read/write splitting proxy or a connection pool combined with a load-balancer can direct each operation to a different database node.</p>
 <p>Since Galera allows, for performance reasons, a very small amount of “slave lag”, the node that is processing the read may have not yet applied the write. It can return old data, causing an application that did not expect that to misbehave or produce an error.</p>
 <p class="section-heading rubric">The Solution</p>

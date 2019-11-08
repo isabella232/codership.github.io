@@ -30,7 +30,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Codership Training" href="training/index.html" />
-    <link rel="prev" title="Write-Set Caching during State Transfers" href="kb/best/gcache-during-state-transfers.html" />
+    <link rel="prev" title="Write-Set Caching during State Transfers" href="kb/gcache-during-state-transfers.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -142,21 +142,18 @@
 <ul class="simple">
 <li><a class="reference internal" href="documentation/index.html"><span class="doc">Documentation</span></a></li>
 <li><a class="reference internal" href="kb/index.html"><span class="doc">Knowledge Base</span></a></li>
-</ul>
-<ul class="sub-links simple">
-<li><a class="reference internal" href="kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
-<li><a class="reference internal" href="kb/best/index.html"><span class="doc">Best Practices</span></a></li>
-</ul>
-<ul class="simple">
 <li><a class="reference internal" href="training/index.html"><span class="doc">Training</span></a></li>
 </ul>
 <ul class="sub-links simple">
 <li><a class="reference internal" href="training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
 <li><a class="reference internal" href="training/videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
+<ul class="here simple">
+<li><a class="reference internal" href="#"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 </div>
-<div class="faq library-index section" id="frequently-asked-questions">
+<div class="library-index faq section" id="frequently-asked-questions">
 <span id="library-faq"></span><h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
 <p>This page lists several frequently asked questions on Galera Cluster and related matters. They include questions you might have before deciding to use Galera. There are some questions on how to install and migrate to Galera, as well as how to get assistance and learn about Galera.</p>
 <p>The questions are grouped by a few categories:</p>
@@ -171,7 +168,7 @@
 </ul>
 <p>Just below each question is further categorization of the question: the minimum experience level of the person who might be interested—if you&#8217;re new to database clusters, you might want to skip the Intermediate ones; and the type of person who might be interested in such a question (e.g., DBAs, business managers).</p>
 <div class="banner container" id="faq-general-questions">
-<p class="section-heading rubric-separated rubric">General Questions</p>
+<p class="section-heading rubric">General Questions</p>
 </div>
 <p class="sub-heading rubric" id="faq-what-is-galera-cluster">What is Galera Cluster?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
@@ -199,7 +196,7 @@
 <p class="list-abstract">Since the software is free, it costs you only a little bit of time to try the software. To start, you might want to set up three new servers to be part of a cluster. If you have an account with Amazon&#8217;s AWS, you could create three instances in there system, just for testing Galera. See <a class="reference internal" href="#faq-codership-offers-support"><span class="std std-ref">the Question on Using AWS</span></a>.</p>
 <p class="list-abstract">If you want to see how well it performs, you might copy your existing databases to your test cluster.  See <a class="reference internal" href="training/tutorials/migration.html#migrate-data"><span class="std std-ref">Data Migration</span></a> for more details on how you might do that.  You can also use a benchmark tool like, <code class="docutils literal"><span class="pre">sysbench</span></code> (see <a class="reference external" href="https://severalnines.com/blog/how-benchmark-performance-mysql-mariadb-using-sysbench">How to Benchmark Performance</a>) to test Galera.</p>
 <div class="banner container" id="faq-learning-questions">
-<p class="section-heading rubric-separated rubric">Learning &amp; Training Questions</p>
+<p class="section-heading rubric">Learning &amp; Training Questions</p>
 </div>
 <p class="sub-heading rubric" id="faq-galera-cluster-popularity">How Popular is Galera Cluster? Will I be able to Find People we Need?</p>
 <p class="list-stats">Level: All; Interested: Business Managers; Category: Training</p>
@@ -228,7 +225,7 @@
 <p class="list-abstract">Developers just need to be mindful to use only InnoDB tables. You can guard against this by setting the <code class="docutils literal"><span class="pre">--default-storage-engine</span> <span class="pre">option</span></code> and <code class="docutils literal"><span class="pre">enforce_storage_engine</span></code> to InnoDB. Be sure to disable <code class="docutils literal"><span class="pre">enforce_storage_engine</span></code>, though, when upgrading the database software.</p>
 <p class="list-abstract">Users would insert or change data in a database the same as they would on a stand-alone database server not using Galera or replication. There&#8217;s no extra login requirements, interfaces, or methods to use a database running on Galera Cluster. Users will be unaware that you&#8217;re using Galera Cluster—other than maybe noticing that your database is much more dependable.</p>
 <div class="banner container" id="faq-assistance-questions">
-<p class="section-heading rubric-separated rubric">Assistance Questions</p>
+<p class="section-heading rubric">Assistance Questions</p>
 </div>
 <p class="sub-heading rubric" id="faq-codership-offers-support">Does Codership Offer Support?</p>
 <p class="list-stats">Level: All; Interested: DBAs, Business Managers; Category: Support</p>
@@ -257,7 +254,7 @@
 <p class="list-abstract">We have a forum in which the community, as well as our staff monitor and post responses:  <a class="reference external" href="https://galeracluster.com/community/">Codership Forum</a>. Some of our partners maintain forums on Galera:  <a class="reference external" href="https://www.fromdual.com/forum/513">FromDual Forum</a>.</p>
 <p class="list-abstract">You can also post questions on forums unaffiliated with Codership or our partners:  <a class="reference external" href="https://dba.stackexchange.com/questions/tagged/galera">Stack Exchange (DBA Section)</a>, <a class="reference external" href="https://stackoverflow.com/questions/tagged/galera">Stack Overflow</a>,</p>
 <div class="banner container" id="faq-installation-migration-questions">
-<p class="section-heading rubric-separated rubric">Installation &amp; Migration Questions</p>
+<p class="section-heading rubric">Installation &amp; Migration Questions</p>
 </div>
 <p class="sub-heading rubric" id="faq-easy-migration-standard-to-galera">If I&#8217;m now using MySQL Standard Replication, will it be Easy to Switch to Galera?</p>
 <p class="list-stats">Level: Newcomer; Interested: DBAs; Category: Installation</p>
@@ -280,7 +277,7 @@
 <p class="list-abstract">If you&#8217;d prefer to use MySQL, see <a class="reference internal" href="documentation/install-mysql.html"><span class="doc">Installing MySQL Galera Cluster</span></a> for information on how to install MySQL and Galera software.  Galera is not yet incorporated into MySQL.</p>
 <p class="sub-heading rubric" id="faq-min-max-galera-nodes">What&#8217;s the Minimum and Maximum Number of Servers in a Galera Cluster?</p>
 <p class="list-stats">Level: Newcomer; Interested: DBAs; Category: Installation</p>
-<p class="list-abstract">The minimum number of nodes required for a cluster is two.  However, a minimum of three nodes is recommend. In a two-node cluster, if one node fails or it&#8217;s taken down for maintenance, the other node will stop since another node is required. There is a work around for two-node cluster issues: see <a class="reference internal" href="kb/best/two-node-clusters.html"><span class="doc">Two-Node Clusters</span></a></p>
+<p class="list-abstract">The minimum number of nodes required for a cluster is two.  However, a minimum of three nodes is recommend. In a two-node cluster, if one node fails or it&#8217;s taken down for maintenance, the other node will stop since another node is required. There is a work around for two-node cluster issues: see <a class="reference internal" href="kb/two-node-clusters.html"><span class="doc">Two-Node Clusters</span></a></p>
 <p class="list-abstract">As for the maximum number of nodes, there is none. However, a single cluster in excessive of ten nodes may experience lag from the synchronizing of so many nodes across a network or the internet. This can be mitigated based on your network configuration, but then other factors come into play.</p>
 <p class="sub-heading rubric" id="faq-min-galera-equipment">What Type of Server or Equipment is Recommended for a Galera Cluster?</p>
 <p class="list-stats">Level: Newcomer; Interested: DBAs; Category: Installation</p>
@@ -288,7 +285,7 @@
 <p class="list-abstract">The best equipment you can afford to buy, the better. If you&#8217;re using virtual servers like those through Amazon&#8217;s AWS, you don&#8217;t need to be concerned about most of these equipment factors. You will just need to allow your servers enough memory and storage space.</p>
 <p class="list-abstract">However you build your server nodes, it&#8217;s best that they be equal in all ways: physical and virtual equipment; operating system configuration; software installation.</p>
 <div class="banner container" id="faq-usage-questions">
-<p class="section-heading rubric-separated rubric">Usage Questions</p>
+<p class="section-heading rubric">Usage Questions</p>
 </div>
 <p class="sub-heading rubric" id="faq-galera-load-balancing">Does Galera Balance Loads?</p>
 <p class="list-stats">Level: Advanced; Interested: DBAs; Category: Performance</p>
@@ -335,7 +332,7 @@
 <p class="list-abstract">Standard MySQL replication uses the binary log for replicating. However, Galera doesn&#8217;t use the binary log.  Nevertheless, there may be situations in which you might want to use point-in-time recovery methods to restore tables or data since the last backup.</p>
 <p class="list-abstract">You might also want to attach an asynchronous slave to one of your nodes, using standard MySQL replication and set it on a delay.  This can also help with recovering tables and data lost since the last backup was made.</p>
 <div class="banner container" id="faq-administrative-questions">
-<p class="section-heading rubric-separated rubric">Administrative Questions</p>
+<p class="section-heading rubric">Administrative Questions</p>
 </div>
 <p class="sub-heading rubric" id="faq-what-causes-galera-to-stop">What typically Causes a Cluster to Stop?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs, Business Managers; Category: Maintenance</p>
@@ -373,7 +370,7 @@
 <p class="list-abstract">Integral to Galera Cluster replication, the cluster will wait for all of the nodes in the cluster to return the status of certification test before committing transactions or rolling them back.  Because of this, a node that is inundated with traffic will delay that node from replying to the cluster and delay the other nodes as they wait for it to report.</p>
 <p class="list-abstract">To alleviate this problem, you would make sure that all of the servers the same physically (i.e., amount of RAM, types of network interfaces), or at least have close the same amount of resources available.  You would also use a load balancer (e.g., MariaDB MaxScale, ProxySQL) to make sure one node is not overloaded with traffic.</p>
 <div class="banner container" id="faq-trivial-questions">
-<p class="section-heading rubric-separated rubric">Galera Trivia Questions</p>
+<p class="section-heading rubric">Galera Trivia Questions</p>
 </div>
 <p class="sub-heading rubric" id="faq-why-called-is-galera">Why is the Software Called Galera?</p>
 <p class="list-stats">Level: Newcomer; Interested: DBAs, Business Managers; Category: Background</p>
@@ -404,7 +401,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="kb/best/gcache-during-state-transfers.html" title="previous chapter">Write-Set Caching during State Transfers</a></li>
+      <li>Previous: <a href="kb/gcache-during-state-transfers.html" title="previous chapter">Write-Set Caching during State Transfers</a></li>
       <li>Next: <a href="training/index.html" title="next chapter">Codership Training</a></li>
   </ul></li>
 </ul>

@@ -143,28 +143,25 @@
 <li><p class="first"><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></p>
 </li>
 <li><p class="first"><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></p>
-<ul class="sub-links simple">
-<li><a class="reference internal" href="../../kb/trouble/index.html"><span class="doc">Troubleshooting</span></a></li>
-<li><a class="reference internal" href="../../kb/best/index.html"><span class="doc">Best Practices</span></a></li>
-</ul>
-<ul class="simple">
-<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
-</ul>
+</li>
+<li><p class="first"><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></p>
 <ul class="sub-links here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
 </ul>
 <ul class="sub-links simple">
 <li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
-<p>Related Documents</p>
-<p>Related Articles</p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></p>
 </li>
 </ul>
+<p>Related Documents</p>
+<p>Related Articles</p>
 </div>
 </div>
 <div class="library-article section" id="support-for-transaction-isolation-levels">
 <span id="supporting-transaction-isolation-levels"></span><h1>Support for Transaction Isolation Levels<a class="headerlink" href="#support-for-transaction-isolation-levels" title="Permalink to this headline">¶</a></h1>
-<p class="list-stats">Length:  1009 words; Writer: Seppo Jaakola; Published: September 21, 2015; Topic: General; Level: Intermediate</p>
+<p class="article-stats">Length:  1009 words; Writer: Seppo Jaakola; Published: September 21, 2015; Topic: General; Level: Intermediate</p>
 <p>There appears to be great misunderstanding as to what MySQL transaction isolation levels Galera CLuster actually supports and how. This blog post tries to give answer to those uncertainties.</p>
 <p>Galera Cluster provides <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> between transactions running on separate cluster nodes. Transactions running on the same node are isolated by whatever was configured as the transaction isolation level in the MySQL configuration. So, if you have configured the default <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> isolation, transactions issued on the same node will behave under <code class="docutils literal"><span class="pre">REPEATABLE</span> <span class="pre">READ</span></code> semantics. However, for transactions issued on separate cluster nodes, the ‘first committer wins’ rule of <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> is provided, and this will fix the lost update problem that generally hurts REPEATABLE READ isolation.</p>
 <p>Therefore, it is not safe for the application to rely on <code class="docutils literal"><span class="pre">SNAPSHOT</span> <span class="pre">ISOLATION</span></code> semantics. But in general, transaction isolation in Galera CLuster is no less than what was configured for transaction isolation level in MySQL.</p>
