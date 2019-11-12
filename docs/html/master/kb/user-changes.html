@@ -163,7 +163,7 @@
 </div>
 <div class="library-article section" id="user-changes-not-replicating">
 <span id="kb-trouble-user-changes"></span><h1>User Changes not Replicating<a class="headerlink" href="#user-changes-not-replicating" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 506 words; Updated: September 12, 2019; Category: Schema &amp; SQL; Type: Troubleshooting</p>
+<p class="article-stats">Length: 518 words; Updated: September 12, 2019; Category: Schema &amp; SQL; Type: Troubleshooting</p>
 <p>When a DBA make changes to data in the mysql database—that&#8217;s the database that contains user names and privileges—if done in a straightforward way (e.g., with an <code class="docutils literal"><span class="pre">UPDATE</span></code> statement), they&#8217;re not replicated to the other nodes in the cluster. This can cause problems for users, as well as frustrate the DBA.</p>
 <p class="section-heading rubric">Scenario</p>
 <p>Suppose you made some changes to database users, but when you check the other nodes, you find they have not replicated to the cluster. For instance, suppose you want to change the host address from which a user, <em>bob</em> may access the cluster. You log into a node and use the <code class="docutils literal"><span class="pre">UPDATE</span></code> statement to change the <code class="docutils literal"><span class="pre">Host</span></code> column in the <code class="docutils literal"><span class="pre">mysql.user</span></code> table for Bob.</p>

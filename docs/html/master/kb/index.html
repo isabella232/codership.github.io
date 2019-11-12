@@ -170,32 +170,35 @@
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="node-crash-during-sst.html"><span class="doc">Node Crashes during SST</span></a></p>
-<p class="list-stats">Length: 463 words; Updated: November 6, 2019</p>
-<p class="list-abstract">When using <code class="docutils literal"><span class="pre">rsync</span></code> for State Snapshot Transfers, if the donor node crashes in the middle of a state transfer, the joiner node may stall, its databases may be incomplete and inaccessible. This article discusses this situation and how to resolve it.</p>
+<p class="list-stats">Length: 463 words; Updated: Nov 2019</p>
+<p class="list-abstract">If a donor node crashes while using <code class="docutils literal"><span class="pre">rsync</span></code> for a state transfers, the joiner node may stall with incomplete databases, and be inaccessibe. This article discusses how to resolve this.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="sst-fails-sql-syntax-error.html"><span class="doc">SST Fails due to SQL Syntax Errors</span></a></p>
-<p class="list-stats">Length: 789 words; Updated: November 7, 2019</p>
-<p class="list-abstract">When using <code class="docutils literal"><span class="pre">mysqldump</span></code> for State Snapshot Transfers, and a new node joins a cluster, after it requests data from the cluster, it may fail. Looking at the database error log, there may be entries that says there were SQL Syntax errors.</p>
+<p class="list-stats">Length: 789 words; Updated: Nov 2019</p>
+<p class="list-abstract">When using <code class="docutils literal"><span class="pre">mysqldump</span></code> for state transfers for a new node, it may fail. In the database error log, there may be entries that says there were SQL Syntax errors.</p>
 </div>
 <div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="requested-state-transfer-failed.html"><span class="doc">Requested State Transfer Failed</span></a></p>
-<p class="list-stats">Length: 649 words; Updated: November 6, 2019</p>
-<p class="list-abstract">When a new node joins a cluster, it will try to synchronize with the cluster by getting a full copy of the databases from one of the other nodes.  Sometimes its request will be ignored and no node will be selected to be the donor.</p>
+<p class="list-stats">Length: 649 words; Updated: Nov 2019</p>
+<p class="list-abstract">When a new node joins a cluster, it will try to get a full copy of the databases from one of the other nodes.  Sometimes its request will be ignored and no node is selected to be the donor.</p>
 </div>
 <div class="banner container" id="kb-trouble-sql-syntax">
 <p class="section-heading rubric">Schema &amp; SQL</p>
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="stall-on-alter-table.html"><span class="doc">Cluster Stalls on ALTER TABLE</span></a></p>
-<p class="list-stats">Length: 519 words; Updated: October 30, 2019:</p>
-<p class="list-abstract">A cluster will sometimes stall when executing <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code>. This can happen when changing the schema of a table with several columns and indexes. Depending on the number of rows, it can be a major drain on performance.</p>
+<p class="list-stats">Length: 519 words; Updated: Oct 2019:</p>
+<p class="list-abstract">A cluster will sometimes stall when executing <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code> on a table with several columns and indexes. Depending on the number of rows, it can be a major drain on performance.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="user-changes.html"><span class="doc">User Changes not Replicating</span></a></p>
-<p class="list-stats">Length: 373 words; Published:</p>
-<p class="list-abstract">After making changes to the <code class="docutils literal"><span class="pre">mysql</span></code> database (e.g., user name, password, host address), they’re not replicated to the other nodes in the cluster. This can cause problems for users, as well as frustrate the DBA.</p>
+<p class="list-stats">Length: 518 words; Updated: Sep 2019</p>
+<p class="list-abstract">Changes to the <code class="docutils literal"><span class="pre">mysql</span></code> database (e.g., user name, host address) are not replicated on other nodes. This can cause problems for users, as well as frustrate the DBA.</p>
 </div>
 <div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="auto-increment-multiples.html"><span class="doc">AUTO_INCREMENT Increasing by Multiples</span></a></p>
-<p class="list-stats">Length: 995 words; Published: October 22, 2019</p>
-<p class="list-abstract">Tables with key columns that use the <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> attribute will increment values by more than one, when using Galera Cluster. This can be confusing and worrisome, but this article explains how this is a good method.</p>
+<p class="list-stats">Length: 995 words; Published: Oct 2019</p>
+<p class="list-abstract">Key columns using <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> will increase values by more than one with Galera. This can be confusing and worrisome, but this article explains why this is a good method.</p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="resolve-commit-failure.html"><span class="doc">Commit Failed for Reason 3</span></a></p>
+<p class="list-stats">Length: 326 words; Updated: Nov 2019</p>
+<p class="list-abstract">When you have <code class="docutils literal"><span class="pre">wsrep_debug</span></code> turned <code class="docutils literal"><span class="pre">ON</span></code>, you may occasionally see a message noting that a commit has failed due to reason <code class="docutils literal"><span class="pre">3</span></code>.</p>
 </div>
 <div class="banner container" id="kb-trouble-splits-topology">
 <p class="section-heading rubric">Splits &amp; Topology</p>
@@ -203,12 +206,12 @@
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="multi-master-conflicts.html"><span class="doc">Multi-Master Conflicts</span></a></p>
 <p class="list-stats">Length: 751 words; Published:</p>
-<p class="list-abstract">Mmlti-master database environments have certain types of conflicts and typically involve inconsistencies of rows amongst nodes. This article explains the nuances of Galera Cluster and how to handle and prevent them.</p>
+<p class="list-abstract">Multi-master clusters have certain types of conflicts and can involve data inconsistencies among nodes. This article explains the nuances of Galera and how to prevent them.</p>
 </div>
 <div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="error-unknown-command.html"><span class="doc">Unknown Command Errors</span></a></p>
-<p class="list-stats">Length: 971 words; Updated: November 6, 2019</p>
-<p class="list-abstract">Although a user entered a valid SQL statement, instead of receiving the expected results, an error message is returned saying, &#8220;Unknown Command&#8221;.  It may not do this on all nodes, but error message returned for all queries on some nodes.</p>
+<p class="list-stats">Length: 971 words; Updated: Nov 2019</p>
+<p class="list-abstract">Instead of receiving results from a valid SQL statement, an error message is returned saying, &#8220;Unknown Command&#8221; on one node. This error is returned for all queries on the node.</p>
 </div>
 </div>
 <div class="section" id="best-practices-articles">
@@ -220,59 +223,59 @@
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="group-commit.html"><span class="doc">Group Commit</span></a></p>
 <p class="list-stats">Length: 322 words; Published:</p>
-<p class="list-abstract">When several transactions try to commit at the same time, <code class="docutils literal"><span class="pre">GROUP</span> <span class="pre">COMMIT</span></code> will force them to be flushed to the disk with a single system call, rather than a system call for each commit. This can greatly improves the throughput of TPS.</p>
+<p class="list-abstract">When several transactions try to commit simultaneously, <code class="docutils literal"><span class="pre">GROUP</span> <span class="pre">COMMIT</span></code> flushes them to the disk with a single system call, rather than a call for each, greatly improving performance.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="large-transactions.html"><span class="doc">Large Transactions</span></a></p>
 <p class="list-stats">Length: 443 words; Published:</p>
-<p class="list-abstract">Large transactions, especially ones which delete millions of rows from a table at once, can lead to diminished performance. One reason for this is that the table may be reindexing and rescanning after each row is deleted.</p>
+<p class="list-abstract">Large transactions can lead to diminished performance. One reason for this is that the table may be reindexing and rescanning after each row is deleted.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="parallel-slave-threads.html"><span class="doc">Parallel Slave Threads</span></a></p>
 <p class="list-stats">Length: 366 words; Published:</p>
-<p class="list-abstract">There&#8217;s no rule for how many slave threads are needed. Parallel threads don&#8217;t ensure better performance, but they don&#8217;t impair performance and they may in fact speed up the synchronization of new nodes joining a cluster.</p>
+<p class="list-abstract">Parallel threads don&#8217;t ensure better performance, but they don&#8217;t impair performance and they may actually increase synchronization of new nodes joining a cluster.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="detecting-slow-node.html"><span class="doc">Slow Nodes</span></a></p>
 <p class="list-stats">Length: 297 words; Published:</p>
-<p class="list-abstract">By design, cluster performance cannot be higher than the performance of the slowest node in the cluster. Even with only one node, its performance can be considerably slower when compared with running the same server in a stand-alone mode.</p>
+<p class="list-abstract">By design, cluster performance won&#8217;t be higher than the slowest node. Even with only one node, its performance can be considerably slower compared to stand-alone mode.</p>
 </div>
 <div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="wan-latency.html"><span class="doc">WAN Latency</span></a></p>
 <p class="list-stats">Length: 221 words; Published:</p>
-<p class="list-abstract">When using Galera Cluster over a Wide Area Network, links can have exceptionally high latency. It can be checked by taking Round-Trip Time measurements between nodes. It can be corrected by adjusting all of the temporal parameters.</p>
+<p class="list-abstract">When using Galera over a WAN, links can have exceptionally high latency. Check this by measuring the Round-Trip Time among nodes, and correct it by adjusting temporal parameters.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="wan-replication.html"><span class="doc">WAN Replication</span></a></p>
 <p class="list-stats">Length: 161 words; Published:</p>
-<p class="list-abstract">When running the cluster over a WAN (Wide Area Network), you may frequently experience transient network connectivity failures. To prevent this from partitioning the cluster, you may want to increase the <em>keepalive</em> timeouts.</p>
+<p class="list-abstract">When running a cluster over a WAN, there may be transient network connectivity failures. To prevent this from partitioning the cluster, try increasing the <em>keep-alive</em> timeouts.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="customizing-gcache-size.html"><span class="doc">Write-Set Cache Size</span></a></p>
 <p class="list-stats">Length: 467 words; Published:</p>
-<p class="list-abstract">The size of the write-set cache can be defined by the <code class="docutils literal"><span class="pre">gcache.size</span></code> parameter. If you have storage issues, there are some guidelines to consider in adjusting this issue. You could change your state snapshot method.</p>
+<p class="list-abstract">If you have storage issues, there are some guidelines to adjust the <code class="docutils literal"><span class="pre">gcache.size</span></code> parameter, properly. You could also change your state snapshot method.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="gcache-during-state-transfers.html"><span class="doc">Write-Set Caching during State Transfers</span></a></p>
 <p class="list-stats">Length: 156 words; Published:</p>
-<p class="list-abstract">Normally, nodes don&#8217;t use much more memory than a stand-alone. The certification index and uncommitted write-sets do drain some. Typically, though, this isn&#8217;t usually noticeable. Write-set caching during state transfers is the exception.</p>
+<p class="list-abstract">Galera nodes don&#8217;t use much more memory than a stand-alone. The certification index and uncommitted write-sets drain some. Write-set caching during state transfers is the exception.</p>
 </div>
 <div class="banner container" id="kb-best-topology">
 <p class="section-heading rubric">Topology</p>
 </div>
 <div class="list-col1 container">
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="multi-master-setup.html"><span class="doc">Multi-Master Setup</span></a></p>
-<p class="list-stats">Length: 55 words; Published:</p>
-<p class="list-abstract">A master is a node that can simultaneously process writes from clients. The more masters in a cluster, the higher the probability of certification conflicts.  This can lead to undesirable rollbacks and performance degradation.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="single-master-setup.html"><span class="doc">Single Master Setup</span></a></p>
 <p class="list-stats">Length: 81 words; Published:</p>
-<p class="list-abstract">Although Galera is a true multi-master system, it is possible to designate one node to handle all writes, to be the master for all of the other nodes. To do this, there are certain configuratoin requirements, while some aspects that can be relaxed.</p>
+<p class="list-abstract">It&#8217;s possible to designate one node in a cluster to handle all writes, to be the <em>master</em> to the other nodes. To do this, there are certain configuratoin requirements.</p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="multi-master-setup.html"><span class="doc">Multi-Master Setup</span></a></p>
+<p class="list-stats">Length: 55 words; Published:</p>
+<p class="list-abstract">The more <em>masters</em> in a cluster, the higher the probability of certification conflicts. This can lead to undesirable rollbacks and performance degradation.</p>
 </div>
 <div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="two-node-clusters.html"><span class="doc">Two-Node Clusters</span></a></p>
-<p class="list-stats">Length: 399 words; Published:</p>
-<p class="list-abstract">Although it may seem simple to maintain a cluster of only two nodes, there is an inherent potential problem. In a two-node cluster, when one node fails, it may cause problems, to distrupt some processes. Mostly, high availability is no longer ensured.</p>
+<p class="list-stats">Length: 880 words; Updated: Nov 2019</p>
+<p class="list-abstract">There are potential problems with two-node clusters: A split-brain situation may occur. When one node fails, the remaining node becomes non-operational.</p>
 </div>
 <div class="banner container" id="kb-best-security">
 <p class="section-heading rubric">Security &amp; SQL</p>
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="setting-selinux-policy.html"><span class="doc">Setting an SELinux Policy</span></a></p>
-<p class="list-stats">Length: 345 words; Updated: October 20, 2019</p>
-<p class="list-abstract">When you first enable Galera Cluster on a node that runs SELinux, it will prohibit all cluster activities.  In order to enable replication on the node, you need a policy so that SELinux can recognize cluster activities as legitimate.</p>
+<p class="list-stats">Length: 345 words; Updated: Oct 2019</p>
+<p class="list-abstract">When you first installing a node, SELinux will prohibit cluster activities. You will need a SELinux policy so it will recognize cluster activities as legitimate.</p>
 </div>
 <div class="list-col2 container">
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="using-sync-functions.html"><span class="doc">Synchronization Functions</span></a></p>
-<p class="list-stats">Length: 391 words; Published:</p>
-<p class="list-abstract">An application may need to perform a critical read. Synchronization functions can tie the synchronization process to specific transactions so that the node waits only until a specific transaction is applied before executing the query.</p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="sync-transaction-before-another.html"><span class="doc">Synch a Transaction First</span></a></p>
+<p class="list-stats">Length: 994 words; Updated: Nov 2019</p>
+<p class="list-abstract">When entering a transaction, you may need to ensure a previous transaction has been committed on the current node. Synchronization functions can make this easier to do.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>

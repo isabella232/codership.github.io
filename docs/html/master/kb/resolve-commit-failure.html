@@ -5,11 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Using Synchronization Functions in Galera Cluster" name="title" />
+    <meta content="Resolving Commit Failures (Reason 3)" name="title" />
 <meta content="en-US" name="language" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
-    <title>Using Synchronization Functions &#8212; Galera Cluster Documentation</title>
+    <title>Commit Failed for Reason 3 &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -29,8 +29,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Two-Node Clusters" href="two-node-clusters.html" />
-    <link rel="prev" title="Detecting a Slow Node" href="detecting-slow-node.html" />
+    <link rel="next" title="Multi-Master Conflicts" href="multi-master-conflicts.html" />
+    <link rel="prev" title="AUTO_INCREMENT Increasing by Multiples" href="auto-increment-multiples.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -157,52 +157,28 @@
 </ul>
 <p>Related Documents</p>
 <ul class="simple">
-<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a></li>
-<li><a class="reference internal" href="../documentation/mysql-wsrep-functions.html#wsrep-last-written-gtid"><span class="std std-ref">WSREP_LAST_WRITTEN_GTID()</span></a></li>
-<li><a class="reference internal" href="../documentation/mysql-wsrep-functions.html#wsrep-sync-wait-upto-gtid"><span class="std std-ref">WSREP_SYNC_WAIT_UPTO_GTID()</span></a></li>
-<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-provider-version"><span class="std std-ref">wsrep_provider_version</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a></li>
 </ul>
+<p>Related Articles</p>
 </div>
 </div>
-<div class="library-article section" id="using-synchronization-functions">
-<span id="kb-best-using-sync-functions"></span><h1>Using Synchronization Functions<a class="headerlink" href="#using-synchronization-functions" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 391 words; Published: October 22, 2019; Category: Schema &amp; SQL; Type: Best Practices</p>
-<p>Occasionally, an application may need to perform a critical read. Critical reads are queries that require that the local database reaches the most up-to-date state possible before the query is executed.</p>
-<p>In Galera Cluster prior to 4.x, you could manage critical reads using the <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a> session variable.  This would cause the node to enable causality checks, holding new queries until the database server catches up with all updates that were made prior to the start of the current transaction.  While this method does ensure that the node reaches the most up-to-date state before executing the query, it also means that the node may wait to receive updates that might have nothing to do with the query at hand.</p>
-<p>Beginning with Galera Cluster 4.0, though, you can use synchronization functions.  This allows you to tie the synchronization process to specific transactions so that the node waits only until a specific transaction is applied before executing the query.  Here is an example of how this might work:</p>
-<p class="kb rubric">Scenario</p>
-<p>Suppose on <code class="docutils literal"><span class="pre">node1</span></code>, you begin a transaction, make changes to a table and then commit the transaction like so:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">START TRANSACTION;</span>
-
-<span class="go">UPDATE table1 SET col4 = col4 * 1.2;</span>
-
-<span class="go">COMMIT;</span>
+<div class="library-article section" id="commit-failed-for-reason-3">
+<span id="kb-trouble-resolve-commit-failures"></span><h1>Commit Failed for Reason 3<a class="headerlink" href="#commit-failed-for-reason-3" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length: 326 words; Updated: November 12, 2019; Category: Schema &amp; SQL; Type: Troubleshooting</p>
+<p>When you have <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a> turned <code class="docutils literal"><span class="pre">ON</span></code>, you may occasionally see a message noting that a commit has failed due to reason <code class="docutils literal"><span class="pre">3</span></code>. This problem can be resolved with a change in topology or with an upgrade.</p>
+<p class="section-heading rubric">Scenario</p>
+<p>Suppose you enable  <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a> on the nodes in your cluster.  Then you attempt to change locally the data contained in a database, but you encounter problems.  When you check the database error log, you see a message saying that a commit has failed due to reason <code class="docutils literal"><span class="pre">3</span></code>.  Below is an example of an excerpt from a database server&#8217;s error log showing this:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>110906 17:45:01 [Note] WSREP: BF kill (1, seqno: 16962377), victim:  (140588996478720 4) trx: 35525064
+110906 17:45:01 [Note] WSREP: Aborting query: commit
+110906 17:45:01 [Note] WSREP: kill trx QUERY_COMMITTING for 35525064
+110906 17:45:01 [Note] WSREP: commit failed for reason: 3, seqno: -1
 </pre></div>
 </div>
-<p>After that, using the <a class="reference internal" href="../documentation/mysql-wsrep-functions.html#wsrep-last-written-gtid"><span class="std std-ref">WSREP_LAST_WRITTEN_GTID()</span></a> function, say you obtain the <a class="reference internal" href="../documentation/glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> of the transaction and save it to the <code class="docutils literal"><span class="pre">$transaction_1_gtid</span></code> variable like this:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span><span class="nv">transaction_1_gtid</span> <span class="o">=</span> SELECT WSREP_LAST_WRITTEN_GTID<span class="o">()</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Now, on <code class="docutils literal"><span class="pre">node2</span></code>, suppose you set it to wait until it replicates and applies the transaction from <code class="docutils literal"><span class="pre">node1</span></code> before starting a new transaction:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SELECT WSREP_SYNC_WAIT_UPTO_GTID($transaction_1_gtid);</span>
-
-<span class="go">START TRANSACTION;</span>
-</pre></div>
-</div>
-<p>Next, you execute your critical reads.</p>
-<p class="kb rubric">Recommendations</p>
-<p>Using the <a class="reference internal" href="../documentation/mysql-wsrep-functions.html#wsrep-sync-wait-upto-gtid"><span class="std std-ref">WSREP_SYNC_WAIT_UPTO_GTID()</span></a> function, the node waits until it has replicated and applied the given Global Transaction ID before starting a new transaction.</p>
-<p>Synchronization Functions were introduced in Galera Cluster 4.  If you have an older version, you won&#8217;t be able to use these features.  To determine which version is installed on a server, use the <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement and look for the <a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-provider-version"><span class="std std-ref">wsrep_provider_version</span></a> status variable.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">SHOW STATUS LIKE &#39;wsrep_provider_version&#39;;</span>
-
-<span class="go">+------------------------+----------------------+</span>
-<span class="go">| Variable_name          | Value                |</span>
-<span class="go">+------------------------+----------------------+</span>
-<span class="go">| wsrep_provider_version | 25.3.5-wheezy(rXXXX) |</span>
-<span class="go">+------------------------+----------------------+</span>
-</pre></div>
-</div>
-<p>The digits after the second and third decimal places are the version. The results here indicate that Galera Cluster version 3.5 is installed on the server.</p>
+<p>When attempting to apply a replicated write-set, slave threads occasionally encounter lock conflicts with local transactions, which may already be in the commit phase.  In such cases, the node aborts the local transaction, allowing the slave thread to proceed.</p>
+<p>This is a consequence of optimistic transaction execution.  The database server executes transactions with the expectation that there won&#8217;t be any row conflicts.  It&#8217;s an expected issue in a multi-master configuration.</p>
+<p class="section-heading rubric">Work-Arounds &amp; Solution</p>
+<p>To mitigate such conflicts, there are a couple of things you can do. You could use the cluster in a master-slave configuration: you would direct all writes to a single node.  The other work-around is to use the same approach as master-slave read/write splitting.</p>
+<p>The solution may be, though, to upgrade to the latest version of MySQL or MariaDB and the latest version of Galera Cluster. This problem seems to have occurred only in older versions of the database and cluster software.</p>
 </div>
 
 
@@ -218,8 +194,8 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Knowledge Base</a><ul>
-      <li>Previous: <a href="detecting-slow-node.html" title="previous chapter">Detecting a Slow Node</a></li>
-      <li>Next: <a href="two-node-clusters.html" title="next chapter">Two-Node Clusters</a></li>
+      <li>Previous: <a href="auto-increment-multiples.html" title="previous chapter">AUTO_INCREMENT Increasing by Multiples</a></li>
+      <li>Next: <a href="multi-master-conflicts.html" title="next chapter">Multi-Master Conflicts</a></li>
   </ul></li>
   </ul></li>
 </ul>

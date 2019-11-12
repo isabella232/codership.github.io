@@ -5,12 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="MySQL wsrep Functions" name="title" />
+    <meta content="Galera Functions" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, mysql wsrep functions, galera functions" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
-    <title>MySQL wsrep Functions &#8212; Galera Cluster Documentation</title>
+    <title>Galera Functions &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -158,11 +158,11 @@
 <ul class="simple">
 <li><a class="reference internal" href="galera-parameters.html#repl-causal-read-timeout"><span class="std std-ref">repl.causal_read_timeout</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
 </div>
-<div class="library-document section" id="mysql-wsrep-functions">
-<span id="id1"></span><h1>MySQL wsrep Functions<a class="headerlink" href="#mysql-wsrep-functions" title="Permalink to this headline">¶</a></h1>
+<div class="library-document section" id="galera-functions">
+<span id="wsrep-functions"></span><h1>Galera Functions<a class="headerlink" href="#galera-functions" title="Permalink to this headline">¶</a></h1>
+<p>Starting with version 4 of Galera Cluster, there are several Galera functions available. At this point, the Galera functions related to <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> (GTID).  They return a GTID or have effect on transactions related to a GTID.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
 <col width="40%" />
@@ -267,7 +267,7 @@
 </tr>
 </tbody>
 </table>
-<p>This function blocks the client until the node applies and commits the given <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>.  If you don&#8217;t provide a timeout, it defaults to the value of <a class="reference internal" href="galera-parameters.html#repl-causal-read-timeout"><span class="std std-ref">repl.causal_read_timeout</span></a>. It the following return values:</p>
+<p>This function blocks the client until the node applies and commits the given <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>.  If you don&#8217;t provide a timeout, it defaults to the value of <a class="reference internal" href="galera-parameters.html#repl-causal-read-timeout"><span class="std std-ref">repl.causal_read_timeout</span></a>. It returns the following values:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">1</span></code>: The node applied and committed the given Global Transaction ID.</li>
 <li><code class="docutils literal"><span class="pre">ER_LOCAL_WAIT_TIMEOUT</span></code> Error: The function times out before the node can apply the transaction.</li>
