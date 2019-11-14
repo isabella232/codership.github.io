@@ -30,15 +30,18 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Synchronizing a Transaction Before Executing Another" href="sync-transaction-before-another.html" />
-    <link rel="prev" title="Write-Set Caching during State Transfers" href="gcache-during-state-transfers.html" />
+    <link rel="prev" title="Two-Node Clusters" href="two-node-clusters.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -161,12 +164,26 @@
 <li><a class="reference internal" href="../documentation/firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
 <li><a class="reference internal" href="../documentation/firewalld.html"><span class="doc">Firewall Settings</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-article section" id="setting-an-selinux-policy">
 <span id="kb-best-setting-selinux"></span><h1>Setting an SELinux Policy<a class="headerlink" href="#setting-an-selinux-policy" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats" id="index-0">Length: 345 words; Published: October 20, 2019; Category: Security; Type: Best Practices</p>
+<p class="article-stats" id="index-0">Length: 345 words; Published: June 24, 2015; Updated: October 20, 2019; Category: Security; Type: Best Practices</p>
 <p>Security-Enhanced Linux (SELinux) is a security module of the Linux kernel for all distributions.  It supports access control security policies.  When you first install Galera Cluster, unless you disable or configure SELinux properly, it will prevent communications between Galera nodes. In order to enable replication on the node, unless you disable SELinux, you will need a policy for Galera so that SELinux wil recognize cluster activities as legitimate.</p>
 <p class="section-heading rubric">Recommendations</p>
 <p>To create a policy for Galera Cluster, you can first set SELinux to run in permissive mode.  Permissive mode does not block cluster activity, but it does log the actions as warnings.  You can make this change generally by editing the SELinux configuration file (e.g., <code class="docutils literal"><span class="pre">/etc/selinux/config</span></code>) to include an uncommented line like so:</p>
@@ -186,6 +203,14 @@
 </pre></div>
 </div>
 <p>Almost all Linux distributions ship with a MySQL or MariaDB policy for SELinux. The last line here enables that policy.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/selinux.html"><span class="doc">SELinux with Galera</span></a></li>
+<li><a class="reference internal" href="../documentation/firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
+<li><a class="reference internal" href="../documentation/firewalld.html"><span class="doc">Firewall Settings</span></a></li>
+</ul>
+</div>
 </div>
 
 
@@ -201,7 +226,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Knowledge Base</a><ul>
-      <li>Previous: <a href="gcache-during-state-transfers.html" title="previous chapter">Write-Set Caching during State Transfers</a></li>
+      <li>Previous: <a href="two-node-clusters.html" title="previous chapter">Two-Node Clusters</a></li>
       <li>Next: <a href="sync-transaction-before-another.html" title="next chapter">Synchronizing a Transaction Before Executing Another</a></li>
   </ul></li>
   </ul></li>

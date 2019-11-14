@@ -29,16 +29,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="WAN Latency" href="wan-latency.html" />
-    <link rel="prev" title="Detecting a Slow Node" href="detecting-slow-node.html" />
+    <link rel="next" title="Setting an SELinux Policy" href="setting-selinux-policy.html" />
+    <link rel="prev" title="Multi-Master Setup" href="multi-master-setup.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -163,9 +166,24 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="two-node-clusters">
 <span id="kb-best-two-node-clusters"></span><h1>Two-Node Clusters<a class="headerlink" href="#two-node-clusters" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 880 words; Published: October 22, 2019; Category: Topology; Type: Best Practices</p>
+<p class="article-stats">Length: 880 words; Published: June 24, 2015; Updated: October 22, 2019; Category: Topology; Type: Best Practices</p>
 <p>When using Galera Cluster, it&#8217;s recommended that the cluster have at least three nodes.  However, some DBAs would prefer to use only two nodes.  This could be because their budget doesn&#8217;t allow for the cost of a third production node.  Or it could be that they are putting together a cluster for testing updates and want to minimize the effort and expense of testing.</p>
 <p>Whatever the reason for having only two nodes, there are some factors to consider, some preventive measures to take.  In a two-node cluster, when there is a conflicting pair of transactions, it could lead to a split-brain situation. Also, when one node fails, the remaining node will become non-operational. This KB article will explain how to address these possibilities.</p>
 <p class="section-heading rubric">Two Scenarios</p>
@@ -199,6 +217,14 @@ log=&quot;/var/log/garbd.log&quot;
 </pre></div>
 </div>
 <p>The node will resume processing updates, even if it suspects a split-brain situation. Enabling <a class="reference internal" href="../documentation/galera-parameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> is dangerous, though, in a multi-master setup due to the risk for split-brain situations.  However, it does simplify things in master-slave clusters—especially in situations with only two nodes.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.boostrap</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-parameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a></li>
+<li><a class="reference internal" href="../documentation/arbitrator.html#arbitrator"><span class="std std-ref">Arbitrator</span></a></li>
+</ul>
+</div>
 </div>
 
 
@@ -214,8 +240,8 @@ log=&quot;/var/log/garbd.log&quot;
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Knowledge Base</a><ul>
-      <li>Previous: <a href="detecting-slow-node.html" title="previous chapter">Detecting a Slow Node</a></li>
-      <li>Next: <a href="wan-latency.html" title="next chapter">WAN Latency</a></li>
+      <li>Previous: <a href="multi-master-setup.html" title="previous chapter">Multi-Master Setup</a></li>
+      <li>Next: <a href="setting-selinux-policy.html" title="next chapter">Setting an SELinux Policy</a></li>
   </ul></li>
   </ul></li>
 </ul>

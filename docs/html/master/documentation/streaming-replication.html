@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -159,8 +162,24 @@
 <li><a class="reference internal" href="#sr-limit"><span class="std std-ref">Limitations</span></a></li>
 <li><a class="reference internal" href="using-sr.html#usr-hot-records"><span class="std std-ref">Streaming Replication</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="streaming-replication">
 <span id="id1"></span><h1>Streaming Replication<a class="headerlink" href="#streaming-replication" title="Permalink to this headline">¶</a></h1>
@@ -196,6 +215,13 @@
 <p class="sub-heading rubric" id="limit-rollback">Performance During Rollbacks</p>
 <p>Occasionally, you may encounter situations in which the cluster needs to roll back a transaction while <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a> is in use.  In these situations, the rollback operation consumes system resources on all nodes.</p>
 <p>When long-running write transactions frequently need to be rolled back, this can become a performance problem.  Therefore, it&#8217;s a good application design policy to use shorter transactions whenever possible.  In the event that your application performs batch processing or scheduled housekeeping tasks, consider splitting these into smaller transactions in addition to using Streaming Replication.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#sr-limit"><span class="std std-ref">Limitations</span></a></li>
+<li><a class="reference internal" href="using-sr.html#usr-hot-records"><span class="std std-ref">Streaming Replication</span></a></li>
+</ul>
+</div>
 </div>
 
 

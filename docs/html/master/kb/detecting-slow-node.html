@@ -29,16 +29,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Two-Node Clusters" href="two-node-clusters.html" />
-    <link rel="prev" title="Single Master Setup" href="single-master-setup.html" />
+    <link rel="next" title="WAN Latency" href="wan-latency.html" />
+    <link rel="prev" title="Setting Parallel Slave Threads" href="parallel-slave-threads.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -160,15 +163,29 @@
 <li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a></li>
 <li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-article section" id="detecting-a-slow-node">
 <span id="kb-best-detecting-slow-node"></span><h1>Detecting a Slow Node<a class="headerlink" href="#detecting-a-slow-node" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 297 words; Published: October 22, 2019; Category: Performance; Type: Best Practices</p>
+<p class="article-stats">Length: 297 words; Published: April 1, 2014; Updated: October 22, 2019; Category: Performance; Type: Best Practices</p>
 <p>By design, the performance of a cluster cannot be higher than the performance of the slowest node in the cluster. Even if you have only one node, its performance can be considerably slower when compared with running the same server in a standalone mode (i.e., without a wsrep Provider).</p>
 <p>This is particularly true for large transactions&#8212;even if they are within transaction size limits. This is why it&#8217;s important to be able to detect a slow node on a cluster.</p>
-<p class="kb rubric">Scenario</p>
+<p class="section-heading rubric">Scenario</p>
 <p id="finding-slow-nodes">Suppose you suspect that your cluster is running slowly, that transactions are slow to commit to all nodes. However, you&#8217;re not sure which node is the slowest.</p>
 <p>There are two status variables you can use to find slow nodes in a cluster: <a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a> and <a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a>. Check these status variables on each node in a cluster.  The node that returns the highest value is the slowest one.  Lower values are preferable.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">GLOBAL_STATUS</span>
@@ -185,6 +202,13 @@
 </div>
 <p>The <code class="docutils literal"><span class="pre">wsrep_flow_control_sent</span></code> variable provides the number of times a node sent a pause event due to flow control since the last status query. The <code class="docutils literal"><span class="pre">wsrep_local_recv_queue_avg</span></code> varaible returns an average of the received queue length since the last status query. Nodes that return values much higher than <code class="docutils literal"><span class="pre">0.0</span></code> indicate that it cannot apply write-sets as fast as they are received and can generate replication throttling.</p>
 <p>Check these status variables on each node in your cluster.  The node that returns the highest value is the slowest node.  Lower values are preferable.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a></li>
+</ul>
+</div>
 </div>
 
 
@@ -200,8 +224,8 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Knowledge Base</a><ul>
-      <li>Previous: <a href="single-master-setup.html" title="previous chapter">Single Master Setup</a></li>
-      <li>Next: <a href="two-node-clusters.html" title="next chapter">Two-Node Clusters</a></li>
+      <li>Previous: <a href="parallel-slave-threads.html" title="previous chapter">Setting Parallel Slave Threads</a></li>
+      <li>Next: <a href="wan-latency.html" title="next chapter">WAN Latency</a></li>
   </ul></li>
   </ul></li>
 </ul>

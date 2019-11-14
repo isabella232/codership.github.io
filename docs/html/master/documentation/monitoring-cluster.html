@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -174,8 +177,24 @@
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-ready"><span class="std std-ref">wsrep_ready</span></a></li>
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="using-status-variables">
 <span id="monitoring-cluster"></span><h1>Using Status Variables<a class="headerlink" href="#using-status-variables" title="Permalink to this headline">¶</a></h1>
@@ -378,6 +397,29 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">In addition to this status variable, you can also use <a class="reference internal" href="galera-status-variables.html#wsrep-local-send-queue-max"><span class="std std-ref">wsrep_local_send_queue_max</span></a> and <a class="reference internal" href="galera-status-variables.html#wsrep-local-send-queue-min"><span class="std std-ref">wsrep_local_send_queue_min</span></a> to see the maximum and minimum sizes the node recorded for the local send queue.</p>
+</div>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="notification-cmd.html"><span class="doc">Notification Command</span></a></li>
+<li><a class="reference internal" href="quorum-reset.html"><span class="doc">Reset Quorum</span></a></li>
+<li><a class="reference internal" href="#check-node-status"><span class="std std-ref">checking node status</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-conf-id"><span class="std std-ref">wsrep_cluster_conf_id</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-cluster-name"><span class="std std-ref">wsrep_cluster_name</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-state-uuid"><span class="std std-ref">wsrep_cluster_state_uuid</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-connected"><span class="std std-ref">wsrep_connected</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-send-queue-avg"><span class="std std-ref">wsrep_local_send_queue_avg</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-state-comment"><span class="std std-ref">wsrep_local_state_comment</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-recv-queue-avg"><span class="std std-ref">wsrep_local_recv_queue_avg</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-recv-queue-max"><span class="std std-ref">wsrep_local_recv_queue_max</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-recv-queue-min"><span class="std std-ref">wsrep_local_recv_queue_min</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-ready"><span class="std std-ref">wsrep_ready</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a></li>
+</ul>
 </div>
 </div>
 

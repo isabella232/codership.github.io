@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -164,6 +167,19 @@
 <li><a class="reference internal" href="../videos/galera-backup.html"><span class="doc">Galera Back-Ups (video)</span></a></li>
 </ul>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-article section" id="making-back-ups-with-galera-cluster">
 <span id="galera-backup"></span><h1>Making Back-Ups with Galera Cluster<a class="headerlink" href="#making-back-ups-with-galera-cluster" title="Permalink to this headline">¶</a></h1>
@@ -350,6 +366,16 @@ tar -czf $backup_dir/$backup_today.tgz * --transform &quot;s,^,$backup_today/,&q
 <p>This one option, <code class="docutils literal"><span class="pre">--cfg</span></code> is to give the path and name of the Galera Arbitrator configuration file.  The daemon will read it before doing anything.</p>
 <p class="section-heading rubric">Conclusion</p>
 <p>Those are the primary ways in which DBAs can make back-ups when using Galera Cluster. There are some third-party software that provide some more advanced methods (e.g., XtraBackup).  But these are the more straightforward and most common methods.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Galera</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../videos/galera-backup.html"><span class="doc">Galera Back-Ups (video)</span></a></li>
+</ul>
+</div>
 </div>
 
 

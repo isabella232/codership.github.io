@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -166,8 +169,24 @@
 <li><a class="reference internal" href="sst-physical.html#sst-physical-xtrabackup"><span class="std std-ref">xtrabackup</span></a></li>
 <li><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="state-snapshot-transfers">
 <span id="sst"></span><h1>State Snapshot Transfers<a class="headerlink" href="#state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
@@ -225,6 +244,20 @@
 </pre></div>
 </div>
 <p>There is no single best method for State Snapshot Transfers.  You must decide which suits your particular needs and cluster deployment.  Fortunately, you need only set the method on the receiving node.  So long as the donor has support, it serves the transfer in whatever method the joiner requests.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a></li>
+<li><a class="reference internal" href="mysqldump.html#mysqldump"><span class="std std-ref">mysqldump</span></a>&#8220;</li>
+<li><a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical</span></a></li>
+<li><a class="reference internal" href="sst-physical.html#sst-physical-rsync"><span class="std std-ref">rsync</span></a></li>
+<li><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></li>
+<li><a class="reference internal" href="sst-physical.html#sst-physical-xtrabackup"><span class="std std-ref">xtrabackup</span></a></li>
+<li><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></li>
+</ul>
+</div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="sst-logical.html">Logical State Snapshot</a></li>

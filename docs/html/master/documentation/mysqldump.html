@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -159,8 +162,24 @@
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="enabling-mysqldump">
 <span id="mysqldump"></span><h1>Enabling <code class="docutils literal"><span class="pre">mysqldump</span></code><a class="headerlink" href="#enabling-mysqldump" title="Permalink to this headline">¶</a></h1>
@@ -194,12 +213,19 @@
 </div>
 <p>You would, of course, modify the text above to use your user names, IP addresses, and passwords. These SQL statements will grant each node in the cluster access to the database server on this node.  You need to run these SQL statements on each node to allow <code class="docutils literal"><span class="pre">mysqldump</span></code> in state transfers among them.</p>
 <p>If you have not yet created the cluster, you can stop the database server while you configure the other nodes.  To stop MySQL on servers that use <code class="docutils literal"><span class="pre">init</span></code>, run the execute the following from the command-line:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql stop
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">service mysql stop</span>
 </pre></div>
 </div>
 <p>For servers that use <code class="docutils literal"><span class="pre">systemd</span></code>, you would execute the following from the command-line to shutdown MySQL:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl stop mysql
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">systemctl stop mysql</span>
 </pre></div>
+</div>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a></li>
+</ul>
 </div>
 </div>
 

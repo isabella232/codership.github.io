@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -162,17 +165,32 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="customizing-the-write-set-cache-size">
 <span id="kb-best-customizing-gcache-size"></span><h1>Customizing the Write-Set Cache Size<a class="headerlink" href="#customizing-the-write-set-cache-size" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 467 words; Published: October 22, 2019; Category: Performance; Type: Best Practices</p>
+<p class="article-stats">Length: 467 words; Published: June 24, 2015; Updated: October 22, 2019; Category: Performance; Type: Best Practices</p>
 <p>You can define the size of the write-set cache using the <a class="reference internal" href="../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter.  The set the size to one less than that of the data directory.</p>
-<p class="kb rubric">Scenario</p>
+<p class="section-heading rubric">Scenario</p>
 <p>If you have storage issues, there are some guidelines to consider in adjusting this issue.  For example, your preferred state snapshot method.  <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code> copy the InnoDB log files, while <code class="docutils literal"><span class="pre">mysqldump</span></code> does not.  So, if you use <code class="docutils literal"><span class="pre">mysqldump</span></code> for state snapshot transfers, you can subtract the size of the log files from your calculation of the data directory size.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Incremental State Transfers (IST) copies the database five times faster over <code class="docutils literal"><span class="pre">mysqldump</span></code> and about 50% faster than <code class="docutils literal"><span class="pre">xtrabackup</span></code>.  Meaning that your cluster can handle relatively large write-set caches.  However, bear in mind that you cannot provision a server with Incremental State Transfers.</p>
 </div>
-<p class="kb rubric">Recommendations</p>
+<p class="section-heading rubric">Recommendations</p>
 <p>As a general rule, start with the data directory size, including any possible links, then subtract the size of the ring buffer storage file, which is called <code class="docutils literal"><span class="pre">galera.cache</span></code> by default.</p>
 <p>If storage remains an issue, you can further refine these calculations with the database write rate.  The write rate indicates the tail length that the cluster stores in the write-set cache.</p>
 <p>You can calculate this using the <a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a> status variable.</p>
@@ -201,6 +219,13 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Consider these configuration tips as guidelines only. For example, in cases where you must avoid state snapshot transfers as much as possible, you may end up using a much larger write-set cache than suggested above.</p>
+</div>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a></li>
+</ul>
 </div>
 </div>
 

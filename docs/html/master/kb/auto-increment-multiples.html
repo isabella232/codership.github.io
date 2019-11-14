@@ -29,16 +29,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Commit Failed for Reason 3" href="resolve-commit-failure.html" />
+    <link rel="next" title="Deadlock Found during a Transaction" href="deadlock-found.html" />
     <link rel="prev" title="User Changes not Replicating" href="user-changes.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -161,6 +164,21 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="auto-increment-increasing-by-multiples">
 <span id="kb-trouble-auto-increment-multiples"></span><h1>AUTO_INCREMENT Increasing by Multiples<a class="headerlink" href="#auto-increment-increasing-by-multiples" title="Permalink to this headline">¶</a></h1>
 <p class="article-stats">Length: 995 words; Published: October 22, 2019; Category: Schema &amp; SQL; Type: Troubleshooting</p>
@@ -182,8 +200,10 @@
 </pre></div>
 </div>
 <p>As you can see, the first column, called <code class="docutils literal"><span class="pre">toy_id</span></code>, uses auto_increment.  Let&#8217;s see what happens when three rows of data are inserted into the table.  Keep in mind that this is a new table which has never contained data.</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">toys</span> <span class="k">VALUES</span><span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Baseball&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">15</span><span class="p">),</span>
-<span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Frisbee&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">.</span><span class="mi">45</span><span class="p">),</span> <span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Slinky&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">95</span><span class="p">);</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">toys</span>
+<span class="k">VALUES</span><span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Baseball&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">15</span><span class="p">),</span>
+<span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Frisbee&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">.</span><span class="mi">45</span><span class="p">),</span>
+<span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Slinky&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">.</span><span class="mi">95</span><span class="p">);</span>
 
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">toys</span><span class="p">;</span>
 
@@ -249,8 +269,10 @@
 </div>
 <p>You can see here that the auto_increment_offset on this node differs from the third node in the cluster.  On the second node in the cluster, it has a value of 2.</p>
 <p>Let&#8217;s add three more rows to the table, but this time from the first node:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">toys</span> <span class="k">VALUES</span><span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Ping Pong Paddle&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">.</span><span class="mi">95</span><span class="p">),</span>
-<span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Gumby &amp; Pokey&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="mi">25</span><span class="p">),</span> <span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Etch-A-Sketch&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">.</span><span class="mi">25</span><span class="p">);</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">toys</span>
+<span class="k">VALUES</span><span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Ping Pong Paddle&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">.</span><span class="mi">95</span><span class="p">),</span>
+<span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Gumby &amp; Pokey&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">.</span><span class="mi">25</span><span class="p">),</span>
+<span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Etch-A-Sketch&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">.</span><span class="mi">25</span><span class="p">);</span>
 
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">toys</span><span class="p">;</span>
 
@@ -268,7 +290,8 @@
 </div>
 <p>Notice that the first new row has a <code class="docutils literal"><span class="pre">toy_id</span></code> of 10, which matches the <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> value for the table.  For the next row, it jumps to 13, and then 16.  It doesn&#8217;t have the symetry of the results of the first <code class="docutils literal"><span class="pre">INSERT</span></code> statement, but it&#8217;s logical.</p>
 <p>Let&#8217;s insert two more rows, but on the second node:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">toys</span> <span class="k">VALUES</span><span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Tonka Dump Truck&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">24</span><span class="p">.</span><span class="mi">95</span><span class="p">),</span>
+<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">toys</span>
+<span class="k">VALUES</span><span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Tonka Dump Truck&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">24</span><span class="p">.</span><span class="mi">95</span><span class="p">),</span>
 <span class="p">(</span><span class="no">NULL</span><span class="p">,</span> <span class="s1">&#39;Airport Playset&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">.</span><span class="mi">95</span><span class="p">);</span>
 
 <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">toys</span> <span class="k">LIMIT</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">;</span>
@@ -283,6 +306,12 @@
 </div>
 <p>To save space, we used the <code class="docutils literal"><span class="pre">LIMIT</span></code> clause to select the last two rows, the two new rows inserted.  As you can see, the second node used the next <code class="docutils literal"><span class="pre">toy_id</span></code> in the sequence (i.e., 17) and then just three just in case the other two nodes were inserting rows.</p>
 <p>The result of setting the value of <code class="docutils literal"><span class="pre">auto_increment_increment</span></code> to the number of nodes, and the <code class="docutils literal"><span class="pre">auto_increment_offset</span></code> from 1 to the number of nodes, is that there will be no conflicts between the nodes.  Just don&#8217;t manually change the value of these two variables or use <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code> to change the value of AUTO_INCREMENT for any table.  That would cause problems.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a></li>
+</ul>
+</div>
 </div>
 
 
@@ -299,7 +328,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Knowledge Base</a><ul>
       <li>Previous: <a href="user-changes.html" title="previous chapter">User Changes not Replicating</a></li>
-      <li>Next: <a href="resolve-commit-failure.html" title="next chapter">Commit Failed for Reason 3</a></li>
+      <li>Next: <a href="deadlock-found.html" title="next chapter">Deadlock Found during a Transaction</a></li>
   </ul></li>
   </ul></li>
 </ul>

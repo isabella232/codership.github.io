@@ -29,16 +29,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Detecting a Slow Node" href="detecting-slow-node.html" />
-    <link rel="prev" title="Setting Parallel Slave Threads" href="parallel-slave-threads.html" />
+    <link rel="next" title="Multi-Master Setup" href="multi-master-setup.html" />
+    <link rel="prev" title="Write-Set Caching during State Transfers" href="gcache-during-state-transfers.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -157,11 +160,26 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="single-master-setup">
 <span id="kb-best-single-master-setup"></span><h1>Single Master Setup<a class="headerlink" href="#single-master-setup" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 81 words; Published: October 22, 2019; Category: Topology; Type: Best Practices</p>
+<p class="article-stats">Length: 81 words; Published: June 24, 2015; Updated: October 22, 2019; Category: Topology; Type: Best Practices</p>
 <p>If a cluster uses only one node as a master, there are certain requirements (e.g., the slave queue size) that can be relaxed.</p>
-<p class="kb rubric">Recommendations</p>
+<p class="section-heading rubric">Recommendations</p>
 <p>To relax flow control, you might use the settings below:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;gcs.fc_limit = 256;</span>
 <span class="s">                          gcs.fc_factor = 0.99;</span>
@@ -188,8 +206,8 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Knowledge Base</a><ul>
-      <li>Previous: <a href="parallel-slave-threads.html" title="previous chapter">Setting Parallel Slave Threads</a></li>
-      <li>Next: <a href="detecting-slow-node.html" title="next chapter">Detecting a Slow Node</a></li>
+      <li>Previous: <a href="gcache-during-state-transfers.html" title="previous chapter">Write-Set Caching during State Transfers</a></li>
+      <li>Next: <a href="multi-master-setup.html" title="next chapter">Multi-Master Setup</a></li>
   </ul></li>
   </ul></li>
 </ul>

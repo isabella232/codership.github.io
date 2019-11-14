@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -155,9 +158,20 @@
 <li><p class="first"><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></p>
 </li>
 </ul>
-<p>Related Documents</p>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-article section" id="to-sst-or-not-to-sst">
 <span id="sst-or-not"></span><h1>To SST or Not To SST?<a class="headerlink" href="#to-sst-or-not-to-sst" title="Permalink to this headline">¶</a></h1>
@@ -225,8 +239,8 @@ First, the joining node establishes its current replication position and compare
 </div>
 <p class="section-heading rubric">Catch-Up</p>
 <p>After the joiner has received a State Transfer, it must also catch up with any transactions that were issued on the rest of the cluster while the State Transfer was in progress. Those transactions are continuously received by the joiner and stored in the gcache. As soon as the state transfer completes, the donor needs to apply them all.</p>
-<p>An attentive reader may ask &#8220;What happens if the joining node is never able to catch up because there are too many new transactions? Will flow-control kick in?&#8221;. The answer is yes, however rather than applying flow control immediately and stopping the entire cluster in its tracks until the catch-up phase is complete, Galera uses a heuristics to determine when throttling is required.
-If the node is able to make progress towards catching up, as evidenced by a decreasing length of its receive queue, no flow control will kick in. However, if the node begins to fall further behind and the queue continues to grow, the cluster will be throttled so that the node is given some breathing room. This way the entire procedure for joining a new node is guaranteed to complete even in the presence of continuing load on the database.</p>
+<p>An attentive reader may ask &#8220;What happens if the joining node is never able to catch up because there are too many new transactions? Will flow-control kick in?&#8221;. The answer is yes, however rather than applying flow control immediately and stopping the entire cluster in its tracks until the catch-up phase is complete, Galera uses a heuristics to determine when throttling is required.</p>
+<p>If the node is able to make progress towards catching up, as evidenced by a decreasing length of its receive queue, no flow control will kick in. However, if the node begins to fall further behind and the queue continues to grow, the cluster will be throttled so that the node is given some breathing room. This way the entire procedure for joining a new node is guaranteed to complete even in the presence of continuing load on the database.</p>
 </div>
 
 

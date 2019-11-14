@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -164,8 +167,20 @@
 <li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a></li>
 <li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-article section" id="replication-configuration">
 <span id="wsrep-configuration"></span><h1>Replication Configuration<a class="headerlink" href="#replication-configuration" title="Permalink to this headline">¶</a></h1>
@@ -224,6 +239,17 @@
 </div>
 <p>In this example, the <code class="docutils literal"><span class="pre">segment</span></code> option for <code class="docutils literal"><span class="pre">gcomm</span></code> and the <code class="docutils literal"><span class="pre">max_install_timeouts</span></code> option for <code class="docutils literal"><span class="pre">evs</span></code> are set.</p>
 <p>Incidentally, if the listen address and port are not set in the parameter list, <code class="docutils literal"><span class="pre">gcomm</span></code> will listen on all interfaces.  The listen port will be taken from the cluster address.  If it&#8217;s not specified in the cluster address, the default port is <code class="docutils literal"><span class="pre">4567</span></code>.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-name"><span class="std std-ref">wsrep_cluster_name</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+</ul>
+</div>
 </div>
 
 

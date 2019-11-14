@@ -29,16 +29,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Setting an SELinux Policy" href="setting-selinux-policy.html" />
+    <link rel="next" title="Single Master Setup" href="single-master-setup.html" />
     <link rel="prev" title="Customizing the Write-Set Cache Size" href="customizing-gcache-size.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -161,17 +164,38 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="write-set-caching-during-state-transfers">
 <span id="kb-best-gcache-during-state-transfers"></span><h1>Write-Set Caching during State Transfers<a class="headerlink" href="#write-set-caching-during-state-transfers" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats" id="index-0">Length: 156 words; Published: October 22, 2019; Category: Performance; Type: Best Practices</p>
+<p class="article-stats" id="index-0">Length: 156 words; Published: June 24, 2015; Updated: October 22, 2019; Category: Performance; Type: Best Practices</p>
 <p>Under normal operations, nodes do not consume much more memory than the regular standalone MySQL database server.  The certification index and uncommitted write-sets do cause some additional usage, but in typical applications this is not usually noticeable. Write-set caching during state transfers is the exception.</p>
-<p class="kb rubric">Scenario</p>
+<p class="section-heading rubric">Scenario</p>
 <p>When a node receives a state transfer, it cannot process or apply incoming write-sets as it does not yet have a state to apply them to.  Depending on the state transfer method, (<code class="docutils literal"><span class="pre">mysqldump</span></code>, for instance), the sending node may also be unable to apply write-sets.</p>
-<p class="kb rubric">Recommendations</p>
+<p class="section-heading rubric">Recommendations</p>
 <p>The Write-set Cache, (or GCache), caches write-sets on memory-mapped files to disk and Galera Cluster allocates these files as needed.  In other words, the only limit for the cache is the available disk space.  Writing to disk in turn reduces memory consumption.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information on configuring write-set caching to improve performance, see <a class="reference internal" href="../documentation/managing-fc.html#configuring-fc"><span class="std std-ref">Configuring Flow Control</span></a>.</p>
+</div>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/managing-fc.html#configuring-fc"><span class="std std-ref">Configuring Flow Control</span></a></li>
+</ul>
 </div>
 </div>
 
@@ -189,7 +213,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Knowledge Base</a><ul>
       <li>Previous: <a href="customizing-gcache-size.html" title="previous chapter">Customizing the Write-Set Cache Size</a></li>
-      <li>Next: <a href="setting-selinux-policy.html" title="next chapter">Setting an SELinux Policy</a></li>
+      <li>Next: <a href="single-master-setup.html" title="next chapter">Single Master Setup</a></li>
   </ul></li>
   </ul></li>
 </ul>

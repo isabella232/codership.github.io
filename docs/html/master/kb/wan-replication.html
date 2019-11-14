@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -163,11 +166,26 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="wan-replication">
 <span id="kb-best-wan-replication"></span><h1>WAN Replication<a class="headerlink" href="#wan-replication" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 161 words; Published: October 22, 2019; Category: Performance; Type: Best Practices</p>
+<p class="article-stats">Length: 161 words; Published: June 24, 2015; Updated: October 22, 2019; Category: Performance; Type: Best Practices</p>
 <p>When running the cluster over a <abbr title="Wide Area Network">WAN</abbr>, you may frequently experience transient network connectivity failures.  To prevent this from partitioning the cluster, you may want to increase the <em>keepalive</em> timeouts.</p>
-<p class="kb rubric">Recommendations</p>
+<p class="section-heading rubric">Recommendations</p>
 <p>The following parameters can tolerate 30 second connectivity outages:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;evs.keepalive_period = PT3S;</span>
 <span class="s">                              evs.suspect_timeout = PT30S;</span>
@@ -185,6 +203,14 @@
 <li>You must set the <a class="reference internal" href="../documentation/galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> parameter to a value higher than that of the <a class="reference internal" href="../documentation/galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter.</li>
 <li>You must set the <a class="reference internal" href="../documentation/galera-parameters.html#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a> parameter to a value higher than the value of the <a class="reference internal" href="../documentation/galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a> parameter.</li>
 </ul>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-parameters.html#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a></li>
+</ul>
+</div>
 </div>
 
 

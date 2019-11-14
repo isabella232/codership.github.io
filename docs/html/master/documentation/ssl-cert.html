@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -158,8 +161,24 @@
 <ul class="simple">
 <li><a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="ssl-certificates">
 <span id="ssl-cert"></span><h1>SSL Certificates<a class="headerlink" href="#ssl-certificates" title="Permalink to this headline">¶</a></h1>
@@ -179,13 +198,13 @@
 <p>To create the CA key and cert, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Generate the CA key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl genrsa <span class="m">2048</span> &gt; ca-key.pem
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl genrsa 2048 &gt; ca-key.pem</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Using the CA key, generate the CA certificate.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl req -new -x509 -nodes -days <span class="m">365000</span> <span class="se">\</span>
-      -key ca-key.pem -out ca-cert.pem
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl req -new -x509 -nodes -days 365000 \</span>
+<span class="go">      -key ca-key.pem -out ca-cert.pem</span>
 </pre></div>
 </div>
 </li>
@@ -195,20 +214,20 @@
 <p>The node uses the server certificate to secure both the database server activity and replication traffic from Galera Cluster.</p>
 <ol class="arabic">
 <li><p class="first">Create the server key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl req -newkey rsa:2048 -days <span class="m">365000</span> <span class="se">\</span>
-      -nodes -keyout server-key.pem -out server-req.pem
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl req -newkey rsa:2048 -days 365000 \</span>
+<span class="go">      -nodes -keyout server-key.pem -out server-req.pem</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Process the server RSA key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl rsa -in server-key.pem -out server-key.pem
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl rsa -in server-key.pem -out server-key.pem</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Sign the server certificate.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl x509 -req -in server-req.pem -days <span class="m">365000</span> <span class="se">\</span>
-      -CA ca-cert.pem -CAkey ca-key.pem -set_serial <span class="m">01</span> <span class="se">\</span>
-      -out server-cert.pem
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl x509 -req -in server-req.pem -days 365000 \</span>
+<span class="go">      -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 \</span>
+<span class="go">      -out server-cert.pem</span>
 </pre></div>
 </div>
 </li>
@@ -218,20 +237,20 @@
 <p>The node uses the client certificate to secure client-side activity.  In the event that you prefer physical transfer methods for state snapshot transfers, <code class="docutils literal"><span class="pre">rsync</span></code> for instance, the node also uses this key and certificate to secure <code class="docutils literal"><span class="pre">stunnel</span></code>.</p>
 <ol class="arabic">
 <li><p class="first">Create the client key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl req -newkey rsa:2048 -days <span class="m">365000</span> <span class="se">\</span>
-      -nodes -keyout client-key.pem -out client-req.pem
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl req -newkey rsa:2048 -days 365000 \</span>
+<span class="go">      -nodes -keyout client-key.pem -out client-req.pem</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Process client RSA key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl rsa -in client-key.pem -out client-key.pem
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl rsa -in client-key.pem -out client-key.pem</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Sign the client certificate.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl x509 -req -in client-req.pem -days <span class="m">365000</span> <span class="se">\</span>
-      -CA ca-cert.pem -CAkey ca-key.pem -set_serial <span class="m">01</span> <span class="se">\</span>
-      -out client-cert.pem
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl x509 -req -in client-req.pem -days 365000 \</span>
+<span class="go">      -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 \</span>
+<span class="go">      -out client-cert.pem</span>
 </pre></div>
 </div>
 </li>
@@ -239,8 +258,8 @@
 <p>This creates a key and certificate file for the database client.  They are in the current working directory as <code class="docutils literal"><span class="pre">client-key.pem</span></code> and <code class="docutils literal"><span class="pre">client-cert.pem</span></code>.  Each node requires both to secure client activity and state snapshot transfers.</p>
 <p class="section-heading rubric" id="verify-cert">Verifying the Certificates</p>
 <p>When you finish creating the key and certificate files, use <code class="docutils literal"><span class="pre">openssl</span></code> to verify that they were generated correctly:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> openssl verify -CAfile ca-cert.pem <span class="se">\</span>
-      server-cert.pem client-cert.pem
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl verify -CAfile ca-cert.pem \</span>
+<span class="go">      server-cert.pem client-cert.pem</span>
 
 <span class="go">server-cert.pem: OK</span>
 <span class="go">client-cert.pem: OK</span>
@@ -254,6 +273,12 @@
 <li>Client Certificate: <code class="docutils literal"><span class="pre">client-key.pem</span></code> and <code class="docutils literal"><span class="pre">client-cert.pem</span></code>.</li>
 </ul>
 <p>Place these files in the <code class="docutils literal"><span class="pre">/etc/mysql/certs</span></code> directory of each node, or a similar location where you can find them later in configuring the cluster to use <abbr title="Secure Socket Layer">SSL</abbr>.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a></li>
+</ul>
+</div>
 </div>
 
 

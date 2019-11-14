@@ -31,15 +31,18 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Streaming Replication" href="streaming-replication.html" />
-    <link rel="prev" title="Node Failure and Recovery" href="recovery.html" />
+    <link rel="prev" title="Node Failure &amp; Recovery" href="recovery.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -161,8 +164,24 @@
 <li><a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a></li>
 <li><a class="reference internal" href="quorum-reset.html"><span class="doc">Reset Quorum</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="quorum-components">
 <span id="id1"></span><h1>Quorum Components<a class="headerlink" href="#quorum-components" title="Permalink to this headline">¶</a></h1>
@@ -265,6 +284,15 @@ Secondary Site:
 </pre></div>
 </div>
 <p>Under this pattern, some nodes are located at the primary site while others are at the secondary site.  In the event that the secondary site goes down or if network connectivity is lost between the sites, the nodes at the primary site remain the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Additionally, either <code class="docutils literal"><span class="pre">node1</span></code> or <code class="docutils literal"><span class="pre">node2</span></code> can crash without the rest of the nodes becoming non-primary components.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></li>
+<li><a class="reference internal" href="arbitrator.html"><span class="doc">Galera Arbitrator</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a></li>
+<li><a class="reference internal" href="quorum-reset.html"><span class="doc">Reset Quorum</span></a></li>
+</ul>
+</div>
 </div>
 
 
@@ -281,7 +309,7 @@ Secondary Site:
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Documentation</a><ul>
   <li><a href="technical-description.html">Technical Description</a><ul>
-      <li>Previous: <a href="recovery.html" title="previous chapter">Node Failure and Recovery</a></li>
+      <li>Previous: <a href="recovery.html" title="previous chapter">Node Failure &amp; Recovery</a></li>
       <li>Next: <a href="streaming-replication.html" title="next chapter">Streaming Replication</a></li>
   </ul></li>
   </ul></li>

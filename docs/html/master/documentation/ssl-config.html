@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -166,8 +169,24 @@
 <li><a class="reference internal" href="galera-parameters.html#socket-checksum"><span class="std std-ref">socket.checksum</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="ssl-configuration">
 <span id="ssl-config"></span><h1>SSL Configuration<a class="headerlink" href="#ssl-configuration" title="Permalink to this headline">¶</a></h1>
@@ -232,6 +251,20 @@
 <p>Using the <a class="reference internal" href="galera-parameters.html#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a> parameter, one can override the default <abbr title="Secure Sockets Layer">SSL</abbr> cipher the node uses to encrypt replication traffic.  Galera Cluster uses whatever ciphers are available to the <abbr title="Secure Sockets Layer">SSL</abbr> implementation installed on the nodes. For instance, if you install OpenSSL on your node, Galera Cluster can use any cipher supported by OpenSSL, as well as use filters to ensure that &#8220;weak&#8221; algorithms are not accepted on connection handshake.</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;socket.ssl_cipher=ALL:!EXP:!NULL:!ADH:!LOW:!SSLv2:!SSLv3:!MD5:!RC4:!RSA&quot;</span>
 </pre></div>
+</div>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a></li>
+<li><a class="reference internal" href="ssl-sst.html"><span class="doc">SSL for State Snapshot Transfers</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-cert"><span class="std std-ref">socket.ssl_cert</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-ca"><span class="std std-ref">socket.ssl_ca</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-checksum"><span class="std std-ref">socket.checksum</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a></li>
+</ul>
 </div>
 </div>
 

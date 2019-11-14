@@ -37,10 +37,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -160,8 +163,24 @@
 <li><a class="reference internal" href="backup-cluster.html"><span class="doc">Backing Up Cluster Data</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="galera-arbitrator">
 <span id="arbitrator"></span><h1>Galera Arbitrator<a class="headerlink" href="#galera-arbitrator" title="Permalink to this headline">¶</a></h1>
@@ -273,6 +292,13 @@ LOG_FILE=&quot;/var/log/garbd.log&quot;
 <p>This starts Galera Arbitrator as a service.  It uses the parameters set in the configuration file.</p>
 <p>In addition to the standard configuration, any parameter available to Galera Cluster also works with Galera Arbitrator, excepting those prefixed by <code class="docutils literal"><span class="pre">repl</span></code>.  When you start it as a service, you can set those using the <code class="docutils literal"><span class="pre">GALERA_OPTIONS</span></code> parameter.</p>
 <p>For more information on the options available to Galera Arbitrator, see <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="backup-cluster.html"><span class="doc">Backing Up Cluster Data</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+</ul>
+</div>
 </div>
 
 

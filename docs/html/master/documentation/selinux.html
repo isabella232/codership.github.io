@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -158,8 +161,24 @@
 <ul class="simple">
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="selinux-configuration">
 <span id="selinux"></span><h1>SELinux Configuration<a class="headerlink" href="#selinux-configuration" title="Permalink to this headline">¶</a></h1>
@@ -172,18 +191,18 @@
 <p>To set SELinux to permissive mode, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Using <code class="docutils literal"><span class="pre">semanage</span></code>, open the relevant ports:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> semanage port -a -t mysqld_port_t -p tcp <span class="m">4567</span>
-<span class="gp">#</span> semanage port -a -t mysqld_port_t -p tcp <span class="m">4568</span>
-<span class="gp">#</span> semanage port -a -t mysqld_port_t -p tcp <span class="m">4444</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">semanage port -a -t mysqld_port_t -p tcp 4567</span>
+<span class="go">semanage port -a -t mysqld_port_t -p tcp 4568</span>
+<span class="go">semanage port -a -t mysqld_port_t -p tcp 4444</span>
 </pre></div>
 </div>
 <p>SELinux already opens the standard MySQL port <code class="docutils literal"><span class="pre">3306</span></code>.  In the event that you use UDP in your cluster, you also need to open <code class="docutils literal"><span class="pre">4567</span></code> to those connections.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> semanage port -a -t mysqld_port_t -p udp <span class="m">4567</span>
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">semanage port -a -t mysqld_port_t -p udp 4567</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Set SELinux to permissive mode for the database server.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> semanage permissive -a mysqld_t
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">semanage permissive -a mysqld_t</span>
 </pre></div>
 </div>
 </li>
@@ -192,11 +211,11 @@
 <p class="sub-heading rubric" id="define-selinux-policy">Defining the SELinux Policy</p>
 <p>While SELinux remains in permissive mode, it continues to log activity from the database server.  In order for it to understand normal operation for the database, you need to start the database and generate routine events for SELinux to see.</p>
 <p>For servers that use <code class="docutils literal"><span class="pre">init</span></code>, start the database with the following command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service mysql start
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">service mysql start</span>
 </pre></div>
 </div>
 <p>For servers that use <code class="docutils literal"><span class="pre">systemd</span></code>, instead run this command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl mysql start
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">systemctl mysql start</span>
 </pre></div>
 </div>
 <p>You can now begin to create events for SELinux to log.  There are many ways to go about this, including:</p>
@@ -215,19 +234,19 @@
 <p>To generate and load an SELinux policy for Galera Cluster, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Using <code class="docutils literal"><span class="pre">fgrep</span></code> and <code class="docutils literal"><span class="pre">audit2allow</span></code>, create a textease file with the policy information.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> fgrep <span class="s2">&quot;mysqld&quot;</span> /var/log/audit/audit.log <span class="p">|</span> audit2allow -m MySQL_galera -o galera.te
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">fgrep &quot;mysqld&quot; /var/log/audit/audit.log | audit2allow -m MySQL_galera -o galera.te</span>
 </pre></div>
 </div>
 <p>This creates a <code class="docutils literal"><span class="pre">galera.te</span></code> file in your working directory.</p>
 </li>
 <li><p class="first">Compile the audit logs into an SELinux policy module.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> checkmodule -M -m galera.te -o galera.mod
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">checkmodule -M -m galera.te -o galera.mod</span>
 </pre></div>
 </div>
 <p>This creates a <code class="docutils literal"><span class="pre">galera.mod</span></code> file in your working directory.</p>
 </li>
 <li><p class="first">Package the compiled policy module.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> semodule_package -m galera.mod -o galera.pp.
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">semodule_package -m galera.mod -o galera.pp.</span>
 </pre></div>
 </div>
 <p>This creates a <code class="docutils literal"><span class="pre">galera.pp</span></code> file in your working directory.</p>
@@ -238,12 +257,18 @@
 </div>
 </li>
 <li><p class="first">Disable permissive mode for the database server.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> semanage permissive -d mysql_t
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">semanage permissive -d mysql_t</span>
 </pre></div>
 </div>
 </li>
 </ol>
 <p>SELinux returns to enforcement mode, now using new policies that work with Galera Cluster.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+</ul>
+</div>
 </div>
 
 

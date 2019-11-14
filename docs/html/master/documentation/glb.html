@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -166,8 +169,24 @@
 <li><a class="reference internal" href="glb-parameters.html#glb-source"><span class="std std-ref">&#8211;source</span></a></li>
 <li><a class="reference internal" href="#glb-service"><span class="std std-ref">Service Installation</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="galera-load-balancer">
 <span id="glb-doc"></span><h1>Galera Load Balancer<a class="headerlink" href="#galera-load-balancer" title="Permalink to this headline">¶</a></h1>
@@ -274,6 +293,20 @@
 <li><code class="docutils literal"><span class="pre">drain</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;</span></code> will sets the designated server to drain. When doing this, Galera Load Balancer won&#8217;t send new connections to the given server, but it also won&#8217;t kill existing connections. Instead, it waits for the connections to the specified server to end gracefully.</li>
 </ul>
 <p>When adding an IP address to Galera Load Balancer at runtime, keep in mind that it must follow the convention, <code class="docutils literal"><span class="pre">IP</span> <span class="pre">Address:port:weight</span></code>.  A hostname may be used instead of an IP address.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#glb-use"><span class="std std-ref">Using Galera Load Balancer</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-default-targets"><span class="std std-ref">DEFAULT_TARGETS</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-round"><span class="std std-ref">&#8211;round</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-single"><span class="std std-ref">&#8211;single</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-random"><span class="std std-ref">&#8211;random</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-source"><span class="std std-ref">&#8211;source</span></a></li>
+<li><a class="reference internal" href="#glb-service"><span class="std std-ref">Service Installation</span></a></li>
+</ul>
+</div>
 </div>
 
 

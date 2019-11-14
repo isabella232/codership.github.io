@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -163,9 +166,24 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="synchronizing-a-transaction-before-executing-another">
 <span id="kb-best-sync-transaction-first"></span><h1>Synchronizing a Transaction Before Executing Another<a class="headerlink" href="#synchronizing-a-transaction-before-executing-another" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 391 words; Published: October 22, 2019; Category: Schema &amp; SQL; Type: Best Practices</p>
+<p class="article-stats">Length: 391 words; Published: May 30, 2019; Updated: October 22, 2019; Category: Schema &amp; SQL; Type: Best Practices</p>
 <p>There are times in which a user—or an application—will perform complex tasks, to add and change data dynamically and contingent upon whatever factors might be important to the user. Along these lines, someone or an application may enter a transaction, but may not want it commited until a previous transaction has been committed.  This can be a bit tricky, especially when a cluster is using a load balancer:  The second transaction may have be sent to a different node than the first.  If that happens, the user will have difficulty being sure that the second node has already replicated the first transaction. Fortunately, there are now some Galera functions that can help.</p>
 <p>Prior to version 4.0 of Galera Cluster, you could use the <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a> session variable to wait for the node to be synchronized before executing a transaction.  It would cause the node to enable causality checks, holding any new queries until the database server is synchronized with all updates that were made prior to the start of the current transaction. While this method does ensure that the node reaches the most up-to-date state before executing a query, it also means that the node may be waiting to receive updates that might have nothing to do with a query it&#8217;s waiting to execute. If those unrealted queries are large and time consuming, the pending transaction will be significantly delayed and the apparent performce will be reduced.</p>
 <p>Beginning with version 4.0 of Galera Cluster, you can use Galera functions to make transactions contingent upon a specific transaction.  The node will waits only until that transaction, based on its GTID, is applied before executing the query.</p>
@@ -203,7 +221,8 @@
 
 <span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">books</span> <span class="n">DISABLE</span> <span class="k">KEYS</span><span class="p">;</span>
 
-<span class="k">LOAD</span> <span class="n">DATA</span> <span class="n">LOCAL</span> <span class="k">INFILE</span> <span class="s1">&#39;oup_books.csv&#39;</span> <span class="k">INTO</span> <span class="k">TABLE</span> <span class="n">books</span>
+<span class="k">LOAD</span> <span class="n">DATA</span> <span class="n">LOCAL</span> <span class="k">INFILE</span> <span class="s1">&#39;oup_books.csv&#39;</span>
+<span class="k">INTO</span> <span class="k">TABLE</span> <span class="n">books</span>
 <span class="n">FIELDS</span> <span class="k">TERMINATED</span> <span class="k">BY</span> <span class="s1">&#39;|&#39;</span>
 <span class="k">ENCLOSED</span> <span class="k">BY</span> <span class="s1">&#39;&quot;&#39;</span>
 <span class="k">LINES</span> <span class="k">TERMINATED</span> <span class="k">BY</span> <span class="s1">&#39;\r\n&#39;</span>
@@ -216,6 +235,14 @@
 </pre></div>
 </div>
 <p>With this function, <a class="reference internal" href="../documentation/wsrep-functions.html#wsrep-sync-wait-upto-gtid"><span class="std std-ref">WSREP_SYNC_WAIT_UPTO_GTID()</span></a> tells the node to wait until the transaction identified by the GTID given within the parentheses (the value of our user variable) is committed before processing this transaction.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/wsrep-functions.html"><span class="doc">Galera Functions</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-provider-version"><span class="std std-ref">wsrep_provider_version</span></a></li>
+<li><a class="reference internal" href="../documentation/wsrep-functions.html#wsrep-last-written-gtid"><span class="std std-ref">wsrep_last_written_gtid()</span></a></li>
+</ul>
+</div>
 </div>
 
 

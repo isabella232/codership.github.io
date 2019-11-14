@@ -37,10 +37,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -165,18 +168,33 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="node-crashes-during-sst">
 <span id="kb-trouble-node-crash-during-sst"></span><h1>Node Crashes during SST<a class="headerlink" href="#node-crashes-during-sst" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 463 words; Updated: November 4, 2019; Category: State Transfers; Type: Troubleshooting</p>
+<p class="article-stats">Length: 463 words; Published: April 1, 2014; Updated: November 4, 2019; Category: State Transfers; Type: Troubleshooting</p>
 <p>When a new node joins a cluster, it will request data from the cluster.  One node, known as a <em>donor</em>, will use a <a class="reference internal" href="../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full copy of the data to the new node, known as the <em>joiner</em>.  Depending on how the nodes are configured, they will typically use the utilities, <code class="docutils literal"><span class="pre">mysqldump</span></code> or <code class="docutils literal"><span class="pre">rsync</span></code> to transfer the data.  All of this usually works well, but it doesn&#8217;t always. This KB article will consider a common scenario in which problems may occur.</p>
 <p class="section-heading rubric">Scenario</p>
 <p>You can set the <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> option to whatever tool you want to use to make state transfers. DBAs typically set this to <code class="docutils literal"><span class="pre">mysqldump</span></code> or <code class="docutils literal"><span class="pre">rsync</span></code>.  When a new node joins, <a class="reference internal" href="../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> begins, and file system processes are started for the tool used (e.g., <code class="docutils literal"><span class="pre">rsync</span></code>). Below is show the results of running <code class="docutils literal"><span class="pre">ps</span></code> on the joining node during a state transfer:</p>
 <div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">ps -e | grep rsync</span>
 
-<span class="go">14718 ?        00:00:00 wsrep_sst_rsync</span>
-<span class="go">14766 ?        00:00:00 rsync</span>
-<span class="go">14799 ?        00:00:00 rsync</span>
-<span class="go">14800 ?        00:00:00 rsync</span>
+<span class="go">14718 ? 00:00:00 wsrep_sst_rsync</span>
+<span class="go">14766 ? 00:00:00 rsync</span>
+<span class="go">14799 ? 00:00:00 rsync</span>
+<span class="go">14800 ? 00:00:00 rsync</span>
 </pre></div>
 </div>
 <p>If the node crashes before the state transfer is complete, it may cause the process or processing running <code class="docutils literal"><span class="pre">rsync</span></code>, or whatever tool you&#8217;re using, to stall, occupying the port and not allowing you to restart the node. When this happens, the error logs for the database server (i.e., <code class="docutils literal"><span class="pre">/var/log/mysqld.log</span></code>) will show that the port is in use, although it isn&#8217;t.  You&#8217;ll have to fix this problem.</p>
@@ -186,7 +204,7 @@
 
 <span class="go">ps -e | grep rsync</span>
 
-<span class="go">14800 ?        00:06:05 rsync</span>
+<span class="go">14800 ? 00:06:05 rsync</span>
 </pre></div>
 </div>
 <p>In the example here, the results show that the process identification number is <code class="docutils literal"><span class="pre">14800</span></code>.  Using this information, you might enter the following from the command-line:</p>
@@ -199,6 +217,14 @@
 </div>
 <p>However, this usually doesn&#8217;t work.  Instead, you&#8217;ll have to use the <code class="docutils literal"><span class="pre">kill</span></code> command for each process.  It&#8217;s tedious, but necessary. Once you have killed the orphaned process, it will free the relevant ports and allow you to start <code class="docutils literal"><span class="pre">mysqld</span></code> on the new node.</p>
 <p>After restarting the node, if the processes handling the state transfer stalls again, it wasn&#8217;t a fluke. There&#8217;s a persistent problem with the network or security or something else.  Check the server logs and the database logs on the server to determine the cause.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/sst.html"><span class="doc">SST</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+</ul>
+</div>
 </div>
 
 

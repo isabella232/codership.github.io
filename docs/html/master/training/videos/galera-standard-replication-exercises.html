@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -165,12 +168,24 @@
 <li><a class="reference internal" href="../../documentation/state-transfer.html"><span class="doc">State Transfer</span></a></li>
 <li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html"><span class="doc">wsrep Options</span></a></li>
 </ul>
-<p>Related Articles</p>
 <p>Other Resources</p>
 <ul class="simple">
 <li><a class="reference external" href="http://releases.galeracluster.com/">Galera Repository</a></li>
 </ul>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-article training-exercises section" id="training-video-exercises">
 <span id="exercises-galera-standard-replication"></span><h1>Training Video Exercises<a class="headerlink" href="#training-video-exercises" title="Permalink to this headline">¶</a></h1>
@@ -216,6 +231,22 @@
 <li>Start <code class="docutils literal"><span class="pre">mysqld</span></code> on each of the other two servers.  If you get errors, review the logs to resolve ant problems.  When each starts without an error, check the status parameter, <code class="docutils literal"><span class="pre">wsrep_cluster_size</span></code> to see if the cluster size reflects the number of nodes that are running. Keep trying until you’re able to start the nodes and they all join together to form a cluster.</li>
 <li>On one of the nodes, use the <code class="docutils literal"><span class="pre">mysql</span></code> client to load the dump file made for your database system.  Do this on only one node.  As soon as you’re finished, log into each of the other nodes to confirm the database and its tables have been replicated on them.</li>
 </ol>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
+<li><a class="reference internal" href="../../documentation/firewalld.html"><span class="doc">firewalld</span></a></li>
+<li><a class="reference internal" href="../../documentation/install.html"><span class="doc">Installing Galera</span></a></li>
+<li><a class="reference internal" href="../../documentation/node-provisioning.html"><span class="doc">Node Provisioning</span></a></li>
+<li><a class="reference internal" href="../../documentation/selinux.html"><span class="doc">SELinux</span></a></li>
+<li><a class="reference internal" href="../../documentation/state-transfer.html"><span class="doc">State Transfer</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html"><span class="doc">wsrep Options</span></a></li>
+</ul>
+<p>Other Resources</p>
+<ul class="simple">
+<li><a class="reference external" href="http://releases.galeracluster.com/">Galera Repository</a></li>
+</ul>
+</div>
 </div>
 </div>
 

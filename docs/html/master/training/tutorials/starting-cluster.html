@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -164,8 +167,20 @@
 <li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a></li>
 <li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-article section" id="starting-the-cluster">
 <span id="starting-cluster"></span><h1>Starting the Cluster<a class="headerlink" href="#starting-the-cluster" title="Permalink to this headline">¶</a></h1>
@@ -198,15 +213,15 @@
 <p class="last">When you start a new cluster, any node can serve as the first node, since all the databases are empty.  When you migrate from MySQL to Galera Cluster, use the original master node as the first node.  When restarting the cluster, use the most advanced node.  For more information, see <a class="reference internal" href="migration.html"><span class="doc">Migration</span></a> and <a class="reference internal" href="../../documentation/quorum-reset.html"><span class="doc">Quorum Reset</span></a>.</p>
 </div>
 <p>To start the first node&#8211;which should have MySQL, MariaDB or Percona XtraDB, and Galera installed&#8211;you&#8217;ll have to launch the database server on it with the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.  There are a few ways you might do this, depending on the operating system. For systems that use <code class="docutils literal"><span class="pre">init</span></code>, execute the following from the command-line:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> systemctl start mysql --wsrep-new-cluster
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">systemctl start mysql --wsrep-new-cluster</span>
 </pre></div>
 </div>
 <p>For operating systems that use <code class="docutils literal"><span class="pre">systemd</span></code>, you would instead enter the following from the command-line:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> /usr/bin/mysqld_bootstrap
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">/usr/bin/mysqld_bootstrap</span>
 </pre></div>
 </div>
 <p>Both of these start the <code class="docutils literal"><span class="pre">mysqld</span></code> daemon on the node. Starting in MariaDB version 10.4, which includes Galera version 4, you can enter instead the following from the command-line to start MariaDB, Galera, and to establish the Primary Component:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> galera_new_cluster
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">galera_new_cluster</span>
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -235,7 +250,7 @@
 <p>The variable <code class="docutils literal"><span class="pre">safe_to_bootstrap</span></code> is set to 0 on the first node after it&#8217;s been bootstrapped to protect against you inadvertently bootstrapping again while the cluster is runnning.  You&#8217;ll have to change the value to 1 to be able to bootstrap anew.</p>
 <p class="section-heading rubric" id="add-nodes-to-cluster">Adding Nodes to the Cluster</p>
 <p>Once you have successfully started the first node and thereby initialized a new cluster, the procedure for adding all the other nodes is even simpler. You just launch <code class="docutils literal"><span class="pre">mysqld</span></code> as you would normally&#8211;without the <code class="docutils literal"><span class="pre">--wsrep-new-cluster</span></code> option.  You would enter something like the following from the command-line, depending on your operating system and database system (see above for other methods):</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl start mariadb
+<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">systemctl start mariadb</span>
 </pre></div>
 </div>
 <p>When the database server initializes as a new node, it will try to connect to the cluster members. It knows where to find these other nodes based on the IP addresses listed in the <a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter in the configuration file.</p>
@@ -250,6 +265,17 @@
 </pre></div>
 </div>
 <p>This indicates that the two nodes are now connected to the cluster.  When the nodes in the cluster agree on the membership state, they initiate state exchange.  In state exchange, a new node will check the cluster state.  If the state of a new node differs from the cluster state&#8211;which is normally the case&#8211;the new node requests a state snapshot transfer (SST) from the cluster and it installs it on its local database.  After this is done, the new node is ready for use.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="migration.html"><span class="doc">Migration</span></a></li>
+<li><a class="reference internal" href="migration.html"><span class="doc">Migration</span></a></li>
+<li><a class="reference internal" href="../../documentation/quorum-reset.html"><span class="doc">Quorum Reset</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a></li>
+<li><a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
+</ul>
+</div>
 </div>
 
 

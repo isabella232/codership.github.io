@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -155,13 +158,26 @@
 <ul class="simple">
 <li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
 </ul>
-<p>Related Documents</p>
-<p class="bull-head">Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-article section" id="group-commit">
 <span id="kb-best-group-commit"></span><h1>Group Commit<a class="headerlink" href="#group-commit" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 322 words; Published: October 22, 2019; Category: Performance; Type: Best Practices</p>
+<p class="article-stats">Length: 322 words; Published: May 30, 2019; Updated: October 22, 2019; Category: Performance; Type: Best Practices</p>
 <p>After each transaction is committed, InnoDB will typically flush changes to its redo log and the binary log to the disk&#8211;it does this typically by calling <cite>fsync()</cite>, <cite>fdatasync()</cite>. This method is used to ensure data changes are stored durably on the disk. Disk flushing, however, can have an effect on performance and the number of transactions-per-second (TPS) that can be committed.</p>
 <p>Starting with version 5.3 of MariaDB, Group Commit was introduced. If there are several transactions trying to commit at the same time, group commit will force them to be flushed to the disk with a single system call, rather than one system call for each commit. This can greatly reduce the need for flush operations, and greatly improve the throughput of TPS.</p>
 <p>In Galera transactions are committed sequentially in total order determined by the group communication between nodes. Sequential commit ordering is implemented with commit monitor, which allows only single transaction to proceed at the time.</p>

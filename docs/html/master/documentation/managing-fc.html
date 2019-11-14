@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -167,8 +170,24 @@
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused"><span class="std std-ref">wsrep_flow_control_paused</span></a></li>
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused-ns"><span class="std std-ref">wsrep_flow_control_paused_ns</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="managing-flow-control">
 <span id="managing-fc"></span><h1>Managing Flow Control<a class="headerlink" href="#managing-flow-control" title="Permalink to this headline">¶</a></h1>
@@ -246,12 +265,29 @@
 <p>Bear in mind that, while it is critical for multi-master operations that you use as small a slave queue as possible, the slave queue length is not so critical in master-slave setups.  Depending on your application and hardware, the node can apply even 1K of write-sets in a fraction of a second.  The slave queue length has no effect on master-slave failover.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>Cluster nodes process transactions asynchronously with regards to each other.  Nodes cannot anticipate in any way the amount of replication data.  Because of this, Flow Control is always reactive.  That is, it only comes into affect after the node exceeds certain limits.  It cannot prevent exceeding these limits or, when they are exceeded, it cannot make any guarantee as to the degree they are exceeded.</p>
+<p class="last">Cluster nodes process transactions asynchronously with regards to each other.  Nodes cannot anticipate in any way the amount of replication data.  Because of this, Flow Control is always reactive.  That is, it only comes into affect after the node exceeds certain limits.  It cannot prevent exceeding these limits or, when they are exceeded, it cannot make any guarantee as to the degree they are exceeded.</p>
+</div>
 <p>Meaning, if you were to configure a node with:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">gcs.recv_q_hard_limit</span><span class="o">=</span><span class="s">100Mb</span>
+<blockquote>
+<div><div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">gcs.recv_q_hard_limit</span><span class="o">=</span><span class="s">100Mb</span>
 </pre></div>
 </div>
-<p class="last">That node can still exceed that limit from a 1Gb write-set.</p>
+</div></blockquote>
+<p>That node can still exceed that limit from a 1Gb write-set.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-status-variables.html"><span class="doc">Galera Status Variables</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-fc-limit"><span class="std std-ref">gcs.fc_limit</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-max-throttle"><span class="std std-ref">gcs.max_throttle</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-fc-factor"><span class="std std-ref">gcs.fc_factor</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-sent"><span class="std std-ref">wsrep_flow_control_sent</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-recv"><span class="std std-ref">wsrep_flow_control_recv</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused"><span class="std std-ref">wsrep_flow_control_paused</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused-ns"><span class="std std-ref">wsrep_flow_control_paused_ns</span></a></li>
+</ul>
 </div>
 </div>
 

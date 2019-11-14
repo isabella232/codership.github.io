@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -167,8 +170,24 @@
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-state"><span class="std std-ref">wsrep_evs_state</span></a></li>
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="auto-eviction">
 <span id="id1"></span><h1>Auto-Eviction<a class="headerlink" href="#auto-eviction" title="Permalink to this headline">¶</a></h1>
@@ -283,6 +302,21 @@
 </ol>
 <p>These steps will update the EVS Protocol version for one node in a cluster. Repeat the process on each of the remaining nodes so that they all use EVS Protocol version 1.</p>
 <p>For more information on upgrading in general, see <a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera Cluster</span></a>.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera Cluster</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-auto-evict"><span class="std std-ref">evs.auto_evict</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-delayed-keep-period"><span class="std std-ref">evs.delayed_keep_period</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-delayed-margin"><span class="std std-ref">evs.delayed_margin</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-evict"><span class="std std-ref">evs.evict</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-version"><span class="std std-ref">evs.version</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-delayed"><span class="std std-ref">wsrep_evs_delayed</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-evict-list"><span class="std std-ref">wsrep_evs_evict_list</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-state"><span class="std std-ref">wsrep_evs_state</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+</ul>
+</div>
 </div>
 
 

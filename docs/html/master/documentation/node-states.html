@@ -30,16 +30,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Node Failure and Recovery" href="recovery.html" />
+    <link rel="next" title="Node Failure &amp; Recovery" href="recovery.html" />
     <link rel="prev" title="State Transfers" href="state-transfer.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -167,8 +170,24 @@
 <li><a class="reference internal" href="#writeset-caching"><span class="std std-ref">Write-set Caching</span></a></li>
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-ready"><span class="std std-ref">wsrep_ready</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="flow-control">
 <span id="id1"></span><h1>Flow Control<a class="headerlink" href="#flow-control" title="Permalink to this headline">¶</a></h1>
@@ -241,6 +260,21 @@
 <li><strong>Missing Transitions</strong> In the event that the joining node does not require a state transfer, the node state changes from the <code class="docutils literal"><span class="pre">PRIMARY</span></code> state directly to the <code class="docutils literal"><span class="pre">JOINED</span></code> state.</li>
 </ul>
 <p>For more information on Flow Control see <a class="reference external" href="https://www.mysqlperformanceblog.com/2013/05/02/galera-flow-control-in-percona-xtradb-cluster-for-mysql/">Galera Flow Control in Percona XtraDB Cluster</a>.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#catching-up"><span class="std std-ref">Catching Up</span></a></li>
+<li><a class="reference internal" href="#cluster-sync"><span class="std std-ref">Cluster Sync</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-fc-factor"><span class="std std-ref">gcs.fc_factor</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-fc-limit"><span class="std std-ref">gcs.fc_limit</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-max-throttle"><span class="std std-ref">gcs.max_throttle</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a></li>
+<li><a class="reference internal" href="#no-flow-control"><span class="std std-ref">No Flow Control</span></a></li>
+<li><a class="reference internal" href="#writeset-caching"><span class="std std-ref">Write-set Caching</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-ready"><span class="std std-ref">wsrep_ready</span></a></li>
+</ul>
+</div>
 </div>
 
 
@@ -258,7 +292,7 @@
   <li><a href="index.html">The Codership Documentation</a><ul>
   <li><a href="technical-description.html">Technical Description</a><ul>
       <li>Previous: <a href="state-transfer.html" title="previous chapter">State Transfers</a></li>
-      <li>Next: <a href="recovery.html" title="next chapter">Node Failure and Recovery</a></li>
+      <li>Next: <a href="recovery.html" title="next chapter">Node Failure &amp; Recovery</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

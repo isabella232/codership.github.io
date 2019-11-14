@@ -5,12 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Node Failure and Recovery in Galera Cluster" name="title" />
+    <meta content="Node Failure &amp; Recovery in Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, split-brain, recovery" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
-    <title>Node Failure and Recovery &#8212; Galera Cluster Documentation</title>
+    <title>Node Failure &amp; Recovery &#8212; Galera Cluster Documentation</title>
     
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -165,11 +168,27 @@
 <li><a class="reference internal" href="notification-cmd.html"><span class="doc">Notification Command</span></a></li>
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-local-state"><span class="std std-ref">wsrep_local_state</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
 </div>
-<div class="library-document section" id="node-failure-and-recovery">
-<span id="recovery"></span><h1>Node Failure and Recovery<a class="headerlink" href="#node-failure-and-recovery" title="Permalink to this headline">¶</a></h1>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="node-failure-recovery">
+<span id="recovery"></span><h1>Node Failure &amp; Recovery<a class="headerlink" href="#node-failure-recovery" title="Permalink to this headline">¶</a></h1>
 <p>Individual nodes fail to operate when they lose touch with the cluster.  This can occur due to various reasons.  For instance, in the event of hardware failure or software crash, the loss of network connectivity or the failure of a state transfer.  Anything that prevents the node from communicating with the cluster is generalized behind the concept of node failure.  Understanding how nodes fail will help in planning for their recovery.</p>
 <p class="sub-heading rubric" id="single-node-failure-detection">Detecting Single Node Failures</p>
 <span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">When a node fails the only sign is the loss of connection to the node processes as seen by other nodes.  Thus nodes are considered failed when they lose membership with the cluster&#8217;s <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  That is, from the perspective of the cluster when the nodes that form the Primary Component can no longer see the node, that node is failed.  From the perspective of the failed node itself, assuming that it has not crashed, it has lost its connection with the Primary Component.</p>
@@ -217,6 +236,19 @@
 <p class="section-heading rubric" id="state-transfer-failure">State Transfer Failure</p>
 <p>Single node failures can also occur when a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">state snapshot transfer</span></a> fails.  This failure renders the receiving node unusable, as the receiving node aborts when it detects a state transfer failure.</p>
 <p>When the node fails while using <code class="docutils literal"><span class="pre">mysqldump</span></code>, restarting may require you to manually restore the administrative tables.  For the <code class="docutils literal"><span class="pre">rsync</span></code> method in state transfers this is not an issue, given that it does not require the database server to be in an operational state to work.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-parameters.html#evs-consensus-timeout"><span class="std std-ref">evs.consensus_timeout</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-inactive-check-period"><span class="std std-ref">evs.inactive_check_period</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-keepalive-period"><span class="std std-ref">evs.keepalive_period</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></li>
+<li><a class="reference internal" href="monitoring-cluster.html"><span class="doc">Monitoring the Cluster</span></a></li>
+<li><a class="reference internal" href="notification-cmd.html"><span class="doc">Notification Command</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-local-state"><span class="std std-ref">wsrep_local_state</span></a></li>
+</ul>
+</div>
 </div>
 
 

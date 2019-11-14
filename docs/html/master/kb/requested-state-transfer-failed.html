@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -165,9 +168,24 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="requested-state-transfer-failed">
 <span id="kb-trouble-requested-state-transfer-failed"></span><h1>Requested State Transfer Failed<a class="headerlink" href="#requested-state-transfer-failed" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 649 words; Updated: November 6, 2019; Category: State Transfers; Type: Troubleshooting</p>
+<p class="article-stats">Length: 649 words; Published: April 1, 2014; Updated: November 6, 2019; Category: State Transfers; Type: Troubleshooting</p>
 <p>When a new node joins a cluster, it will try to synchronize with the cluster by getting a full copy of the databases from one of the other nodes.  This is known as a <a class="reference internal" href="../documentation/sst.html"><span class="doc">State Transfer</span></a>.  It will use a tool like <code class="docutils literal"><span class="pre">rsync</span></code> or <code class="docutils literal"><span class="pre">mysqldump</span></code>, depending on how the <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> option was set. Although this usually works well, sometimes it will fail.  This KB article discusses such a situation.</p>
 <p class="section-heading rubric">Scenario</p>
 <p>Suppose a new node joins a cluster—this is known as a joiner node.  This is assuming that the node has in fact joined the cluster, but just hasn&#8217;t been able to synchronize the data with the other nodes.  When it joins the cluster, it will look for another node, known as a donor, to give it a copy of the databases by the <a class="reference internal" href="../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method.  Normally, this starts almost immediately and is completed fairly quickly, depending on the size of the databases and how busy are the nodes.</p>
@@ -229,6 +247,16 @@ unavailable).  Will keep retrying every 1 second(s).
 </pre></div>
 </div>
 <p>Once you&#8217;ve nominated nodes to be donors, assuming the joiner has in fact joined the cluster, initiating state transfer should happen immediately and without any further problem.  If it doesn&#8217;t, confirm that there aren&#8217;t any problems with your network connection. Also, confirm that the needed ports aren&#8217;t being blocked by SELinux or a firewall. In particular, make sure port 4568 is open: it&#8217;s used for State Snapshot Transfers.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/sst.html"><span class="doc">State Transfers</span></a></li>
+<li><a class="reference internal" href="../documentation/firewall-settings.html"><span class="doc">TCP/UDP Ports</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-parameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a></li>
+</ul>
+</div>
 </div>
 
 

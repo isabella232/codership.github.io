@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -157,8 +160,24 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="#"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-index section" id="the-codership-knowledge-base">
 <span id="kb"></span><h1>The Codership Knowledge Base<a class="headerlink" href="#the-codership-knowledge-base" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Article Counts: 10 Troubleshooting, 13 Best Practices; Recent Changes: 6 Updated, 2 New Articles</p>
 <p><a class="reference internal" href="../documentation/index.html"><span class="doc">The Codership Documentation</span></a> explains in detail how to deploy and administer a Galera Cluster. This section, the Codership Knowledge Base (KB) contains information on resolving problems and improving use of Galera Cluster.  Here you&#8217;ll find troubleshooting articles and best practices articles.</p>
 <p>In essence, the Documentation is how to use Galera assuming everything goes according to plan; the KB is for when things don&#8217;t go as expected or when they could be better.</p>
 <p>In addition to this KB, you can also post questions on the <a class="reference external" href="https://galeracluster.com/community/">Codership Forum</a>. The community, as well as our staff monitor and respond to posts made there. If you need more immediate and personalized assistance, you can get a Support contract with us at Codership.  For a quote on the cost of support, write us at <a class="reference external" href="mailto:info&#37;&#52;&#48;codership&#46;com">info<span>&#64;</span>codership<span>&#46;</span>com</a> or use <a class="reference external" href="https://galeracluster.com/contact-us/#send-us-a-message">our on-line form</a> to send us a message.</p>
@@ -170,15 +189,15 @@
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="node-crash-during-sst.html"><span class="doc">Node Crashes during SST</span></a></p>
-<p class="list-stats">Length: 463 words; Updated: Nov 2019</p>
+<p class="list-stats">Length: 463 words; Pub: Apr 2014; Updated: Nov 2019</p>
 <p class="list-abstract">If a donor node crashes while using <code class="docutils literal"><span class="pre">rsync</span></code> for a state transfers, the joiner node may stall with incomplete databases, and be inaccessibe. This article discusses how to resolve this.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="sst-fails-sql-syntax-error.html"><span class="doc">SST Fails due to SQL Syntax Errors</span></a></p>
-<p class="list-stats">Length: 789 words; Updated: Nov 2019</p>
+<p class="list-stats">Length: 789 words; Pub: Apr 2014; Updated: Nov 2019</p>
 <p class="list-abstract">When using <code class="docutils literal"><span class="pre">mysqldump</span></code> for state transfers for a new node, it may fail. In the database error log, there may be entries that says there were SQL Syntax errors.</p>
 </div>
 <div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="requested-state-transfer-failed.html"><span class="doc">Requested State Transfer Failed</span></a></p>
-<p class="list-stats">Length: 649 words; Updated: Nov 2019</p>
+<p class="list-stats">Length: 649 words; Pub: Apr 2014; Updated: Nov 2019</p>
 <p class="list-abstract">When a new node joins a cluster, it will try to get a full copy of the databases from one of the other nodes.  Sometimes its request will be ignored and no node is selected to be the donor.</p>
 </div>
 <div class="banner container" id="kb-trouble-sql-syntax">
@@ -186,18 +205,21 @@
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="stall-on-alter-table.html"><span class="doc">Cluster Stalls on ALTER TABLE</span></a></p>
-<p class="list-stats">Length: 519 words; Updated: Oct 2019:</p>
+<p class="list-stats">Length: 519 words; Pub: Apr 2014; Updated: Oct 2019:</p>
 <p class="list-abstract">A cluster will sometimes stall when executing <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code> on a table with several columns and indexes. Depending on the number of rows, it can be a major drain on performance.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="user-changes.html"><span class="doc">User Changes not Replicating</span></a></p>
-<p class="list-stats">Length: 518 words; Updated: Sep 2019</p>
+<p class="list-stats">Length: 518 words; Pub: Apr 2014; Updated: Sep 2019</p>
 <p class="list-abstract">Changes to the <code class="docutils literal"><span class="pre">mysql</span></code> database (e.g., user name, host address) are not replicated on other nodes. This can cause problems for users, as well as frustrate the DBA.</p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="auto-increment-multiples.html"><span class="doc">AUTO_INCREMENT Increasing by Multiples</span></a></p>
+<p class="list-stats">Length: 995 words; Pub: Oct 2019</p>
+<p class="list-abstract">Key columns using <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> will increase values by more than one with Galera. This can be confusing and worrisome, but this article explains why this is a good method.</p>
 </div>
 <div class="list-col2 container">
-<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="auto-increment-multiples.html"><span class="doc">AUTO_INCREMENT Increasing by Multiples</span></a></p>
-<p class="list-stats">Length: 995 words; Published: Oct 2019</p>
-<p class="list-abstract">Key columns using <code class="docutils literal"><span class="pre">AUTO_INCREMENT</span></code> will increase values by more than one with Galera. This can be confusing and worrisome, but this article explains why this is a good method.</p>
+<p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="deadlock-found.html"><span class="doc">Deadlock Found during a Transaction</span></a></p>
+<p class="list-stats">Length: 887 words; Pub: Nov 2019</p>
+<p class="list-abstract">After starting a transaction involving an SQL statement that changes data, a deadlock error message will be returned indicating another node has already locked the same rows.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="resolve-commit-failure.html"><span class="doc">Commit Failed for Reason 3</span></a></p>
-<p class="list-stats">Length: 326 words; Updated: Nov 2019</p>
+<p class="list-stats">Length: 326 words; Pub: Apr 2014; Updated: Nov 2019</p>
 <p class="list-abstract">When you have <code class="docutils literal"><span class="pre">wsrep_debug</span></code> turned <code class="docutils literal"><span class="pre">ON</span></code>, you may occasionally see a message noting that a commit has failed due to reason <code class="docutils literal"><span class="pre">3</span></code>.</p>
 </div>
 <div class="banner container" id="kb-trouble-splits-topology">
@@ -205,12 +227,12 @@
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="multi-master-conflicts.html"><span class="doc">Multi-Master Conflicts</span></a></p>
-<p class="list-stats">Length: 751 words; Published:</p>
+<p class="list-stats">Length: 751 words; Pub: Apr 2014</p>
 <p class="list-abstract">Multi-master clusters have certain types of conflicts and can involve data inconsistencies among nodes. This article explains the nuances of Galera and how to prevent them.</p>
 </div>
 <div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="error-unknown-command.html"><span class="doc">Unknown Command Errors</span></a></p>
-<p class="list-stats">Length: 971 words; Updated: Nov 2019</p>
+<p class="list-stats">Length: 971 words; Pub: Apr 2014; Updated: Nov 2019</p>
 <p class="list-abstract">Instead of receiving results from a valid SQL statement, an error message is returned saying, &#8220;Unknown Command&#8221; on one node. This error is returned for all queries on the node.</p>
 </div>
 </div>
@@ -222,30 +244,30 @@
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="group-commit.html"><span class="doc">Group Commit</span></a></p>
-<p class="list-stats">Length: 322 words; Published:</p>
+<p class="list-stats">Length: 322 words; Pub: May 2019; Updated: Oct 2019</p>
 <p class="list-abstract">When several transactions try to commit simultaneously, <code class="docutils literal"><span class="pre">GROUP</span> <span class="pre">COMMIT</span></code> flushes them to the disk with a single system call, rather than a call for each, greatly improving performance.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="large-transactions.html"><span class="doc">Large Transactions</span></a></p>
-<p class="list-stats">Length: 443 words; Published:</p>
+<p class="list-stats">Length: 443 words; Pub: Apr 2015</p>
 <p class="list-abstract">Large transactions can lead to diminished performance. One reason for this is that the table may be reindexing and rescanning after each row is deleted.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="parallel-slave-threads.html"><span class="doc">Parallel Slave Threads</span></a></p>
-<p class="list-stats">Length: 366 words; Published:</p>
+<p class="list-stats">Length: 366 words; Pub: Jun 2015</p>
 <p class="list-abstract">Parallel threads don&#8217;t ensure better performance, but they don&#8217;t impair performance and they may actually increase synchronization of new nodes joining a cluster.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="detecting-slow-node.html"><span class="doc">Slow Nodes</span></a></p>
-<p class="list-stats">Length: 297 words; Published:</p>
+<p class="list-stats">Length: 297 words; Pub: Apr 2014</p>
 <p class="list-abstract">By design, cluster performance won&#8217;t be higher than the slowest node. Even with only one node, its performance can be considerably slower compared to stand-alone mode.</p>
 </div>
 <div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="wan-latency.html"><span class="doc">WAN Latency</span></a></p>
-<p class="list-stats">Length: 221 words; Published:</p>
+<p class="list-stats">Length: 221 words; Pub: Jun 2015</p>
 <p class="list-abstract">When using Galera over a WAN, links can have exceptionally high latency. Check this by measuring the Round-Trip Time among nodes, and correct it by adjusting temporal parameters.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="wan-replication.html"><span class="doc">WAN Replication</span></a></p>
-<p class="list-stats">Length: 161 words; Published:</p>
+<p class="list-stats">Length: 161 words; Pub: Jun 2015</p>
 <p class="list-abstract">When running a cluster over a WAN, there may be transient network connectivity failures. To prevent this from partitioning the cluster, try increasing the <em>keep-alive</em> timeouts.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="customizing-gcache-size.html"><span class="doc">Write-Set Cache Size</span></a></p>
-<p class="list-stats">Length: 467 words; Published:</p>
+<p class="list-stats">Length: 467 words; Pub: Jun 2015</p>
 <p class="list-abstract">If you have storage issues, there are some guidelines to adjust the <code class="docutils literal"><span class="pre">gcache.size</span></code> parameter, properly. You could also change your state snapshot method.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="gcache-during-state-transfers.html"><span class="doc">Write-Set Caching during State Transfers</span></a></p>
-<p class="list-stats">Length: 156 words; Published:</p>
+<p class="list-stats">Length: 156 words; Pub: Jun 2015</p>
 <p class="list-abstract">Galera nodes don&#8217;t use much more memory than a stand-alone. The certification index and uncommitted write-sets drain some. Write-set caching during state transfers is the exception.</p>
 </div>
 <div class="banner container" id="kb-best-topology">
@@ -253,15 +275,15 @@
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="single-master-setup.html"><span class="doc">Single Master Setup</span></a></p>
-<p class="list-stats">Length: 81 words; Published:</p>
+<p class="list-stats">Length: 81 words; Pub: Jun 2015</p>
 <p class="list-abstract">It&#8217;s possible to designate one node in a cluster to handle all writes, to be the <em>master</em> to the other nodes. To do this, there are certain configuratoin requirements.</p>
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="multi-master-setup.html"><span class="doc">Multi-Master Setup</span></a></p>
-<p class="list-stats">Length: 55 words; Published:</p>
+<p class="list-stats">Length: 55 words; Pub: Jun 2015</p>
 <p class="list-abstract">The more <em>masters</em> in a cluster, the higher the probability of certification conflicts. This can lead to undesirable rollbacks and performance degradation.</p>
 </div>
 <div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="two-node-clusters.html"><span class="doc">Two-Node Clusters</span></a></p>
-<p class="list-stats">Length: 880 words; Updated: Nov 2019</p>
+<p class="list-stats">Length: 880 words; Pub: Jun 2015; Updated: Nov 2019</p>
 <p class="list-abstract">There are potential problems with two-node clusters: A split-brain situation may occur. When one node fails, the remaining node becomes non-operational.</p>
 </div>
 <div class="banner container" id="kb-best-security">
@@ -269,12 +291,12 @@
 </div>
 <div class="list-col1 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="setting-selinux-policy.html"><span class="doc">Setting an SELinux Policy</span></a></p>
-<p class="list-stats">Length: 345 words; Updated: Oct 2019</p>
+<p class="list-stats">Length: 345 words; Pub: Jun 2015; Updated: Oct 2019</p>
 <p class="list-abstract">When you first installing a node, SELinux will prohibit cluster activities. You will need a SELinux policy so it will recognize cluster activities as legitimate.</p>
 </div>
 <div class="list-col2 container">
 <p class="rubric-2 list-sub-header rubric"><a class="reference internal" href="sync-transaction-before-another.html"><span class="doc">Synch a Transaction First</span></a></p>
-<p class="list-stats">Length: 994 words; Updated: Nov 2019</p>
+<p class="list-stats">Length: 994 words; Pub: May 2019; Updated: Nov 2019</p>
 <p class="list-abstract">When entering a transaction, you may need to ensure a previous transaction has been committed on the current node. Synchronization functions can make this easier to do.</p>
 </div>
 <div class="toctree-wrapper compound">

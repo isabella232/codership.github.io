@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -164,9 +167,24 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="sst-fails-with-sql-syntax-errors">
 <span id="kb-trouble-sst-fails-sql-syntax"></span><h1>SST Fails with SQL Syntax Errors<a class="headerlink" href="#sst-fails-with-sql-syntax-errors" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 789 words; Updated: November 7, 2019; Category: State Transfers; Type: Troubleshooting</p>
+<p class="article-stats">Length: 789 words; Published: April 1, 2014; Updated: November 7, 2019; Category: State Transfers; Type: Troubleshooting</p>
 <p>When a new node joins a cluster, since it has no data, it will request data from the cluster.  This node is known as the joiner.  One of the nodes that&#8217;s already part of the cluster and synchronized, will provide the joiner with a full copy of all of the databases. This node is know as a donor.  It will use the <a class="reference internal" href="../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full data copy to the new node.</p>
 <p>For making snapshots to send to a joiner, the donor will use whatever method designated in advanced by the administrator.  This is done by setting the <code class="docutils literal"><span class="pre">wsrep_sst_method</span></code> variable.  There are two basic methods: <a class="reference internal" href="../documentation/glossary.html#term-physical-state-transfer-method"><span class="xref std std-term">Physical State Transfer Method</span></a> and <a class="reference internal" href="../documentation/glossary.html#term-logical-state-transfer-method"><span class="xref std std-term">Logical State Transfer Method</span></a>.  For the physical method, most use the utility <code class="docutils literal"><span class="pre">rsync</span></code>.  For the logical method, there is the utility <code class="docutils literal"><span class="pre">mysqldump</span></code>.  The better choice is to use is to use the physical method and <code class="docutils literal"><span class="pre">rsync</span></code>. It&#8217;s faster and more dependable than using <code class="docutils literal"><span class="pre">mysqldump</span></code>.</p>
 <p>Nevertheless, since <code class="docutils literal"><span class="pre">mysqldump</span></code> is a popular tool for making back-ups of MySQL and MariaDB databases, many administrators opt to use it. Unfortunately, while it&#8217;s good for back-ups, it doesn&#8217;t always work well for synchronizing a joiner. Let&#8217;s consider a common scenario about this.</p>
@@ -214,6 +232,15 @@
 </div>
 <p>As you can see, the user name and password are obscured.  This <code class="docutils literal"><span class="pre">SET</span></code> statement won&#8217;t be replicated to the other nodes.  You&#8217;ll have to set the values for <code class="docutils literal"><span class="pre">wsrep_sst_auth</span></code> on each node.  All of this is a reason why most DBAs prefer to use <code class="docutils literal"><span class="pre">rsync</span></code> for state transfers.</p>
 <p>If you&#8217;re determined to use <code class="docutils literal"><span class="pre">mysqldump</span></code>, once you&#8217;ve set the user name and password for using <code class="docutils literal"><span class="pre">mysqldump</span></code> to generate a dump file, as well as restoring one, you should be able to use it without much trouble.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/sst.html"><span class="doc">SST</span></a></li>
+<li><a class="reference internal" href="../documentation/sst-logical.html"><span class="doc">SST Logical</span></a></li>
+<li><a class="reference internal" href="../documentation/sst-physical.html"><span class="doc">SST Physical</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a></li>
+</ul>
+</div>
 </div>
 
 

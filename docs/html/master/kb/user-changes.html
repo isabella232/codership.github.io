@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -161,23 +164,40 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="user-changes-not-replicating">
 <span id="kb-trouble-user-changes"></span><h1>User Changes not Replicating<a class="headerlink" href="#user-changes-not-replicating" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 518 words; Updated: September 12, 2019; Category: Schema &amp; SQL; Type: Troubleshooting</p>
+<p class="article-stats">Length: 518 words; Published: April 1, 2014; Updated: September 12, 2019; Category: Schema &amp; SQL; Type: Troubleshooting</p>
 <p>When a DBA make changes to data in the mysql database—that&#8217;s the database that contains user names and privileges—if done in a straightforward way (e.g., with an <code class="docutils literal"><span class="pre">UPDATE</span></code> statement), they&#8217;re not replicated to the other nodes in the cluster. This can cause problems for users, as well as frustrate the DBA.</p>
 <p class="section-heading rubric">Scenario</p>
 <p>Suppose you made some changes to database users, but when you check the other nodes, you find they have not replicated to the cluster. For instance, suppose you want to change the host address from which a user, <em>bob</em> may access the cluster. You log into a node and use the <code class="docutils literal"><span class="pre">UPDATE</span></code> statement to change the <code class="docutils literal"><span class="pre">Host</span></code> column in the <code class="docutils literal"><span class="pre">mysql.user</span></code> table for Bob.</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">mysql</span><span class="p">.</span><span class="n">user</span>
 <span class="kt">SET</span> <span class="n">Host</span> <span class="o">=</span> <span class="s1">&#39;12.0.12.34&#39;</span>
-<span class="k">WHERE</span> <span class="n">User</span> <span class="o">=</span> <span class="s1">&#39;bob&#39;</span> <span class="k">AND</span> <span class="n">Host</span> <span class="o">=</span> <span class="s1">&#39;12.0.56.78&#39;</span><span class="p">;</span>
+<span class="k">WHERE</span> <span class="n">User</span> <span class="o">=</span> <span class="s1">&#39;bob&#39;</span>
+<span class="k">AND</span> <span class="n">Host</span> <span class="o">=</span> <span class="s1">&#39;12.0.56.78&#39;</span><span class="p">;</span>
 
 <span class="k">FLUSH</span> <span class="n">PRIVILEGES</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>When that&#8217;s finished, you ask Bob to log in from the new host.  He tries to connect to the cluster, but through a different node than the one on which you entered the update. He can&#8217;t log in, even thought his local IP address is <code class="docutils literal"><span class="pre">12.0.56.78</span></code>.  He gets this error message:</p>
 <div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="n">Enter</span> <span class="n">password</span><span class="p">:</span>
-<span class="n">ERROR</span> <span class="mi">1045</span> <span class="p">(</span><span class="mi">28000</span><span class="p">):</span> <span class="n">Access</span> <span class="n">denied</span> <span class="k">for</span> <span class="n">user</span> <span class="s1">&#39;bob&#39;</span><span class="o">@</span><span class="s1">&#39;12.0.56.78&#39;</span>
-<span class="p">(</span><span class="k">using</span> <span class="n">password</span><span class="p">:</span> <span class="n">YES</span><span class="p">)</span>
+<span class="n">ERROR</span> <span class="mi">1045</span> <span class="p">(</span><span class="mi">28000</span><span class="p">):</span> <span class="n">Access</span> <span class="n">denied</span>
+  <span class="k">for</span> <span class="n">user</span> <span class="s1">&#39;bob&#39;</span><span class="o">@</span><span class="s1">&#39;12.0.56.78&#39;</span>
+  <span class="p">(</span><span class="k">using</span> <span class="n">password</span><span class="p">:</span> <span class="n">YES</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>You then tell him to log into the cluster through the same node through which you made the update.  He is then successful. The problem is that the change to the <code class="docutils literal"><span class="pre">user</span></code> table didn&#8217;t replicate to the other nodes.</p>
@@ -192,6 +212,12 @@
 </div>
 <p>This change the host address for the user in a way that will replicate through the cluster.  The user may now access the database from the given IP address through any node in the cluster.</p>
 <p>If you have a need to change something directly using a statement such as <code class="docutils literal"><span class="pre">UPDATE</span></code>, to circumvent the usual methods, you must execute the statement on each node, including <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">PRIVILEGES</span></code>.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../training/tutorials/migration.html"><span class="doc">Migration</span></a></li>
+</ul>
+</div>
 </div>
 
 

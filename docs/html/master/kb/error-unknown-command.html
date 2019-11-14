@@ -35,10 +35,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -165,9 +168,24 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="unknown-command-errors">
 <span id="kb-trouble-error-unknown-command"></span><h1>Unknown Command Errors<a class="headerlink" href="#unknown-command-errors" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 971 words; Updated: November 1, 2019; Category: Splits &amp; Topology; Type: Troubleshooting</p>
+<p class="article-stats">Length: 971 words; Published: April 1, 2014; Updated: November 1, 2019; Category: Splits &amp; Topology; Type: Troubleshooting</p>
 <p>A frustrating situation is when you enter a valid SQL statement through the <code class="docutils literal"><span class="pre">mysql</span></code> client on a node, and instead of receiving the results you&#8217;d expect, you receive <code class="docutils literal"><span class="pre">Unknown</span> <span class="pre">command</span></code> errors—in fact,  you receive it for all queries on the node. This is because the node has lost confidence in the cluster and is thereby unwilling to execute any transactions.</p>
 <p class="section-heading rubric">Scenario</p>
 <p>Although it&#8217;s not common, when trying to execute a query using the <code class="docutils literal"><span class="pre">mysql</span></code> client or any other client, you may get an <code class="docutils literal"><span class="pre">`Unknown</span> <span class="pre">command</span></code> error message. This may happen regardless of the query entered, each returns the same error message:</p>
@@ -229,6 +247,16 @@ read_only=ON
 </pre></div>
 </div>
 <p>This node will now operate as the starting point in a new Primary Component.  Nodes that are part of non-operational components and have network connectivity will attempt to initiate a state transfer to bring their own databases up-to-date with this node.  At that point, the cluster will begin accepting SQL requests again.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-on"><span class="std std-ref">wsrep_on</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a></li>
+</ul>
+</div>
 </div>
 
 

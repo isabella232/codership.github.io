@@ -29,16 +29,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Setting Parallel Slave Threads" href="parallel-slave-threads.html" />
-    <link rel="prev" title="Handling Large Transactions" href="large-transactions.html" />
+    <link rel="next" title="Two-Node Clusters" href="two-node-clusters.html" />
+    <link rel="prev" title="Single Master Setup" href="single-master-setup.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -157,9 +160,24 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-article section" id="multi-master-setup">
 <span id="kb-best-multi-master-setup"></span><h1>Multi-Master Setup<a class="headerlink" href="#multi-master-setup" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 55 words; Published: October 22, 2019; Category: Topology; Type: Best Practices</p>
+<p class="article-stats">Length: 55 words; Published: June 24, 2015; Updated: October 22, 2019; Category: Topology; Type: Best Practices</p>
 <p>A master is a node that can simultaneously process writes from clients. The more masters in a cluster, the higher the probability of certification conflicts.  This can lead to undesirable rollbacks and performance degradation.</p>
 <p>If you find you experience frequent certification conflicts, consider reducing the number of nodes the cluster uses as masters.</p>
 </div>
@@ -177,8 +195,8 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Knowledge Base</a><ul>
-      <li>Previous: <a href="large-transactions.html" title="previous chapter">Handling Large Transactions</a></li>
-      <li>Next: <a href="parallel-slave-threads.html" title="next chapter">Setting Parallel Slave Threads</a></li>
+      <li>Previous: <a href="single-master-setup.html" title="previous chapter">Single Master Setup</a></li>
+      <li>Next: <a href="two-node-clusters.html" title="next chapter">Two-Node Clusters</a></li>
   </ul></li>
   </ul></li>
 </ul>

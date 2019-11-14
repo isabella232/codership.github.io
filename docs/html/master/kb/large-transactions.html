@@ -29,16 +29,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Multi-Master Setup" href="multi-master-setup.html" />
+    <link rel="next" title="Setting Parallel Slave Threads" href="parallel-slave-threads.html" />
     <link rel="prev" title="Group Commit" href="group-commit.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -160,16 +163,30 @@
 <li><a class="reference external" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a></li>
 <li><a class="reference external" href="https://www.percona.com/doc/percona-toolkit/2.1/pt-archiver.html">pt-archiver</a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-article section" id="handling-large-transactions">
 <span id="kb-best-large-transactions"></span><h1>Handling Large Transactions<a class="headerlink" href="#handling-large-transactions" title="Permalink to this headline">¶</a></h1>
-<p class="article-stats">Length: 443 words; Published: October 22, 2019; Category: Performance; Type: Best Practices</p>
+<p class="article-stats">Length: 443 words; Published: June 24, 2015; Updated: October 22, 2019; Category: Performance; Type: Best Practices</p>
 <p>Large transactions, especially ones deleting removes millions of rows from a table at once, can lead to diminished performance. One reason is that the table may reindexed and rescanned after each row is deleted.</p>
-<p class="kb rubric">Scenario</p>
+<p class="section-heading rubric">Scenario</p>
 <p>Suppose you have a node called <code class="docutils literal"><span class="pre">dbhost</span></code> with a database called <code class="docutils literal"><span class="pre">keystone</span></code>.  Suppose further that you execute a large transaction, which includes a <code class="docutils literal"><span class="pre">DELETE</span></code> statement that deletes expired tokens from their table in that database and on that host. If this transaction involves millions of rows, it could affect the overall performance of the cluster.</p>
-<p class="kb rubric">Recommendations</p>
+<p class="section-heading rubric">Recommendations</p>
 <p>This problem might be easily resolved by changing the size of the InnoDB buffer pool. The pool is bytes of the memory area where InnoDB caches table and index data. The larger the pool (i.e., the more RAM is used), the less the disk is  accessed, which is especially important when dealing with the same data in tables multiple times as you might in a large transaction on the same table.</p>
 <p>To change the buffer pool size, check the value of the <a class="reference external" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a> variable. If your servers are dedicated only to database service, try setting it to 80% of the server&#8217;s physical memory size. You can use the <code class="docutils literal"><span class="pre">free</span></code> command to see how much memory you have.  Once you determine how much memory you can spare for the InnoDB pool, add or change a line in the server&#8217;s configuration file like the following:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">innodb_buffer_pool_size</span><span class="o">=</span><span class="s">128M</span>
@@ -185,6 +202,13 @@
 <p>This allows you to delete rows efficiently from the cluster.</p>
 <p>The <code class="docutils literal"><span class="pre">--source</span></code> parameter provides the host, database, and table. Since there is no  <code class="docutils literal"><span class="pre">--destination</span></code> parameter given, it won&#8217;t move the data to another table for archiving, per the primary function of <code class="docutils literal"><span class="pre">pt-archiver</span></code>. The <code class="docutils literal"><span class="pre">--purge</span></code> parameter instructs <code class="docutils literal"><span class="pre">pt-archiver</span></code> to remove the rows from the database. The <code class="docutils literal"><span class="pre">--where</span></code> parameter provides the <code class="docutils literal"><span class="pre">WHERE</span></code> clause of the <code class="docutils literal"><span class="pre">DELETE</span></code> statement.</p>
 <p>The <code class="docutils literal"><span class="pre">--primary-key-only</span></code> parameter is efficient when purging rows. It prevents fetching each row in its entirety, when only the primary key column is used in the <code class="docutils literal"><span class="pre">WHERE</span></code> clause for <code class="docutils literal"><span class="pre">DELETE</span></code> statements.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference external" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">innodb_buffer_pool_size</a></li>
+<li><a class="reference external" href="https://www.percona.com/doc/percona-toolkit/2.1/pt-archiver.html">pt-archiver</a></li>
+</ul>
+</div>
 </div>
 
 
@@ -201,7 +225,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Knowledge Base</a><ul>
       <li>Previous: <a href="group-commit.html" title="previous chapter">Group Commit</a></li>
-      <li>Next: <a href="multi-master-setup.html" title="next chapter">Multi-Master Setup</a></li>
+      <li>Next: <a href="parallel-slave-threads.html" title="next chapter">Setting Parallel Slave Threads</a></li>
   </ul></li>
   </ul></li>
 </ul>

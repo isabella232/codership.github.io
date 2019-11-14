@@ -29,16 +29,19 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Single Master Setup" href="single-master-setup.html" />
-    <link rel="prev" title="Multi-Master Setup" href="multi-master-setup.html" />
+    <link rel="next" title="Detecting a Slow Node" href="detecting-slow-node.html" />
+    <link rel="prev" title="Handling Large Transactions" href="large-transactions.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -161,17 +164,31 @@
 <li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a></li>
 <li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-article section" id="setting-parallel-slave-threads">
 <span id="kb-best-parallel-slave-threads"></span><h1>Setting Parallel Slave Threads<a class="headerlink" href="#setting-parallel-slave-threads" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="index-0"></span><p class="article-stats" id="index-1">Length: 366 words; Published: October 22, 2019; Category: Performance; Type: Best Practices</p>
+<span class="target" id="index-0"></span><p class="article-stats" id="index-1">Length: 366 words; Published: June 24, 2015; Updated: October 22, 2019; Category: Performance; Type: Best Practices</p>
 <p>There is no rule about how many slave threads you need for replication.  Parallel threads do not guarantee better performance, but they don&#8217;t impair regular operation performance and they may in fact speed up the synchronization of new nodes joining a cluster.</p>
-<p class="kb rubric">Scenario</p>
+<p class="section-heading rubric">Scenario</p>
 <p>Suppose you have a cluster of a few nodes, but occasionally you add a couple of new nodes to the cluster to handle unexpected surges in traffic.  When these surges happen, you want the new nodes to be synchronized rapidly and not be a drain on the performance of the cluster in the process.</p>
 <p>You may be able to do this, to get new nodes synchronized and handling traffic faster by making changes to a couple of settings.</p>
-<p class="kb rubric">Recommendations</p>
+<p class="section-heading rubric">Recommendations</p>
 <p>To make state transfers quicker for new nodes, consider changing the number of slave threads. You should start with four slave threads per CPU core:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_slave_threads</span><span class="o">=</span><span class="s">4</span>
 </pre></div>
@@ -197,6 +214,14 @@
 <p class="first admonition-title">Warning</p>
 <p class="last">Do not use a value for <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a> that is higher than the average given by the <a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a> status variable.</p>
 </div>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-cert-deps-distance"><span class="std std-ref">wsrep_cert_deps_distance</span></a></li>
+</ul>
+</div>
 </div>
 
 
@@ -212,8 +237,8 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Knowledge Base</a><ul>
-      <li>Previous: <a href="multi-master-setup.html" title="previous chapter">Multi-Master Setup</a></li>
-      <li>Next: <a href="single-master-setup.html" title="next chapter">Single Master Setup</a></li>
+      <li>Previous: <a href="large-transactions.html" title="previous chapter">Handling Large Transactions</a></li>
+      <li>Next: <a href="detecting-slow-node.html" title="next chapter">Detecting a Slow Node</a></li>
   </ul></li>
   </ul></li>
 </ul>

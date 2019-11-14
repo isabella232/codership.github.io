@@ -36,10 +36,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -161,8 +164,24 @@
 <li><a class="reference internal" href="#repeatable-read"><span class="std std-ref">REPEATABLE-READ</span></a></li>
 <li><a class="reference internal" href="#serializable"><span class="std std-ref">SERIALIZABLE</span></a></li>
 </ul>
-<p>Related Articles</p>
 </div>
+</div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
 </div>
 <div class="library-document section" id="isolation-levels">
 <span id="id1"></span><h1>Isolation Levels<a class="headerlink" href="#isolation-levels" title="Permalink to this headline">¶</a></h1>
@@ -196,6 +215,15 @@ isolation level is honored only between transactions issued on the same node and
 <p class="sub-heading rubric" id="serializable">SERIALIZABLE</p>
 <p>Here all records accessed within a transaction are locked.  The resource locks in a way that also prevents you from appending records to the table the transaction operates upon.</p>
 <p><code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> prevents a phenomenon known as a phantom read.  Phantom reads occur when, within a transaction, two identical queries execute, and the rows the second query returns differ from the first.</p>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#read-committed"><span class="std std-ref">READ-COMMITTED</span></a></li>
+<li><a class="reference internal" href="#read-uncommitted"><span class="std std-ref">READ-UNCOMMITTED</span></a></li>
+<li><a class="reference internal" href="#repeatable-read"><span class="std std-ref">REPEATABLE-READ</span></a></li>
+<li><a class="reference internal" href="#serializable"><span class="std std-ref">SERIALIZABLE</span></a></li>
+</ul>
+</div>
 </div>
 
 

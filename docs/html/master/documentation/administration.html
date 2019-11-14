@@ -37,10 +37,13 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <link rel="stylesheet" href="/library/_static/basic-style.css">
 <link rel="stylesheet" href="/library/_static/header.css">
 <link rel="stylesheet" href="/library/_static/footer.css">
 <link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:768px)" href="/library/_static/tablet.css"/>
 
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
@@ -180,6 +183,23 @@
 </ul>
 </div>
 </div>
+<div class="top-links container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
 <div class="library-document section" id="galera-cluster-administration">
 <span id="administration"></span><h1>Galera Cluster Administration<a class="headerlink" href="#galera-cluster-administration" title="Permalink to this headline">¶</a></h1>
 <p>With the basics of how the cluster works and how to install and initialize it covered, this part begins a five part series on the administration and management of Galera Cluster.</p>
@@ -231,6 +251,31 @@
 <p>Standard backup methods available to MySQL database servers fail to preserve Global Transaction ID&#8217;s used by Galera Cluster.  You can recover data from these backups, but they&#8217;re insufficient in restoring nodes to a well-defined state.  This section shows how to use state transfers to properly perform backups in Galera Cluster.</p>
 </li>
 </ul>
+<div class="bottom-links container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="arbitrator.html"><span class="doc">Arbitrator</span></a></li>
+<li><a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a></li>
+<li><a class="reference internal" href="backup-cluster.html"><span class="doc">Backups</span></a></li>
+<li><a class="reference internal" href="monitor.html"><span class="doc">Cluster Monitoring</span></a></li>
+<li><a class="reference internal" href="deployment.html"><span class="doc">Deployment</span></a></li>
+<li><a class="reference internal" href="managing-fc.html"><span class="doc">Flow Control</span></a></li>
+<li><a class="reference internal" href="system-tables.html"><span class="doc">Galera System Tables</span></a></li>
+<li><a class="reference internal" href="node-provisioning.html"><span class="doc">Node Provisioning</span></a></li>
+<li><a class="reference internal" href="pc-recovery.html"><span class="doc">Recover Primary</span></a></li>
+<li><a class="reference internal" href="quorum-reset.html"><span class="doc">Reset Quorum</span></a></li>
+<li><a class="reference internal" href="schema-upgrades.html"><span class="doc">Schema Upgrades</span></a></li>
+<li><a class="reference internal" href="scriptable-sst.html"><span class="doc">Scriptable SST</span></a></li>
+<li><a class="reference internal" href="security.html"><span class="doc">Security</span></a></li>
+<li><a class="reference internal" href="sst.html"><span class="doc">State Snapshot Transfers</span></a></li>
+<li><a class="reference internal" href="using-sr.html"><span class="doc">Streaming Replication</span></a></li>
+<li><a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../training/tutorials/migrate.html"><span class="doc">Galera Cluster Migration Factors</span></a></li>
+</ul>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </div>
