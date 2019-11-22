@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="InnoDB Isolation Levels" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="InnoDB Isolation Levels" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, isolation levels, innodb" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Isolation Levels &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="State Transfers" href="state-transfer.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -167,7 +159,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -186,7 +178,7 @@
 </div>
 <div class="library-document section" id="isolation-levels">
 <span id="id1"></span><h1>Isolation Levels<a class="headerlink" href="#isolation-levels" title="Permalink to this headline">¶</a></h1>
-<p>In a database system, concurrent transactions are processed in &#8220;isolation&#8221; from each other. The level of isolation determines how transactions can affect each other.</p>
+<p>In a database system, concurrent transactions are processed in “isolation” from each other. The level of isolation determines how transactions can affect each other.</p>
 <p class="section-heading rubric">Intra-Node vs. Inter-Node Isolation in Galera Cluster</p>
 <p>Before going into details about possible isolation levels which can be set for a client session in Galera Cluster it is important to make a distinction between single node and global cluster transaction isolation. Individual cluster nodes can provide any isolation level <em>to the extent</em> it is supported by MySQL/InnoDB. However isolation level <em>between</em> the nodes in the cluster is affected by replication protocol, so transactions issued on different nodes may not be isolated <em>identically</em> to transactions issued on the same node.</p>
 <p>Overall isolation levels that are supported cluster-wide are</p>
@@ -195,28 +187,28 @@
 <li><a class="reference internal" href="#read-committed"><span class="std std-ref">READ-COMMITTED</span></a></li>
 <li><a class="reference internal" href="#repeatable-read"><span class="std std-ref">REPEATABLE-READ</span></a></li>
 </ul>
-<p>For transactions issued on different nodes, isolation is also strengthened by the &#8220;first committer wins&#8221; rule, which eliminates the &#8220;lost update anomaly&#8221; inherent to these levels, whereas for transactions issued on the same node this rule does not hold (as per original MySQL/InnoDB behavior). This makes for different outcomes depending on transaction origin (transaction issued on the same node may succeed, whereas the same transaction issued on another node would fail), but in either case it is no weaker than that isolation level on a standalone MySQL/InnoDB.</p>
+<p>For transactions issued on different nodes, isolation is also strengthened by the “first committer wins” rule, which eliminates the “lost update anomaly” inherent to these levels, whereas for transactions issued on the same node this rule does not hold (as per original MySQL/InnoDB behavior). This makes for different outcomes depending on transaction origin (transaction issued on the same node may succeed, whereas the same transaction issued on another node would fail), but in either case it is no weaker than that isolation level on a standalone MySQL/InnoDB.</p>
 <p><a class="reference internal" href="#serializable"><span class="std std-ref">SERIALIZABLE</span></a>
 isolation level is honored only between transactions issued on the same node and thus should be avoided.</p>
 <p>Data consistency between the nodes is always guaranteed regardless of the isolation level chosen by the client. However the client logic may break if it relies on an isolation level which is not not supported in the given configuration.</p>
 <p class="section-heading rubric">Understanding Isolation Levels</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">When using Galera Cluster in master-slave mode, all four levels are available to you, to the extend that MySQL supports it.  In multi-master mode, however, you can only use the <code class="docutils literal"><span class="pre">REPEATABLE-READ</span></code> level.</p>
+<p class="last">When using Galera Cluster in master-slave mode, all four levels are available to you, to the extend that MySQL supports it.  In multi-master mode, however, you can only use the <code class="docutils literal notranslate"><span class="pre">REPEATABLE-READ</span></code> level.</p>
 </div>
 <p class="sub-heading rubric" id="read-uncommitted">READ-UNCOMMITTED</p>
 <p>Here transactions can see changes to data made by other transactions that are not yet committed.</p>
-<p>In other words, transactions can read data that eventually may not exist, given that other transactions can always rollback the changes without commit.  This is known as a dirty read.  Effectively, <code class="docutils literal"><span class="pre">READ-UNCOMMITTED</span></code> has no real isolation at all.</p>
+<p>In other words, transactions can read data that eventually may not exist, given that other transactions can always rollback the changes without commit.  This is known as a dirty read.  Effectively, <code class="docutils literal notranslate"><span class="pre">READ-UNCOMMITTED</span></code> has no real isolation at all.</p>
 <p class="sub-heading rubric" id="read-committed">READ-COMMITTED</p>
 <p>Here dirty reads are not possible.  Uncommitted changes remain invisible to other transactions until the transaction commits.</p>
-<p>However, at this isolation level <code class="docutils literal"><span class="pre">SELECT</span></code> queries use their own snapshots of committed data, that is data committed before the <code class="docutils literal"><span class="pre">SELECT</span></code> query executed.  As a result, <code class="docutils literal"><span class="pre">SELECT</span></code> queries, when run multiple times within the same transaction, can return different result sets.  This is called a non-repeatable read.</p>
+<p>However, at this isolation level <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> queries use their own snapshots of committed data, that is data committed before the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> query executed.  As a result, <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> queries, when run multiple times within the same transaction, can return different result sets.  This is called a non-repeatable read.</p>
 <p class="sub-heading rubric" id="repeatable-read">REPEATABLE-READ</p>
-<p>Here non-repeatable reads are not possible.  Snapshots taken for the <code class="docutils literal"><span class="pre">SELECT</span></code> query are taken the first time the <code class="docutils literal"><span class="pre">SELECT</span></code> query runs during the transaction.</p>
-<p>The snapshot remains in use throughout the entire transaction for the <code class="docutils literal"><span class="pre">SELECT</span></code> query.  It always returns the same result set.  This level does not take into account changes to data made by other transactions, regardless of whether or not they have been committed.  IN this way, reads remain repeatable.</p>
+<p>Here non-repeatable reads are not possible.  Snapshots taken for the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> query are taken the first time the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> query runs during the transaction.</p>
+<p>The snapshot remains in use throughout the entire transaction for the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> query.  It always returns the same result set.  This level does not take into account changes to data made by other transactions, regardless of whether or not they have been committed.  IN this way, reads remain repeatable.</p>
 <p class="sub-heading rubric" id="serializable">SERIALIZABLE</p>
 <p>Here all records accessed within a transaction are locked.  The resource locks in a way that also prevents you from appending records to the table the transaction operates upon.</p>
-<p><code class="docutils literal"><span class="pre">SERIALIZABLE</span></code> prevents a phenomenon known as a phantom read.  Phantom reads occur when, within a transaction, two identical queries execute, and the rows the second query returns differ from the first.</p>
-<div class="bottom-links container">
+<p><code class="docutils literal notranslate"><span class="pre">SERIALIZABLE</span></code> prevents a phenomenon known as a phantom read.  Phantom reads occur when, within a transaction, two identical queries execute, and the rows the second query returns differ from the first.</p>
+<div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="#read-committed"><span class="std std-ref">READ-COMMITTED</span></a></li>
@@ -229,13 +221,55 @@ isolation level is honored only between transactions issued on the same node and
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="technical-description.html">Technical Description</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tech-desc-introduction.html">Database Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certification-based-replication.html">Certification-Based Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">Replication API</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="state-transfer.html">State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node-states.html">Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recovery.html">Node Failure &amp; Recovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weighted-quorum.html">Quorum Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streaming-replication.html">Streaming Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -250,14 +284,24 @@ isolation level is honored only between transactions issued on the same node and
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

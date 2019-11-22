@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="State Transfers with Galera Cluster" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="State Transfers with Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, sst, state snapshot transfer" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>State Transfers &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Flow Control" href="node-states.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -169,7 +161,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -197,18 +189,18 @@
 <span class="target" id="index-0"></span><p id="index-1">In a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST), the cluster provisions nodes by transferring a full data copy from one node to another.  When a new node joins the cluster, the new node initiates a State Snapshot Transfer to synchronize its data with a node that is already part of the cluster.</p>
 <p>You can choose from two conceptually different approaches in Galera Cluster to transfer a state from one database to another:</p>
 <ul>
-<li><p class="first"><strong>Logical</strong> This method uses <code class="docutils literal"><span class="pre">mysqldump</span></code>.  It requires that you fully initialize the receiving server and ready it to accept connections <em>before</em> the transfer.</p>
-<p>This is a blocking method.  The donor node becomes <code class="docutils literal"><span class="pre">READ-ONLY</span></code> for the duration of the transfer.  The State Snapshot Transfer applies the <code class="docutils literal"><span class="pre">FLUSH</span> <span class="pre">TABLES</span> <span class="pre">WITH</span> <span class="pre">READ</span> <span class="pre">LOCK</span></code> command on the donor node.</p>
-<p><code class="docutils literal"><span class="pre">mysqldump</span></code> is the slowest method for State Snapshot Transfers.  This can be an issue in a loaded cluster.</p>
+<li><p class="first"><strong>Logical</strong> This method uses <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>.  It requires that you fully initialize the receiving server and ready it to accept connections <em>before</em> the transfer.</p>
+<p>This is a blocking method.  The donor node becomes <code class="docutils literal notranslate"><span class="pre">READ-ONLY</span></code> for the duration of the transfer.  The State Snapshot Transfer applies the <code class="docutils literal notranslate"><span class="pre">FLUSH</span> <span class="pre">TABLES</span> <span class="pre">WITH</span> <span class="pre">READ</span> <span class="pre">LOCK</span></code> command on the donor node.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> is the slowest method for State Snapshot Transfers.  This can be an issue in a loaded cluster.</p>
 </li>
-<li><p class="first"><strong>Physical</strong> This method uses <code class="docutils literal"><span class="pre">rsync</span></code>, <code class="docutils literal"><span class="pre">rsync_wan</span></code>, <code class="docutils literal"><span class="pre">xtrabackup</span></code> and other methods and copies the data files directly from server to server.  It requires that you initialize the receiving server <em>after</em> the transfer.</p>
-<p>This method is faster than <code class="docutils literal"><span class="pre">mysqldump</span></code>, but they have certain limitations.  You can only use them on server startup.  The receiving server requires very similar configurations to the donor, (for example, both servers must use the same <a class="reference external" href="https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_file_per_table">innodb_file_per_table</a> value).</p>
-<p>Some of these methods, such as <code class="docutils literal"><span class="pre">xtrabackup</span></code> can be made non-blocking on the donor.  They are supported through a scriptable SST interface.</p>
+<li><p class="first"><strong>Physical</strong> This method uses <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, <code class="docutils literal notranslate"><span class="pre">rsync_wan</span></code>, <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code> and other methods and copies the data files directly from server to server.  It requires that you initialize the receiving server <em>after</em> the transfer.</p>
+<p>This method is faster than <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>, but they have certain limitations.  You can only use them on server startup.  The receiving server requires very similar configurations to the donor, (for example, both servers must use the same <a class="reference external" href="https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_file_per_table">innodb_file_per_table</a> value).</p>
+<p>Some of these methods, such as <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code> can be made non-blocking on the donor.  They are supported through a scriptable SST interface.</p>
 </li>
 </ul>
 <p>For more information on the particular methods available for State Snapshot Transfers, see the <a class="reference internal" href="sst.html"><span class="doc">State Snapshot Transfers</span></a>.</p>
 <p>You can set which State Snapshot Transfer method a node uses from the confirmation file.  For example:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">rsync_wan</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">rsync_wan</span>
 </pre></div>
 </div>
 <p class="section-heading rubric" id="state-transfer-ist">Incremental State Transfer (IST)</p>
@@ -216,22 +208,22 @@
 <p>This provisioning method is only available under certain conditions:</p>
 <ul class="simple">
 <li>Where the joiner node <a class="reference internal" href="glossary.html#term-state-uuid"><span class="xref std std-term">state UUID</span></a> is the same as that of the group.</li>
-<li>Where all missing write-sets are available in the donor&#8217;s write-set cache.</li>
+<li>Where all missing write-sets are available in the donor’s write-set cache.</li>
 </ul>
 <p>When these conditions are met, the donor node transfers the missing transactions alone, replaying them in order until the joiner catches up with the cluster.</p>
 <p>For example, say that you have a node in your cluster that falls behind the cluster.  This node carries a node state that reads:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>5a76ef62-30ec-11e1-0800-dba504cf2aab:197222
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>5a76ef62-30ec-11e1-0800-dba504cf2aab:197222
 </pre></div>
 </div>
 <p>Meanwhile, the current node state on the cluster reads:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>5a76ef62-30ec-11e1-0800-dba504cf2aab:201913
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>5a76ef62-30ec-11e1-0800-dba504cf2aab:201913
 </pre></div>
 </div>
-<p>The donor node on the cluster receives the state transfer request from the joiner node.  It checks its write-set cache for the <a class="reference internal" href="glossary.html#term-sequence-number"><span class="xref std std-term">sequence number</span></a> <code class="docutils literal"><span class="pre">197223</span></code>.  If that seqno is not available in the <a class="reference internal" href="glossary.html#term-write-set-cache"><span class="xref std std-term">write-set cache</span></a>, a State Snapshot Transfer initiates.  If that seqno is available in the write-set cache, the donor node sends the commits from <code class="docutils literal"><span class="pre">197223</span></code> through to <code class="docutils literal"><span class="pre">201913</span></code> to the joiner, instead of the full state.</p>
+<p>The donor node on the cluster receives the state transfer request from the joiner node.  It checks its write-set cache for the <a class="reference internal" href="glossary.html#term-sequence-number"><span class="xref std std-term">sequence number</span></a> <code class="docutils literal notranslate"><span class="pre">197223</span></code>.  If that seqno is not available in the <a class="reference internal" href="glossary.html#term-write-set-cache"><span class="xref std std-term">write-set cache</span></a>, a State Snapshot Transfer initiates.  If that seqno is available in the write-set cache, the donor node sends the commits from <code class="docutils literal notranslate"><span class="pre">197223</span></code> through to <code class="docutils literal notranslate"><span class="pre">201913</span></code> to the joiner, instead of the full state.</p>
 <p>The advantage of Incremental State Transfers is that they can dramatically speed up the reemerging of a node to the cluster.  Additionally, the process is non-blocking on the donor.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The most important parameter for Incremental State Transfers is <code class="docutils literal"><span class="pre">gcache.size</span></code> on the donor node.  This controls how much space you allocate in system memory for caching write-sets.  The more space available the more write-sets you can store.  The more write-sets you can store the wider the seqno gaps you can close through Incremental State Transfers.</p>
+<p>The most important parameter for Incremental State Transfers is <code class="docutils literal notranslate"><span class="pre">gcache.size</span></code> on the donor node.  This controls how much space you allocate in system memory for caching write-sets.  The more space available the more write-sets you can store.  The more write-sets you can store the wider the seqno gaps you can close through Incremental State Transfers.</p>
 <p class="last">On the other hand, if the write-set cache is much larger than the size of your database state, Incremental State Transfers begun less efficient than sending a state snapshot.</p>
 </div>
 <p class="sub-heading rubric" id="state-transfer-gcache">Write-set Cache (GCache)</p>
@@ -249,7 +241,7 @@
 <p>When all other stores are disabled, at least one page file remains present on disk.</p>
 </li>
 </ul>
-<p>For more information on parameters that control write-set caching, see the <code class="docutils literal"><span class="pre">gcache.*</span></code> parameters on <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
+<p>For more information on parameters that control write-set caching, see the <code class="docutils literal notranslate"><span class="pre">gcache.*</span></code> parameters on <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
 <p>Galera Cluster uses an allocation algorithm that attempts to store write-sets in the above order.  That is, first it attempts to use permanent in-memory store.  If there is not enough space for the write-set, it attempts to store to the permanent ring-buffer file.  The page store always succeeds, unless the write-set is larger than the available disk space.</p>
 <p>By default, the write-set cache allocates files in the working directory of the process.  You can specify a dedicated location for write-set caching, using the <a class="reference internal" href="galera-parameters.html#gcache-dir"><span class="std std-ref">gcache.dir</span></a> parameter.</p>
 <div class="admonition note">
@@ -258,9 +250,9 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If the <a class="reference internal" href="galera-parameters.html#gcache-recover"><span class="std std-ref">gcache.recover</span></a> parameter is set to <code class="docutils literal"><span class="pre">yes</span></code>, an attempt to recover the gcache will be performed on startup, so that the node may continue to serve IST to other nodes. If set to <code class="docutils literal"><span class="pre">no</span></code>, gcache will be invalidated on startup and the node will only be able to serve SST.</p>
+<p class="last">If the <a class="reference internal" href="galera-parameters.html#gcache-recover"><span class="std std-ref">gcache.recover</span></a> parameter is set to <code class="docutils literal notranslate"><span class="pre">yes</span></code>, an attempt to recover the gcache will be performed on startup, so that the node may continue to serve IST to other nodes. If set to <code class="docutils literal notranslate"><span class="pre">no</span></code>, gcache will be invalidated on startup and the node will only be able to serve SST.</p>
 </div>
-<div class="bottom-links container">
+<div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
@@ -275,13 +267,55 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="technical-description.html">Technical Description</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tech-desc-introduction.html">Database Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certification-based-replication.html">Certification-Based Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">Replication API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isolation-levels.html">Isolation Levels</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node-states.html">Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recovery.html">Node Failure &amp; Recovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weighted-quorum.html">Quorum Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streaming-replication.html">Streaming Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -296,14 +330,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

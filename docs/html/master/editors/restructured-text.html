@@ -1,34 +1,25 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Sphinx &amp; Restructured Text" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Sphinx &amp; Restructured Text" name="title" />
 <meta content="Instructions and examples on using Restructured Text mark-up." name="description" />
 <meta content="en-US" name="language" />
 <meta content="sphinx, restructured text, restructuredtext" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Sphinx &amp; reStructuredText &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="The Codership Style Guide" href="style-guide.html" />
@@ -87,8 +78,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -139,12 +129,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="simple">
 <li><a class="reference internal" href="../documentation/index.html"><span class="doc">Documentation</span></a></li>
 <li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
@@ -156,7 +148,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 <li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
@@ -171,7 +163,7 @@
 </div>
 <div class="library-index section" id="sphinx-restructuredtext">
 <span id="sphinx-restructured-text"></span><h1>Sphinx &amp; reStructuredText<a class="headerlink" href="#sphinx-restructuredtext" title="Permalink to this headline">¶</a></h1>
-<p>The Codership Library uses a Python documentation system called, Sphinx.  It converts reStructuredText files into HTML web pages, as well as other formats (e.g., PDF and EPub). As for reStructuredText, it&#8217;s a lightweight mark-up language that can be processed by Sphinx, and is easily readable by people.</p>
+<p>The Codership Library uses a Python documentation system called, Sphinx.  It converts reStructuredText files into HTML web pages, as well as other formats (e.g., PDF and EPub). As for reStructuredText, it’s a lightweight mark-up language that can be processed by Sphinx, and is easily readable by people.</p>
 <p>This page of the Library, in the Editors section provides some examples of how to use reStructuredText to format text and organize document pages in the Library.  This is not a comprehensive list of formatting codes available, but rather a list of what we use in the Library—and only those we thought to add to this page.</p>
 <div class="section" id="text-formatting">
 <h2>Text Formatting<a class="headerlink" href="#text-formatting" title="Permalink to this headline">¶</a></h2>
@@ -200,7 +192,7 @@
 </tr>
 <tr class="row-even"><td>monospace font</td>
 <td>``text``</td>
-<td><code class="docutils literal"><span class="pre">text</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">text</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -208,15 +200,15 @@
 <div class="section" id="lists">
 <h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
 <p>If you want to present a list of items, you can use bullets.  In HTML, these are &lt;li&gt; tags for each list item, grouped withing a pair &lt;ul&gt; tags for an unnumbered list.  To generate these in restructuredtext,  you need only preface a bullet item with a hyphen and a space like so:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>- some text
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- some text
 - more text
   + some sub-text
   + more sub-text
 - other text
 </pre></div>
 </div>
-<p>The lines preceded by hyphens will produce bullets.  The items preceded by plus-signs will produce a sub-bullet list. Notice that there&#8217;s nothing to enter for the &lt;ul&gt; tags. Below is the HTML text the code above will produce:</p>
-<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;simple&quot;</span><span class="p">&gt;</span>
+<p>The lines preceded by hyphens will produce bullets.  The items preceded by plus-signs will produce a sub-bullet list. Notice that there’s nothing to enter for the &lt;ul&gt; tags. Below is the HTML text the code above will produce:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;simple&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>some text<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>more text<span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>some sub-text<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
@@ -230,7 +222,7 @@
 <p>numbered bullets:       #. text</p>
 <p>Adding class to &lt;ul&gt; tag</p>
 <blockquote>
-<div><div class="highlight-text"><div class="highlight"><pre><span></span>.. rst-class:: video-stats
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. rst-class:: video-stats
 
 - Speaker:  Sakari Keskitalo, Philip Stoev
 - Date:  February 22, 2017
@@ -241,13 +233,13 @@
 </div>
 <div class="section" id="special-characters">
 <h2>Special Characters<a class="headerlink" href="#special-characters" title="Permalink to this headline">¶</a></h2>
-<p>If you want to use an emdash, you would enter three hyphens enclosed in a pair of bars, with spaces on both sides (i.e., <code class="docutils literal"><span class="pre">|---|</span></code> ).   At the bottom of the document, place the following code:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>.. |---|   unicode:: U+2014 .. EM DASH
+<p>If you want to use an emdash, you would enter three hyphens enclosed in a pair of bars, with spaces on both sides (i.e., <code class="docutils literal notranslate"><span class="pre">|---|</span></code> ).   At the bottom of the document, place the following code:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. |---|   unicode:: U+2014 .. EM DASH
    :trim:
 </pre></div>
 </div>
-<p>To add a hard-return, an HTML break tag, you can use <em>br</em>, wrapped in a pair of bars (i.e., <code class="docutils literal"><span class="pre">|br|</span></code>).  At the bottom of the document, you would enter the following code:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>.. |br| raw:: html
+<p>To add a hard-return, an HTML break tag, you can use <em>br</em>, wrapped in a pair of bars (i.e., <code class="docutils literal notranslate"><span class="pre">|br|</span></code>).  At the bottom of the document, you would enter the following code:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. |br| raw:: html
 
    &lt;br/&gt;
 </pre></div>
@@ -256,7 +248,7 @@
 <div class="section" id="links">
 <h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
 <p>For better navigation and richer information, all of the pages in the Library have links to other pages or other web sites.  These are accomplished, of course, with links.  The table below shows how to create links using Restructured Text mark-up:</p>
-<table border="1" class="doc-options docutils">
+<table border="1" class="colwidths-given doc-options docutils">
 <colgroup>
 <col width="25%" />
 <col width="40%" />
@@ -282,21 +274,21 @@
 </div>
 <div class="section" id="new-pages">
 <h2>New Pages<a class="headerlink" href="#new-pages" title="Permalink to this headline">¶</a></h2>
-<p>When new pages are added to Library, they must be included in the table of contents (i.e., <code class="docutils literal"><span class="pre">toctree</span></code>) of a pages—typically an index.rst file—so that it may be included in the PDF versions of the documentation.  Below is how you would include three pages under the one on which these formatting codes are entered:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>.. toctree::
+<p>When new pages are added to Library, they must be included in the table of contents (i.e., <code class="docutils literal notranslate"><span class="pre">toctree</span></code>) of a pages—typically an index.rst file—so that it may be included in the PDF versions of the documentation.  Below is how you would include three pages under the one on which these formatting codes are entered:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. toctree::
   :maxdepth: 2
 
    some-document
    another-document
 </pre></div>
 </div>
-<p>These will link two documents to the one which contains this text.  It will also put links to them on the page, wherever this is entered. The link will include the heading from each page.  Notice that the document file name did not include the file extention (i.e., <code class="docutils literal"><span class="pre">.rst</span></code>).</p>
+<p>These will link two documents to the one which contains this text.  It will also put links to them on the page, wherever this is entered. The link will include the heading from each page.  Notice that the document file name did not include the file extention (i.e., <code class="docutils literal notranslate"><span class="pre">.rst</span></code>).</p>
 </div>
 <div class="section" id="meta-tags">
 <h2>Meta Tags<a class="headerlink" href="#meta-tags" title="Permalink to this headline">¶</a></h2>
-<p>Meta tags are used to provide extra information to web browsers and search engines.  For instance the &lt;title&gt; tag in the heading of an HTML page provides the title that you will see at the top of the browser, perhaps in the tabs. The &lt;description&gt; tag can be used by the search engine to display a descpription you&#8217;ll see in the search results. The &lt;keywords&gt; tag helps to improve the ranking in searches.</p>
+<p>Meta tags are used to provide extra information to web browsers and search engines.  For instance the &lt;title&gt; tag in the heading of an HTML page provides the title that you will see at the top of the browser, perhaps in the tabs. The &lt;description&gt; tag can be used by the search engine to display a descpription you’ll see in the search results. The &lt;keywords&gt; tag helps to improve the ranking in searches.</p>
 <p>There are many meta tags that may be included in an HTML page. Below is how you would add them to a page formatted with Restructured Text:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>.. meta::
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. meta::
    :title: Sphinx &amp; Restructured Text
    :description: Instructions on using Restructured Text mark-up.
    :language: en-US
@@ -304,8 +296,8 @@
    :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
 </pre></div>
 </div>
-<p>This block of code should be entered at the very top of the document.  Below is the results of the above; it&#8217;s the tags that can be see when looking at the page source in the web browser.</p>
-<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<p>This block of code should be entered at the very top of the document.  Below is the results of the above; it’s the tags that can be see when looking at the page source in the web browser.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;Sphinx &amp;amp; Restructured Text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;title&quot;</span> <span class="p">/&gt;</span>
 <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;Instructions on using Restructured Text mark-up.&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;description&quot;</span> <span class="p">/&gt;</span>
 <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;en-US&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;language&quot;</span> <span class="p">/&gt;</span>
@@ -318,8 +310,8 @@
 </div>
 <div class="section" id="css-classes-ids">
 <h2>CSS Classes &amp; IDs<a class="headerlink" href="#css-classes-ids" title="Permalink to this headline">¶</a></h2>
-<p>Adding a CSS class or a CSS identification to an HTML tag is tricky with restructuredtext.  One way is to use <code class="docutils literal"><span class="pre">rst-class</span></code> like so:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>.. _`some-link-point`:
+<p>Adding a CSS class or a CSS identification to an HTML tag is tricky with restructuredtext.  One way is to use <code class="docutils literal notranslate"><span class="pre">rst-class</span></code> like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. _`some-link-point`:
 .. rst-class:: my-class
 .. rubric:: Some Sub-Heading
 
@@ -327,22 +319,22 @@
 </pre></div>
 </div>
 <p>Below are the results of the above formatting codes:</p>
-<div class="highlight-html"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;my-class rubric&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;something-unique&quot;</span><span class="p">&gt;</span>Some Sub-Heading<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;my-class rubric&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;something-unique&quot;</span><span class="p">&gt;</span>Some Sub-Heading<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>A paragraph with some sort text, talking about something or other.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<p class="tutorial-article">We use Cascading Style Sheets (CSS) to set the fonts, margins, and other such text and page formats. However, you may want to add style for just one page.  To do this, you can use the <code class="docutils literal"><span class="pre">raw</span></code> directive like so:</p>
+<p class="tutorial-article">We use Cascading Style Sheets (CSS) to set the fonts, margins, and other such text and page formats. However, you may want to add style for just one page.  To do this, you can use the <code class="docutils literal notranslate"><span class="pre">raw</span></code> directive like so:</p>
 </div>
 <div class="section" id="raw-html">
 <h2>Raw HTML<a class="headerlink" href="#raw-html" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes the easiest approach to achieving something in HTML is to add a raw HTML tag.  This will require you to define or declare it, usually near the top of the file, and then invoking it as needed. Here&#8217;s how you would declare it:</p>
-<div class="highlight-html"><div class="highlight"><pre><span></span>.. role:: raw-html(raw)
+<p>Sometimes the easiest approach to achieving something in HTML is to add a raw HTML tag.  This will require you to define or declare it, usually near the top of the file, and then invoking it as needed. Here’s how you would declare it:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>.. role:: raw-html(raw)
    :format: html
 </pre></div>
 </div>
 <p>Below is how you would then use it to put &lt;small&gt; tags around some text:</p>
-<div class="highlight-html"><div class="highlight"><pre><span></span>:raw-html:`<span class="p">&lt;</span><span class="nt">small</span><span class="p">&gt;</span>a minor point<span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;</span>`
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>:raw-html:`<span class="p">&lt;</span><span class="nt">small</span><span class="p">&gt;</span>a minor point<span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;</span>`
 </pre></div>
 </div>
 <p>abbreviations:  <abbr title="Some Text">s.t.</abbr></p>
@@ -351,6 +343,7 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -358,20 +351,46 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
             </a></p>
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Sphinx &amp; reStructuredText</a><ul>
-<li><a class="reference internal" href="#text-formatting">Text Formatting</a></li>
-<li><a class="reference internal" href="#lists">Lists</a></li>
-<li><a class="reference internal" href="#special-characters">Special Characters</a></li>
-<li><a class="reference internal" href="#links">Links</a></li>
-<li><a class="reference internal" href="#new-pages">New Pages</a></li>
-<li><a class="reference internal" href="#meta-tags">Meta Tags</a></li>
-<li><a class="reference internal" href="#css-classes-ids">CSS Classes &amp; IDs</a></li>
-<li><a class="reference internal" href="#raw-html">Raw HTML</a></li>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Codership Writers &amp; Editors</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="docs-state.html">State of the Codership Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faqs-pending.html">New Questions for the FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="github-info.html">The Codership GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kb-plans.html">Development of the Codership Knowledge Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mission-goals.html">The Codership Library Mission &amp; Goals</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Sphinx &amp; reStructuredText</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#text-formatting">Text Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lists">Lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#special-characters">Special Characters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#links">Links</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-pages">New Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#meta-tags">Meta Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#css-classes-ids">CSS Classes &amp; IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#raw-html">Raw HTML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html">The Codership Style Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-articles.html">Tutorial Articles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training-videos.html">Codership Training Videos</a></li>
 </ul>
 </li>
 </ul>
+
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
@@ -385,14 +404,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

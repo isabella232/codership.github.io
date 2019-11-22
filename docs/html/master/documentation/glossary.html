@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Galera Cluster Glossary" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Cluster Glossary" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, mysql, mariadb, glossary, terms" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Glossary &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="The Codership Knowledge Base" href="../kb/index.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -160,7 +152,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -183,7 +175,7 @@
 <dt id="term-galera-arbitrator">Galera Arbitrator</dt>
 <dd><p class="first">An external process that functions as an additional node in certain cluster operations, such as quorum calculations and generating consistent application state snapshots.</p>
 <p>For example, consider a situation where your cluster becomes partitioned due to a loss of network connectivity that results in two components of equal size.  Each component initiates quorum calculations to determine which should remain the <a class="reference internal" href="#term-primary-component"><span class="xref std std-term">Primary Component</span></a> and which should become a non-operational component.  If the components are of equal size, it risks a split-brain condition.  Galera Arbitrator provides an addition vote in the quorum calculation, so that one component registers as larger than the other.  The larger component then remains the Primary Component.</p>
-<p>Unlike the main <code class="docutils literal"><span class="pre">mysqld</span></code> process, <code class="docutils literal"><span class="pre">garbd</span></code> doesn&#8217;t generate replication events of its own and doesn&#8217;t store replication data. It does, however, acknowledge all replication events.  Furthermore, you can route replication through Galera Arbitrator, such as when generating a consistent application state snapshot for backups.</p>
+<p>Unlike the main <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> process, <code class="docutils literal notranslate"><span class="pre">garbd</span></code> doesn’t generate replication events of its own and doesn’t store replication data. It does, however, acknowledge all replication events.  Furthermore, you can route replication through Galera Arbitrator, such as when generating a consistent application state snapshot for backups.</p>
 <p class="last">For more information, see <a class="reference internal" href="arbitrator.html"><span class="doc">Galera Arbitrator</span></a> and <a class="reference internal" href="backup-cluster.html"><span class="doc">Backing Up Cluster Data</span></a>.</p>
 </dd>
 <dt id="term-galera-replication-plugin">Galera Replication Plugin</dt>
@@ -195,22 +187,22 @@
 <dt id="term-global-transaction-id">Global Transaction ID</dt>
 <dd><p class="first">To keep the state identical on all nodes, the <a class="reference internal" href="#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> uses global transaction IDs (GTID), which are used to identify the state change and to identify the state itself by the ID of the last state change</p>
 <p>The GTID consists of a state UUID, which uniquely identifies the state and the sequence of changes it undergoes, and an ordinal sequence number (seqno, a 64-bit signed integer) to denote the position of the change in the sequence.</p>
-<p class="last">For more information on Global Transaction ID&#8217;s, see <a class="reference internal" href="architecture.html#wsrep-api"><span class="std std-ref">wsrep API</span></a>.</p>
+<p class="last">For more information on Global Transaction ID’s, see <a class="reference internal" href="architecture.html#wsrep-api"><span class="std std-ref">wsrep API</span></a>.</p>
 </dd>
 <dt id="term-incremental-state-transfer">Incremental State Transfer</dt>
 <dd><p class="first">In an Incremental State Transfer (IST) a node only receives the missing write-sets and catches up with the group by replaying them. See also the definition for State Snapshot Transfer (SST).</p>
-<p class="last">For more information on IST&#8217;s, see <a class="reference internal" href="state-transfer.html#state-transfer-ist"><span class="std std-ref">Incremental State Transfer (IST)</span></a>.</p>
+<p class="last">For more information on IST’s, see <a class="reference internal" href="state-transfer.html#state-transfer-ist"><span class="std std-ref">Incremental State Transfer (IST)</span></a>.</p>
 </dd>
 <dt id="term-ist">IST</dt>
 <dd>See <a class="reference internal" href="#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</dd>
 <dt id="term-logical-state-transfer-method">Logical State Transfer Method</dt>
-<dd><p class="first">This is a type of back-end state transfer method that operates through the database server (e.g., <code class="docutils literal"><span class="pre">mysqldump</span></code>).</p>
+<dd><p class="first">This is a type of back-end state transfer method that operates through the database server (e.g., <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>).</p>
 <p class="last">For more information, see <a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical State Snapshot</span></a>.</p>
 </dd>
 <dt id="term-pf">PF</dt>
 <dd>PF is packet filter used for firewall software, that has been ported to several operating systems. It can be configured for firewall protection of a Galera Cluster.</dd>
 <dt id="term-physical-state-transfer-method">Physical State Transfer Method</dt>
-<dd><p class="first">This is another type of back-end state transfer method, but it operates on the physical media in the datadir (e.g., <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code>).</p>
+<dd><p class="first">This is another type of back-end state transfer method, but it operates on the physical media in the datadir (e.g., <code class="docutils literal notranslate"><span class="pre">rsync</span></code> and <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>).</p>
 <p class="last">For more information, see <a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical State Snapshot</span></a>.</p>
 </dd>
 <dt id="term-primary-component">Primary Component</dt>
@@ -218,7 +210,7 @@
 <p class="last">For more information on the Primary Component, see <a class="reference internal" href="weighted-quorum.html"><span class="doc">Quorum Components</span></a>.</p>
 </dd>
 <dt id="term-rolling-schema-upgrade">Rolling Schema Upgrade</dt>
-<dd><p class="first">The rolling schema upgrade is a <abbr title="Data Definition Language">DDL</abbr> processing method in which the <abbr title="Data Definition Language">DDL</abbr> will only be processed locally on the node. The node is desynchronized from the cluster for the duration of the <abbr title="Data Definition Language">DDL</abbr> processing in a way that it doesn&#8217;t block the other nodes.  When the <abbr title="Data Definition Language">DDL</abbr> processing is complete, the node applies the delayed replication events and synchronizes with the cluster.</p>
+<dd><p class="first">The rolling schema upgrade is a <abbr title="Data Definition Language">DDL</abbr> processing method in which the <abbr title="Data Definition Language">DDL</abbr> will only be processed locally on the node. The node is desynchronized from the cluster for the duration of the <abbr title="Data Definition Language">DDL</abbr> processing in a way that it doesn’t block the other nodes.  When the <abbr title="Data Definition Language">DDL</abbr> processing is complete, the node applies the delayed replication events and synchronizes with the cluster.</p>
 <p class="last">For more information, see <a class="reference internal" href="schema-upgrades.html#rsu"><span class="std std-ref">Rolling Schema Upgrade</span></a>.</p>
 </dd>
 <dt id="term-rsu">RSU</dt>
@@ -234,9 +226,9 @@
 <p class="last">For more information, see <a class="reference internal" href="sst.html#sst"><span class="std std-ref">State Snapshot Transfer (SST)</span></a>.</p>
 </dd>
 <dt id="term-state-uuid">State UUID</dt>
-<dd>Unique identifier for the state of a node and the sequence of changes it undergoes.  It&#8217;s the first component of the <a class="reference internal" href="#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>.</dd>
+<dd>Unique identifier for the state of a node and the sequence of changes it undergoes.  It’s the first component of the <a class="reference internal" href="#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>.</dd>
 <dt id="term-streaming-replication">Streaming Replication</dt>
-<dd><p class="first">This provides an alternative replication method for handling large or long-running write transactions.  It&#8217;s a new feature in version 4.0 of Galera Cluster.  In older versions, the feature is unsupported.</p>
+<dd><p class="first">This provides an alternative replication method for handling large or long-running write transactions.  It’s a new feature in version 4.0 of Galera Cluster.  In older versions, the feature is unsupported.</p>
 <p>Under normal operation, the node performs all replication and certification operations when the transaction commits. With large transactions this can result in conflicts if smaller transactions are committed first.  With Streaming Replication, the node breaks the transaction into fragments, then certifies and replicates them to all nodes while the transaction is still in progress.  Once certified, a fragment can no longer be aborted by a conflicting transaction.</p>
 <p class="last">For more information see <a class="reference internal" href="streaming-replication.html"><span class="doc">Streaming Replication</span></a> and <a class="reference internal" href="using-sr.html"><span class="doc">Using Streaming Replication</span></a>.</p>
 </dd>
@@ -261,13 +253,56 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mysql-wsrep-options.html">MySQL wsrep Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-functions.html">Galera Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-parameters.html">Galera Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-status-variables.html">Galera Status Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xtrabackup-options.html">XtraBackup Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="glb-parameters.html">Galera Load Balancer Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="versioning-information.html">Versioning Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="legal-notice.html">Legal Notice</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Glossary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -282,14 +317,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

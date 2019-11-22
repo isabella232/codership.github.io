@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Back-up a Galera Cluster" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Back-up a Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, sst backup, state snapshot transfer" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Backing Up Cluster Data &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Deployment" href="deployment.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -164,7 +156,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -192,23 +184,23 @@
 <li>The node initiates the backup at a well-defined point.</li>
 <li>The node associates a Global Transaction ID with the backup.</li>
 <li>The node desyncs from the cluster to avoid throttling performance while making the backup, even if the backup process blocks the node.</li>
-<li>The cluster knows that the node is performing a backup and won&#8217;t choose the node as a donor for another node.</li>
+<li>The cluster knows that the node is performing a backup and won’t choose the node as a donor for another node.</li>
 </ul>
 <p>In order to use this method for backups, you will need to use a script that implements both your preferred backup procedure and the Galera Arbitrator daemon, triggering it in a manner similar to a state snapshot transfer. You would execute such a script from the command-line like this:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> garbd --address gcomm://192.168.1.2?gmcast.listen_addr<span class="o">=</span>tcp://0.0.0.0:4444 <span class="se">\</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> garbd --address gcomm://192.168.1.2?gmcast.listen_addr<span class="o">=</span>tcp://0.0.0.0:4444 <span class="se">\</span>
   --group example_cluster --donor example_donor --sst backup
 </pre></div>
 </div>
-<p>This command triggers donor node to invoke a script with the name <code class="docutils literal"><span class="pre">wsrep_sst_backup.sh</span></code>, which it looks for in the <code class="docutils literal"><span class="pre">PATH</span></code> for the <code class="docutils literal"><span class="pre">mysqld</span></code> process.  When the donor reaches a well-defined point, a point where no changes are happening to the database, it runs the backup script passing the GTID corresponding to the current database state.</p>
+<p>This command triggers donor node to invoke a script with the name <code class="docutils literal notranslate"><span class="pre">wsrep_sst_backup.sh</span></code>, which it looks for in the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> for the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> process.  When the donor reaches a well-defined point, a point where no changes are happening to the database, it runs the backup script passing the GTID corresponding to the current database state.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">In the command, &#8216;<code class="docutils literal"><span class="pre">?gmcast.listen_addr=tcp://0.0.0.0:4444</span></code>&#8216; is an arbitrary listen socket address that Galera Arbitrator opens to communicate with the cluster.  You only need to specify this in the event that the default socket address (i.e., <code class="docutils literal"><span class="pre">0.0.0.0:4567</span></code> is busy).</p>
+<p class="last">In the command, ‘<code class="docutils literal notranslate"><span class="pre">?gmcast.listen_addr=tcp://0.0.0.0:4444</span></code>’ is an arbitrary listen socket address that Galera Arbitrator opens to communicate with the cluster.  You only need to specify this in the event that the default socket address (i.e., <code class="docutils literal notranslate"><span class="pre">0.0.0.0:4567</span></code> is busy).</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">You may find it useful to create your backup script using a modified version of the standard state snapshot transfer script.  For information on scripts of this kind, see <a class="reference internal" href="scriptable-sst.html"><span class="doc">Scriptable State Snapshot Transfers</span></a>.</p>
 </div>
-<div class="bottom-links container">
+<div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="scriptable-sst.html"><span class="doc">Scriptable SST</span></a></li>
@@ -218,13 +210,59 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="administration.html">Galera Cluster Administration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-provisioning.html">Node Provisioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst.html">State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scriptable-sst.html">Scriptable State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema-upgrades.html">Schema Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrading.html">Upgrading Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pc-recovery.html">Recovering Primary Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quorum-reset.html">Resetting the Quorum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="managing-fc.html">Managing Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-eviction.html">Auto-Eviction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-sr.html">Using Streaming Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrator.html">Galera Arbitrator</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Backing Up Cluster Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -239,14 +277,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

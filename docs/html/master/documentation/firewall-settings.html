@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Galera Cluster - Firewall Settings" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Cluster - Firewall Settings" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, firewall, ports" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Firewall Settings &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Firewall Configuration with iptables" href="ip-tables.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -160,7 +152,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -181,15 +173,15 @@
 <span id="id1"></span><h1>Firewall Settings<a class="headerlink" href="#firewall-settings" title="Permalink to this headline">¶</a></h1>
 <p>Galera Cluster requires a number of ports to maintain network connectivity between the nodes.  Depending on your deployment, you may not require all of these ports, but a cluster might require all of them on each node.  Below is a list of these ports and their purpose:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">3306</span></code> is the default port for MySQL client connections and <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> using <code class="docutils literal"><span class="pre">mysqldump</span></code> for backups.</li>
-<li><code class="docutils literal"><span class="pre">4567</span></code> is reserved for Galera Cluster replication traffic. Multicast replication uses both TCP and UDP transport on this port.</li>
-<li><code class="docutils literal"><span class="pre">4568</span></code> is the port for <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</li>
-<li><code class="docutils literal"><span class="pre">4444</span></code> is used for all other <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">3306</span></code> is the default port for MySQL client connections and <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> using <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> for backups.</li>
+<li><code class="docutils literal notranslate"><span class="pre">4567</span></code> is reserved for Galera Cluster replication traffic. Multicast replication uses both TCP and UDP transport on this port.</li>
+<li><code class="docutils literal notranslate"><span class="pre">4568</span></code> is the port for <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">4444</span></code> is used for all other <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</li>
 </ul>
 <p>How these ports are enabled for Galera Cluster can vary depending upon your operating system distribution and what you use to configure the firewall.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="ip-tables.html">Firewall Configuration with <code class="docutils literal"><span class="pre">iptables</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="ip-tables.html">Firewall Configuration with <code class="docutils literal notranslate"><span class="pre">iptables</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="firewalld.html">Firewall Configuration with FirewallD</a></li>
 <li class="toctree-l1"><a class="reference internal" href="firewall-pf.html">Firewall Configuration with PF</a></li>
 </ul>
@@ -198,20 +190,56 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="security.html">Security</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Firewall Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ssl.html">SSL Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="selinux.html">SELinux Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Documentation</a><ul>
   <li><a href="security.html">Security</a><ul>
       <li>Previous: <a href="security.html" title="previous chapter">Security</a></li>
-      <li>Next: <a href="ip-tables.html" title="next chapter">Firewall Configuration with <code class="docutils literal"><span class="pre">iptables</span></code></a></li>
+      <li>Next: <a href="ip-tables.html" title="next chapter">Firewall Configuration with <code class="docutils literal notranslate"><span class="pre">iptables</span></code></a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -219,14 +247,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

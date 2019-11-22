@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="SSL Certificates to use with Galera Cluster" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="SSL Certificates to use with Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, ssl certificate, security, ports" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>SSL Certificates &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="SSL Configuration" href="ssl-config.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -164,7 +156,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -189,77 +181,77 @@
 <p class="last">This chapter only covers certificate generation.  For information on its use in Galera Cluster, see <a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a>.</p>
 </div>
 <p class="section-heading rubric" id="gen-certs">Generating Certificates</p>
-<p>There are three certificates that you need to create in order to secure Galera Cluster: the Certificate Authority (CA) key and cert; the server certificate, to secure <code class="docutils literal"><span class="pre">mysqld</span></code> activity and replication traffic; and the client certificate to secure the database client and <code class="docutils literal"><span class="pre">stunnel</span></code> for state snapshot transfers.</p>
+<p>There are three certificates that you need to create in order to secure Galera Cluster: the Certificate Authority (CA) key and cert; the server certificate, to secure <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> activity and replication traffic; and the client certificate to secure the database client and <code class="docutils literal notranslate"><span class="pre">stunnel</span></code> for state snapshot transfers.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">When certificates expire there is no way to update the cluster without a complete shutdown.  You can minimize the frequency of this downtime by using large values for the <code class="docutils literal"><span class="pre">-days</span></code> parameter when generating your certificates.</p>
+<p class="last">When certificates expire there is no way to update the cluster without a complete shutdown.  You can minimize the frequency of this downtime by using large values for the <code class="docutils literal notranslate"><span class="pre">-days</span></code> parameter when generating your certificates.</p>
 </div>
 <p class="sub-heading rubric" id="gen-ca">CA Certificate</p>
 <p>The node uses the Certificate Authority to verify the signature on the certificates.  As such, you need this key and cert file to generate the server and client certificates.</p>
 <p>To create the CA key and cert, complete the following steps:</p>
 <ol class="arabic">
 <li><p class="first">Generate the CA key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl genrsa 2048 &gt; ca-key.pem</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl genrsa 2048 &gt; ca-key.pem</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Using the CA key, generate the CA certificate.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl req -new -x509 -nodes -days 365000 \</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl req -new -x509 -nodes -days 365000 \</span>
 <span class="go">      -key ca-key.pem -out ca-cert.pem</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<p>This creates a key and certificate file for the Certificate Authority.  They are in the current working directory as <code class="docutils literal"><span class="pre">ca-key.pem</span></code> and <code class="docutils literal"><span class="pre">ca-cert.pem</span></code>.  You need both to generate the server and client certificates.  Additionally, each node requires <code class="docutils literal"><span class="pre">ca-cert.pem</span></code> to verify certificate signatures.</p>
+<p>This creates a key and certificate file for the Certificate Authority.  They are in the current working directory as <code class="docutils literal notranslate"><span class="pre">ca-key.pem</span></code> and <code class="docutils literal notranslate"><span class="pre">ca-cert.pem</span></code>.  You need both to generate the server and client certificates.  Additionally, each node requires <code class="docutils literal notranslate"><span class="pre">ca-cert.pem</span></code> to verify certificate signatures.</p>
 <p class="sub-heading rubric" id="gen-server-cert">Server Certificate</p>
 <p>The node uses the server certificate to secure both the database server activity and replication traffic from Galera Cluster.</p>
 <ol class="arabic">
 <li><p class="first">Create the server key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl req -newkey rsa:2048 -days 365000 \</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl req -newkey rsa:2048 -days 365000 \</span>
 <span class="go">      -nodes -keyout server-key.pem -out server-req.pem</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Process the server RSA key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl rsa -in server-key.pem -out server-key.pem</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl rsa -in server-key.pem -out server-key.pem</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Sign the server certificate.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl x509 -req -in server-req.pem -days 365000 \</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl x509 -req -in server-req.pem -days 365000 \</span>
 <span class="go">      -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 \</span>
 <span class="go">      -out server-cert.pem</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<p>This creates a key and certificate file for the server.  They are in the current working directory as <code class="docutils literal"><span class="pre">server-key.pem</span></code> and <code class="docutils literal"><span class="pre">server-cert.pem</span></code>.  Each node requires both to secure database server activity and replication traffic.</p>
+<p>This creates a key and certificate file for the server.  They are in the current working directory as <code class="docutils literal notranslate"><span class="pre">server-key.pem</span></code> and <code class="docutils literal notranslate"><span class="pre">server-cert.pem</span></code>.  Each node requires both to secure database server activity and replication traffic.</p>
 <p class="sub-heading rubric" id="gen-client-cert">Client Certificate</p>
-<p>The node uses the client certificate to secure client-side activity.  In the event that you prefer physical transfer methods for state snapshot transfers, <code class="docutils literal"><span class="pre">rsync</span></code> for instance, the node also uses this key and certificate to secure <code class="docutils literal"><span class="pre">stunnel</span></code>.</p>
+<p>The node uses the client certificate to secure client-side activity.  In the event that you prefer physical transfer methods for state snapshot transfers, <code class="docutils literal notranslate"><span class="pre">rsync</span></code> for instance, the node also uses this key and certificate to secure <code class="docutils literal notranslate"><span class="pre">stunnel</span></code>.</p>
 <ol class="arabic">
 <li><p class="first">Create the client key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl req -newkey rsa:2048 -days 365000 \</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl req -newkey rsa:2048 -days 365000 \</span>
 <span class="go">      -nodes -keyout client-key.pem -out client-req.pem</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Process client RSA key.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl rsa -in client-key.pem -out client-key.pem</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl rsa -in client-key.pem -out client-key.pem</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Sign the client certificate.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl x509 -req -in client-req.pem -days 365000 \</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl x509 -req -in client-req.pem -days 365000 \</span>
 <span class="go">      -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 \</span>
 <span class="go">      -out client-cert.pem</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<p>This creates a key and certificate file for the database client.  They are in the current working directory as <code class="docutils literal"><span class="pre">client-key.pem</span></code> and <code class="docutils literal"><span class="pre">client-cert.pem</span></code>.  Each node requires both to secure client activity and state snapshot transfers.</p>
+<p>This creates a key and certificate file for the database client.  They are in the current working directory as <code class="docutils literal notranslate"><span class="pre">client-key.pem</span></code> and <code class="docutils literal notranslate"><span class="pre">client-cert.pem</span></code>.  Each node requires both to secure client activity and state snapshot transfers.</p>
 <p class="section-heading rubric" id="verify-cert">Verifying the Certificates</p>
-<p>When you finish creating the key and certificate files, use <code class="docutils literal"><span class="pre">openssl</span></code> to verify that they were generated correctly:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">openssl verify -CAfile ca-cert.pem \</span>
+<p>When you finish creating the key and certificate files, use <code class="docutils literal notranslate"><span class="pre">openssl</span></code> to verify that they were generated correctly:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl verify -CAfile ca-cert.pem \</span>
 <span class="go">      server-cert.pem client-cert.pem</span>
 
 <span class="go">server-cert.pem: OK</span>
@@ -267,14 +259,14 @@
 </pre></div>
 </div>
 <p>In the event that this verification fails, repeat the above process to generate replacement certificates.</p>
-<p>Once the certificates pass verification, you can send them out to each node.  Use a secure method, such as <code class="docutils literal"><span class="pre">scp</span></code> or <code class="docutils literal"><span class="pre">sftp</span></code>.  The node requires the following files:</p>
+<p>Once the certificates pass verification, you can send them out to each node.  Use a secure method, such as <code class="docutils literal notranslate"><span class="pre">scp</span></code> or <code class="docutils literal notranslate"><span class="pre">sftp</span></code>.  The node requires the following files:</p>
 <ul class="simple">
-<li>Certificate Authority: <code class="docutils literal"><span class="pre">ca-cert.pem</span></code>.</li>
-<li>Server Certificate: <code class="docutils literal"><span class="pre">server-key.pem</span></code> and <code class="docutils literal"><span class="pre">server-cert.pem</span></code>.</li>
-<li>Client Certificate: <code class="docutils literal"><span class="pre">client-key.pem</span></code> and <code class="docutils literal"><span class="pre">client-cert.pem</span></code>.</li>
+<li>Certificate Authority: <code class="docutils literal notranslate"><span class="pre">ca-cert.pem</span></code>.</li>
+<li>Server Certificate: <code class="docutils literal notranslate"><span class="pre">server-key.pem</span></code> and <code class="docutils literal notranslate"><span class="pre">server-cert.pem</span></code>.</li>
+<li>Client Certificate: <code class="docutils literal notranslate"><span class="pre">client-key.pem</span></code> and <code class="docutils literal notranslate"><span class="pre">client-cert.pem</span></code>.</li>
 </ul>
-<p>Place these files in the <code class="docutils literal"><span class="pre">/etc/mysql/certs</span></code> directory of each node, or a similar location where you can find them later in configuring the cluster to use <abbr title="Secure Socket Layer">SSL</abbr>.</p>
-<div class="bottom-links container">
+<p>Place these files in the <code class="docutils literal notranslate"><span class="pre">/etc/mysql/certs</span></code> directory of each node, or a similar location where you can find them later in configuring the cluster to use <abbr title="Secure Socket Layer">SSL</abbr>.</p>
+<div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a></li>
@@ -284,13 +276,49 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="security.html">Security</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="firewall-settings.html">Firewall Settings</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="ssl.html">SSL Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="selinux.html">SELinux Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -307,14 +335,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

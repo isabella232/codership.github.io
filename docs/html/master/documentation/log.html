@@ -1,34 +1,25 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Database Server Logs to Troubleshoot Galera Cluster" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Database Server Logs to Troubleshoot Galera Cluster" name="title" />
 <meta content="How to use Database Server Logs to Troubleshoot Galera Cluster Problems." name="description" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, logs, log file, troubleshooting" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Database Server Logs &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Notification Command" href="notification-cmd.html" />
@@ -87,8 +78,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -139,12 +129,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -167,7 +159,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -186,7 +178,7 @@
 </div>
 <div class="library-document section" id="database-server-logs">
 <span id="log"></span><h1>Database Server Logs<a class="headerlink" href="#database-server-logs" title="Permalink to this headline">¶</a></h1>
-<p>Galera Cluster provides the same database server logging features available to MySQL, MariaDB and Percona XtraDB, depending on which you use.  By default, it writes errors to a <code class="docutils literal"><span class="pre">&lt;hostname&gt;.err</span></code> file in the data directory.  You can change this in the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file using the <a class="reference external" href="https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_log-error">log_error</a> option, or by using the <code class="docutils literal"><span class="pre">--log-error</span></code> parameter.</p>
+<p>Galera Cluster provides the same database server logging features available to MySQL, MariaDB and Percona XtraDB, depending on which you use.  By default, it writes errors to a <code class="docutils literal notranslate"><span class="pre">&lt;hostname&gt;.err</span></code> file in the data directory.  You can change this in the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> configuration file using the <a class="reference external" href="https://dev.mysql.com/doc/refman/5.6/en/server-options.html#option_mysqld_log-error">log_error</a> option, or by using the <code class="docutils literal notranslate"><span class="pre">--log-error</span></code> parameter.</p>
 <p class="section-heading rubric" id="server-log-parameters">Log Parameters</p>
 <p>Galera Cluster provides parameters and wsrep options that allow you to enable error logging on events that are specific to the replication process.  If you have a script monitoring the logs, these entires can give you information on conflicts occurring in the replication process.</p>
 <ul>
@@ -197,20 +189,20 @@
 <li><p class="first"><a class="reference internal" href="mysql-wsrep-options.html#wsrep-debug"><span class="std std-ref">wsrep_debug</span></a>: This parameter enables debugging information for the database server logs.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">In addition to useful debugging information, this parameter also causes the database server to print authentication information, (i.e., passwords) to the error logs.  Don&#8217;t enable it in production environments as it&#8217;s a security vulnerability.</p>
+<p class="last">In addition to useful debugging information, this parameter also causes the database server to print authentication information, (i.e., passwords) to the error logs.  Don’t enable it in production environments as it’s a security vulnerability.</p>
 </div>
 </li>
 </ul>
-<p>You can enable these through the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.  The excerpt below is an example of these options and how they are enabled:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># wsrep Log Options</span>
+<p>You can enable these through the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> configuration file.  The excerpt below is an example of these options and how they are enabled:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># wsrep Log Options</span>
 <span class="na">wsrep_log_conflicts</span><span class="o">=</span><span class="s">ON</span>
 <span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;cert.log_conflicts=ON&quot;</span>
 <span class="na">wsrep_debug</span><span class="o">=</span><span class="s">ON</span>
 </pre></div>
 </div>
 <p class="section-heading rubric" id="gra-log">Additional Log Files</p>
-<p>Whenever a node fails to apply an event on a slave node, the database server creates a special binary log file of the event in the data directory.  The naming convention the node uses for the filename is <code class="docutils literal"><span class="pre">GRA_*.log</span></code>.</p>
-<div class="bottom-links container">
+<p>Whenever a node fails to apply an event on a slave node, the database server creates a special binary log file of the event in the data directory.  The naming convention the node uses for the filename is <code class="docutils literal notranslate"><span class="pre">GRA_*.log</span></code>.</p>
+<div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="galera-parameters.html#cert-log-conflicts"><span class="std std-ref">cert.log_conflicts</span></a></li>
@@ -222,13 +214,50 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="monitor.html">Cluster Monitoring</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="monitoring-cluster.html">Using Status Variables</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Database Server Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd.html">Notification Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd-example.html">Notification Script Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -243,14 +272,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

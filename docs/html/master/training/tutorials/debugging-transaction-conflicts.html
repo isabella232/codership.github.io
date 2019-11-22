@@ -1,32 +1,23 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Debugging Transaction Conflicts in Galera Cluster" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Debugging Transaction Conflicts in Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Debugging Transaction Conflicts &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Debugging Problems with SST" href="debug-problems-with-sst.html" />
@@ -85,8 +76,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -137,12 +127,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul>
 <li><p class="first"><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></p>
 </li>
@@ -161,7 +153,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 <li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
@@ -179,10 +171,10 @@
 <p class="article-stats">Length:  1,086 words; Writer: Philip Stoev; Published: June 29, 2015; Topic: General; Level: Beginner</p>
 <p>If you are using Galera Cluster in multi-master mode, you will most likely run into transaction conflicts if two clients attempt to modify the same row at the same time. Such conflicts are reported a deadlock errors to the application.
 Legacy applications are frequently unable to handle transaction conflicts properly and may not provide sufficient information to debug the source of the problem.</p>
-<p>If the <code class="docutils literal"><span class="pre">wsrep_log_conflicts</span></code> option is set, Galera can output all the information about transaction conflicts that is available to it to the error log. As it is a dynamic option, you can enable it while the server is running, collect some entries for examination, and disable it to avoid filling up the log.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">wsrep_log_conflicts</span></code> option is set, Galera can output all the information about transaction conflicts that is available to it to the error log. As it is a dynamic option, you can enable it while the server is running, collect some entries for examination, and disable it to avoid filling up the log.</p>
 <p class="section-heading rubric">Decoding the Output</p>
-<p>The output from <code class="docutils literal"><span class="pre">wsrep_log_conflicts</span></code> may look a bit intimidating at first, but in fact contains a lot of information that can be used to pin-point the offending application, module or SQL operation. The relevant pieces of information have been underlined:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">*** Priority TRANSACTION:</span>
+<p>The output from <code class="docutils literal notranslate"><span class="pre">wsrep_log_conflicts</span></code> may look a bit intimidating at first, but in fact contains a lot of information that can be used to pin-point the offending application, module or SQL operation. The relevant pieces of information have been underlined:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">*** Priority TRANSACTION:</span>
 <span class="go">TRANSACTION 1375, ACTIVE 0 sec starting index read</span>
 <span class="go">mysql tables in use 1, locked 1</span>
 <span class="go">1 lock struct(s), heap size 360, 0 row lock(s)</span>
@@ -222,31 +214,31 @@ Legacy applications are frequently unable to handle transaction conflicts proper
 <p>ACTIVE 23 sec - how long the victim transaction has been running before it was aborted. Long-running transactions are more prone to being unable to complete due to other transactions committing in the meantime.</p>
 <p>Consider breaking down such transactions into smaller parts or changing them to modify a smaller number of rows. Transactions that perform housekeeping can be modified to do less work, but run more frequently, or be moved to a dedicated maintenance window or a period of lower server activity.</p>
 <p>MySQL thread id 5 - the ID of the thread that was aborted due to the conflict.
-This ID is the same that is used in <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">PROCESSLIST</span></code>, the query log and the slow query log, so can be used to cross-reference with those sources of information</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">localhost ::1 root - the username of the client for the aborted transaction and the host the client connected from.</span>
+This ID is the same that is used in <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">PROCESSLIST</span></code>, the query log and the slow query log, so can be used to cross-reference with those sources of information</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">localhost ::1 root - the username of the client for the aborted transaction and the host the client connected from.</span>
 <span class="go">update t1 set ... The SQL string of the query that was aborted.</span>
 </pre></div>
 </div>
 <p>For multi-statement transactions, the SQL string may not be available, or show simply COMMIT, if the conflict was detected at commit time.</p>
 <p>index <cite>PRIMARY</cite> - the name of the index that was used by the aborted query.
 PHYSICAL RECORD - a dump of the record or records where the conflict occurred.
-This section comes directly from the InnoDB storage engine and follows the format used in <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">ENGINE</span> <span class="pre">INNODB</span> <span class="pre">STATUS</span></code>.</p>
+This section comes directly from the InnoDB storage engine and follows the format used in <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">ENGINE</span> <span class="pre">INNODB</span> <span class="pre">STATUS</span></code>.</p>
 <p>The record with heap no 1 can be disregarded, while the following entries contain the actual conflicting records from the table.</p>
 <p>hex 80000001 - in our example, this is the hex dump of the primary key.
-As the key is declared as <code class="docutils literal"><span class="pre">UNSIGNED</span> <span class="pre">INTEGER</span></code>, the value has a leading sign bit that should be taken into account when converting to decimal.</p>
+As the key is declared as <code class="docutils literal notranslate"><span class="pre">UNSIGNED</span> <span class="pre">INTEGER</span></code>, the value has a leading sign bit that should be taken into account when converting to decimal.</p>
 <p>problematic_key_value21 - any string fields will be decoded and visible in the output.</p>
 <p>seqno: 24 - the binary log ID of the winning transaction.</p>
 <p class="section-heading rubric">Determining the Winning Transaction</p>
 <p>All the information from the output above, except for the seqno, pertains to the victim transaction of a conflict. Sometimes it is useful to determine the transaction that won the conflict and was not aborted, and the seqno can be used to obtain that information from the binary log.</p>
-<p>In order to be able to fetch this information, the server needs to be running with binary logging enabled. If <code class="docutils literal"><span class="pre">log-slave-updates</span></code> is enabled, then the binlog on each server will contain all updates, so only one server needs to be searched in order to find the transaction. Otherwise the binlogs of all servers need to be searched separately.</p>
-<p>MariaDB Cluster provides the actual SQL update statements from the transaction if the <code class="docutils literal"><span class="pre">--binlog-annotate-row-events</span></code> option is enabled. Galera Cluster and Percona XtraDB Cluster will only provide a list of the updates made by the transaction.</p>
+<p>In order to be able to fetch this information, the server needs to be running with binary logging enabled. If <code class="docutils literal notranslate"><span class="pre">log-slave-updates</span></code> is enabled, then the binlog on each server will contain all updates, so only one server needs to be searched in order to find the transaction. Otherwise the binlogs of all servers need to be searched separately.</p>
+<p>MariaDB Cluster provides the actual SQL update statements from the transaction if the <code class="docutils literal notranslate"><span class="pre">--binlog-annotate-row-events</span></code> option is enabled. Galera Cluster and Percona XtraDB Cluster will only provide a list of the updates made by the transaction.</p>
 <p>Unfortunately one needs to search through the entire binlog for the seqno in question, which is called Xid in the binlog:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mysqlbinlog var/mysqld.2/data/0.000001 <span class="p">|</span> grep <span class="s1">&#39;Xid = 3&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> mysqlbinlog var/mysqld.2/data/0.000001 <span class="p">|</span> grep <span class="s1">&#39;Xid = 3&#39;</span>
 <span class="gp">#</span><span class="m">150629</span>  <span class="m">0</span>:46:45 server id <span class="m">2</span>  end_log_pos <span class="m">644</span> CRC32 0x39cbbd68  <span class="nv">Xid</span> <span class="o">=</span> <span class="m">3</span>
 </pre></div>
 </div>
 <p>This provides the server id that executed the winning transaction, plus the position in the binlog when the transaction ended. We can use mysqlbinlog again to display the binlog up to and including the winning transaction:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> mysqlbinlog var/mysqld.2/data/0.000001 --server-id<span class="o">=</span><span class="m">2</span> --stop-position<span class="o">=</span><span class="m">644</span> --base64-output<span class="o">=</span>DECODE-ROWS --verbose
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> mysqlbinlog var/mysqld.2/data/0.000001 --server-id<span class="o">=</span><span class="m">2</span> --stop-position<span class="o">=</span><span class="m">644</span> --base64-output<span class="o">=</span>DECODE-ROWS --verbose
 
 <span class="go">...</span>
 
@@ -269,18 +261,65 @@ As the key is declared as <code class="docutils literal"><span class="pre">UNSIG
 <span class="go">DELIMITER ;</span>
 </pre></div>
 </div>
-<p>From this output, we can see what updates the winning transaction made, as artificially-generated SQL statements. MariaDB Cluster with <code class="docutils literal"><span class="pre">--binlog-annotate-row-events</span></code> would provide the original SQL that was issued.</p>
+<p>From this output, we can see what updates the winning transaction made, as artificially-generated SQL statements. MariaDB Cluster with <code class="docutils literal notranslate"><span class="pre">--binlog-annotate-row-events</span></code> would provide the original SQL that was issued.</p>
 </div>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Codership Training</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Codership Tutorials on Galera Cluster</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-installation.html">Installing Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-configuration.html">Replication Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="starting-cluster.html">Starting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing-cluster.html">Testing a Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restarting-cluster.html">Restarting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-on-aws.html">Installing a Galera Cluster on AWS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-monitoring.html">Monitoring a Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migrate.html">Galera Cluster Migration Factors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-backup.html">Making Back-Ups with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started-docker.html">Getting Started Galera with Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="achieving-read-after-write-semantics.html">Read-After-Write Semantics with Galera</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debugging Transaction Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug-problems-with-sst.html">Debugging Problems with SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geo-distributed-clusters.html">Geo-Distributed Database Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primary-component.html">The Primary Component in Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supporting-transaction-isolation-levels.html">Support for Transaction Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="safe-to-bootstrap-feature.html">The Safe-To-Bootstrap Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-or-not.html">To SST or Not To SST?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../videos/index.html">Codership Training Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
@@ -295,14 +334,24 @@ As the key is declared as <code class="docutils literal"><span class="pre">UNSIG
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Galera Cluster Quorum Components" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Cluster Quorum Components" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, weighted quorum, quorum, split-brain" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Quorum Components &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Streaming Replication" href="streaming-replication.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -167,7 +159,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -190,7 +182,7 @@
 <p>Under normal operations, your Primary Component is the cluster.  When cluster partitioning occurs, Galera Cluster invokes a special quorum algorithm to select one component as the Primary Component.  This guarantees that there is never more than one Primary Component in the cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">In addition to the individual node, quorum calculations also take into account a separate process called <code class="docutils literal"><span class="pre">garbd</span></code>.  For more information on its configuration and use, see <a class="reference internal" href="arbitrator.html"><span class="doc">Galera Arbitrator</span></a>.</p>
+<p class="last">In addition to the individual node, quorum calculations also take into account a separate process called <code class="docutils literal notranslate"><span class="pre">garbd</span></code>.  For more information on its configuration and use, see <a class="reference internal" href="arbitrator.html"><span class="doc">Galera Arbitrator</span></a>.</p>
 </div>
 <p class="section-heading rubric" id="weighted-quorum">Weighted Quorum</p>
 <span class="target" id="index-0"></span><span class="target" id="index-1"></span><p id="index-2">The current number of nodes in the cluster defines the current cluster size.  There is no configuration setting that allows you to define the list of all possible cluster nodes.  Every time a node joins the cluster, the total cluster size increases.  When a node leaves the cluster, gracefully, the cluster size decreases.  Cluster size determines the number of votes required to achieve quorum.</p>
@@ -216,7 +208,7 @@
 <p>For example, this can occur if you have a cluster without a backup switch in the event that the main switch fails.  Or, when a single node fails in a two node cluster.</p>
 <p>By design, Galera Cluster avoids split-brain condition.  In the event that a failure results in splitting the cluster into two partitions of equal size, (unless you explicitly configure it otherwise), neither partition becomes a Primary Component.</p>
 <p>To minimize the risk of this happening in clusters that do have an even number of nodes, partition the cluster in a way that one component always forms the Primary cluster section.</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>4 node cluster -&gt; 3 (Primary) + 1 (Non-primary)
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>4 node cluster -&gt; 3 (Primary) + 1 (Non-primary)
 6 node cluster -&gt; 4 (Primary) + 2 (Non-primary)
 6 node cluster -&gt; 5 (Primary) + 1 (Non-primary)
 </pre></div>
@@ -226,18 +218,21 @@
 <p class="section-heading rubric" id="quorum-calculation">Quorum Calculation</p>
 <p id="index-3">Galera Cluster supports a weighted quorum, where each node can be assigned a weight in the 0 to 255 range, with which it will participate in quorum calculations.</p>
 <p>The quorum calculation formula is</p>
+<div class="math notranslate nohighlight">
+\[\frac{ \sum_{p_i \times w_i} - \sum_{l_i \times w_i}}
+{ 2} &lt; \sum_{m_i \times w_i}\]</div>
 <p>Where:</p>
 <ul class="simple">
-<li> Members of the last seen primary component;</li>
-<li> Members that are known to have left gracefully;</li>
-<li> Current component members; and,</li>
-<li> Member weights.</li>
+<li><span class="math notranslate nohighlight">\(p_i\)</span> Members of the last seen primary component;</li>
+<li><span class="math notranslate nohighlight">\(l_i\)</span> Members that are known to have left gracefully;</li>
+<li><span class="math notranslate nohighlight">\(m_i\)</span> Current component members; and,</li>
+<li><span class="math notranslate nohighlight">\(w_i\)</span> Member weights.</li>
 </ul>
 <p>What this means is that the quorum is preserved if (and only if) the sum weight of the nodes in a new component strictly exceeds half that of the preceding <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, minus the nodes which left gracefully.</p>
-<p>You can customize node weight using the <a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a> parameter.  By default, node weight is <code class="docutils literal"><span class="pre">1</span></code>, which translates to the traditional node count behavior.</p>
+<p>You can customize node weight using the <a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a> parameter.  By default, node weight is <code class="docutils literal notranslate"><span class="pre">1</span></code>, which translates to the traditional node count behavior.</p>
 <p>You can change the node weight during runtime by setting the <a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a> parameter.</p>
 <blockquote>
-<div><div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s2">&quot;pc.weight=3&quot;</span><span class="p">;</span>
+<div><div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s2">&quot;pc.weight=3&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -250,32 +245,32 @@
 <p>Now that you understand how quorum weights work, here are some examples of deployment patterns and how to use them.</p>
 <p class="sub-heading rubric" id="wq-three-nodes">Weighted Quorum for Three Nodes</p>
 <p>When configuring quorum weights for three nodes, use the following pattern:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>node1: pc.weight = 2
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>node1: pc.weight = 2
 node2: pc.weight = 1
 node3: pc.weight = 0
 </pre></div>
 </div>
-<p>Under this pattern, killing <code class="docutils literal"><span class="pre">node2</span></code> and <code class="docutils literal"><span class="pre">node3</span></code> simultaneously preserves the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> on <code class="docutils literal"><span class="pre">node1</span></code>.  Killing <code class="docutils literal"><span class="pre">node1</span></code> causes <code class="docutils literal"><span class="pre">node2</span></code> and <code class="docutils literal"><span class="pre">node3</span></code> to become non-primary components.</p>
+<p>Under this pattern, killing <code class="docutils literal notranslate"><span class="pre">node2</span></code> and <code class="docutils literal notranslate"><span class="pre">node3</span></code> simultaneously preserves the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> on <code class="docutils literal notranslate"><span class="pre">node1</span></code>.  Killing <code class="docutils literal notranslate"><span class="pre">node1</span></code> causes <code class="docutils literal notranslate"><span class="pre">node2</span></code> and <code class="docutils literal notranslate"><span class="pre">node3</span></code> to become non-primary components.</p>
 <p class="sub-heading rubric" id="wq-simple-master-slave">Weighted Quorum for a Simple Master-Slave Scenario</p>
 <p>When configuring quorum weights for a simple master-slave scenario, use the following pattern:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>node1: pc.weight = 1
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>node1: pc.weight = 1
 node2: pc.weight = 0
 </pre></div>
 </div>
-<p>Under this pattern, if the master <code class="docutils literal"><span class="pre">node</span></code> dies, <code class="docutils literal"><span class="pre">node2</span></code> becomes a non-primary component.  However, in the event that <code class="docutils literal"><span class="pre">node2</span></code> dies, <code class="docutils literal"><span class="pre">node1</span></code> continues as the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  If the network connection between the nodes fails, <code class="docutils literal"><span class="pre">node1</span></code> continues as the Primary Component while <code class="docutils literal"><span class="pre">node2</span></code> becomes a non-primary component.</p>
+<p>Under this pattern, if the master <code class="docutils literal notranslate"><span class="pre">node</span></code> dies, <code class="docutils literal notranslate"><span class="pre">node2</span></code> becomes a non-primary component.  However, in the event that <code class="docutils literal notranslate"><span class="pre">node2</span></code> dies, <code class="docutils literal notranslate"><span class="pre">node1</span></code> continues as the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  If the network connection between the nodes fails, <code class="docutils literal notranslate"><span class="pre">node1</span></code> continues as the Primary Component while <code class="docutils literal notranslate"><span class="pre">node2</span></code> becomes a non-primary component.</p>
 <p class="sub-heading rubric" id="wq-master-multi-slave">Weighted Quorum for a Master and Multiple Slaves Scenario</p>
 <p>When configuring quorum weights for a master-slave scenario that features multiple slave nodes, use the following pattern:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>node1: pc.weight = 1
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>node1: pc.weight = 1
 node2: pc.weight = 0
 node3: pc.weight = 0
 ...
 noden: pc.weight = 0
 </pre></div>
 </div>
-<p>Under this pattern, if <code class="docutils literal"><span class="pre">node1</span></code> dies, all remaining nodes end up as non-primary components.  If any other node dies, the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> is preserved.  In the case of network partitioning, <code class="docutils literal"><span class="pre">node1</span></code> always remains as the Primary Component.</p>
+<p>Under this pattern, if <code class="docutils literal notranslate"><span class="pre">node1</span></code> dies, all remaining nodes end up as non-primary components.  If any other node dies, the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> is preserved.  In the case of network partitioning, <code class="docutils literal notranslate"><span class="pre">node1</span></code> always remains as the Primary Component.</p>
 <p class="sub-heading rubric" id="wq-primary-secondary-site">Weighted Quorum for a Primary and Secondary Site Scenario</p>
 <p>When configuring quorum weights for primary and secondary sites, use the following pattern:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>Primary Site:
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Primary Site:
   node1: pc.weight = 2
   node2: pc.weight = 2
 
@@ -284,8 +279,8 @@ Secondary Site:
   node4: pc.weight = 1
 </pre></div>
 </div>
-<p>Under this pattern, some nodes are located at the primary site while others are at the secondary site.  In the event that the secondary site goes down or if network connectivity is lost between the sites, the nodes at the primary site remain the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Additionally, either <code class="docutils literal"><span class="pre">node1</span></code> or <code class="docutils literal"><span class="pre">node2</span></code> can crash without the rest of the nodes becoming non-primary components.</p>
-<div class="bottom-links container">
+<p>Under this pattern, some nodes are located at the primary site while others are at the secondary site.  In the event that the secondary site goes down or if network connectivity is lost between the sites, the nodes at the primary site remain the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Additionally, either <code class="docutils literal notranslate"><span class="pre">node1</span></code> or <code class="docutils literal notranslate"><span class="pre">node2</span></code> can crash without the rest of the nodes becoming non-primary components.</p>
+<div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></li>
@@ -298,13 +293,55 @@ Secondary Site:
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="technical-description.html">Technical Description</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tech-desc-introduction.html">Database Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certification-based-replication.html">Certification-Based Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">Replication API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isolation-levels.html">Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="state-transfer.html">State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node-states.html">Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recovery.html">Node Failure &amp; Recovery</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Quorum Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streaming-replication.html">Streaming Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -319,14 +356,24 @@ Secondary Site:
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

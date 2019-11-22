@@ -1,32 +1,23 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Group Commit with Galera Cluster" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Group Commit with Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Group Commit &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Handling Large Transactions" href="large-transactions.html" />
@@ -85,8 +76,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -137,12 +127,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="simple">
 <li><a class="reference internal" href="../documentation/index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -161,7 +153,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 <li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
@@ -179,12 +171,12 @@
 <div class="library-article section" id="group-commit">
 <span id="kb-best-group-commit"></span><h1>Group Commit<a class="headerlink" href="#group-commit" title="Permalink to this headline">¶</a></h1>
 <p class="article-stats">Length: 322 words; Published: May 30, 2019; Updated: October 22, 2019; Category: Performance; Type: Best Practices</p>
-<p>After each transaction is committed, InnoDB will typically flush changes to its redo log and the binary log to the disk&#8211;it does this typically by calling <cite>fsync()</cite>, <cite>fdatasync()</cite>. This method is used to ensure data changes are stored durably on the disk. Disk flushing, however, can have an effect on performance and the number of transactions-per-second (TPS) that can be committed.</p>
+<p>After each transaction is committed, InnoDB will typically flush changes to its redo log and the binary log to the disk–it does this typically by calling <cite>fsync()</cite>, <cite>fdatasync()</cite>. This method is used to ensure data changes are stored durably on the disk. Disk flushing, however, can have an effect on performance and the number of transactions-per-second (TPS) that can be committed.</p>
 <p>Starting with version 5.3 of MariaDB, Group Commit was introduced. If there are several transactions trying to commit at the same time, group commit will force them to be flushed to the disk with a single system call, rather than one system call for each commit. This can greatly reduce the need for flush operations, and greatly improve the throughput of TPS.</p>
 <p>In Galera transactions are committed sequentially in total order determined by the group communication between nodes. Sequential commit ordering is implemented with commit monitor, which allows only single transaction to proceed at the time.</p>
 <p>Prior to version 4 of Galera, even with MariaDB 5.3 or later, transactions were committed strictly in sequence: group commit had no effect of Galera. In Galera 3, the commit monitor was held until the transaction was completely finished. This disabled the MariaDB group commit optimization and it was not possible to amortize expensive disk operations (i.e., <cite>fsync()</cite>, <cite>fdatasync()</cite>).</p>
 <p>As of version 4 of Galera, the commit time concurrency control was reworked so that the commit monitor is released as soon as the commit has been queued for group commit. This allows transactions to be committed in groups while still respecting sequential commit order.</p>
-<p>In essence, MariaDB&#8217;s group commit operates now with Galera&#8211;starting with version 4&#8211;by providing better integration with existing functionality. The same will also apply to MySQL-wsrep when it&#8217;s implemented: Galera 4 provides a better way to integrate with native binary log group commit.</p>
+<p>In essence, MariaDB’s group commit operates now with Galera–starting with version 4–by providing better integration with existing functionality. The same will also apply to MySQL-wsrep when it’s implemented: Galera 4 provides a better way to integrate with native binary log group commit.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last"><strong>See Also</strong>: For more information, see the <a class="reference external" href="https://mariadb.com/kb/en/mariadb/group-commit-for-the-binary-log/">MariaDB Documentation on Group Commit</a>.</p>
@@ -193,13 +185,63 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Knowledge Base</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#troubleshooting-articles">Troubleshooting Articles</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#best-practices-articles">Best Practices Articles</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-crash-during-sst.html">Node Crashes during SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-fails-sql-syntax-error.html">SST Fails with SQL Syntax Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="requested-state-transfer-failed.html">Requested State Transfer Failed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stall-on-alter-table.html">Cluster Stalls on <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-changes.html">User Changes not Replicating</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-increment-multiples.html">AUTO_INCREMENT Increasing by Multiples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deadlock-found.html">Deadlock Found during a Transaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resolve-commit-failure.html">Commit Failed for Reason 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-master-conflicts.html">Multi-Master Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error-unknown-command.html">Unknown Command Errors</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Group Commit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="large-transactions.html">Handling Large Transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-slave-threads.html">Setting Parallel Slave Threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="detecting-slow-node.html">Detecting a Slow Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wan-latency.html">WAN Latency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wan-replication.html">WAN Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="customizing-gcache-size.html">Customizing the Write-Set Cache Size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gcache-during-state-transfers.html">Write-Set Caching during State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="single-master-setup.html">Single Master Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-master-setup.html">Multi-Master Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="two-node-clusters.html">Two-Node Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setting-selinux-policy.html">Setting an SELinux Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sync-transaction-before-another.html">Synchronizing a Transaction Before Executing Another</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -212,14 +254,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Galera Cluster within Jail Instances" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Cluster within Jail Instances" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, jails, packet filtering, firewall" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Using Jails &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Cluster Monitoring" href="monitor.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -170,7 +162,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -189,40 +181,40 @@
 </div>
 <div class="library-document section" id="using-jails">
 <span id="jails"></span><h1>Using Jails<a class="headerlink" href="#using-jails" title="Permalink to this headline">¶</a></h1>
-<p>In FreeBSD, <code class="docutils literal"><span class="pre">jails</span></code> provides a platform for securely deploying applications within virtual instances.  You may find it useful in portable deployments across numerous machines for testing and security.</p>
+<p>In FreeBSD, <code class="docutils literal notranslate"><span class="pre">jails</span></code> provides a platform for securely deploying applications within virtual instances.  You may find it useful in portable deployments across numerous machines for testing and security.</p>
 <p>Galera Cluster can run from within a jail instance.</p>
 <p class="section-heading rubric" id="jails-prep-serve">Preparing the Server</p>
 <p>Jails exist as isolated file systems within, but unaware of, the host server.  In order to grant the node running within the jail network connectivity with the cluster, you need to configure the network interfaces and firewall to redirect from the host into the jail.</p>
 <p class="sub-heading rubric" id="jail-net-config">Network Configuration</p>
-<p>To begin, create a second loopback interface for the jail.  this allows you to isolate jail traffic from <code class="docutils literal"><span class="pre">lo0</span></code>, the host loopback interface.</p>
+<p>To begin, create a second loopback interface for the jail.  this allows you to isolate jail traffic from <code class="docutils literal notranslate"><span class="pre">lo0</span></code>, the host loopback interface.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For the purposes of this guide, the jail loopback is called <code class="docutils literal"><span class="pre">lo1</span></code>, if <code class="docutils literal"><span class="pre">lo1</span></code> already exists on your system, increment the digit to create one that does not already exist, (for instance, <code class="docutils literal"><span class="pre">lo2</span></code>).</p>
+<p class="last">For the purposes of this guide, the jail loopback is called <code class="docutils literal notranslate"><span class="pre">lo1</span></code>, if <code class="docutils literal notranslate"><span class="pre">lo1</span></code> already exists on your system, increment the digit to create one that does not already exist, (for instance, <code class="docutils literal notranslate"><span class="pre">lo2</span></code>).</p>
 </div>
 <p>To create a loopback interface, complete the following steps:</p>
 <ol class="arabic">
-<li><p class="first">Using your preferred text editor, add the loopback interface to <code class="docutils literal"><span class="pre">/etc/rc.conf</span></code>:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> Network Interface
+<li><p class="first">Using your preferred text editor, add the loopback interface to <code class="docutils literal notranslate"><span class="pre">/etc/rc.conf</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> Network Interface
 <span class="go">cloned_interfaces=&quot;${cloned_interfaces} lo1&quot;</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Create the loopback interface:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service netif cloneup
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> service netif cloneup
 </pre></div>
 </div>
 </li>
 </ol>
-<p>This creates <code class="docutils literal"><span class="pre">lo1</span></code>, a new loopback network interface for your jails.  You can view the new interface in the listing using the following command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> ifconfig
+<p>This creates <code class="docutils literal notranslate"><span class="pre">lo1</span></code>, a new loopback network interface for your jails.  You can view the new interface in the listing using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ifconfig
 </pre></div>
 </div>
 <p class="sub-heading rubric" id="jails-pf">Firewall Configuration</p>
-<p>FreeBSD provides packet filtering support at the kernel level.  Using PF you can set up, maintain and inspect the packet filtering rule sets.  For jails, you can route traffic from external ports on the host system to internal ports within the jail&#8217;s file system.  This allows the node running within the jail to have network access as though it were running on the host system.</p>
+<p>FreeBSD provides packet filtering support at the kernel level.  Using PF you can set up, maintain and inspect the packet filtering rule sets.  For jails, you can route traffic from external ports on the host system to internal ports within the jail’s file system.  This allows the node running within the jail to have network access as though it were running on the host system.</p>
 <p>To enable PF and create rules for the node, complete the following steps:</p>
 <ol class="arabic">
-<li><p class="first">Using your preferred text editor, make the following additions to <code class="docutils literal"><span class="pre">/etc/rc.conf</span></code>:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> Firewall Configuration
+<li><p class="first">Using your preferred text editor, make the following additions to <code class="docutils literal notranslate"><span class="pre">/etc/rc.conf</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> Firewall Configuration
 <span class="go">pf_enable=&quot;YES&quot;</span>
 <span class="go">pf_rules=&quot;/etc/pf.conf&quot;</span>
 <span class="go">pflog_enable=&quot;YES&quot;</span>
@@ -230,8 +222,8 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Create the rules files for PF at <code class="docutils literal"><span class="pre">/etc/pf.conf</span></code></p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> External Network Interface
+<li><p class="first">Create the rules files for PF at <code class="docutils literal notranslate"><span class="pre">/etc/pf.conf</span></code></p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> External Network Interface
 <span class="go">ext_if=&quot;vtnet0&quot;</span>
 
 <span class="gp">#</span> Internal Network Interface
@@ -257,15 +249,15 @@
 <span class="go">pass in proto tcp from &lt;wsrep_cluster_address&gt; to any port $wsrep_ports keep state</span>
 </pre></div>
 </div>
-<p>Replace <code class="docutils literal"><span class="pre">host_IP_address</span></code> with the IP address of the host server and <code class="docutils literal"><span class="pre">jail_IP_address</span></code> with the IP address you want to use for the jail.</p>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">host_IP_address</span></code> with the IP address of the host server and <code class="docutils literal notranslate"><span class="pre">jail_IP_address</span></code> with the IP address you want to use for the jail.</p>
 </li>
-<li><p class="first">Using <code class="docutils literal"><span class="pre">pfctl</span></code>, check for any typos in your PF configurations:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> pfctl -v -nf /etc/pf.conf
+<li><p class="first">Using <code class="docutils literal notranslate"><span class="pre">pfctl</span></code>, check for any typos in your PF configurations:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> pfctl -v -nf /etc/pf.conf
 </pre></div>
 </div>
 </li>
-<li><p class="first">If <code class="docutils literal"><span class="pre">pfctl</span></code> runs without throwing any errors, start PF and PF logging services:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service pf start
+<li><p class="first">If <code class="docutils literal notranslate"><span class="pre">pfctl</span></code> runs without throwing any errors, start PF and PF logging services:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> service pf start
 <span class="gp">#</span> service pflog start
 </pre></div>
 </div>
@@ -274,57 +266,57 @@
 <p>The server now uses PF to manage its firewall.  Network traffic directed at the four ports Galera Cluster uses is routed to the comparable ports within the jail.</p>
 <p>For more information on firewall configurations for FreeBSD, see <a class="reference internal" href="firewall-pf.html"><span class="doc">Firewall Configuration with PF</span></a>.</p>
 <p class="section-heading rubric" id="jail-creation">Creating the Node Jail</p>
-<p>While FreeBSD does provide a manual interface for creating and managing jails on your server, (<code class="docutils literal"><span class="pre">jail(8)</span></code>), it can prove cumbersome in the event that you have multiple jails running on a server.</p>
-<p>The application <code class="docutils literal"><span class="pre">ezjail</span></code> facilitates this process by automating common tasks and using templates and symbolic links to reduce the disk space usage per jail.  It is available for installation through <code class="docutils literal"><span class="pre">pkg</span></code>.  Alternative, you can build it through ports at <code class="docutils literal"><span class="pre">sysutils/ezjail</span></code>.</p>
-<p>To create a node jail with <code class="docutils literal"><span class="pre">ezjail</span></code>, complete the following steps:</p>
+<p>While FreeBSD does provide a manual interface for creating and managing jails on your server, (<code class="docutils literal notranslate"><span class="pre">jail(8)</span></code>), it can prove cumbersome in the event that you have multiple jails running on a server.</p>
+<p>The application <code class="docutils literal notranslate"><span class="pre">ezjail</span></code> facilitates this process by automating common tasks and using templates and symbolic links to reduce the disk space usage per jail.  It is available for installation through <code class="docutils literal notranslate"><span class="pre">pkg</span></code>.  Alternative, you can build it through ports at <code class="docutils literal notranslate"><span class="pre">sysutils/ezjail</span></code>.</p>
+<p>To create a node jail with <code class="docutils literal notranslate"><span class="pre">ezjail</span></code>, complete the following steps:</p>
 <ol class="arabic">
-<li><p class="first">Using your preferred text editor, add the following line to <code class="docutils literal"><span class="pre">/etc/rc.conf</span></code>:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">ezjail_enable=&quot;YES&quot;</span>
+<li><p class="first">Using your preferred text editor, add the following line to <code class="docutils literal notranslate"><span class="pre">/etc/rc.conf</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ezjail_enable=&quot;YES&quot;</span>
 </pre></div>
 </div>
-<p>This allows you to start and stop jails through the <code class="docutils literal"><span class="pre">service</span></code> command.</p>
+<p>This allows you to start and stop jails through the <code class="docutils literal notranslate"><span class="pre">service</span></code> command.</p>
 </li>
-<li><p class="first">Initialize the <code class="docutils literal"><span class="pre">ezjail</span></code> environment:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin install -sp
+<li><p class="first">Initialize the <code class="docutils literal notranslate"><span class="pre">ezjail</span></code> environment:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin install -sp
 </pre></div>
 </div>
-<p>This install the base jail system at <code class="docutils literal"><span class="pre">/usr/jails/</span></code>.  It also installs a local build of the ports tree within the jail.</p>
+<p>This install the base jail system at <code class="docutils literal notranslate"><span class="pre">/usr/jails/</span></code>.  It also installs a local build of the ports tree within the jail.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">While the database server is not available for FreeBSD in ports or as a package binary, a port of the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> is available at <code class="docutils literal"><span class="pre">databases/galera</span></code>.</p>
+<p class="last">While the database server is not available for FreeBSD in ports or as a package binary, a port of the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> is available at <code class="docutils literal notranslate"><span class="pre">databases/galera</span></code>.</p>
 </div>
 </li>
 <li><p class="first">Create the node jail.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin create galera-node <span class="s1">&#39;lo1|192.168.68.1&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin create galera-node <span class="s1">&#39;lo1|192.168.68.1&#39;</span>
 </pre></div>
 </div>
-<p>This creates the particular jail for your node and links it to the <code class="docutils literal"><span class="pre">lo1</span></code> loopback interface and IP address.  Replace the IP address with the local IP for internal use on your server.  It is the same address as you assigned in the firewall redirects above for <code class="docutils literal"><span class="pre">/etc/pf.conf</span></code>.</p>
+<p>This creates the particular jail for your node and links it to the <code class="docutils literal notranslate"><span class="pre">lo1</span></code> loopback interface and IP address.  Replace the IP address with the local IP for internal use on your server.  It is the same address as you assigned in the firewall redirects above for <code class="docutils literal notranslate"><span class="pre">/etc/pf.conf</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Bear in mind that in the above command <code class="docutils literal"><span class="pre">galera-node</span></code> provides the hostname for the jail file system.  As Galera Cluster draws on the hostname for the default node name, you need to either use a unique jail name for each node, or manually set <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> in the configuration file to avoid confusion.</p>
+<p class="last">Bear in mind that in the above command <code class="docutils literal notranslate"><span class="pre">galera-node</span></code> provides the hostname for the jail file system.  As Galera Cluster draws on the hostname for the default node name, you need to either use a unique jail name for each node, or manually set <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> in the configuration file to avoid confusion.</p>
 </div>
 </li>
-<li><p class="first">Copy the <code class="docutils literal"><span class="pre">resolve.conf</span></code> file from the host file system into the node jail.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> cp /etc/resolv.conf /usr/jails/galera-node/etc/
+<li><p class="first">Copy the <code class="docutils literal notranslate"><span class="pre">resolve.conf</span></code> file from the host file system into the node jail.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> cp /etc/resolv.conf /usr/jails/galera-node/etc/
 </pre></div>
 </div>
 <p>This allows the network interface within the jail to resolve domain names in connecting to the internet.</p>
 </li>
 <li><p class="first">Start the node jail.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin start galera-node
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin start galera-node
 </pre></div>
 </div>
 </li>
 </ol>
-<p>The node jail is now running on your server.  You can view running jails using the <code class="docutils literal"><span class="pre">ezjail-admin</span></code> command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin list
+<p>The node jail is now running on your server.  You can view running jails using the <code class="docutils literal notranslate"><span class="pre">ezjail-admin</span></code> command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin list
 <span class="go">STA JID  IP            Hostname     Root Directory</span>
 <span class="go">--- ---- ------------- ------------ ----------------------</span>
 <span class="go">DR  2    192.168.68.1  galera-node  /usr/jails/galera-node</span>
 </pre></div>
 </div>
-<p>While on the host system, you can access and manipulate files and directories in the jail file system from <code class="docutils literal"><span class="pre">/usr/jails/galera-node/</span></code>.  Additionally, you can enter the jail directly and manipulate processes running within using the following command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">root@FreeBSDHost:/usr/jails #</span> ezjail-admin console galera-node
+<p>While on the host system, you can access and manipulate files and directories in the jail file system from <code class="docutils literal notranslate"><span class="pre">/usr/jails/galera-node/</span></code>.  Additionally, you can enter the jail directly and manipulate processes running within using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">root@FreeBSDHost:/usr/jails #</span> ezjail-admin console galera-node
 <span class="gp">root@galera-node:~ #</span>
 </pre></div>
 </div>
@@ -336,18 +328,18 @@
 <li><a class="reference internal" href="install-mysql-src.html"><span class="doc">Galera Cluster for MySQL</span></a></li>
 <li><a class="reference internal" href="install-mariadb-src.html"><span class="doc">MariaDB Galera Cluster</span></a></li>
 </ul>
-<p>Due to certain Linux dependencies, the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> cannot be built from source on FreeBSD.  Instead you can use the port at <code class="docutils literal"><span class="pre">/usr/ports/databases/galera</span></code> or install it from a binary package within the jail:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> pkg install galera
+<p>Due to certain Linux dependencies, the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a> cannot be built from source on FreeBSD.  Instead you can use the port at <code class="docutils literal notranslate"><span class="pre">/usr/ports/databases/galera</span></code> or install it from a binary package within the jail:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> pkg install galera
 </pre></div>
 </div>
-<p>This install the wsrep Provider file in <code class="docutils literal"><span class="pre">/usr/local/lib</span></code>.  Use this path in the configuration file for the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a> parameter.</p>
+<p>This install the wsrep Provider file in <code class="docutils literal notranslate"><span class="pre">/usr/local/lib</span></code>.  Use this path in the configuration file for the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a> parameter.</p>
 <p class="sub-heading rubric" id="jails-node-config">Configuration File</p>
 <p>For the most part, the configuration file for a node running in a jail is the same as when the node runs on a standard FreeBSD server.  But, there are some parameters that draw their defaults from the base system.  These you need to set manually, as the jail is unable to access the host file system.</p>
 <ul class="simple">
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a> The node determines the default address from the IP address on the first network interface.  Jails cannot see the network interfaces on the host system.  You need to set this parameter to ensure that the cluster is given the correct IP address for the node.</li>
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> The node determines the default name from the system hostname.  Jails have their own hostnames, distinct from that of the host system.</li>
 </ul>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="go">[mysqld]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[mysqld]</span>
 <span class="go">user=mysql</span>
 <span class="gp">#</span>bind-address<span class="o">=</span><span class="m">0</span>.0.0.0
 
@@ -367,21 +359,21 @@
 <span class="go">wsrep_sst_method=rsync</span>
 </pre></div>
 </div>
-<p>If you are logged into the jail console, place the configuration file at <code class="docutils literal"><span class="pre">/etc/my.cnf</span></code>.  If you are on the host system console, place it at <code class="docutils literal"><span class="pre">/usr/jails/galera-node/etc/my.cnf</span></code>.  Replace <code class="docutils literal"><span class="pre">galera-node</span></code> in the latter with the name of the node jail.</p>
+<p>If you are logged into the jail console, place the configuration file at <code class="docutils literal notranslate"><span class="pre">/etc/my.cnf</span></code>.  If you are on the host system console, place it at <code class="docutils literal notranslate"><span class="pre">/usr/jails/galera-node/etc/my.cnf</span></code>.  Replace <code class="docutils literal notranslate"><span class="pre">galera-node</span></code> in the latter with the name of the node jail.</p>
 <p class="section-heading rubric" id="jails-galera-start">Starting the Cluster</p>
 <p>When running the cluster from within jails, you create and manage the cluster in the same manner as you would in the standard deployment of Galera Cluster on FreeBSD.  The exception being that you must obtain console access to the node jail first.</p>
 <p>To start the initial cluster node, run the following commands:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin console galera-node
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin console galera-node
 <span class="gp">#</span> service mysql start --wsrep-new-cluster
 </pre></div>
 </div>
 <p>To start each additional node, run the following commands:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin console galera-node
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> ezjail-admin console galera-node
 <span class="gp">#</span> service mysql start
 </pre></div>
 </div>
 <p>Each node you start after the initial will attempt to establish network connectivity with the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> and begin syncing their database states into one another.</p>
-<div class="bottom-links container">
+<div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="firewall-pf.html"><span class="doc">Firewall Configuration with PF</span></a></li>
@@ -397,13 +389,49 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="deployment.html">Deployment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deployment-variants.html">Cluster Deployment Variants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="load-balancing.html">Load Balancing</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="containers.html">Container Deployments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -420,14 +448,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

@@ -1,32 +1,23 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="High Availability with Galera Cluster" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="High Availability with Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>High Availability with Galera Cluster &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="What’s New in Galera Cluster 4.x" href="../../whats-new.html" />
@@ -85,8 +76,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -137,12 +127,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul>
 <li><p class="first"><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></p>
 </li>
@@ -161,7 +153,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 <li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
@@ -176,9 +168,9 @@
 </div>
 <div class="library-article library-video section" id="high-availability-with-galera-cluster">
 <span id="video-galera-high-availability"></span><h1>High Availability with Galera Cluster<a class="headerlink" href="#high-availability-with-galera-cluster" title="Permalink to this headline">¶</a></h1>
-<div class="video-abstract list-col2-3 container">
+<div class="video-abstract list-col2-3 docutils container">
 The MySQL Server High Availability landscape provides with a slew of tools to help you ensure that your databases keep humming. Such tools are Galera Cluster, however, it is worth looking at semi-synchronous replication with failover tools, and also the usual leader-follower asynchronous replication. Today more workloads are moving to the cloud, and what failover options do you get with Amazon RDS for MySQL or even Aurora? What about the newfangled group replication and InnoDB Cluster? And let us not forget that Galera Cluster has spawned branches too!</div>
-<div class="list-col1-3 container">
+<div class="list-col1-3 docutils container">
 <p class="video-stats rubric">Video Specifications</p>
 <ul class="video-stats simple">
 <li>Speaker: Colin Charles</li>
@@ -186,16 +178,16 @@ The MySQL Server High Availability landscape provides with a slew of tools to he
 <li>Length of Video: 60 minutes</li>
 </ul>
 </div>
-<div class="banner container">
+<div class="banner docutils container">
 <p class="section-heading rubric">Outline of Training Video</p>
 </div>
-<div class="list-col1 container">
+<div class="list-col1 docutils container">
 <p><strong>1. Codership</strong> <span class="raw-html"><small>(time index: 1:04)</small></span> <br/> Brief introduction to Codership, the creators and developers of Galera Cluster.</p>
-<p><strong>2. What is High Availability</strong> <span class="raw-html"><small>(time index: 2:50)</small></span> <br/> Discussion of the fundamentals of High Availability—the value and goals—as well as how it&#8217;s achieved generally.</p>
+<p><strong>2. What is High Availability</strong> <span class="raw-html"><small>(time index: 2:50)</small></span> <br/> Discussion of the fundamentals of High Availability—the value and goals—as well as how it’s achieved generally.</p>
 <p><strong>3. Redundancy Through MySQL Replication</strong> <span class="raw-html"><small>(time index: 19:22)</small></span> <br/> Covers briefly how standard replication may be used for maintaining high availability.</p>
 <p><strong>4. Failover Frameworks</strong> <span class="raw-html"><small>(time index: 21:55)</small></span> <br/> Discusses methods by which failed servers, in particular a master, may be replaced—including common difficulties one may encounter.</p>
 </div>
-<div class="list-col2 container">
+<div class="list-col2 docutils container">
 <p><strong>5. Proxies</strong> <span class="raw-html"><small>(time index: 25:05)</small></span> <br/> Explains how proxies may be used for directing traffic among multiple servers, and redirecting away from a down server.</p>
 <p><strong>6. Galera Cluster</strong> <span class="raw-html"><small>(time index: 27:13)</small></span> <br/> Introduction to Galera Cluster and how high availability can be achieved so easily with it, as well as an explanation of how Galera works.</p>
 <p><strong>7.**Cloud-Based Solutions</strong> <span class="raw-html"><small>(time index: 45:37)</small></span> <br/> Explains how Galera Cluster may be used on a cloud situation, how a cloud-based cluster can solved problems, as well as how to make use of them.</p>
@@ -206,20 +198,55 @@ The MySQL Server High Availability landscape provides with a slew of tools to he
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../../index.html">
               <img class="logo" src="../../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Codership Training</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/index.html">Codership Tutorials on Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Codership Training Videos</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="galera-intro.html">Introduction to Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-mysql-installing.html">Installing Galera Cluster with MySQL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-mariadb-installing.html">Installing Galera Cluster with MariaDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-aws-installing.html">Installing a Galera Cluster on AWS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-standard-replication.html">Standard Replication &amp; Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-monitoring.html">Monitoring a Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-backup.html">Making Back-Ups with Galera Cluster</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">High Availability with Galera Cluster</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">Codership Training</a><ul>
   <li><a href="index.html">Codership Training Videos</a><ul>
       <li>Previous: <a href="galera-backup-exercises.html" title="previous chapter">Training Video Exercises</a></li>
-      <li>Next: <a href="../../whats-new.html" title="next chapter">What&#8217;s New in Galera Cluster 4.x</a></li>
+      <li>Next: <a href="../../whats-new.html" title="next chapter">What’s New in Galera Cluster 4.x</a></li>
   </ul></li>
   </ul></li>
   </ul></li>
@@ -227,14 +254,24 @@ The MySQL Server High Availability landscape provides with a slew of tools to he
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

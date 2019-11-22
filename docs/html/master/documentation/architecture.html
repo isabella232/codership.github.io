@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Galera Cluster Architecture" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Cluster Architecture" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, replication api, wsrep api, gtid, galera replication plugin, group communication plugin" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Replication API &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Isolation Levels" href="isolation-levels.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -160,7 +152,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -187,7 +179,7 @@
 <p>The internal architecture of Galera Cluster revolves around four components:</p>
 <ul class="simple">
 <li><strong>Database Management System (DBMS):</strong>  The database server that runs on an individual node.  Galera Cluster can use MySQL, MariaDB or Percona XtraDB.</li>
-<li><strong>wsrep API:</strong>  This is the interface to the database server and it&#8217;s the replication provider.  It consists of two main elements:</li>
+<li><strong>wsrep API:</strong>  This is the interface to the database server and it’s the replication provider.  It consists of two main elements:</li>
 </ul>
 <blockquote>
 <div><ul class="simple">
@@ -207,13 +199,13 @@
 <ul class="simple">
 <li>On one node in the cluster, a state change occurs in the database.</li>
 <li>In the database, the wsrep hooks translate the changes to the write-set.</li>
-<li><code class="docutils literal"><span class="pre">dlopen()</span></code> then makes the wsrep provider functions available to the wsrep hooks.</li>
+<li><code class="docutils literal notranslate"><span class="pre">dlopen()</span></code> then makes the wsrep provider functions available to the wsrep hooks.</li>
 <li>The Galera Replication plugin handles write-set certification and replication to the cluster.</li>
 </ul>
 <p>For each node in the cluster, the application process occurs by high-priority transactions.</p>
 <p class="section-heading rubric" id="global-transaction-id">Global Transaction ID</p>
 <p>In order to keep the state identical across the cluster, the wsrep API uses a <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>, or GTID.  This allows it to identify state changes and to identify the current state in relation to the last state change. Below is an example of a GTID:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>45eec521-2f34-11e0-0800-2a36050b826b:94530586304
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>45eec521-2f34-11e0-0800-2a36050b826b:94530586304
 </pre></div>
 </div>
 <p>The Global Transaction ID consists of the following components:</p>
@@ -233,19 +225,61 @@
 <p id="index-2">The Group Communication Framework provides a plugin architecture for the various gcomm systems.</p>
 <p>Galera Cluster is built on top of a proprietary group communication system layer, which implements a virtual synchrony <abbr title="Quality of Service">QoS</abbr>.  Virtual synchrony unifies the data delivery and cluster membership services, providing clear formalism for message delivery semantics.</p>
 <p>While virtual synchrony guarantees consistency, it does not guarantee temporal synchrony, which is necessary for smooth multi-master operations.  To address this, Galera Cluster implements its own runtime-configurable temporal flow control.  Flow control keeps nodes synchronized to a fraction of a second.</p>
-<p>Group Communication Framework also provides a total ordering of messages from multiple sources.  It uses this to generate <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>&#8216;s in a multi-master cluster.</p>
+<p>Group Communication Framework also provides a total ordering of messages from multiple sources.  It uses this to generate <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>’s in a multi-master cluster.</p>
 <p>At the transport level, Galera Cluster is a symmetric undirected graph.  All database nodes connect to each other over a <abbr title="Transmission Control Protocol">TCP</abbr> connection.  By default, <abbr title="Transmission Control Protocol">TCP</abbr> is used for both message replication and the cluster membership services. However, you can also use <abbr title="User Datagram Protocol">UDP</abbr> multicast for replication in a <abbr title="Local Area Network">LAN</abbr>.</p>
 </div>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="technical-description.html">Technical Description</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tech-desc-introduction.html">Database Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certification-based-replication.html">Certification-Based Replication</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Replication API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isolation-levels.html">Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="state-transfer.html">State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node-states.html">Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recovery.html">Node Failure &amp; Recovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weighted-quorum.html">Quorum Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streaming-replication.html">Streaming Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -260,14 +294,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Upgrading a Schema in Galera Cluster" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Upgrading a Schema in Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, schema, alter, upgrade" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Schema Upgrades &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Upgrading Galera Cluster" href="upgrading.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -165,7 +157,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -184,20 +176,20 @@
 </div>
 <div class="library-document section" id="schema-upgrades">
 <span id="id1"></span><h1>Schema Upgrades<a class="headerlink" href="#schema-upgrades" title="Permalink to this headline">¶</a></h1>
-<p>Schema changes are of particular interest related to Galara Cluster. Schema changes are  <abbr title="Data Definition Language">DDL</abbr> statement executed on a database (e.g., <code class="docutils literal"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code>, <code class="docutils literal"><span class="pre">GRANT</span></code>).  These <abbr title="Data Definition Language">DDL</abbr> statements change the database itself and are non-transactional.</p>
+<p>Schema changes are of particular interest related to Galara Cluster. Schema changes are  <abbr title="Data Definition Language">DDL</abbr> statement executed on a database (e.g., <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code>, <code class="docutils literal notranslate"><span class="pre">GRANT</span></code>).  These <abbr title="Data Definition Language">DDL</abbr> statements change the database itself and are non-transactional.</p>
 <p>Galera Cluster processes schema changes by two different methods:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#toi"><span class="std std-ref">Total Order Isolation</span></a>: Abbreviated as TOI, these are schema changes made on all cluster nodes in the same total order sequence, preventing other transations from committing for the duration of the operation.</li>
 <li><a class="reference internal" href="#rsu"><span class="std std-ref">Rolling Schema Upgrade</span></a> Known also as RSU, these are schema changes run locally, affecting only the node on which they are run.  The changes do not replicate to the rest of the cluster.</li>
 </ul>
-<p>You can set the method for online schema changes by using the <code class="docutils literal"><span class="pre">wsrep_OSU_method</span></code> parameter in the configuration file, (<code class="docutils literal"><span class="pre">my.ini</span></code> or <code class="docutils literal"><span class="pre">my.cnf`,</span> <span class="pre">depending</span> <span class="pre">on</span> <span class="pre">your</span> <span class="pre">build)</span> <span class="pre">or</span> <span class="pre">through</span> <span class="pre">the</span> <span class="pre">``mysql</span></code> client.  Galera Cluster defaults to the Total Order Isolation method.</p>
+<p>You can set the method for online schema changes by using the <code class="docutils literal notranslate"><span class="pre">wsrep_OSU_method</span></code> parameter in the configuration file, (<code class="docutils literal notranslate"><span class="pre">my.ini</span></code> or <code class="docutils literal notranslate"><span class="pre">my.cnf`,</span> <span class="pre">depending</span> <span class="pre">on</span> <span class="pre">your</span> <span class="pre">build)</span> <span class="pre">or</span> <span class="pre">through</span> <span class="pre">the</span> <span class="pre">``mysql</span></code> client.  Galera Cluster defaults to the Total Order Isolation method.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If you&#8217;re using Galera Cluster for Percona XtraDB Cluster, see the the <a class="reference external" href="https://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html">pt-online-schema-change</a> in the Percona Toolkit.</p>
+<p class="last">If you’re using Galera Cluster for Percona XtraDB Cluster, see the the <a class="reference external" href="https://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html">pt-online-schema-change</a> in the Percona Toolkit.</p>
 </div>
 <p class="section-heading rubric" id="toi">Total Order Isolation</p>
-<p id="index-0">When you want an online schema change to replicate through the cluster and don&#8217;t care that other transactions will be blocked while the cluster processes the <abbr title="Data Definition Language">DDL</abbr> statements, use the <a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> method. You would do this with the <code class="docutils literal"><span class="pre">SET</span></code> statement like so:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;TOI&#39;</span><span class="p">;</span>
+<p id="index-0">When you want an online schema change to replicate through the cluster and don’t care that other transactions will be blocked while the cluster processes the <abbr title="Data Definition Language">DDL</abbr> statements, use the <a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> method. You would do this with the <code class="docutils literal notranslate"><span class="pre">SET</span></code> statement like so:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;TOI&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>In Total Order Isolation, queries that change the schema replicate as statements to all nodes in the cluster.  The nodes wait for all preceding transactions to commit simultaneously, then they execute the schema change in isolation.  For the duration of the <abbr title="Data Definition Language">DDL</abbr> processing, no other transactions can commit.</p>
@@ -208,8 +200,8 @@
 <li>The cluster replicates the schema change query as a statement before its execution.  There is no way to know whether or not individual nodes succeed in processing the query.  This prevents error checking on schema changes in Total Order Isolation.</li>
 </ul>
 <p class="section-heading rubric" id="rsu">Rolling Schema Upgrade</p>
-<span class="target" id="index-1"></span><p id="index-2">When you want to maintain high-availability during schema upgrades and can avoid conflicts between new and old schema definitions, use the <a class="reference internal" href="glossary.html#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a> method.  You would do this with the <code class="docutils literal"><span class="pre">SET</span></code> statement like so:</p>
-<div class="highlight-mysql"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;RSU&#39;</span><span class="p">;</span>
+<span class="target" id="index-1"></span><p id="index-2">When you want to maintain high-availability during schema upgrades and can avoid conflicts between new and old schema definitions, use the <a class="reference internal" href="glossary.html#term-rolling-schema-upgrade"><span class="xref std std-term">Rolling Schema Upgrade</span></a> method.  You would do this with the <code class="docutils literal notranslate"><span class="pre">SET</span></code> statement like so:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_OSU_method</span><span class="o">=</span><span class="s1">&#39;RSU&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>In Rolling Schema Upgrade, queries that change the schema are only processed on the local node.  While the node processes the schema change, it desynchronizes with the cluster.  When it finishes processing the schema change, it applies delayed replication events and synchronizes itself with the cluster.</p>
@@ -217,9 +209,9 @@
 <p>The main advantage of the Rolling Schema Upgrade is that it only blocks one node at a time. The main disadvantage of the Rolling Schema Upgrade is that it is potentially unsafe, and may fail if the new and old schema definitions are incompatible at the replication event level.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">To avoid conflicts between new and old schema definitions, execute SQL statements such as <code class="docutils literal"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code> and <code class="docutils literal"><span class="pre">DROP</span> <span class="pre">TABLE</span></code> using the <a class="reference internal" href="#toi"><span class="std std-ref">Total Order Isolation</span></a> method.</p>
+<p class="last">To avoid conflicts between new and old schema definitions, execute SQL statements such as <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code> and <code class="docutils literal notranslate"><span class="pre">DROP</span> <span class="pre">TABLE</span></code> using the <a class="reference internal" href="#toi"><span class="std std-ref">Total Order Isolation</span></a> method.</p>
 </div>
-<div class="bottom-links container">
+<div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="#toi"><span class="std std-ref">Total Order Isolation</span></a></li>
@@ -230,13 +222,59 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="administration.html">Galera Cluster Administration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-provisioning.html">Node Provisioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst.html">State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scriptable-sst.html">Scriptable State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Schema Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrading.html">Upgrading Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pc-recovery.html">Recovering Primary Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quorum-reset.html">Resetting the Quorum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="managing-fc.html">Managing Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-eviction.html">Auto-Eviction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-sr.html">Using Streaming Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrator.html">Galera Arbitrator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup-cluster.html">Backing Up Cluster Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -251,14 +289,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

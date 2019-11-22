@@ -1,34 +1,25 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Galera Cluster Arbitrator" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Cluster Arbitrator" name="title" />
 <meta content="Galera Arbitrator serves can function as an odd node to avoid split-brain and can be useful in making back-ups." name="description" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, mysql, mariadb, arbitrator, garbd" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Galera Arbitrator &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Backing Up Cluster Data" href="backup-cluster.html" />
@@ -87,8 +78,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -139,12 +129,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -166,7 +158,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -185,7 +177,7 @@
 </div>
 <div class="library-document section" id="galera-arbitrator">
 <span id="arbitrator"></span><h1>Galera Arbitrator<a class="headerlink" href="#galera-arbitrator" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="index-0"></span><span class="target" id="index-1"></span><p id="index-2">When deploying a Galera Cluster, it&#8217;s recommended that you use a minimum of three instances: Three nodes, three data centers and so on.</p>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><p id="index-2">When deploying a Galera Cluster, it’s recommended that you use a minimum of three instances: Three nodes, three data centers and so on.</p>
 <p>If the cost of adding resources (e.g., a third data center) is too much, you can use <a class="reference internal" href="glossary.html#term-galera-arbitrator"><span class="xref std std-term">Galera Arbitrator</span></a>.  Galera Arbitrator is a member of a cluster that participates in voting, but not in the actual replication.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -196,44 +188,44 @@
 <img alt="../_images/arbitrator.png" src="../_images/arbitrator.png" />
 </div>
 <p><em>Galera Arbitrator</em></p>
-<p>If one datacenter fails or loses its <abbr title="Wide Area Network">WAN</abbr> connection, the node that sees the arbitrator&#8212;and by extension sees clients&#8212;continues operation.</p>
+<p>If one datacenter fails or loses its <abbr title="Wide Area Network">WAN</abbr> connection, the node that sees the arbitrator—and by extension sees clients—continues operation.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Even though Galera Arbitrator doesn&#8217;t store data, it must see all replication traffic.  Placing Galera Arbitrator in a location with poor network connectivity to the rest of the cluster may lead to poor cluster performance.</p>
+<p class="last">Even though Galera Arbitrator doesn’t store data, it must see all replication traffic.  Placing Galera Arbitrator in a location with poor network connectivity to the rest of the cluster may lead to poor cluster performance.</p>
 </div>
-<p>In the event that Galera Arbitrator fails, it won&#8217;t affect cluster operation.  You can attach a new instance to the cluster at any time and there can be several instances running in the cluster.</p>
+<p>In the event that Galera Arbitrator fails, it won’t affect cluster operation.  You can attach a new instance to the cluster at any time and there can be several instances running in the cluster.</p>
 <p>For more information on using Galera Arbitrator for making backups, see <a class="reference internal" href="backup-cluster.html"><span class="doc">Backing Up Cluster Data</span></a>.</p>
 <p class="section-heading rubric" id="starting-arbitrator">Starting Galera Arbitrator</p>
-<p>Galera Arbitrator is a separate daemon from Galera Cluster, called <code class="docutils literal"><span class="pre">garbd</span></code>.  This means that you must start it separately from the cluster.  It also means that you cannot configure Galera Arbitrator through the <code class="docutils literal"><span class="pre">my.cnf</span></code> configuration file.</p>
+<p>Galera Arbitrator is a separate daemon from Galera Cluster, called <code class="docutils literal notranslate"><span class="pre">garbd</span></code>.  This means that you must start it separately from the cluster.  It also means that you cannot configure Galera Arbitrator through the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> configuration file.</p>
 <p>How you configure Galera Arbitrator depends on how you start it.  That is to say, whether it runs from the shell or as a service. These two methods are described in the next two sections.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>When Galera Arbitrator starts, the script executes a <code class="docutils literal"><span class="pre">sudo</span></code> statement as the user <code class="docutils literal"><span class="pre">nobody</span></code> during its process.  There is a particular issue in Fedora and some other distributions of Linux, in which the default <code class="docutils literal"><span class="pre">sudo</span></code> configuration will block users that operate without <code class="docutils literal"><span class="pre">tty</span></code> access.  To correct this, edit with a text editor the <code class="docutils literal"><span class="pre">/etc/sudoers</span></code> file and comment out this line:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>Defaults requiretty
+<p>When Galera Arbitrator starts, the script executes a <code class="docutils literal notranslate"><span class="pre">sudo</span></code> statement as the user <code class="docutils literal notranslate"><span class="pre">nobody</span></code> during its process.  There is a particular issue in Fedora and some other distributions of Linux, in which the default <code class="docutils literal notranslate"><span class="pre">sudo</span></code> configuration will block users that operate without <code class="docutils literal notranslate"><span class="pre">tty</span></code> access.  To correct this, edit with a text editor the <code class="docutils literal notranslate"><span class="pre">/etc/sudoers</span></code> file and comment out this line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Defaults requiretty
 </pre></div>
 </div>
 <p class="last">This will prevent the operating system from blocking Galera Arbitrator.</p>
 </div>
 <p class="section-heading rubric" id="arbitrator-shell-start">Starting Galera Arbitrator from the Shell</p>
 <p>When starting Galera Arbitrator from the shell, you have two options as to how you may configure it.  You can set the parameters through the command line arguments, as in the example here:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> garbd --group<span class="o">=</span>example_cluster <span class="se">\</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> garbd --group<span class="o">=</span>example_cluster <span class="se">\</span>
      --address<span class="o">=</span><span class="s2">&quot;gcomm://192.168.1.1,192.168.1.2,192.168.1.3&quot;</span> <span class="se">\</span>
      --option<span class="o">=</span><span class="s2">&quot;socket.ssl_key=/etc/ssl/galera/server-key.pem;socket.ssl_cert=/etc/ssl/galera/server-cert.pem;socket.ssl_ca=/etc/ssl/galera/ca-cert.pem;socket.ssl_cipher=AES128-SHA256&quot;&quot;</span>
 </pre></div>
 </div>
-<p>If you use SSL, it&#8217;s necessary to specify the cipher. Otherwise, after initializing the ssl context an error will occur with a message saying, &#8220;Terminate called after throwing an instance of &#8216;gu::NotSet&#8217;&#8221;.</p>
-<p>If you don&#8217;t want to enter the options every time you start Galera Arbitrator from the shell, you can set the options in the <code class="docutils literal"><span class="pre">arbtirator.config</span></code> configuration file:</p>
-<div class="highlight-linux-config"><div class="highlight"><pre><span></span><span class="c1"># arbtirator.config</span>
+<p>If you use SSL, it’s necessary to specify the cipher. Otherwise, after initializing the ssl context an error will occur with a message saying, “Terminate called after throwing an instance of ‘gu::NotSet’”.</p>
+<p>If you don’t want to enter the options every time you start Galera Arbitrator from the shell, you can set the options in the <code class="docutils literal notranslate"><span class="pre">arbtirator.config</span></code> configuration file:</p>
+<div class="highlight-linux-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># arbtirator.config</span>
 group <span class="o">=</span> example_cluster
 address <span class="o">=</span> gcomm://192.168.1.1,192.168.1.2,192.168.1.3
 </pre></div>
 </div>
-<p>Then, to enable those options when you start Galera Arbitrator, use the <code class="docutils literal"><span class="pre">--cfg</span></code> option like so:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> garbd --cfg /path/to/arbitrator.config
+<p>Then, to enable those options when you start Galera Arbitrator, use the <code class="docutils literal notranslate"><span class="pre">--cfg</span></code> option like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> garbd --cfg /path/to/arbitrator.config
 </pre></div>
 </div>
-<p>For more information on the options available to Galera Arbitrator through the shell, run <code class="docutils literal"><span class="pre">garbd</span></code> with the <code class="docutils literal"><span class="pre">--help</span></code> argument.</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> garbd --help
+<p>For more information on the options available to Galera Arbitrator through the shell, run <code class="docutils literal notranslate"><span class="pre">garbd</span></code> with the <code class="docutils literal notranslate"><span class="pre">--help</span></code> argument.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> garbd --help
 
 <span class="go">Usage: garbd [options] [group address]</span>
 
@@ -253,11 +245,11 @@ address <span class="o">=</span> gcomm://192.168.1.1,192.168.1.2,192.168.1.3
 <span class="go">  -h [ --help ]         Show help message</span>
 </pre></div>
 </div>
-<p>In addition to the standard configuration, any parameter available to Galera Cluster also works with Galera Arbitrator, except for those prefixed by <code class="docutils literal"><span class="pre">repl</span></code>.  When you start it from the shell, you can set those using the <code class="docutils literal"><span class="pre">--option</span></code> argument.</p>
+<p>In addition to the standard configuration, any parameter available to Galera Cluster also works with Galera Arbitrator, except for those prefixed by <code class="docutils literal notranslate"><span class="pre">repl</span></code>.  When you start it from the shell, you can set those using the <code class="docutils literal notranslate"><span class="pre">--option</span></code> argument.</p>
 <p>For more information on the options available to Galera Arbitrator, see <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
 <p class="section-heading rubric" id="arbitrator-service-start">Starting Galera Arbitrator as a Service</p>
-<p>When starting Galera Aribtrator as a service, whether using <code class="docutils literal"><span class="pre">init</span></code> or <code class="docutils literal"><span class="pre">systemd</span></code>, you would use a different format for the configuration file than you would use when starting it from the shell. Below is an example of the configuration file:</p>
-<div class="highlight-linux-config"><div class="highlight"><pre><span></span><span class="c1"># Copyright (C) 2013-2015 Codership Oy</span>
+<p>When starting Galera Aribtrator as a service, whether using <code class="docutils literal notranslate"><span class="pre">init</span></code> or <code class="docutils literal notranslate"><span class="pre">systemd</span></code>, you would use a different format for the configuration file than you would use when starting it from the shell. Below is an example of the configuration file:</p>
+<div class="highlight-linux-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (C) 2013-2015 Codership Oy</span>
 <span class="c1"># This config file is to be sourced by garbd service script.</span>
 
 <span class="c1"># A space-separated list of node addresses (address[:port]) in the cluster:</span>
@@ -274,26 +266,26 @@ GALERA_OPTIONS=&quot;socket.ssl_cert=/etc/galera/cert/cert.pem;socket.ssl_key=/$
 LOG_FILE=&quot;/var/log/garbd.log&quot;
 </pre></div>
 </div>
-<p>In order for Galera Arbitrator to use the configuration file, you must place it in a file directory where your system looks for service configuration files.  There is no standard location for this directory; it varies from distribution to distribution, though it usually in <code class="docutils literal"><span class="pre">/etc</span></code> and at least one sub-directory down. Some common locations include:</p>
+<p>In order for Galera Arbitrator to use the configuration file, you must place it in a file directory where your system looks for service configuration files.  There is no standard location for this directory; it varies from distribution to distribution, though it usually in <code class="docutils literal notranslate"><span class="pre">/etc</span></code> and at least one sub-directory down. Some common locations include:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">/etc/defaults/</span></code></li>
-<li><code class="docutils literal"><span class="pre">/etc/init.d/</span></code></li>
-<li><code class="docutils literal"><span class="pre">/etc/systemd/</span></code></li>
-<li><code class="docutils literal"><span class="pre">/etc/sysconfig/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/etc/defaults/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/etc/init.d/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/etc/systemd/</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/etc/sysconfig/</span></code></li>
 </ul>
 <p>Check the documentation for the operating system distribution your server uses to determine where to place service configuration files.</p>
-<p>Once you have the service configuration file in the right location, you can start the <code class="docutils literal"><span class="pre">garb</span></code> service.  For systems that use <code class="docutils literal"><span class="pre">init</span></code>, run the following command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> service garb start
+<p>Once you have the service configuration file in the right location, you can start the <code class="docutils literal notranslate"><span class="pre">garb</span></code> service.  For systems that use <code class="docutils literal notranslate"><span class="pre">init</span></code>, run the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> service garb start
 </pre></div>
 </div>
-<p>For systems that run <code class="docutils literal"><span class="pre">systemd</span></code>, use instead this command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl start garb
+<p>For systems that run <code class="docutils literal notranslate"><span class="pre">systemd</span></code>, use instead this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> systemctl start garb
 </pre></div>
 </div>
 <p>This starts Galera Arbitrator as a service.  It uses the parameters set in the configuration file.</p>
-<p>In addition to the standard configuration, any parameter available to Galera Cluster also works with Galera Arbitrator, excepting those prefixed by <code class="docutils literal"><span class="pre">repl</span></code>.  When you start it as a service, you can set those using the <code class="docutils literal"><span class="pre">GALERA_OPTIONS</span></code> parameter.</p>
+<p>In addition to the standard configuration, any parameter available to Galera Cluster also works with Galera Arbitrator, excepting those prefixed by <code class="docutils literal notranslate"><span class="pre">repl</span></code>.  When you start it as a service, you can set those using the <code class="docutils literal notranslate"><span class="pre">GALERA_OPTIONS</span></code> parameter.</p>
 <p>For more information on the options available to Galera Arbitrator, see <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
-<div class="bottom-links container">
+<div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="backup-cluster.html"><span class="doc">Backing Up Cluster Data</span></a></li>
@@ -304,13 +296,59 @@ LOG_FILE=&quot;/var/log/garbd.log&quot;
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="administration.html">Galera Cluster Administration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-provisioning.html">Node Provisioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst.html">State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scriptable-sst.html">Scriptable State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema-upgrades.html">Schema Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrading.html">Upgrading Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pc-recovery.html">Recovering Primary Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quorum-reset.html">Resetting the Quorum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="managing-fc.html">Managing Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-eviction.html">Auto-Eviction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-sr.html">Using Streaming Replication</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Galera Arbitrator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup-cluster.html">Backing Up Cluster Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -325,14 +363,24 @@ LOG_FILE=&quot;/var/log/garbd.log&quot;
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

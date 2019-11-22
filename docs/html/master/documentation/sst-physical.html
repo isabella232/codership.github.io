@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Physical State Snapshots within Galera Cluster" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Physical State Snapshots within Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, sst, state snapshot transfer, rsync, physical" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>Physical State Snapshot &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Scriptable State Snapshot Transfers" href="scriptable-sst.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -160,7 +152,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -179,7 +171,7 @@
 </div>
 <div class="library-document section" id="physical-state-snapshot">
 <span id="sst-physical"></span><h1>Physical State Snapshot<a class="headerlink" href="#physical-state-snapshot" title="Permalink to this headline">¶</a></h1>
-<p>There are two back-end methods available for Physical State Snapshots: <code class="docutils literal"><span class="pre">rsync</span></code> and <code class="docutils literal"><span class="pre">xtrabackup</span></code>.</p>
+<p>There are two back-end methods available for Physical State Snapshots: <code class="docutils literal notranslate"><span class="pre">rsync</span></code> and <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>.</p>
 <p>The <a class="reference internal" href="glossary.html#term-physical-state-transfer-method"><span class="xref std std-term">Physical State Transfer Method</span></a> has the following advantages:</p>
 <ul class="simple">
 <li>These transfers physically copy the data from one node to the disk of the other, and as such do not need to interact with the database server at either end.</li>
@@ -194,28 +186,28 @@
 <p>What this means is that when your node requires a state snapshot transfer, the database server must restart to apply the changes.  The database server remains inaccessible to the client until the state snapshot transfer is complete, since it cannot perform authentication without the storage engines.</p>
 </li>
 </ul>
-<p class="section-heading rubric" id="sst-physical-rsync"><code class="docutils literal"><span class="pre">rsync</span></code></p>
-<p>The fastest back-end method for State Snapshot Transfers is <code class="docutils literal"><span class="pre">rsync</span></code>.  It carries all the advantages and disadvantages of of the Physical Snapshot Transfer.  While it does block the donor node during transfer, <code class="docutils literal"><span class="pre">rsync</span></code> does not require database configuration or root access, which makes it easier to configure.</p>
-<p>When using terabyte-scale databases, <code class="docutils literal"><span class="pre">rsync</span></code> is considerably faster, (1.5 to 2 times faster), than <code class="docutils literal"><span class="pre">xtrabackup</span></code>.  This translates to a reduction in transfer times by several hours.</p>
-<p><code class="docutils literal"><span class="pre">rsync</span></code> also features the rsync-wan modification, which engages the <code class="docutils literal"><span class="pre">rsync</span></code> delta transfer algorithm.  However, given that this makes it more I/O intensive, you should only use it when the network throughput is the bottleneck, which is usually the case in <abbr title="Wide Area Network">WAN</abbr> deployments.</p>
+<p class="section-heading rubric" id="sst-physical-rsync"><code class="docutils literal notranslate"><span class="pre">rsync</span></code></p>
+<p>The fastest back-end method for State Snapshot Transfers is <code class="docutils literal notranslate"><span class="pre">rsync</span></code>.  It carries all the advantages and disadvantages of of the Physical Snapshot Transfer.  While it does block the donor node during transfer, <code class="docutils literal notranslate"><span class="pre">rsync</span></code> does not require database configuration or root access, which makes it easier to configure.</p>
+<p>When using terabyte-scale databases, <code class="docutils literal notranslate"><span class="pre">rsync</span></code> is considerably faster, (1.5 to 2 times faster), than <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>.  This translates to a reduction in transfer times by several hours.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rsync</span></code> also features the rsync-wan modification, which engages the <code class="docutils literal notranslate"><span class="pre">rsync</span></code> delta transfer algorithm.  However, given that this makes it more I/O intensive, you should only use it when the network throughput is the bottleneck, which is usually the case in <abbr title="Wide Area Network">WAN</abbr> deployments.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The most common issue encountered with this method is due to incompatibilities between the various versions of <code class="docutils literal"><span class="pre">rsync</span></code> on the donor and joining nodes.</p>
+<p class="last">The most common issue encountered with this method is due to incompatibilities between the various versions of <code class="docutils literal notranslate"><span class="pre">rsync</span></code> on the donor and joining nodes.</p>
 </div>
-<p>The <code class="docutils literal"><span class="pre">rsync</span></code> script runs on both donor and joining nodes.  On the joiner, it starts <code class="docutils literal"><span class="pre">rsync</span></code> in server-mode and waits for a connection from the donor.  On the donor, it starts <code class="docutils literal"><span class="pre">rsync</span></code> in client-mode and sends the contents of the data directory to the joining node.</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="na">wsrep_sst_method</span> <span class="o">=</span> <span class="s">rsync</span>
+<p>The <code class="docutils literal notranslate"><span class="pre">rsync</span></code> script runs on both donor and joining nodes.  On the joiner, it starts <code class="docutils literal notranslate"><span class="pre">rsync</span></code> in server-mode and waits for a connection from the donor.  On the donor, it starts <code class="docutils literal notranslate"><span class="pre">rsync</span></code> in client-mode and sends the contents of the data directory to the joining node.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_sst_method</span> <span class="o">=</span> <span class="s">rsync</span>
 </pre></div>
 </div>
-<p>For more information about <code class="docutils literal"><span class="pre">rsync</span></code>, see the <a class="reference external" href="https://rsync.samba.org/">rsync Documentation</a>.</p>
-<p class="section-heading rubric" id="sst-physical-xtrabackup"><code class="docutils literal"><span class="pre">xtrabackup</span></code></p>
-<p>The most popular back-end method for State Snapshot Transfers is <code class="docutils literal"><span class="pre">xtrabackup</span></code>.  It carries all the advantages and disadvantages of a Physical State Snapshot, but is virtually non-blocking on the donor node.</p>
-<p><code class="docutils literal"><span class="pre">xtrabackup</span></code> only blocks the donor for the short period of time it takes to copy the MyISAM tables, (for instance, the system tables).  If these tables are small, the blocking time remains very short.  However, this comes at the cost of speed: a state snapshot transfer that uses <code class="docutils literal"><span class="pre">xtrabackup</span></code> can be considerably slower than one that uses <code class="docutils literal"><span class="pre">rsync</span></code>.</p>
-<p>Given that <code class="docutils literal"><span class="pre">xtrabackup</span></code> copies a large amount of data in the shortest possible time, it may also noticeably degrade donor performance.</p>
+<p>For more information about <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, see the <a class="reference external" href="https://rsync.samba.org/">rsync Documentation</a>.</p>
+<p class="section-heading rubric" id="sst-physical-xtrabackup"><code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code></p>
+<p>The most popular back-end method for State Snapshot Transfers is <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>.  It carries all the advantages and disadvantages of a Physical State Snapshot, but is virtually non-blocking on the donor node.</p>
+<p><code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code> only blocks the donor for the short period of time it takes to copy the MyISAM tables, (for instance, the system tables).  If these tables are small, the blocking time remains very short.  However, this comes at the cost of speed: a state snapshot transfer that uses <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code> can be considerably slower than one that uses <code class="docutils literal notranslate"><span class="pre">rsync</span></code>.</p>
+<p>Given that <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code> copies a large amount of data in the shortest possible time, it may also noticeably degrade donor performance.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The most common issue encountered with this method is due to its configuration.  <code class="docutils literal"><span class="pre">xtrabackup</span></code> requires that you set certain options in the configuration file, which means having local root access to the donor server.</p>
+<p class="last">The most common issue encountered with this method is due to its configuration.  <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code> requires that you set certain options in the configuration file, which means having local root access to the donor server.</p>
 </div>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
 <span class="na">wsrep_sst_auth</span> <span class="o">=</span> <span class="s">&lt;wsrep_sst_user&gt;:&lt;password&gt;</span>
 <span class="na">wsrep_sst_method</span> <span class="o">=</span> <span class="s">xtrabackup</span>
 <span class="na">datadir</span> <span class="o">=</span> <span class="s">/path/to/datadir</span>
@@ -224,25 +216,71 @@
 <span class="na">socket</span> <span class="o">=</span> <span class="s">/path/to/socket</span>
 </pre></div>
 </div>
-<p>For more information on <code class="docutils literal"><span class="pre">xtrabackup</span></code>, see the <a class="reference external" href="https://www.percona.com/doc/percona-xtrabackup/2.1/manual.html?id=percona-xtrabackup:xtrabackup_manual">Percona XtraBackup User Manual</a> and <a class="reference external" href="https://www.percona.com/doc/percona-xtradb-cluster/5.6/manual/xtrabackup_sst.html">XtraBackup SST Configuration</a>.</p>
+<p>For more information on <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>, see the <a class="reference external" href="https://www.percona.com/doc/percona-xtrabackup/2.1/manual.html?id=percona-xtrabackup:xtrabackup_manual">Percona XtraBackup User Manual</a> and <a class="reference external" href="https://www.percona.com/doc/percona-xtradb-cluster/5.6/manual/xtrabackup_sst.html">XtraBackup SST Configuration</a>.</p>
 </div>
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="administration.html">Galera Cluster Administration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-provisioning.html">Node Provisioning</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="sst.html">State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scriptable-sst.html">Scriptable State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema-upgrades.html">Schema Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrading.html">Upgrading Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pc-recovery.html">Recovering Primary Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quorum-reset.html">Resetting the Quorum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="managing-fc.html">Managing Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-eviction.html">Auto-Eviction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-sr.html">Using Streaming Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrator.html">Galera Arbitrator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup-cluster.html">Backing Up Cluster Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Documentation</a><ul>
   <li><a href="administration.html">Galera Cluster Administration</a><ul>
   <li><a href="sst.html">State Snapshot Transfers</a><ul>
-      <li>Previous: <a href="mysqldump.html" title="previous chapter">Enabling <code class="docutils literal"><span class="pre">mysqldump</span></code></a></li>
+      <li>Previous: <a href="mysqldump.html" title="previous chapter">Enabling <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code></a></li>
       <li>Next: <a href="scriptable-sst.html" title="next chapter">Scriptable State Snapshot Transfers</a></li>
   </ul></li>
   </ul></li>
@@ -252,14 +290,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>

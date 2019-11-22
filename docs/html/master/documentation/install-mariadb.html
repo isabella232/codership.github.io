@@ -1,33 +1,24 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta content="Install MariaDB Galera Cluster" name="title" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Install MariaDB Galera Cluster" name="title" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, installation, install, mariadb, binaries, apt, yum" name="keywords" />
 <meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
 
     <title>MariaDB Galera Cluster - Binary Installation &#8212; Galera Cluster Documentation</title>
-    
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="MariaDB Galera Cluster - Source Installation" href="install-mariadb-src.html" />
@@ -86,8 +77,7 @@
 
 </script>
 
-  </head>
-  <body role="document">
+  </head><body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
@@ -138,12 +128,14 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
+          
+
           <div class="body" role="main">
             
-  <div class="left-margin container">
-<div class="left-margin-top container">
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
 <a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
-<div class="left-margin-content container">
+<div class="left-margin-content docutils container">
 <ul class="here simple">
 <li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
 </ul>
@@ -175,7 +167,7 @@
 </ul>
 </div>
 </div>
-<div class="top-links container">
+<div class="top-links docutils container">
 <ul class="simple">
 <li><a class="reference external" href="https://galeracluster.com">Home</a></li>
 </ul>
@@ -198,48 +190,48 @@
 <a class="tutorial-screenshot reference internal image-reference" href="../_images/mariadb-repository-tool.png"><img alt="MariaDB Repository Tool" class="tutorial-screenshot" src="../_images/mariadb-repository-tool.png" style="width: 600px;" /></a>
 <p class="section-heading rubric" id="mariadb-repo">Enabling the MariaDB Repository</p>
 <p>In order to install MariaDB Galera Cluster through your package manager, you need to enable the MariaDB repository on your server.  There are two different ways to accomplish this, depending on which Linux distribution you use.</p>
-<p class="sub-heading rubric" id="mariadb-deb">Enabling the <code class="docutils literal"><span class="pre">apt</span></code> Repository</p>
+<p class="sub-heading rubric" id="mariadb-deb">Enabling the <code class="docutils literal notranslate"><span class="pre">apt</span></code> Repository</p>
 <p>For Debian and Debian-based Linux distributions, the procedure for adding a repository requires that you first install the software properties.  The package names vary depending on your distribution.  For Debian, at the command-line execute the following:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install python-software-properties
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install python-software-properties
 </pre></div>
 </div>
 <p>For Ubuntu or a distribution derived from Ubuntu, execute instead this command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install software-properties-common
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install software-properties-common
 </pre></div>
 </div>
-<p>If you&#8217;re use a different Debian-based distribution and neither of these lines above work, consult your distribution&#8217;s package listings for the appropriate package name.</p>
+<p>If you’re use a different Debian-based distribution and neither of these lines above work, consult your distribution’s package listings for the appropriate package name.</p>
 <p>Once you have the software properties installed, you can enable the MariaDB repository for your server.</p>
 <p>First, add the GnuPG key for the MariaDB repository by executing the following from the command-line:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-key adv --recv-keys --keyserver <span class="se">\</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-key adv --recv-keys --keyserver <span class="se">\</span>
       keyserver.ubuntu.com 0xcbcb082a1bb943db
 </pre></div>
 </div>
 <p>Next, add the MariaDB repository to your sources list. You can do this by entering something like the following from the command-line:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> add-apt-repository <span class="s1">&#39;deb https://mirror.jmu.edu/pub/mariadb/repo/version/distro release main&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> add-apt-repository <span class="s1">&#39;deb https://mirror.jmu.edu/pub/mariadb/repo/version/distro release main&#39;</span>
 </pre></div>
 </div>
-<p>You wouldn&#8217;t enter exactly the line above. You&#8217;ll have to adjust the repository address:</p>
+<p>You wouldn’t enter exactly the line above. You’ll have to adjust the repository address:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">version</span></code> indicates the version number of MariaDB that you want to use. (e.g., <code class="docutils literal"><span class="pre">5.6</span></code>).</li>
-<li><code class="docutils literal"><span class="pre">distro</span></code> is the name of the Linux distribution you&#8217;re using&#8217; (e.g., <code class="docutils literal"><span class="pre">ubuntu</span></code>).</li>
-<li><code class="docutils literal"><span class="pre">release</span></code> should be changed to your distribution release (e.g., <code class="docutils literal"><span class="pre">wheezy</span></code>).</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code> indicates the version number of MariaDB that you want to use. (e.g., <code class="docutils literal notranslate"><span class="pre">5.6</span></code>).</li>
+<li><code class="docutils literal notranslate"><span class="pre">distro</span></code> is the name of the Linux distribution you’re using’ (e.g., <code class="docutils literal notranslate"><span class="pre">ubuntu</span></code>).</li>
+<li><code class="docutils literal notranslate"><span class="pre">release</span></code> should be changed to your distribution release (e.g., <code class="docutils literal notranslate"><span class="pre">wheezy</span></code>).</li>
 </ul>
-<p>If you don&#8217;t know which release is installed on your server, you can determine this by using the entering the following from the command-line:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">$</span> lsb_release -a
+<p>If you don’t know which release is installed on your server, you can determine this by using the entering the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> lsb_release -a
 </pre></div>
 </div>
 <ol class="arabic simple">
 <li>You should also update the local cache on the server.  You can do this by entering the following:</li>
 </ol>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get update
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get update
 </pre></div>
 </div>
 <p>For more information on the MariaDB repository, package names and available mirrors, see the <a class="reference external" href="https://downloads.mariadb.org/mariadb/repositories/">MariaDB Repository Generator</a>.</p>
-<p>Packages in the MariaDB repository are now available for installation through <code class="docutils literal"><span class="pre">apt-get</span></code>.</p>
-<p class="sub-heading rubric" id="mariadb-rpm">Enabling the <code class="docutils literal"><span class="pre">yum</span></code> Repository</p>
-<p>For RPM-based distributions (e.g., CentOS, Red Hat and Fedora), you can enable the MariaDB repository by creating a text file with <code class="docutils literal"><span class="pre">.repo</span></code> as the file extension to the <code class="docutils literal"><span class="pre">/etc/yum/repos.d/</span></code> directory.</p>
-<p>Using a simple text editor, create a new <code class="docutils literal"><span class="pre">.repo</span></code> file containing something like the following:</p>
-<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="c1"># MariaDB.repo</span>
+<p>Packages in the MariaDB repository are now available for installation through <code class="docutils literal notranslate"><span class="pre">apt-get</span></code>.</p>
+<p class="sub-heading rubric" id="mariadb-rpm">Enabling the <code class="docutils literal notranslate"><span class="pre">yum</span></code> Repository</p>
+<p>For RPM-based distributions (e.g., CentOS, Red Hat and Fedora), you can enable the MariaDB repository by creating a text file with <code class="docutils literal notranslate"><span class="pre">.repo</span></code> as the file extension to the <code class="docutils literal notranslate"><span class="pre">/etc/yum/repos.d/</span></code> directory.</p>
+<p>Using a simple text editor, create a new <code class="docutils literal notranslate"><span class="pre">.repo</span></code> file containing something like the following:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># MariaDB.repo</span>
 
 <span class="k">[mariadb]</span>
 <span class="na">name</span> <span class="o">=</span> <span class="s">MariaDB</span>
@@ -248,32 +240,32 @@
 <span class="na">gpgcheck</span> <span class="o">=</span> <span class="s">1</span>
 </pre></div>
 </div>
-<p>For the value of <code class="docutils literal"><span class="pre">baseurl</span></code>, you&#8217;ll have to adjust the web address:</p>
+<p>For the value of <code class="docutils literal notranslate"><span class="pre">baseurl</span></code>, you’ll have to adjust the web address:</p>
 <ul class="simple">
-<li><code class="docutils literal"><span class="pre">version</span></code> should be changed to the version of MariaDB you want to use (e.g., <code class="docutils literal"><span class="pre">5.6</span></code>).</li>
-<li><code class="docutils literal"><span class="pre">package</span></code> will have to be changed to the package name for your operating system distribution, release and architecture.  For example, <code class="docutils literal"><span class="pre">rhel6-amd64</span></code> would reference packages for a Red Hat Enterprise Linux 6 server running on 64-bit hardware.</li>
+<li><code class="docutils literal notranslate"><span class="pre">version</span></code> should be changed to the version of MariaDB you want to use (e.g., <code class="docutils literal notranslate"><span class="pre">5.6</span></code>).</li>
+<li><code class="docutils literal notranslate"><span class="pre">package</span></code> will have to be changed to the package name for your operating system distribution, release and architecture.  For example, <code class="docutils literal notranslate"><span class="pre">rhel6-amd64</span></code> would reference packages for a Red Hat Enterprise Linux 6 server running on 64-bit hardware.</li>
 </ul>
 <p>For more information on the repository, package names or available mirrors, see the <a class="reference external" href="https://downloads.mariadb.org/mariadb/repositories/">MariaDB Repository Generator</a>. It will generate the actual text you will need to put in your repository configuration file. In fact, by clicking through the choices presented, you can just copy the results and paste them into your configuration file without any modification.</p>
 <p class="section-heading rubric" id="mariadb-install">Installing MariaDB Galera Cluster</p>
 <p>There are three packages involved in the installation of MariaDB Galera Cluster: the MariaDB database client, a command-line tool for accessing the database; the MariaDB database server, built to include the <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a> patch; and the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>.</p>
 <p>For Debian-based distributions, from the command-line run the following command:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install mariadb-client <span class="se">\</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> apt-get install mariadb-client <span class="se">\</span>
       mariadb-galera-server <span class="se">\</span>
       galera
 </pre></div>
 </div>
 <p>For RPM-based distributions, execute instead from the command line the following:</p>
-<div class="highlight-console"><div class="highlight"><pre><span></span><span class="gp">#</span> yum install MariaDB-client <span class="se">\</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> yum install MariaDB-client <span class="se">\</span>
       MariaDB-Galera-server <span class="se">\</span>
       galera
 </pre></div>
 </div>
-<p>Once you&#8217;ve done this, MariaDB Galera Cluster will be installed on your server.  You&#8217;ll need to repeat this process for each node in your cluster.</p>
+<p>Once you’ve done this, MariaDB Galera Cluster will be installed on your server.  You’ll need to repeat this process for each node in your cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If you installed MariaDB Galera Cluster over an existing stand-alone instance of MariaDB, there are some additional steps that you&#8217;ll need to take to update your system to the new database server.  For more information on this, see <a class="reference internal" href="../training/tutorials/migration.html"><span class="doc">Migrating to Galera Cluster</span></a>.</p>
+<p class="last">If you installed MariaDB Galera Cluster over an existing stand-alone instance of MariaDB, there are some additional steps that you’ll need to take to update your system to the new database server.  For more information on this, see <a class="reference internal" href="../training/tutorials/migration.html"><span class="doc">Migrating to Galera Cluster</span></a>.</p>
 </div>
-<div class="bottom-links container">
+<div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="install.html"><span class="doc">Install Galera</span></a></li>
@@ -294,13 +286,52 @@
 
 
           </div>
+          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/logo.png" alt="Logo"/>
-            </a></p><div class="relations">
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="install.html">Installing Galera Cluster</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="install-mysql.html">Galera Cluster for MySQL—Binary Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-mysql-src.html">Galera Cluster for MySQL - Source Installation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MariaDB Galera Cluster - Binary Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-mariadb-src.html">MariaDB Galera Cluster - Source Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-xtradb.html">Percona XtraDB Cluster - Binary Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-xtradb-src.html">Percona XtraDB Cluster - Source Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New in Galera Cluster 4.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
@@ -315,14 +346,24 @@
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
