@@ -268,7 +268,7 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>Function</td>
-<td><code class="docutils literal notranslate"><span class="pre">WSREP_LAST_WRITTEN_GTID()</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">WSREP_SYNC_WAIT_UPTO_GTID()</span></code></td>
 </tr>
 <tr class="row-even"><td>Required Arguments</td>
 <td>Global Transaction ID</td>
@@ -281,7 +281,8 @@
 </tr>
 </tbody>
 </table>
-<p>This function blocks the client until the node applies and commits the given <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>.  If you don’t provide a timeout, it defaults to the value of <a class="reference internal" href="galera-parameters.html#repl-causal-read-timeout"><span class="std std-ref">repl.causal_read_timeout</span></a>. It returns the following values:</p>
+<p>This function blocks the client until the node applies and commits the given <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>. Optional argument accepts timeout in seconds.
+If you don’t provide a timeout, it will continue to block indefinitely. It returns the following values:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">1</span></code>: The node applied and committed the given Global Transaction ID.</li>
 <li><code class="docutils literal notranslate"><span class="pre">ER_LOCAL_WAIT_TIMEOUT</span></code> Error: The function times out before the node can apply the transaction.</li>
@@ -292,12 +293,6 @@
 <span class="go">...</span>
 <span class="go">SELECT WSREP_SYNC_WAIT_UPTO_GTID($transaction_gtid);</span>
 </pre></div>
-</div>
-<div class="bottom-links docutils container">
-<p>Related Documents</p>
-<ul class="simple">
-<li><a class="reference internal" href="galera-parameters.html#repl-causal-read-timeout"><span class="std std-ref">repl.causal_read_timeout</span></a></li>
-</ul>
 </div>
 </div>
 
