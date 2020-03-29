@@ -258,7 +258,7 @@
 <h2>Disabling AppArmor<a class="headerlink" href="#disabling-apparmor" title="Permalink to this headline">¶</a></h2>
 <p id="disable-apparmor">By default, some servers—for instance, Ubuntu—include AppArmor, which may prevent <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> from opening additional ports or running scripts.  You must disable AppArmor or configure it to allow <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> to run external programs and open listen sockets on unprivileged ports.</p>
 <p>To disable AppArmor, run the following commands:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo ln -s /etc/apparmor.d/usr /etc/apparmor.d/disable/.sbin.mysqld
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/usr.sbin.mysqld
 </pre></div>
 </div>
 <p>You will then need to restart AppArmor.  If your system uses init scripts, run the following command:</p>
