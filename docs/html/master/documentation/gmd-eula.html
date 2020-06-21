@@ -5,12 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Example of a Galera Notification Script" name="title" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Install Galera Manager" name="title" />
 <meta content="en-US" name="language" />
-<meta content="galera cluster, notification, notify command, trigger, script" name="keywords" />
+<meta content="galera cluster, gmd, galera manager, gui, installation, install" name="keywords" />
 <meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
 
-    <title>Notification Script Example &#8212; Galera Cluster Documentation</title>
+    <title>Galera Manager End-User License Agreement (EULA) &#8212; Galera Cluster Documentation</title>
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -21,8 +21,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Security" href="security.html" />
-    <link rel="prev" title="Notification Command" href="notification-cmd.html" />
+    <link rel="next" title="Galera Manager Daemon (gmd)" href="gmd.html" />
+    <link rel="prev" title="AWS Ports with Galera Manager" href="galera-manager-ports.html" />
 
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -151,9 +151,18 @@
 <ul class="simple">
 <li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
 </ul>
-<p>Related Documents</p>
+<p>Galera Manager Documents</p>
 <ul class="simple">
-<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+<li><a class="reference internal" href="galera-manager.html"><span class="doc">Getting Started</span></a></li>
+<li><a class="reference internal" href="gmd-install.html"><span class="doc">Installing</span></a></li>
+<li><a class="reference internal" href="galera-manager-ports.html"><span class="doc">AWS Ports</span></a></li>
+<li><a class="reference internal" href="gmd.html"><span class="doc">gmd Daemon</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying Clusters</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-nodes.html"><span class="doc">Adding Nodes</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-users.html"><span class="doc">Adding Users</span></a></li>
+<li><a class="reference internal" href="galera-manager-initializing-data.html"><span class="doc">Loading Data</span></a></li>
+<li><a class="reference internal" href="galera-manager-monitoring-clusters.html"><span class="doc">Monitoring a Cluster</span></a></li>
+<li><a class="reference internal" href="gmd-upgrading.html"><span class="doc">Upgrading</span></a></li>
 </ul>
 </div>
 </div>
@@ -174,135 +183,38 @@
 <li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
 </ul>
 </div>
-<div class="library-document section" id="notification-script-example">
-<span id="example-notification-script"></span><h1>Notification Script Example<a class="headerlink" href="#notification-script-example" title="Permalink to this headline">¶</a></h1>
-<p>Nodes can call a notification script when changes happen in the membership of the cluster, that is when nodes join or leave the cluster.  You can specify the name of the script the node calls using the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a>.  While you can use whatever script meets the particular needs of a deployment, you may find it helpful to consider the example below as a starting point.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -eu</span>
-
-<span class="c1"># This is a simple example of wsrep notification script (wsrep_notify_cmd).</span>
-<span class="c1"># It will create &#39;wsrep&#39; schema and two tables in it: &#39;membership&#39; and &#39;status&#39;</span>
-<span class="c1"># and insert data into them on every membership or node status change.</span>
-<span class="c1">#</span>
-<span class="c1"># Edit parameters below to specify the address and login to server.</span>
-
-<span class="nv">USER</span><span class="o">=</span>root
-<span class="nv">PSWD</span><span class="o">=</span>rootpass
-<span class="nv">HOST</span><span class="o">=</span>&lt;host_IP_address&gt;
-<span class="nv">PORT</span><span class="o">=</span><span class="m">3306</span>
-
-<span class="nv">SCHEMA</span><span class="o">=</span><span class="s2">&quot;wsrep&quot;</span>
-<span class="nv">MEMB_TABLE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$SCHEMA</span><span class="s2">.membership&quot;</span>
-<span class="nv">STATUS_TABLE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$SCHEMA</span><span class="s2">.status&quot;</span>
-
-<span class="nv">BEGIN</span><span class="o">=</span><span class="s2">&quot;</span>
-<span class="s2">   SET wsrep_on=0;</span>
-<span class="s2">   DROP SCHEMA IF EXISTS </span><span class="nv">$SCHEMA</span><span class="s2">; CREATE SCHEMA </span><span class="nv">$SCHEMA</span><span class="s2">;</span>
-<span class="s2">   CREATE TABLE </span><span class="nv">$MEMB_TABLE</span><span class="s2"> (</span>
-<span class="s2">      idx  INT UNIQUE PRIMARY KEY,</span>
-<span class="s2">      uuid CHAR(40) UNIQUE, /* node UUID */</span>
-<span class="s2">      name VARCHAR(32),     /* node name */</span>
-<span class="s2">      addr VARCHAR(256)     /* node address */</span>
-<span class="s2">   ) ENGINE=MEMORY;</span>
-<span class="s2">   CREATE TABLE </span><span class="nv">$STATUS_TABLE</span><span class="s2"> (</span>
-<span class="s2">      size   INT,      /* component size   */</span>
-<span class="s2">      idx    INT,      /* this node index  */</span>
-<span class="s2">      status CHAR(16), /* this node status */</span>
-<span class="s2">      uuid   CHAR(40), /* cluster UUID */</span>
-<span class="s2">      prim   BOOLEAN   /* if component is primary */</span>
-<span class="s2">   ) ENGINE=MEMORY;</span>
-<span class="s2">   BEGIN;</span>
-<span class="s2">   DELETE FROM </span><span class="nv">$MEMB_TABLE</span><span class="s2">;</span>
-<span class="s2">   DELETE FROM </span><span class="nv">$STATUS_TABLE</span><span class="s2">;</span>
-<span class="s2">&quot;</span>
-<span class="nv">END</span><span class="o">=</span><span class="s2">&quot;COMMIT;&quot;</span>
-
-configuration_change<span class="o">()</span>
-<span class="o">{</span>
-   <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$BEGIN</span><span class="s2">;&quot;</span>
-
-   <span class="nb">local</span> <span class="nv">idx</span><span class="o">=</span><span class="m">0</span>
-
-   <span class="k">for</span> NODE in <span class="k">$(</span><span class="nb">echo</span> <span class="nv">$MEMBERS</span> <span class="p">|</span> sed s/,/<span class="se">\ </span>/g<span class="k">)</span>
-   <span class="k">do</span>
-      <span class="nb">echo</span> <span class="s2">&quot;INSERT INTO </span><span class="nv">$MEMB_TABLE</span><span class="s2"> VALUES ( </span><span class="nv">$idx</span><span class="s2">, &quot;</span>
-      <span class="c1"># Don&#39;t forget to properly quote string values</span>
-      <span class="nb">echo</span> <span class="s2">&quot;&#39;</span><span class="nv">$NODE</span><span class="s2">&#39;&quot;</span> <span class="p">|</span> sed  s/<span class="se">\\</span>//<span class="se">\&#39;</span>,<span class="se">\&#39;</span>/g
-      <span class="nb">echo</span> <span class="s2">&quot;);&quot;</span>
-      <span class="nv">idx</span><span class="o">=</span><span class="k">$((</span> <span class="nv">$idx</span> <span class="o">+</span> <span class="m">1</span> <span class="k">))</span>
-   <span class="k">done</span>
-
-   <span class="nb">echo</span> <span class="s2">&quot;</span>
-<span class="s2">      INSERT INTO </span><span class="nv">$STATUS_TABLE</span><span class="s2"></span>
-<span class="s2">      VALUES(</span><span class="nv">$idx</span><span class="s2">, </span><span class="nv">$INDEX</span><span class="s2">,&#39;</span><span class="nv">$STATUS</span><span class="s2">&#39;, &#39;</span><span class="nv">$CLUSTER_UUID</span><span class="s2">&#39;, </span><span class="nv">$PRIMARY</span><span class="s2">);</span>
-<span class="s2">   &quot;</span>
-
-   <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$END</span><span class="s2">&quot;</span>
-<span class="o">}</span>
-
-status_update<span class="o">()</span>
-<span class="o">{</span>
-   <span class="nb">echo</span> <span class="s2">&quot;</span>
-<span class="s2">      SET wsrep_on=0;</span>
-<span class="s2">      BEGIN;</span>
-<span class="s2">      UPDATE </span><span class="nv">$STATUS_TABLE</span><span class="s2"> SET status=&#39;</span><span class="nv">$STATUS</span><span class="s2">&#39;;</span>
-<span class="s2">      COMMIT;</span>
-<span class="s2">   &quot;</span>
-<span class="o">}</span>
-
-<span class="nv">COM</span><span class="o">=</span>status_update <span class="c1"># not a configuration change by default</span>
-
-<span class="k">while</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span>
-<span class="k">do</span>
-   <span class="k">case</span> <span class="nv">$1</span> in
-      --status<span class="o">)</span>
-         <span class="nv">STATUS</span><span class="o">=</span><span class="nv">$2</span>
-         <span class="nb">shift</span>
-         <span class="p">;;</span>
-      --uuid<span class="o">)</span>
-         <span class="nv">CLUSTER_UUID</span><span class="o">=</span><span class="nv">$2</span>
-         <span class="nb">shift</span>
-         <span class="p">;;</span>
-      --primary<span class="o">)</span>
-         <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">PRIMARY</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="o">||</span> <span class="nv">PRIMARY</span><span class="o">=</span><span class="s2">&quot;0&quot;</span>
-         <span class="nv">COM</span><span class="o">=</span>configuration_change
-         <span class="nb">shift</span>
-         <span class="p">;;</span>
-      --index<span class="o">)</span>
-         <span class="nv">INDEX</span><span class="o">=</span><span class="nv">$2</span>
-         <span class="nb">shift</span>
-         <span class="p">;;</span>
-      --members<span class="o">)</span>
-         <span class="nv">MEMBERS</span><span class="o">=</span><span class="nv">$2</span>
-         <span class="nb">shift</span>
-         <span class="p">;;</span>
-         <span class="k">esac</span>
-         <span class="nb">shift</span>
-   <span class="k">done</span>
-
-<span class="c1"># Undefined means node is shutting down</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$STATUS</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;Undefined&quot;</span> <span class="o">]</span>
-<span class="k">then</span>
-   <span class="nv">$COM</span> <span class="p">|</span> mysql -B -u<span class="nv">$USER</span> -p<span class="nv">$PSWD</span> -h<span class="nv">$HOST</span> -P<span class="nv">$PORT</span>
-<span class="k">fi</span>
-
-<span class="nb">exit</span> <span class="m">0</span>
-</pre></div>
-</div>
-<p class="section-heading rubric" id="notification-cmd-path-permissions">Path and Permissions</p>
-<p>After you modify this script to fit your requirements, you need to move it into a directory in the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> or the binaries directory for your system.  On Linux, the binaries directory is typically at <code class="docutils literal notranslate"><span class="pre">/usr/bin</span></code>, while on FreeBSD it is at <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code>.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> mv my-wsrep-notify.sh /usr/bin
-</pre></div>
-</div>
-<p>In addition to this, given that the notification command contains your root password, change the ownership to the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> user and make sure the script is executable only by that user.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> chown mysql:mysql /usr/bin/my-wsrep-notify.sh
-<span class="gp">#</span> chmod <span class="m">700</span> /usr/bin/my-wsrep-notify.sh.
-</pre></div>
-</div>
-<p>This ensures that only the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> user can execute and read the notification script, preventing all other users from seeing the root password.</p>
+<div class="library-license section" id="galera-manager-end-user-license-agreement-eula">
+<span id="gmd-eula"></span><h1>Galera Manager End-User License Agreement (EULA)<a class="headerlink" href="#galera-manager-end-user-license-agreement-eula" title="Permalink to this headline">¶</a></h1>
+<p>THE SOFTWARE LICENSE TERMS CONTAINED HEREIN (THE “LICENSE TERMS”) CONSTITUTE A LEGAL AND BINDING AGREEMENT BETWEEN YOU (“YOU” OR “CUSTOMER”) AND CODERSHIP OY (“COMPANY”).  BY DOWNLOADING THE SOFTWARE (“GALERA MANAGER”) AND/OR INSTALLING AND USING CODERSHIP OY SOFTWARE (THE “PRODUCT”), YOU ACCEPT AND AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT. READ IT CAREFULLY BEFORE COMPLETING THE INSTALLATION PROCESS AND USING THE PRODUCT.</p>
+<p>IF YOU DO NOT AGREE TO BE BOUND BY THESE TERMS, OR THE PERSON OR ENTITY INSTALLING AND/OR USING THE PRODUCT DOES NOT HAVE AUTHORITY TO BIND THE CUSTOMER TO THESE LICENSE TERMS, THEN DO NOT INSTALL AND/OR USE THE PRODUCTS.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Grant of License and Restrictions. Subject to the License Terms, Company grants Customer a non-sublicensable, non-exclusive right to use the Product strictly in accordance with the related user documentation and specification sheets (collectively, the “Documentation”) and any terms and procedures Company may prescribe from time to time. Company retains complete ownership of the Product and copies. The Customer must maintain the Copyright Notice and any other notices that appear on the Product on any copies and any media. Customer will not (and will not allow any third party to:<ol class="lowerroman">
+<li>reverse engineer or attempt to discover any source code or underlying ideas or algorithms of any Product,</li>
+<li>provide, lease, lend, use for time sharing or service bureau purposes or otherwise use or allow others to use the Product for the benefit of any third party, or (iii) use any Product, or allow the transfer, transmission, export, or re-export of any Products or portion thereof in violation of any export control laws or regulations administered by the U.S. Commerce Department, OFAC, or any other government agency.</li>
+</ol>
+</li>
+</ol>
+<p>All the limitations and restrictions on the Products in these License Terms also apply to the Documentation.</p>
+<ol class="arabic simple" start="2">
+<li>Termination. This Agreement and all licenses hereunder may be terminated by the Company at any time if the Customer fails to comply with any term of this Agreement. Upon termination, Customer shall immediately cease all use of all affected Products and return or destroy all copies of all affected Products and all portions thereof and so certify to the Company in writing. Except as otherwise expressly provided herein, the terms of this Agreement shall survive termination. Termination is not an exclusive remedy and all other remedies will be available to the Company whether or not termination occurs.</li>
+<li>Limitation of Liability.  THE PRODUCT IS PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT. FURTHER, THE COMPANY DOESNOT WARRANT RESULTS OF USE OR THAT THE PRODUCT IS BUG FREE OR THAT THEIR USE WILL BE UNINTERRUPTED. THE COMPANY FURTHER SHALL NOT BE RESPONSIBLE FOR ANY COST OF PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES OR RIGHTS, FOR ANY INCIDENTAL OR CONSEQUENTIAL DAMAGES, FOR INTERRUPTION OF USE OR LOSS OR CORRUPTION OF DATA.</li>
+<li>Miscellaneous. Neither this Agreement nor the licenses granted hereunder are assignable or transferable by the Customer without the prior written consent of the Company and any attempt to do so shall be void. No failure or delay in exercising any right hereunder will operate as a waiver thereof, nor will any partial exercise of any right or power hereunder preclude further exercise. If any provision of this Agreement shall be adjudged by any court of competent jurisdiction to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that this Agreement shall otherwise remain in full force and effect and enforceable. This Agreement shall be construed pursuant to the laws of Finland without regard to the United Nations Convention on the International Sale of Goods. This Agreement is the complete and exclusive statement of the mutual understanding of the parties and supersedes and cancels all previous written and oral agreements and communications relating to the subject matter of this Agreement. In any action to enforce this Agreement, the Company will be entitled to recover its attorney’s fees and costs in connection with such action.</li>
+</ol>
+</div></blockquote>
 <div class="bottom-links docutils container">
-<p>Related Documents</p>
+<p>Galera Manager Documents</p>
 <ul class="simple">
-<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+<li><a class="reference internal" href="galera-manager.html"><span class="doc">Getting Started</span></a></li>
+<li><a class="reference internal" href="gmd-install.html"><span class="doc">Installing</span></a></li>
+<li><a class="reference internal" href="galera-manager-ports.html"><span class="doc">AWS Ports</span></a></li>
+<li><a class="reference internal" href="gmd.html"><span class="doc">gmd Daemon</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying Clusters</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-nodes.html"><span class="doc">Adding Nodes</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-users.html"><span class="doc">Adding Users</span></a></li>
+<li><a class="reference internal" href="galera-manager-initializing-data.html"><span class="doc">Loading Data</span></a></li>
+<li><a class="reference internal" href="galera-manager-monitoring-clusters.html"><span class="doc">Monitoring a Cluster</span></a></li>
+<li><a class="reference internal" href="gmd-upgrading.html"><span class="doc">Upgrading</span></a></li>
 </ul>
 </div>
 </div>
@@ -337,9 +249,9 @@ status_update<span class="o">()</span>
 <li class="toctree-l2 current"><a class="reference internal" href="monitor.html">Cluster Monitoring</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="monitoring-cluster.html">Using Status Variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="log.html">Database Server Logs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="galera-manager.html">The Galera Manager</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="galera-manager.html">The Galera Manager</a></li>
 <li class="toctree-l3"><a class="reference internal" href="notification-cmd.html">Notification Command</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Notification Script Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd-example.html">Notification Script Example</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
@@ -359,8 +271,10 @@ status_update<span class="o">()</span>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">The Codership Documentation</a><ul>
   <li><a href="monitor.html">Cluster Monitoring</a><ul>
-      <li>Previous: <a href="notification-cmd.html" title="previous chapter">Notification Command</a></li>
-      <li>Next: <a href="security.html" title="next chapter">Security</a></li>
+  <li><a href="galera-manager.html">The Galera Manager</a><ul>
+      <li>Previous: <a href="galera-manager-ports.html" title="previous chapter">AWS Ports with Galera Manager</a></li>
+      <li>Next: <a href="gmd.html" title="next chapter">Galera Manager Daemon (<code class="docutils literal notranslate"><span class="pre">gmd</span></code>)</a></li>
+  </ul></li>
   </ul></li>
   </ul></li>
   </ul></li>
