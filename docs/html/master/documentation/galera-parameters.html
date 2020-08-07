@@ -279,7 +279,7 @@
 <td>&#160;</td>
 <td>3.8</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#evs-delayed-margin"><span class="std std-ref">evs.delayed_margin</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#evs-delay-margin"><span class="std std-ref">evs.delay_margin</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">PT1S</span></code></td>
 <td><blockquote class="first last">
 <div>No</div></blockquote>
@@ -1080,7 +1080,7 @@ on the master are committed.</p>
 </pre></div>
 </div>
 <p>For more information on the delayed list and the Auto Eviction process, see <a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a>.</p>
-<p class="section-heading rubric" id="evs-delayed-margin"><code class="docutils literal notranslate"><span class="pre">evs.delayed_margin</span></code></p>
+<p class="section-heading rubric" id="evs-delay-margin"><code class="docutils literal notranslate"><span class="pre">evs.delay_margin</span></code></p>
 <p id="index-10">Defines how long the node allows response times to deviate before adding an entry to the delayed list.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
@@ -1102,7 +1102,7 @@ on the master are committed.</p>
 <p>Each cluster node monitors group communication response times from all other nodes.  When the cluster registers a delayed response from a given node, it adds an entry for that node to its delayed list.  Delayed nodes can trigger Auto Eviction, which removes them permanently from the cluster.</p>
 <p>This parameter determines how long a delay can run before the node adds an entry to the delayed list.  You must set this parameter to a value higher than the round-trip delay time (RTT) between the nodes.</p>
 <p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.delayed_margin=PT5S&quot;</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.delay_margin=PT5S&quot;</span>
 </pre></div>
 </div>
 <p>For more information on the delayed list and the Auto Eviction process, see <a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a>.</p>

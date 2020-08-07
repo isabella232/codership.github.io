@@ -156,7 +156,7 @@
 <li><a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera Cluster</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#evs-auto-evict"><span class="std std-ref">evs.auto_evict</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#evs-delayed-keep-period"><span class="std std-ref">evs.delayed_keep_period</span></a></li>
-<li><a class="reference internal" href="galera-parameters.html#evs-delayed-margin"><span class="std std-ref">evs.delayed_margin</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-delay-margin"><span class="std std-ref">evs.delay_margin</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#evs-evict"><span class="std std-ref">evs.evict</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#evs-version"><span class="std std-ref">evs.version</span></a></li>
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-delayed"><span class="std std-ref">wsrep_evs_delayed</span></a></li>
@@ -191,7 +191,7 @@
 <p>If the delayed node becomes responsive again for a fixed period, entries for that node are removed from the delayed list.  However, if the node receives enough delayed entries and it’s found on the delayed list for the majority of the cluster, the delayed node is evicted permanently from the cluster. Evicted nodes cannot rejoin the cluster until restarted.</p>
 <p>You can configure the parameters of Auto-Eviction by setting the following options through  <a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a>:</p>
 <ul>
-<li><p class="first"><a class="reference internal" href="galera-parameters.html#evs-delayed-margin"><span class="std std-ref">evs.delayed_margin</span></a>: This sets the time period that a node can delay its response from expectations until the cluster adds it to the delayed list. You must set this parameter to a value higher than the round-trip delay time (RTT) between the nodes.</p>
+<li><p class="first"><a class="reference internal" href="galera-parameters.html#evs-delay-margin"><span class="std std-ref">evs.delay_margin</span></a>: This sets the time period that a node can delay its response from expectations until the cluster adds it to the delayed list. You must set this parameter to a value higher than the round-trip delay time (RTT) between the nodes.</p>
 <p>The default value is <code class="docutils literal notranslate"><span class="pre">PT1S</span></code>.</p>
 </li>
 <li><p class="first"><a class="reference internal" href="galera-parameters.html#evs-delayed-keep-period"><span class="std std-ref">evs.delayed_keep_period</span></a>: This sets the time period you require a node to remain responsive until it’s removed from the delayed list.</p>
@@ -302,7 +302,7 @@
 <li><a class="reference internal" href="upgrading.html"><span class="doc">Upgrading Galera Cluster</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#evs-auto-evict"><span class="std std-ref">evs.auto_evict</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#evs-delayed-keep-period"><span class="std std-ref">evs.delayed_keep_period</span></a></li>
-<li><a class="reference internal" href="galera-parameters.html#evs-delayed-margin"><span class="std std-ref">evs.delayed_margin</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#evs-delay-margin"><span class="std std-ref">evs.delay_margin</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#evs-evict"><span class="std std-ref">evs.evict</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#evs-version"><span class="std std-ref">evs.version</span></a></li>
 <li><a class="reference internal" href="galera-status-variables.html#wsrep-evs-delayed"><span class="std std-ref">wsrep_evs_delayed</span></a></li>
