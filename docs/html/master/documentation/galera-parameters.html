@@ -765,7 +765,7 @@
 <td>&#160;</td>
 <td>3.17</td>
 </tr>
-<tr class="row-odd"><td><span class="xref std std-ref">socket.send_buf_size</span></td>
+<tr class="row-odd"><td><a class="reference internal" href="#socket-send-buf-size"><span class="std std-ref">socket.send_buf_size</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">auto</span></code></td>
 <td><blockquote class="first last">
 <div>Yes</div></blockquote>
@@ -2543,11 +2543,9 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 </table>
 <p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.recv_buf_size=212992&quot;</span>
-
-<span class="na">.. _`socket.send_buf_size`:</span>
 </pre></div>
 </div>
-<p class="section-heading rubric"><code class="docutils literal notranslate"><span class="pre">socket.send_buf_size</span></code></p>
+<p class="section-heading rubric" id="socket-send-buf-size"><code class="docutils literal notranslate"><span class="pre">socket.send_buf_size</span></code></p>
 <p id="index-72">The size of the send buffer that used on the network sockets between nodes. Galera passes the value to the kernel via the <code class="docutils literal notranslate"><span class="pre">SO_SNDBUF</span></code> socket option. The value is either numeric value in bytes or <code class="docutils literal notranslate"><span class="pre">auto</span></code> which allows the kernel to autotune the send buffer.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
