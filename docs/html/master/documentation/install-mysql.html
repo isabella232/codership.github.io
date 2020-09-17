@@ -292,7 +292,14 @@ Pin-Priority: <span class="mi">1001</span>
 </div>
 <p>Please note that on CentOS 6 and 7, this command may generate a transaction check error. For more information on that error and how to resolve it, see the section below on <a class="reference internal" href="#centos-mysql-shared-compt"><span class="std std-ref">MySQL Shared Compatibility Libraries</span></a>.</p>
 <p>If you want to install version 4 of Galera Cluster using <code class="docutils literal notranslate"><span class="pre">yum</span></code>, you would instead execute the following from the command-line:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">yum install galera-4 and mysql-wsrep-8.0</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">yum install galera-4 mysql-wsrep-8.0</span>
+</pre></div>
+</div>
+<p>Please note that on CentOS 8 and RedHat 8, you need to disable MySQL and
+MariaDB modules before installing Galera Cluster from a repository under
+<a class="reference external" href="https://releases.galeracluster.com/">https://releases.galeracluster.com/</a>. In order to do this, execute the
+following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">dnf module disable mysql mariadb</span>
 </pre></div>
 </div>
 <p>If you’re using the <code class="docutils literal notranslate"><span class="pre">zypper</span></code> utility, which would be used with openSUSE and SUSE Linux Enterprise Server, you would execute the following from the command-line:</p>
