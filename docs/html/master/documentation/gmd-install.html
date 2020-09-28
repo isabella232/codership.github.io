@@ -193,7 +193,7 @@
 <p>The <em>Installer</em> is an easy installation program for installing Galera Manager. When you run it, you will be asked a series of questions about configuring Galera Manager. When it’s finished, the <code class="docutils literal notranslate"><span class="pre">gmd</span></code> daemon will be started on the <em>Installer Host</em>, allowing you to use this server to deploy a Galera Cluster and add nodes to other <em>AWS Instances</em>, as well as monitor the cluster.</p>
 <p>Below are more details on these steps to download and run the <em>Installer</em>.  The questions you’ll be presented when installing are fairly self-explanitory.  However, you may want to read this page before beginning, in case there are questions about which you want to know more before starting the installation.</p>
 <p class="section-heading rubric" id="galera-manager-installer-download">Download the <em>Installer</em></p>
-<p>To install Galera Manager, you’ll need to download the <em>Installer</em> to a server or <em>Instance</em> which is using the Linux distribution Ubuntu or Amazon Linux 2—the latter being available only on AWS. Eventually, the <em>Installer</em> will be made available for other distributions.</p>
+<p>To install Galera Manager, you’ll need to download the <em>Installer</em> to a server or <em>Instance</em> which is using Amazon Linux 2, which is available only on AWS. Eventually, the <em>Installer</em> will be made available for other distributions.</p>
 <p>Galera Manager is still in beta mode. When a stable release is available, you’ll be able to find a link to the <em>Installer</em> on <a class="reference external" href="https://galeracluster.com/downloads/">Codership’s Download page</a>.  Until then, you can download it with an FTP program or with a tool like <code class="docutils literal notranslate"><span class="pre">wget</span></code>, directly from the Codership repository.  In the example below, you can see the download address:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">Downloading <em>Galera Manager Installer</em> (Example 1)</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
@@ -288,10 +288,10 @@
 <span class="go">Also, if the browser warns about security risk when connecting</span>
 <span class="go">to service for the first time, you should choose to &quot;continue&quot;.</span>
 
-<span class="go">INFO[0213] Logs DB url: https://34.217.114.37:9091</span>
-<span class="go">Metrics DB url: https://34.217.114.37:9092</span>
+<span class="go">INFO[0213] Logs DB url: https://34.217.114.37:8091</span>
+<span class="go">Metrics DB url: https://34.217.114.37:8092</span>
 
-<span class="hll"><span class="go">Please make sure you have TCP ports 80, 443, 9091, 9092 open in the server firewall.</span>
+<span class="hll"><span class="go">Please make sure you have TCP ports 80, 443, 8091, 8092 open in the server firewall.</span>
 </span>
 <span class="go">INFO[0213] Below you can see Logs DB credentials (if once asked):</span>
 <span class="go">DB name: gmd</span>
@@ -302,9 +302,9 @@
 </span></pre></div>
 </div>
 </div>
-<p>There’s the URL for accessing Galera Manager, in the second sentence where it says, “Direct your browser…”  There are two other URLs that include the port numbers (i.e., 9091 or 9092). Those are for accessing logs and metrics databases.  The Galera Manager is accessed on port 80 or 443.</p>
+<p>There’s the URL for accessing Galera Manager, in the second sentence where it says, “Direct your browser…”  There are two other URLs that include the port numbers (i.e., 8091 or 8092). Those are for accessing logs and metrics databases.  The Galera Manager is accessed on port 80 or 443.</p>
 <p class="sub-heading rubric" id="galera-manager-installer-ports">TCP Ports</p>
-<p>Regarding ports, notice the line in the example above about TCP ports 80, 443, 9091, 9092.  You’ll need to make sure those are accessible on AWS.  Go to the EC2 console in AWS, and click on <em>Security Groups</em> in the left margin.  Then look for the security group for the server on which you installed Galera Manager. Edit the <em>Inbound Rules</em> for that group to open those ports (see the screenshot below).</p>
+<p>Regarding ports, notice the line in the example above about TCP ports 80, 443, 8091, 8092.  You’ll need to make sure those are accessible on AWS.  Go to the EC2 console in AWS, and click on <em>Security Groups</em> in the left margin.  Then look for the security group for the server on which you installed Galera Manager. Edit the <em>Inbound Rules</em> for that group to open those ports (see the screenshot below).</p>
 <div class="figure" id="id11">
 <a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-aws-inbound-rules-gmd.png"><img alt="AWS Inbound Rules for Galera Manager" class="document-screenshot" src="../_images/galera-manager-aws-inbound-rules-gmd.png" style="width: 800px;" /></a>
 <p class="caption"><span class="caption-text">AWS Inbound Rules for Galera Manager (Figure 1)</span></p>

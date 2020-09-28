@@ -205,12 +205,12 @@
 <span class="go">to service for the first time, you should choose to &quot;continue&quot;.</span>
 <span class="go">...</span>
 
-<span class="hll"><span class="go">Please make sure you have TCP ports 80, 443, 9091, 9092 open in the server firewall.</span>
+<span class="hll"><span class="go">Please make sure you have TCP ports 80, 443, 8091, 8092 open in the server firewall.</span>
 </span></pre></div>
 </div>
 </div>
-<p>As the highlighted line at the bottom here says, you will need to make sure the TCP ports 80, 443, 9091, 9092 are open. This could be on a local computer or on an <em>AWS Instance</em> on which you’ve installed Galera Manager.</p>
-<p>Ports 80 and 443 are used to access Galera Manager through a web browser.  Port 9091 is used by <code class="docutils literal notranslate"><span class="pre">gmd</span></code> to access InfluxDB for logging, and port 9092 is used by <code class="docutils literal notranslate"><span class="pre">gmd</span></code> to access Prometheus for cluster and node metrics, both of which are installed by the <em>Installer</em>.</p>
+<p>As the highlighted line at the bottom here says, you will need to make sure the TCP ports 80, 443, 8091, 8092 are open. This could be on a local computer or on an <em>AWS Instance</em> on which you’ve installed Galera Manager.</p>
+<p>Ports 80 and 443 are used to access Galera Manager through a web browser.  Port 8091 is used by <code class="docutils literal notranslate"><span class="pre">gmd</span></code> to access InfluxDB for logging, and port 8092 is used by <code class="docutils literal notranslate"><span class="pre">gmd</span></code> to access Prometheus for cluster and node metrics, both of which are installed by the <em>Installer</em>.</p>
 <p>To open these ports on AWS, go to the EC2 console, and click on <em>Security Groups</em> in the left margin.  Then look for the <em>Security Group</em> for the <em>Instance</em> on which you installed Galera Manager. Edit the <em>Inbound Rules</em> for that group to open those ports. When you’re finished, the <em>Inbound Rules</em> will look something like the screenshot below:</p>
 <div class="figure" id="id2">
 <a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-aws-inbound-rules-gmd.png"><img alt="AWS Inbound Rules for Galera Manager" class="document-screenshot" src="../_images/galera-manager-aws-inbound-rules-gmd.png" style="width: 800px;" /></a>
@@ -225,7 +225,7 @@
 </span></pre></div>
 </div>
 </div>
-<p>Only port 80 is used to access Galera Manager from a web broswer.  Port 8081 is used by <code class="docutils literal notranslate"><span class="pre">gmd</span></code> to access InfluxDB; port 8082 is used for Prometheus.  Since you didn’t enable <code class="docutils literal notranslate"><span class="pre">https</span></code>, you’ll have to open these three ports in the <em>Security Group</em> for the <em>Instance</em> on which you’ve installed Galera Manager. But in this case, you don’t need also to enable ports 443, 9091, and 9092.</p>
+<p>Only port 80 is used to access Galera Manager from a web broswer.  Port 8081 is used by <code class="docutils literal notranslate"><span class="pre">gmd</span></code> to access InfluxDB; port 8082 is used for Prometheus.  Since you didn’t enable <code class="docutils literal notranslate"><span class="pre">https</span></code>, you’ll have to open these three ports in the <em>Security Group</em> for the <em>Instance</em> on which you’ve installed Galera Manager. But in this case, you don’t need also to enable ports 443, 8091, and 8092.</p>
 <p>You may have noticed when looking at the lists of ports above and in Figure 1 that they don’t include port 3306 and other ports used by MySQL, MariaDB and Galera Cluster. Galera Manager doesn’t need them to create and monitor a cluster and nodes. Those ports are needed on the hosts of the nodes. So separate <em>Security Groups</em> will be needed for them.</p>
 <p class="section-heading rubric" id="galera-manager-node-ports">Host &amp; Node Ports</p>
 <p>After you create a cluster within Galera Manager, and then add nodes to that cluster, Galera Manager will create <em>Instances</em> or hosts for each node, and a <em>Security Group</em> in AWS with <em>Inbound Rules</em> for each host. These rules will open the ports needed for <code class="docutils literal notranslate"><span class="pre">gmd</span></code> on the Galera Manager server to communicate with the nodes, as well as the normal ports required by the nodes within a Galera Cluster to communicate with each other, in addition to ports for users and other clients need to communicate with MySQL or MariaDB.</p>
@@ -234,7 +234,7 @@
 <a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-aws-inbound-rules.png"><img alt="AWS Inbound Rules" class="document-screenshot" src="../_images/galera-manager-aws-inbound-rules.png" style="width: 800px;" /></a>
 <p class="caption"><span class="caption-text">AWS Inbound Rules for a Host (Figure 2)</span></p>
 </div>
-<p>Notice this <em>Security Group</em> includes ports 9091 and 9092, which are necessary for Galera Manager to communicate with the host related to host metrics and llogs.  Port 3036 is used by users and clients to communicate with MySQL or MariaDB to access the databases. The other three ports are used by Galera Cluster and the nodes to communicate with each other and synchronize lagging or new nodes that join the cluster.</p>
+<p>Notice this <em>Security Group</em> includes ports 8091 and 8092, which are necessary for Galera Manager to communicate with the host related to host metrics and llogs.  Port 3036 is used by users and clients to communicate with MySQL or MariaDB to access the databases. The other three ports are used by Galera Cluster and the nodes to communicate with each other and synchronize lagging or new nodes that join the cluster.</p>
 <p>You might be tempted to tighten security more, to create one <em>Security Group</em> to be used by all hosts and in it to specify the IP addresses of each node for ports 4444, 4567, and 4568—perhaps because of the default description, <em>No Restructions</em> for each of those rules. Along these lines, you might also change ports 9100 - 9104 to the IP address of wherever Galera Manager or <code class="docutils literal notranslate"><span class="pre">gmd</span></code> is running. You would have to leave port 3306 accessible from anywhere, though, so that MySQL users and clients can access the databases.</p>
 <p>If you were to do all of that, make all of those changes to the <em>Source</em> IP addresses, it would like something like what you see in the screenshot in Figure 3 below:</p>
 <div class="figure" id="id5">
