@@ -50,114 +50,128 @@
 Codership Training Courses
 ===========================
 
-Using video communcation conferencing systems such Zoom, Codership is able to offer live virtual classes. From your office, home, or virtually anywhere, you may attend courses conducted by the Codership staff. Each month we will offer courses on Galera Cluster and related software.
+Using video communication conferencing systems such Zoom, Codership is able to offer live virtual classes. From your office, home, or virtually anywhere, you may attend courses conducted by the Codership staff. Each month we will offer courses on Galera Cluster and related software.
 
 .. _`training-course-list`:
 .. container:: banner
 
    .. rst-class:: section-heading
-   .. rubric:: Courses
+   .. rubric:: Database Administration with Galera Cluster
 
+   The Database Administrator with Galera Cluster training teaches you how to install and configure in real-time a Galera Cluster for your application use cases. You will participate in interactive hands-on labs. Our expert instructors will teach you how to design and maintain your Galera Cluster for High Availability and scalability.
 
-.. container:: list-col1
+   This course not only covers Galera Cluster from Codership (upstream Galera Cluster) but also Percona XtraDB Cluster (PXC) and MariaDB Galera Cluster administration. The course contents will cover the newly released Galera 4 library, but also the commonly used Galera 3 library. You can start off never having used Galera Cluster to finish the training as an advanced and effective Galera Cluster user and administrator.
 
+   .. _`galera-intro-course-details`:
+   .. container:: banner
 
-   .. rst-class:: sub-heading list-sub-header
-   .. rubric:: :doc:`galera-intro-course`
+      .. rst-class:: section-heading
+      .. rubric:: Course Details
 
-   .. rst-class:: list-stats
+      .. rst-class:: sub-heading list-sub-header
+      .. rubric:: **Course Dates**
 
-      Length: 3 days, 4 hours per day
+      - EMEA: January 2021, 13th and 14th, starting 10 AM CET
 
-   .. rst-class:: list-abstract
-
-      This course is for those who are new to Galera Cluster, but have experience as an administering MySQL or MariaDB databases. It explains how Galera Cluster works and  how to install and configure Galera Cluster software and set up a cluster.
-
-
-   .. rst-class:: sub-heading list-sub-header
-   .. rubric:: :doc:`galera-dba-course`
-
-   .. rst-class:: list-stats
-
-      Length: 3 days, 4 hours per day
-
-   .. rst-class:: list-abstract
-
-      If you're a new database administrator and been made recently responsible for maintaining your organization's databases, this course will teach you about basic and core DBA tasks.
+      - USA: January 2021, 20th and 21st, starting 9 AM PST
 
 
 
-.. container:: list-col2
+      .. rst-class:: sub-heading list-sub-header
+      .. rubric:: **Course Duration**
 
-   .. rst-class:: sub-heading list-sub-header
-   .. rubric:: :doc:`galera-advanced-special-courses`
+      - 2 days.
 
-   .. rst-class:: list-stats
-
-      Length: 1 to 2 days, 2 to 4 hours per day
-
-   .. rst-class:: list-abstract
-
-      In addition to the general Galera Cluster and DBA courses, which will be offered regularly, Codership will offer several advanced courses on various advanced topics such a performance tuning, as well as short seminars on new features.
+      - The breakdown is 3 hours, with a half hour lunch break, and another 3 hours per day. There will be bio-breaks. The total contact time with the trainer is 12 hours over a span of 2 days.
 
 
 
 
-.. _`training-courses-quarter-schedule`:
-.. container:: banner
+      .. rst-class:: sub-heading list-sub-header
+      .. rubric:: **Content Breakdown**
 
-   .. rst-class:: section-heading
-   .. rubric:: Course Schedule
+      - An overview of MySQL High Availability solutions including coverage of Disaster Recovery options
 
-.. container:: list-col1
+      - What is Galera Cluster and why it is the right solution for you
 
-   .. rst-class:: sub-heading list-sub-header
-   .. rubric:: DBA with Galera (27 - 29 January 2020)
+      - Design simple and advanced Galera Cluster topologies
 
-   .. rst-class:: list-stats
+      - Installation of Galera Cluster
 
-      Length: 3 days, 4 hours per day
-      Times: 12:30 - 4:30 p.m., U.S. Eastern Time; 8:30 a.m. - 12:30 p.m., U.S. Pacific Time
+      - Configuring your Galera Cluster optimally
 
-   .. rst-class:: list-abstract
+      - How do you backup and restore your Galera Cluster?
 
-      This training course will be taught four hours each day, for three consecutive days.
+      - How do you handle load balancing with Galera Cluster and associated proxies?
 
+      - Make Galera Cluster perform optimally — performance optimization is key
 
-.. container:: list-col2
+      - Security of your Galera Cluster nodes and data, including the transport layer with SSL
 
-   .. rst-class:: sub-heading list-sub-header
-   .. rubric:: Intro. to Galera Cluster (10 - 12 February 2020)
+      - Scalability with Galera Cluster
 
-   .. rst-class:: list-stats
+      - How do you monitor your entire Galera Cluster topology?
 
-      Length: 3 days, 4 hours per day
+      - How to have a mix of Galera Cluster with standard MySQL replication
 
-   .. rst-class:: list-abstract
+      - Migrating to Galera Cluster
 
-      This training course will explain how to plan and conduct upgrades of Galera software on an active cluster, one node at a time, without loss of service or data.
+      - Upgrading your Galera Cluster
 
+      - Performing schema upgrades in your Galera Cluster
 
-   .. rst-class:: sub-heading list-sub-header
-   .. rubric:: DBA with Galera (19 - 21 Februrary 2020)
+      - Troubleshoot common Galera Cluster problems (understanding diagnostics from the error log, debugging State Snapshot Transfer (SST) errors, are nodes finding it hard to rejoin due to network issues, figuring out how to fix the schema based on frequent transaction rollbacks, and so on)
 
-   .. rst-class:: list-stats
-
-      Length: 3 days, 4 hours per day
-
-   .. rst-class:: list-abstract
-
-      This training course explains how to monitor a Galera Cluster, utilizing the Galera specific status variables, as well as employing scripts for logging status information.
+      - How to do you administer a MariaDB Galera Cluster and Percona XtraDB Cluster (PXC) differently from upstream Galera Cluster that you get from Codership
 
 
+
+
+      .. rst-class:: sub-heading list-sub-header
+      .. rubric:: **Requirements**
+
+      - You need to be able to use Zoom the platform we will be using
+
+      - You will need to have access to an SSH client. Being in a Microsoft Windows environment is OK, but you need to have SSH to access up to 3 remote servers.
+
+      - Some basic understanding of Linux (e.g. package management) as well as MySQL
+
+
+
+      .. rst-class:: sub-heading list-sub-header
+      .. rubric:: **Audience**
+
+      - Database administrators (DBAs)
+
+      - MySQL DBAs or application developers who want to delve into Galera Cluster administration
+
+      - Systems administrators with database management responsibilities
+
+      - DevOps professionals who need to manage the database as well
+
+
+
+      .. rst-class:: sub-heading list-sub-header
+      .. rubric:: **Cost**
+
+      - The cost of training is 1800 € / 2100 USD for 2 days.
+
+      - Early bird price before 31.12.2020 1500 € / 1750 USD for 2 days.
+
+      - Volume discount for trainees from the same company: 4 pays for 3, 5 pays for 4 etc.
+
+      - `Sign Up For Training <http://www2.galeracluster.com/l/38852/2020-09-18/9kqcz6>`_
+
+
+      .. image:: ../../images/galera-dba-course-screenshot.png
+            :width: 350px
+            :alt: Codership Training Courses
+            :class: course-screenshot no-mobile
 
 .. toctree::
    :maxdepth: 2
    :hidden:
 
-   galera-intro-course
-   galera-dba-course
-   galera-advanced-special-courses
 
 
 .. |---|   unicode:: U+2014 .. EM DASH
