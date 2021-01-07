@@ -172,14 +172,15 @@
 </div>
 <div class="library-document section" id="physical-state-snapshot">
 <span id="sst-physical"></span><h1>Physical State Snapshot<a class="headerlink" href="#physical-state-snapshot" title="Permalink to this headline">¶</a></h1>
-<p>There are two back-end methods available for Physical State Snapshots: <code class="docutils literal notranslate"><span class="pre">rsync</span></code> and <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>.</p>
+<p>There are two back-end methods available for Physical State Snapshots: <code class="docutils literal notranslate"><span class="pre">rsync</span></code> and <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>.
+Starting with version 8.0.22 also <code class="docutils literal notranslate"><span class="pre">clone</span></code> method is available for Galera Cluster for MySQL</p>
 <p>The <a class="reference internal" href="glossary.html#term-physical-state-transfer-method"><span class="xref std std-term">Physical State Transfer Method</span></a> has the following advantages:</p>
 <ul class="simple">
 <li>These transfers physically copy the data from one node to the disk of the other, and as such do not need to interact with the database server at either end.</li>
 <li>These transfers do not require the database to be in working condition, as the donor node overwrites what was previously on the joining node disk.</li>
 <li>These transfers are faster.</li>
 </ul>
-<p>The Physical State Transfer Method has the following disadvantages:</p>
+<p>The :term:’Physical State Transfer Method’ has the following disadvantages:</p>
 <ul>
 <li><p class="first">These transfers require the joining node to have the same data directory layout and the same storage engine configuration as the donor node.  For example, you must use the same file-per-table, compression, log file size and similar settings for InnoDB.</p>
 </li>
@@ -218,6 +219,23 @@
 </pre></div>
 </div>
 <p>For more information on <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>, see the <a class="reference external" href="https://www.percona.com/doc/percona-xtrabackup/2.1/manual.html?id=percona-xtrabackup:xtrabackup_manual">Percona XtraBackup User Manual</a> and <a class="reference external" href="https://www.percona.com/doc/percona-xtradb-cluster/5.6/manual/xtrabackup_sst.html">XtraBackup SST Configuration</a>.</p>
+<p class="section-heading rubric" id="sst-physical-clone"><code class="docutils literal notranslate"><span class="pre">clone</span></code></p>
+<p>Starting with version 8.0.22 <code class="docutils literal notranslate"><span class="pre">clone</span></code> SST method is available for Galera
+CLuster for MySQL. It is based on the native MySQL clone plugin. It
+proved to be much faster than <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>, however it will block Donor
+node on DDL execution if that happens during the transfer.</p>
+<p>Basic configuraition for <code class="docutils literal notranslate"><span class="pre">clone</span></code> SST on Joiner:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
+<span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">clone</span>
+</pre></div>
+</div>
+<p>Basic configuraition for <code class="docutils literal notranslate"><span class="pre">clone</span></code> SST on Donor:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
+<span class="na">wsrep_sst_auth</span><span class="o">=</span><span class="s">&lt;admin user&gt;:&lt;admin password&gt;</span>
+</pre></div>
+</div>
+<p>Optionally <cite>plugin_dir</cite> variable needs to be configured if MySQL plugins
+are not in the default location.</p>
 </div>
 
 

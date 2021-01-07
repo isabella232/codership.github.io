@@ -185,7 +185,7 @@
 <div class="library-document section" id="ssl-for-state-snapshot-transfers">
 <span id="ssl-sst"></span><h1>SSL for State Snapshot Transfers<a class="headerlink" href="#ssl-for-state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
 <p>When you finish generating the SSL certificates for your cluster, you can begin configuring the node for their use.  Where <a class="reference internal" href="ssl-config.html"><span class="doc">SSL Configuration</span></a> covers how to enable SSL for replication traffic and the database client, this page covers enabling it for <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> scripts.</p>
-<p>The particular method you use to secure the State Snapshot Transfer through SSL depends upon the method you use in state snapshot transfers: <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> or <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>.</p>
+<p>The particular method you use to secure the State Snapshot Transfer through SSL depends upon the method you use in state snapshot transfers: <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>, <code class="docutils literal notranslate"><span class="pre">clone</span></code> or <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">For Gelera Cluster, SSL configurations are not dynamic.  Since they must be set on every node in the cluster, if you want to enable this feature with an existing cluster you need to restart the entire cluster.</p>
@@ -277,6 +277,30 @@
 <p class="first admonition-title">Note</p>
 <p class="last">In order to use SSL with <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>, you need to set <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> to <code class="docutils literal notranslate"><span class="pre">xtrabackup-v2</span></code>, instead of <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>.</p>
 </div>
+<p class="section-heading rubric" id="ssl-clone">Enabling SSL for <code class="docutils literal notranslate"><span class="pre">clone</span></code></p>
+<p>Configurations for <code class="docutils literal notranslate"><span class="pre">clone</span></code> are handled through the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> configuration file, in the same as the database server and client.  Use the <code class="docutils literal notranslate"><span class="pre">[sst]</span></code> unit to configure SSL for the script.  You can use the same SSL certificate files as the node uses on the database server, client and with replication traffic.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># clone Configuration</span>
+<span class="k">[mysqld]</span>
+<span class="na">ssl-cert</span><span class="o">=</span> <span class="s">/path/to/server-cert.pem</span>
+<span class="na">ssl-key</span><span class="o">=</span> <span class="s">/path/to/server-key.pem</span>
+<span class="na">ssl-ca</span><span class="o">=</span> <span class="s">/path/to/ca.pem</span>
+
+<span class="k">[client] # or [sst]</span>
+<span class="na">ssl-cert</span><span class="o">=</span> <span class="s">/path/to/client-cert.pem</span>
+<span class="na">ssl-key</span><span class="o">=</span> <span class="s">/path/to/client-key.pem</span>
+<span class="na">ssl-ca</span><span class="o">=</span> <span class="s">/path/to/ca.pem</span>
+<span class="na">ssl-mode</span><span class="o">=</span> <span class="s">VERIFY_CA</span>
+</pre></div>
+</div>
+<p>Client SSL configuration on Donor node must match server SSL configuration
+on Joiner. (That means: mysql client using client SSL configuration from
+Joiner should be able to connect to server on Donor) Client SSL configuration
+on Joiner must match CLONE SSL configuration on donor. If CLONE plugin on
+Donor is not loaded, or if CLONE SSL configuration is empty then server SSL
+configuration on Donor is used.</p>
+<p>If for some reason general client SSL configuration is undesirable, client
+SSL configuration for <code class="docutils literal notranslate"><span class="pre">clone</span></code> SST can be put into the <cite>[sst]</cite> section of
+the configuration file. It will be used first.</p>
 <div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">

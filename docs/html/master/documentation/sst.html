@@ -156,11 +156,11 @@
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a></li>
-<li><a class="reference internal" href="mysqldump.html#mysqldump"><span class="std std-ref">mysqldump</span></a>”</li>
-<li><a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical</span></a></li>
+<li><a class="reference internal" href="mysqldump.html#mysqldump"><span class="std std-ref">mysqldump</span></a></li>
 <li><a class="reference internal" href="sst-physical.html#sst-physical-rsync"><span class="std std-ref">rsync</span></a></li>
-<li><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></li>
+<li><a class="reference internal" href="sst-physical.html#sst-physical-clone"><span class="std std-ref">clone</span></a></li>
 <li><a class="reference internal" href="sst-physical.html#sst-physical-xtrabackup"><span class="std std-ref">xtrabackup</span></a></li>
+<li><a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical</span></a></li>
 <li><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></li>
 </ul>
 </div>
@@ -217,13 +217,20 @@
 <td>Donor and Joiner</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="sst-physical.html#sst-physical-rsync"><span class="std std-ref">rsync</span></a></td>
-<td>Fastest</td>
+<td>Faster</td>
 <td>Blocks</td>
 <td>Unavailable</td>
 <td><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></td>
 <td>None</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="sst-physical.html#sst-physical-xtrabackup"><span class="std std-ref">xtrabackup</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="sst-physical.html#sst-physical-clone"><span class="std std-ref">clone</span></a></td>
+<td>Fastest</td>
+<td>On DDLs</td>
+<td>Unavailable</td>
+<td><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></td>
+<td>Only Donor</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="sst-physical.html#sst-physical-xtrabackup"><span class="std std-ref">xtrabackup</span></a></td>
 <td>Fast</td>
 <td>Briefly</td>
 <td>Unavailable</td>
@@ -244,11 +251,11 @@
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
 <li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
 <li><a class="reference internal" href="galera-parameters.html#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a></li>
-<li><a class="reference internal" href="mysqldump.html#mysqldump"><span class="std std-ref">mysqldump</span></a>”</li>
-<li><a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical</span></a></li>
+<li><a class="reference internal" href="mysqldump.html#mysqldump"><span class="std std-ref">mysqldump</span></a></li>
 <li><a class="reference internal" href="sst-physical.html#sst-physical-rsync"><span class="std std-ref">rsync</span></a></li>
-<li><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></li>
+<li><a class="reference internal" href="sst-physical.html#sst-physical-clone"><span class="std std-ref">clone</span></a></li>
 <li><a class="reference internal" href="sst-physical.html#sst-physical-xtrabackup"><span class="std std-ref">xtrabackup</span></a></li>
+<li><a class="reference internal" href="sst-logical.html#sst-logical"><span class="std std-ref">Logical</span></a></li>
 <li><a class="reference internal" href="sst-physical.html#sst-physical"><span class="std std-ref">Physical</span></a></li>
 </ul>
 </div>
